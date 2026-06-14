@@ -44,6 +44,16 @@ export const posts: Post[] = [
     tools: ['Higgsfield', 'ElevenLabs', 'Systeme.io', 'CapCut', 'Copy.ai'],
     featured: true,
   },
+  {
+    slug: 'the-agentic-income-flywheel-2026',
+    title: 'The Agentic Income Flywheel: Honest Comparisons + Recurring Tools + Owned Audience (2026)',
+    dek: 'The exact system that turns one ranking comparison into recurring commissions, an email list, and content that earns for years across the whole network.',
+    query: 'agentic income flywheel method',
+    date: '2026-06-14',
+    cluster: 'income',
+    tools: ['Higgsfield', 'Systeme.io', 'ElevenLabs', 'Gamma', 'CapCut', 'HeyGen', 'Synthesia', 'Opus Clip'],
+    featured: true,
+  },
 ]
 
 export function getPost(slug: string): Post | undefined {

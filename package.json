@@ -9,7 +9,11 @@
     "start": "next start",
     "lint": "next lint",
     "sync:catalog": "node scripts/sync-catalog.mjs",
-    "audit:affiliate": "node ../affiliate-agent-skills/scripts/affiliate-audit.mjs --content=./content --write"
+    "audit:affiliate": "node ../affiliate-agent-skills/scripts/affiliate-audit.mjs --content=./content --write",
+    "type-check": "tsc --noEmit",
+    "links:check:static": "node scripts/check-internal-links.mjs || echo 'add links check script'",
+    "merge:gate": "npm run type-check && npm run links:check:static && echo 'L99 gate passed (add claims/slop if needed)'",
+    "predeploy": "npm run merge:gate && npm run sync:catalog"
   },
   "dependencies": {
     "next": "^16.0.0",

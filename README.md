@@ -1,3 +1,17 @@
+<!-- GITHUB_VISUALS_START -->
+<p align="center">
+  <img src="assets/github/header.svg" alt="Agentic Income - Flagship hub for honest AI-agent income systems" width="100%">
+</p>
+
+<details open>
+<summary><strong>How this repo works</strong></summary>
+<p align="center">
+  <img src="assets/github/how-it-works.svg" alt="Agentic Income operating map" width="100%">
+</p>
+</details>
+
+<!-- GITHUB_VISUALS_END -->
+
 # agenticincome.ai
 
 **Flagship of the agentic-income network.** The authority hub on earning with AI agents — honest tool comparisons in the shape AI search engines cite, the exact stacks, and income systems that compound.

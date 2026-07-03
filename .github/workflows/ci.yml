@@ -8,17 +8,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 10
 
       - name: Setup Node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: "24"
           cache: pnpm
@@ -26,11 +29,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # `next lint` was removed in Next.js 16 (the lint script is a no-op/failure
-      # in this stack), so lint is reported but non-blocking. Build is the gate.
-      - name: Lint
-        run: pnpm lint
-        continue-on-error: true
+      - name: Merge gate
+        run: pnpm run merge:gate
 
       - name: Build
         run: pnpm build

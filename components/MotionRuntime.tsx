@@ -14,9 +14,9 @@ export function MotionRuntime() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.hero-media',
-        { autoAlpha: 0.72, scale: 1.06 },
+        { autoAlpha: 0.9, scale: 1.04 },
         {
-          autoAlpha: 0.84,
+          autoAlpha: 0.96,
           scale: 1.025,
           duration: 1.5,
           ease: 'power2.out',
@@ -25,7 +25,7 @@ export function MotionRuntime() {
 
       gsap.fromTo(
         '.motion-reveal',
-        { autoAlpha: 0, y: 18 },
+        { autoAlpha: 0.92, y: 10 },
         {
           autoAlpha: 1,
           y: 0,
@@ -38,7 +38,7 @@ export function MotionRuntime() {
 
       gsap.fromTo(
         '[data-hero-panel]',
-        { autoAlpha: 0, y: 24, scale: 0.985 },
+        { autoAlpha: 0.94, y: 12, scale: 0.992 },
         {
           autoAlpha: 1,
           y: 0,
@@ -52,7 +52,7 @@ export function MotionRuntime() {
 
       gsap.utils.toArray<SVGPathElement>('[data-flow-line], [data-hero-trace], [data-signal-wave]').forEach((path) => {
         const length = path.getTotalLength()
-        gsap.set(path, { strokeDasharray: length, strokeDashoffset: length })
+        gsap.set(path, { strokeDasharray: length, strokeDashoffset: length * 0.08 })
         gsap.to(path, {
           strokeDashoffset: 0,
           duration: 1.2,

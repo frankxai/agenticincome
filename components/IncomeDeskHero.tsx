@@ -20,7 +20,7 @@ export function IncomeDeskHero() {
   ]
 
   return (
-    <section className="hero-stage -mx-6" aria-label="Agentic Income homepage hero">
+    <section className="hero-stage -mx-4 sm:-mx-6" aria-label="Agentic Income homepage hero">
       <Image
         src="/brand/income-desk-hero-poster.webp"
         alt=""
@@ -70,18 +70,21 @@ export function IncomeDeskHero() {
         </defs>
       </svg>
 
-      <div className="hero-content mx-auto max-w-6xl px-6">
+      <div className="hero-content mx-auto w-full max-w-6xl px-4 sm:px-6">
         <div className="hero-copy motion-reveal">
           <div className="kicker">Agentic income network</div>
-          <h1 className="hero-title">Agentic Income</h1>
+          <h1 className="hero-title">
+            <span>Agentic</span>
+            <span>Income</span>
+          </h1>
           <p className="hero-subtitle">
             Build the first AI-tool income loop: one honest comparison, one recurring payer route, one owned-audience capture, and one direct product path.
           </p>
           <div className="hero-actions">
-            <Link href="/start" className="cta">
+            <Link href="/start" className="cta w-full sm:w-auto">
               Open starter kit
             </Link>
-            <Link href="/tools" className="cta-secondary">
+            <Link href="/tools" className="cta-secondary w-full sm:w-auto">
               Inspect the payer catalog
             </Link>
           </div>

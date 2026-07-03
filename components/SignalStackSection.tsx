@@ -36,7 +36,10 @@ export function SignalStackSection() {
       <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
         <div className="section-heading motion-reveal">
           <div className="kicker">Live signal model</div>
-          <h2>Turn demand into a route, not a random link.</h2>
+          <h2>
+            <span>Turn demand into a route,</span>
+            <span>not a random link.</span>
+          </h2>
           <p>
             Search intent enters, the comparison protects trust, and the best-fit payer or owned product receives the click only after the answer earns it.
           </p>

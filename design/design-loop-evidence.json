@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-26",
+  "version": "2026-07-03",
   "task": "Agentic Income premium transformation homepage, product strategy, brand documentation, generated media, Next.js metadata, and e2e product delivery buildout.",
   "surface": "agenticincome.ai website, homepage hero, signal-routing section, transformation poster section, GSAP motion runtime, Open Graph image, manifest, /design route, flywheel, tools, offers, offer detail pages, starter-kit delivery, checkout redirect, start, subscribe API, and launch-readiness gate.",
   "audience": "AI builders, creator operators, and founders who need trusted AI-tool income systems.",
@@ -64,7 +64,27 @@
       "Reduced-motion-safe route"
     ]
   },
+  "asset_quality": {
+    "tier": "B",
+    "source_method": "generated-media",
+    "provenance": "generated",
+    "why_premium": "The homepage uses project-bound generated hero and transformation media, coded proof panels, SVG routes, and browser-verified responsive composition rather than decorative filler. The July 3 pass raised static contrast, preserved inspectable media, and made mobile text and signal paths readable without depending on animation timing.",
+    "shortcut_risk": "low",
+    "context_tested": true
+  },
   "artifacts": [
+    {
+      "path_or_url": "C:/Users/frank/starlight/repos/_visual-qa/agenticincome-hub-final-20260703-064142/hub-mobile-tall.png",
+      "kind": "web-mobile-screenshot",
+      "inspected": true,
+      "notes": "Final mobile crop after July 3 hub polish. Hero, CTAs, income desk, and signal model are readable with no clipped text or missing static signal path."
+    },
+    {
+      "path_or_url": "C:/Users/frank/starlight/repos/_visual-qa/agenticincome-hub-final-20260703-064142/hub-desktop.png",
+      "kind": "web-desktop-screenshot",
+      "inspected": true,
+      "notes": "Final desktop crop after July 3 hub polish. Maintains cinematic income-desk composition while improving text contrast and animation-independent static readability."
+    },
     {
       "path_or_url": "design/",
       "kind": "brand-system",
@@ -241,6 +261,21 @@
     }
   ],
   "checks": [
+    {
+      "name": "asset-tier",
+      "status": "pass",
+      "evidence": "Tier B: generated hero/transformation media with coded UI proof and SVG signal assets. The primary homepage visual is not decorative filler and was inspected in desktop/mobile crops."
+    },
+    {
+      "name": "export-inspection",
+      "status": "pass",
+      "evidence": "Final local production screenshots inspected at C:/Users/frank/starlight/repos/_visual-qa/agenticincome-hub-final-20260703-064142 for mobile 390x1700 and desktop 1440x1100."
+    },
+    {
+      "name": "hub-static-motion-state",
+      "status": "pass",
+      "evidence": "MotionRuntime no longer hides hero copy, the income desk, or signal paths at the first captured frame; motion now enhances an already readable static state."
+    },
     {
       "name": "source-security-scan",
       "status": "pass",

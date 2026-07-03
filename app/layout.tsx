@@ -65,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Nav />
         <MotionRuntime />
-        <main className="mx-auto max-w-6xl px-6">{children}</main>
+        <main className="mx-auto w-full max-w-6xl overflow-x-clip px-4 sm:px-6">{children}</main>
         <Footer />
         <Analytics />
         <SpeedInsights />

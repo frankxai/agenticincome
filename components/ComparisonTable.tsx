@@ -53,7 +53,7 @@ export function ComparisonTable({ rows, caption }: { rows: Row[]; caption?: stri
                 <tr key={r.tool} className={`border-t border-border ${r.pick ? 'bg-accent/[0.05]' : ''}`}>
                   <td className="px-4 py-3 font-semibold text-ink">
                     {r.tool}
-                    {r.pick && <span className="ml-2 rounded bg-accent/20 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent">Top pick</span>}
+                    {r.pick && <span className="ml-2 rounded bg-accent/20 px-1.5 py-0.5 text-[10px] font-bold uppercase text-accent">Top pick</span>}
                   </td>
                   <td className="px-4 py-3 text-muted">{r.verdict}</td>
                   <td className="px-4 py-3 text-ink">{r.price}</td>

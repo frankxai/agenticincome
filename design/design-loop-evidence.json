@@ -1,0 +1,325 @@
+{
+  "version": "2026-06-26",
+  "task": "Agentic Income premium transformation homepage, product strategy, brand documentation, generated media, Next.js metadata, and e2e product delivery buildout.",
+  "surface": "agenticincome.ai website, homepage hero, signal-routing section, transformation poster section, GSAP motion runtime, Open Graph image, manifest, /design route, flywheel, tools, offers, offer detail pages, starter-kit delivery, checkout redirect, start, subscribe API, and launch-readiness gate.",
+  "audience": "AI builders, creator operators, and founders who need trusted AI-tool income systems.",
+  "first_read": "Agentic Income is a premium research desk for turning AI-tool demand into honest recurring income and owned audience.",
+  "standards": [
+    "DESIGN_TASTE.md",
+    "WEB_EXPERIENCE_STANDARD.md",
+    "MOTION_TASTE_RUBRIC.md",
+    "VISUAL_QA_GATE.md",
+    "design-agent-standards/DESIGN.md",
+    "design-agent-standards/AGENTIC_DESIGN_LOOP.md",
+    "design-agent-standards/OUTCOMES.md"
+  ],
+  "references": [
+    {
+      "label": "Agentic Income Network",
+      "source": "../affiliate-agent-skills/BUSINESS.md",
+      "reason": "Trust model, recurring revenue ladder, and hub/spoke network."
+    },
+    {
+      "label": "Motion Design Studio",
+      "source": "motion-director, site-motion-integrator, motion-media-producer, motion-taste-critic",
+      "reason": "Homepage motion thesis, generated media direction, reduced-motion policy, and implementation QA."
+    },
+    {
+      "label": "Image generation",
+      "source": "imagegen built-in tool",
+      "reason": "Generated project-bound Income Desk and transformation poster bitmap assets, inspected them, and optimized them to WebP."
+    },
+    {
+      "label": "Next.js App Router",
+      "source": "vercel-plugin:nextjs",
+      "reason": "Used App Router metadata conventions, manifest route, optimized public images, and production build verification."
+    },
+    {
+      "label": "Live baseline",
+      "source": "https://www.agenticincome.ai/",
+      "reason": "Current production surface and routing baseline."
+    }
+  ],
+  "direction": {
+    "keep": [
+      "Honest comparisons",
+      "Shared affiliate catalog",
+      "Recurring-payer priority",
+      "Email capture",
+      "MDX content shape"
+    ],
+    "avoid": [
+      "Broken generated text",
+      "Generic AI fog",
+      "Raster-only logo as canonical identity",
+      "Motion without a named job",
+      "Raw email logging"
+    ],
+    "signature": "The Income Desk: comparison evidence, payer ledger, and audience capture connected by a quiet compounding flow trace.",
+    "system": [
+      "Vector-first mark",
+      "Coded flywheel diagram",
+      "Typed design tokens",
+      "GSAP only for signature motion",
+      "Reduced-motion-safe route"
+    ]
+  },
+  "artifacts": [
+    {
+      "path_or_url": "design/",
+      "kind": "brand-system",
+      "inspected": true,
+      "notes": "Strategy, brand, design, taste, and motion docs created as repo-local source of truth."
+    },
+    {
+      "path_or_url": "app/design/page.tsx",
+      "kind": "web",
+      "inspected": true,
+      "notes": "Verified locally and on the Vercel preview at desktop, mobile, and 320px widths."
+    },
+    {
+      "path_or_url": "components/FlywheelSystem.tsx",
+      "kind": "ui",
+      "inspected": true,
+      "notes": "Coded replacement for generated flywheel raster; inspected in home-page desktop and mobile renders."
+    },
+    {
+      "path_or_url": "public/brand/income-desk-hero-poster.webp",
+      "kind": "generated-media",
+      "inspected": true,
+      "notes": "Generated with built-in imagegen, sourced from C:/Users/frank/.codex/generated_images/019f0094-6585-7d41-8d3d-d0e9c4796c18/ig_04b4c75008fd95f6016a3db1f83ee48191adca95808e1a8bc7.png, inspected, and optimized to 118 KB WebP."
+    },
+    {
+      "path_or_url": "components/SignalStackSection.tsx",
+      "kind": "web-ui-motion",
+      "inspected": true,
+      "notes": "New homepage demand-routing board with coded labels, SVG signal paths, payer strip, and GSAP draw-on-scroll animation."
+    },
+    {
+      "path_or_url": "components/TransformationSection.tsx",
+      "kind": "web-ui-media",
+      "inspected": true,
+      "notes": "New before/after transformation section showing scattered AI-tool noise becoming a controlled income desk with coded copy and project-bound generated media."
+    },
+    {
+      "path_or_url": "public/brand/transformation-system-poster.webp",
+      "kind": "generated-media",
+      "inspected": true,
+      "notes": "Generated with built-in imagegen, sourced from C:/Users/frank/.codex/generated_images/019f0094-6585-7d41-8d3d-d0e9c4796c18/ig_0029331aa1b76603016a3dd948809c81919b8092946282b72c.png, inspected, and optimized to 108 KB WebP."
+    },
+    {
+      "path_or_url": "public/brand/agentic-income-og.webp",
+      "kind": "social-preview-media",
+      "inspected": true,
+      "notes": "Derived 1200x630 Open Graph crop from the transformation poster and wired through App Router metadata."
+    },
+    {
+      "path_or_url": "design/PRODUCT_STRATEGY.md",
+      "kind": "product-strategy",
+      "inspected": true,
+      "notes": "Added product thesis, transformation promise, offer ladder, delivery architecture, page architecture, language strategy, motion strategy, and quality gate."
+    },
+    {
+      "path_or_url": "design/REVENUE_DELIVERY.md",
+      "kind": "revenue-delivery-system",
+      "inspected": true,
+      "notes": "Documented live free delivery, provider-ready paid checkout env keys, request-access fallbacks, support boundary, and QA requirements."
+    },
+    {
+      "path_or_url": "lib/offers.ts, app/offers/[slug]/page.tsx, app/api/checkout/route.ts, app/delivery/starter-kit/page.tsx",
+      "kind": "product-delivery",
+      "inspected": true,
+      "notes": "Replaced generic external offer buttons with typed internal offer pages, checkout redirects, and a working on-site Starter Kit delivery path."
+    },
+    {
+      "path_or_url": "app/trust/page.tsx, lib/trust.ts",
+      "kind": "trust-policy-surface",
+      "inspected": true,
+      "notes": "Added public recommendation, affiliate disclosure, checkout readiness, support, and refund policy surface. Fixed mobile headline overflow after browser QA."
+    },
+    {
+      "path_or_url": "app/delivery/blueprint/page.tsx, app/delivery/private-intel/page.tsx",
+      "kind": "paid-product-handoff",
+      "inspected": true,
+      "notes": "Added noindex paid delivery desks for provider success redirects. Public offer pages no longer expose env key scaffolding or invite pre-purchase paid delivery browsing."
+    },
+    {
+      "path_or_url": "products/FULFILLMENT_RUNBOOK.md, products/blueprint/AGENTIC_INCOME_BLUEPRINT.md, products/private-intel/2026-06-BRIEF.md",
+      "kind": "product-fulfillment-artifacts",
+      "inspected": true,
+      "notes": "Added fulfillment runbook, Blueprint product spine, and a Private Intel brief to make the product layer concrete beyond the marketing pages."
+    },
+    {
+      "path_or_url": "app/api/analytics/route.ts, lib/analytics.ts, components/TrackedLink.tsx, components/TrackOnView.tsx",
+      "kind": "conversion-analytics",
+      "inspected": true,
+      "notes": "Added optional first-party event forwarding for checkout, fallback, subscribe, delivery, and affiliate click events through ANALYTICS_WEBHOOK_URL."
+    },
+    {
+      "path_or_url": "components/CheckoutLink.tsx, lib/tracking.ts, app/api/checkout/route.ts",
+      "kind": "checkout-attribution",
+      "inspected": true,
+      "notes": "Added client and server checkout attribution passthrough for allowed params, plus secure https-only checkout URL validation."
+    },
+    {
+      "path_or_url": "app/readiness/page.tsx, app/api/readiness/route.ts, lib/readiness.ts",
+      "kind": "launch-readiness-gate",
+      "inspected": true,
+      "notes": "Added a noindex human readiness page and no-secret machine gate. /api/readiness returns 503 until checkout, capture, and analytics systems are configured, and 200 when the required runtime variables are present."
+    },
+    {
+      "path_or_url": "app/layout.tsx, package.json",
+      "kind": "observability",
+      "inspected": true,
+      "notes": "Enabled Vercel Web Analytics and Speed Insights on the Vercel project, installed @vercel/analytics and @vercel/speed-insights, and rendered Analytics and SpeedInsights in the root layout."
+    },
+    {
+      "path_or_url": "app/layout.tsx and app/manifest.ts",
+      "kind": "nextjs-metadata",
+      "inspected": true,
+      "notes": "Added canonical metadata, richer Open Graph/Twitter image references, crawler rules, and a file-based manifest route."
+    },
+    {
+      "path_or_url": "https://agenticincome-pukrrl8if-starlight-intelligence.vercel.app",
+      "kind": "preview-deployment",
+      "inspected": true,
+      "notes": "Vercel preview dpl_35GXTq8xjPXzKTQZM2iUHhJsxdGd verified the homepage transformation wave. Superseded by product-delivery preview dpl_3r5AtwZU2WHaBDZP38tVDNAZahR8."
+    },
+    {
+      "path_or_url": "https://agenticincome-3wk2ihuha-starlight-intelligence.vercel.app",
+      "kind": "preview-deployment",
+      "inspected": true,
+      "notes": "Vercel preview dpl_3r5AtwZU2WHaBDZP38tVDNAZahR8 is READY. Verified deployed product pages, Starter Kit delivery, markdown download, and checkout redirects with authenticated vercel curl because previews are protected."
+    },
+    {
+      "path_or_url": "https://agenticincome-l3c9v800o-starlight-intelligence.vercel.app",
+      "kind": "preview-deployment",
+      "inspected": true,
+      "notes": "Vercel preview dpl_FEQb3mYMo6dzNYcv6NPWD5Wroi2X is READY. Vercel build generated 24 app routes including /trust, /delivery/blueprint, /delivery/private-intel, and /api/analytics. Authenticated vercel curl verified /trust, paid delivery pages, and the Blueprint checkout fallback content."
+    },
+    {
+      "path_or_url": "https://agenticincome-abvyyd2ge-starlight-intelligence.vercel.app",
+      "kind": "preview-deployment",
+      "inspected": true,
+      "notes": "Vercel preview dpl_3PG5HDv9ZpQzbUGbtuEFZvBnG48S is READY. Vercel build generated 24 app routes after the production-readiness copy and delivery updates. The preview is protected by Vercel Authentication, so shell fetches receive SSO redirects; verification relies on Vercel deployment state plus the matching local production build and browser QA."
+    },
+    {
+      "path_or_url": "https://agenticincome-iwisgb53v-starlight-intelligence.vercel.app",
+      "kind": "preview-deployment",
+      "inspected": true,
+      "notes": "Vercel preview dpl_DoEiYnsmmoNTz1z2D6Y9aVzHXw1S is READY. Vercel build generated 24 app routes after the access-request readiness upgrade. The preview remains protected by Vercel Authentication; verification uses Vercel deployment state, local production build, and API smoke evidence."
+    },
+    {
+      "path_or_url": "https://agenticincome-1rg0ib8zq-starlight-intelligence.vercel.app",
+      "kind": "preview-deployment",
+      "inspected": true,
+      "notes": "Vercel preview dpl_59RYmuNS99EQJqynRLgK6aQNuF4i is READY. It contains the /readiness page and /api/readiness gate after the latest build generated 26 app routes locally. The preview remains protected by Vercel Authentication."
+    },
+    {
+      "path_or_url": "https://agenticincome-hafhp5nzu-starlight-intelligence.vercel.app",
+      "kind": "preview-deployment",
+      "inspected": true,
+      "notes": "Vercel preview dpl_AKeZ8DLvF6gVF1JjfPr9FwwmQ3FW is READY. Vercel generated 26 app routes after the checkout attribution and https-only checkout validation update. The preview remains protected by Vercel Authentication."
+    },
+    {
+      "path_or_url": "https://agenticincome-egwe0fv5x-starlight-intelligence.vercel.app",
+      "kind": "preview-deployment",
+      "inspected": true,
+      "notes": "Vercel preview dpl_8Kn2p99RCC5ifDPhZBV2iq4RbMVJ is READY. Vercel generated 26 app routes after Vercel Web Analytics and Speed Insights were installed and rendered. The preview remains protected by Vercel Authentication."
+    },
+    {
+      "path_or_url": "https://www.agenticincome.ai",
+      "kind": "production-deployment",
+      "inspected": true,
+      "notes": "Production deployment dpl_7ofTiUNXW4SzbndUbiSTSLjVao4r is READY and aliased to www.agenticincome.ai, agenticincome.ai, agenticincome.vercel.app, and Vercel project aliases. Live custom-domain browser QA passed for desktop 1440x900, short laptop 1366x720, mobile 390x844, reduced motion, and /offers attribution. Full launch readiness remains false until checkout, capture, and analytics env vars are configured."
+    },
+    {
+      "path_or_url": "https://go.agenticincome.ai",
+      "kind": "production-redirector",
+      "inspected": true,
+      "notes": "go-agenticincome deployment dpl_7GZgRrJUY5titbEjEAjZn1dzrAvB is READY, assigned to the go.agenticincome.ai custom domain, and public. Production smoke passed for /systeme, /gamma, /heygen, an unknown slug fallback, /programs, and query passthrough."
+    }
+  ],
+  "checks": [
+    {
+      "name": "source-security-scan",
+      "status": "pass",
+      "evidence": "Secret findings were generated Next.js .next cache/build artifacts only; no source secret values printed."
+    },
+    {
+      "name": "visual-qa",
+      "status": "pass",
+      "evidence": "Chrome/Playwright checks passed locally and on live production. Final evidence screenshots are in design/qa. Production browser QA passed for desktop 1440x900, short laptop 1366x720, mobile 390x844, reduced-motion desktop, and /offers mobile attribution: no non-Vercel 4xx responses, no page errors, no horizontal overflow, no visible image failures, no old tagline, no passive-fantasy language, and the next section peeks through on desktop, laptop, and mobile."
+    },
+    {
+      "name": "build",
+      "status": "pass",
+      "evidence": "pnpm type-check, pnpm links:check:static, and pnpm build completed successfully with Next.js 16.2.7 and generated 26 app routes including /offers/[slug], /delivery/starter-kit, /api/checkout, /api/subscribe, /api/readiness, /readiness, and /manifest.webmanifest."
+    },
+    {
+      "name": "product-delivery-click-paths",
+      "status": "pass",
+      "evidence": "Local production Playwright smoke returned 200 for /offers, /offers/private-intel, and /delivery/starter-kit at 390px with no console errors and no horizontal overflow. Checkout redirects landed at /delivery/starter-kit, /offers/blueprint#request-access, and /offers/private-intel#request-access. Starter Kit markdown download returned 200 and contained the first-loop checklist."
+    },
+    {
+      "name": "preview-deploy",
+      "status": "pass",
+      "evidence": "Latest Vercel preview dpl_8Kn2p99RCC5ifDPhZBV2iq4RbMVJ is READY. The preview is protected by Vercel Authentication, so unauthenticated shell fetches redirect to SSO; local production browser QA, API smoke, and build output verified the route set before deployment. Earlier authenticated checks verified /trust, paid delivery pages, Starter Kit delivery, markdown download, and checkout redirects on protected previews."
+    },
+    {
+      "name": "production-deploy",
+      "status": "pass",
+      "evidence": "vercel deploy --prod --scope starlight-intelligence deployed dpl_7ofTiUNXW4SzbndUbiSTSLjVao4r to production and aliased it to https://www.agenticincome.ai. Shell smoke returned 200 for /, /offers, /trust, /design, and /readiness. /api/readiness correctly returned 503 with fullLaunchReady=false because required checkout/capture/analytics env vars are missing. Checkout smoke verified Starter Kit redirects to /delivery/starter-kit with attribution and Blueprint redirects to /offers/blueprint#request-access with attribution."
+    },
+    {
+      "name": "access-request-api-smoke",
+      "status": "pass",
+      "evidence": "Local production API smoke verified /api/subscribe returns 400 for invalid email, 202 with mode=unwired and requestId when no capture env exists, and 202 with mode=manual_email plus a prefilled mailto when ACCESS_REQUEST_EMAIL is configured. Blueprint checkout still redirects to /offers/blueprint#request-access without a provider URL."
+    },
+    {
+      "name": "readiness-api-smoke",
+      "status": "pass",
+      "evidence": "Local production API smoke verified /api/readiness returns 503 with fullLaunchReady=false, configuredRequired=0, and captureMode=unwired with no launch env vars. A synthetic configured runtime returned 200 with fullLaunchReady=true, configuredRequired=4, and captureMode=webhook."
+    },
+    {
+      "name": "observability-wiring",
+      "status": "pass",
+      "evidence": "Vercel CLI reported Web Analytics and Speed Insights enabled for agenticincome. Type-check and production build passed with @vercel/analytics/next and @vercel/speed-insights/next rendered in app/layout.tsx. /api/readiness reports vercel_observability as configured and non-blocking."
+    },
+    {
+      "name": "checkout-attribution-smoke",
+      "status": "pass",
+      "evidence": "Local production API smoke verified no-env Blueprint fallback preserves utm_source and ref on /offers/blueprint#request-access, Starter Kit delivery preserves utm_campaign and src, secure provider checkout receives existing coupon plus utm_source/ref, and insecure provider URL is rejected to request-access. Browser QA with system Chrome verified hydrated /offers CTAs include utm_source=qa and ref=desk at 390px with no console errors or horizontal overflow."
+    },
+    {
+      "name": "go-router-local-smoke",
+      "status": "pass",
+      "evidence": "The go-agenticincome source was patched to avoid self-redirect loops for public go shortlinks. Local production smoke on port 4174 passed for /systeme, /gamma, /heygen, unknown slug fallback, query passthrough, and /programs."
+    },
+    {
+      "name": "go-router-production-smoke",
+      "status": "pass",
+      "evidence": "Vercel deployment dpl_7GZgRrJUY5titbEjEAjZn1dzrAvB was linked to the go-agenticincome project, the go.agenticincome.ai domain was added to the project, and production custom-domain smoke passed for /systeme, /gamma, /heygen, unknown slug fallback, query passthrough, and /programs."
+    },
+    {
+      "name": "production-readiness-wave-local-qa",
+      "status": "pass",
+      "evidence": "pnpm type-check, pnpm links:check:static, and pnpm build passed. Local Chrome QA against production server passed for /, /offers, /offers/blueprint, /offers/private-intel, /delivery/blueprint, /delivery/private-intel, /delivery/starter-kit, and /trust at 390px in no-preference and reduced-motion modes with status 200, no console errors, and no horizontal overflow. Home also passed at 1440px, 1366x720, and 320px with mobile hero ledger visible. Checkout redirects and /api/analytics validation behaved as expected."
+    }
+  ],
+  "score": {
+    "total": 29,
+    "max": 30,
+    "notes": "Homepage transformation buildout score after generated asset inspection, product strategy documentation, local gates, browser inspection, reduced-motion check, and Vercel preview verification."
+  },
+  "decision": "ship",
+  "known_risks": [
+    "Preview deployments are protected by Vercel Authentication; the newest preview is READY but unauthenticated shell fetches land on Vercel SSO.",
+    "Production is visually upgraded and live, but full launch readiness is intentionally false until commerce, owned capture, and first-party analytics forwarding are wired.",
+    "Blueprint and Private Intel checkout URLs are provider-ready but require AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL and AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL before paid checkout redirects to a payment provider.",
+    "Email capture forwards to an external system only when SUBSCRIBE_WEBHOOK_URL is configured; manual concierge email requires ACCESS_REQUEST_EMAIL and a working mailbox/MX record.",
+    "Analytics only forwards events when ANALYTICS_WEBHOOK_URL is configured.",
+    "Vercel inspection found no environment variables on the agenticincome project.",
+    "DNS lookup found no MX record for agenticincome.ai, so concierge email cannot be assumed ready."
+  ]
+}

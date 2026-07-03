@@ -9,9 +9,16 @@
     "start": "next start",
     "lint": "next lint",
     "sync:catalog": "node scripts/sync-catalog.mjs",
-    "audit:affiliate": "node scripts/audit-affiliate.mjs"
+    "audit:affiliate": "node scripts/audit-affiliate.mjs",
+    "type-check": "tsc --noEmit",
+    "links:check:static": "node scripts/check-internal-links.mjs",
+    "merge:gate": "npm run type-check && npm run links:check:static && echo 'L99 gate passed (add claims/slop if needed)'",
+    "predeploy": "npm run merge:gate && npm run sync:catalog"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
+    "gsap": "^3.15.0",
     "next": "^16.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

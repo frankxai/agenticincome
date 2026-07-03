@@ -1,9 +1,10 @@
 import type { MetadataRoute } from 'next'
 import { site } from '@/lib/site'
 import { posts } from '@/lib/posts'
+import { offers } from '@/lib/offers'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ['', '/blog', '/start'].map((path) => ({
+  const routes = ['', '/blog', '/tools', '/offers', '/trust', '/design', '/start'].map((path) => ({
     url: `${site.url}${path}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
@@ -15,5 +16,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }))
-  return [...routes, ...postRoutes]
+  const offerRoutes = offers.map((offer) => ({
+    url: `${site.url}/offers/${offer.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
+  }))
+  return [...routes, ...postRoutes, ...offerRoutes]
 }

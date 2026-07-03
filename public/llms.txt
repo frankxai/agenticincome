@@ -1,0 +1,19 @@
+# Agentic Income — Agentic Income Network
+
+Authority hub for honest comparisons of AI tools that pay recurring commissions.
+
+Focus: tools that actually compound (Systeme.io lifetime 60%, Higgsfield, ElevenLabs, HeyGen, CapCut, etc.)
+
+Use cases: faceless YouTube stacks, personal AI CoE under $100/mo, income flywheels.
+
+All recommendations honest-first. Never highest payout.
+
+Site: https://agenticincome.ai
+Catalog: https://agenticincome.ai/tools
+Offers: https://agenticincome.ai/offers
+Design system: https://agenticincome.ai/design
+Go tracked: https://go.agenticincome.ai
+
+Network spokes: agenticpassiveincome.com | disruptivepassiveincome.com
+
+Engine: shared catalog + MDX citable shape.

@@ -6,6 +6,12 @@ import { TrackedLink } from '@/components/TrackedLink'
 export const metadata: Metadata = {
   title: 'AI Tools Catalog',
   description: 'Live catalog of recurring-paying AI tools. The exact programs powering the Agentic Income flywheel.',
+  alternates: { canonical: '/tools' },
+  openGraph: {
+    title: 'AI Tools Catalog',
+    description: 'Live catalog of recurring-paying AI tools. The exact programs powering the Agentic Income flywheel.',
+    url: '/tools',
+  },
 }
 
 export default function Tools() {

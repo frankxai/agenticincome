@@ -4,6 +4,12 @@ import { brandPillars, designTokens, motionSystem, qualityGate, swarmLeads } fro
 export const metadata: Metadata = {
   title: 'Design System',
   description: 'The Agentic Income design, motion, and trust operating system.',
+  alternates: { canonical: '/design' },
+  openGraph: {
+    title: 'Design System',
+    description: 'The Agentic Income design, motion, and trust operating system.',
+    url: '/design',
+  },
 }
 
 const scores = [

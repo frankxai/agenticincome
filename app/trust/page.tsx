@@ -5,6 +5,12 @@ import { checkoutReadiness, supportPolicies, trustPrinciples } from '@/lib/trust
 export const metadata: Metadata = {
   title: 'Trust Standard',
   description: 'How Agentic Income handles recommendations, affiliate disclosure, checkout readiness, delivery, support, and refunds.',
+  alternates: { canonical: '/trust' },
+  openGraph: {
+    title: 'Trust Standard',
+    description: 'How Agentic Income handles recommendations, affiliate disclosure, checkout readiness, delivery, support, and refunds.',
+    url: '/trust',
+  },
 }
 
 export default function TrustPage() {

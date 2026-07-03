@@ -6,6 +6,12 @@ import { EmailCapture } from '@/components/EmailCapture'
 export const metadata: Metadata = {
   title: 'Start Here',
   description: 'The 3-step path to building an income system with AI agents — what to build, in what order, and why it compounds.',
+  alternates: { canonical: '/start' },
+  openGraph: {
+    title: 'Start Here',
+    description: 'The 3-step path to building an income system with AI agents — what to build, in what order, and why it compounds.',
+    url: '/start',
+  },
 }
 
 export default function Start() {

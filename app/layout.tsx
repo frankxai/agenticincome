@@ -32,13 +32,11 @@ export const metadata: Metadata = {
   creator: site.author,
   publisher: site.name,
   category: 'business',
-  alternates: { canonical: site.url },
   manifest: '/manifest.webmanifest',
   icons: { icon: '/icon.svg', shortcut: '/icon.svg', apple: '/icon.svg' },
   openGraph: {
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
-    url: site.url,
     siteName: site.name,
     type: 'website',
     images: [{ url: ogImage, width: 1200, height: 630, alt: 'Agentic Income transformation desk' }],

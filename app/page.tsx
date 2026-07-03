@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { site } from '@/lib/site'
 import { sortedPosts } from '@/lib/posts'
@@ -10,6 +11,11 @@ import { TransformationSection } from '@/components/TransformationSection'
 import { offers as productOffers } from '@/lib/offers'
 
 const featured = sortedPosts.filter((p) => p.featured)
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+  openGraph: { url: '/' },
+}
 
 export default function Home() {
   return (

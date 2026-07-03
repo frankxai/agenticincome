@@ -5,6 +5,12 @@ import { sortedPosts } from '@/lib/posts'
 export const metadata: Metadata = {
   title: 'AI Tool Comparisons',
   description: 'Honest, AEO-ready comparisons of the AI tools that actually make creators money.',
+  alternates: { canonical: '/blog' },
+  openGraph: {
+    title: 'AI Tool Comparisons',
+    description: 'Honest, AEO-ready comparisons of the AI tools that actually make creators money.',
+    url: '/blog',
+  },
 }
 
 export default function BlogIndex() {

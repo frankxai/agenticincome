@@ -6,6 +6,12 @@ import { CheckoutLink } from '@/components/CheckoutLink'
 export const metadata: Metadata = {
   title: 'Offers',
   description: 'Direct products and memberships from the Agentic Income network. Own your outcome beyond affiliate.',
+  alternates: { canonical: '/offers' },
+  openGraph: {
+    title: 'Offers',
+    description: 'Direct products and memberships from the Agentic Income network. Own your outcome beyond affiliate.',
+    url: '/offers',
+  },
 }
 
 const promiseStrip = [

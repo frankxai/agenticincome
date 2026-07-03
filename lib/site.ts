@@ -6,7 +6,7 @@
 export const site = {
   name: 'Agentic Income',
   domain: 'agenticincome.ai',
-  url: 'https://agenticincome.ai',
+  url: 'https://www.agenticincome.ai',
   role: 'hub', // 'hub' (flagship) | 'spoke'
   tagline: 'The AI-tool income desk.',
   description:
@@ -14,7 +14,7 @@ export const site = {
   author: 'Frank',
   // Hub links down to its spokes; spokes link up to the hub. Topical authority + referral flow.
   network: [
-    { name: 'Agentic Passive Income', url: 'https://agenticpassiveincome.com', blurb: 'The automation angle: durable loops, clear tradeoffs, and fewer fragile tool bets.' },
+    { name: 'Agentic Passive Income', url: 'https://www.agenticpassiveincome.com', blurb: 'The automation angle: durable loops, clear tradeoffs, and fewer fragile tool bets.' },
     { name: 'Disruptive Passive Income', url: 'https://disruptivepassiveincome.com', blurb: 'The market-shift angle: where AI tools change workflows enough to justify a new route.' },
   ],
   nav: [

@@ -24,6 +24,12 @@ export async function generateMetadata({ params }: OfferPageProps): Promise<Meta
   return {
     title: offer.shortTitle,
     description: offer.summary,
+    alternates: { canonical: `/offers/${offer.slug}` },
+    openGraph: {
+      title: offer.shortTitle,
+      description: offer.summary,
+      url: `/offers/${offer.slug}`,
+    },
   }
 }
 

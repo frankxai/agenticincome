@@ -8,19 +8,22 @@ export const site = {
   domain: 'agenticincome.ai',
   url: 'https://agenticincome.ai',
   role: 'hub', // 'hub' (flagship) | 'spoke'
-  tagline: 'Build a system that earns.',
+  tagline: 'The AI-tool income desk.',
   description:
-    'The honest playbook for making money with AI agents — real tool comparisons, the exact stacks, and income systems that compound while you sleep.',
+    'A premium intelligence desk for turning AI-tool demand into honest comparisons, recurring payer routes, owned audience, and direct product systems.',
   author: 'Frank',
   // Hub links down to its spokes; spokes link up to the hub. Topical authority + referral flow.
   network: [
-    { name: 'Agentic Passive Income', url: 'https://agenticpassiveincome.ai', blurb: 'The passive-income angle — set it once, let it run.' },
-    { name: 'Disruptive Passive Income', url: 'https://disruptivepassiveincome.com', blurb: 'The tools quietly replacing whole job functions.' },
+    { name: 'Agentic Passive Income', url: 'https://agenticpassiveincome.com', blurb: 'The automation angle: durable loops, clear tradeoffs, and fewer fragile tool bets.' },
+    { name: 'Disruptive Passive Income', url: 'https://disruptivepassiveincome.com', blurb: 'The market-shift angle: where AI tools change workflows enough to justify a new route.' },
   ],
   nav: [
     { label: 'Comparisons', href: '/blog' },
-    { label: 'The Stack', href: '/blog/personal-ai-coe-under-100' },
-    { label: 'Start Here', href: '/start' },
+    { label: 'Tools', href: '/tools' },
+    { label: 'Offers', href: '/offers' },
+    { label: 'Trust', href: '/trust' },
+    { label: 'Design', href: '/design' },
+    { label: 'Start', href: '/start' },
   ],
 } as const
 

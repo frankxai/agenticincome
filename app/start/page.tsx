@@ -13,11 +13,25 @@ export default function Start() {
 
   return (
     <div className="py-14">
-      <h1 className="text-4xl font-extrabold tracking-tight text-ink">Start here</h1>
+      <div className="kicker">Start here</div>
+      <h1 className="mt-3 text-5xl font-semibold text-ink">Build the first revenue loop.</h1>
       <p className="mt-4 max-w-2xl text-lg text-muted">
-        You don't need an audience or a product to begin. You need one honest comparison that ranks, the right
-        recurring-payer tools behind it, and an email list that turns readers into a relationship. Here's the order.
+        You do not need an audience or a product to begin. You need one honest comparison that ranks, the right
+        recurring-payer tools behind it, and an email list that turns readers into a relationship.
       </p>
+
+      <div className="mt-8 grid gap-4 md:grid-cols-3">
+        {[
+          ['Find the signal', 'Choose one tool category where people already compare, switch, and buy.'],
+          ['Protect the trust', 'Write the answer so the useful recommendation survives disclosure and payout pressure.'],
+          ['Capture the asset', 'Route the click, capture the email, and package the workflow into a product path.'],
+        ].map(([title, body]) => (
+          <div key={title} className="card motion-reveal">
+            <div className="text-sm font-semibold text-gold">{title}</div>
+            <p className="mt-3 text-sm leading-6 text-muted">{body}</p>
+          </div>
+        ))}
+      </div>
 
       <ol className="mt-10 space-y-6">
         {[
@@ -36,7 +50,7 @@ export default function Start() {
       </ol>
 
       <h2 className="mt-14 text-2xl font-bold text-ink">The recurring-payer shortlist</h2>
-      <p className="mt-2 max-w-2xl text-muted">The programs worth building around — ranked. Recurring commissions are what make the income passive.</p>
+      <p className="mt-2 max-w-2xl text-muted">The programs worth building around, ranked by fit and recurring potential. The point is not to chase payout; it is to route trust where it belongs.</p>
       <div className="mt-6 overflow-hidden rounded-xl border border-border glass">
         <table className="w-full text-sm">
           <thead><tr className="text-left text-muted">
@@ -55,10 +69,14 @@ export default function Start() {
       </div>
 
       <div className="mt-10">
-        <Link href="/blog" className="font-medium text-accent hover:underline">See the comparisons in action →</Link>
+        <Link href="/blog" className="font-medium text-accent hover:underline">See the comparisons in action</Link>
+        <span className="mx-3 text-muted/40">·</span>
+        <Link href="/delivery/starter-kit" className="font-medium text-accent hover:underline">Open the starter kit</Link>
+        <span className="mx-3 text-muted/40">·</span>
+        <Link href="/offers" className="font-medium text-accent hover:underline">Inspect the paid systems</Link>
       </div>
 
-      <EmailCapture headline="Want the build order as a checklist?" sub="I'll send the exact step-by-step I use to ship a ranking comparison in an afternoon." />
+      <EmailCapture headline="Want the build order as a checklist?" sub="Get the step-by-step path and top recurring shortlist. No noise." />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { getLink, findProgram } from '@/lib/affiliate'
+import { TrackedLink } from '@/components/TrackedLink'
 
 /**
  * Renders an affiliate link when we've joined the program (ourLink set),
@@ -12,8 +13,15 @@ export function AffiliateLink({ tool, children }: { tool: string; children?: Rea
   if (!href) return <strong>{label}</strong>
 
   return (
-    <a href={href} target="_blank" rel="sponsored nofollow noopener" className="text-accent underline underline-offset-2">
+    <TrackedLink
+      href={href}
+      target="_blank"
+      rel="sponsored nofollow noopener"
+      className="text-accent underline underline-offset-2"
+      event="affiliate_click"
+      payload={{ tool, source: 'content-affiliate-link' }}
+    >
       {label}
-    </a>
+    </TrackedLink>
   )
 }

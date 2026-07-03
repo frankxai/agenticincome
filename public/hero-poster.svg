@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Agentic Income routing poster</title>
+  <desc id="desc">A liquid glass command plane showing AI tool demand flowing into tracked income routes.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="0.48" stop-color="#07080d"/>
+      <stop offset="1" stop-color="#152340"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".20"/>
+      <stop offset=".45" stop-color="#ffffff" stop-opacity=".04"/>
+      <stop offset="1" stop-color="#6ea8fe" stop-opacity=".14"/>
+    </linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="22"/></filter>
+  </defs>
+  <rect width="1200" height="760" fill="url(#bg)"/>
+  <circle cx="910" cy="150" r="180" fill="#6ea8fe" opacity=".18" filter="url(#soft)"/>
+  <circle cx="240" cy="220" r="160" fill="#a78bfa" opacity=".13" filter="url(#soft)"/>
+  <rect x="120" y="96" width="960" height="568" rx="44" fill="url(#glass)" stroke="#ffffff" stroke-opacity=".16"/>
+  <rect x="170" y="152" width="860" height="86" rx="28" fill="#05070d" opacity=".72" stroke="#ffffff" stroke-opacity=".12"/>
+  <text x="214" y="188" fill="#9aa0b4" font-family="Inter, Arial" font-size="18" letter-spacing="5">LIVE ROUTING PLANE</text>
+  <text x="214" y="218" fill="#e7e9f0" font-family="Inter, Arial" font-size="28" font-weight="700">Tool demand to tracked income</text>
+  <g font-family="Inter, Arial" font-weight="700">
+    <path d="M250 390 C390 280 530 280 670 390 S950 500 1010 370" fill="none" stroke="#6ea8fe" stroke-width="5" stroke-linecap="round" opacity=".75"/>
+    <circle cx="250" cy="390" r="52" fill="#101827" stroke="#6ea8fe" stroke-opacity=".7"/>
+    <circle cx="480" cy="320" r="52" fill="#101827" stroke="#a78bfa" stroke-opacity=".65"/>
+    <circle cx="710" cy="405" r="52" fill="#101827" stroke="#6ee7b7" stroke-opacity=".65"/>
+    <circle cx="950" cy="372" r="52" fill="#101827" stroke="#6ea8fe" stroke-opacity=".7"/>
+    <text x="214" y="398" fill="#e7e9f0" font-size="22">SEARCH</text>
+    <text x="444" y="328" fill="#e7e9f0" font-size="22">ANSWER</text>
+    <text x="678" y="413" fill="#e7e9f0" font-size="22">ROUTE</text>
+    <text x="918" y="380" fill="#e7e9f0" font-size="22">EARN</text>
+  </g>
+  <rect x="190" y="560" width="820" height="48" rx="24" fill="#ffffff" opacity=".06" stroke="#ffffff" stroke-opacity=".12"/>
+  <text x="230" y="591" fill="#9aa0b4" font-family="Inter, Arial" font-size="18">Gamma / HeyGen / Opus / Synthesia / Higgsfield</text>
+</svg>

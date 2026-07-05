@@ -8,6 +8,7 @@ import { IncomeDeskHero } from '@/components/IncomeDeskHero'
 import { FlywheelSystem } from '@/components/FlywheelSystem'
 import { SignalStackSection } from '@/components/SignalStackSection'
 import { TransformationSection } from '@/components/TransformationSection'
+import { TrustComparisonDesk } from '@/components/TrustComparisonDesk'
 import { offers as productOffers } from '@/lib/offers'
 
 const featured = sortedPosts.filter((p) => p.featured)
@@ -22,6 +23,7 @@ export default function Home() {
     <>
       <IncomeDeskHero />
       <SignalStackSection />
+      <TrustComparisonDesk />
       <TransformationSection />
 
       <section className="section-band">

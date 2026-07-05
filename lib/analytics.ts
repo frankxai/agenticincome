@@ -19,6 +19,15 @@ const ALLOWED_EVENTS = new Set([
   'offer_view',
   'subscribe_success',
   'subscribe_error',
+  'comparison_criteria_opened',
+  'disclosure_seen',
+  'affiliate_route_clicked',
+  'owned_offer_clicked',
+  'unpaid_route_clicked',
+  'null_link_rendered',
+  'stale_route_seen',
+  'last_verified_visible',
+  'trust_standard_clicked',
 ])
 
 function clean(value: unknown): string | undefined {

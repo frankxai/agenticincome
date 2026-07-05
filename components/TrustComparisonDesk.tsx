@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { type KeyboardEvent, useEffect, useMemo, useState } from 'react'
+import Link from 'next/link'
 import { findProgram, getLink } from '@/lib/affiliate'
 import { trackClientEvent } from '@/lib/client-analytics'
 import { TrackedLink } from '@/components/TrackedLink'
@@ -146,6 +147,10 @@ function routeEvent(route: TrustRoute) {
   return 'stale_route_seen'
 }
 
+function isExternalHref(href: string) {
+  return /^https?:\/\//.test(href)
+}
+
 function formatProgramStatus(route: TrustRoute) {
   const program = findProgram(route.tool)
   if (!program) return route.routeStatus === 'owned' ? 'Owned product path' : 'No catalog payer'
@@ -159,6 +164,9 @@ export function TrustComparisonDesk() {
 
   useEffect(() => {
     trackClientEvent('disclosure_seen', { source: 'trust-comparison-desk', state: 'visible' })
+  }, [])
+
+  useEffect(() => {
     trackClientEvent('last_verified_visible', {
       source: 'trust-comparison-desk',
       tool: activeRoute.tool,
@@ -191,6 +199,52 @@ export function TrustComparisonDesk() {
     }
   }
 
+  function focusRoute(routeId: string) {
+    window.requestAnimationFrame(() => {
+      document.getElementById(`route-tab-${routeId}`)?.focus()
+    })
+  }
+
+  function moveRoute(routeIndex: number, direction: number) {
+    const nextRoute = ROUTES[(routeIndex + direction + ROUTES.length) % ROUTES.length]
+    selectRoute(nextRoute)
+    focusRoute(nextRoute.id)
+  }
+
+  function handleRouteKeyDown(event: KeyboardEvent<HTMLButtonElement>, routeIndex: number) {
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      event.preventDefault()
+      moveRoute(routeIndex, 1)
+    }
+
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      event.preventDefault()
+      moveRoute(routeIndex, -1)
+    }
+
+    if (event.key === 'Home') {
+      event.preventDefault()
+      selectRoute(ROUTES[0])
+      focusRoute(ROUTES[0].id)
+    }
+
+    if (event.key === 'End') {
+      event.preventDefault()
+      const lastRoute = ROUTES[ROUTES.length - 1]
+      selectRoute(lastRoute)
+      focusRoute(lastRoute.id)
+    }
+  }
+
+  function trackRouteClick(route: TrustRoute, href: string) {
+    trackClientEvent(routeEvent(route), {
+      href,
+      tool: route.tool,
+      source: 'trust-comparison-desk',
+      state: route.routeStatus,
+    })
+  }
+
   return (
     <section className="section-band trust-desk-section" aria-labelledby="trust-desk-title">
       <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
@@ -209,14 +263,13 @@ export function TrustComparisonDesk() {
             <span className="trust-status trust-status-owned">Owned</span>
             <span className="trust-status trust-status-stale">Stale</span>
           </div>
-          <TrackedLink
+          <Link
             href="/trust"
             className="cta-secondary mt-6 w-full sm:w-auto"
-            event="trust_standard_clicked"
-            payload={{ source: 'trust-comparison-desk' }}
+            onClick={() => trackClientEvent('trust_standard_clicked', { href: '/trust', source: 'trust-comparison-desk' })}
           >
             Read trust standard
-          </TrackedLink>
+          </Link>
         </div>
 
         <div className="trust-desk motion-reveal">
@@ -232,14 +285,19 @@ export function TrustComparisonDesk() {
           </div>
 
           <div className="trust-desk-grid">
-            <div className="trust-route-list" aria-label="Comparison routes">
-              {ROUTES.map((route) => (
+            <div className="trust-route-list" role="tablist" aria-label="Comparison routes">
+              {ROUTES.map((route, routeIndex) => (
                 <button
+                  id={`route-tab-${route.id}`}
                   key={route.id}
                   type="button"
+                  role="tab"
                   className={`trust-route-button ${route.id === activeRoute.id ? 'is-active' : ''}`}
                   onClick={() => selectRoute(route)}
-                  aria-pressed={route.id === activeRoute.id}
+                  onKeyDown={(event) => handleRouteKeyDown(event, routeIndex)}
+                  aria-selected={route.id === activeRoute.id}
+                  aria-controls="route-tabpanel"
+                  tabIndex={route.id === activeRoute.id ? 0 : -1}
                 >
                   <span className={`trust-status ${STATUS_CLASS[route.routeStatus]}`}>{route.routeLabel}</span>
                   <strong>{route.title}</strong>
@@ -248,7 +306,7 @@ export function TrustComparisonDesk() {
               ))}
             </div>
 
-            <article className="trust-route-detail" aria-live="polite">
+            <article id="route-tabpanel" role="tabpanel" aria-labelledby={`route-tab-${activeRoute.id}`} className="trust-route-detail" aria-live="polite">
               <div className="trust-detail-header">
                 <div>
                   <span className={`trust-status ${STATUS_CLASS[activeRoute.routeStatus]}`}>{activeRoute.routeLabel}</span>
@@ -308,20 +366,30 @@ export function TrustComparisonDesk() {
                   {activeRoute.payoutModel && <small>{activeRoute.payoutModel}</small>}
                 </div>
                 {activeHref ? (
-                  <TrackedLink
-                    href={activeHref}
-                    target={activeHref.startsWith('http') ? '_blank' : undefined}
-                    rel={activeHref.startsWith('http') ? 'sponsored nofollow noopener' : undefined}
-                    className="cta trust-route-cta"
-                    event={routeEvent(activeRoute)}
-                    payload={{
-                      tool: activeRoute.tool,
-                      source: 'trust-comparison-desk',
-                      state: activeRoute.routeStatus,
-                    }}
-                  >
-                    {activeRoute.ctaLabel}
-                  </TrackedLink>
+                  isExternalHref(activeHref) ? (
+                    <TrackedLink
+                      href={activeHref}
+                      target="_blank"
+                      rel="sponsored nofollow noopener"
+                      className="cta trust-route-cta"
+                      event={routeEvent(activeRoute)}
+                      payload={{
+                        tool: activeRoute.tool,
+                        source: 'trust-comparison-desk',
+                        state: activeRoute.routeStatus,
+                      }}
+                    >
+                      {activeRoute.ctaLabel}
+                    </TrackedLink>
+                  ) : (
+                    <Link
+                      href={activeHref}
+                      className="cta trust-route-cta"
+                      onClick={() => trackRouteClick(activeRoute, activeHref)}
+                    >
+                      {activeRoute.ctaLabel}
+                    </Link>
+                  )
                 ) : (
                   <span className="trust-disabled-cta">No paid route available</span>
                 )}

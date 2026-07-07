@@ -10,7 +10,7 @@ export const site = {
   role: 'hub', // 'hub' (flagship) | 'spoke'
   tagline: 'The AI-tool income desk.',
   description:
-    'A premium intelligence desk for turning AI-tool demand into honest comparisons, recurring payer routes, owned audience, and direct product systems.',
+    'An operating desk that turns AI-tool search demand into ranked comparisons, recurring-payer routes, an owned list, and a direct product ladder.',
   author: 'Frank',
   // Hub links down to its spokes; spokes link up to the hub. Topical authority + referral flow.
   network: [

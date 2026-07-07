@@ -1,0 +1,205 @@
+{
+  "version": "2026-07-05",
+  "task": "Agentic Income TrustComparisonDesk local implementation and visual QA.",
+  "surface": "Agentic Income homepage proof band in C:/Users/frank/starlight/repos/agenticincome.",
+  "audience": "Creator-operators, AI tool evaluators, affiliate-route builders, and revenue-network users who need criteria, disclosure, freshness, and alternatives before clicking an outbound or owned-product route.",
+  "first_read": "Every route earns its click: recommendations expose criteria, disclosure, freshness, route state, and alternatives before conversion.",
+  "standards": [
+    "C:/Users/frank/starlight/repos/_intelligence/README.md",
+    "C:/Users/frank/starlight/repos/_intelligence/quality-gates.md",
+    "C:/Users/frank/starlight/repos/DESIGN_TASTE.md",
+    "C:/Users/frank/starlight/repos/WEB_EXPERIENCE_STANDARD.md",
+    "C:/Users/frank/starlight/repos/MOTION_TASTE_RUBRIC.md",
+    "C:/Users/frank/starlight/repos/VISUAL_QA_GATE.md",
+    "C:/Users/frank/starlight/repos/design-agent-standards/PREMIUM_ASSET_STANDARD.md",
+    "C:/Users/frank/starlight/repos/design-agent-standards/AGENTIC_DESIGN_LOOP.md",
+    "C:/Users/frank/starlight/repos/design-agent-standards/OUTCOMES.md"
+  ],
+  "references": [
+    {
+      "label": "Trust comparison spec",
+      "source": "C:/Users/frank/starlight/repos/_intelligence/specs/god-mode-2026-07-05/agentic-income-trust-comparison-module-spec-2026-07-05.md",
+      "reason": "Implementation PRD, compliance source floor, motion score, and acceptance criteria."
+    },
+    {
+      "label": "Agentic Income affiliate catalog",
+      "source": "C:/Users/frank/starlight/repos/agenticincome/lib/affiliate.ts",
+      "reason": "Existing route helper and program lookup source used by the component."
+    },
+    {
+      "label": "Private v0 concept chat",
+      "source": "https://v0.app/chat/eIUrK1XwQMc",
+      "reason": "Completed after implementation; retained as concept reference only, not production code."
+    }
+  ],
+  "direction": {
+    "keep": [
+      "Dark operator desk language.",
+      "Dense but readable comparison UI.",
+      "Semantic paid, unpaid, owned, and stale route states.",
+      "Disclosure, last verified date, and alternatives visible before CTA."
+    ],
+    "avoid": [
+      "Passive-income hype as the lead promise.",
+      "Affiliate CTAs without adjacent disclosure.",
+      "Commission-first ranking.",
+      "Fake paid routes when a catalog link is missing.",
+      "Motion that hides disclosure or criteria."
+    ],
+    "signature": "Criteria before click.",
+    "system": [
+      "Tier C exact comparison UI.",
+      "Track A state transitions only.",
+      "Homepage proof-band implementation.",
+      "Desktop, mobile, and reduced-motion visual QA.",
+      "First-party event taxonomy for disclosure and route interaction."
+    ]
+  },
+  "asset_quality": {
+    "tier": "C",
+    "source_method": "vector-diagram",
+    "provenance": "owned",
+    "why_premium": "The primary asset is a code-authored trust mechanism tied to the existing affiliate catalog, route helpers, and analytics allowlist. It communicates product behavior rather than using decorative charts or generic affiliate cards.",
+    "shortcut_risk": "low",
+    "context_tested": true
+  },
+  "artifacts": [
+    {
+      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/components/TrustComparisonDesk.tsx",
+      "kind": "web-component",
+      "inspected": true,
+      "notes": "Client component implementing paid, unpaid, owned, and stale/review-before-primary-CTA route states with criteria, disclosure, freshness, alternatives, and CTA."
+    },
+    {
+      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/app/page.tsx",
+      "kind": "web-route",
+      "inspected": true,
+      "notes": "Homepage now mounts TrustComparisonDesk after SignalStackSection."
+    },
+    {
+      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/lib/analytics.ts",
+      "kind": "analytics-allowlist",
+      "inspected": true,
+      "notes": "Added comparison, disclosure, freshness, route, null-link, stale-route, and trust-standard events."
+    },
+    {
+      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-20260705/trust-comparison-desk-local-qa.json",
+      "kind": "visual-qa-metrics",
+      "inspected": true,
+      "notes": "Local Chrome QA against next start on port 3001: status 200, no horizontal overflow, four route buttons, all trust states visible, disclosure and last-verified text visible."
+    },
+    {
+      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-20260705/desktop-trust-desk.png",
+      "kind": "web-screenshot",
+      "inspected": true,
+      "notes": "Desktop section capture after the accessible headline text polish."
+    },
+    {
+      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-20260705/mobile-trust-desk.png",
+      "kind": "web-screenshot",
+      "inspected": true,
+      "notes": "Mobile card-stack capture; disclosure appears before the CTA and no horizontal overflow is present."
+    },
+    {
+      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-20260705/reduced-motion-trust-desk.png",
+      "kind": "web-screenshot",
+      "inspected": true,
+      "notes": "Reduced-motion desktop capture; all meaning is visible without essential animation."
+    },
+    {
+      "path_or_url": "https://github.com/frankxai/agenticincome/pull/7",
+      "kind": "draft-pr",
+      "inspected": true,
+      "notes": "Draft PR for the clean trust-desk branch. It remains draft to respect CI/Vercel cost discipline until production readiness review."
+    },
+    {
+      "path_or_url": "https://agenticincome-kemju52uq-starlight-intelligence.vercel.app/",
+      "kind": "vercel-preview",
+      "inspected": true,
+      "notes": "Vercel preview deployment dpl_2MiZjin4MQDHrSJ44gYNkNJwpMgp is READY and tied to PR #7 / commit f50f4f98cfdb7b234309d030192a7f2a4428b0c2. The preview is protected, verified through temporary Vercel share access expiring 2026-07-06T06:18:18Z."
+    },
+    {
+      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-preview-pr7-20260705/trust-comparison-desk-preview-qa.json",
+      "kind": "visual-qa-metrics",
+      "inspected": true,
+      "notes": "Preview Chrome QA passed for desktop, mobile, and reduced-motion: status 200, no SSO wall after share access, no console errors, no page errors, no failed responses, no horizontal overflow, and all trust states visible."
+    },
+    {
+      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-preview-pr7-20260705/preview-desktop-trust-desk.png",
+      "kind": "web-screenshot",
+      "inspected": true,
+      "notes": "Vercel preview desktop capture."
+    },
+    {
+      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-preview-pr7-20260705/preview-mobile-trust-desk.png",
+      "kind": "web-screenshot",
+      "inspected": true,
+      "notes": "Vercel preview mobile capture."
+    }
+  ],
+  "checks": [
+    {
+      "name": "asset-tier",
+      "status": "pass",
+      "evidence": "Tier C exact UI mechanism; no decorative primary asset."
+    },
+    {
+      "name": "export-inspection",
+      "status": "pass",
+      "evidence": "Desktop, mobile, and reduced-motion screenshots inspected."
+    },
+    {
+      "name": "type-check",
+      "status": "pass",
+      "evidence": "npm run type-check passed."
+    },
+    {
+      "name": "static-link-check",
+      "status": "pass",
+      "evidence": "npm run links:check:static passed."
+    },
+    {
+      "name": "production-build",
+      "status": "pass",
+      "evidence": "npm run build passed with Next.js 16.2.7 and generated 33 static pages."
+    },
+    {
+      "name": "visual-qa",
+      "status": "pass",
+      "evidence": "Local Chrome QA passed for desktop 1440px, mobile 390px, and reduced-motion desktop. The only failed responses were expected local Vercel Analytics and Speed Insights scripts under next start."
+    },
+    {
+      "name": "source-security-scan",
+      "status": "pass",
+      "evidence": "Scoped gitleaks scans on changed source files passed. Full repo wrapper found known generated .next cache findings only."
+    },
+    {
+      "name": "v0-concept-review",
+      "status": "pass",
+      "evidence": "Private v0 chat completed after implementation and remains concept input only; Codex did not copy generated code."
+    },
+    {
+      "name": "preview-deploy",
+      "status": "pass",
+      "evidence": "Draft PR #7 from clean branch codex/agentic-income-trust-desk triggered one native Vercel preview deployment, dpl_2MiZjin4MQDHrSJ44gYNkNJwpMgp, which is READY. Preview browser QA passed on desktop, mobile, and reduced motion."
+    },
+    {
+      "name": "production-deploy",
+      "status": "blocked",
+      "evidence": "No production deploy attempted. Next gate is review/approval, then mark PR ready or merge/promote deliberately."
+    }
+  ],
+  "score": {
+    "total": 28,
+    "max": 30,
+    "notes": "Local implementation reaches the 26/30 visual threshold, passes local gates, and has a verified Vercel preview. Score is capped until production-domain evidence exists."
+  },
+  "decision": "iterate",
+  "known_risks": [
+    "The repository contains unrelated dirty files; branch ownership must be reviewed before PR or deploy.",
+    "Affiliate program terms and payout language still need freshness verification before stronger claims.",
+    "The module is only on the Agentic Income hub; article/table and network-spoke variants remain queued.",
+    "The preview is protected by Vercel Authentication and was verified through temporary share access.",
+    "No production promotion has been run for this change set."
+  ]
+}

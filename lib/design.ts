@@ -29,12 +29,12 @@ export const designTokens = {
 
 export const brandPillars = [
   {
-    title: 'Honest comparison',
-    body: 'The best tool wins before payout is considered. Dead-end frontier tools still get covered when they answer the search intent.',
+    title: 'Fit ranks first',
+    body: 'The best tool wins before payout is considered. ChatGPT and Claude pay nothing and still take the top slot when they are the answer.',
   },
   {
     title: 'Recurring-payer routing',
-    body: 'Revenue comes from tools that actually pay recurring and authentically fit the recommendation.',
+    body: 'Revenue comes from tools that pay recurring and fit the recommendation they appear in.',
   },
   {
     title: 'Owned audience',

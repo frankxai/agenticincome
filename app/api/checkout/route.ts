@@ -2,9 +2,16 @@ import { NextResponse } from 'next/server'
 import { forwardAnalyticsEvent } from '@/lib/analytics'
 import { checkoutUrl, getOffer } from '@/lib/offers'
 import { appendTrackingParams } from '@/lib/tracking'
+import { checkRateLimit, clientKeyFromHeaders } from '@agentic-income/engine'
 
 export async function GET(req: Request) {
   const url = new URL(req.url)
+
+  const { allowed } = checkRateLimit(clientKeyFromHeaders(req.headers, 'checkout'), 30, 60_000)
+  if (!allowed) {
+    return NextResponse.json({ ok: false, error: 'rate_limited' }, { status: 429 })
+  }
+
   const slug = url.searchParams.get('offer') ?? ''
   const offer = getOffer(slug)
 

@@ -20,16 +20,17 @@ export default function Start() {
   return (
     <div className="py-14">
       <div className="kicker">Start here</div>
-      <h1 className="mt-3 text-5xl font-semibold text-ink">Build the first revenue loop.</h1>
+      <h1 className="mt-3 text-5xl font-semibold text-ink">Build the first loop. Then run it like a desk.</h1>
       <p className="mt-4 max-w-2xl text-lg text-muted">
-        You do not need an audience or a product to begin. You need one honest comparison that ranks, the right
-        recurring-payer tools behind it, and an email list that turns readers into a relationship.
+        Start with no audience and no product. One comparison that ranks, a recurring-payer route behind it, and an
+        email list — then the same operating model repeats across every category you add. The first loop is a page;
+        the tenth is a system.
       </p>
 
       <div className="mt-8 grid gap-4 md:grid-cols-3">
         {[
           ['Find the signal', 'Choose one tool category where people already compare, switch, and buy.'],
-          ['Protect the trust', 'Write the answer so the useful recommendation survives disclosure and payout pressure.'],
+          ['Set the verdict', 'Rank the answer on fit first; disclosure and payout enter after, never before.'],
           ['Capture the asset', 'Route the click, capture the email, and package the workflow into a product path.'],
         ].map(([title, body]) => (
           <div key={title} className="card motion-reveal">
@@ -42,7 +43,7 @@ export default function Start() {
       <ol className="mt-10 space-y-6">
         {[
           { t: 'Pick one tool category you actually use', d: 'Voice, video, writing, coding — whatever you have real opinions about. Authentic beats broad. You can only recommend honestly what you\'ve touched.' },
-          { t: 'Write the comparison in the citable shape', d: 'Direct answer up top, sortable table, the honest pick, a real FAQ. That structure is what ranks and what AI search engines lift verbatim.' },
+          { t: 'Write the comparison in the citable shape', d: 'Direct answer up top, sortable table, the genuine pick, a real FAQ. That structure is what ranks and what AI search engines lift verbatim.' },
           { t: 'Place recurring-payer links, then build the list', d: 'Link the tools that pay every month — not one-time bounties. Add one email capture. Now every reader is either income or a future relationship.' },
         ].map((s, i) => (
           <li key={s.t} className="flex gap-4 rounded-xl border border-border glass p-5">

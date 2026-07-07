@@ -7,30 +7,58 @@ type ReadinessItem = {
   detail: string
 }
 
-function hasSecureUrlEnv(name: string) {
+type EnvCheck = { configured: boolean; misconfigured: boolean; warning?: string }
+
+// Distinguishes "not set" (a normal, expected state before a provider is wired) from
+// "set but wrong" (a typo'd URL, a malformed email) — the readiness API previously
+// collapsed both into a single `false`, so a misspelled env var name looked identical
+// to one that was never set at all. The second case should be loud, not silent.
+function checkSecureUrlEnv(name: string): EnvCheck {
   const value = process.env[name]
-  if (!value) return false
+  if (!value) return { configured: false, misconfigured: false }
 
   try {
     const url = new URL(value)
-    return url.protocol === 'https:'
+    if (url.protocol !== 'https:') {
+      return { configured: false, misconfigured: true, warning: `${name} is set but is not https:// — refusing to use an insecure checkout URL.` }
+    }
+    return { configured: true, misconfigured: false }
   } catch {
-    return false
+    return { configured: false, misconfigured: true, warning: `${name} is set but is not a valid URL. Check for a typo or truncated value.` }
   }
 }
 
-function hasEmailEnv(name: string) {
+function checkEmailEnv(name: string): EnvCheck {
   const value = process.env[name]
-  return Boolean(value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+  if (!value) return { configured: false, misconfigured: false }
+
+  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+  return valid
+    ? { configured: true, misconfigured: false }
+    : { configured: false, misconfigured: true, warning: `${name} is set but does not look like a valid email address.` }
 }
 
 export function getLaunchReadiness() {
-  const blueprintCheckout = hasSecureUrlEnv('AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL')
-  const privateIntelCheckout = hasSecureUrlEnv('AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL')
-  const subscribeWebhook = hasSecureUrlEnv('SUBSCRIBE_WEBHOOK_URL')
-  const conciergeEmail = hasEmailEnv('ACCESS_REQUEST_EMAIL')
-  const analyticsWebhook = hasSecureUrlEnv('ANALYTICS_WEBHOOK_URL')
+  const blueprintCheckoutCheck = checkSecureUrlEnv('AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL')
+  const privateIntelCheckoutCheck = checkSecureUrlEnv('AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL')
+  const subscribeWebhookCheck = checkSecureUrlEnv('SUBSCRIBE_WEBHOOK_URL')
+  const conciergeEmailCheck = checkEmailEnv('ACCESS_REQUEST_EMAIL')
+  const analyticsWebhookCheck = checkSecureUrlEnv('ANALYTICS_WEBHOOK_URL')
+
+  const blueprintCheckout = blueprintCheckoutCheck.configured
+  const privateIntelCheckout = privateIntelCheckoutCheck.configured
+  const subscribeWebhook = subscribeWebhookCheck.configured
+  const conciergeEmail = conciergeEmailCheck.configured
+  const analyticsWebhook = analyticsWebhookCheck.configured
   const captureConfigured = subscribeWebhook || conciergeEmail
+
+  const misconfigurationWarnings = [blueprintCheckoutCheck, privateIntelCheckoutCheck, subscribeWebhookCheck, conciergeEmailCheck, analyticsWebhookCheck]
+    .map((check) => check.warning)
+    .filter((warning): warning is string => Boolean(warning))
+
+  if (misconfigurationWarnings.length > 0 && process.env.NODE_ENV !== 'test') {
+    for (const warning of misconfigurationWarnings) console.warn(`[readiness] ${warning}`)
+  }
 
   const items: ReadinessItem[] = [
     {
@@ -90,12 +118,16 @@ export function getLaunchReadiness() {
   const fullLaunchReady = configuredRequired.length === required.length
 
   return {
-    version: '2026-06-26',
+    version: '2026-07-06',
     checkedAt: new Date().toISOString(),
     fullLaunchReady,
     configuredRequired: configuredRequired.length,
     requiredTotal: required.length,
     captureMode: subscribeWebhook ? 'webhook' : conciergeEmail ? 'manual_email' : 'unwired',
+    // Distinct from `items[].configured === false` — this list only has entries when an
+    // env var is SET but fails validation (a typo, a truncated URL). An empty array here
+    // with items still unconfigured just means "not set yet," which is fine.
+    misconfigurationWarnings,
     items,
   }
 }

@@ -3,7 +3,7 @@
 import type { AnchorHTMLAttributes, ReactNode } from 'react'
 import { useEffect, useState } from 'react'
 import { appendTrackingParamsToPath } from '@/lib/tracking'
-import { TrackedLink } from '@/components/TrackedLink'
+import { TrackedLink } from '@agentic-income/engine/react.js'
 
 type CheckoutLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string

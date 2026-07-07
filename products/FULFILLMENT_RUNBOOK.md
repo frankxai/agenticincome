@@ -11,6 +11,7 @@ This runbook defines how each offer is delivered once the public site routes a b
 | Starter Kit | `/api/checkout?offer=starter-kit` | none | `/delivery/starter-kit` | live |
 | Blueprint | `/api/checkout?offer=blueprint` | `AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL` | `/delivery/blueprint` | payment-link pending |
 | Private Intel | `/api/checkout?offer=private-intel` | `AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL` | `/delivery/private-intel` | payment-link pending |
+| Faceless YouTube Agent Pack | `/api/checkout?offer=faceless-youtube-pack` (not yet routed) | `AGENTIC_INCOME_FACELESS_YT_CHECKOUT_URL` (not yet set) | `/delivery/faceless-youtube-pack` (not yet built) | content drafted, not launched — see `products/faceless-youtube-pack/` |
 
 ## Payment Provider Setup
 

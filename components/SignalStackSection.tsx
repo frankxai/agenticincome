@@ -10,8 +10,8 @@ const signalSteps = [
   },
   {
     number: '02',
-    title: 'Comparison earns trust',
-    body: 'The useful answer stays honest before payout is considered.',
+    title: 'Comparison sets the verdict',
+    body: 'The ranking is fixed on fit before payout enters the math.',
     metric: 'proof',
   },
   {
@@ -37,11 +37,11 @@ export function SignalStackSection() {
         <div className="section-heading motion-reveal">
           <div className="kicker">Live signal model</div>
           <h2>
-            <span>Turn demand into a route,</span>
-            <span>not a random link.</span>
+            <span>One search in,</span>
+            <span>one routed click out.</span>
           </h2>
           <p>
-            Search intent enters, the comparison protects trust, and the best-fit payer or owned product receives the click only after the answer earns it.
+            Search intent enters, the comparison ranks it on fit, and the click routes to the winner — a recurring payer when one fits the verdict, an owned product when none does.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href="/tools" className="cta-secondary">

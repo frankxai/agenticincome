@@ -1,0 +1,192 @@
+{
+  "capturedAt": "2026-07-05T06:55:40.576Z",
+  "url": "http://127.0.0.1:3001/",
+  "results": [
+    {
+      "name": "desktop-trust-desk",
+      "status": 200,
+      "screenshot": "C:\\Users\\frank\\starlight\\repos\\agenticincome\\.visual-qa\\trust-comparison-desk-20260705\\desktop-trust-desk.png",
+      "metrics": {
+        "statusTexts": [
+          "Paid",
+          "Unpaid",
+          "Owned",
+          "Stale",
+          "Paid route",
+          "No paid route",
+          "Owned offer",
+          "Verify before primary CTA",
+          "Paid route"
+        ],
+        "routeButtonCount": 4,
+        "routeButtonTexts": [
+          "Paid routeFaceless YouTube stackScript, voice, edit, and clip a channel without hiring a full team.",
+          "No paid routeFrontier model answerChoose the best model before routing to any payer.",
+          "Owned offerOwned income loopTurn one comparison into a product and list relationship.",
+          "Verify before primary CTAVideo model backdoorMonetize video-model demand only after terms are checked."
+        ],
+        "hasHorizontalOverflow": false,
+        "includesCriteria": true,
+        "includesDisclosure": true,
+        "includesLastVerified": true,
+        "includesNoPaidRoute": true,
+        "includesOwnedOffer": true,
+        "includesStale": true,
+        "headingText": "Every route earns its click.",
+        "ctaTexts": [
+          "Open routed pick"
+        ],
+        "sectionRect": {
+          "x": 168,
+          "y": -145.375,
+          "width": 1104,
+          "height": 1390.21875,
+          "top": -145.375,
+          "right": 1272,
+          "bottom": 1244.84375,
+          "left": 168
+        },
+        "scrollWidth": 1440,
+        "viewportWidth": 1440
+      },
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "failedResponses": [
+        {
+          "url": "http://127.0.0.1:3001/_vercel/insights/script.js",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:3001/_vercel/speed-insights/script.js",
+          "status": 404
+        }
+      ]
+    },
+    {
+      "name": "mobile-trust-desk",
+      "status": 200,
+      "screenshot": "C:\\Users\\frank\\starlight\\repos\\agenticincome\\.visual-qa\\trust-comparison-desk-20260705\\mobile-trust-desk.png",
+      "metrics": {
+        "statusTexts": [
+          "Paid",
+          "Unpaid",
+          "Owned",
+          "Stale",
+          "Paid route",
+          "No paid route",
+          "Owned offer",
+          "Verify before primary CTA",
+          "Paid route"
+        ],
+        "routeButtonCount": 4,
+        "routeButtonTexts": [
+          "Paid routeFaceless YouTube stackScript, voice, edit, and clip a channel without hiring a full team.",
+          "No paid routeFrontier model answerChoose the best model before routing to any payer.",
+          "Owned offerOwned income loopTurn one comparison into a product and list relationship.",
+          "Verify before primary CTAVideo model backdoorMonetize video-model demand only after terms are checked."
+        ],
+        "hasHorizontalOverflow": false,
+        "includesCriteria": true,
+        "includesDisclosure": true,
+        "includesLastVerified": true,
+        "includesNoPaidRoute": true,
+        "includesOwnedOffer": true,
+        "includesStale": true,
+        "headingText": "Every route earns its click.",
+        "ctaTexts": [
+          "Open routed pick"
+        ],
+        "sectionRect": {
+          "x": 16,
+          "y": -555.453125,
+          "width": 358,
+          "height": 2910.359375,
+          "top": -555.453125,
+          "right": 374,
+          "bottom": 2354.90625,
+          "left": 16
+        },
+        "scrollWidth": 390,
+        "viewportWidth": 390
+      },
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "failedResponses": [
+        {
+          "url": "http://127.0.0.1:3001/_vercel/insights/script.js",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:3001/_vercel/speed-insights/script.js",
+          "status": 404
+        }
+      ]
+    },
+    {
+      "name": "reduced-motion-trust-desk",
+      "status": 200,
+      "screenshot": "C:\\Users\\frank\\starlight\\repos\\agenticincome\\.visual-qa\\trust-comparison-desk-20260705\\reduced-motion-trust-desk.png",
+      "metrics": {
+        "statusTexts": [
+          "Paid",
+          "Unpaid",
+          "Owned",
+          "Stale",
+          "Paid route",
+          "No paid route",
+          "Owned offer",
+          "Verify before primary CTA",
+          "Paid route"
+        ],
+        "routeButtonCount": 4,
+        "routeButtonTexts": [
+          "Paid routeFaceless YouTube stackScript, voice, edit, and clip a channel without hiring a full team.",
+          "No paid routeFrontier model answerChoose the best model before routing to any payer.",
+          "Owned offerOwned income loopTurn one comparison into a product and list relationship.",
+          "Verify before primary CTAVideo model backdoorMonetize video-model demand only after terms are checked."
+        ],
+        "hasHorizontalOverflow": false,
+        "includesCriteria": true,
+        "includesDisclosure": true,
+        "includesLastVerified": true,
+        "includesNoPaidRoute": true,
+        "includesOwnedOffer": true,
+        "includesStale": true,
+        "headingText": "Every route earns its click.",
+        "ctaTexts": [
+          "Open routed pick"
+        ],
+        "sectionRect": {
+          "x": 168,
+          "y": -145.375,
+          "width": 1104,
+          "height": 1390.21875,
+          "top": -145.375,
+          "right": 1272,
+          "bottom": 1244.84375,
+          "left": 168
+        },
+        "scrollWidth": 1440,
+        "viewportWidth": 1440
+      },
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "failedResponses": [
+        {
+          "url": "http://127.0.0.1:3001/_vercel/insights/script.js",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:3001/_vercel/speed-insights/script.js",
+          "status": 404
+        }
+      ]
+    }
+  ]
+}

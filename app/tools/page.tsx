@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { payingPrograms } from '@/lib/affiliate'
 import Link from 'next/link'
-import { TrackedLink } from '@/components/TrackedLink'
+import { TrackedLink } from '@agentic-income/engine/react.js'
 
 export const metadata: Metadata = {
   title: 'AI Tools Catalog',

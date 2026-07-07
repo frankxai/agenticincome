@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createHash } from 'node:crypto'
 import { forwardAnalyticsEvent } from '@/lib/analytics'
+import { checkRateLimit, clientKeyFromHeaders } from '@agentic-income/engine'
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PUBLIC_EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -29,6 +30,11 @@ function conciergeMailto(email: string, source: string, requestId: string) {
 }
 
 export async function POST(req: Request) {
+  const { allowed } = checkRateLimit(clientKeyFromHeaders(req.headers, 'subscribe'), 5, 60_000)
+  if (!allowed) {
+    return NextResponse.json({ ok: false, error: 'rate_limited' }, { status: 429 })
+  }
+
   const { email, source = 'agenticincome' } = await req.json().catch(() => ({}))
   const normalized = typeof email === 'string' ? email.trim().toLowerCase() : ''
 

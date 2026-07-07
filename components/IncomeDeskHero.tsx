@@ -5,7 +5,7 @@ import { posts } from '@/lib/posts'
 
 const proofRows = [
   ['Search intent', 'Faceless YouTube stack', 'Creator demand'],
-  ['Honest pick', 'ElevenLabs + CapCut', 'Best fit wins'],
+  ['Ranked pick', 'ElevenLabs + CapCut', 'Best fit wins'],
   ['Revenue route', 'Recurring payer links', 'Disclosure safe'],
 ]
 
@@ -78,7 +78,7 @@ export function IncomeDeskHero() {
             <span>Income</span>
           </h1>
           <p className="hero-subtitle">
-            Build the first AI-tool income loop: one honest comparison, one recurring payer route, one owned-audience capture, and one direct product path.
+            Build the first AI-tool income loop: one comparison ranked for a query people already search, one route to a tool that pays every month, one email capture, one product of your own.
           </p>
           <div className="hero-actions">
             <Link href="/start" className="cta w-full sm:w-auto">

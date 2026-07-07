@@ -8,6 +8,7 @@ import { IncomeDeskHero } from '@/components/IncomeDeskHero'
 import { FlywheelSystem } from '@/components/FlywheelSystem'
 import { SignalStackSection } from '@/components/SignalStackSection'
 import { TransformationSection } from '@/components/TransformationSection'
+import { TrustComparisonDesk } from '@/components/TrustComparisonDesk'
 import { offers as productOffers } from '@/lib/offers'
 
 const featured = sortedPosts.filter((p) => p.featured)
@@ -22,6 +23,7 @@ export default function Home() {
     <>
       <IncomeDeskHero />
       <SignalStackSection />
+      <TrustComparisonDesk />
       <TransformationSection />
 
       <section className="section-band">
@@ -30,7 +32,7 @@ export default function Home() {
             <div className="kicker">Trust architecture</div>
             <h2>The recommendation is the asset.</h2>
             <p>
-              Agentic Income monetizes attention without corrupting the answer. Each recommendation has to survive the catalog, the comparison, and the disclosure.
+              Every pick ships with its ranking criteria, payout status, and last-verified date on the page. Each recommendation has to survive the catalog, the comparison, and the disclosure.
             </p>
           </div>
           <Link href="/trust" className="cta-secondary motion-reveal">
@@ -118,7 +120,7 @@ export default function Home() {
         </div>
       </section>
 
-      <EmailCapture headline="Get the next payer before the crowd" sub="One high-signal note when a tool worth building around becomes available. No noise." />
+      <EmailCapture headline="Get the next payer before the crowd" sub="One note when a program worth building a page around opens — the tool, the rate, and the comparison angle to take." />
     </>
   )
 }

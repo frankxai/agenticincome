@@ -7,6 +7,8 @@ import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
 import { MotionRuntime } from '@/components/MotionRuntime'
 import { site } from '@/lib/site'
+import { CatalogProvider } from '@agentic-income/engine/react.js'
+import catalog from '@/data/programs.json'
 
 const ogImage = '/brand/agentic-income-og.webp'
 
@@ -63,10 +65,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
-        <Nav />
-        <MotionRuntime />
-        <main className="mx-auto w-full max-w-6xl overflow-x-clip px-4 sm:px-6">{children}</main>
-        <Footer />
+        <CatalogProvider catalog={catalog}>
+          <Nav />
+          <MotionRuntime />
+          <main className="mx-auto w-full max-w-6xl overflow-x-clip px-4 sm:px-6">{children}</main>
+          <Footer />
+        </CatalogProvider>
         <Analytics />
         <SpeedInsights />
       </body>

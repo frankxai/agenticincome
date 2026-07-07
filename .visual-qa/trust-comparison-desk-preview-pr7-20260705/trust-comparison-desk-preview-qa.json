@@ -1,0 +1,170 @@
+{
+  "capturedAt": "2026-07-05T07:19:40.509Z",
+  "deploymentUrl": "https://agenticincome-kemju52uq-starlight-intelligence.vercel.app/",
+  "shareUrlExpires": "2026-07-06T06:18:18Z",
+  "deploymentId": "dpl_2MiZjin4MQDHrSJ44gYNkNJwpMgp",
+  "pr": 7,
+  "branch": "codex/agentic-income-trust-desk",
+  "commit": "f50f4f98cfdb7b234309d030192a7f2a4428b0c2",
+  "results": [
+    {
+      "name": "preview-desktop-trust-desk",
+      "status": 200,
+      "finalUrl": "https://agenticincome-kemju52uq-starlight-intelligence.vercel.app/",
+      "screenshot": "C:\\Users\\frank\\starlight\\worktrees\\agenticincome-trust-desk\\.visual-qa\\trust-comparison-desk-preview-pr7-20260705\\preview-desktop-trust-desk.png",
+      "metrics": {
+        "blockedBySsoText": false,
+        "routeButtonCount": 4,
+        "routeButtonTexts": [
+          "Paid routeFaceless YouTube stackScript, voice, edit, and clip a channel without hiring a full team.",
+          "No paid routeFrontier model answerChoose the best model before routing to any payer.",
+          "Owned offerOwned income loopTurn one comparison into a product and list relationship.",
+          "Verify before primary CTAVideo model backdoorMonetize video-model demand only after terms are checked."
+        ],
+        "statusTexts": [
+          "Paid",
+          "Unpaid",
+          "Owned",
+          "Stale",
+          "Paid route",
+          "No paid route",
+          "Owned offer",
+          "Verify before primary CTA",
+          "Paid route"
+        ],
+        "hasHorizontalOverflow": false,
+        "includesCriteria": true,
+        "includesDisclosure": true,
+        "includesLastVerified": true,
+        "includesNoPaidRoute": true,
+        "includesOwnedOffer": true,
+        "includesStale": true,
+        "headingText": "Every route earns its click.",
+        "ctaTexts": [
+          "Open routed pick"
+        ],
+        "sectionRect": {
+          "x": 168,
+          "y": -145.375,
+          "width": 1104,
+          "height": 1390.21875,
+          "top": -145.375,
+          "right": 1272,
+          "bottom": 1244.84375,
+          "left": 168
+        },
+        "scrollWidth": 1440,
+        "viewportWidth": 1440
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": []
+    },
+    {
+      "name": "preview-mobile-trust-desk",
+      "status": 200,
+      "finalUrl": "https://agenticincome-kemju52uq-starlight-intelligence.vercel.app/",
+      "screenshot": "C:\\Users\\frank\\starlight\\worktrees\\agenticincome-trust-desk\\.visual-qa\\trust-comparison-desk-preview-pr7-20260705\\preview-mobile-trust-desk.png",
+      "metrics": {
+        "blockedBySsoText": false,
+        "routeButtonCount": 4,
+        "routeButtonTexts": [
+          "Paid routeFaceless YouTube stackScript, voice, edit, and clip a channel without hiring a full team.",
+          "No paid routeFrontier model answerChoose the best model before routing to any payer.",
+          "Owned offerOwned income loopTurn one comparison into a product and list relationship.",
+          "Verify before primary CTAVideo model backdoorMonetize video-model demand only after terms are checked."
+        ],
+        "statusTexts": [
+          "Paid",
+          "Unpaid",
+          "Owned",
+          "Stale",
+          "Paid route",
+          "No paid route",
+          "Owned offer",
+          "Verify before primary CTA",
+          "Paid route"
+        ],
+        "hasHorizontalOverflow": false,
+        "includesCriteria": true,
+        "includesDisclosure": true,
+        "includesLastVerified": true,
+        "includesNoPaidRoute": true,
+        "includesOwnedOffer": true,
+        "includesStale": true,
+        "headingText": "Every route earns its click.",
+        "ctaTexts": [
+          "Open routed pick"
+        ],
+        "sectionRect": {
+          "x": 16,
+          "y": -555.453125,
+          "width": 358,
+          "height": 2910.359375,
+          "top": -555.453125,
+          "right": 374,
+          "bottom": 2354.90625,
+          "left": 16
+        },
+        "scrollWidth": 390,
+        "viewportWidth": 390
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": []
+    },
+    {
+      "name": "preview-reduced-motion-trust-desk",
+      "status": 200,
+      "finalUrl": "https://agenticincome-kemju52uq-starlight-intelligence.vercel.app/",
+      "screenshot": "C:\\Users\\frank\\starlight\\worktrees\\agenticincome-trust-desk\\.visual-qa\\trust-comparison-desk-preview-pr7-20260705\\preview-reduced-motion-trust-desk.png",
+      "metrics": {
+        "blockedBySsoText": false,
+        "routeButtonCount": 4,
+        "routeButtonTexts": [
+          "Paid routeFaceless YouTube stackScript, voice, edit, and clip a channel without hiring a full team.",
+          "No paid routeFrontier model answerChoose the best model before routing to any payer.",
+          "Owned offerOwned income loopTurn one comparison into a product and list relationship.",
+          "Verify before primary CTAVideo model backdoorMonetize video-model demand only after terms are checked."
+        ],
+        "statusTexts": [
+          "Paid",
+          "Unpaid",
+          "Owned",
+          "Stale",
+          "Paid route",
+          "No paid route",
+          "Owned offer",
+          "Verify before primary CTA",
+          "Paid route"
+        ],
+        "hasHorizontalOverflow": false,
+        "includesCriteria": true,
+        "includesDisclosure": true,
+        "includesLastVerified": true,
+        "includesNoPaidRoute": true,
+        "includesOwnedOffer": true,
+        "includesStale": true,
+        "headingText": "Every route earns its click.",
+        "ctaTexts": [
+          "Open routed pick"
+        ],
+        "sectionRect": {
+          "x": 168,
+          "y": -145.375,
+          "width": 1104,
+          "height": 1390.21875,
+          "top": -145.375,
+          "right": 1272,
+          "bottom": 1244.84375,
+          "left": 168
+        },
+        "scrollWidth": 1440,
+        "viewportWidth": 1440
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": []
+    }
+  ]
+}

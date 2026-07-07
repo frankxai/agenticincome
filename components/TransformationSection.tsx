@@ -17,7 +17,7 @@ const states = [
 ]
 
 const moves = [
-  ['Question', 'Turn high-intent searches into a direct answer, not a meandering blog post.'],
+  ['Question', 'Answer the search in the first screen: verdict, criteria, tradeoff.'],
   ['Proof', 'Show the tradeoffs, disclose the incentives, and let the best-fit tool win.'],
   ['Route', 'Send qualified demand to recurring programs or a direct product only when it belongs.'],
   ['Asset', 'Capture the relationship so the next launch starts with trust instead of rented attention.'],
@@ -30,7 +30,7 @@ export function TransformationSection() {
         <div className="kicker">Transformation</div>
         <h2>From tool noise to a compounding income desk.</h2>
         <p>
-          Agentic Income is built to make the upgrade visible: scattered demand becomes one honest recommendation system, then one owned product relationship.
+          Agentic Income makes the upgrade visible: scattered demand becomes one routed recommendation system with criteria on the page, then one owned product relationship.
         </p>
       </div>
 

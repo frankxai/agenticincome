@@ -16,6 +16,7 @@
     "predeploy": "npm run merge:gate && npm run sync:catalog"
   },
   "dependencies": {
+    "@agentic-income/engine": "link:../affiliate-agent-skills",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "gsap": "^3.15.0",

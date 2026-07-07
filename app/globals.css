@@ -728,6 +728,339 @@ body::before {
   line-height: 1.2;
 }
 
+.trust-desk-section {
+  background:
+    radial-gradient(circle at 72% 12%, rgba(110,168,254,0.14), transparent 32%),
+    radial-gradient(circle at 28% 100%, rgba(214,181,109,0.08), transparent 34%);
+}
+
+.trust-desk-section .section-heading h2 {
+  font-size: clamp(2.45rem, 3.6vw, 3.35rem);
+  line-height: 1.04;
+}
+
+.trust-desk-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.35rem;
+}
+
+.trust-desk {
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--color-border) 72%, var(--color-accent) 18%);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(140deg, rgba(110,168,254,0.11), transparent 32%),
+    linear-gradient(330deg, rgba(214,181,109,0.08), transparent 38%),
+    rgba(10,12,20,0.82);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.065), 0 34px 110px rgba(0,0,0,0.32);
+  padding: clamp(1rem, 2.5vw, 1.35rem);
+}
+
+.trust-desk-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 1rem;
+  background: rgba(5,6,10,0.58);
+  padding: 1rem;
+}
+
+.trust-desk-topline h3,
+.trust-route-detail h3 {
+  margin-top: 0.35rem;
+  color: var(--color-ink);
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 780;
+  line-height: 1.12;
+}
+
+.trust-freshness {
+  flex: 0 0 auto;
+  min-width: 8rem;
+  border-radius: 0.85rem;
+  background: rgba(52,211,153,0.1);
+  padding: 0.65rem 0.75rem;
+  color: var(--color-green);
+  text-align: right;
+}
+
+.trust-freshness span,
+.trust-action-row small {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.72rem;
+}
+
+.trust-freshness strong {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
+}
+
+.trust-desk-grid {
+  display: grid;
+  grid-template-columns: minmax(13rem, 0.72fr) minmax(0, 1.28fr);
+  gap: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.trust-route-list {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.trust-route-button {
+  width: 100%;
+  min-height: 8.25rem;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 0.95rem;
+  background: rgba(5,6,10,0.48);
+  padding: 0.85rem;
+  color: var(--color-muted);
+  text-align: left;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .trust-route-button {
+    transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+  }
+
+  .trust-route-button:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.trust-route-button:hover,
+.trust-route-button.is-active {
+  border-color: color-mix(in oklab, var(--color-accent) 54%, var(--color-border));
+  background: rgba(110,168,254,0.08);
+}
+
+.trust-route-button strong {
+  display: block;
+  margin-top: 0.65rem;
+  color: var(--color-ink);
+  font-size: 0.98rem;
+  line-height: 1.2;
+}
+
+.trust-route-button small {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.trust-status {
+  display: inline-flex;
+  min-height: 1.65rem;
+  align-items: center;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  padding: 0.32rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.trust-status-paid {
+  border-color: rgba(52,211,153,0.26);
+  background: rgba(52,211,153,0.1);
+  color: var(--color-green);
+}
+
+.trust-status-unpaid {
+  border-color: rgba(110,168,254,0.28);
+  background: rgba(110,168,254,0.1);
+  color: var(--color-accent);
+}
+
+.trust-status-owned {
+  border-color: rgba(214,181,109,0.3);
+  background: rgba(214,181,109,0.12);
+  color: var(--color-gold);
+}
+
+.trust-status-stale {
+  border-color: rgba(167,139,250,0.3);
+  background: rgba(167,139,250,0.12);
+  color: var(--color-accent-2);
+}
+
+.trust-route-detail {
+  border: 1px solid rgba(255,255,255,0.065);
+  border-radius: 1rem;
+  background: rgba(5,6,10,0.54);
+  padding: clamp(0.9rem, 2vw, 1.15rem);
+}
+
+.trust-detail-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.trust-detail-header p,
+.trust-route-copy p,
+.trust-action-row p,
+.trust-disclosure-box p {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.58;
+}
+
+.trust-program-status {
+  flex: 0 0 auto;
+  max-width: 12rem;
+  border-radius: 0.8rem;
+  background: rgba(255,255,255,0.045);
+  padding: 0.65rem 0.75rem;
+  color: color-mix(in oklab, var(--color-ink) 82%, var(--color-muted));
+  font-size: 0.78rem;
+  font-weight: 760;
+  text-align: right;
+}
+
+.trust-disclosure-box {
+  margin-top: 1rem;
+  border: 1px solid color-mix(in oklab, var(--color-border) 65%, var(--color-gold) 25%);
+  border-radius: 0.9rem;
+  background: rgba(214,181,109,0.08);
+  padding: 0.85rem;
+}
+
+.trust-disclosure-box p {
+  margin-top: 0.45rem;
+  color: color-mix(in oklab, var(--color-ink) 80%, var(--color-muted));
+}
+
+.trust-criteria-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.trust-meter {
+  min-height: 5.6rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 0.82rem;
+  background: rgba(255,255,255,0.03);
+  padding: 0.75rem;
+}
+
+.trust-meter-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--color-muted);
+  font-size: 0.76rem;
+}
+
+.trust-meter-label strong {
+  color: var(--color-ink);
+}
+
+.trust-meter-track {
+  height: 0.42rem;
+  margin-top: 1rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+}
+
+.trust-meter-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-gold), var(--color-green));
+}
+
+.trust-route-copy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.trust-route-copy div:first-child {
+  grid-column: 1 / -1;
+}
+
+.trust-route-copy div,
+.trust-alternatives,
+.trust-action-row {
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 0.86rem;
+  background: rgba(255,255,255,0.025);
+  padding: 0.85rem;
+}
+
+.trust-route-copy span {
+  color: var(--color-gold);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.trust-route-copy p {
+  margin-top: 0.45rem;
+}
+
+.trust-alternatives {
+  margin-top: 0.75rem;
+}
+
+.trust-alt-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+
+.trust-alt-row span {
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.035);
+  padding: 0.45rem 0.62rem;
+  color: color-mix(in oklab, var(--color-ink) 76%, var(--color-muted));
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.trust-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  background: rgba(5,6,10,0.48);
+}
+
+.trust-action-row p {
+  margin-top: 0.3rem;
+  color: var(--color-ink);
+  font-weight: 760;
+}
+
+.trust-route-cta {
+  flex: 0 0 auto;
+}
+
+.trust-disabled-cta {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  padding: 0.85rem 1rem;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
 @media (max-width: 860px) {
   .hero-stage {
     min-height: clamp(42rem, 92svh, 48rem);
@@ -795,6 +1128,8 @@ body::before {
   .desk-grid,
   .flywheel-grid,
   .signal-grid,
+  .trust-desk-grid,
+  .trust-route-copy,
   .transformation-layout,
   .transformation-moves {
     grid-template-columns: 1fr;
@@ -811,6 +1146,27 @@ body::before {
 
   .signal-header {
     flex-direction: column;
+  }
+
+  .trust-detail-header,
+  .trust-action-row,
+  .trust-desk-topline {
+    flex-direction: column;
+  }
+
+  .trust-freshness,
+  .trust-program-status {
+    width: 100%;
+    max-width: none;
+    text-align: left;
+  }
+
+  .trust-route-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .trust-criteria-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .section-heading h2 {
@@ -923,6 +1279,21 @@ body::before {
   .hero-ledger,
   .hero-proofbar {
     display: none;
+  }
+
+  .trust-route-list,
+  .trust-criteria-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-route-button {
+    min-height: 7rem;
+  }
+
+  .trust-route-cta,
+  .trust-disabled-cta {
+    width: 100%;
+    justify-content: center;
   }
 
   .signal-graph {

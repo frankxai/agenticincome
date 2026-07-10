@@ -1,16 +1,11 @@
 import { NextResponse } from 'next/server'
-import { createHash } from 'node:crypto'
 import { forwardAnalyticsEvent } from '@/lib/analytics'
+import { createSubscribeRequestId } from '@/lib/subscribe-security'
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PUBLIC_EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-function requestIdFor(email: string, source: string) {
-  const day = new Date().toISOString().slice(0, 10)
-  return createHash('sha256').update(`${day}:${source}:${email}`).digest('hex').slice(0, 12).toUpperCase()
-}
-
-function conciergeMailto(email: string, source: string, requestId: string) {
+function conciergeMailto(source: string, requestId: string) {
   const contact = process.env.ACCESS_REQUEST_EMAIL
   if (!contact || !PUBLIC_EMAIL_PATTERN.test(contact)) return null
 
@@ -19,7 +14,7 @@ function conciergeMailto(email: string, source: string, requestId: string) {
     [
       `Request ID: ${requestId}`,
       `Source: ${source}`,
-      `Email: ${email}`,
+      'Please send this message from the address you want us to use for delivery updates.',
       '',
       'I want access to the Agentic Income offer above. Please send the next available checkout or onboarding path.',
     ].join('\n'),
@@ -37,12 +32,15 @@ export async function POST(req: Request) {
   }
 
   const normalizedSource = typeof source === 'string' && source.trim() ? source.trim().slice(0, 80) : 'agenticincome'
-  const requestId = requestIdFor(normalized, normalizedSource)
+  const requestId = createSubscribeRequestId()
   const webhook = process.env.SUBSCRIBE_WEBHOOK_URL
   if (webhook) {
     const response = await fetch(webhook, {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: {
+        'content-type': 'application/json',
+        'Idempotency-Key': requestId,
+      },
       body: JSON.stringify({
         email: normalized,
         source: normalizedSource,
@@ -73,7 +71,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true, mode: 'webhook', requestId })
   }
 
-  const mailto = conciergeMailto(normalized, normalizedSource, requestId)
+  const mailto = conciergeMailto(normalizedSource, requestId)
   const mode = mailto ? 'manual_email' : 'unwired'
 
   await forwardAnalyticsEvent({

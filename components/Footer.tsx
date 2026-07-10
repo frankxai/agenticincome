@@ -11,7 +11,7 @@ export function Footer() {
             <p className="mt-2 max-w-sm text-sm text-muted">{site.description}</p>
           </div>
           <div>
-            <div className="text-xs font-semibold uppercase text-muted">The network</div>
+            <div className="text-xs font-semibold uppercase text-muted">Related research</div>
             <ul className="mt-3 space-y-2 text-sm">
               {site.network.map((n) => (
                 <li key={n.url}>
@@ -37,7 +37,7 @@ export function Footer() {
         </div>
         <div className="mt-10 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <span suppressHydrationWarning>© {new Date().getFullYear()} {site.name}. Built by {site.author}.</span>
-          <span>Honest tool comparisons. Some links are affiliate links.</span>
+          <span>Implementation, products, and disclosed tool research. No revenue promises.</span>
         </div>
       </div>
     </footer>

@@ -2,7 +2,8 @@
   "name": "agenticincome",
   "version": "0.1.0",
   "private": true,
-  "description": "Agentic Income — the authority hub on earning with AI agents. Flagship of the agentic-income network.",
+  "packageManager": "pnpm@11.5.0",
+  "description": "Agentic Income — implementation services, open systems, and practical products for building trustworthy AI revenue engines.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

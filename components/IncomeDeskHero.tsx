@@ -1,140 +1,127 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import { payingPrograms } from '@/lib/affiliate'
-import { posts } from '@/lib/posts'
 
-const proofRows = [
-  ['Search intent', 'Faceless YouTube stack', 'Creator demand'],
-  ['Honest pick', 'ElevenLabs + CapCut', 'Best fit wins'],
-  ['Revenue route', 'Recurring payer links', 'Disclosure safe'],
+const deliveryStages = [
+  {
+    number: '01',
+    title: 'Audit',
+    body: 'Choose one customer job, revenue path, and constraint worth solving.',
+  },
+  {
+    number: '02',
+    title: 'Architect',
+    body: 'Define the offer, agent workflow, product surface, and evidence plan.',
+  },
+  {
+    number: '03',
+    title: 'Implement',
+    body: 'Build the workflow and customer-facing surface in a Git-backed system.',
+  },
+  {
+    number: '04',
+    title: 'Verify',
+    body: 'Prove the build, preview, handoff, and next operating decision.',
+  },
+]
+
+const proofAssets = [
+  {
+    label: 'Open-source skills',
+    value: 'Installable operating brain',
+    href: 'https://github.com/frankxai/agentic-income-skills',
+  },
+  {
+    label: 'Shared catalog',
+    value: 'Auditable recommendation data',
+    href: 'https://github.com/frankxai/affiliate-agent-skills',
+  },
+  {
+    label: 'Deployable template',
+    value: 'Next.js reference implementation',
+    href: 'https://github.com/frankxai/agentic-income-template',
+  },
+  {
+    label: 'Live routing layer',
+    value: 'Inspectable program directory',
+    href: 'https://go.agenticincome.ai/programs',
+  },
 ]
 
 export function IncomeDeskHero() {
-  const programs = payingPrograms()
-  const payers = programs.slice(0, 4)
-  const recurringPrograms = programs.filter((program) => program.recurring && !program.recurring.toLowerCase().includes('one-time')).length
-  const heroStats = [
-    [`${programs.length}`, 'payer records'],
-    [`${posts.length}`, 'live loops'],
-    [`${recurringPrograms}`, 'recurring routes'],
-  ]
-
   return (
-    <section className="hero-stage -mx-4 sm:-mx-6" aria-label="Agentic Income homepage hero">
-      <Image
-        src="/brand/income-desk-hero-poster.webp"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="hero-media"
-        aria-hidden="true"
-      />
-      <div className="hero-shade" aria-hidden="true" />
-
-      <svg className="hero-trace" viewBox="0 0 1200 620" aria-hidden="true">
-        <path
-          data-hero-trace
-          d="M92 420 C270 292 426 358 568 258 C708 160 872 172 1100 80"
-          fill="none"
-          stroke="url(#hero-trace-gradient)"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        <path
-          data-hero-trace
-          d="M166 500 C330 424 436 434 590 350 C722 278 842 324 1030 252"
-          fill="none"
-          stroke="#D6B56D"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-          opacity="0.72"
-        />
-        {[180, 420, 642, 880, 1072].map((x, index) => (
-          <circle
-            key={x}
-            data-hero-node
-            cx={x}
-            cy={[354, 318, 210, 164, 96][index]}
-            r="5"
-            fill={index === 4 ? '#34D399' : '#F1F3F9'}
-          />
-        ))}
-        <defs>
-          <linearGradient id="hero-trace-gradient" x1="92" x2="1100" y1="420" y2="80" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#6EA8FE" stopOpacity="0" />
-            <stop offset="0.25" stopColor="#6EA8FE" />
-            <stop offset="0.64" stopColor="#D6B56D" />
-            <stop offset="1" stopColor="#34D399" />
-          </linearGradient>
-        </defs>
-      </svg>
+    <section className="hero-stage -mx-4 sm:-mx-6" aria-labelledby="home-title">
+      <div className="hero-atmosphere" aria-hidden="true" />
+      <div className="hero-grid" aria-hidden="true" />
 
       <div className="hero-content mx-auto w-full max-w-6xl px-4 sm:px-6">
         <div className="hero-copy motion-reveal">
-          <div className="kicker">Agentic income network</div>
-          <h1 className="hero-title">
-            <span>Agentic</span>
-            <span>Income</span>
+          <div className="kicker">Agent-as-a-Service · open systems · digital products</div>
+          <h1 id="home-title" className="hero-title">
+            <span>Build the revenue engine.</span>
+            <span>Keep the leverage.</span>
           </h1>
           <p className="hero-subtitle">
-            Build the first AI-tool income loop: one honest comparison, one recurring payer route, one owned-audience capture, and one direct product path.
+            Agentic Income turns one valuable workflow into a trustworthy offer, a working product surface, and an operating system your team can continue after handoff.
           </p>
           <div className="hero-actions">
-            <Link href="/start" className="cta w-full sm:w-auto">
-              Open starter kit
+            <Link href="/offers/implementation-sprint" className="cta w-full sm:w-auto">
+              Request an implementation plan
             </Link>
-            <Link href="/tools" className="cta-secondary w-full sm:w-auto">
-              Inspect the payer catalog
-            </Link>
+            <a
+              href="https://github.com/frankxai/agentic-income-skills"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-secondary w-full sm:w-auto"
+            >
+              Inspect the open-source system
+            </a>
           </div>
+          <p className="hero-note">
+            No revenue promises. Scope, evidence, delivery, and acceptance checks are agreed before implementation begins.
+          </p>
         </div>
 
-        <aside className="hero-panel" data-hero-panel aria-label="Live Agentic Income routing preview">
+        <aside className="hero-panel" data-hero-panel aria-label="Agentic Income implementation model">
           <div className="desk-header">
             <div>
-              <div className="text-xs uppercase text-muted">Income desk</div>
-              <div className="mt-1 text-lg font-semibold text-ink">Comparison engine</div>
+              <div className="text-xs uppercase text-muted">Revenue system build</div>
+              <div className="mt-1 text-lg font-semibold text-ink">From workflow to verified preview</div>
             </div>
-            <div className="status-dot">Live</div>
+            <div className="status-dot">Git-backed</div>
           </div>
 
-          <div className="mt-3 space-y-3">
-            {proofRows.map(([label, value, note]) => (
-              <div key={label} className="route-row">
+          <div className="engine-stage-list">
+            {deliveryStages.map((stage) => (
+              <div key={stage.number} className="engine-stage" data-engine-stage>
+                <span>{stage.number}</span>
                 <div>
-                  <div className="text-xs text-muted">{label}</div>
-                  <div className="font-medium text-ink">{value}</div>
+                  <strong>{stage.title}</strong>
+                  <p>{stage.body}</p>
                 </div>
-                <div className="text-right text-xs text-muted">{note}</div>
               </div>
             ))}
           </div>
 
-          <div className="hero-ledger">
-            <div className="panel-label">Recurring ledger</div>
-            <div className="mt-3 space-y-2">
-              {payers.map((program) => (
-                <div key={program.tool} className="ledger-row">
-                  <span>{program.tool}</span>
-                  <span>{program.recurring ?? 'verify'}</span>
-                </div>
-              ))}
+          <div className="desk-footer">
+            <div>
+              <div className="text-xs text-muted">Delivery evidence</div>
+              <div className="mt-1 text-sm font-semibold text-ink">Repository · checks · Vercel preview · handoff</div>
             </div>
           </div>
         </aside>
 
-        <div className="hero-proofbar motion-reveal" aria-label="Agentic Income operating proof">
-          {heroStats.map(([value, label]) => (
-            <div key={label} className="hero-proof">
-              <span className="proof-value">{value}</span>
-              <span>{label}</span>
-            </div>
+        <div id="proof" className="hero-proofbar motion-reveal" aria-label="Inspectable Agentic Income proof">
+          {proofAssets.map((asset) => (
+            <a
+              key={asset.label}
+              href={asset.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-proof hero-proof-action"
+            >
+              <span>{asset.label}</span>
+              <strong>{asset.value}</strong>
+            </a>
           ))}
-          <Link href="/offers" className="hero-proof hero-proof-action">
-            <span>Next move</span>
-            <strong>View product ladder</strong>
-          </Link>
         </div>
       </div>
     </section>

@@ -8,7 +8,7 @@ import { Footer } from '@/components/Footer'
 import { MotionRuntime } from '@/components/MotionRuntime'
 import { site } from '@/lib/site'
 
-const ogImage = '/brand/agentic-income-og.webp'
+const ogImage = '/opengraph-image'
 
 const geistSans = Geist({
   subsets: ['latin'],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   applicationName: site.name,
   title: { default: `${site.name} — ${site.tagline}`, template: `%s · ${site.name}` },
   description: site.description,
-  keywords: ['AI agents', 'affiliate systems', 'AI tool comparisons', 'recurring revenue', 'agentic income'],
+  keywords: ['Agent as a Service', 'AI implementation', 'revenue systems', 'agent skills', 'digital products', 'AI tool comparisons'],
   authors: [{ name: site.author }],
   creator: site.author,
   publisher: site.name,
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description: site.description,
     siteName: site.name,
     type: 'website',
-    images: [{ url: ogImage, width: 1200, height: 630, alt: 'Agentic Income transformation desk' }],
+    images: [{ url: ogImage, width: 1200, height: 630, alt: 'Agentic Income revenue system implementation' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -63,9 +63,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <Nav />
         <MotionRuntime />
-        <main className="mx-auto w-full max-w-6xl overflow-x-clip px-4 sm:px-6">{children}</main>
+        <main id="main-content" className="mx-auto w-full max-w-6xl overflow-x-clip px-4 sm:px-6">{children}</main>
         <Footer />
         <Analytics />
         <SpeedInsights />

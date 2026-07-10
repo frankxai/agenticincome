@@ -41,6 +41,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
 
   const liveCheckout = checkoutUrl(offer)
   const isFree = offer.checkout.fallback === 'delivery'
+  const isScoped = offer.accessMode === 'scope-first'
   const accessSteps = [
     ['01', 'Click', offer.checkoutOutcome],
     ['02', 'Deliver', `The handoff route is ${offer.deliveryPath}. ${offer.receiptInstruction}`],
@@ -80,6 +81,8 @@ export default async function OfferDetail({ params }: OfferPageProps) {
           <p className="mt-3 text-sm leading-6 text-muted">
             {isFree
               ? 'Delivered instantly on-site.'
+              : isScoped
+                ? 'Scope, acceptance checks, and commercial terms are agreed before implementation.'
               : liveCheckout
                 ? 'Live checkout URL is configured.'
                 : 'Checkout is provider-ready; request access until the payment link is connected.'}
@@ -87,6 +90,8 @@ export default async function OfferDetail({ params }: OfferPageProps) {
           <div className="mt-5 rounded-xl border border-border bg-bg/60 p-4 text-xs leading-6 text-muted">
             {isFree
               ? 'Internal free delivery route is live.'
+              : isScoped
+                ? 'No payment is taken here. The intake route records interest only when the configured service is available.'
               : liveCheckout
                 ? 'Secure payment provider checkout is connected.'
                 : 'Secure checkout is being connected. Request access and receive the current checklist now.'}
@@ -175,7 +180,9 @@ export default async function OfferDetail({ params }: OfferPageProps) {
         <section id="request-access" className="section-band">
           <EmailCapture
             headline={`Request ${offer.shortTitle} access`}
-            sub="Get notified when the checkout opens and receive the current first-loop checklist immediately."
+            sub={isScoped
+              ? 'Share your email to request the current scoping path. If online intake is not connected, the page will say so before claiming receipt.'
+              : 'Get notified when the checkout opens and receive the current first-loop checklist immediately.'}
             source={`offer-${offer.slug}`}
             buttonLabel="Request access"
             successMessage="Request received. You are on the access list."

@@ -12,29 +12,24 @@ export function MotionRuntime() {
     gsap.registerPlugin(ScrollTrigger)
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.hero-media',
-        { autoAlpha: 0.9, scale: 1.04 },
-        {
-          autoAlpha: 0.96,
-          scale: 1.025,
-          duration: 1.5,
-          ease: 'power2.out',
-        },
-      )
-
-      gsap.fromTo(
-        '.motion-reveal',
-        { autoAlpha: 0.92, y: 10 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.72,
-          stagger: 0.08,
-          ease: 'power3.out',
-          clearProps: 'transform,opacity,visibility',
-        },
-      )
+      gsap.utils.toArray<HTMLElement>('.motion-reveal').forEach((element) => {
+        gsap.fromTo(
+          element,
+          { autoAlpha: 0.94, y: 10 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.62,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity,visibility',
+            scrollTrigger: {
+              trigger: element,
+              start: 'top 92%',
+              once: true,
+            },
+          },
+        )
+      })
 
       gsap.fromTo(
         '[data-hero-panel]',
@@ -45,6 +40,20 @@ export function MotionRuntime() {
           scale: 1,
           duration: 0.82,
           delay: 0.18,
+          ease: 'power3.out',
+          clearProps: 'transform,opacity,visibility',
+        },
+      )
+
+      gsap.fromTo(
+        '[data-engine-stage]',
+        { autoAlpha: 0.72, x: 10 },
+        {
+          autoAlpha: 1,
+          x: 0,
+          duration: 0.5,
+          delay: 0.35,
+          stagger: 0.1,
           ease: 'power3.out',
           clearProps: 'transform,opacity,visibility',
         },
@@ -73,7 +82,7 @@ export function MotionRuntime() {
             autoAlpha: 1,
             scale: 1,
             duration: 0.42,
-            ease: 'back.out(1.8)',
+            ease: 'power3.out',
             scrollTrigger: {
               trigger: node.closest('section') ?? node,
               start: 'top 78%',

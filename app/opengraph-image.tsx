@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 import { site } from '@/lib/site'
 
 export const dynamic = 'force-static'
-export const alt = `Agentic Income - Flagship hub for honest AI-agent income systems`
+export const alt = 'Agentic Income - revenue systems built with agents and delivered with proof'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -55,10 +55,10 @@ export default function Image() {
               fontWeight: 800,
             }}
           >
-            L4 / {site.domain}
+            AGENT-AS-A-SERVICE / {site.domain}
           </div>
           <div style={{ marginTop: 42, fontSize: 78, fontWeight: 900, lineHeight: 0.95 }}>{site.name}</div>
-          <div style={{ marginTop: 28, fontSize: 34, fontWeight: 700, color: '#dbeafe' }}>{site.tagline}</div>
+          <div style={{ marginTop: 28, fontSize: 34, fontWeight: 700, color: '#d1fae5' }}>{site.tagline}</div>
           <div style={{ marginTop: 24, fontSize: 24, lineHeight: 1.35, color: '#94a3b8' }}>{site.description}</div>
         </div>
       </div>

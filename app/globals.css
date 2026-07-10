@@ -263,6 +263,12 @@ body::before {
   margin-top: 2rem;
 }
 
+.hero-actions > * {
+  max-width: 100%;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
 .hero-panel {
   border: 1px solid color-mix(in oklab, var(--color-border) 72%, var(--color-accent) 24%);
   border-radius: 1.25rem;
@@ -661,6 +667,141 @@ body::before {
   color: var(--color-muted);
   font-size: 0.9rem;
   line-height: 1.55;
+}
+
+.workflow-proof {
+  margin-top: 2rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--color-border) 72%, var(--color-accent) 20%);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(145deg, rgba(16,185,129,0.09), transparent 32%),
+    rgba(10,12,20,0.82);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.055), 0 30px 100px rgba(0,0,0,0.28);
+  padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.workflow-command {
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 1rem;
+  background: #05060a;
+  padding: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.workflow-command-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--color-muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+}
+
+.workflow-command-topline strong {
+  color: var(--color-green);
+  font-weight: 750;
+}
+
+.workflow-command code {
+  display: block;
+  margin-top: 1rem;
+  color: var(--color-ink);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: clamp(0.76rem, 1.8vw, 0.94rem);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.workflow-command p,
+.workflow-evidence p {
+  margin-top: 0.7rem;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.workflow-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0.85rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.workflow-step {
+  min-height: 17rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 0.95rem;
+  background: rgba(5,6,10,0.54);
+  padding: 1rem;
+}
+
+.workflow-step-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--color-accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+}
+
+.workflow-step-meta strong {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  padding: 0.3rem 0.5rem;
+  color: var(--color-gold);
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+.workflow-step h3 {
+  margin-top: 1.5rem;
+  color: var(--color-ink);
+  font-size: 1.1rem;
+  font-weight: 780;
+}
+
+.workflow-step p {
+  margin-top: 0.65rem;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  line-height: 1.58;
+}
+
+.workflow-output {
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 0.8rem;
+  color: color-mix(in oklab, var(--color-ink) 78%, var(--color-muted));
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.workflow-evidence {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: center;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 1rem;
+  background: rgba(5,6,10,0.58);
+  padding: 1rem;
+}
+
+.workflow-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.65rem;
+}
+
+.workflow-boundary {
+  margin-top: 0.85rem;
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  line-height: 1.6;
 }
 
 .meter-track {
@@ -1356,6 +1497,7 @@ body::before {
 
   .desk-grid,
   .flywheel-grid,
+  .workflow-steps,
   .signal-grid,
   .trust-desk-grid,
   .trust-route-copy,
@@ -1428,6 +1570,14 @@ body::before {
   .transformation-states {
     grid-template-columns: 1fr;
   }
+
+  .workflow-evidence {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-actions {
+    justify-content: flex-start;
+  }
 }
 
 @media (min-width: 861px) and (max-height: 760px) {
@@ -1488,8 +1638,8 @@ body::before {
   }
 
   .hero-title {
-    font-size: clamp(2.82rem, 12vw, 4rem);
-    max-width: 7ch;
+    font-size: clamp(2.58rem, 11.2vw, 3.55rem);
+    max-width: 8ch;
   }
 
   .hero-subtitle {
@@ -1500,6 +1650,7 @@ body::before {
   .hero-actions .cta,
   .hero-actions .cta-secondary {
     width: 100%;
+    padding-inline: 1rem;
   }
 
   .hero-panel {
@@ -1548,6 +1699,15 @@ body::before {
     left: 0.7rem;
     padding: 0.75rem;
     font-size: 0.82rem;
+  }
+
+  .workflow-command-topline {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .workflow-actions .cta-secondary {
+    width: 100%;
   }
 }
 

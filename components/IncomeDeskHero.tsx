@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { TrackedLink } from '@/components/TrackedLink'
 
 const deliveryStages = [
   {
@@ -63,17 +63,24 @@ export function IncomeDeskHero() {
             Agentic Income turns one valuable workflow into a trustworthy offer, a working product surface, and an operating system your team can continue after handoff.
           </p>
           <div className="hero-actions">
-            <Link href="/offers/implementation-sprint" className="cta w-full sm:w-auto">
+            <TrackedLink
+              href="/offers/implementation-sprint"
+              className="cta w-full sm:w-auto"
+              event="implementation_request_clicked"
+              payload={{ source: 'homepage-hero' }}
+            >
               Request an implementation plan
-            </Link>
-            <a
+            </TrackedLink>
+            <TrackedLink
               href="https://github.com/frankxai/agentic-income-skills"
               target="_blank"
               rel="noopener noreferrer"
               className="cta-secondary w-full sm:w-auto"
+              event="open_source_proof_clicked"
+              payload={{ source: 'homepage-hero' }}
             >
               Inspect the open-source system
-            </a>
+            </TrackedLink>
           </div>
           <p className="hero-note">
             No revenue promises. Scope, evidence, delivery, and acceptance checks are agreed before implementation begins.
@@ -111,16 +118,18 @@ export function IncomeDeskHero() {
 
         <div id="proof" className="hero-proofbar motion-reveal" aria-label="Inspectable Agentic Income proof">
           {proofAssets.map((asset) => (
-            <a
+            <TrackedLink
               key={asset.label}
               href={asset.href}
               target="_blank"
               rel="noopener noreferrer"
               className="hero-proof hero-proof-action"
+              event="open_source_proof_clicked"
+              payload={{ source: 'homepage-proof-rail', state: asset.label }}
             >
               <span>{asset.label}</span>
               <strong>{asset.value}</strong>
-            </a>
+            </TrackedLink>
           ))}
         </div>
       </div>

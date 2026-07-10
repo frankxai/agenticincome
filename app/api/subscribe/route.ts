@@ -77,7 +77,7 @@ export async function POST(req: Request) {
   const mode = mailto ? 'manual_email' : 'unwired'
 
   await forwardAnalyticsEvent({
-    event: 'subscribe_success',
+    event: mode === 'unwired' ? 'subscribe_unwired' : 'subscribe_success',
     source: normalizedSource,
     state: mode,
     requestId,

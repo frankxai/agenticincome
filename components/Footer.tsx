@@ -32,6 +32,9 @@ export function Footer() {
               <Link href="/delivery/starter-kit" className="text-ink hover:text-accent">
                 Delivery
               </Link>
+              <Link href="/privacy" className="text-ink hover:text-accent">
+                Privacy
+              </Link>
             </div>
           </div>
         </div>

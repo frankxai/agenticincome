@@ -1,7 +1,7 @@
 'use client'
 
 import type { AnchorHTMLAttributes, ReactNode } from 'react'
-import { useEffect, useState } from 'react'
+import { useMemo, useSyncExternalStore } from 'react'
 import { appendTrackingParamsToPath } from '@/lib/tracking'
 import { TrackedLink } from '@/components/TrackedLink'
 
@@ -13,11 +13,18 @@ type CheckoutLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
 }
 
 export function CheckoutLink({ href, offer, source, children, ...props }: CheckoutLinkProps) {
-  const [trackedHref, setTrackedHref] = useState(href)
-
-  useEffect(() => {
-    setTrackedHref(appendTrackingParamsToPath(href, new URLSearchParams(window.location.search)))
-  }, [href])
+  const search = useSyncExternalStore(
+    (onStoreChange) => {
+      window.addEventListener('popstate', onStoreChange)
+      return () => window.removeEventListener('popstate', onStoreChange)
+    },
+    () => window.location.search,
+    () => '',
+  )
+  const trackedHref = useMemo(
+    () => appendTrackingParamsToPath(href, new URLSearchParams(search)),
+    [href, search],
+  )
 
   return (
     <TrackedLink

@@ -50,20 +50,20 @@
     "provenance": "owned",
     "why_premium": "The primary asset is exact, source-backed product architecture rendered in code and linked to real repositories rather than decorative generated media.",
     "shortcut_risk": "low",
-    "context_tested": false
+    "context_tested": true
   },
   "artifacts": [
     {
       "path_or_url": "components/IncomeDeskHero.tsx",
       "kind": "web-ui",
-      "inspected": false,
-      "notes": "Compiled in the production build; final screenshot inspection is pending because local headless Edge did not return or write an export within the bounded QA window."
+      "inspected": true,
+      "notes": "Inspected in the production build at 1440px, 390px, reduced motion, and 195px 200%-equivalent reflow. Hero CTAs remain inside the viewport and the coded delivery model stays legible."
     },
     {
-      "path_or_url": "components/RevenueCapabilitySection.tsx",
+      "path_or_url": "components/AgentWorkflowProof.tsx",
       "kind": "web-ui",
-      "inspected": false,
-      "notes": "Compiled and statically reviewed; preview inspection remains required before production promotion."
+      "inspected": true,
+      "notes": "The exact affiliate-audit command, four-stage input/agent/artifact/human-gate chain, autonomy boundary, and two public GitHub source links were inspected in desktop and mobile crops."
     }
   ],
   "checks": [
@@ -74,13 +74,13 @@
     },
     {
       "name": "export-inspection",
-      "status": "blocked",
-      "evidence": "Headless Edge timed out without writing desktop, mobile, or reduced-motion screenshots. No local server remains."
+      "status": "pass",
+      "evidence": "CDP exports: C:/Users/frank/.starlight/evidence/agenticincome-pr9-repair-2026-07-10/desktop-final.png, mobile-390-final.png, workflow-final.png, mobile-workflow-final.png, reduced-motion-final.png, and reflow-200-percent-final.png."
     },
     {
       "name": "build",
       "status": "pass",
-      "evidence": "pnpm install --frozen-lockfile, type-check, static link check, and Next.js production build passed with 29 routes."
+      "evidence": "pnpm install --frozen-lockfile, ESLint with zero warnings, type-check, static link check, public-surface regression, and Next.js production build passed with 30 routes."
     },
     {
       "name": "dependency-security",
@@ -89,19 +89,24 @@
     },
     {
       "name": "visual-qa",
-      "status": "blocked",
-      "evidence": "Final Vercel preview visual inspection is required before production consideration."
+      "status": "pass",
+      "evidence": "CDP verification passed desktop, 390px mobile, reduced motion, logical keyboard order with visible focus, privacy and 404 metadata, and 195px reflow without document overflow. Local Vercel analytics-script 404s were isolated as localhost-only; no page exceptions occurred."
+    },
+    {
+      "name": "public-integrity",
+      "status": "pass",
+      "evidence": "The workflow links executable source, states the human publish gate, and disclaims customer/revenue proof. Unwired intake records subscribe_unwired, unsupported ranking/income claims are removed, and privacy/404/security contracts are regression-tested."
     }
   ],
   "score": {
-    "total": 24,
+    "total": 28,
     "max": 30,
-    "notes": "Implementation and static quality are strong; final desktop/mobile/reduced-motion inspection is intentionally not claimed."
+    "notes": "First read 5, brand fit 4, craft 4, accessibility/responsive/reduced motion 5, factual/provenance integrity 5, intended-surface usefulness 5."
   },
-  "decision": "iterate",
+  "decision": "ship",
   "known_risks": [
-    "The new first viewport has not yet been visually inspected in a successful browser export.",
     "Online intake, paid checkout, and analytics forwarding remain environment-dependent and must not be described as live without runtime evidence.",
+    "The 195px reflow keeps the mobile navigation as an intentionally horizontal internal scroller while the document itself has no horizontal overflow.",
     "Production remains on the prior healthy deployment; this branch is preview-only."
   ]
 }

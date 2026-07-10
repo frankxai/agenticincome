@@ -12,9 +12,9 @@ Primary: inspect and request the scoped Implementation Sprint. Secondary: inspec
 
 1. Category, promise, implementation CTA, open-source CTA, four-stage product proof, artifact rail.
 2. Agent-as-a-Service, products, open source, editorial authority.
-3. Audit, Architect, Implement, Verify delivery loop.
+3. One inspectable affiliate-audit workflow with exact command, source links, output artifact, and human publish gate.
 4. Offer ladder with explicit access and pricing states.
 5. Dated, disclosed recommendation method.
 6. Research and final implementation CTA.
 
-No hero video or WebGL. Coded UI is the hero asset. Keyboard focus, skip link, native scroll, reduced motion, and responsive re-composition are required.
+No hero video or WebGL. Coded UI is the hero asset. The workflow proof must state that it is a reference implementation, not customer or revenue evidence. Keyboard focus, skip link, native scroll, reduced motion, and responsive re-composition are required.

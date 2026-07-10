@@ -19,3 +19,7 @@ All content is fully visible at rest. Sequence reveals, path drawing, and transi
 ## Asset Decision
 
 Tier C system-authored product proof. No new generated media, video, 3D, or external assets are justified for this pass. Existing generated media is not used as the primary homepage asset.
+
+## Workflow Proof Scene
+
+The public affiliate-audit workflow is the inspectable proof object: a real command, documented inputs, executable source, `AUDIT.md` output, and a human approval boundary before public or partner action. Its GitHub links are the evidence; the on-page system panel explains the evidence without inventing a run result.

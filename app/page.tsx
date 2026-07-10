@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { IncomeDeskHero } from '@/components/IncomeDeskHero'
 import { RevenueCapabilitySection } from '@/components/RevenueCapabilitySection'
-import { FlywheelSystem } from '@/components/FlywheelSystem'
+import { AgentWorkflowProof } from '@/components/AgentWorkflowProof'
 import { TrustComparisonDesk } from '@/components/TrustComparisonDesk'
 import { sortedPosts } from '@/lib/posts'
 import { offers } from '@/lib/offers'
@@ -22,7 +22,7 @@ export default function Home() {
     <>
       <IncomeDeskHero />
       <RevenueCapabilitySection />
-      <FlywheelSystem />
+      <AgentWorkflowProof />
 
       <section className="section-band">
         <div className="grid gap-8 lg:grid-cols-[0.76fr_1.24fr] lg:items-end">

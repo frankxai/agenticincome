@@ -1,0 +1,13 @@
+{
+  "name": "ai-pack",
+  "version": "1.0.0",
+  "description": "The Income Architect pack — /ai guides you from capability to cash flow: assess your surfaces, architect the model, design the offer, ship it, and run the weekly operator loop. Education-grade knowledge base included.",
+  "author": {
+    "name": "Frank Riemer",
+    "url": "https://agenticincome.ai"
+  },
+  "homepage": "https://agenticincome.ai/pack",
+  "repository": "https://github.com/frankxai/agenticincome",
+  "license": "MIT",
+  "keywords": ["income", "agentic", "business", "claude-code", "offer", "solopreneur"]
+}

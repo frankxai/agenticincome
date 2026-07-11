@@ -41,6 +41,8 @@ for (const event of [
 ]) requireText('analytics', `'${event}'`, `analytics allowlist includes ${event}`)
 
 requireText('subscribe', "mode === 'unwired' ? 'subscribe_unwired' : 'subscribe_success'", 'unwired intake is not recorded as success')
+requireText('subscribe', 'isSameOriginRequest(req)', 'intake is same-origin only')
+requireText('subscribe', 'readBoundedJson(req)', 'intake body is bounded before parsing')
 
 forbidText('start', 'what ranks and what AI search engines lift verbatim', 'unsupported ranking claim')
 forbidText('start', 'every reader is either income', 'dehumanizing outcome claim')

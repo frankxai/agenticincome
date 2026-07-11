@@ -1,6 +1,13 @@
 import { NextResponse } from 'next/server'
 import { forwardAnalyticsEvent } from '@/lib/analytics'
 import { createSubscribeRequestId } from '@/lib/subscribe-security'
+import {
+  analyticsClientKey,
+  consumeAnalyticsRateLimit,
+  hasJsonContentType,
+  isSameOriginRequest,
+  readBoundedJson,
+} from '@/lib/api-security'
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PUBLIC_EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -24,7 +31,37 @@ function conciergeMailto(source: string, requestId: string) {
 }
 
 export async function POST(req: Request) {
-  const { email, source = 'agenticincome' } = await req.json().catch(() => ({}))
+  if (!isSameOriginRequest(req)) {
+    return NextResponse.json({ ok: false, error: 'origin_not_allowed' }, { status: 403 })
+  }
+  if (!hasJsonContentType(req)) {
+    return NextResponse.json({ ok: false, error: 'unsupported_media_type' }, { status: 415 })
+  }
+
+  const clientKey = analyticsClientKey(req)
+  if (!clientKey) {
+    return NextResponse.json({ ok: false, error: 'client_unidentified' }, { status: 403 })
+  }
+  const rateLimit = consumeAnalyticsRateLimit(`subscribe:${clientKey}`)
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { ok: false, error: 'rate_limited' },
+      { status: 429, headers: { 'Retry-After': String(rateLimit.retryAfterSeconds) } },
+    )
+  }
+
+  const body = await readBoundedJson(req)
+  if (!body.ok) {
+    return NextResponse.json(
+      { ok: false, error: body.error },
+      { status: body.error === 'payload_too_large' ? 413 : 400 },
+    )
+  }
+
+  const payload = typeof body.value === 'object' && body.value !== null
+    ? body.value as Record<string, unknown>
+    : {}
+  const { email, source = 'agenticincome' } = payload
   const normalized = typeof email === 'string' ? email.trim().toLowerCase() : ''
 
   if (!EMAIL_PATTERN.test(normalized)) {

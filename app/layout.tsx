@@ -73,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main-content" className="skip-link">Skip to content</a>
         <Nav />
         <MotionRuntime />
-        <main id="main-content" className="mx-auto w-full max-w-6xl overflow-x-clip px-4 sm:px-6">{children}</main>
+        <main id="main-content" className="mx-auto w-full max-w-6xl px-4 sm:px-6">{children}</main>
         <Footer />
         <Analytics />
         <SpeedInsights />

@@ -18,6 +18,7 @@ Everything here is **dated, sourced, and re-verified on a loop**. Every file car
 | [04](04-tool-stack.md) | **The Tool Stack** | Checkout (merchant of record), email, hosting, analytics — the minimum machine, legal-light |
 | [05](05-honest-marketing.md) | **Honest Marketing** | Selling without income claims: FTC disclosure, EU rules, trust surfaces that convert |
 | [06](06-cases.md) | **Attested Cases** | Real builds with provenance — the case format and the standing library |
+| [07](07-field-dossier.md) | **Field Dossier (2026-07-11)** | The raw verified research: runtime states, affiliate program terms, MoR fees, market stats, regulatory notes — every claim sourced |
 
 ## How to use this
 

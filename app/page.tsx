@@ -1,18 +1,22 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { IncomeDeskHero } from '@/components/IncomeDeskHero'
-import { RevenueCapabilitySection } from '@/components/RevenueCapabilitySection'
+import { AssemblyHero } from '@/components/AssemblyHero'
+import { ShiftSection } from '@/components/ShiftSection'
+import { PathSection } from '@/components/PathSection'
+import { PackTerminal } from '@/components/PackTerminal'
+import { KnowledgeIndex } from '@/components/KnowledgeIndex'
+import { ProductLadder } from '@/components/ProductLadder'
 import { AgentWorkflowProof } from '@/components/AgentWorkflowProof'
-import { TrustComparisonDesk } from '@/components/TrustComparisonDesk'
+import { TrinityRibbon } from '@/components/TrinityRibbon'
+import { EmailCapture } from '@/components/EmailCapture'
 import { sortedPosts } from '@/lib/posts'
-import { offers } from '@/lib/offers'
 
-const featured = sortedPosts.filter((post) => post.featured)
+const featured = sortedPosts.filter((post) => post.featured).slice(0, 2)
 
 export const metadata: Metadata = {
-  title: 'Revenue systems built with agents, delivered with proof',
+  title: 'Build income with AI agents — machinery you can inspect',
   description:
-    'Agent-as-a-Service implementation, open-source revenue-system skills, practical digital products, and reader-first AI tool research.',
+    'Income is becoming an engineering discipline. A dated, re-verified knowledge base, the installable /ai Income Architect pack, self-serve products, and attested proof. No income promises — machinery and education.',
   alternates: { canonical: '/' },
   openGraph: { url: '/' },
 }
@@ -20,49 +24,31 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <IncomeDeskHero />
-      <RevenueCapabilitySection />
+      <AssemblyHero />
+
+      <ShiftSection />
+
+      <PathSection />
+
+      <PackTerminal />
+
+      <KnowledgeIndex />
+
+      <ProductLadder />
+
       <AgentWorkflowProof />
-
-      <section className="section-band">
-        <div className="grid gap-8 lg:grid-cols-[0.76fr_1.24fr] lg:items-end">
-          <div className="section-heading motion-reveal">
-            <div className="kicker">Ways to start</div>
-            <h2>Choose the depth of help you need.</h2>
-          </div>
-          <p className="max-w-2xl text-lg leading-8 text-muted motion-reveal">
-            Start free, install the system yourself, keep the market map current, or request a scoped implementation. Every route states what is live before asking for commitment.
-          </p>
-        </div>
-
-        <div className="offer-rail">
-          {offers.map((offer) => (
-            <Link key={offer.slug} href={`/offers/${offer.slug}`} className="offer-row motion-reveal">
-              <div>
-                <span>{offer.tier}</span>
-                <h3>{offer.shortTitle}</h3>
-              </div>
-              <p>{offer.summary}</p>
-              <strong>{offer.price}</strong>
-            </Link>
-          ))}
-        </div>
-
-        <div className="mt-6">
-          <Link href="/offers" className="cta-secondary">Compare every route</Link>
-        </div>
-      </section>
-
-      <TrustComparisonDesk />
 
       <section className="section-band">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div className="section-heading motion-reveal">
-            <div className="kicker">Reader-first research</div>
-            <h2>Decisions before incentives.</h2>
-            <p>Comparisons show the tradeoff, the evidence date, and the material incentive so the reader can judge the recommendation.</p>
+            <div className="kicker text-[color:var(--color-accent-2)]">Research · education</div>
+            <h2 className="display-h2">Decisions before incentives.</h2>
+            <p className="mt-3 max-w-xl text-[color:var(--color-muted)]">
+              Comparisons show the tradeoff, the evidence date, and the material incentive —
+              so you can judge the recommendation, not just receive it.
+            </p>
           </div>
-          <Link href="/blog" className="cta-secondary">All comparisons</Link>
+          <Link href="/blog" className="cta-secondary">All research</Link>
         </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -79,16 +65,31 @@ export default function Home() {
         </div>
       </section>
 
+      <TrinityRibbon />
+
+      <section className="section-band">
+        <EmailCapture
+          headline="The Agentic Income Brief"
+          sub="Weekly: what changed in the agent landscape, one stream teardown, pack updates. Factual, dated, unsubscribe in one click."
+          source="home-brief"
+          buttonLabel="Get the Brief"
+          successMessage="You're in. The next Brief ships this week."
+        />
+      </section>
+
       <section className="conversion-band motion-reveal">
         <div>
-          <div className="kicker">Implementation</div>
-          <h2>Bring one valuable workflow.</h2>
-          <p>We will define the customer job, delivery boundary, evidence, and build plan before any implementation commitment.</p>
+          <div className="kicker text-[color:var(--color-gold)]">Implementation · apex — 2/month</div>
+          <h2 className="display-h2">Bring one valuable workflow.</h2>
+          <p className="mt-3 max-w-xl text-[color:var(--color-muted)]">
+            The only human-gated product in the trinity: a scoped agent-team build with verification
+            evidence and a Git-backed handover. Scope first — no payment on this site.
+          </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
           <Link href="/offers/implementation-sprint" className="cta">Request a scoped plan</Link>
-          <a href="https://github.com/frankxai/agentic-income-skills" target="_blank" rel="noopener noreferrer" className="cta-secondary">
-            Inspect the method
+          <a href="https://github.com/frankxai/agenticincome" target="_blank" rel="noopener noreferrer" className="cta-secondary">
+            Audit us on GitHub
           </a>
         </div>
       </section>

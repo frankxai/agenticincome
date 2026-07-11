@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { AssemblyHero } from '@/components/AssemblyHero'
+import { ManifestoSection } from '@/components/ManifestoSection'
 import { ShiftSection } from '@/components/ShiftSection'
 import { PathSection } from '@/components/PathSection'
 import { PackTerminal } from '@/components/PackTerminal'
@@ -27,6 +28,8 @@ export default function Home() {
       <AssemblyHero />
 
       <ShiftSection />
+
+      <ManifestoSection />
 
       <PathSection />
 

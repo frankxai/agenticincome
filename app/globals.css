@@ -1768,10 +1768,10 @@ body::before {
 
 .assembly-title {
   margin-top: 0.9rem;
-  font-size: clamp(2.5rem, 5.2vw, 4.35rem);
+  font-size: clamp(2.7rem, 6vw, 5.1rem);
   font-weight: 800;
-  letter-spacing: -0.022em;
-  line-height: 1.02;
+  letter-spacing: -0.026em;
+  line-height: 1.01;
   color: var(--color-ink);
   text-wrap: balance;
 }
@@ -2124,3 +2124,37 @@ body::before {
 @media (max-width: 899px), (prefers-reduced-motion: reduce) {
   .assembly-canvas { position: relative; inset: auto; height: 54svh; min-height: 400px; margin-top: 0.75rem; }
 }
+
+/* ---- manifesto: pure type on void ---- */
+.manifesto-band {
+  padding: clamp(5rem, 14vh, 9rem) 0;
+}
+
+.manifesto-line {
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(2.4rem, 6.4vw, 5.2rem);
+  font-weight: 800;
+  letter-spacing: -0.028em;
+  line-height: 1.04;
+  color: var(--color-ink);
+  margin: 0.35em 0;
+  text-wrap: balance;
+}
+
+.mline-emerald { color: var(--color-accent); }
+.mline-cyan { color: var(--color-accent-2); }
+
+.manifesto-link {
+  display: inline-block;
+  margin-top: 2.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.3rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.manifesto-link:hover { color: var(--color-accent); border-color: var(--color-accent); }

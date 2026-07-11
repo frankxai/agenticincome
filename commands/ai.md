@@ -33,6 +33,7 @@ Then state your routing decision in one paragraph — *"You're entering at [mode
 | 3. Offer | `/ai-offer` | `income/02-offer.md` — offer spec, pricing, delivery workflow, fulfillment design |
 | 4. Ship | `/ai-ship` | `income/03-launch-runbook.md` — landing/checkout/MoR checklist, launch sequence |
 | 5. Operate | `/ai-operate` | `income/weekly/YYYY-WW.md` — weekly operator review + next experiment |
+| ∞. Refresh | `/ai-refresh` | fact re-verification diffs — the freshness loop, quarterly or on demand |
 
 Artifacts live in the user's repo under `income/` (create it). **Never end a session without writing or updating an artifact** — advice that lives only in chat doesn't exist. Each artifact ends with a `Built with /ai · agenticincome.ai · <date>` provenance line.
 

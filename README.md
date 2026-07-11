@@ -54,6 +54,10 @@ Every file carries `last_verified` frontmatter and a quarterly review cycle. Cur
 | [04 · The Tool Stack](knowledge/04-tool-stack.md) | The five-slot minimum machine — merchant of record, email, web, analytics, agents — legal-light by construction |
 | [05 · Honest Marketing](knowledge/05-honest-marketing.md) | Selling without income claims: the FTC/EU floor and the voice that converts by showing machinery |
 | [06 · Attested Cases](knowledge/06-cases.md) | Proof with provenance — the case format and the standing library |
+| [07 · Field Dossier](knowledge/07-field-dossier.md) | The raw verified research — every claim sourced, conflicts flagged |
+| [Integrations](knowledge/integrations/claude-code.md) | Run it with Claude Code · [Codex/portable](knowledge/integrations/codex.md) · [OpenClaw, safely](knowledge/integrations/openclaw-safely.md) · [Hermes](knowledge/integrations/hermes.md) |
+
+**The spine:** read [THE MANIFESTO](MANIFESTO.md) — ten rules that explain every decision in these repos.
 
 ## The business model (ours, in the open)
 

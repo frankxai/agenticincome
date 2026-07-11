@@ -20,6 +20,15 @@ Everything here is **dated, sourced, and re-verified on a loop**. Every file car
 | [06](06-cases.md) | **Attested Cases** | Real builds with provenance — the case format and the standing library |
 | [07](07-field-dossier.md) | **Field Dossier (2026-07-11)** | The raw verified research: runtime states, affiliate program terms, MoR fees, market stats, regulatory notes — every claim sourced |
 
+## Integration guides — run this with your runtime
+
+| | |
+|---|---|
+| [Claude Code](integrations/claude-code.md) | The reference runtime: plugin install, subagent fan-out, scheduled loops, cost honesty |
+| [Codex CLI + portable](integrations/codex.md) | Codex custom prompts, Cursor/Windsurf, Gemini CLI (post-free-tier), OpenCode |
+| [OpenClaw, safely](integrations/openclaw-safely.md) | The always-on operator without the blast radius — seven rules, the ops portfolio, the incident you won't have |
+| [Hermes](integrations/hermes.md) | Self-improving operators, governed workflows, and the four-rung maturity ladder |
+
 ## How to use this
 
 - **Reading order for a first pass:** 01 → 02 → pick your model → 03 → 04 → 05.

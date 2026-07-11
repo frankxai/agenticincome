@@ -1,16 +1,18 @@
 import { NextResponse } from 'next/server'
-import { createHash } from 'node:crypto'
 import { forwardAnalyticsEvent } from '@/lib/analytics'
+import { createSubscribeRequestId } from '@/lib/subscribe-security'
+import {
+  analyticsClientKey,
+  consumeAnalyticsRateLimit,
+  hasJsonContentType,
+  isSameOriginRequest,
+  readBoundedJson,
+} from '@/lib/api-security'
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PUBLIC_EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-function requestIdFor(email: string, source: string) {
-  const day = new Date().toISOString().slice(0, 10)
-  return createHash('sha256').update(`${day}:${source}:${email}`).digest('hex').slice(0, 12).toUpperCase()
-}
-
-function conciergeMailto(email: string, source: string, requestId: string) {
+function conciergeMailto(source: string, requestId: string) {
   const contact = process.env.ACCESS_REQUEST_EMAIL
   if (!contact || !PUBLIC_EMAIL_PATTERN.test(contact)) return null
 
@@ -19,7 +21,7 @@ function conciergeMailto(email: string, source: string, requestId: string) {
     [
       `Request ID: ${requestId}`,
       `Source: ${source}`,
-      `Email: ${email}`,
+      'Please send this message from the address you want us to use for delivery updates.',
       '',
       'I want access to the Agentic Income offer above. Please send the next available checkout or onboarding path.',
     ].join('\n'),
@@ -29,7 +31,37 @@ function conciergeMailto(email: string, source: string, requestId: string) {
 }
 
 export async function POST(req: Request) {
-  const { email, source = 'agenticincome' } = await req.json().catch(() => ({}))
+  if (!isSameOriginRequest(req)) {
+    return NextResponse.json({ ok: false, error: 'origin_not_allowed' }, { status: 403 })
+  }
+  if (!hasJsonContentType(req)) {
+    return NextResponse.json({ ok: false, error: 'unsupported_media_type' }, { status: 415 })
+  }
+
+  const clientKey = analyticsClientKey(req)
+  if (!clientKey) {
+    return NextResponse.json({ ok: false, error: 'client_unidentified' }, { status: 403 })
+  }
+  const rateLimit = consumeAnalyticsRateLimit(`subscribe:${clientKey}`)
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { ok: false, error: 'rate_limited' },
+      { status: 429, headers: { 'Retry-After': String(rateLimit.retryAfterSeconds) } },
+    )
+  }
+
+  const body = await readBoundedJson(req)
+  if (!body.ok) {
+    return NextResponse.json(
+      { ok: false, error: body.error },
+      { status: body.error === 'payload_too_large' ? 413 : 400 },
+    )
+  }
+
+  const payload = typeof body.value === 'object' && body.value !== null
+    ? body.value as Record<string, unknown>
+    : {}
+  const { email, source = 'agenticincome' } = payload
   const normalized = typeof email === 'string' ? email.trim().toLowerCase() : ''
 
   if (!EMAIL_PATTERN.test(normalized)) {
@@ -37,12 +69,15 @@ export async function POST(req: Request) {
   }
 
   const normalizedSource = typeof source === 'string' && source.trim() ? source.trim().slice(0, 80) : 'agenticincome'
-  const requestId = requestIdFor(normalized, normalizedSource)
+  const requestId = createSubscribeRequestId()
   const webhook = process.env.SUBSCRIBE_WEBHOOK_URL
   if (webhook) {
     const response = await fetch(webhook, {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: {
+        'content-type': 'application/json',
+        'Idempotency-Key': requestId,
+      },
       body: JSON.stringify({
         email: normalized,
         source: normalizedSource,
@@ -73,11 +108,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true, mode: 'webhook', requestId })
   }
 
-  const mailto = conciergeMailto(normalized, normalizedSource, requestId)
+  const mailto = conciergeMailto(normalizedSource, requestId)
   const mode = mailto ? 'manual_email' : 'unwired'
 
   await forwardAnalyticsEvent({
-    event: 'subscribe_success',
+    event: mode === 'unwired' ? 'subscribe_unwired' : 'subscribe_success',
     source: normalizedSource,
     state: mode,
     requestId,

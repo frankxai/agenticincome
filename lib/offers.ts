@@ -18,6 +18,7 @@ export type Offer = {
   checkoutOutcome: string
   refundPolicy: string
   receiptInstruction: string
+  accessMode?: 'scope-first'
   checkout: {
     provider: 'internal' | 'external'
     envKey?: string
@@ -26,6 +27,47 @@ export type Offer = {
 }
 
 export const offers: Offer[] = [
+  {
+    slug: 'implementation-sprint',
+    tier: 'Agent-as-a-Service',
+    title: 'Revenue System Implementation Sprint',
+    shortTitle: 'Implementation Sprint',
+    price: 'Scoped proposal',
+    summary: 'A focused engagement to audit one valuable workflow, design the revenue system, implement the customer path, and hand over a verified preview.',
+    promise: 'Turn one credible workflow into a working offer and product surface without surrendering ownership of the repository, process, or next decision.',
+    cta: 'Request a scoped plan',
+    audience: 'Founder-led teams with a real workflow, domain expertise, or existing audience who need implementation depth rather than another broad AI strategy exercise.',
+    firstWin: 'A written build decision: customer job, commercial model, evidence, system boundary, delivery plan, and explicit stop conditions.',
+    deliverables: [
+      'Revenue-system audit and model recommendation',
+      'Offer, capability, and customer-path architecture',
+      'Git-backed implementation on an isolated branch',
+      'Local quality gates and one Vercel preview',
+      'Decision log, residual risks, and operating handoff',
+    ],
+    outcomes: [
+      'One concrete customer path instead of a generic AI concept',
+      'A reviewable implementation your team can continue',
+      'Honest language, instrumentation boundaries, and proof near claims',
+      'A clear next decision after the preview is inspected',
+    ],
+    proof: [
+      'The public skills repository exposes the operating method.',
+      'The deployable template and live routing directory show working components of the system.',
+      'Every sprint is scoped around repository evidence, checks, preview, and handoff.',
+    ],
+    support: 'Support and iteration boundaries are agreed in the scoped plan before work begins.',
+    upgradePath: 'Continue independently with the open-source system, retain a bounded implementation lane, or package the result into a repeatable digital product.',
+    deliveryPath: '/offers/implementation-sprint#request-access',
+    checkoutOutcome: 'No payment is taken on this site. The request path opens the scoped-intake section so deliverables and acceptance checks can be agreed first.',
+    refundPolicy: 'No checkout is active for this service. Any future commercial agreement must state payment, acceptance, support, and cancellation terms before work starts.',
+    receiptInstruction: 'No receipt is expected until a separate scoped agreement and payment path exist.',
+    accessMode: 'scope-first',
+    checkout: {
+      provider: 'internal',
+      fallback: 'request-access',
+    },
+  },
   {
     slug: 'starter-kit',
     tier: 'Free',

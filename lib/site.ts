@@ -8,9 +8,9 @@ export const site = {
   domain: 'agenticincome.ai',
   url: 'https://www.agenticincome.ai',
   role: 'hub', // 'hub' (flagship) | 'spoke'
-  tagline: 'The AI-tool income desk.',
+  tagline: 'Revenue systems built with agents, delivered with proof.',
   description:
-    'A premium intelligence desk for turning AI-tool demand into honest comparisons, recurring payer routes, owned audience, and direct product systems.',
+    'Agent-as-a-Service implementation, open-source revenue-system skills, practical digital products, and reader-first AI tool research.',
   author: 'Frank',
   // Hub links down to its spokes; spokes link up to the hub. Topical authority + referral flow.
   network: [
@@ -18,12 +18,11 @@ export const site = {
     { name: 'Disruptive Passive Income', url: 'https://disruptivepassiveincome.com', blurb: 'The market-shift angle: where AI tools change workflows enough to justify a new route.' },
   ],
   nav: [
-    { label: 'Comparisons', href: '/blog' },
-    { label: 'Tools', href: '/tools' },
+    { label: 'Implementation', href: '/offers/implementation-sprint' },
     { label: 'Offers', href: '/offers' },
+    { label: 'Open source', href: 'https://github.com/frankxai/agentic-income-skills' },
+    { label: 'Research', href: '/blog' },
     { label: 'Trust', href: '/trust' },
-    { label: 'Design', href: '/design' },
-    { label: 'Start', href: '/start' },
   ],
 } as const
 

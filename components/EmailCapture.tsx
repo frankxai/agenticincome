@@ -32,7 +32,7 @@ export function EmailCapture({
 
   const doneMessage =
     result?.mode === 'unwired'
-      ? 'Request prepared. The capture endpoint still needs operator routing before this becomes a real access queue.'
+      ? 'This site cannot retain the request yet. Save the reference below and return when online intake is connected.'
       : successMessage
 
   return (
@@ -110,7 +110,7 @@ export function EmailCapture({
       ) : null}
 
       <div className="mt-4 text-[11px] text-muted">
-        Built from the same catalog that powers every comparison on the network.
+        Your address is sent only to the configured intake service. It is never included in analytics events.
       </div>
     </div>
   )

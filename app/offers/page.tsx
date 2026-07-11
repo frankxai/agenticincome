@@ -5,7 +5,7 @@ import { CheckoutLink } from '@/components/CheckoutLink'
 
 export const metadata: Metadata = {
   title: 'Offers',
-  description: 'Direct products and memberships from the Agentic Income network. Own your outcome beyond affiliate.',
+  description: 'Scoped Agent-as-a-Service implementation, practical digital products, and transparent access states from Agentic Income.',
   alternates: { canonical: '/offers' },
   openGraph: {
     title: 'Offers',
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 }
 
 const promiseStrip = [
+  ['Implementation', 'Scope and build one revenue system with repository and preview evidence.'],
   ['Free', 'Learn the first loop without buying another tool.'],
   ['Blueprint', 'Install the operating desk and content architecture.'],
   ['Intel', 'Keep the payer map current as the market moves.'],
@@ -24,14 +25,14 @@ export default function Offers() {
   return (
     <div className="py-16">
       <section className="max-w-4xl">
-        <div className="kicker">Direct products</div>
-        <h1 className="mt-3 text-5xl font-semibold text-ink">Own the system.</h1>
+        <div className="kicker">Implementation and products</div>
+        <h1 className="mt-3 text-5xl font-semibold text-ink">Choose the right depth.</h1>
         <p className="mt-4 text-xl leading-8 text-muted">
-          Affiliate links fund the floor. Direct products package the operating system so trust becomes a reusable asset instead of a one-off post.
+          Request a scoped implementation, start with the free operating path, install the Blueprint yourself, or keep the opportunity map current with Private Intel.
         </p>
       </section>
 
-      <section className="mt-8 grid gap-4 md:grid-cols-3" aria-label="Agentic Income offer ladder">
+      <section className="mt-8 grid gap-4 md:grid-cols-4" aria-label="Agentic Income offer ladder">
         {promiseStrip.map(([title, body]) => (
           <div key={title} className="card motion-reveal">
             <div className="text-sm font-semibold text-gold">{title}</div>
@@ -44,7 +45,7 @@ export default function Offers() {
         <div>
           <div className="text-sm font-semibold text-gold">Before you buy</div>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-            Free delivery is live. Paid checkout is provider-ready and falls back to request-access until payment links are configured. Support, refund, affiliate, and delivery rules are public.
+            Free delivery is live. The implementation sprint is scope-first and does not take payment here. Digital-product checkout falls back honestly to request access until provider links are connected.
           </p>
         </div>
         <Link href="/trust" className="cta-secondary">
@@ -94,7 +95,7 @@ export default function Offers() {
       </section>
 
       <section className="mt-16 max-w-4xl border-t border-border pt-8 text-sm leading-6 text-muted">
-        All offers use the same engine and honesty standard. The Blueprint and Intel are built on the exact workflows used to rank and monetize the content you read here.
+        Every route uses the same evidence standard: concrete scope, inspectable delivery, honest access state, and no outcome claims that cannot be supported.
         <div className="mt-3">
           <Link href="/start" className="text-accent">
             Return to the free playbook

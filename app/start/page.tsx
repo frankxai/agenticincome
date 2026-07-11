@@ -22,8 +22,8 @@ export default function Start() {
       <div className="kicker">Start here</div>
       <h1 className="mt-3 text-5xl font-semibold text-ink">Build the first revenue loop.</h1>
       <p className="mt-4 max-w-2xl text-lg text-muted">
-        You do not need an audience or a product to begin. You need one honest comparison that ranks, the right
-        recurring-payer tools behind it, and an email list that turns readers into a relationship.
+        You do not need a finished product to begin. Start with one question you can answer from experience,
+        document the tradeoffs, and give readers an honest next step they can choose to keep.
       </p>
 
       <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -42,8 +42,8 @@ export default function Start() {
       <ol className="mt-10 space-y-6">
         {[
           { t: 'Pick one tool category you actually use', d: 'Voice, video, writing, coding — whatever you have real opinions about. Authentic beats broad. You can only recommend honestly what you\'ve touched.' },
-          { t: 'Write the comparison in the citable shape', d: 'Direct answer up top, sortable table, the honest pick, a real FAQ. That structure is what ranks and what AI search engines lift verbatim.' },
-          { t: 'Place recurring-payer links, then build the list', d: 'Link the tools that pay every month — not one-time bounties. Add one email capture. Now every reader is either income or a future relationship.' },
+          { t: 'Write the comparison in an inspectable shape', d: 'Lead with the answer, show the criteria, name the tradeoffs, date the evidence, and disclose any material incentive.' },
+          { t: 'Offer a useful next step', d: 'Add a link only when it fits the recommendation. Offer an email or product path only when its delivery and data handling are clear.' },
         ].map((s, i) => (
           <li key={s.t} className="flex gap-4 rounded-xl border border-border glass p-5">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-accent/15 font-bold text-accent">{i + 1}</span>

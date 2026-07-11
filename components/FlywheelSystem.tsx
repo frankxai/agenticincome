@@ -1,23 +1,23 @@
 const nodes = [
   {
     number: '01',
-    title: 'Rank for demand',
-    body: 'High-intent searches around the tools everyone already compares.',
+    title: 'Audit the workflow',
+    body: 'Name the customer job, evidence, constraints, and viable revenue route.',
   },
   {
     number: '02',
-    title: 'Tell the truth',
-    body: 'The honest pick wins before payout is considered.',
+    title: 'Design the system',
+    body: 'Connect the offer, agent workflow, product surface, and operating handoff.',
   },
   {
     number: '03',
-    title: 'Route to recurring',
-    body: 'Adjacent payers get linked only when they fit the recommendation.',
+    title: 'Build the proof',
+    body: 'Implement the smallest complete customer path in a reviewable repository.',
   },
   {
     number: '04',
-    title: 'Own the audience',
-    body: 'Email and direct products compound beyond one search visit.',
+    title: 'Verify and hand over',
+    body: 'Run the checks, inspect the preview, record risks, and define the next decision.',
   },
 ]
 
@@ -25,16 +25,16 @@ export function FlywheelSystem() {
   return (
     <section className="section-band">
       <div className="section-heading motion-reveal">
-        <div className="kicker">The system</div>
-        <h2>One engine, four compounding loops.</h2>
+        <div className="kicker">Delivery system</div>
+        <h2>One implementation loop, four verifiable stages.</h2>
         <p>
-          Each loop makes the next one cheaper: search demand teaches the catalog, the catalog improves the comparison, and the comparison grows an owned audience.
+          Strategy is useful only when it survives implementation. Each stage produces evidence the next person can inspect, operate, and improve.
         </p>
       </div>
 
       <div className="flywheel motion-reveal">
         <svg className="flywheel-map" viewBox="0 0 720 360" role="img" aria-labelledby="flywheel-title">
-          <title id="flywheel-title">Agentic Income flywheel from demand to owned audience</title>
+          <title id="flywheel-title">Agentic Income delivery loop from audit through verified handoff</title>
           <path
             data-flow-line
             d="M166 94 C265 30 455 30 554 94 C660 166 660 194 554 266 C455 330 265 330 166 266 C60 194 60 166 166 94"
@@ -68,8 +68,8 @@ export function FlywheelSystem() {
           </text>
           <defs>
             <linearGradient id="flywheel-gradient" x1="116" x2="604" y1="52" y2="308" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#6EA8FE" />
-              <stop offset="0.5" stopColor="#D6B56D" />
+              <stop stopColor="#10B981" />
+              <stop offset="0.5" stopColor="#F59E0B" />
               <stop offset="1" stopColor="#34D399" />
             </linearGradient>
           </defs>

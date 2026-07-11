@@ -1,0 +1,70 @@
+{
+  "_comment": "Polar-ready product catalog for agenticincome.ai. Source of truth for product metadata; ops/POLAR-SETUP.md is the runbook that turns these entries into live Polar products. Prices in cents. interval: null = one-time purchase.",
+  "_note": "Paid payloads must move to private delivery (Polar file delivery or a private repo granted via license key) before this repo goes public. Until then, products/blueprint/*.md and products/private-intel/*.md are the paid content sitting in a private repo — do NOT open-source this repo with them in it.",
+  "updatedAt": "2026-07-11",
+  "merchant_of_record": "polar.sh",
+  "refund_policy": "30-day no-questions refund on all paid one-time products; subscriptions cancelable anytime, first-month refund on request.",
+  "products": [
+    {
+      "id": "starter-kit",
+      "name": "Income Flywheel Starter Kit",
+      "price_cents": 0,
+      "interval": null,
+      "description": "The free first loop: pick one category, structure one honest comparison, route one recurring payer, and capture your first owned-audience relationship. Delivered instantly on-site with a checklist you can execute in 30 minutes.",
+      "delivery": {
+        "type": "on-site",
+        "path": "/delivery/starter-kit",
+        "files": []
+      },
+      "license": "Free. Personal use; share the link, not copies."
+    },
+    {
+      "id": "blueprint",
+      "name": "Income Architecture Blueprint",
+      "price_cents": 6700,
+      "interval": null,
+      "description": "Three complete business-plan kits — services, products, systems — each with a fully worked fictional example, scenario economics with named assumptions, an agent-role fulfillment runbook, a launch checklist, and a kill-criterion worksheet. Designed to be driven by the free /ai pack; every number is a labeled scenario, never a promise.",
+      "delivery": {
+        "type": "polar-files",
+        "path": "/delivery/blueprint",
+        "files": [
+          "products/blueprint/00-README.md",
+          "products/blueprint/service-kit.md",
+          "products/blueprint/product-kit.md",
+          "products/blueprint/system-kit.md"
+        ]
+      },
+      "license": "Personal license — purchased copies are for the buyer's own business. Not for resale or redistribution."
+    },
+    {
+      "id": "agent-team-pro",
+      "name": "Agent Team Pro",
+      "price_cents": 12900,
+      "interval": null,
+      "description": "The premium delivery crew: advanced agent definitions, fulfillment workflows, and operating loops that extend the free /ai pack into a full production system, with 12 months of updates included. Built from the same machinery that runs this business; no outcomes are promised, machinery is.",
+      "delivery": {
+        "type": "polar-files+private-repo",
+        "path": "/delivery/agent-team-pro",
+        "files": [
+          "products/agent-team-pro/ (payload to be assembled — see _note; target: agents/, workflows/, loops/, 00-README.md)"
+        ]
+      },
+      "license": "Personal license — purchased copies are for the buyer's own business. Not for resale or redistribution. Includes 12 months of updates via license key."
+    },
+    {
+      "id": "private-intel",
+      "name": "Private Intel",
+      "price_cents": 1900,
+      "interval": "month",
+      "description": "A monthly operator briefing: payer-term drift from the verified registry, landscape changes that affect income machinery, audit notes, and a priority watchlist. Factual and dated — intelligence, not hype.",
+      "delivery": {
+        "type": "polar-files+email",
+        "path": "/delivery/private-intel",
+        "files": [
+          "products/private-intel/<YYYY-MM>-BRIEF.md (monthly)"
+        ]
+      },
+      "license": "Personal subscription — briefs are for the subscriber's own use. Not for resale or redistribution. Access ends with the subscription."
+    }
+  ]
+}

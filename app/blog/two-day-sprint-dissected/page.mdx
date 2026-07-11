@@ -1,0 +1,85 @@
+export const metadata = {
+  title: 'The Two-Day Implementation Sprint, Dissected',
+  description: 'The full anatomy of a two-day AI agent implementation sprint — the five fulfillment patterns, the honest cost table (human hours + agent spend), and what clients actually receive.',
+  alternates: { canonical: '/blog/two-day-sprint-dissected' },
+  openGraph: {
+    title: 'The Two-Day Implementation Sprint, Dissected',
+    description: 'The full anatomy of a two-day AI agent implementation sprint — the five fulfillment patterns, the honest cost table (human hours + agent spend), and what clients actually receive.',
+    url: '/blog/two-day-sprint-dissected',
+  },
+}
+
+<ArticleJsonLd
+  title="The Two-Day Implementation Sprint, Dissected"
+  description="The full anatomy of a two-day AI agent implementation sprint — patterns, honest costs, and deliverables."
+  slug="two-day-sprint-dissected"
+  date="2026-07-11"
+/>
+
+# The Two-Day Implementation Sprint, Dissected
+
+<AnswerBox>
+A two-day implementation sprint is a fixed-scope service delivery where one operator directs an agent team through a five-stage machine: **brief → parallel build → adversarial review → gated pipeline → handover**. In the modeled scenario this page walks through, it compresses what a 2022 agency staffed with four people for three weeks into roughly **12 focused human hours plus 30–40 agent wall-clock hours** — and the client walks away with repo-committed artifacts, not slideware. This is the anatomy, gear by gear, including the costs nobody prints.
+</AnswerBox>
+
+There's a version of this story that's told badly everywhere: "AI does the work now." It's false in the way that matters. Unstructured delegation — pointing a model at a client problem and hoping — fails on quality, and it fails invisibly, which is worse. What actually works is **structured delegation**: five distinct fulfillment patterns, each with its own discipline, composed into a delivery machine. The two-day sprint is that machine at its smallest commercial size.
+
+This anatomy is the method behind the [implementation sprint](/offers/implementation-sprint) offered on this site — engagements are scoped individually, and no self-serve checkout exists for the service — and it's the same anatomy the free [/ai pack](/pack) teaches your own agent team. The cost table below is a modeled scenario, labeled as such; the discipline around it is public and inspectable.
+
+## The five patterns the sprint is built from
+
+Every agent delivery system — ours, yours, anyone's — reduces to five patterns, in escalating autonomy. The sprint uses four of them; the fifth arrives after handover.
+
+**1. The Session — human-in-the-loop build.** One agent, one sitting, you watching. This is where anything client-facing happens the *first* time, and anything irreversible happens *every* time. Discipline: start from a written brief, end with a written artifact in the repo. If it lives only in a chat, it doesn't exist.
+
+**2. The Team — parallel specialists.** Subagents with distinct roles — researcher, builder, reviewer — fanned out under one director. Right for work with independent streams: mapping a client's stack while scaffolding the workflow while drafting the runbook. The critical discipline: one of those roles is **adversarial**. A reviewer agent whose only job is to break the builder's work before the client can. Quality floors are set by the reviewer prompt, not the builder prompt.
+
+**3. The Loop — recurring bounded jobs.** A scheduled run with a fixed contract: same job, fresh inputs, every interval. Loops must be **idempotent, capped, and observable** — a loop that can spend unbounded money or post unreviewed output isn't automation, it's a liability with a login. In the sprint, a loop is the parting gift: the 30-day maintenance check installed before handover ends.
+
+**4. The Pipeline — multi-stage with gates.** Generate → verify → stage → **human approve** → publish. The human gate sits before publish, always. This is how anything touching the client's real systems ships on day two.
+
+**5. The Operator — always-on assistant.** The messaging-native glue (OpenClaw-class) that watches the loops and pings a human when a gate needs attention. Not part of the sprint itself — it's what a client grows into. Deploying it safely is covered in the knowledge base that ships with the [/ai pack](/pack) (`knowledge/integrations/openclaw-safely.md`).
+
+## The 48 hours, hour by hour
+
+**Day 0 (before the clock starts): the brief.** A 60-minute call runs the assessment — what workflow, what systems, what "done" means. The output is a written brief with acceptance criteria, and the client approves it *in writing* before anything is built. This is Session pattern, and it is the highest-leverage hour in the entire engagement: every sprint that goes sideways goes sideways here, invisibly, and surfaces on day two, expensively.
+
+**Day 1: the Team fans out.** Three specialists run in parallel under the operator's direction. The **researcher** maps the client's stack — systems, formats, permissions, the undocumented weirdness every real business has — into written findings with flagged unknowns. The **builder** scaffolds the workflow against the brief, committing to a private repo with every commit referencing a brief line item. The **reviewer** red-teams what the builder produces: malformed inputs, permission edge cases, the failure modes the client would have found in week three. By end of day, artifacts exist: findings doc, working scaffold, defect list. The operator's job all day is adjudication — reviewing checkpoints, resolving the researcher's unknowns with the client, deciding which defects matter.
+
+**Day 2: the Pipeline runs.** The workflow executes end-to-end against the client's real data, behind a feature flag or in a staging copy — generate, verify, stage. A verification report is produced: what was tested, what passed, what's a known limitation. Then the human gate: the client (and the operator) review before anything is switched live. The afternoon is handover — a written handover doc, a walkthrough recording, and the 30-day Loop installed: a scheduled, capped, observable check that writes a run log a human can audit in sixty seconds. Then the invoice.
+
+## The honest cost table (a modeled scenario)
+
+Compression claims deserve receipts — so here is the whole ledger, labeled honestly: **a modeled sprint, run per the /ai pack's delivery runbook**. Every column is a scenario, not a measurement of a specific client delivery. Human hours are the model's attention budget per phase; agent spend varies with runtime plan, model choice, and how much the reviewer finds. (Subscription figures per the field dossier — `knowledge/07-field-dossier.md`, shipped with the [/ai pack](/pack); verify current pricing at signup.)
+
+| Phase | Human hours | Agent wall-clock | Agent spend (scenario) |
+|---|---|---|---|
+| Day 0 — brief + approval | 2.5 | ~1h | ~$1–3 |
+| Day 1 — team direction + adjudication | 5 | ~20h across 3 agents | ~$15–60 |
+| Day 2 — pipeline, gate, handover | 4.5 | ~10h | ~$10–40 |
+| 30-day loop (installed, then runs) | 0.5/wk | ~1h/wk | ~$2–5/wk |
+| **Sprint total** | **~12** | **~30–40h** | **~$25–100 + runtime plan** |
+
+Two things this table says that the "AI does the work" story doesn't. First, the human hours don't disappear — they *concentrate*. Twelve hours of pure judgment: scoping, adjudicating, gating, handing over. The typing went away; the deciding didn't. Second, the agent spend is almost a rounding error against the delivery's value — which is exactly why the pricing rule matters: **price the outcome, not your hours.** Bill hourly and the compression benefits your client; price the outcome and it benefits you. That single sentence is most of the economics of Model 1 in the knowledge base (`knowledge/02-income-models.md`).
+
+## What the client actually receives
+
+Not vibes, not a slide deck. A repo they own, containing:
+
+1. **The approved brief** — with acceptance criteria they wrote against.
+2. **The working system** — committed, with history, every commit traceable to a brief line.
+3. **The verification report** — what was tested, what passed, known limits stated plainly.
+4. **The handover doc + walkthrough recording** — enough for their team to operate it without us.
+5. **The 30-day loop** — running, capped, observable, with logs a human can audit fast.
+6. **Provenance on everything** — date, method, reviewer, on every artifact. Inspectable delivery is what clients remember, and it's what makes the case study attestable later.
+
+## Steal the anatomy
+
+The sprint isn't proprietary — the discipline is the product, and the discipline is public. The [/ai pack](/pack) (MIT, runs in Claude Code or any runtime via the portable guide) walks you through building your own version: `/ai assess` for the capability read, `/ai architect` for the model choice, `/ai offer` for the scope armor, `/ai ship` and `/ai operate` for the rest. And if you'd rather have it run once on your own business first, the [implementation sprint](/offers/implementation-sprint) is built from this same anatomy — each engagement is scoped individually, in writing, before anything is built.
+
+<FaqSection items={[
+  { q: 'Can two days really replace a three-week agency engagement?', a: 'For a scoped, single-workflow implementation — yes, structurally. The compression comes from parallel agent specialists and pre-written discipline, not from working faster. What it does not replace: discovery on ambiguous problems, org change management, or anything without a written acceptance criterion. Scope is the load-bearing wall.' },
+  { q: 'What does the agent spend actually depend on?', a: 'Runtime plan (subscription vs. API), model tier, and defect count — an adversarial reviewer that finds real problems triggers rebuild cycles. The scenario range in the cost table assumes a current frontier runtime on a paid plan; verify current pricing against the field dossier before quoting your own sprints.' },
+  { q: 'Why is the reviewer agent adversarial instead of just checking a list?', a: 'Because builder and checker sharing a perspective is how errors survive. The reviewer role is prompted to break things — malformed inputs, edge cases, wrong assumptions — before the client encounters them. Quality floors are set by the reviewer prompt, not the builder prompt.' },
+  { q: 'Is this an income promise?', a: 'No. It is an anatomy of a delivery method with its costs printed. Whether a sprint offer earns anything depends on your skills, market, pipeline, and pricing — the same variables as any service business. We publish machinery, not outcomes.' },
+]} />

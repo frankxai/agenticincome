@@ -18,12 +18,12 @@ export const site = {
     { name: 'Disruptive Passive Income', url: 'https://disruptivepassiveincome.com', stage: 'COMPOUND', pack: '/dpi', blurb: 'The sovereign wealth substrate — income architecture structurally decoupled from hours.' },
   ],
   nav: [
-    { label: 'Pack', href: '/pack' },
-    { label: 'Challenge', href: '/challenge' },
-    { label: 'Knowledge', href: 'https://github.com/frankxai/agenticincome/tree/main/knowledge' },
+    { label: 'Build', href: '/build' },
+    { label: 'Operate', href: '/operate' },
+    { label: 'Proof', href: '/proof' },
     { label: 'Offers', href: '/offers' },
-    { label: 'Research', href: '/blog' },
     { label: 'Trust', href: '/trust' },
+    { label: 'Pack', href: '/pack' },
   ],
 } as const
 

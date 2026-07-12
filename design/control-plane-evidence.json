@@ -1,0 +1,37 @@
+{
+  "version": "2026-07-13",
+  "task": "Add the first shared public control-plane slice for Build, Operate, Proof, and a browser-local Request-to-Quote reference experience.",
+  "surface": "/build, /build/request-to-quote, /operate, /proof, and primary navigation",
+  "audience": "Founders and domain experts with one valuable customer job",
+  "first_read": "AgenticIncome builds governed delivery systems, operates them with explicit authority, and separates system evidence from accepted delivery and settled economics.",
+  "asset_quality": {
+    "tier": "C",
+    "source_method": "system-authored-ui",
+    "provenance": "owned",
+    "context_tested": true
+  },
+  "artifacts": [
+    {
+      "path_or_url": "components/RequestToQuoteDesk.tsx",
+      "kind": "browser-local-utility",
+      "inspected": true,
+      "notes": "No fetch, storage, automatic pricing, customer send, agreement creation, credential access, or money movement."
+    },
+    {
+      "path_or_url": "app/proof/page.tsx",
+      "kind": "public-evidence-surface",
+      "inspected": true,
+      "notes": "Explicitly distinguishes current system evidence from customer or economic evidence."
+    }
+  ],
+  "checks": [
+    { "name": "type-check", "status": "pass", "evidence": "TypeScript 5.9.3 completed with no errors in the Next.js 16.2.7 integration harness." },
+    { "name": "route-regression", "status": "pass", "evidence": "Two node:test regressions passed, including absence of fetch and localStorage in the Request-to-Quote desk." },
+    { "name": "production-build", "status": "pass", "evidence": "Next.js 16.2.7 production build compiled and statically generated /build, /build/request-to-quote, /operate, and /proof." }
+  ],
+  "known_risks": [
+    "The Request-to-Quote utility is deliberately local-only and is not a lead intake path.",
+    "Economic milestones define an evidence standard and do not imply that anyone has reached them.",
+    "Production promotion and domain changes remain human-gated."
+  ]
+}

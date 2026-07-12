@@ -1,9 +1,10 @@
 const LINES = [
-  { text: 'The hours are over.', tone: 'ink' },
-  { text: 'Machinery, not promises.', tone: 'emerald' },
+  { text: 'We never promise income.', tone: 'ink' },
+  { text: 'We hand you the machines.', tone: 'emerald' },
   { text: 'Artifacts, not advice.', tone: 'ink' },
-  { text: 'Agents do the work. Humans hold the gate.', tone: 'cyan' },
+  { text: 'Agents build. Humans hold the gate.', tone: 'cyan' },
   { text: 'One machine at a time.', tone: 'ink' },
+  { text: 'Audit us.', tone: 'emerald' },
 ] as const
 
 export function ManifestoSection() {

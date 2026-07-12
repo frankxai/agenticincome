@@ -41,7 +41,10 @@ export function PackTerminal() {
             <span className="font-mono text-[0.85em] text-[color:var(--color-accent)]">/ai</span> — an income
             architect in your terminal.
           </h2>
-          <p className="mt-4 text-[color:var(--color-muted)]">
+          <p className="mt-4 text-lg font-semibold text-[color:var(--color-ink)]">
+            Not a course you watch. A team you command.
+          </p>
+          <p className="mt-3 text-[color:var(--color-muted)]">
             Five staged commands, four specialist agents, four skills — installable in Claude Code,
             portable to Codex, Gemini CLI, Cursor, and OpenCode. Every stage ends with a written
             artifact in <em className="not-italic text-[color:var(--color-ink)]">your</em> repo. Advice that

@@ -41,11 +41,12 @@ export function ProductLadder() {
     <section className="section-band" id="products">
       <div className="section-heading motion-reveal">
         <div className="kicker text-[color:var(--color-gold)]">Products · commercial — labeled honestly</div>
-        <h2 className="display-h2">Open core, <span className="text-[color:var(--color-gold)]">paid depth.</span></h2>
+        <h2 className="display-h2">Everything important is free. <span className="text-[color:var(--color-gold)]">Depth is $67.</span></h2>
         <p className="mt-4 max-w-2xl text-[color:var(--color-muted)]">
-          The machinery and education are free forever. The paid layer is depth and updates — sold
-          self-serve through a merchant of record, no calls, no funnels, generous refunds. Access
-          states below are rendered from reality: nothing says “buy” until checkout actually exists.
+          The packs, the knowledge, the manifesto — free forever, MIT. What we sell is depth and
+          updates: complete business-plan kits, premium agent teams, operator intel. Self-serve
+          through a merchant of record, no calls, no funnels, 30-day refunds. And nothing below
+          says “buy” until checkout actually exists — access states render from reality.
         </p>
       </div>
 

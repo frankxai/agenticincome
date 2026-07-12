@@ -390,20 +390,19 @@ export function AssemblyHero() {
         <div className="assembly-copy">
           <p className="kicker text-[color:var(--color-accent-2)]">Agentic income · the hub · earn</p>
           <h1 className="assembly-title">
-            Income is becoming an <span>engineering discipline.</span>
+            The hours are over.
+            <br />
+            <span className="t-grad">The machines are yours.</span>
           </h1>
           <p className="assembly-sub">
-            AI agents now research markets, build offers, ship products, and run the weekly loop.
-            We publish the machinery — every gear inspectable — and teach you to run it.
+            For a century, solo income obeyed one law: money = hours × rate. AI agents just broke
+            it. Direct an engineering team from your terminal. Ship real revenue machinery. Keep
+            the surplus — and inspect every gear.
           </p>
           <div className="assembly-actions">
-            <Link href="/pack" className="cta">Install the /ai pack</Link>
-            <a
-              href="https://github.com/frankxai/agenticincome/tree/main/knowledge"
-              className="cta-secondary"
-              rel="noopener"
-            >
-              Read the knowledge base
+            <Link href="/pack" className="cta">Install /ai — free</Link>
+            <a href="#the-shift" className="cta-secondary">
+              Watch it assemble ↓
             </a>
           </div>
           <p className="assembly-legend">

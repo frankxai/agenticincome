@@ -22,6 +22,21 @@ export default function Home() {
   return (
     <>
       <IncomeDeskHero />
+
+      <section className="mt-8 grid gap-4 rounded-2xl border border-border bg-surface/70 p-5 md:grid-cols-[1fr_auto] md:items-center motion-reveal">
+        <div>
+          <div className="text-sm font-semibold text-gold">Free · 7-day challenge</div>
+          <h2 className="mt-1 text-2xl font-semibold text-ink">Build your first honest AI-income node in a week.</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
+            One small real step a day by email — a category, a joined program, a live page, an owned list, a first
+            tracked click. No income claims; this network publishes its own real numbers, zeros included.
+          </p>
+        </div>
+        <Link href="/challenge" className="cta text-center">
+          Start the challenge
+        </Link>
+      </section>
+
       <SignalStackSection />
       <TrustComparisonDesk />
       <TransformationSection />

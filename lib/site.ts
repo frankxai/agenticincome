@@ -19,6 +19,7 @@ export const site = {
   ],
   nav: [
     { label: 'Comparisons', href: '/blog' },
+    { label: 'Challenge', href: '/challenge' },
     { label: 'Tools', href: '/tools' },
     { label: 'Offers', href: '/offers' },
     { label: 'Trust', href: '/trust' },

@@ -37,7 +37,13 @@ export function Footer() {
         </div>
         <div className="mt-10 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <span suppressHydrationWarning>© {new Date().getFullYear()} {site.name}. Built by {site.author}.</span>
-          <span>Honest tool comparisons. Some links are affiliate links.</span>
+          <span>
+            Honest tool comparisons. Some links are affiliate links —{' '}
+            <Link href="/disclosure" className="text-ink hover:text-accent underline underline-offset-2">
+              read the full disclosure
+            </Link>
+            .
+          </span>
         </div>
       </div>
     </footer>

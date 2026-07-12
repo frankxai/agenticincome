@@ -32,6 +32,9 @@ export default function TrustPage() {
           <Link href="/readiness" className="cta-secondary">
             Launch readiness
           </Link>
+          <Link href="/disclosure" className="cta-secondary">
+            Full affiliate disclosure
+          </Link>
         </div>
       </section>
 

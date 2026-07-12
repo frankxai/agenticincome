@@ -49,6 +49,10 @@ Options:
 
 Update the form action and the route handler when wired. Keep the "highest converting" callout.
 
+Challenge sequence (7-day evergreen email, `source: "challenge"` from `/challenge`): content is
+written, `/api/subscribe` accepts and tags the signup, but the day-2..7 drip send is **not wired** —
+see `content/challenge/SEQUENCE.md` for the n8n vs. Resend options and what's blocking each.
+
 ## Analytics & tracking
 - Vercel Web Analytics + Speed Insights are enabled on the `agenticincome` project and wired in `app/layout.tsx`.
 - UTM/ref query param passthrough is active in both `go.agenticincome.ai` and the main `/api/checkout` route.

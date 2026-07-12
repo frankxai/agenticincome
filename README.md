@@ -2,6 +2,8 @@
 
 # Agentic Income
 
+## The hours are over. The machines are yours.
+
 ### Build income with AI agents — machinery you can inspect, education you can verify, packs you can install.
 
 **[agenticincome.ai](https://agenticincome.ai)** · the hub of the trinity:

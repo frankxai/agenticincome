@@ -19,6 +19,7 @@ export const site = {
   ],
   nav: [
     { label: 'Pack', href: '/pack' },
+    { label: 'Challenge', href: '/challenge' },
     { label: 'Knowledge', href: 'https://github.com/frankxai/agenticincome/tree/main/knowledge' },
     { label: 'Offers', href: '/offers' },
     { label: 'Research', href: '/blog' },

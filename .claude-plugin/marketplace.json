@@ -1,0 +1,24 @@
+{
+  "name": "agenticincome",
+  "owner": {
+    "name": "Frank Riemer",
+    "url": "https://agenticincome.ai"
+  },
+  "metadata": {
+    "description": "Agentic Income packs — install /ai and build income with AI agents. Part of the trinity: agenticincome.ai · agenticpassiveincome.com · disruptivepassiveincome.com",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "ai-pack",
+      "source": "./",
+      "description": "The Income Architect — /ai: assess → architect → offer → ship → operate. From capability to cash flow with an agent team.",
+      "version": "1.0.0",
+      "author": { "name": "Frank Riemer" },
+      "homepage": "https://agenticincome.ai/pack",
+      "license": "MIT",
+      "category": "business",
+      "keywords": ["income", "agents", "offers", "solopreneur"]
+    }
+  ]
+}

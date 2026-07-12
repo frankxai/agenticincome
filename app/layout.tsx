@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, Bricolage_Grotesque } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
@@ -19,6 +19,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   subsets: ['latin'],
   variable: '--font-geist-mono',
+  display: 'swap',
+})
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin'],
+  variable: '--font-display',
+  weight: ['600', '700', '800'],
   display: 'swap',
 })
 
@@ -61,12 +68,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable}`}>
       <body>
         <a href="#main-content" className="skip-link">Skip to content</a>
         <Nav />
         <MotionRuntime />
-        <main id="main-content" className="mx-auto w-full max-w-6xl overflow-x-clip px-4 sm:px-6">{children}</main>
+        <main id="main-content" className="mx-auto w-full max-w-6xl px-4 sm:px-6">{children}</main>
         <Footer />
         <Analytics />
         <SpeedInsights />

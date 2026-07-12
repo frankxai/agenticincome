@@ -141,7 +141,7 @@ export const offers: Offer[] = [
     upgradePath: 'Private Intel keeps the payer map current and adds monthly opportunity notes.',
     deliveryPath: '/delivery/blueprint',
     checkoutOutcome: 'When the payment link is configured, the provider should redirect buyers to the Blueprint delivery desk.',
-    refundPolicy: '7-day refund window if the buyer has not used the implementation walkthrough or requested template support.',
+    refundPolicy: '30-day no-questions refund via the merchant of record: reply to the receipt or email us within 30 days of purchase and it is refunded in full.',
     receiptInstruction: 'Keep the provider receipt. The delivery desk explains access, install order, and support boundaries.',
     checkout: {
       provider: 'external',
@@ -182,7 +182,7 @@ export const offers: Offer[] = [
     upgradePath: 'Future partner and licensing packages can add implementation, templates, or private audits.',
     deliveryPath: '/delivery/private-intel',
     checkoutOutcome: 'When the membership checkout is configured, the provider should send members to the Private Intel delivery desk.',
-    refundPolicy: 'Cancel any future renewal from the payment provider. First-month refunds are reviewed when access was not delivered.',
+    refundPolicy: 'Cancel anytime from the payment provider’s customer portal. If the first month was not useful, ask and it will be refunded.',
     receiptInstruction: 'Keep the provider receipt and use the delivery desk to confirm the monthly brief and Q&A access path.',
     checkout: {
       provider: 'external',

@@ -1,0 +1,48 @@
+name: knowledge-freshness
+
+on:
+  schedule:
+    - cron: '0 9 1 * *' # monthly, 1st, 09:00 UTC
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Flag knowledge files past their review cycle
+        run: |
+          set -euo pipefail
+          STALE_DAYS=100
+          now=$(date +%s)
+          stale=0
+          {
+            echo "## Knowledge freshness audit — $(date -u +%F)"
+            echo ""
+            echo "| file | last_verified | age (days) | status |"
+            echo "|---|---|---|---|"
+          } >> "$GITHUB_STEP_SUMMARY"
+          for f in knowledge/*.md; do
+            lv=$(grep -m1 '^last_verified:' "$f" | awk '{print $2}' || true)
+            if [ -z "$lv" ]; then
+              echo "| $f | — | — | ⚠️ missing last_verified |" >> "$GITHUB_STEP_SUMMARY"
+              stale=$((stale+1))
+              continue
+            fi
+            then=$(date -d "$lv" +%s)
+            age=$(( (now - then) / 86400 ))
+            if [ "$age" -gt "$STALE_DAYS" ]; then
+              echo "| $f | $lv | $age | 🔴 stale — re-verify |" >> "$GITHUB_STEP_SUMMARY"
+              stale=$((stale+1))
+            else
+              echo "| $f | $lv | $age | 🟢 fresh |" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$stale" -gt 0 ]; then
+            echo "**$stale file(s) need a re-verification pass — run the knowledge-refresh loop.**" >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          echo "All knowledge files within review cycle." >> "$GITHUB_STEP_SUMMARY"

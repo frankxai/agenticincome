@@ -1,0 +1,30 @@
+name: Fact correction
+description: Caught a stale or wrong claim before our loop did? Corrections with sources are contributions — they ship in the weekly Brief with attribution.
+title: "[correction] "
+labels: ["correction"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Where
+      placeholder: "knowledge/01-landscape.md — OpenClaw section"
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: The claim as published
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: The correction + primary source URL
+      description: Primary sources for money facts (official pricing/terms pages). Roundup blogs are leads, not proof.
+    validations:
+      required: true
+  - type: input
+    id: credit
+    attributes:
+      label: Credit (optional)
+      placeholder: "Name/handle for Brief attribution — leave blank to stay anonymous"

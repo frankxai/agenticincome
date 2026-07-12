@@ -1,0 +1,77 @@
+const KB = 'https://github.com/frankxai/agenticincome/blob/main/knowledge'
+
+const MODELS = [
+  {
+    stage: 'Model 1 · weeks 1–4',
+    name: 'Services',
+    body: 'Sell one scoped outcome; an agent team compresses delivery 5–20×. Price the outcome — the compression surplus is yours, not your client’s.',
+    econ: [
+      ['First dollar', 'days'],
+      ['Coupling', 'still your hours'],
+      ['Job', 'fund the next model'],
+    ],
+    href: `${KB}/02-income-models.md`,
+  },
+  {
+    stage: 'Model 2 · months 2–3',
+    name: 'Products',
+    body: 'Package the decisions you made in service work — packs, kits, blueprints. Agent-native products do work for the buyer instead of assigning homework.',
+    econ: [
+      ['Self-serve band', '$19–$149'],
+      ['Margin', '~95% via merchant of record'],
+      ['The game', 'distribution'],
+    ],
+    href: `${KB}/02-income-models.md`,
+  },
+  {
+    stage: 'Model 3 · months 3–6',
+    name: 'Systems',
+    body: 'Own a machine that produces with maintenance measured in hours per month. “Passive” means structurally decoupled — never zero. We publish every maintenance floor.',
+    econ: [
+      ['First dollar', 'weeks–months'],
+      ['Ceiling', 'highest of the three'],
+      ['Next', '/api streams → /dpi portfolio'],
+    ],
+    href: `${KB}/02-income-models.md`,
+  },
+]
+
+export function PathSection() {
+  return (
+    <section className="section-band" id="path">
+      <div className="section-heading motion-reveal">
+        <div className="kicker text-[color:var(--color-accent)]">The path · open machinery</div>
+        <h2 className="display-h2">Three models. One order. <span className="text-[color:var(--color-accent)]">Each funds the next.</span></h2>
+        <p className="mt-4 max-w-2xl text-[color:var(--color-muted)]">
+          Services buy your runway, products package your judgment, systems decouple your calendar.
+          The <code className="rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-1.5 py-0.5 text-[0.85em]">/ai architect</code> stage
+          computes your entry point from what you already have — with a kill criterion attached.
+        </p>
+      </div>
+
+      <div className="mt-10 grid gap-4 lg:grid-cols-3">
+        {MODELS.map((m, i) => (
+          <a key={m.name} href={m.href} rel="noopener" className="path-card motion-reveal group">
+            <div className="path-stage">{m.stage}</div>
+            <h3>
+              <span className="mr-2 font-mono text-sm text-[color:var(--color-muted)]">0{i + 1}</span>
+              {m.name}
+            </h3>
+            <p className="text-sm leading-relaxed text-[color:var(--color-muted)]">{m.body}</p>
+            <dl className="path-econ">
+              {m.econ.map(([k, v]) => (
+                <div key={k} className="flex justify-between gap-4">
+                  <dt>{k}</dt>
+                  <dd><b>{v}</b></dd>
+                </div>
+              ))}
+            </dl>
+            <span className="mt-1 font-mono text-[0.68rem] uppercase tracking-widest text-[color:var(--color-muted)] transition group-hover:text-[color:var(--color-accent)]">
+              Read the economics →
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}

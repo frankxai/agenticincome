@@ -1,0 +1,52 @@
+name: Attested case submission
+description: Shipped something real with /ai, /api, or /dpi? Submit it with provenance. We verify before publishing, never pay for cases, and publish honest failures too.
+title: "[case] "
+labels: ["case-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The case format is defined in [knowledge/06-cases.md](../blob/main/knowledge/06-cases.md).
+        Rules: no case without artifacts · revenue never without costs · we verify before publishing.
+  - type: input
+    id: what
+    attributes:
+      label: What you built
+      placeholder: "A comparison publication for <niche> running on the /api content engine"
+    validations:
+      required: true
+  - type: dropdown
+    id: model
+    attributes:
+      label: Income model
+      options: [service, product, system]
+    validations:
+      required: true
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Artifacts we can verify
+      description: Repos, PRs, live URLs, handover docs — the audit trail. Sanitize identity if needed, never method.
+    validations:
+      required: true
+  - type: textarea
+    id: costs
+    attributes:
+      label: Honest costs
+      description: Human hours (including discovery/review) + agent spend. If you disclose revenue, costs are mandatory.
+    validations:
+      required: true
+  - type: dropdown
+    id: naming
+    attributes:
+      label: May we name you?
+      options: ["Yes — name and link me", "Pseudonym only", "Fully anonymous"]
+    validations:
+      required: true
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Consent
+      options:
+        - label: I consent to publication in the attested-case library under the format in knowledge/06, and confirm nothing here is compensated praise.
+          required: true

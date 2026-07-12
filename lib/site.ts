@@ -8,19 +8,20 @@ export const site = {
   domain: 'agenticincome.ai',
   url: 'https://www.agenticincome.ai',
   role: 'hub', // 'hub' (flagship) | 'spoke'
-  tagline: 'Revenue systems built with agents, delivered with proof.',
+  tagline: 'Build income with AI agents — machinery you can inspect.',
   description:
-    'Agent-as-a-Service implementation, open-source revenue-system skills, practical digital products, and reader-first AI tool research.',
-  author: 'Frank',
+    'The engineering discipline of agentic income: a dated, re-verified knowledge base, the installable /ai Income Architect pack, self-serve products, and attested proof. No income promises — machinery and education.',
+  author: 'Frank Riemer',
   // Hub links down to its spokes; spokes link up to the hub. Topical authority + referral flow.
   network: [
-    { name: 'Agentic Passive Income', url: 'https://www.agenticpassiveincome.com', blurb: 'The automation angle: durable loops, clear tradeoffs, and fewer fragile tool bets.' },
-    { name: 'Disruptive Passive Income', url: 'https://disruptivepassiveincome.com', blurb: 'The market-shift angle: where AI tools change workflows enough to justify a new route.' },
+    { name: 'Agentic Passive Income', url: 'https://www.agenticpassiveincome.com', stage: 'AUTOMATE', pack: '/api', blurb: 'Streams that run on inspectable loops — content engines, product lines, honest affiliate systems.' },
+    { name: 'Disruptive Passive Income', url: 'https://disruptivepassiveincome.com', stage: 'COMPOUND', pack: '/dpi', blurb: 'The sovereign wealth substrate — income architecture structurally decoupled from hours.' },
   ],
   nav: [
-    { label: 'Implementation', href: '/offers/implementation-sprint' },
+    { label: 'Pack', href: '/pack' },
+    { label: 'Challenge', href: '/challenge' },
+    { label: 'Knowledge', href: 'https://github.com/frankxai/agenticincome/tree/main/knowledge' },
     { label: 'Offers', href: '/offers' },
-    { label: 'Open source', href: 'https://github.com/frankxai/agentic-income-skills' },
     { label: 'Research', href: '/blog' },
     { label: 'Trust', href: '/trust' },
   ],

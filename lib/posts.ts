@@ -15,6 +15,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: 'two-day-sprint-dissected',
+    title: 'The Two-Day Implementation Sprint, Dissected',
+    dek: 'The full anatomy of an agent-team delivery — the five fulfillment patterns, the honest cost table (human hours + agent spend), and what clients actually receive.',
+    query: 'ai agent implementation sprint',
+    date: '2026-07-11',
+    cluster: 'income',
+    tools: ['Claude Code', 'Codex'],
+    featured: true,
+  },
+  {
     slug: 'best-ai-tools-faceless-youtube',
     title: 'Best AI Tools for a Faceless YouTube Channel (Full Stack Under $60/mo)',
     dek: 'The exact AI stack to run a faceless channel — script, voice, video, edit, clip — for the price of one streaming subscription.',

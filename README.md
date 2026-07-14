@@ -51,3 +51,14 @@ pnpm dev | build | type-check | sync:catalog | predeploy (gate + sync)
 
 ## Business model (evolved)
 Affiliate (recurring floor) → owned list → own products (Blueprint/Intel) → engine licensing/consulting. Honesty is non-negotiable; only link winners.
+
+## Trinity Income Portfolio Integration (Earn Stage)
+This is the canonical **Earn** stage of the Trinity Income Portfolio (Earn / Automate / Compound).
+- **Branding**: Trinity router, Explorer → Shaper stage progression, exportable skills (agentic-passive-income, trinity-income-router).
+- **Marketplace Mechanics Absorbed**: Full retainer marketplace UI for $2-5k/mo Agentic Agency plays (manager agents, DePIN, MCP integration).
+- **Public-Trust Proofs**: Every recommendation, stage, and retainer includes verifiable proofs published on /trust and discovery hub.
+- **Lead Magnet**: Upgraded 7-Day Challenge as evergreen onboarding.
+- **Discovery Hub & Onboarding Wizard**: Interactive progression with exportable artifacts.
+- All changes production e2e, excellence reviewed, pushed to main.
+
+See /onboarding, /discovery, /marketplace for live implementation.

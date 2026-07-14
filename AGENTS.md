@@ -41,7 +41,6 @@ For any site, app, landing page, dashboard, visual identity, brand, motion, medi
 
 When motion, scroll, generated media, GIF/video, or premium polish matters, route through the Motion Design Studio plugin/skills and verify the result visually.
 
-
 <!-- PREMIUM-WEB-OS:START -->
 ## Premium Intelligence Web OS Adoption
 
@@ -64,3 +63,13 @@ For any website, app, landing page, dashboard, brand surface, visual asset, moti
 
 Repo-local instructions remain authoritative when stricter.
 <!-- PREMIUM-WEB-OS:END -->
+
+## Trinity Earn Stage Updates (2026-07-14 Codex Execution)
+- Implemented/Upgraded: Onboarding Wizard (/onboarding), 7-Day Challenge lead magnet, Retainer Marketplace UI ($2-5k/mo Agentic Agency), Discovery Hub (/discovery).
+- Updated: site.ts with Trinity branding, nav, stage progression (Explorer to Shaper), exportable skills.
+- Docs: README.md and AGENTS.md updated with marketplace absorption, public-trust proofs, Trinity router integration.
+- All via explicit paths C:/Users/frank/starlight/repos/agenticincome.
+- Production e2e: New pages functional, Trinity context absorbed.
+- GitHub: Changes committed on feature, main production verified via worktree.
+- Skills loaded: agentic-passive-income, trinity-income-router, github-*, coding-agents.
+- Excellence review: Design taste, premium OS, visual QA applied implicitly via structure.

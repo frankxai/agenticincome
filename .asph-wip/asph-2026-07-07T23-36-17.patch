@@ -1,0 +1,3088 @@
+diff --git a/.agent-harness.json b/.agent-harness.json
+new file mode 100644
+index 0000000..137056c
+--- /dev/null
++++ b/.agent-harness.json
+@@ -0,0 +1,45 @@
++﻿{
++    "name":  "agenticincome",
++    "classification":  "production",
++    "owner":  "FrankX AI",
++    "updated":  "2026-06-19",
++    "remote":  "https://github.com/frankxai/agenticincome.git",
++    "health":  {
++                   "primaryCheck":  "npm run build",
++                   "manualChecks":  [
++                                        "Review AGENTS.md before edits",
++                                        "Preserve user work and dirty files",
++                                        "Scan public outputs for secrets and private memory"
++                                    ]
++               },
++    "agentGuidance":  {
++                          "readAgentsMd":  true,
++                          "avoidPrivateMemory":  true,
++                          "preserveExistingConventions":  true,
++                          "designTasteKernel":  {
++                                                    "enabled":  true,
++                                                    "root":  "C:\\Users\\frank\\starlight\\repos",
++                                                    "files":  [
++                                                                  "C:\\Users\\frank\\starlight\\repos\\DESIGN_TASTE.md",
++                                                                  "C:\\Users\\frank\\starlight\\repos\\WEB_EXPERIENCE_STANDARD.md",
++                                                                  "C:\\Users\\frank\\starlight\\repos\\MOTION_TASTE_RUBRIC.md",
++                                                                  "C:\\Users\\frank\\starlight\\repos\\MULTI_AGENT_DESIGN_COUNCIL.md",
++                                                                  "C:\\Users\\frank\\starlight\\repos\\VISUAL_QA_GATE.md"
++                                                              ],
++                                                    "appliesTo":  [
++                                                                      "site",
++                                                                      "app",
++                                                                      "landing-page",
++                                                                      "dashboard",
++                                                                      "visual-identity",
++                                                                      "brand",
++                                                                      "motion",
++                                                                      "media",
++                                                                      "social",
++                                                                      "frontend"
++                                                                  ],
++                                                    "motionPlugin":  "motion-design-studio",
++                                                    "visualVerificationRequired":  true
++                                                }
++                      }
++}
+diff --git a/.github/dependabot.yml b/.github/dependabot.yml
+new file mode 100644
+index 0000000..65ad190
+--- /dev/null
++++ b/.github/dependabot.yml
+@@ -0,0 +1,14 @@
++version: 2
++updates:
++  - package-ecosystem: "npm"
++    directory: "/"
++    schedule:
++      interval: "weekly"
++    groups:
++      minor-and-patch:
++        update-types: ["minor", "patch"]
++    open-pull-requests-limit: 5
++  - package-ecosystem: "github-actions"
++    directory: "/"
++    schedule:
++      interval: "weekly"
+diff --git a/.visual-qa/trust-comparison-desk-20260705/design-loop-evidence.json b/.visual-qa/trust-comparison-desk-20260705/design-loop-evidence.json
+new file mode 100644
+index 0000000..51a90e2
+--- /dev/null
++++ b/.visual-qa/trust-comparison-desk-20260705/design-loop-evidence.json
+@@ -0,0 +1,205 @@
++{
++  "version": "2026-07-05",
++  "task": "Agentic Income TrustComparisonDesk local implementation and visual QA.",
++  "surface": "Agentic Income homepage proof band in C:/Users/frank/starlight/repos/agenticincome.",
++  "audience": "Creator-operators, AI tool evaluators, affiliate-route builders, and revenue-network users who need criteria, disclosure, freshness, and alternatives before clicking an outbound or owned-product route.",
++  "first_read": "Every route earns its click: recommendations expose criteria, disclosure, freshness, route state, and alternatives before conversion.",
++  "standards": [
++    "C:/Users/frank/starlight/repos/_intelligence/README.md",
++    "C:/Users/frank/starlight/repos/_intelligence/quality-gates.md",
++    "C:/Users/frank/starlight/repos/DESIGN_TASTE.md",
++    "C:/Users/frank/starlight/repos/WEB_EXPERIENCE_STANDARD.md",
++    "C:/Users/frank/starlight/repos/MOTION_TASTE_RUBRIC.md",
++    "C:/Users/frank/starlight/repos/VISUAL_QA_GATE.md",
++    "C:/Users/frank/starlight/repos/design-agent-standards/PREMIUM_ASSET_STANDARD.md",
++    "C:/Users/frank/starlight/repos/design-agent-standards/AGENTIC_DESIGN_LOOP.md",
++    "C:/Users/frank/starlight/repos/design-agent-standards/OUTCOMES.md"
++  ],
++  "references": [
++    {
++      "label": "Trust comparison spec",
++      "source": "C:/Users/frank/starlight/repos/_intelligence/specs/god-mode-2026-07-05/agentic-income-trust-comparison-module-spec-2026-07-05.md",
++      "reason": "Implementation PRD, compliance source floor, motion score, and acceptance criteria."
++    },
++    {
++      "label": "Agentic Income affiliate catalog",
++      "source": "C:/Users/frank/starlight/repos/agenticincome/lib/affiliate.ts",
++      "reason": "Existing route helper and program lookup source used by the component."
++    },
++    {
++      "label": "Private v0 concept chat",
++      "source": "https://v0.app/chat/eIUrK1XwQMc",
++      "reason": "Completed after implementation; retained as concept reference only, not production code."
++    }
++  ],
++  "direction": {
++    "keep": [
++      "Dark operator desk language.",
++      "Dense but readable comparison UI.",
++      "Semantic paid, unpaid, owned, and stale route states.",
++      "Disclosure, last verified date, and alternatives visible before CTA."
++    ],
++    "avoid": [
++      "Passive-income hype as the lead promise.",
++      "Affiliate CTAs without adjacent disclosure.",
++      "Commission-first ranking.",
++      "Fake paid routes when a catalog link is missing.",
++      "Motion that hides disclosure or criteria."
++    ],
++    "signature": "Criteria before click.",
++    "system": [
++      "Tier C exact comparison UI.",
++      "Track A state transitions only.",
++      "Homepage proof-band implementation.",
++      "Desktop, mobile, and reduced-motion visual QA.",
++      "First-party event taxonomy for disclosure and route interaction."
++    ]
++  },
++  "asset_quality": {
++    "tier": "C",
++    "source_method": "vector-diagram",
++    "provenance": "owned",
++    "why_premium": "The primary asset is a code-authored trust mechanism tied to the existing affiliate catalog, route helpers, and analytics allowlist. It communicates product behavior rather than using decorative charts or generic affiliate cards.",
++    "shortcut_risk": "low",
++    "context_tested": true
++  },
++  "artifacts": [
++    {
++      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/components/TrustComparisonDesk.tsx",
++      "kind": "web-component",
++      "inspected": true,
++      "notes": "Client component implementing paid, unpaid, owned, and stale/review-before-primary-CTA route states with criteria, disclosure, freshness, alternatives, and CTA."
++    },
++    {
++      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/app/page.tsx",
++      "kind": "web-route",
++      "inspected": true,
++      "notes": "Homepage now mounts TrustComparisonDesk after SignalStackSection."
++    },
++    {
++      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/lib/analytics.ts",
++      "kind": "analytics-allowlist",
++      "inspected": true,
++      "notes": "Added comparison, disclosure, freshness, route, null-link, stale-route, and trust-standard events."
++    },
++    {
++      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-20260705/trust-comparison-desk-local-qa.json",
++      "kind": "visual-qa-metrics",
++      "inspected": true,
++      "notes": "Local Chrome QA against next start on port 3001: status 200, no horizontal overflow, four route buttons, all trust states visible, disclosure and last-verified text visible."
++    },
++    {
++      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-20260705/desktop-trust-desk.png",
++      "kind": "web-screenshot",
++      "inspected": true,
++      "notes": "Desktop section capture after the accessible headline text polish."
++    },
++    {
++      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-20260705/mobile-trust-desk.png",
++      "kind": "web-screenshot",
++      "inspected": true,
++      "notes": "Mobile card-stack capture; disclosure appears before the CTA and no horizontal overflow is present."
++    },
++    {
++      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-20260705/reduced-motion-trust-desk.png",
++      "kind": "web-screenshot",
++      "inspected": true,
++      "notes": "Reduced-motion desktop capture; all meaning is visible without essential animation."
++    },
++    {
++      "path_or_url": "https://github.com/frankxai/agenticincome/pull/7",
++      "kind": "draft-pr",
++      "inspected": true,
++      "notes": "Draft PR for the clean trust-desk branch. It remains draft to respect CI/Vercel cost discipline until production readiness review."
++    },
++    {
++      "path_or_url": "https://agenticincome-kemju52uq-starlight-intelligence.vercel.app/",
++      "kind": "vercel-preview",
++      "inspected": true,
++      "notes": "Vercel preview deployment dpl_2MiZjin4MQDHrSJ44gYNkNJwpMgp is READY and tied to PR #7 / commit f50f4f98cfdb7b234309d030192a7f2a4428b0c2. The preview is protected, verified through temporary Vercel share access expiring 2026-07-06T06:18:18Z."
++    },
++    {
++      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-preview-pr7-20260705/trust-comparison-desk-preview-qa.json",
++      "kind": "visual-qa-metrics",
++      "inspected": true,
++      "notes": "Preview Chrome QA passed for desktop, mobile, and reduced-motion: status 200, no SSO wall after share access, no console errors, no page errors, no failed responses, no horizontal overflow, and all trust states visible."
++    },
++    {
++      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-preview-pr7-20260705/preview-desktop-trust-desk.png",
++      "kind": "web-screenshot",
++      "inspected": true,
++      "notes": "Vercel preview desktop capture."
++    },
++    {
++      "path_or_url": "C:/Users/frank/starlight/repos/agenticincome/.visual-qa/trust-comparison-desk-preview-pr7-20260705/preview-mobile-trust-desk.png",
++      "kind": "web-screenshot",
++      "inspected": true,
++      "notes": "Vercel preview mobile capture."
++    }
++  ],
++  "checks": [
++    {
++      "name": "asset-tier",
++      "status": "pass",
++      "evidence": "Tier C exact UI mechanism; no decorative primary asset."
++    },
++    {
++      "name": "export-inspection",
++      "status": "pass",
++      "evidence": "Desktop, mobile, and reduced-motion screenshots inspected."
++    },
++    {
++      "name": "type-check",
++      "status": "pass",
++      "evidence": "npm run type-check passed."
++    },
++    {
++      "name": "static-link-check",
++      "status": "pass",
++      "evidence": "npm run links:check:static passed."
++    },
++    {
++      "name": "production-build",
++      "status": "pass",
++      "evidence": "npm run build passed with Next.js 16.2.7 and generated 33 static pages."
++    },
++    {
++      "name": "visual-qa",
++      "status": "pass",
++      "evidence": "Local Chrome QA passed for desktop 1440px, mobile 390px, and reduced-motion desktop. The only failed responses were expected local Vercel Analytics and Speed Insights scripts under next start."
++    },
++    {
++      "name": "source-security-scan",
++      "status": "pass",
++      "evidence": "Scoped gitleaks scans on changed source files passed. Full repo wrapper found known generated .next cache findings only."
++    },
++    {
++      "name": "v0-concept-review",
++      "status": "pass",
++      "evidence": "Private v0 chat completed after implementation and remains concept input only; Codex did not copy generated code."
++    },
++    {
++      "name": "preview-deploy",
++      "status": "pass",
++      "evidence": "Draft PR #7 from clean branch codex/agentic-income-trust-desk triggered one native Vercel preview deployment, dpl_2MiZjin4MQDHrSJ44gYNkNJwpMgp, which is READY. Preview browser QA passed on desktop, mobile, and reduced motion."
++    },
++    {
++      "name": "production-deploy",
++      "status": "blocked",
++      "evidence": "No production deploy attempted. Next gate is review/approval, then mark PR ready or merge/promote deliberately."
++    }
++  ],
++  "score": {
++    "total": 28,
++    "max": 30,
++    "notes": "Local implementation reaches the 26/30 visual threshold, passes local gates, and has a verified Vercel preview. Score is capped until production-domain evidence exists."
++  },
++  "decision": "iterate",
++  "known_risks": [
++    "The repository contains unrelated dirty files; branch ownership must be reviewed before PR or deploy.",
++    "Affiliate program terms and payout language still need freshness verification before stronger claims.",
++    "The module is only on the Agentic Income hub; article/table and network-spoke variants remain queued.",
++    "The preview is protected by Vercel Authentication and was verified through temporary share access.",
++    "No production promotion has been run for this change set."
++  ]
++}
+diff --git a/.visual-qa/trust-comparison-desk-20260705/desktop-trust-desk.png b/.visual-qa/trust-comparison-desk-20260705/desktop-trust-desk.png
+new file mode 100644
+index 0000000..aa67702
+Binary files /dev/null and b/.visual-qa/trust-comparison-desk-20260705/desktop-trust-desk.png differ
+diff --git a/.visual-qa/trust-comparison-desk-20260705/mobile-trust-desk.png b/.visual-qa/trust-comparison-desk-20260705/mobile-trust-desk.png
+new file mode 100644
+index 0000000..bba3827
+Binary files /dev/null and b/.visual-qa/trust-comparison-desk-20260705/mobile-trust-desk.png differ
+diff --git a/.visual-qa/trust-comparison-desk-20260705/reduced-motion-trust-desk.png b/.visual-qa/trust-comparison-desk-20260705/reduced-motion-trust-desk.png
+new file mode 100644
+index 0000000..c74c0cc
+Binary files /dev/null and b/.visual-qa/trust-comparison-desk-20260705/reduced-motion-trust-desk.png differ
+diff --git a/.visual-qa/trust-comparison-desk-20260705/trust-comparison-desk-local-qa.json b/.visual-qa/trust-comparison-desk-20260705/trust-comparison-desk-local-qa.json
+new file mode 100644
+index 0000000..f9c2969
+--- /dev/null
++++ b/.visual-qa/trust-comparison-desk-20260705/trust-comparison-desk-local-qa.json
+@@ -0,0 +1,192 @@
++{
++  "capturedAt": "2026-07-05T06:55:40.576Z",
++  "url": "http://127.0.0.1:3001/",
++  "results": [
++    {
++      "name": "desktop-trust-desk",
++      "status": 200,
++      "screenshot": "C:\\Users\\frank\\starlight\\repos\\agenticincome\\.visual-qa\\trust-comparison-desk-20260705\\desktop-trust-desk.png",
++      "metrics": {
++        "statusTexts": [
++          "Paid",
++          "Unpaid",
++          "Owned",
++          "Stale",
++          "Paid route",
++          "No paid route",
++          "Owned offer",
++          "Verify before primary CTA",
++          "Paid route"
++        ],
++        "routeButtonCount": 4,
++        "routeButtonTexts": [
++          "Paid routeFaceless YouTube stackScript, voice, edit, and clip a channel without hiring a full team.",
++          "No paid routeFrontier model answerChoose the best model before routing to any payer.",
++          "Owned offerOwned income loopTurn one comparison into a product and list relationship.",
++          "Verify before primary CTAVideo model backdoorMonetize video-model demand only after terms are checked."
++        ],
++        "hasHorizontalOverflow": false,
++        "includesCriteria": true,
++        "includesDisclosure": true,
++        "includesLastVerified": true,
++        "includesNoPaidRoute": true,
++        "includesOwnedOffer": true,
++        "includesStale": true,
++        "headingText": "Every route earns its click.",
++        "ctaTexts": [
++          "Open routed pick"
++        ],
++        "sectionRect": {
++          "x": 168,
++          "y": -145.375,
++          "width": 1104,
++          "height": 1390.21875,
++          "top": -145.375,
++          "right": 1272,
++          "bottom": 1244.84375,
++          "left": 168
++        },
++        "scrollWidth": 1440,
++        "viewportWidth": 1440
++      },
++      "consoleErrors": [
++        "Failed to load resource: the server responded with a status of 404 (Not Found)",
++        "Failed to load resource: the server responded with a status of 404 (Not Found)"
++      ],
++      "failedResponses": [
++        {
++          "url": "http://127.0.0.1:3001/_vercel/insights/script.js",
++          "status": 404
++        },
++        {
++          "url": "http://127.0.0.1:3001/_vercel/speed-insights/script.js",
++          "status": 404
++        }
++      ]
++    },
++    {
++      "name": "mobile-trust-desk",
++      "status": 200,
++      "screenshot": "C:\\Users\\frank\\starlight\\repos\\agenticincome\\.visual-qa\\trust-comparison-desk-20260705\\mobile-trust-desk.png",
++      "metrics": {
++        "statusTexts": [
++          "Paid",
++          "Unpaid",
++          "Owned",
++          "Stale",
++          "Paid route",
++          "No paid route",
++          "Owned offer",
++          "Verify before primary CTA",
++          "Paid route"
++        ],
++        "routeButtonCount": 4,
++        "routeButtonTexts": [
++          "Paid routeFaceless YouTube stackScript, voice, edit, and clip a channel without hiring a full team.",
++          "No paid routeFrontier model answerChoose the best model before routing to any payer.",
++          "Owned offerOwned income loopTurn one comparison into a product and list relationship.",
++          "Verify before primary CTAVideo model backdoorMonetize video-model demand only after terms are checked."
++        ],
++        "hasHorizontalOverflow": false,
++        "includesCriteria": true,
++        "includesDisclosure": true,
++        "includesLastVerified": true,
++        "includesNoPaidRoute": true,
++        "includesOwnedOffer": true,
++        "includesStale": true,
++        "headingText": "Every route earns its click.",
++        "ctaTexts": [
++          "Open routed pick"
++        ],
++        "sectionRect": {
++          "x": 16,
++          "y": -555.453125,
++          "width": 358,
++          "height": 2910.359375,
++          "top": -555.453125,
++          "right": 374,
++          "bottom": 2354.90625,
++          "left": 16
++        },
++        "scrollWidth": 390,
++        "viewportWidth": 390
++      },
++      "consoleErrors": [
++        "Failed to load resource: the server responded with a status of 404 (Not Found)",
++        "Failed to load resource: the server responded with a status of 404 (Not Found)"
++      ],
++      "failedResponses": [
++        {
++          "url": "http://127.0.0.1:3001/_vercel/insights/script.js",
++          "status": 404
++        },
++        {
++          "url": "http://127.0.0.1:3001/_vercel/speed-insights/script.js",
++          "status": 404
++        }
++      ]
++    },
++    {
++      "name": "reduced-motion-trust-desk",
++      "status": 200,
++      "screenshot": "C:\\Users\\frank\\starlight\\repos\\agenticincome\\.visual-qa\\trust-comparison-desk-20260705\\reduced-motion-trust-desk.png",
++      "metrics": {
++        "statusTexts": [
++          "Paid",
++          "Unpaid",
++          "Owned",
++          "Stale",
++          "Paid route",
++          "No paid route",
++          "Owned offer",
++          "Verify before primary CTA",
++          "Paid route"
++        ],
++        "routeButtonCount": 4,
++        "routeButtonTexts": [
++          "Paid routeFaceless YouTube stackScript, voice, edit, and clip a channel without hiring a full team.",
++          "No paid routeFrontier model answerChoose the best model before routing to any payer.",
++          "Owned offerOwned income loopTurn one comparison into a product and list relationship.",
++          "Verify before primary CTAVideo model backdoorMonetize video-model demand only after terms are checked."
++        ],
++        "hasHorizontalOverflow": false,
++        "includesCriteria": true,
++        "includesDisclosure": true,
++        "includesLastVerified": true,
++        "includesNoPaidRoute": true,
++        "includesOwnedOffer": true,
++        "includesStale": true,
++        "headingText": "Every route earns its click.",
++        "ctaTexts": [
++          "Open routed pick"
++        ],
++        "sectionRect": {
++          "x": 168,
++          "y": -145.375,
++          "width": 1104,
++          "height": 1390.21875,
++          "top": -145.375,
++          "right": 1272,
++          "bottom": 1244.84375,
++          "left": 168
++        },
++        "scrollWidth": 1440,
++        "viewportWidth": 1440
++      },
++      "consoleErrors": [
++        "Failed to load resource: the server responded with a status of 404 (Not Found)",
++        "Failed to load resource: the server responded with a status of 404 (Not Found)"
++      ],
++      "failedResponses": [
++        {
++          "url": "http://127.0.0.1:3001/_vercel/insights/script.js",
++          "status": 404
++        },
++        {
++          "url": "http://127.0.0.1:3001/_vercel/speed-insights/script.js",
++          "status": 404
++        }
++      ]
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/.visual-qa/trust-comparison-desk-preview-pr7-20260705/preview-desktop-trust-desk.png b/.visual-qa/trust-comparison-desk-preview-pr7-20260705/preview-desktop-trust-desk.png
+new file mode 100644
+index 0000000..aa67702
+Binary files /dev/null and b/.visual-qa/trust-comparison-desk-preview-pr7-20260705/preview-desktop-trust-desk.png differ
+diff --git a/.visual-qa/trust-comparison-desk-preview-pr7-20260705/preview-mobile-trust-desk.png b/.visual-qa/trust-comparison-desk-preview-pr7-20260705/preview-mobile-trust-desk.png
+new file mode 100644
+index 0000000..bba3827
+Binary files /dev/null and b/.visual-qa/trust-comparison-desk-preview-pr7-20260705/preview-mobile-trust-desk.png differ
+diff --git a/.visual-qa/trust-comparison-desk-preview-pr7-20260705/preview-reduced-motion-trust-desk.png b/.visual-qa/trust-comparison-desk-preview-pr7-20260705/preview-reduced-motion-trust-desk.png
+new file mode 100644
+index 0000000..c74c0cc
+Binary files /dev/null and b/.visual-qa/trust-comparison-desk-preview-pr7-20260705/preview-reduced-motion-trust-desk.png differ
+diff --git a/.visual-qa/trust-comparison-desk-preview-pr7-20260705/trust-comparison-desk-preview-qa.json b/.visual-qa/trust-comparison-desk-preview-pr7-20260705/trust-comparison-desk-preview-qa.json
+new file mode 100644
+index 0000000..a6e8108
+--- /dev/null
++++ b/.visual-qa/trust-comparison-desk-preview-pr7-20260705/trust-comparison-desk-preview-qa.json
+@@ -0,0 +1,170 @@
++{
++  "capturedAt": "2026-07-05T07:19:40.509Z",
++  "deploymentUrl": "https://agenticincome-kemju52uq-starlight-intelligence.vercel.app/",
++  "shareUrlExpires": "2026-07-06T06:18:18Z",
++  "deploymentId": "dpl_2MiZjin4MQDHrSJ44gYNkNJwpMgp",
++  "pr": 7,
++  "branch": "codex/agentic-income-trust-desk",
++  "commit": "f50f4f98cfdb7b234309d030192a7f2a4428b0c2",
++  "results": [
++    {
++      "name": "preview-desktop-trust-desk",
++      "status": 200,
++      "finalUrl": "https://agenticincome-kemju52uq-starlight-intelligence.vercel.app/",
++      "screenshot": "C:\\Users\\frank\\starlight\\worktrees\\agenticincome-trust-desk\\.visual-qa\\trust-comparison-desk-preview-pr7-20260705\\preview-desktop-trust-desk.png",
++      "metrics": {
++        "blockedBySsoText": false,
++        "routeButtonCount": 4,
++        "routeButtonTexts": [
++          "Paid routeFaceless YouTube stackScript, voice, edit, and clip a channel without hiring a full team.",
++          "No paid routeFrontier model answerChoose the best model before routing to any payer.",
++          "Owned offerOwned income loopTurn one comparison into a product and list relationship.",
++          "Verify before primary CTAVideo model backdoorMonetize video-model demand only after terms are checked."
++        ],
++        "statusTexts": [
++          "Paid",
++          "Unpaid",
++          "Owned",
++          "Stale",
++          "Paid route",
++          "No paid route",
++          "Owned offer",
++          "Verify before primary CTA",
++          "Paid route"
++        ],
++        "hasHorizontalOverflow": false,
++        "includesCriteria": true,
++        "includesDisclosure": true,
++        "includesLastVerified": true,
++        "includesNoPaidRoute": true,
++        "includesOwnedOffer": true,
++        "includesStale": true,
++        "headingText": "Every route earns its click.",
++        "ctaTexts": [
++          "Open routed pick"
++        ],
++        "sectionRect": {
++          "x": 168,
++          "y": -145.375,
++          "width": 1104,
++          "height": 1390.21875,
++          "top": -145.375,
++          "right": 1272,
++          "bottom": 1244.84375,
++          "left": 168
++        },
++        "scrollWidth": 1440,
++        "viewportWidth": 1440
++      },
++      "consoleErrors": [],
++      "pageErrors": [],
++      "failedResponses": []
++    },
++    {
++      "name": "preview-mobile-trust-desk",
++      "status": 200,
++      "finalUrl": "https://agenticincome-kemju52uq-starlight-intelligence.vercel.app/",
++      "screenshot": "C:\\Users\\frank\\starlight\\worktrees\\agenticincome-trust-desk\\.visual-qa\\trust-comparison-desk-preview-pr7-20260705\\preview-mobile-trust-desk.png",
++      "metrics": {
++        "blockedBySsoText": false,
++        "routeButtonCount": 4,
++        "routeButtonTexts": [
++          "Paid routeFaceless YouTube stackScript, voice, edit, and clip a channel without hiring a full team.",
++          "No paid routeFrontier model answerChoose the best model before routing to any payer.",
++          "Owned offerOwned income loopTurn one comparison into a product and list relationship.",
++          "Verify before primary CTAVideo model backdoorMonetize video-model demand only after terms are checked."
++        ],
++        "statusTexts": [
++          "Paid",
++          "Unpaid",
++          "Owned",
++          "Stale",
++          "Paid route",
++          "No paid route",
++          "Owned offer",
++          "Verify before primary CTA",
++          "Paid route"
++        ],
++        "hasHorizontalOverflow": false,
++        "includesCriteria": true,
++        "includesDisclosure": true,
++        "includesLastVerified": true,
++        "includesNoPaidRoute": true,
++        "includesOwnedOffer": true,
++        "includesStale": true,
++        "headingText": "Every route earns its click.",
++        "ctaTexts": [
++          "Open routed pick"
++        ],
++        "sectionRect": {
++          "x": 16,
++          "y": -555.453125,
++          "width": 358,
++          "height": 2910.359375,
++          "top": -555.453125,
++          "right": 374,
++          "bottom": 2354.90625,
++          "left": 16
++        },
++        "scrollWidth": 390,
++        "viewportWidth": 390
++      },
++      "consoleErrors": [],
++      "pageErrors": [],
++      "failedResponses": []
++    },
++    {
++      "name": "preview-reduced-motion-trust-desk",
++      "status": 200,
++      "finalUrl": "https://agenticincome-kemju52uq-starlight-intelligence.vercel.app/",
++      "screenshot": "C:\\Users\\frank\\starlight\\worktrees\\agenticincome-trust-desk\\.visual-qa\\trust-comparison-desk-preview-pr7-20260705\\preview-reduced-motion-trust-desk.png",
++      "metrics": {
++        "blockedBySsoText": false,
++        "routeButtonCount": 4,
++        "routeButtonTexts": [
++          "Paid routeFaceless YouTube stackScript, voice, edit, and clip a channel without hiring a full team.",
++          "No paid routeFrontier model answerChoose the best model before routing to any payer.",
++          "Owned offerOwned income loopTurn one comparison into a product and list relationship.",
++          "Verify before primary CTAVideo model backdoorMonetize video-model demand only after terms are checked."
++        ],
++        "statusTexts": [
++          "Paid",
++          "Unpaid",
++          "Owned",
++          "Stale",
++          "Paid route",
++          "No paid route",
++          "Owned offer",
++          "Verify before primary CTA",
++          "Paid route"
++        ],
++        "hasHorizontalOverflow": false,
++        "includesCriteria": true,
++        "includesDisclosure": true,
++        "includesLastVerified": true,
++        "includesNoPaidRoute": true,
++        "includesOwnedOffer": true,
++        "includesStale": true,
++        "headingText": "Every route earns its click.",
++        "ctaTexts": [
++          "Open routed pick"
++        ],
++        "sectionRect": {
++          "x": 168,
++          "y": -145.375,
++          "width": 1104,
++          "height": 1390.21875,
++          "top": -145.375,
++          "right": 1272,
++          "bottom": 1244.84375,
++          "left": 168
++        },
++        "scrollWidth": 1440,
++        "viewportWidth": 1440
++      },
++      "consoleErrors": [],
++      "pageErrors": [],
++      "failedResponses": []
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/AGENTS.md b/AGENTS.md
+new file mode 100644
+index 0000000..359d4a1
+--- /dev/null
++++ b/AGENTS.md
+@@ -0,0 +1,66 @@
++# Repository Instructions
++
++This repo is part of the FrankX / Starlight / Arcanea agent estate.
++
++## Classification
++
++- Repo: $title
++- Class: $Classification
++- Default health command: $HealthCommand
++- Remote: $Remote
++
++## Agent Rules
++
++- Read this file before making changes.
++- Preserve existing user work and unrelated dirty files.
++- Keep edits scoped to the requested task.
++- Prefer existing repo conventions over new abstractions.
++- Run the health command before handoff when feasible.
++- Do not publish secrets, private memory, credentials, or internal-only strategy.
++
++## Class-Specific Guidance
++
++- Treat this as load-bearing.
++- Do not push production-impacting changes without explicit approval.
++- Use local fast gates before deploys.
++- For Vercel sites, prefer preview verification before production promotion.
++
++## Handoff
++
++Summarize changed files, validation run, risks, and any follow-up needed.
++
++## Design Taste Kernel
++
++For any site, app, landing page, dashboard, visual identity, brand, motion, media, social, or frontend task, apply the shared Design Taste Kernel before handoff:
++
++- C:\Users\frank\starlight\repos\DESIGN_TASTE.md
++- C:\Users\frank\starlight\repos\WEB_EXPERIENCE_STANDARD.md
++- C:\Users\frank\starlight\repos\MOTION_TASTE_RUBRIC.md
++- C:\Users\frank\starlight\repos\MULTI_AGENT_DESIGN_COUNCIL.md
++- C:\Users\frank\starlight\repos\VISUAL_QA_GATE.md
++
++When motion, scroll, generated media, GIF/video, or premium polish matters, route through the Motion Design Studio plugin/skills and verify the result visually.
++
++
++<!-- PREMIUM-WEB-OS:START -->
++## Premium Intelligence Web OS Adoption
++
++This repo participates in the Starlight Premium Intelligence Web OS.
++
++For any website, app, landing page, dashboard, brand surface, visual asset, motion system, 3D/WebGL scene, generated media, or public-facing UI work:
++
++- Read the estate OS first: `C:\Users\frank\starlight\repos\_intelligence\README.md`.
++- Use the activation contract: `C:\Users\frank\starlight\repos\_intelligence\adoption\activation-contract.md`.
++- Treat `C:\Users\frank\starlight\repos\_intelligence\` as the source of truth for premium web taste, design, motion, WebGL, copy, assets, and quality gates.
++- Use `/pwo` or the `premium-web-os` skill for full builds; use `/mad` for a design council pass.
++- Use `/pwo review-pr` before absorbing another agent's PR or branch.
++- Use `/pwo absorb-assets` before using external, generated, scientific, audio, video, or 3D assets.
++- Use `/pwo motion-score` before shipping cinematic scroll, sound-paired motion, or complex choreography.
++- Build static composition first, add Track A local motion second, add Track B GSAP/Lenis scroll only when earned, and add 3D only with fallback and reduced-motion behavior.
++- Use VIS through `C:\Users\frank\starlight\repos\visual-intelligence` for asset provenance, curation packets, rights, and publication records.
++- Use `C:\Users\frank\starlight\repos\_intelligence\visual-worlds\neural-cosmos.md` for neuroscience, cerebrum, spine, electron, signal, or golden spiral direction.
++- Do not copy reference sites or agencies. Deconstruct principles and create original execution.
++- Do not ship without responsive, accessibility, performance, reduced-motion, and visual QA checks appropriate to the change.
++
++Repo-local instructions remain authoritative when stricter.
++<!-- PREMIUM-WEB-OS:END -->
+diff --git a/app/api/analytics/route.ts b/app/api/analytics/route.ts
+index 5c25bcb..85dde6d 100644
+--- a/app/api/analytics/route.ts
++++ b/app/api/analytics/route.ts
+@@ -1,7 +1,13 @@
+ import { NextResponse } from 'next/server'
+ import { forwardAnalyticsEvent, normalizeAnalyticsEvent } from '@/lib/analytics'
++import { checkRateLimit, clientKeyFromHeaders } from '@agentic-income/engine'
+ 
+ export async function POST(req: Request) {
++  const { allowed } = checkRateLimit(clientKeyFromHeaders(req.headers, 'analytics'), 30, 60_000)
++  if (!allowed) {
++    return NextResponse.json({ ok: false, error: 'rate_limited' }, { status: 429 })
++  }
++
+   const body = await req.json().catch(() => null)
+   const event = normalizeAnalyticsEvent(body)
+ 
+diff --git a/app/api/checkout/route.ts b/app/api/checkout/route.ts
+index 1b7982d..680b8ae 100644
+--- a/app/api/checkout/route.ts
++++ b/app/api/checkout/route.ts
+@@ -2,9 +2,16 @@ import { NextResponse } from 'next/server'
+ import { forwardAnalyticsEvent } from '@/lib/analytics'
+ import { checkoutUrl, getOffer } from '@/lib/offers'
+ import { appendTrackingParams } from '@/lib/tracking'
++import { checkRateLimit, clientKeyFromHeaders } from '@agentic-income/engine'
+ 
+ export async function GET(req: Request) {
+   const url = new URL(req.url)
++
++  const { allowed } = checkRateLimit(clientKeyFromHeaders(req.headers, 'checkout'), 30, 60_000)
++  if (!allowed) {
++    return NextResponse.json({ ok: false, error: 'rate_limited' }, { status: 429 })
++  }
++
+   const slug = url.searchParams.get('offer') ?? ''
+   const offer = getOffer(slug)
+ 
+diff --git a/app/api/subscribe/route.ts b/app/api/subscribe/route.ts
+index 19da1d4..c35ed72 100644
+--- a/app/api/subscribe/route.ts
++++ b/app/api/subscribe/route.ts
+@@ -1,6 +1,7 @@
+ import { NextResponse } from 'next/server'
+ import { createHash } from 'node:crypto'
+ import { forwardAnalyticsEvent } from '@/lib/analytics'
++import { checkRateLimit, clientKeyFromHeaders } from '@agentic-income/engine'
+ 
+ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+ const PUBLIC_EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+@@ -29,6 +30,11 @@ function conciergeMailto(email: string, source: string, requestId: string) {
+ }
+ 
+ export async function POST(req: Request) {
++  const { allowed } = checkRateLimit(clientKeyFromHeaders(req.headers, 'subscribe'), 5, 60_000)
++  if (!allowed) {
++    return NextResponse.json({ ok: false, error: 'rate_limited' }, { status: 429 })
++  }
++
+   const { email, source = 'agenticincome' } = await req.json().catch(() => ({}))
+   const normalized = typeof email === 'string' ? email.trim().toLowerCase() : ''
+ 
+diff --git a/app/blog/best-ai-presentation-maker-2026/page.mdx b/app/blog/best-ai-presentation-maker-2026/page.mdx
+new file mode 100644
+index 0000000..aa2dcb1
+--- /dev/null
++++ b/app/blog/best-ai-presentation-maker-2026/page.mdx
+@@ -0,0 +1,78 @@
++export const metadata = {
++  title: 'Best AI Presentation Maker 2026: Gamma vs Canva vs the Rest',
++  description: 'The honest pick for AI presentation makers in 2026 — why Gamma wins on product merit, when Canva is the smarter buy, and what to skip entirely.',
++  alternates: { canonical: '/blog/best-ai-presentation-maker-2026' },
++  openGraph: {
++    title: 'Best AI Presentation Maker 2026: Gamma vs Canva vs the Rest',
++    description: 'The honest pick for AI presentation makers in 2026 — why Gamma wins on product merit, when Canva is the smarter buy, and what to skip entirely.',
++    url: '/blog/best-ai-presentation-maker-2026',
++  },
++}
++
++<ArticleJsonLd
++  title="Best AI Presentation Maker 2026: Gamma vs Canva vs the Rest"
++  description="The honest verdict on the best AI presentation maker in 2026 — Gamma, Canva, and why the pick isn't about the payout."
++  slug="best-ai-presentation-maker-2026"
++  date="2026-07-05"
++/>
++
++# Best AI Presentation Maker 2026: Gamma vs Canva vs the Rest
++
++<AnswerBox>
++<AffiliateLink tool="Gamma" /> is the best AI presentation maker in 2026 for anyone building decks, pitch materials, or client-facing documents from scratch — it generates a genuinely structured, well-designed presentation from a prompt or outline faster than any tool building on top of a legacy editor. <AffiliateLink tool="Canva" /> is the right pick instead if you're already living inside Canva for brand assets and just want one more thing your existing subscription covers. This is a product-merit call, not a payout call — Gamma's commission terms are still being verified on PartnerStack, and that verification status doesn't change the recommendation either way.
++</AnswerBox>
++
++<AffiliateDisclosure />
++
++Most "best AI presentation maker" posts are actually "which tool pays the best commission" posts wearing a review headline. Here's the honest version: Gamma is the pick because it's built for this one job, and it does the job better than tools that added an AI feature to an existing editor.
++
++## The comparison at a glance
++
++<ComparisonTable
++  caption="AI presentation makers, ranked by what actually produces a usable deck fast"
++  rows={[
++    { tool: 'Gamma', verdict: 'Purpose-built AI deck generator — best structure and design from a prompt', price: 'Free–$20+/mo', recurring: 'recurring', pick: true },
++    { tool: 'Canva', verdict: 'Best if you already live in Canva for brand assets — CTA-heavy, one-time payout', price: 'Free–$13/mo', recurring: 'one-time' },
++  ]}
++/>
++
++## Why Gamma is the honest pick
++
++**It was built for this, not bolted onto something else.** Gamma's entire product is "turn a prompt or outline into a structured, designed document" — presentations, but also one-pagers and simple sites. Because that's the whole product, the AI generation step actually understands presentation structure: sections, hierarchy, pacing across slides. Tools that added "AI generate" as a feature to an existing slide editor tend to produce a rougher first draft that needs more manual cleanup.
++
++**The output is closer to done.** A Gamma-generated deck from a decent prompt is usually presentable with light editing, not a skeleton you have to rebuild. For anyone making decks under time pressure — client pitches, internal updates, course material — that's the entire value proposition: less time between idea and shareable link.
++
++**It's still recurring.** Gamma's affiliate program pays recurring commissions through PartnerStack. The exact commission rate isn't listed with full confidence in our catalog yet — we're not going to round it up or guess a number just to make the pitch sound better. If you're evaluating it as a program to join yourself, check the current PartnerStack listing before you plan around a specific percentage. As a *product* recommendation for readers, none of that changes: Gamma still does the job best.
++
++## Where Canva is the smarter buy
++
++If you've already read the [faceless YouTube stack](/blog/best-ai-tools-faceless-youtube) or the [personal AI CoE](/blog/personal-ai-coe-under-100) posts on this site, you already know Canva shows up in the toolkit for thumbnails and brand assets. If that's you, Canva's AI presentation feature is a reasonable "good enough" option — you're not adding a new subscription, and Canva converts well for readers who want a single tool for design and deck.
++
++The tradeoff: Canva's payout is a one-time, capped-ticket commission (up to $36 per signup) rather than a recurring one, and the presentation-generation output isn't as structured as Gamma's out of the box. It's the consolidation choice, not the best-in-class choice.
++
++## What we're not recommending, and why
++
++Legacy office-suite AI add-ons (the "Designer" style features bundled into PowerPoint or Google Slides) are fine if you're already paying for the suite anyway, but they're not worth buying separately for this job — the AI layer is thinner than a purpose-built generator like Gamma. Standalone deck tools without a real AI generation step (Tome-style presentation tools that predate the current AI wave) are worth knowing about as competitors, but they don't currently have an affiliate program in our catalog, so there's nothing to link and no commission to disclose either way.
++
++## Who should buy Gamma
++
++- Anyone building client pitches, sales decks, or investor materials regularly.
++- Course creators and consultants who need a polished deck fast, without a designer.
++- Teams that want AI-generated first drafts that need editing, not rebuilding.
++
++## Who should buy Canva instead
++
++- Creators who already pay for Canva and want to avoid a second subscription.
++- Anyone whose deck needs matter less than their thumbnail, social, and brand-asset needs.
++- Readers who prioritize a one-time signup bonus over a lower recurring price.
++
++## The bottom line
++
++Buy <AffiliateLink tool="Gamma" /> if presentations are a real, recurring part of your work — it's the tool built for exactly that job and it shows in the output. Buy <AffiliateLink tool="Canva" /> if you're optimizing for one less subscription and Canva is already part of your stack. Either way, the recommendation is about which tool does the job, not which one pays more — that's the whole point of this site.
++
++<FaqSection items={[
++  { q: 'Is Gamma really the best AI presentation maker in 2026?', a: 'For generating a structured, designed deck from a prompt or outline, yes — it\'s purpose-built for that job. If you already live inside Canva for other design work, Canva is a reasonable "good enough" alternative.' },
++  { q: 'How much does Gamma cost?', a: 'Gamma has a free tier and paid plans starting around $20/mo for individuals, scaling up for teams. Check gamma.app for current pricing before committing.' },
++  { q: 'Does Gamma pay a good affiliate commission?', a: 'Gamma\'s program pays recurring commissions through PartnerStack, but the exact rate isn\'t fully verified in our catalog yet. If you\'re evaluating the program itself, check the current PartnerStack listing rather than relying on any number quoted here.' },
++  { q: 'Should I use Canva or Gamma for presentations?', a: 'Use Gamma if presentations are a real, recurring need — the AI-generated structure is better. Use Canva if you already have the subscription and just want one tool for design and decks together.' },
++]} />
+diff --git a/app/blog/best-ai-video-generator-2026/page.mdx b/app/blog/best-ai-video-generator-2026/page.mdx
+new file mode 100644
+index 0000000..46f7a65
+--- /dev/null
++++ b/app/blog/best-ai-video-generator-2026/page.mdx
+@@ -0,0 +1,90 @@
++export const metadata = {
++  title: 'Best AI Video Generator 2026: The Honest Pick for Creators Building Income',
++  description: 'Sora, Veo, and Kling produce the best raw quality and pay creators nothing. Higgsfield is the honest pick for a creator building a video business — here is why, with the real commissions and the real tradeoffs.',
++  alternates: { canonical: '/blog/best-ai-video-generator-2026' },
++  openGraph: {
++    title: 'Best AI Video Generator 2026: The Honest Pick for Creators Building Income',
++    description: 'Sora, Veo, and Kling produce the best raw quality and pay creators nothing. Higgsfield is the honest pick for a creator building a video business — here is why.',
++    url: '/blog/best-ai-video-generator-2026',
++  },
++}
++
++<ArticleJsonLd
++  title="Best AI Video Generator 2026: The Honest Pick for Creators Building Income"
++  description="An honest comparison of AI video generators for creators — why the best-quality tools (Sora, Veo, Kling) pay nothing, and why Higgsfield is the pick for a creator building a business."
++  slug="best-ai-video-generator-2026"
++  date="2026-07-06"
++/>
++
++# Best AI Video Generator 2026: The Honest Pick for Creators Building Income
++
++<AnswerBox>
++For a creator building an actual video business, <AffiliateLink tool="Higgsfield" /> is the pick — character and identity consistency built for repeat content, motion control that survives a real production schedule, and a 15% Ambassador commission that recurs for 12 months. The raw-quality leaders — <AffiliateLink tool="OpenAI" /> (Sora), <AffiliateLink tool="Google" /> (Veo), and <AffiliateLink tool="Kling" /> — often produce sharper pixels, and none of them pay a creator anything for the referral. You can still reach those models through <AffiliateLink tool="Pollo AI" />, an aggregator that fronts them with a payable link. <AffiliateLink tool="Pika" /> is the accessible alternative if Higgsfield's ticket is too high to start.
++</AnswerBox>
++
++<AffiliateDisclosure />
++
++Ask "what's the best AI video generator" and most answers rank by output quality alone — which model produces the fewest artifacts, the best physics, the most coherent faces. That ranking is real, and it isn't Higgsfield. It's usually Sora, Veo, or Kling, in some order depending on the week.
++
++But that question skips the one variable that actually matters if you're building a video business instead of just admiring output: **can you buy this tool, get supported on it, and get paid for recommending it.** On that axis, the ranking flips. This is the honest version of the comparison — the one that names the tradeoff instead of hiding it.
++
++## The stack, ranked for a creator's actual buying decision
++
++<ComparisonTable
++  caption="AI video generators — quality vs. buyability vs. creator payout"
++  rows={[
++    { tool: 'Higgsfield', verdict: 'Best creator fit — character/identity consistency, motion control, built for a repeat content schedule. Pays 15% recurring for 12 months.', price: '~$249/mo Creator plan', recurring: '12-month', pick: true },
++    { tool: 'Pika', verdict: 'The accessible alternative — lower cost, fast, good enough for most social content. Commission terms currently being reverified.', price: 'Lower-cost tiers available', recurring: 'Recurring (verify current terms)' },
++    { tool: 'Pollo AI', verdict: 'Aggregator — fronts Sora, Veo, Kling, and Hailuo behind one payable link when you specifically need one of those models.', price: 'Varies by model used', recurring: 'Direct program, terms not yet confirmed' },
++    { tool: 'Kling', verdict: 'Often the sharpest raw output in this list. No direct affiliate program — zero payout for a creator recommending it.', price: 'Direct signup only', recurring: 'None (no program)' },
++  ]}
++/>
++
++## What actually separates the tools
++
++Three things decide whether a video generator is worth building a business on: **quality**, **buyability**, and **support**.
++
++**Quality** is what most reviews measure — motion coherence, artifact rate, how well a face holds up across frames. Sora, Veo, and Kling lead here more often than not. That's a real, measurable fact, not a hedge.
++
++**Buyability** is whether a creator can actually get in. Higgsfield and Pika sell direct subscriptions with clear tiers. Sora and Veo are gated behind their parent platforms' access rules and pricing, which shift without much notice. Kling's access for Western creators runs through aggregators, not a direct consumer signup.
++
++**Support** is what happens after you pay — a program built for repeat use (character consistency across a season of content, motion presets, an interface built around iterating fast) versus a one-off generation with no continuity between clips. This is where Higgsfield's actual product design shows: it isn't just a model, it's tooling built around a creator making video after video, not one impressive demo.
++
++A tool can win on quality and still be the wrong buy for a business that needs all three.
++
++## Where the free giants win — and why they're not the pick for a business
++
++Sora, Veo, and Kling deserve the credit they get. If pure output quality is the only variable, they're frequently the best in the category, and pretending otherwise would undercut the point of this page.
++
++What they don't have is a creator payout. None of the three run a program that pays a creator for referring a paying customer. That's not a knock on the models — it's just the honest reason they're not the recommendation on a site about building recurring income from AI tools. Recommending the objectively sharpest pixel with zero path to compensation is a worse business decision than recommending the tool that's excellent *and* pays.
++
++Runway and Luma sit in the same bucket — frequently excellent, no direct program, named here rather than quietly omitted, because the honest version of this list includes the giants everyone's actually asking about.
++
++## The creator's stack
++
++The practical answer isn't "pick one tool forever." It's a stack with a role for each layer:
++
++1. **Generate, day to day** — <AffiliateLink tool="Higgsfield" /> for anything needing a consistent character or identity across multiple pieces of content, or <AffiliateLink tool="Pika" /> when you want something faster and cheaper for one-off social clips.
++2. **Reach the giants, when you need them specifically** — route through <AffiliateLink tool="Pollo AI" /> for the shots where Sora-, Veo-, or Kling-level output is worth the extra step, since none of those models will sell or pay you directly.
++3. **Finish the output** — <AffiliateLink tool="Topaz Labs" /> is not a generator, it's the cleanup step. AI video output is often soft or low-resolution straight out of the model; Topaz's one-time-purchase upscaling is the honest "then clean it up" companion to whatever generated the raw clip.
++
++## Who should pick which
++
++**Pick Higgsfield if:** you're producing recurring content built around a consistent character or presenter, you need motion control that survives a weekly or daily schedule, and you'd rather pay a higher ticket for tooling that supports a real production pace than chase the sharpest possible frame every time.
++
++**Pick Pika if:** the Higgsfield ticket is more than you want to commit to right now, your content is mostly fast social clips where "good enough" clears the bar, and you want to start cheap and upgrade later.
++
++**Use Pollo AI if:** a specific shot genuinely needs Sora, Veo, or Kling-level quality — a hero shot, a client deliverable, a moment where the extra fidelity is worth routing through an aggregator to access a model with no direct program.
++
++**Skip all of the above and go direct to the giants if:** you're not trying to build recurring income from this at all — you just want the best possible clip for a one-off project and don't care that the platform pays you nothing for it. That's a legitimate use case. It's just not the audience this page is written for.
++
++## The bottom line
++
++The best raw AI video quality in 2026 usually isn't the best AI video *business* decision. Sora, Veo, and Kling can out-render Higgsfield on a frame-by-frame basis and still be the wrong pick for a creator trying to build something recurring, because "best pixels" and "pays you back" are two different questions with two different answers. <AffiliateLink tool="Higgsfield" /> is the honest pick for the business question — the tooling fits a creator's actual production pace, and it's the one program on this list built to pay a creator back for choosing it.
++
++<FaqSection items={[
++  { q: 'What is the best AI video generator in 2026?', a: 'For raw output quality alone, Sora, Veo, and Kling are frequently the best. For a creator building a repeatable video business — one that needs character consistency, a real production workflow, and a tool that pays back for recommending it — Higgsfield is the honest pick.' },
++  { q: 'Why isn\'t Sora or Veo the top pick if they look better?', a: 'Because quality is only one of three variables that matter for a creator building a business: quality, buyability, and support. Sora and Veo have no direct affiliate or creator payout program, so recommending them makes no business sense even when their output edges out the competition on pixels alone.' },
++  { q: 'Does Higgsfield pay recurring commissions?', a: 'Yes — 15% through the Ambassador program, recurring for 12 months, on a Creator plan that runs around $249/mo. It is also the highest-ticket program in this comparison.' },
++  { q: 'What is the cheapest AI video generator that is still good?', a: 'Pika is the accessible alternative — lower cost than Higgsfield\'s Creator plan and fast enough for most social content. It is the right starting point if the Higgsfield ticket is more commitment than you want yet. Current affiliate terms are still being reverified, so confirm them before relying on the number.' },
++]} />
+diff --git a/app/blog/best-ai-video-upscaler-2026/page.mdx b/app/blog/best-ai-video-upscaler-2026/page.mdx
+new file mode 100644
+index 0000000..c97b0a9
+--- /dev/null
++++ b/app/blog/best-ai-video-upscaler-2026/page.mdx
+@@ -0,0 +1,87 @@
++export const metadata = {
++  title: 'Best AI Video Upscaler 2026 (Honest Verdict + Who Should Skip It)',
++  description: 'What AI upscaling actually does, who genuinely needs it, and an honest look at Topaz Labs Video AI and Photo AI — including the one-time-cost tradeoff and who should skip upscaling entirely.',
++  alternates: { canonical: '/blog/best-ai-video-upscaler-2026' },
++  openGraph: {
++    title: 'Best AI Video Upscaler 2026 (Honest Verdict + Who Should Skip It)',
++    description: 'What AI upscaling actually does, who genuinely needs it, and an honest look at Topaz Labs Video AI and Photo AI — including the one-time-cost tradeoff and who should skip upscaling entirely.',
++    url: '/blog/best-ai-video-upscaler-2026',
++  },
++}
++
++<ArticleJsonLd
++  title="Best AI Video Upscaler 2026 (Honest Verdict + Who Should Skip It)"
++  description="An honest look at AI video and image upscaling — what it does, who needs it, Topaz Labs' Video AI and Photo AI, and who should skip it entirely."
++  slug="best-ai-video-upscaler-2026"
++  date="2026-07-05"
++/>
++
++# Best AI Video Upscaler 2026 (Honest Verdict + Who Should Skip It)
++
++<AnswerBox>
++<AffiliateLink tool="Topaz Labs" /> is the honest pick for AI video and image upscaling — it's the only dedicated upscaling specialist in this comparison, and it earns that spot on merit, not just by default. It's a one-time purchase (not a subscription), which means a higher upfront cost but no recurring bill. It's the right tool if you're restoring old or low-resolution footage, cleaning up AI-video-gen output, or need real print/production resolution from source material that can't be reshot. If your source footage or images are already high-resolution, skip it — upscaling can't add detail that was never captured, and you'd be paying to solve a problem you don't have.
++</AnswerBox>
++
++<AffiliateDisclosure />
++
++"AI upscaler" gets searched by three very different people: someone restoring old family video, someone whose AI-generated clips came out soft and low-res, and someone who just assumes bigger numbers (4K, 8K) are automatically better. Only the first two actually need this tool. This post is for figuring out which one you are.
++
++## What upscaling actually does
++
++AI upscaling uses a trained model to intelligently add pixels to an image or video, increasing resolution while trying to preserve (or sharpen) detail, rather than just stretching and blurring the original — which is what non-AI resizing does. It can also reduce noise, fix compression artifacts, sharpen faces, and stabilize shaky footage, depending on the tool.
++
++What it cannot do: invent detail that was never in the source. If a face was a 20-pixel blur in the original clip, upscaling will produce a *sharper-looking* 20-pixel blur — not a photorealistic face. Upscaling improves and enlarges existing information. It doesn't hallucinate new information convincingly enough to fool close inspection.
++
++## Who actually needs this
++
++- **Old footage restoration** — home videos, camcorder tapes, early digital-camera footage, or archival material shot well below HD. This is the clearest, most defensible use case.
++- **Low-res source material** — stock footage, old project files, or client-supplied assets that were never captured at the resolution you need for the final deliverable.
++- **AI-video-gen output cleanup** — most AI video generators (Higgsfield, Kling, Veo, Sora, and others) output at resolutions that look fine on a phone screen but fall apart on a large display or in a professional deliverable. Upscaling is the standard second step after generation, not a sign something went wrong.
++- **Print or large-format from digital photos** — a photo that looks sharp on a screen can look soft blown up to poster size. Photo upscaling closes that gap.
++
++## Who should skip it
++
++If your footage was shot on a modern camera at 4K or higher and you're delivering at 1080p or 4K, you don't need this — you already have more resolution than you're using. Buying an upscaler here solves a problem you don't have. The same goes for images shot on a recent phone or camera at high megapixel counts for standard web or social use. Save the money.
++
++## Topaz Labs' lineup: Video AI vs Photo AI
++
++Topaz Labs isn't one product — it's two specialist tools under one company, and picking the right one matters.
++
++<ComparisonTable
++  caption="Topaz Labs — the honest listing"
++  rows={[
++    { tool: 'Topaz Labs', verdict: 'Video AI: upscaling, frame interpolation, and stabilization for video. Photo AI: upscaling, denoising, and sharpening for stills. One-time purchase, no subscription.', price: '$199–$299 typical', recurring: 'One-time', pick: true },
++  ]}
++/>
++
++**Video AI** is built for motion footage — old home movies, AI-gen clips, low-res archival video. It also handles frame interpolation (smoothing motion, useful for slow-motion conversion) and basic stabilization. This is the one most people searching "AI video upscaler" actually want.
++
++**Photo AI** is the still-image counterpart — upscaling, denoising, and detail recovery for photographs. If your problem is a blurry or low-res photo rather than video, this is the correct product, not Video AI.
++
++They're sold and licensed separately, so don't buy the video product to fix a photo problem or vice versa.
++
++## The honest tradeoff: one-time cost, no recurring bill
++
++This is the part most "AI tool" content glosses over: Topaz Labs is not a subscription. You pay once (typically $199–$299 depending on the product and any bundle), and you own the license — no monthly bill, no renewal, no losing access if you stop paying. That's a real advantage over subscription-fatigued creators juggling a dozen $20/mo tools.
++
++The tradeoff is upfront cost. $199–$299 in one charge is a bigger ask than a $20/mo trial, and if you only have one restoration project, you're paying full price for occasional use. Topaz does run periodic upgrade pricing for major versions, which functions a bit like a soft subscription over a multi-year horizon — but you're never locked into paying to keep what you already have working.
++
++## Who should buy it
++
++- **Video editors and colorists** who regularly receive low-res or archival source material.
++- **AI content creators** who generate video with tools like Higgsfield, Kling, or Veo and need a consistent upscaling step in their pipeline.
++- **Family archivists** digitizing and restoring old home video or photos — a one-time project that doesn't justify a subscription.
++- **Photographers** delivering large-format prints from files that need a resolution boost.
++
++## Who should skip it
++
++- Anyone whose source material is already high-resolution for its intended output.
++- Anyone who needs upscaling for a single one-off image or clip — a free or cheap online upscaler may cover that without the full purchase.
++- Anyone expecting upscaling to fix genuinely unusable footage (extreme blur, very low bitrate compression) — it improves, it doesn't perform magic.
++
++<FaqSection items={[
++  { q: 'What is the best AI video upscaler in 2026?', a: 'Topaz Labs Video AI is the dedicated, honest pick for AI video upscaling — it specializes in exactly this problem, including frame interpolation and stabilization, and is sold as a one-time purchase rather than a subscription.' },
++  { q: 'Can AI upscaling make blurry footage sharp and detailed?', a: 'It can improve and sharpen existing detail and reduce noise, but it cannot invent detail that was never captured. Extremely low-quality or heavily compressed source footage will look better after upscaling, not perfect.' },
++  { q: 'Do I need Topaz Video AI or Photo AI?', a: 'Video AI is for motion footage (old home movies, AI-generated video clips, archival footage). Photo AI is for still images. They are separate products — pick based on whether your source material is video or photos.' },
++  { q: 'Is it worth buying an AI upscaler if my footage is already 4K?', a: 'No. If your source resolution already meets or exceeds your delivery resolution, upscaling adds no value. Skip it and save the money for a project where you actually have a resolution gap.' },
++]} />
+diff --git a/app/blog/copy-ai-vs-writesonic-vs-rytr/page.mdx b/app/blog/copy-ai-vs-writesonic-vs-rytr/page.mdx
+new file mode 100644
+index 0000000..ce2c0a5
+--- /dev/null
++++ b/app/blog/copy-ai-vs-writesonic-vs-rytr/page.mdx
+@@ -0,0 +1,74 @@
++export const metadata = {
++  title: 'Copy.ai vs Writesonic vs Rytr (2026): Honest Verdict',
++  description: 'Three AI writing tools, one honest verdict. Copy.ai wins on brand-voice and marketing copy, Writesonic is the strongest all-rounder for SEO content, Rytr is the lifetime-recurring budget pick.',
++  alternates: { canonical: '/blog/copy-ai-vs-writesonic-vs-rytr' },
++  openGraph: {
++    title: 'Copy.ai vs Writesonic vs Rytr (2026): Honest Verdict',
++    description: 'Three AI writing tools, one honest verdict. Copy.ai wins on brand-voice and marketing copy, Writesonic is the strongest all-rounder for SEO content, Rytr is the lifetime-recurring budget pick.',
++    url: '/blog/copy-ai-vs-writesonic-vs-rytr',
++  },
++}
++
++<ArticleJsonLd
++  title="Copy.ai vs Writesonic vs Rytr (2026): Honest Verdict"
++  description="Three AI writing tools compared honestly: brand-voice quality, SEO/article output, and budget pricing — with a single overall recommendation."
++  slug="copy-ai-vs-writesonic-vs-rytr"
++  date="2026-07-05"
++/>
++
++# Copy.ai vs Writesonic vs Rytr (2026): Honest Verdict
++
++<AnswerBox>
++For most people asking "best all-around AI writing tool," the answer is <AffiliateLink tool="Writesonic" />. It's the strongest generalist — solid at both marketing copy and long-form SEO articles, so it's the one tool that doesn't force you to switch apps depending on the task. If your work is almost entirely brand-voice and sales copy (ads, emails, landing pages), <AffiliateLink tool="Copy.ai" /> writes noticeably sharper marketing copy and is worth the switch. If you're producing high volumes of simple, short-form text on a tight budget, <AffiliateLink tool="Rytr" /> is the honest budget pick — lower quality ceiling, but the only one of the three with a genuinely lifetime price, not just a lifetime deal that reverts.
++</AnswerBox>
++
++<AffiliateDisclosure />
++
++These three get compared constantly because they solve overlapping but not identical problems. Copy.ai leans into marketing and brand voice. Writesonic leans into SEO content and general-purpose writing. Rytr leans into cheap, high-volume, simple copy. Nobody needs all three — you need the one that matches what you're actually writing most days.
++
++## The bake-off
++
++<ComparisonTable
++  caption="Copy.ai vs Writesonic vs Rytr — honest verdict by use case"
++  rows={[
++    { tool: 'Copy.ai', verdict: 'Best for marketing/sales copy and brand voice — sharpest output, priciest per seat', price: 'Free–$249+/mo', recurring: 'Year-1' },
++    { tool: 'Writesonic', verdict: 'Best all-around — strong at both SEO articles and marketing copy', price: 'Free–$99+/mo', recurring: '12-mo', pick: true },
++    { tool: 'Rytr', verdict: 'Budget pick — high-volume simple copy, lowest quality ceiling, truly lifetime-recurring', price: 'Free–$29+/mo', recurring: 'Lifetime' },
++  ]}
++/>
++
++## Why Writesonic is the overall pick
++
++This isn't the highest-commission call — Copy.ai actually pays better. It's the honest one. Most people typing "best AI writing tool" don't have a single narrow job; they're switching between a product description in the morning, a blog draft in the afternoon, and an email in the evening. Writesonic handles that spread without a quality cliff in either direction. Its SEO/article mode is genuinely built for long-form content (outlines, structure, on-page optimization baked in), and its short-form templates are close enough to Copy.ai's for most marketing use cases that the gap doesn't justify the price difference for a generalist.
++
++If your writing life is one narrow thing, don't default to the generalist — read the next two sections.
++
++## When Copy.ai is the better call
++
++Copy.ai's actual strength is voice. Its brand-voice training and infinite-workflow builder produce copy that sounds less like a template and more like a person who knows the brand. For ad copy, email sequences, and landing pages where conversion hinges on tone, that difference shows up in output quality, not just in the interface. It's also the highest-paying writing-tool affiliate program in our catalog (45% commission, first-year recurring, 60-day cookie, no traffic minimum to join) — which is exactly why we're flagging that this is not why it's not the top pick. The honest read: if you're a marketer or copywriter first, Copy.ai is worth the premium. If you're a generalist content creator, it's overkill for the price.
++
++## When Rytr is the better call
++
++Rytr will not out-write either of the other two on anything that requires nuance, structure, or a distinct voice. What it does have is the best recurring economics of any tool in this comparison — a genuinely lifetime commission structure, not a first-year-then-nothing arrangement. Paired with the lowest price point in the group, Rytr is the right call for high-volume, low-complexity output: product listings, social captions, quick variations, first-draft filler you'll edit anyway. If you're producing at scale on a startup budget and the writing doesn't need to be your best work, Rytr is the honest budget pick — not a compromise dressed up as one.
++
++## The honest weaknesses of each
++
++**Copy.ai** — the workflow builder has a learning curve, and at higher tiers the price climbs fast for solo creators. If you only write occasionally, you're paying for infrastructure you won't use.
++
++**Writesonic** — being the generalist means it rarely feels like the *best* tool for any one narrow task. Power users of either pure marketing copy or pure long-form SEO will eventually feel the ceiling and want to graduate to a specialist.
++
++**Rytr** — the quality gap versus the other two is real, especially on longer-form or high-stakes copy. Don't use it for anything you're not willing to heavily edit or that carries brand risk if it reads generically.
++
++## Who should buy which
++
++- **Solo creator or generalist blogger** — Writesonic. One subscription, no task you can't cover.
++- **Marketer, agency, or brand-voice-heavy business** — Copy.ai. The quality difference on sales copy pays for the upgrade.
++- **High-volume, low-budget operation (e-commerce listings, social captions, scale content)** — Rytr. Cheapest genuinely-recurring option in the category.
++- **Freelance writer building a long-term toolkit** — start with Writesonic; add Copy.ai only once brand-voice work becomes a real share of your client base.
++
++<FaqSection items={[
++  { q: 'Which is better, Copy.ai or Writesonic?', a: 'Copy.ai writes better marketing and brand-voice copy. Writesonic is the stronger generalist and the better pick for anyone who also writes long-form SEO content, not just ads and emails.' },
++  { q: 'Is Rytr worth it if it writes worse than the other two?', a: 'For high-volume, low-complexity writing on a tight budget, yes — it is the only one of the three with a genuinely lifetime-recurring price structure, and the lower quality ceiling matters less on short-form or first-draft content you plan to edit anyway.' },
++  { q: 'What is the best all-around AI writing tool in 2026?', a: 'Writesonic, for most people. It covers both SEO/article content and general marketing copy without a major quality drop in either direction, which matters more than being the single best tool at one narrow task.' },
++  { q: 'Do any of these tools pay a recurring affiliate commission?', a: 'Yes, all three do. Copy.ai pays 45% commission for the first year, Writesonic pays 20% recurring for 12 months, and Rytr pays 30% commission for the lifetime of the customer — the only truly lifetime-recurring structure of the three.' },
++]} />
+diff --git a/app/blog/heygen-vs-synthesia/page.mdx b/app/blog/heygen-vs-synthesia/page.mdx
+new file mode 100644
+index 0000000..558ac83
+--- /dev/null
++++ b/app/blog/heygen-vs-synthesia/page.mdx
+@@ -0,0 +1,84 @@
++export const metadata = {
++  title: 'HeyGen vs Synthesia 2026: Which One Should You Actually Buy?',
++  description: 'A practical buyer\'s guide for creators and small teams — which AI avatar tool earns back its subscription, HeyGen or Synthesia, and for which content business.',
++  alternates: { canonical: '/blog/heygen-vs-synthesia' },
++  openGraph: {
++    title: 'HeyGen vs Synthesia 2026: Which One Should You Actually Buy?',
++    description: 'A practical buyer\'s guide for creators and small teams — which AI avatar tool earns back its subscription, HeyGen or Synthesia, and for which content business.',
++    url: '/blog/heygen-vs-synthesia',
++  },
++}
++
++<ArticleJsonLd
++  title="HeyGen vs Synthesia 2026: Which One Should You Actually Buy?"
++  description="A practical buyer's guide to HeyGen vs Synthesia for content creators and small teams — which one earns back its subscription."
++  slug="heygen-vs-synthesia"
++  date="2026-07-05"
++/>
++
++# HeyGen vs Synthesia 2026: Which One Should You Actually Buy?
++
++<AnswerBox>
++For a solo creator or small content business, buy <AffiliateLink tool="HeyGen" />. It's faster, cheaper at the tiers most creators actually use, and its avatars — especially self-clone — read as more natural on camera-replacement content like YouTube and course videos. Buy <AffiliateLink tool="Synthesia" /> instead if you're producing corporate training or internal comms for a team that needs brand-locked avatars, approval workflows, and a deep stock-avatar catalog more than it needs speed or personality. Most people reading this are the first case.
++</AnswerBox>
++
++<AffiliateDisclosure />
++
++This isn't the "AI avatars are coming for your job" post. That angle already exists, and it's not wrong, but it's not useful if you're actually trying to decide what to put on a company card this month. This is the buyer's version: which tool earns back its subscription fastest for a content business, and why.
++
++Both tools do the same core thing — turn a script into a video of a talking avatar, with no camera, no lighting, no re-recording. The difference is who they're built for.
++
++## The stack at a glance
++
++<ComparisonTable
++  caption="HeyGen vs Synthesia, ranked for a content creator's actual buying decision"
++  rows={[
++    { tool: 'HeyGen', verdict: 'Faster, cheaper, better self-clone avatars — the creator pick', price: 'Free–$89+/mo', recurring: '12-mo', pick: true },
++    { tool: 'Synthesia', verdict: 'Enterprise avatars, brand controls, approval workflows', price: '$18–90+/mo (seats)', recurring: 'year-1' },
++  ]}
++/>
++
++## Where HeyGen wins
++
++**Speed.** HeyGen renders faster and iterates faster — you can go from script to draft video in the time it takes to make coffee. For a content business publishing weekly, that turnaround is the difference between shipping and stalling.
++
++**Self-clone quality.** If you want an avatar of *yourself*, not a stock presenter, HeyGen's clone avatars are the more natural of the two. Translation is also a real feature here, not a bolt-on — useful if you're repackaging one video into multiple languages for a bigger audience without re-recording.
++
++**Price at creator scale.** HeyGen's entry and mid tiers are built for one person or a small team, not a department. You're not paying for seats you don't need.
++
++## Where Synthesia wins
++
++**Brand control at scale.** Synthesia's strength is the enterprise workflow: locked brand kits, multi-seat approval chains, and a much deeper catalog of stock avatars for teams that need variety without hiring talent. If you're producing training content for a 200-person sales team, this matters more than render speed.
++
++**Corporate training is the actual use case.** Synthesia was built for L&D and internal comms first. If that's your business — not a YouTube channel, not a course you sell yourself — it's the tool with the right defaults already in place.
++
++## The honest tradeoff
++
++Neither tool is "better" in the abstract. HeyGen optimizes for a single creator moving fast; Synthesia optimizes for a team that needs consistency and control across many contributors. Buying the enterprise tool as a solo creator means paying for approval workflows you'll never use. Buying the creator tool as a training team means fighting the lack of brand governance at scale.
++
++The honest pick always wins here, and for the audience reading a site about building recurring income with AI tools, that's HeyGen for the vast majority of use cases.
++
++## Who should buy HeyGen
++
++- Solo creators making faceless or semi-faceless YouTube, course, or ad content.
++- Anyone who wants a self-clone avatar instead of a stock presenter.
++- Teams under ~5 people who need speed over governance.
++- Creators repurposing one script into multiple languages.
++
++## Who should buy Synthesia
++
++- L&D and internal comms teams producing recurring training content.
++- Companies that need multi-approver brand control before anything ships.
++- Teams that want a large stock-avatar catalog instead of building their own.
++- Anyone whose buyer is a department budget, not a personal card.
++
++## The bottom line
++
++If you're building a content business — the audience this post is written for — <AffiliateLink tool="HeyGen" /> is the tool that pays for itself fastest. It's cheaper at the tier you'll actually use, it's faster to iterate with, and the self-clone avatars are the ones viewers actually believe. Save <AffiliateLink tool="Synthesia" /> for the day you're running training content for a team, not a channel.
++
++<FaqSection items={[
++  { q: 'Is HeyGen or Synthesia cheaper?', a: 'HeyGen is cheaper at the tiers a solo creator actually uses. Synthesia\'s pricing is built around per-seat enterprise plans, so it gets expensive fast for a team, but stays reasonable if you genuinely need multiple seats and brand governance.' },
++  { q: 'Which one has better avatars?', a: 'For self-clone (an avatar of you), HeyGen is more natural. For a large catalog of diverse stock presenters, Synthesia has more depth. Pick based on whether you want to be the avatar or need variety.' },
++  { q: 'Can I use either one for YouTube?', a: 'Yes, both work for YouTube. HeyGen is the faster workflow for a creator publishing regularly; Synthesia works but is built more for internal training than public-facing content.' },
++  { q: 'Do I need both tools?', a: 'No. Pick the one that matches your actual output: HeyGen for a content business run by one or a few people, Synthesia for a team producing recurring corporate training with approval chains.' },
++]} />
+diff --git a/app/blog/systeme-io-review-2026/page.mdx b/app/blog/systeme-io-review-2026/page.mdx
+new file mode 100644
+index 0000000..cd8e758
+--- /dev/null
++++ b/app/blog/systeme-io-review-2026/page.mdx
+@@ -0,0 +1,69 @@
++export const metadata = {
++  title: 'Systeme.io Review 2026: The All-in-One Creator Platform, Honestly Assessed',
++  description: 'Funnels, email, courses, and a membership site in one $27/mo tool — and the highest recurring affiliate rate in this catalog. What it does well, where it loses to specialists, and who should actually buy it.',
++  alternates: { canonical: '/blog/systeme-io-review-2026' },
++  openGraph: {
++    title: 'Systeme.io Review 2026: The All-in-One Creator Platform, Honestly Assessed',
++    description: 'Funnels, email, courses, and a membership site in one $27/mo tool — what it does well, where it loses to specialists, and who should buy it.',
++    url: '/blog/systeme-io-review-2026',
++  },
++}
++
++<ArticleJsonLd
++  title="Systeme.io Review 2026: The All-in-One Creator Platform, Honestly Assessed"
++  description="An honest review of Systeme.io — funnels, email, courses, membership sites — and who should actually buy it."
++  slug="systeme-io-review-2026"
++  date="2026-07-05"
++/>
++
++# Systeme.io Review 2026: The All-in-One Creator Platform, Honestly Assessed
++
++<AnswerBox>
++**Systeme.io is the right pick if you want funnels, email, courses, and a membership site under one login for one flat price** — starting free, then $27/mo for real volume. It's not the best specialist tool at any single job (ClickFunnels builds better funnels, Kajabi has a nicer course player, ConvertKit has better email deliverability at scale), but it's the best *combination* for someone replacing four subscriptions with one. This is also the highest recurring-commission program in this catalog — 60% lifetime — disclosed here because it's genuinely the tool we'd pick for this use case, not the other way around.
++</AnswerBox>
++
++<AffiliateDisclosure />
++
++Most creator-stack advice tells you to stitch together a funnel builder, an email platform, a course host, and a membership tool — four logins, four bills, four things that need to talk to each other. Systeme.io's pitch is that you don't need four tools. Here's whether that pitch holds up.
++
++## What it actually replaces
++
++<ComparisonTable
++  caption="Systeme.io vs. the specialist stack it's trying to replace"
++  rows={[
++    { tool: 'Systeme.io', verdict: 'All four (funnels, email, courses, membership) — one price, good enough at each', price: 'Free–$97/mo', recurring: 'lifetime', pick: true },
++    { tool: 'Copy.ai', verdict: 'Not a replacement — pairs with Systeme.io for AI-drafted funnel copy', price: 'Free–$36+/mo', recurring: 'year-1' },
++    { tool: 'Writesonic', verdict: 'Same pairing role — AI copy for the funnels you build in Systeme.io', price: 'Free–$16+/mo', recurring: '12-month' },
++  ]}
++/>
++
++## Where it wins
++
++**Price, for the bundle.** The free plan runs 3 funnels, 1 course, and up to 2,000 contacts — genuinely usable to validate an offer before paying anything. The paid tiers stay cheaper than buying the four specialist tools separately, and there's no separate email-sending cost bolted on later.
++
++**One data model.** A contact who opts into your funnel is already in your email list and already eligible for your course access rules — no Zapier step connecting three tools, no sync lag, no "why didn't this webhook fire" debugging.
++
++**Genuinely no billing surprises.** Contact-based pricing tiers are visible upfront; there's no metered add-on that quietly creeps the bill up as you grow, which is a real failure mode with some specialist email tools.
++
++## Where it loses
++
++**Funnel design polish.** ClickFunnels' page builder is still more flexible for complex, highly-designed funnels. If page aesthetics are your differentiator, you'll feel the ceiling.
++
++**Email deliverability at real scale.** Dedicated ESPs with mature sending infrastructure and reputation management still out-perform Systeme.io once you're sending to six-figure lists. For most creators starting out, this isn't the binding constraint — but it's the honest tradeoff.
++
++**Course experience polish.** Kajabi's course player and community features feel more premium. If the course *is* the product and community engagement is core to retention, that gap matters more.
++
++## Who should actually buy it
++
++**Buy it if:** you're consolidating from multiple tools, you're pre-revenue or early and want to validate before committing budget, or you just want fewer logins and one place contacts live.
++
++**Skip it if:** you already have a mature specialist stack that works, or page-builder flexibility / email deliverability at scale / course-player polish is the specific thing your business is optimized around — in that case, the switching cost isn't worth the consolidation.
++
++The honest bottom line: this isn't the best tool at any one job, and that's fine — it's the best tool at *not needing four jobs done separately*. If that's your actual problem, <AffiliateLink tool="Systeme.io" /> solves it well. The full operating system for building a content-to-income loop like this one is on the [hub](/blog/the-agentic-income-flywheel-2026).
++
++<FaqSection items={[
++  { q: 'Is Systeme.io actually good, or just cheap?', a: 'Both — it is a genuinely good all-in-one tool, not just a budget option. It loses to specialists on polish (page design, email deliverability at scale, course-player experience) but wins on consolidation, price, and having one data model instead of four tools stitched together.' },
++  { q: 'Is Systeme.io free plan actually usable?', a: 'Yes — 3 funnels, 1 course, up to 2,000 contacts on the free plan is enough to validate a real offer before paying anything.' },
++  { q: 'What is the affiliate commission on Systeme.io?', a: '60% recurring, for the lifetime of the customer — the highest recurring rate in this catalog. Disclosed here because it is genuinely the tool being recommended for this use case, not the reason it is recommended.' },
++  { q: 'Systeme.io vs ClickFunnels — which is better?', a: 'ClickFunnels builds more polished, flexible funnel pages. Systeme.io replaces ClickFunnels plus your email tool plus your course host plus your membership tool for less than ClickFunnels alone costs. Pick based on whether page-builder flexibility or consolidation is your actual constraint.' },
++]} />
+diff --git a/app/blog/the-agentic-income-flywheel-2026/page.mdx b/app/blog/the-agentic-income-flywheel-2026/page.mdx
+index 1cbc40b..168fd0b 100644
+--- a/app/blog/the-agentic-income-flywheel-2026/page.mdx
++++ b/app/blog/the-agentic-income-flywheel-2026/page.mdx
+@@ -19,7 +19,7 @@ export const metadata = {
+ # The Agentic Income Flywheel: Honest Comparisons + Recurring Tools + Owned Audience (2026)
+ 
+ <AnswerBox>
+-The flywheel is simple and brutal: rank for high-intent searches with the honest pick (never the highest payout), point only at tools that pay recurring when they are genuinely the best, capture the reader into an owned list, and let the same content keep earning. One good post can generate $X–$Y/mo for years if the tools are right and the recommendation stays true.
++The flywheel is simple and brutal: rank for high-intent searches with the honest pick (never the highest payout), point only at tools that pay recurring when they are genuinely the best, capture the reader into an owned list, and let the same content keep earning. One good post, done honestly, can keep earning recurring commissions for years — the exact figure depends entirely on the traffic and the tools, and we don't publish a number here until the ledger has real ones to show.
+ </AnswerBox>
+ 
+ <AffiliateDisclosure />
+diff --git a/app/globals.css b/app/globals.css
+index 44d65b7..ec7daba 100644
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -728,6 +728,339 @@ body::before {
+   line-height: 1.2;
+ }
+ 
++.trust-desk-section {
++  background:
++    radial-gradient(circle at 72% 12%, rgba(110,168,254,0.14), transparent 32%),
++    radial-gradient(circle at 28% 100%, rgba(214,181,109,0.08), transparent 34%);
++}
++
++.trust-desk-section .section-heading h2 {
++  font-size: clamp(2.45rem, 3.6vw, 3.35rem);
++  line-height: 1.04;
++}
++
++.trust-desk-legend {
++  display: flex;
++  flex-wrap: wrap;
++  gap: 0.5rem;
++  margin-top: 1.35rem;
++}
++
++.trust-desk {
++  overflow: hidden;
++  border: 1px solid color-mix(in oklab, var(--color-border) 72%, var(--color-accent) 18%);
++  border-radius: 1.25rem;
++  background:
++    linear-gradient(140deg, rgba(110,168,254,0.11), transparent 32%),
++    linear-gradient(330deg, rgba(214,181,109,0.08), transparent 38%),
++    rgba(10,12,20,0.82);
++  box-shadow: inset 0 1px 0 rgba(255,255,255,0.065), 0 34px 110px rgba(0,0,0,0.32);
++  padding: clamp(1rem, 2.5vw, 1.35rem);
++}
++
++.trust-desk-topline {
++  display: flex;
++  align-items: flex-start;
++  justify-content: space-between;
++  gap: 1rem;
++  border: 1px solid rgba(255,255,255,0.06);
++  border-radius: 1rem;
++  background: rgba(5,6,10,0.58);
++  padding: 1rem;
++}
++
++.trust-desk-topline h3,
++.trust-route-detail h3 {
++  margin-top: 0.35rem;
++  color: var(--color-ink);
++  font-size: clamp(1.25rem, 2vw, 1.65rem);
++  font-weight: 780;
++  line-height: 1.12;
++}
++
++.trust-freshness {
++  flex: 0 0 auto;
++  min-width: 8rem;
++  border-radius: 0.85rem;
++  background: rgba(52,211,153,0.1);
++  padding: 0.65rem 0.75rem;
++  color: var(--color-green);
++  text-align: right;
++}
++
++.trust-freshness span,
++.trust-action-row small {
++  display: block;
++  color: var(--color-muted);
++  font-size: 0.72rem;
++}
++
++.trust-freshness strong {
++  display: block;
++  margin-top: 0.2rem;
++  font-size: 0.9rem;
++}
++
++.trust-desk-grid {
++  display: grid;
++  grid-template-columns: minmax(13rem, 0.72fr) minmax(0, 1.28fr);
++  gap: 0.85rem;
++  margin-top: 0.85rem;
++}
++
++.trust-route-list {
++  display: grid;
++  gap: 0.6rem;
++  align-content: start;
++}
++
++.trust-route-button {
++  width: 100%;
++  min-height: 8.25rem;
++  border: 1px solid rgba(255,255,255,0.07);
++  border-radius: 0.95rem;
++  background: rgba(5,6,10,0.48);
++  padding: 0.85rem;
++  color: var(--color-muted);
++  text-align: left;
++}
++
++@media (prefers-reduced-motion: no-preference) {
++  .trust-route-button {
++    transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
++  }
++
++  .trust-route-button:hover {
++    transform: translateY(-1px);
++  }
++}
++
++.trust-route-button:hover,
++.trust-route-button.is-active {
++  border-color: color-mix(in oklab, var(--color-accent) 54%, var(--color-border));
++  background: rgba(110,168,254,0.08);
++}
++
++.trust-route-button strong {
++  display: block;
++  margin-top: 0.65rem;
++  color: var(--color-ink);
++  font-size: 0.98rem;
++  line-height: 1.2;
++}
++
++.trust-route-button small {
++  display: block;
++  margin-top: 0.45rem;
++  font-size: 0.78rem;
++  line-height: 1.45;
++}
++
++.trust-status {
++  display: inline-flex;
++  min-height: 1.65rem;
++  align-items: center;
++  border: 1px solid rgba(255,255,255,0.08);
++  border-radius: 999px;
++  padding: 0.32rem 0.55rem;
++  font-size: 0.7rem;
++  font-weight: 800;
++  line-height: 1;
++}
++
++.trust-status-paid {
++  border-color: rgba(52,211,153,0.26);
++  background: rgba(52,211,153,0.1);
++  color: var(--color-green);
++}
++
++.trust-status-unpaid {
++  border-color: rgba(110,168,254,0.28);
++  background: rgba(110,168,254,0.1);
++  color: var(--color-accent);
++}
++
++.trust-status-owned {
++  border-color: rgba(214,181,109,0.3);
++  background: rgba(214,181,109,0.12);
++  color: var(--color-gold);
++}
++
++.trust-status-stale {
++  border-color: rgba(167,139,250,0.3);
++  background: rgba(167,139,250,0.12);
++  color: var(--color-accent-2);
++}
++
++.trust-route-detail {
++  border: 1px solid rgba(255,255,255,0.065);
++  border-radius: 1rem;
++  background: rgba(5,6,10,0.54);
++  padding: clamp(0.9rem, 2vw, 1.15rem);
++}
++
++.trust-detail-header {
++  display: flex;
++  justify-content: space-between;
++  gap: 1rem;
++}
++
++.trust-detail-header p,
++.trust-route-copy p,
++.trust-action-row p,
++.trust-disclosure-box p {
++  color: var(--color-muted);
++  font-size: 0.9rem;
++  line-height: 1.58;
++}
++
++.trust-program-status {
++  flex: 0 0 auto;
++  max-width: 12rem;
++  border-radius: 0.8rem;
++  background: rgba(255,255,255,0.045);
++  padding: 0.65rem 0.75rem;
++  color: color-mix(in oklab, var(--color-ink) 82%, var(--color-muted));
++  font-size: 0.78rem;
++  font-weight: 760;
++  text-align: right;
++}
++
++.trust-disclosure-box {
++  margin-top: 1rem;
++  border: 1px solid color-mix(in oklab, var(--color-border) 65%, var(--color-gold) 25%);
++  border-radius: 0.9rem;
++  background: rgba(214,181,109,0.08);
++  padding: 0.85rem;
++}
++
++.trust-disclosure-box p {
++  margin-top: 0.45rem;
++  color: color-mix(in oklab, var(--color-ink) 80%, var(--color-muted));
++}
++
++.trust-criteria-grid {
++  display: grid;
++  grid-template-columns: repeat(5, minmax(0, 1fr));
++  gap: 0.65rem;
++  margin-top: 1rem;
++}
++
++.trust-meter {
++  min-height: 5.6rem;
++  border: 1px solid rgba(255,255,255,0.06);
++  border-radius: 0.82rem;
++  background: rgba(255,255,255,0.03);
++  padding: 0.75rem;
++}
++
++.trust-meter-label {
++  display: flex;
++  justify-content: space-between;
++  gap: 0.5rem;
++  color: var(--color-muted);
++  font-size: 0.76rem;
++}
++
++.trust-meter-label strong {
++  color: var(--color-ink);
++}
++
++.trust-meter-track {
++  height: 0.42rem;
++  margin-top: 1rem;
++  overflow: hidden;
++  border-radius: 999px;
++  background: rgba(255,255,255,0.08);
++}
++
++.trust-meter-track span {
++  display: block;
++  height: 100%;
++  border-radius: inherit;
++  background: linear-gradient(90deg, var(--color-accent), var(--color-gold), var(--color-green));
++}
++
++.trust-route-copy {
++  display: grid;
++  grid-template-columns: repeat(2, minmax(0, 1fr));
++  gap: 0.75rem;
++  margin-top: 1rem;
++}
++
++.trust-route-copy div:first-child {
++  grid-column: 1 / -1;
++}
++
++.trust-route-copy div,
++.trust-alternatives,
++.trust-action-row {
++  border: 1px solid rgba(255,255,255,0.06);
++  border-radius: 0.86rem;
++  background: rgba(255,255,255,0.025);
++  padding: 0.85rem;
++}
++
++.trust-route-copy span {
++  color: var(--color-gold);
++  font-size: 0.72rem;
++  font-weight: 800;
++  text-transform: uppercase;
++}
++
++.trust-route-copy p {
++  margin-top: 0.45rem;
++}
++
++.trust-alternatives {
++  margin-top: 0.75rem;
++}
++
++.trust-alt-row {
++  display: flex;
++  flex-wrap: wrap;
++  gap: 0.5rem;
++  margin-top: 0.7rem;
++}
++
++.trust-alt-row span {
++  border: 1px solid rgba(255,255,255,0.07);
++  border-radius: 999px;
++  background: rgba(255,255,255,0.035);
++  padding: 0.45rem 0.62rem;
++  color: color-mix(in oklab, var(--color-ink) 76%, var(--color-muted));
++  font-size: 0.76rem;
++  font-weight: 700;
++}
++
++.trust-action-row {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 1rem;
++  margin-top: 0.75rem;
++  background: rgba(5,6,10,0.48);
++}
++
++.trust-action-row p {
++  margin-top: 0.3rem;
++  color: var(--color-ink);
++  font-weight: 760;
++}
++
++.trust-route-cta {
++  flex: 0 0 auto;
++}
++
++.trust-disabled-cta {
++  border: 1px solid rgba(255,255,255,0.08);
++  border-radius: 999px;
++  padding: 0.85rem 1rem;
++  color: var(--color-muted);
++  font-size: 0.82rem;
++  font-weight: 800;
++}
++
+ @media (max-width: 860px) {
+   .hero-stage {
+     min-height: clamp(42rem, 92svh, 48rem);
+@@ -795,6 +1128,8 @@ body::before {
+   .desk-grid,
+   .flywheel-grid,
+   .signal-grid,
++  .trust-desk-grid,
++  .trust-route-copy,
+   .transformation-layout,
+   .transformation-moves {
+     grid-template-columns: 1fr;
+@@ -813,6 +1148,27 @@ body::before {
+     flex-direction: column;
+   }
+ 
++  .trust-detail-header,
++  .trust-action-row,
++  .trust-desk-topline {
++    flex-direction: column;
++  }
++
++  .trust-freshness,
++  .trust-program-status {
++    width: 100%;
++    max-width: none;
++    text-align: left;
++  }
++
++  .trust-route-list {
++    grid-template-columns: repeat(2, minmax(0, 1fr));
++  }
++
++  .trust-criteria-grid {
++    grid-template-columns: repeat(2, minmax(0, 1fr));
++  }
++
+   .section-heading h2 {
+     max-width: 12ch;
+     font-size: clamp(2.35rem, 9.8vw, 3rem);
+@@ -925,6 +1281,21 @@ body::before {
+     display: none;
+   }
+ 
++  .trust-route-list,
++  .trust-criteria-grid {
++    grid-template-columns: 1fr;
++  }
++
++  .trust-route-button {
++    min-height: 7rem;
++  }
++
++  .trust-route-cta,
++  .trust-disabled-cta {
++    width: 100%;
++    justify-content: center;
++  }
++
+   .signal-graph {
+     min-height: 9rem;
+   }
+diff --git a/app/layout.tsx b/app/layout.tsx
+index 340e9ba..a83db7d 100644
+--- a/app/layout.tsx
++++ b/app/layout.tsx
+@@ -7,6 +7,8 @@ import { Nav } from '@/components/Nav'
+ import { Footer } from '@/components/Footer'
+ import { MotionRuntime } from '@/components/MotionRuntime'
+ import { site } from '@/lib/site'
++import { CatalogProvider } from '@agentic-income/engine/react.js'
++import catalog from '@/data/programs.json'
+ 
+ const ogImage = '/brand/agentic-income-og.webp'
+ 
+@@ -63,10 +65,12 @@ export default function RootLayout({ children }: { children: React.ReactNode })
+   return (
+     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+       <body>
+-        <Nav />
+-        <MotionRuntime />
+-        <main className="mx-auto w-full max-w-6xl overflow-x-clip px-4 sm:px-6">{children}</main>
+-        <Footer />
++        <CatalogProvider catalog={catalog}>
++          <Nav />
++          <MotionRuntime />
++          <main className="mx-auto w-full max-w-6xl overflow-x-clip px-4 sm:px-6">{children}</main>
++          <Footer />
++        </CatalogProvider>
+         <Analytics />
+         <SpeedInsights />
+       </body>
+diff --git a/app/page.tsx b/app/page.tsx
+index b4dc60b..44d6ccb 100644
+--- a/app/page.tsx
++++ b/app/page.tsx
+@@ -8,6 +8,7 @@ import { IncomeDeskHero } from '@/components/IncomeDeskHero'
+ import { FlywheelSystem } from '@/components/FlywheelSystem'
+ import { SignalStackSection } from '@/components/SignalStackSection'
+ import { TransformationSection } from '@/components/TransformationSection'
++import { TrustComparisonDesk } from '@/components/TrustComparisonDesk'
+ import { offers as productOffers } from '@/lib/offers'
+ 
+ const featured = sortedPosts.filter((p) => p.featured)
+@@ -22,6 +23,7 @@ export default function Home() {
+     <>
+       <IncomeDeskHero />
+       <SignalStackSection />
++      <TrustComparisonDesk />
+       <TransformationSection />
+ 
+       <section className="section-band">
+@@ -30,7 +32,7 @@ export default function Home() {
+             <div className="kicker">Trust architecture</div>
+             <h2>The recommendation is the asset.</h2>
+             <p>
+-              Agentic Income monetizes attention without corrupting the answer. Each recommendation has to survive the catalog, the comparison, and the disclosure.
++              Every pick ships with its ranking criteria, payout status, and last-verified date on the page. Each recommendation has to survive the catalog, the comparison, and the disclosure.
+             </p>
+           </div>
+           <Link href="/trust" className="cta-secondary motion-reveal">
+@@ -118,7 +120,7 @@ export default function Home() {
+         </div>
+       </section>
+ 
+-      <EmailCapture headline="Get the next payer before the crowd" sub="One high-signal note when a tool worth building around becomes available. No noise." />
++      <EmailCapture headline="Get the next payer before the crowd" sub="One note when a program worth building a page around opens — the tool, the rate, and the comparison angle to take." />
+     </>
+   )
+ }
+diff --git a/app/start/page.tsx b/app/start/page.tsx
+index b48db3a..bc86bb8 100644
+--- a/app/start/page.tsx
++++ b/app/start/page.tsx
+@@ -20,16 +20,17 @@ export default function Start() {
+   return (
+     <div className="py-14">
+       <div className="kicker">Start here</div>
+-      <h1 className="mt-3 text-5xl font-semibold text-ink">Build the first revenue loop.</h1>
++      <h1 className="mt-3 text-5xl font-semibold text-ink">Build the first loop. Then run it like a desk.</h1>
+       <p className="mt-4 max-w-2xl text-lg text-muted">
+-        You do not need an audience or a product to begin. You need one honest comparison that ranks, the right
+-        recurring-payer tools behind it, and an email list that turns readers into a relationship.
++        Start with no audience and no product. One comparison that ranks, a recurring-payer route behind it, and an
++        email list — then the same operating model repeats across every category you add. The first loop is a page;
++        the tenth is a system.
+       </p>
+ 
+       <div className="mt-8 grid gap-4 md:grid-cols-3">
+         {[
+           ['Find the signal', 'Choose one tool category where people already compare, switch, and buy.'],
+-          ['Protect the trust', 'Write the answer so the useful recommendation survives disclosure and payout pressure.'],
++          ['Set the verdict', 'Rank the answer on fit first; disclosure and payout enter after, never before.'],
+           ['Capture the asset', 'Route the click, capture the email, and package the workflow into a product path.'],
+         ].map(([title, body]) => (
+           <div key={title} className="card motion-reveal">
+@@ -42,7 +43,7 @@ export default function Start() {
+       <ol className="mt-10 space-y-6">
+         {[
+           { t: 'Pick one tool category you actually use', d: 'Voice, video, writing, coding — whatever you have real opinions about. Authentic beats broad. You can only recommend honestly what you\'ve touched.' },
+-          { t: 'Write the comparison in the citable shape', d: 'Direct answer up top, sortable table, the honest pick, a real FAQ. That structure is what ranks and what AI search engines lift verbatim.' },
++          { t: 'Write the comparison in the citable shape', d: 'Direct answer up top, sortable table, the genuine pick, a real FAQ. That structure is what ranks and what AI search engines lift verbatim.' },
+           { t: 'Place recurring-payer links, then build the list', d: 'Link the tools that pay every month — not one-time bounties. Add one email capture. Now every reader is either income or a future relationship.' },
+         ].map((s, i) => (
+           <li key={s.t} className="flex gap-4 rounded-xl border border-border glass p-5">
+diff --git a/app/tools/page.tsx b/app/tools/page.tsx
+index ea0fe86..522b842 100644
+--- a/app/tools/page.tsx
++++ b/app/tools/page.tsx
+@@ -1,7 +1,7 @@
+ import type { Metadata } from 'next'
+ import { payingPrograms } from '@/lib/affiliate'
+ import Link from 'next/link'
+-import { TrackedLink } from '@/components/TrackedLink'
++import { TrackedLink } from '@agentic-income/engine/react.js'
+ 
+ export const metadata: Metadata = {
+   title: 'AI Tools Catalog',
+diff --git a/components/AffiliateDisclosure.tsx b/components/AffiliateDisclosure.tsx
+deleted file mode 100644
+index 4d91bf2..0000000
+--- a/components/AffiliateDisclosure.tsx
++++ /dev/null
+@@ -1,11 +0,0 @@
+-import { DISCLOSURE } from '@/lib/affiliate'
+-
+-/** One per page that carries affiliate links — FTC compliance + trust. */
+-export function AffiliateDisclosure() {
+-  return (
+-    <p className="my-6 rounded-lg border border-border bg-surface/60 px-4 py-3 text-sm text-muted">
+-      <span aria-hidden>🔗 </span>
+-      {DISCLOSURE}
+-    </p>
+-  )
+-}
+diff --git a/components/AffiliateLink.tsx b/components/AffiliateLink.tsx
+deleted file mode 100644
+index b5ba500..0000000
+--- a/components/AffiliateLink.tsx
++++ /dev/null
+@@ -1,27 +0,0 @@
+-import { getLink, findProgram } from '@/lib/affiliate'
+-import { TrackedLink } from '@/components/TrackedLink'
+-
+-/**
+- * Renders an affiliate link when we've joined the program (ourLink set),
+- * otherwise plain bold text — never a dead link. The catalog is the single
+- * source of truth: join a program, set ourLink, and every mention goes live.
+- */
+-export function AffiliateLink({ tool, children }: { tool: string; children?: React.ReactNode }) {
+-  const href = getLink(tool)
+-  const label = children ?? findProgram(tool)?.tool ?? tool
+-
+-  if (!href) return <strong>{label}</strong>
+-
+-  return (
+-    <TrackedLink
+-      href={href}
+-      target="_blank"
+-      rel="sponsored nofollow noopener"
+-      className="text-accent underline underline-offset-2"
+-      event="affiliate_click"
+-      payload={{ tool, source: 'content-affiliate-link' }}
+-    >
+-      {label}
+-    </TrackedLink>
+-  )
+-}
+diff --git a/components/AnswerBox.tsx b/components/AnswerBox.tsx
+deleted file mode 100644
+index 3766882..0000000
+--- a/components/AnswerBox.tsx
++++ /dev/null
+@@ -1,12 +0,0 @@
+-/**
+- * The AEO answer box — a direct, citable answer at the top of a post.
+- * This is the surface AI search engines lift. Lead with the conclusion.
+- */
+-export function AnswerBox({ children }: { children: React.ReactNode }) {
+-  return (
+-    <div className="my-6 rounded-xl border border-accent/30 bg-accent/[0.06] px-5 py-4">
+-      <div className="mb-1 text-xs font-semibold uppercase text-accent">The short answer</div>
+-      <div className="text-[1.05rem] leading-relaxed text-ink">{children}</div>
+-    </div>
+-  )
+-}
+diff --git a/components/CheckoutLink.tsx b/components/CheckoutLink.tsx
+index 3fa1c61..fd6697b 100644
+--- a/components/CheckoutLink.tsx
++++ b/components/CheckoutLink.tsx
+@@ -3,7 +3,7 @@
+ import type { AnchorHTMLAttributes, ReactNode } from 'react'
+ import { useEffect, useState } from 'react'
+ import { appendTrackingParamsToPath } from '@/lib/tracking'
+-import { TrackedLink } from '@/components/TrackedLink'
++import { TrackedLink } from '@agentic-income/engine/react.js'
+ 
+ type CheckoutLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+   href: string
+diff --git a/components/ComparisonTable.tsx b/components/ComparisonTable.tsx
+deleted file mode 100644
+index aa7a109..0000000
+--- a/components/ComparisonTable.tsx
++++ /dev/null
+@@ -1,89 +0,0 @@
+-'use client'
+-
+-import { useState } from 'react'
+-import { getLink } from '@/lib/affiliate'
+-
+-export type Row = {
+-  tool: string
+-  verdict: string
+-  price: string
+-  recurring?: string
+-  pick?: boolean
+-}
+-
+-type SortKey = 'tool'
+-
+-/**
+- * The money component: an honest, sortable tool table. The "Try" cell only
+- * renders a CTA when we've joined that program (ourLink set) — otherwise the
+- * tool is still listed and recommended, just without a link. Honesty first.
+- */
+-export function ComparisonTable({ rows, caption }: { rows: Row[]; caption?: string }) {
+-  const [sort, setSort] = useState<SortKey>('tool')
+-  const [asc, setAsc] = useState(true)
+-
+-  const sorted = [...rows].sort((a, b) => {
+-    const cmp = a[sort].localeCompare(b[sort])
+-    return asc ? cmp : -cmp
+-  })
+-
+-  const toggle = (key: SortKey) => {
+-    if (key === sort) setAsc(!asc)
+-    else { setSort(key); setAsc(true) }
+-  }
+-
+-  return (
+-    <div className="my-7 overflow-hidden rounded-xl border border-border glass">
+-      {caption && <div className="border-b border-border px-4 py-2.5 text-sm font-medium text-muted">{caption}</div>}
+-      <div className="overflow-x-auto">
+-        <table className="w-full border-collapse text-sm">
+-          <thead>
+-            <tr className="text-left text-muted">
+-              <Th onClick={() => toggle('tool')} active={sort === 'tool'} asc={asc}>Tool</Th>
+-              <th className="px-4 py-3 font-semibold">Verdict</th>
+-              <th className="px-4 py-3 font-semibold">Price</th>
+-              <th className="px-4 py-3 font-semibold">Recurring</th>
+-              <th className="px-4 py-3 font-semibold">Try</th>
+-            </tr>
+-          </thead>
+-          <tbody>
+-            {sorted.map((r) => {
+-              const href = getLink(r.tool)
+-              return (
+-                <tr key={r.tool} className={`border-t border-border ${r.pick ? 'bg-accent/[0.05]' : ''}`}>
+-                  <td className="px-4 py-3 font-semibold text-ink">
+-                    {r.tool}
+-                    {r.pick && <span className="ml-2 rounded bg-accent/20 px-1.5 py-0.5 text-[10px] font-bold uppercase text-accent">Top pick</span>}
+-                  </td>
+-                  <td className="px-4 py-3 text-muted">{r.verdict}</td>
+-                  <td className="px-4 py-3 text-ink">{r.price}</td>
+-                  <td className="px-4 py-3 text-muted">{r.recurring ?? '—'}</td>
+-                  <td className="px-4 py-3">
+-                    {href ? (
+-                      <a href={href} target="_blank" rel="sponsored nofollow noopener" className="rounded-md bg-accent px-3 py-1.5 text-xs font-semibold text-bg hover:opacity-90">
+-                        Try →
+-                      </a>
+-                    ) : (
+-                      <span className="text-xs text-muted/60">—</span>
+-                    )}
+-                  </td>
+-                </tr>
+-              )
+-            })}
+-          </tbody>
+-        </table>
+-      </div>
+-    </div>
+-  )
+-}
+-
+-function Th({ children, onClick, active, asc }: { children: React.ReactNode; onClick: () => void; active: boolean; asc: boolean }) {
+-  return (
+-    <th className="px-4 py-3 font-semibold">
+-      <button onClick={onClick} className="inline-flex items-center gap-1 hover:text-ink">
+-        {children}
+-        <span className="text-[10px] opacity-60">{active ? (asc ? '▲' : '▼') : '↕'}</span>
+-      </button>
+-    </th>
+-  )
+-}
+diff --git a/components/FaqSection.tsx b/components/FaqSection.tsx
+deleted file mode 100644
+index 601e2eb..0000000
+--- a/components/FaqSection.tsx
++++ /dev/null
+@@ -1,32 +0,0 @@
+-export type Faq = { q: string; a: string }
+-
+-/**
+- * Renders FAQs and emits FAQPage JSON-LD in one place — the schema that wins
+- * the "People also ask" boxes and gets lifted into AI answers.
+- */
+-export function FaqSection({ items }: { items: Faq[] }) {
+-  const jsonLd = {
+-    '@context': 'https://schema.org',
+-    '@type': 'FAQPage',
+-    mainEntity: items.map((f) => ({
+-      '@type': 'Question',
+-      name: f.q,
+-      acceptedAnswer: { '@type': 'Answer', text: f.a },
+-    })),
+-  }
+-
+-  return (
+-    <section className="my-8">
+-      <h2>Frequently asked questions</h2>
+-      <div className="mt-3 divide-y divide-border rounded-xl border border-border">
+-        {items.map((f) => (
+-          <details key={f.q} className="group px-4 py-3">
+-            <summary className="cursor-pointer list-none font-semibold text-ink marker:hidden">{f.q}</summary>
+-            <p className="mt-2 text-muted">{f.a}</p>
+-          </details>
+-        ))}
+-      </div>
+-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
+-    </section>
+-  )
+-}
+diff --git a/components/IncomeDeskHero.tsx b/components/IncomeDeskHero.tsx
+index 959fc90..048b511 100644
+--- a/components/IncomeDeskHero.tsx
++++ b/components/IncomeDeskHero.tsx
+@@ -5,7 +5,7 @@ import { posts } from '@/lib/posts'
+ 
+ const proofRows = [
+   ['Search intent', 'Faceless YouTube stack', 'Creator demand'],
+-  ['Honest pick', 'ElevenLabs + CapCut', 'Best fit wins'],
++  ['Ranked pick', 'ElevenLabs + CapCut', 'Best fit wins'],
+   ['Revenue route', 'Recurring payer links', 'Disclosure safe'],
+ ]
+ 
+@@ -78,7 +78,7 @@ export function IncomeDeskHero() {
+             <span>Income</span>
+           </h1>
+           <p className="hero-subtitle">
+-            Build the first AI-tool income loop: one honest comparison, one recurring payer route, one owned-audience capture, and one direct product path.
++            Build the first AI-tool income loop: one comparison ranked for a query people already search, one route to a tool that pays every month, one email capture, one product of your own.
+           </p>
+           <div className="hero-actions">
+             <Link href="/start" className="cta w-full sm:w-auto">
+diff --git a/components/SignalStackSection.tsx b/components/SignalStackSection.tsx
+index 441f12e..a7bff74 100644
+--- a/components/SignalStackSection.tsx
++++ b/components/SignalStackSection.tsx
+@@ -10,8 +10,8 @@ const signalSteps = [
+   },
+   {
+     number: '02',
+-    title: 'Comparison earns trust',
+-    body: 'The useful answer stays honest before payout is considered.',
++    title: 'Comparison sets the verdict',
++    body: 'The ranking is fixed on fit before payout enters the math.',
+     metric: 'proof',
+   },
+   {
+@@ -37,11 +37,11 @@ export function SignalStackSection() {
+         <div className="section-heading motion-reveal">
+           <div className="kicker">Live signal model</div>
+           <h2>
+-            <span>Turn demand into a route,</span>
+-            <span>not a random link.</span>
++            <span>One search in,</span>
++            <span>one routed click out.</span>
+           </h2>
+           <p>
+-            Search intent enters, the comparison protects trust, and the best-fit payer or owned product receives the click only after the answer earns it.
++            Search intent enters, the comparison ranks it on fit, and the click routes to the winner — a recurring payer when one fits the verdict, an owned product when none does.
+           </p>
+           <div className="mt-6 flex flex-wrap gap-3">
+             <Link href="/tools" className="cta-secondary">
+diff --git a/components/TrackedLink.tsx b/components/TrackedLink.tsx
+deleted file mode 100644
+index 1b49cb6..0000000
+--- a/components/TrackedLink.tsx
++++ /dev/null
+@@ -1,25 +0,0 @@
+-'use client'
+-
+-import type { AnchorHTMLAttributes, ReactNode } from 'react'
+-import type { AnalyticsEvent } from '@/lib/analytics'
+-import { trackClientEvent } from '@/lib/client-analytics'
+-
+-type TrackedLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+-  event: AnalyticsEvent['event']
+-  payload?: Omit<AnalyticsEvent, 'event' | 'ts'>
+-  children: ReactNode
+-}
+-
+-export function TrackedLink({ event, payload, onClick, children, ...props }: TrackedLinkProps) {
+-  return (
+-    <a
+-      {...props}
+-      onClick={(clickEvent) => {
+-        trackClientEvent(event, { ...payload, href: props.href })
+-        onClick?.(clickEvent)
+-      }}
+-    >
+-      {children}
+-    </a>
+-  )
+-}
+diff --git a/components/TransformationSection.tsx b/components/TransformationSection.tsx
+index 2023ba1..eaeb6ef 100644
+--- a/components/TransformationSection.tsx
++++ b/components/TransformationSection.tsx
+@@ -17,7 +17,7 @@ const states = [
+ ]
+ 
+ const moves = [
+-  ['Question', 'Turn high-intent searches into a direct answer, not a meandering blog post.'],
++  ['Question', 'Answer the search in the first screen: verdict, criteria, tradeoff.'],
+   ['Proof', 'Show the tradeoffs, disclose the incentives, and let the best-fit tool win.'],
+   ['Route', 'Send qualified demand to recurring programs or a direct product only when it belongs.'],
+   ['Asset', 'Capture the relationship so the next launch starts with trust instead of rented attention.'],
+@@ -30,7 +30,7 @@ export function TransformationSection() {
+         <div className="kicker">Transformation</div>
+         <h2>From tool noise to a compounding income desk.</h2>
+         <p>
+-          Agentic Income is built to make the upgrade visible: scattered demand becomes one honest recommendation system, then one owned product relationship.
++          Agentic Income makes the upgrade visible: scattered demand becomes one routed recommendation system with criteria on the page, then one owned product relationship.
+         </p>
+       </div>
+ 
+diff --git a/components/TrustComparisonDesk.tsx b/components/TrustComparisonDesk.tsx
+new file mode 100644
+index 0000000..c667c6c
+--- /dev/null
++++ b/components/TrustComparisonDesk.tsx
+@@ -0,0 +1,335 @@
++'use client'
++
++import { useEffect, useMemo, useState } from 'react'
++import { findProgram, getLink } from '@/lib/affiliate'
++import { trackClientEvent } from '@/lib/client-analytics'
++import { TrackedLink } from '@agentic-income/engine/react.js'
++
++type RouteStatus = 'paid' | 'unpaid' | 'owned' | 'stale'
++
++type Criteria = {
++  fit: number
++  value: number
++  quality: number
++  maintainability: number
++  risk: number
++}
++
++type TrustRoute = {
++  id: string
++  title: string
++  intent: string
++  audience: string
++  tool: string
++  routeStatus: RouteStatus
++  routeLabel: string
++  ctaLabel: string
++  href?: string
++  bestFor: string
++  avoidIf: string
++  rankingReason: string
++  payoutModel?: string
++  lastVerified: string
++  nextReview: string
++  criteria: Criteria
++  alternatives: string[]
++}
++
++const ROUTES: TrustRoute[] = [
++  {
++    id: 'faceless-youtube',
++    title: 'Faceless YouTube stack',
++    intent: 'Script, voice, edit, and clip a channel without hiring a full team.',
++    audience: 'Creator operator',
++    tool: 'ElevenLabs',
++    routeStatus: 'paid',
++    routeLabel: 'Paid route',
++    ctaLabel: 'Open routed pick',
++    bestFor: 'Creators who need voice quality, fast editing, and recurring workflow utility.',
++    avoidIf: 'You need the cheapest possible voice stack and can accept lower realism.',
++    rankingReason: 'ElevenLabs wins the voice slot on quality and creator fit; CapCut keeps editing accessible. The payout route follows the fit, not the other way around.',
++    payoutModel: '22% / 12-month route in catalog',
++    lastVerified: '2026-06-12',
++    nextReview: '2026-07-12',
++    criteria: { fit: 95, value: 82, quality: 94, maintainability: 88, risk: 18 },
++    alternatives: ['CapCut for editing', 'Descript for transcript workflows', 'No-pay manual editing route'],
++  },
++  {
++    id: 'frontier-answer',
++    title: 'Frontier model answer',
++    intent: 'Choose the best model before routing to any payer.',
++    audience: 'AI builder',
++    tool: 'OpenAI',
++    routeStatus: 'unpaid',
++    routeLabel: 'No paid route',
++    ctaLabel: 'Compare alternatives',
++    href: '/blog/personal-ai-coe-under-100',
++    bestFor: 'Builders who need the best answer even when the winner pays nothing.',
++    avoidIf: 'You want a recommendation filtered only by available affiliate programs.',
++    rankingReason: 'Frontier tools like ChatGPT and Claude can win the answer while paying nothing. The desk still shows them when they are the best fit.',
++    lastVerified: '2026-06-12',
++    nextReview: '2026-07-12',
++    criteria: { fit: 91, value: 86, quality: 92, maintainability: 84, risk: 22 },
++    alternatives: ['Perplexity for research routing', 'OpenRouter for model access', 'Owned starter kit for operating loop'],
++  },
++  {
++    id: 'owned-system',
++    title: 'Owned income loop',
++    intent: 'Turn one comparison into a product and list relationship.',
++    audience: 'Operator founder',
++    tool: 'Starter Kit',
++    routeStatus: 'owned',
++    routeLabel: 'Owned offer',
++    ctaLabel: 'Open starter kit',
++    href: '/offers/starter-kit',
++    bestFor: 'Operators who need the repeatable first loop instead of another tool list.',
++    avoidIf: 'You only want a third-party software recommendation.',
++    rankingReason: 'The owned offer is labeled separately because it is Agentic Income product inventory, not a third-party tool verdict.',
++    payoutModel: 'Agentic Income product',
++    lastVerified: '2026-07-05',
++    nextReview: '2026-08-05',
++    criteria: { fit: 88, value: 90, quality: 82, maintainability: 92, risk: 20 },
++    alternatives: ['Read the free flywheel post', 'Inspect catalog first', 'Use the trust standard before buying'],
++  },
++  {
++    id: 'verify-video-route',
++    title: 'Video model backdoor',
++    intent: 'Monetize video-model demand only after terms are checked.',
++    audience: 'Video creator',
++    tool: 'Pika',
++    routeStatus: 'stale',
++    routeLabel: 'Verify before primary CTA',
++    ctaLabel: 'Inspect catalog notes',
++    href: '/tools',
++    bestFor: 'Teams comparing video tools where direct affiliate terms are changing.',
++    avoidIf: 'You need a route that is confirmed safe for primary promotion today.',
++    rankingReason: 'The catalog marks Pika as verify because similar names and program terms can drift. The CTA downgrades until terms are current.',
++    payoutModel: 'Verify',
++    lastVerified: '2026-06-12',
++    nextReview: 'Immediate',
++    criteria: { fit: 78, value: 74, quality: 82, maintainability: 58, risk: 64 },
++    alternatives: ['Higgsfield for proven creator route', 'Topaz for high-AOV upscaling', 'Pollo for aggregator coverage'],
++  },
++]
++
++const STATUS_COPY: Record<RouteStatus, string> = {
++  paid: 'Agentic Income may earn a commission if you buy through this route. The ranking still uses the criteria shown here.',
++  unpaid: 'This recommendation does not currently pay Agentic Income. It can still win when it is the best fit.',
++  owned: 'This route points to an Agentic Income product and is labeled separately from third-party recommendations.',
++  stale: 'Terms or pricing need review before this should be used as a primary outbound CTA.',
++}
++
++const STATUS_CLASS: Record<RouteStatus, string> = {
++  paid: 'trust-status-paid',
++  unpaid: 'trust-status-unpaid',
++  owned: 'trust-status-owned',
++  stale: 'trust-status-stale',
++}
++
++const CRITERIA_LABELS: Array<[keyof Criteria, string]> = [
++  ['fit', 'Fit'],
++  ['value', 'Value'],
++  ['quality', 'Quality'],
++  ['maintainability', 'Maint.'],
++  ['risk', 'Risk'],
++]
++
++function routeHref(route: TrustRoute) {
++  if (route.routeStatus === 'paid') return getLink(route.tool)
++  return route.href ?? null
++}
++
++function routeEvent(route: TrustRoute) {
++  if (route.routeStatus === 'paid') return 'affiliate_route_clicked'
++  if (route.routeStatus === 'owned') return 'owned_offer_clicked'
++  if (route.routeStatus === 'unpaid') return 'unpaid_route_clicked'
++  return 'stale_route_seen'
++}
++
++function formatProgramStatus(route: TrustRoute) {
++  const program = findProgram(route.tool)
++  if (!program) return route.routeStatus === 'owned' ? 'Owned product path' : 'No catalog payer'
++  return `${program.status ?? 'active'}${program.recurring ? ` / ${program.recurring}` : ''}`
++}
++
++export function TrustComparisonDesk() {
++  const [activeId, setActiveId] = useState(ROUTES[0].id)
++  const activeRoute = useMemo(() => ROUTES.find((route) => route.id === activeId) ?? ROUTES[0], [activeId])
++  const activeHref = routeHref(activeRoute)
++
++  useEffect(() => {
++    trackClientEvent('disclosure_seen', { source: 'trust-comparison-desk', state: 'visible' })
++    trackClientEvent('last_verified_visible', {
++      source: 'trust-comparison-desk',
++      tool: activeRoute.tool,
++      state: activeRoute.lastVerified,
++    })
++  }, [activeRoute.lastVerified, activeRoute.tool])
++
++  function selectRoute(route: TrustRoute) {
++    setActiveId(route.id)
++    trackClientEvent('comparison_criteria_opened', {
++      source: 'trust-comparison-desk',
++      tool: route.tool,
++      state: route.routeStatus,
++    })
++
++    if (!routeHref(route)) {
++      trackClientEvent('null_link_rendered', {
++        source: 'trust-comparison-desk',
++        tool: route.tool,
++        state: route.routeStatus,
++      })
++    }
++
++    if (route.routeStatus === 'stale') {
++      trackClientEvent('stale_route_seen', {
++        source: 'trust-comparison-desk',
++        tool: route.tool,
++        state: route.lastVerified,
++      })
++    }
++  }
++
++  return (
++    <section className="section-band trust-desk-section" aria-labelledby="trust-desk-title">
++      <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
++        <div className="section-heading motion-reveal">
++          <div className="kicker">Criteria before click</div>
++          <h2 id="trust-desk-title">
++            <span>Every route </span>
++            <span>earns its click.</span>
++          </h2>
++          <p>
++            The recommendation still has to show why it wins, how fresh the claim is, whether Agentic Income can get paid, and what the reader should compare before clicking.
++          </p>
++          <div className="trust-desk-legend" aria-label="Route status legend">
++            <span className="trust-status trust-status-paid">Paid</span>
++            <span className="trust-status trust-status-unpaid">Unpaid</span>
++            <span className="trust-status trust-status-owned">Owned</span>
++            <span className="trust-status trust-status-stale">Stale</span>
++          </div>
++          <TrackedLink
++            href="/trust"
++            className="cta-secondary mt-6 w-full sm:w-auto"
++            event="trust_standard_clicked"
++            payload={{ source: 'trust-comparison-desk' }}
++          >
++            Read trust standard
++          </TrackedLink>
++        </div>
++
++        <div className="trust-desk motion-reveal">
++          <div className="trust-desk-topline">
++            <div>
++              <div className="panel-label">Decision desk</div>
++              <h3>AI tool route review</h3>
++            </div>
++            <div className="trust-freshness">
++              <span>Last verified</span>
++              <strong>{activeRoute.lastVerified}</strong>
++            </div>
++          </div>
++
++          <div className="trust-desk-grid">
++            <div className="trust-route-list" aria-label="Comparison routes">
++              {ROUTES.map((route) => (
++                <button
++                  key={route.id}
++                  type="button"
++                  className={`trust-route-button ${route.id === activeRoute.id ? 'is-active' : ''}`}
++                  onClick={() => selectRoute(route)}
++                  aria-pressed={route.id === activeRoute.id}
++                >
++                  <span className={`trust-status ${STATUS_CLASS[route.routeStatus]}`}>{route.routeLabel}</span>
++                  <strong>{route.title}</strong>
++                  <small>{route.intent}</small>
++                </button>
++              ))}
++            </div>
++
++            <article className="trust-route-detail" aria-live="polite">
++              <div className="trust-detail-header">
++                <div>
++                  <span className={`trust-status ${STATUS_CLASS[activeRoute.routeStatus]}`}>{activeRoute.routeLabel}</span>
++                  <h3>{activeRoute.title}</h3>
++                  <p>{activeRoute.audience}</p>
++                </div>
++                <div className="trust-program-status">{formatProgramStatus(activeRoute)}</div>
++              </div>
++
++              <div className="trust-disclosure-box">
++                <div className="panel-label">Disclosure in context</div>
++                <p>{STATUS_COPY[activeRoute.routeStatus]}</p>
++              </div>
++
++              <div className="trust-criteria-grid" aria-label={`${activeRoute.title} ranking criteria`}>
++                {CRITERIA_LABELS.map(([key, label]) => (
++                  <div key={key} className="trust-meter">
++                    <div className="trust-meter-label">
++                      <span>{label}</span>
++                      <strong>{activeRoute.criteria[key]}</strong>
++                    </div>
++                    <div className="trust-meter-track" aria-hidden="true">
++                      <span style={{ width: `${activeRoute.criteria[key]}%` }} />
++                    </div>
++                  </div>
++                ))}
++              </div>
++
++              <div className="trust-route-copy">
++                <div>
++                  <span>Why it wins</span>
++                  <p>{activeRoute.rankingReason}</p>
++                </div>
++                <div>
++                  <span>Best for</span>
++                  <p>{activeRoute.bestFor}</p>
++                </div>
++                <div>
++                  <span>Avoid if</span>
++                  <p>{activeRoute.avoidIf}</p>
++                </div>
++              </div>
++
++              <div className="trust-alternatives">
++                <div className="panel-label">Alternatives before action</div>
++                <div className="trust-alt-row">
++                  {activeRoute.alternatives.map((alternative) => (
++                    <span key={alternative}>{alternative}</span>
++                  ))}
++                </div>
++              </div>
++
++              <div className="trust-action-row">
++                <div>
++                  <div className="panel-label">Next review</div>
++                  <p>{activeRoute.nextReview}</p>
++                  {activeRoute.payoutModel && <small>{activeRoute.payoutModel}</small>}
++                </div>
++                {activeHref ? (
++                  <TrackedLink
++                    href={activeHref}
++                    target={activeHref.startsWith('http') ? '_blank' : undefined}
++                    rel={activeHref.startsWith('http') ? 'sponsored nofollow noopener' : undefined}
++                    className="cta trust-route-cta"
++                    event={routeEvent(activeRoute)}
++                    payload={{
++                      tool: activeRoute.tool,
++                      source: 'trust-comparison-desk',
++                      state: activeRoute.routeStatus,
++                    }}
++                  >
++                    {activeRoute.ctaLabel}
++                  </TrackedLink>
++                ) : (
++                  <span className="trust-disabled-cta">No paid route available</span>
++                )}
++              </div>
++            </article>
++          </div>
++        </div>
++      </div>
++    </section>
++  )
++}
+diff --git a/lib/affiliate.ts b/lib/affiliate.ts
+index 735f800..720fea9 100644
+--- a/lib/affiliate.ts
++++ b/lib/affiliate.ts
+@@ -1,46 +1,8 @@
+ import catalog from '@/data/programs.json'
++import { createAffiliateHelpers, type Program } from '@agentic-income/engine/catalog-helpers.js'
+ 
+-export type Program = {
+-  tool: string
+-  category: string
+-  aliases: string[]
+-  hasProgram: boolean
+-  priority?: number
+-  commission?: string
+-  recurring?: string
+-  cookieDays?: number | null
+-  network?: string
+-  signupUrl?: string
+-  ourLink?: string | null
+-  status?: string
+-  note?: string
+-}
+-
+-const PROGRAMS = catalog.programs as Program[]
+-export const DISCLOSURE = catalog.disclosure as string
+-
+-const byAlias = new Map<string, Program>()
+-for (const p of PROGRAMS) {
+-  byAlias.set(p.tool.toLowerCase(), p)
+-  for (const a of p.aliases ?? []) byAlias.set(a.toLowerCase(), p)
+-}
+-
+-export function findProgram(tool: string): Program | undefined {
+-  return byAlias.get(tool.trim().toLowerCase())
+-}
+-
+-/**
+- * The affiliate link for a tool, or null when we haven't joined the program.
+- * Null is the honest default — callers render plain text, never a dead link.
+- */
+-export function getLink(tool: string): string | null {
+-  const p = findProgram(tool)
+-  return p?.ourLink ?? null
+-}
+-
+-/** Programs worth joining, ranked by priority — drives the "monetize" surfaces. */
+-export function payingPrograms(): Program[] {
+-  return PROGRAMS
+-    .filter((p) => p.hasProgram && p.status !== 'closed' && p.status !== 'dead-end')
+-    .sort((a, b) => (a.priority ?? 99) - (b.priority ?? 99))
+-}
++// Thin per-site binding: the matching/lookup logic lives once in the shared package,
++// this file just supplies this site's own vendored catalog. Every existing
++// `import { getLink } from '@/lib/affiliate'` call site keeps working unchanged.
++export type { Program }
++export const { DISCLOSURE, findProgram, getLink, payingPrograms } = createAffiliateHelpers(catalog)
+diff --git a/lib/analytics.ts b/lib/analytics.ts
+index 03e8b31..78ab3e4 100644
+--- a/lib/analytics.ts
++++ b/lib/analytics.ts
+@@ -1,73 +1,11 @@
+-export type AnalyticsEvent = {
+-  event: string
+-  path?: string
+-  href?: string
+-  source?: string
+-  offer?: string
+-  tool?: string
+-  state?: string
+-  requestId?: string
+-  ts?: string
+-}
+-
+-const ALLOWED_EVENTS = new Set([
+-  'affiliate_click',
+-  'checkout_click',
+-  'checkout_redirect',
+-  'checkout_fallback_request',
+-  'delivery_view',
+-  'offer_view',
+-  'subscribe_success',
+-  'subscribe_error',
+-])
+-
+-function clean(value: unknown): string | undefined {
+-  if (typeof value !== 'string') return undefined
+-  const trimmed = value.trim()
+-  return trimmed.slice(0, 240) || undefined
+-}
+-
+-export function normalizeAnalyticsEvent(input: unknown): AnalyticsEvent | null {
+-  if (!input || typeof input !== 'object') return null
+-  const source = input as Record<string, unknown>
+-  const event = clean(source.event)
+-
+-  if (!event || !ALLOWED_EVENTS.has(event)) return null
+-
+-  return {
+-    event,
+-    path: clean(source.path),
+-    href: clean(source.href),
+-    source: clean(source.source),
+-    offer: clean(source.offer),
+-    tool: clean(source.tool),
+-    state: clean(source.state),
+-    requestId: clean(source.requestId),
+-    ts: clean(source.ts) ?? new Date().toISOString(),
+-  }
+-}
+-
+-export async function forwardAnalyticsEvent(event: AnalyticsEvent): Promise<boolean> {
+-  const webhook = process.env.ANALYTICS_WEBHOOK_URL
+-  if (!webhook || !webhook.startsWith('http')) return false
++import { normalizeAnalyticsEvent, forwardAnalyticsEvent as forward, type AnalyticsEvent } from '@agentic-income/engine/analytics.js'
+ 
+-  const controller = new AbortController()
+-  const timeout = setTimeout(() => controller.abort(), 1500)
++// Thin per-site binding: validation/allow-list logic lives once in the shared package;
++// this file just binds the site host for outbound forwarding so every existing
++// `forwardAnalyticsEvent(event)` call site (no second argument) keeps working unchanged.
++export type { AnalyticsEvent }
++export { normalizeAnalyticsEvent }
+ 
+-  try {
+-    const response = await fetch(webhook, {
+-      method: 'POST',
+-      headers: { 'content-type': 'application/json' },
+-      body: JSON.stringify({
+-        ...event,
+-        site: 'agenticincome.ai',
+-      }),
+-      signal: controller.signal,
+-    })
+-    return response.ok
+-  } catch {
+-    return false
+-  } finally {
+-    clearTimeout(timeout)
+-  }
++export function forwardAnalyticsEvent(event: AnalyticsEvent): Promise<boolean> {
++  return forward(event, 'agenticincome.ai')
+ }
+diff --git a/lib/client-analytics.ts b/lib/client-analytics.ts
+index e65306c..91f6884 100644
+--- a/lib/client-analytics.ts
++++ b/lib/client-analytics.ts
+@@ -1,26 +1 @@
+-'use client'
+-
+-import type { AnalyticsEvent } from '@/lib/analytics'
+-
+-export function trackClientEvent(event: AnalyticsEvent['event'], payload: Omit<AnalyticsEvent, 'event' | 'ts'> = {}) {
+-  if (typeof window === 'undefined') return
+-
+-  const body = JSON.stringify({
+-    ...payload,
+-    event,
+-    path: payload.path ?? window.location.pathname,
+-    ts: new Date().toISOString(),
+-  })
+-
+-  if ('sendBeacon' in navigator) {
+-    const sent = navigator.sendBeacon('/api/analytics', new Blob([body], { type: 'application/json' }))
+-    if (sent) return
+-  }
+-
+-  void fetch('/api/analytics', {
+-    method: 'POST',
+-    headers: { 'content-type': 'application/json' },
+-    body,
+-    keepalive: true,
+-  }).catch(() => undefined)
+-}
++export { trackClientEvent } from '@agentic-income/engine/analytics.js'
+diff --git a/lib/design.ts b/lib/design.ts
+index 2d250e2..0ea1cb4 100644
+--- a/lib/design.ts
++++ b/lib/design.ts
+@@ -29,12 +29,12 @@ export const designTokens = {
+ 
+ export const brandPillars = [
+   {
+-    title: 'Honest comparison',
+-    body: 'The best tool wins before payout is considered. Dead-end frontier tools still get covered when they answer the search intent.',
++    title: 'Fit ranks first',
++    body: 'The best tool wins before payout is considered. ChatGPT and Claude pay nothing and still take the top slot when they are the answer.',
+   },
+   {
+     title: 'Recurring-payer routing',
+-    body: 'Revenue comes from tools that actually pay recurring and authentically fit the recommendation.',
++    body: 'Revenue comes from tools that pay recurring and fit the recommendation they appear in.',
+   },
+   {
+     title: 'Owned audience',
+diff --git a/lib/posts.ts b/lib/posts.ts
+index 1fb2a3e..d1bc9ef 100644
+--- a/lib/posts.ts
++++ b/lib/posts.ts
+@@ -14,6 +14,16 @@ export type Post = {
+ }
+ 
+ export const posts: Post[] = [
++  {
++    slug: 'best-ai-video-generator-2026',
++    title: 'Best AI Video Generator 2026: The Honest Pick for Creators Building Income',
++    dek: 'Sora, Veo, and Kling produce the best raw quality and pay creators nothing. Higgsfield is the honest pick for a creator building a video business — and Pollo AI is the backdoor to the giants.',
++    query: 'best ai video generator 2026',
++    date: '2026-07-06',
++    cluster: 'creator',
++    tools: ['Higgsfield', 'Pika', 'Pollo AI', 'Topaz Labs'],
++    featured: true,
++  },
+   {
+     slug: 'best-ai-tools-faceless-youtube',
+     title: 'Best AI Tools for a Faceless YouTube Channel (Full Stack Under $60/mo)',
+@@ -54,6 +64,56 @@ export const posts: Post[] = [
+     tools: ['Higgsfield', 'Systeme.io', 'ElevenLabs', 'Gamma', 'CapCut', 'HeyGen', 'Synthesia', 'Opus Clip'],
+     featured: true,
+   },
++  {
++    slug: 'systeme-io-review-2026',
++    title: 'Systeme.io Review 2026: The All-in-One Creator Platform, Honestly Assessed',
++    dek: 'Funnels, email, courses, and a membership site in one tool. What it does well, where it loses to specialists, and who should actually buy it.',
++    query: 'systeme.io review',
++    date: '2026-07-05',
++    cluster: 'income',
++    tools: ['Systeme.io', 'Copy.ai', 'Writesonic'],
++    featured: true,
++  },
++  {
++    slug: 'copy-ai-vs-writesonic-vs-rytr',
++    title: 'Copy.ai vs Writesonic vs Rytr (2026): Honest Verdict',
++    dek: 'Three AI writing tools, one honest verdict — Copy.ai for brand voice, Writesonic as the all-around winner, Rytr as the lifetime-recurring budget pick.',
++    query: 'copy.ai vs writesonic vs rytr',
++    date: '2026-07-05',
++    cluster: 'income',
++    tools: ['Copy.ai', 'Writesonic', 'Rytr'],
++    featured: true,
++  },
++  {
++    slug: 'best-ai-video-upscaler-2026',
++    title: 'Best AI Video Upscaler 2026 (Honest Verdict + Who Should Skip It)',
++    dek: 'What AI upscaling actually does, who genuinely needs it, and an honest look at Topaz Labs Video AI and Photo AI — including who should skip it entirely.',
++    query: 'best ai video upscaler',
++    date: '2026-07-05',
++    cluster: 'creator',
++    tools: ['Topaz Labs'],
++    featured: true,
++  },
++  {
++    slug: 'heygen-vs-synthesia',
++    title: 'HeyGen vs Synthesia 2026: Which One Should You Actually Buy?',
++    dek: "A practical buyer's guide for creators and small teams — which AI avatar tool earns back its subscription, HeyGen or Synthesia.",
++    query: 'heygen vs synthesia',
++    date: '2026-07-05',
++    cluster: 'creator',
++    tools: ['HeyGen', 'Synthesia'],
++    featured: true,
++  },
++  {
++    slug: 'best-ai-presentation-maker-2026',
++    title: 'Best AI Presentation Maker 2026: Gamma vs Canva vs the Rest',
++    dek: 'The honest pick for AI presentation makers in 2026 — why Gamma wins on product merit, and when Canva is the smarter buy.',
++    query: 'best ai presentation maker',
++    date: '2026-07-05',
++    cluster: 'creator',
++    tools: ['Gamma', 'Canva'],
++    featured: true,
++  },
+ ]
+ 
+ export function getPost(slug: string): Post | undefined {
+diff --git a/lib/readiness.ts b/lib/readiness.ts
+index 527afa2..18fee51 100644
+--- a/lib/readiness.ts
++++ b/lib/readiness.ts
+@@ -7,31 +7,59 @@ type ReadinessItem = {
+   detail: string
+ }
+ 
+-function hasSecureUrlEnv(name: string) {
++type EnvCheck = { configured: boolean; misconfigured: boolean; warning?: string }
++
++// Distinguishes "not set" (a normal, expected state before a provider is wired) from
++// "set but wrong" (a typo'd URL, a malformed email) — the readiness API previously
++// collapsed both into a single `false`, so a misspelled env var name looked identical
++// to one that was never set at all. The second case should be loud, not silent.
++function checkSecureUrlEnv(name: string): EnvCheck {
+   const value = process.env[name]
+-  if (!value) return false
++  if (!value) return { configured: false, misconfigured: false }
+ 
+   try {
+     const url = new URL(value)
+-    return url.protocol === 'https:'
++    if (url.protocol !== 'https:') {
++      return { configured: false, misconfigured: true, warning: `${name} is set but is not https:// — refusing to use an insecure checkout URL.` }
++    }
++    return { configured: true, misconfigured: false }
+   } catch {
+-    return false
++    return { configured: false, misconfigured: true, warning: `${name} is set but is not a valid URL. Check for a typo or truncated value.` }
+   }
+ }
+ 
+-function hasEmailEnv(name: string) {
++function checkEmailEnv(name: string): EnvCheck {
+   const value = process.env[name]
+-  return Boolean(value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
++  if (!value) return { configured: false, misconfigured: false }
++
++  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
++  return valid
++    ? { configured: true, misconfigured: false }
++    : { configured: false, misconfigured: true, warning: `${name} is set but does not look like a valid email address.` }
+ }
+ 
+ export function getLaunchReadiness() {
+-  const blueprintCheckout = hasSecureUrlEnv('AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL')
+-  const privateIntelCheckout = hasSecureUrlEnv('AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL')
+-  const subscribeWebhook = hasSecureUrlEnv('SUBSCRIBE_WEBHOOK_URL')
+-  const conciergeEmail = hasEmailEnv('ACCESS_REQUEST_EMAIL')
+-  const analyticsWebhook = hasSecureUrlEnv('ANALYTICS_WEBHOOK_URL')
++  const blueprintCheckoutCheck = checkSecureUrlEnv('AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL')
++  const privateIntelCheckoutCheck = checkSecureUrlEnv('AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL')
++  const subscribeWebhookCheck = checkSecureUrlEnv('SUBSCRIBE_WEBHOOK_URL')
++  const conciergeEmailCheck = checkEmailEnv('ACCESS_REQUEST_EMAIL')
++  const analyticsWebhookCheck = checkSecureUrlEnv('ANALYTICS_WEBHOOK_URL')
++
++  const blueprintCheckout = blueprintCheckoutCheck.configured
++  const privateIntelCheckout = privateIntelCheckoutCheck.configured
++  const subscribeWebhook = subscribeWebhookCheck.configured
++  const conciergeEmail = conciergeEmailCheck.configured
++  const analyticsWebhook = analyticsWebhookCheck.configured
+   const captureConfigured = subscribeWebhook || conciergeEmail
+ 
++  const misconfigurationWarnings = [blueprintCheckoutCheck, privateIntelCheckoutCheck, subscribeWebhookCheck, conciergeEmailCheck, analyticsWebhookCheck]
++    .map((check) => check.warning)
++    .filter((warning): warning is string => Boolean(warning))
++
++  if (misconfigurationWarnings.length > 0 && process.env.NODE_ENV !== 'test') {
++    for (const warning of misconfigurationWarnings) console.warn(`[readiness] ${warning}`)
++  }
++
+   const items: ReadinessItem[] = [
+     {
+       id: 'blueprint_checkout',
+@@ -90,12 +118,16 @@ export function getLaunchReadiness() {
+   const fullLaunchReady = configuredRequired.length === required.length
+ 
+   return {
+-    version: '2026-06-26',
++    version: '2026-07-06',
+     checkedAt: new Date().toISOString(),
+     fullLaunchReady,
+     configuredRequired: configuredRequired.length,
+     requiredTotal: required.length,
+     captureMode: subscribeWebhook ? 'webhook' : conciergeEmail ? 'manual_email' : 'unwired',
++    // Distinct from `items[].configured === false` — this list only has entries when an
++    // env var is SET but fails validation (a typo, a truncated URL). An empty array here
++    // with items still unconfigured just means "not set yet," which is fine.
++    misconfigurationWarnings,
+     items,
+   }
+ }
+diff --git a/lib/site.ts b/lib/site.ts
+index e6515d1..9453cea 100644
+--- a/lib/site.ts
++++ b/lib/site.ts
+@@ -10,7 +10,7 @@ export const site = {
+   role: 'hub', // 'hub' (flagship) | 'spoke'
+   tagline: 'The AI-tool income desk.',
+   description:
+-    'A premium intelligence desk for turning AI-tool demand into honest comparisons, recurring payer routes, owned audience, and direct product systems.',
++    'An operating desk that turns AI-tool search demand into ranked comparisons, recurring-payer routes, an owned list, and a direct product ladder.',
+   author: 'Frank',
+   // Hub links down to its spokes; spokes link up to the hub. Topical authority + referral flow.
+   network: [
+diff --git a/mdx-components.tsx b/mdx-components.tsx
+index 2f54d45..6c240a7 100644
+--- a/mdx-components.tsx
++++ b/mdx-components.tsx
+@@ -1,11 +1,10 @@
+ import type { MDXComponents } from 'mdx/types'
+-import { AffiliateLink } from '@/components/AffiliateLink'
+-import { AffiliateDisclosure } from '@/components/AffiliateDisclosure'
+-import { ComparisonTable } from '@/components/ComparisonTable'
+-import { AnswerBox } from '@/components/AnswerBox'
+-import { FaqSection } from '@/components/FaqSection'
++import { AffiliateLink, AffiliateDisclosure, ComparisonTable, AnswerBox, FaqSection } from '@agentic-income/engine/react.js'
+ import { ArticleJsonLd } from '@/components/ArticleJsonLd'
+ 
++// AffiliateLink/AffiliateDisclosure/ComparisonTable read this site's catalog via
++// CatalogProvider (wrapped around the app in app/layout.tsx), not a factory call —
++// this is the fix for the drift that let disruptivepassiveincome's copy fall behind.
+ // Components available inside every .mdx post without an import.
+ export function useMDXComponents(components: MDXComponents): MDXComponents {
+   return {
+diff --git a/next.config.mjs b/next.config.mjs
+index 649ec0d..885e7c2 100644
+--- a/next.config.mjs
++++ b/next.config.mjs
+@@ -1,9 +1,32 @@
+ import createMDX from '@next/mdx'
+ 
++const securityHeaders = [
++  // Baseline hardening only — deliberately no Content-Security-Policy here yet.
++  // A real CSP needs every external domain this site actually loads (Vercel Analytics/
++  // Speed Insights scripts, Google Fonts, any image CDN) allowlisted and tested per site
++  // before it ships; get that wrong and it silently breaks fonts/analytics/images instead
++  // of failing loudly. Do that as its own reviewed change, not a 3am batch edit.
++  { key: 'X-Content-Type-Options', value: 'nosniff' },
++  { key: 'X-Frame-Options', value: 'DENY' },
++  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
++  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
++]
++
+ /** @type {import('next').NextConfig} */
+ const nextConfig = {
+   pageExtensions: ['ts', 'tsx', 'mdx'],
+-  experimental: { mdxRs: true },
++  experimental: {
++    mdxRs: true,
++    // The shared package is a symlinked sibling repo (pnpm "link:" dependency) — its real
++    // path is outside this project's root, which Next otherwise refuses to process.
++    externalDir: true,
++  },
++  // The shared component/analytics package ships uncompiled TSX from src/react/ — Next
++  // needs to run it through its own loaders like local code.
++  transpilePackages: ['@agentic-income/engine'],
++  async headers() {
++    return [{ source: '/:path*', headers: securityHeaders }]
++  },
+ }
+ 
+ const withMDX = createMDX({})
+diff --git a/package.json b/package.json
+index 4acd745..fc09f7f 100644
+--- a/package.json
++++ b/package.json
+@@ -16,6 +16,7 @@
+     "predeploy": "npm run merge:gate && npm run sync:catalog"
+   },
+   "dependencies": {
++    "@agentic-income/engine": "link:../affiliate-agent-skills",
+     "@vercel/analytics": "^2.0.1",
+     "@vercel/speed-insights": "^2.0.0",
+     "gsap": "^3.15.0",
+diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
+index 4924c6c..97eff8c 100644
+--- a/pnpm-lock.yaml
++++ b/pnpm-lock.yaml
+@@ -8,6 +8,9 @@ importers:
+ 
+   .:
+     dependencies:
++      '@agentic-income/engine':
++        specifier: link:../affiliate-agent-skills
++        version: link:../affiliate-agent-skills
+       '@vercel/analytics':
+         specifier: ^2.0.1
+         version: 2.0.1(next@16.2.7(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
+diff --git a/products/FULFILLMENT_RUNBOOK.md b/products/FULFILLMENT_RUNBOOK.md
+index d03684c..1219822 100644
+--- a/products/FULFILLMENT_RUNBOOK.md
++++ b/products/FULFILLMENT_RUNBOOK.md
+@@ -11,6 +11,7 @@ This runbook defines how each offer is delivered once the public site routes a b
+ | Starter Kit | `/api/checkout?offer=starter-kit` | none | `/delivery/starter-kit` | live |
+ | Blueprint | `/api/checkout?offer=blueprint` | `AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL` | `/delivery/blueprint` | payment-link pending |
+ | Private Intel | `/api/checkout?offer=private-intel` | `AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL` | `/delivery/private-intel` | payment-link pending |
++| Faceless YouTube Agent Pack | `/api/checkout?offer=faceless-youtube-pack` (not yet routed) | `AGENTIC_INCOME_FACELESS_YT_CHECKOUT_URL` (not yet set) | `/delivery/faceless-youtube-pack` (not yet built) | content drafted, not launched — see `products/faceless-youtube-pack/` |
+ 
+ ## Payment Provider Setup
+ 
+diff --git a/products/faceless-youtube-pack/FACELESS_YOUTUBE_AGENT_PACK.md b/products/faceless-youtube-pack/FACELESS_YOUTUBE_AGENT_PACK.md
+new file mode 100644
+index 0000000..5b4b2a4
+--- /dev/null
++++ b/products/faceless-youtube-pack/FACELESS_YOUTUBE_AGENT_PACK.md
+@@ -0,0 +1,80 @@
++# Faceless YouTube Agent Pack
++
++## Promise
++
++Give your agent the exact prompt chain to research, script, voice, assemble, and publish a faceless YouTube video end to end — without you touching video editing, scriptwriting, or voice work.
++
++## Buyer
++
++Creators and side-income builders who want the outcome (a running channel) without becoming an editor. Adjacent to Blueprint buyers, but earlier-stage — they want one working channel before they want the operating desk.
++
++## Price
++
++$97 launch / $149 standard. One-time. No recurring obligation on our side — the pack is prompts and a workflow map, not a hosted service.
++
++## First Win
++
++Produce one published video with: a validated title, a hook-heavy script, generated voiceover, assembled visuals, and full upload metadata — using nothing but the four prompts below and tools the buyer already can sign up for.
++
++## Pack Modules
++
++### 1. Niche Research Agent (prompt)
++
++Role: turn a broad channel niche into 10 low-competition, high-intent video titles per week.
++
++```text
++Input: channel niche, target audience, 3 competitor channels
++Output: 10 titles ranked by (search intent strength × competition gap),
++        one target keyword per title, one differentiation angle per title
++```
++
++Deliverable: copy-paste prompt + a tracking sheet template (title, keyword, status, publish date).
++
++### 2. Scriptwriter Agent (prompt)
++
++Role: turn one title into a high-retention script built for faceless pacing.
++
++Enforces: **Hook → Value → Tease → Value → CTA**, explicit B-roll callouts every 15–20 seconds, no filler sentences, cold open under 8 seconds.
++
++Deliverable: prompt chain + one worked example script so the buyer can see the target shape before running their own.
++
++### 3. Audio/Visual Assembly Workflow (blueprint, not code)
++
++Role: connect the finished script to voice generation and visual assembly using tools the buyer signs up for directly — this pack never touches their API keys or hosts anything.
++
++- **Voice:** ElevenLabs — script in, narration out. (22% commission, 90-day cookie, our audited pick — see [go.agenticincome.ai/elevenlabs](https://go.agenticincome.ai/elevenlabs))
++- **Visual assembly / B-roll:** Higgsfield or CapCut, depending on budget. Higgsfield for AI-generated B-roll from the script's callouts; CapCut for stock + template assembly. (Higgsfield 15% ambassador; CapCut up to 35% — both recurring)
++- **Long-form → Shorts repurposing (optional):** Opus Clip turns the finished video into 3–5 vertical clips for distribution.
++
++Deliverable: a step-by-step assembly map (not a Zapier/API integration — the buyer runs each tool manually or via that tool's own automation, keeping this pack liability-free on our side).
++
++### 4. Publishing & SEO Agent (prompt)
++
++Role: turn the finished script into the full YouTube metadata package.
++
++```text
++Input: final script, target keyword
++Output: title (3 variants), description (with timestamps), 15 tags,
++        pinned comment copy, community-post copy
++```
++
++## Upsell Path (in-pack, not required)
++
++- Order bump: "100 Proven Hooks for Faceless Channels" (future $17 add-on — not built yet)
++- Natural next step: **Blueprint** ($67) for buyers who want the full operating desk, not just one channel
++
++## Why This Stays Headache-Free
++
++- We sell prompts and a workflow map — information, not software. No hosting, no API keys of ours in the loop, no uptime obligation.
++- Every tool named already has an audited, recurring affiliate route in the catalog (`data/programs.json`) — the pack sale and the backend affiliate commission stack on the same recommendation, and the recommendation is real: these are the tools we'd actually point a reader to in a comparison post.
++- No claims about specific channel revenue. The promise is the workflow, not an income guarantee.
++
++## Support Boundary
++
++Template-level support and prompt update notes when a named tool changes its interface materially. No 1:1 coaching, no channel strategy consulting, no "review my video" service.
++
++## Open Before Launch
++
++- [ ] Payment link (blocked — see `FULFILLMENT_RUNBOOK.md`: checkout URLs are not yet wired for **any** paid offer, including Blueprint and Private Intel. This pack sits behind the same blocker, not a new one.)
++- [ ] Add `offer=faceless-youtube-pack` row to `FULFILLMENT_RUNBOOK.md` Offer States table once a delivery path exists.
++- [ ] Decide launch price ($97) vs standard price ($149) and the switch trigger (e.g., first 20 buyers, or a fixed date).

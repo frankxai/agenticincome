@@ -1,23 +1,16 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { AssemblyHero } from '@/components/AssemblyHero'
-import { ManifestoSection } from '@/components/ManifestoSection'
-import { ShiftSection } from '@/components/ShiftSection'
-import { PathSection } from '@/components/PathSection'
-import { PackTerminal } from '@/components/PackTerminal'
-import { KnowledgeIndex } from '@/components/KnowledgeIndex'
-import { ProductLadder } from '@/components/ProductLadder'
+import { IncomeDeskHero } from '@/components/IncomeDeskHero'
+import { RevenueCapabilitySection } from '@/components/RevenueCapabilitySection'
 import { AgentWorkflowProof } from '@/components/AgentWorkflowProof'
-import { TrinityRibbon } from '@/components/TrinityRibbon'
-import { EmailCapture } from '@/components/EmailCapture'
 import { sortedPosts } from '@/lib/posts'
 
 const featured = sortedPosts.filter((post) => post.featured).slice(0, 2)
 
 export const metadata: Metadata = {
-  title: 'Build income with AI agents — machinery you can inspect',
+  title: 'Turn one valuable workflow into an income system you own',
   description:
-    'Income is becoming an engineering discipline. A dated, re-verified knowledge base, the installable /ai Income Architect pack, self-serve products, and attested proof. No income promises — machinery and education.',
+    'For founders, experts, and operators: package one valuable workflow into a governed agent service with a clear offer, acceptance checks, public proof, and a system you own.',
   alternates: { canonical: '/' },
   openGraph: { url: '/' },
 }
@@ -25,30 +18,48 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <AssemblyHero />
+      <IncomeDeskHero />
 
-      <ShiftSection />
+      <RevenueCapabilitySection />
 
-      <ManifestoSection />
+      <section className="section-band" aria-labelledby="human-principal-title">
+        <div className="grid gap-8 lg:grid-cols-[0.76fr_1.24fr] lg:items-end">
+          <div className="section-heading motion-reveal">
+            <div className="kicker">Human judgment · agent leverage</div>
+            <h2 id="human-principal-title">The agent does more. You remain the principal.</h2>
+          </div>
+          <p className="max-w-2xl text-lg leading-8 text-muted motion-reveal">
+            Agents can research, structure, draft, build, test, and document. A person or legal
+            entity still owns the customer relationship, approves commitments, controls accounts,
+            and decides what is good enough to ship.
+          </p>
+        </div>
 
-      <PathSection />
-
-      <PackTerminal />
-
-      <KnowledgeIndex />
-
-      <ProductLadder />
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {[
+            ['You bring the signal', 'A buyer you understand, a painful workflow, real constraints, and judgment earned in the field.'],
+            ['Agents build the evidence', 'Research, workflow design, implementation, tests, documentation, and a reviewable decision trail.'],
+            ['You keep the compounding assets', 'The offer, repository, customer trust, operating knowledge, accounts, and intellectual property.'],
+          ].map(([title, body]) => (
+            <div key={title} className="card motion-reveal">
+              <h3 className="text-xl font-semibold text-ink">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted">{body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <AgentWorkflowProof />
 
       <section className="section-band">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div className="section-heading motion-reveal">
-            <div className="kicker text-[color:var(--color-accent-2)]">Research · education</div>
-            <h2 className="display-h2">Decisions before incentives.</h2>
+            <div className="kicker text-[color:var(--color-accent-2)]">Research · secondary layer</div>
+            <h2 className="display-h2">Useful research earns attention. It does not define the product.</h2>
             <p className="mt-3 max-w-xl text-[color:var(--color-muted)]">
-              Comparisons show the tradeoff, the evidence date, and the material incentive —
-              so you can judge the recommendation, not just receive it.
+              Tool comparisons remain dated, disclosed, and recommendation-first. They help people
+              make decisions and discover the operating system without turning Agentic Income into
+              another giant directory.
             </p>
           </div>
           <Link href="/blog" className="cta-secondary">All research</Link>
@@ -68,31 +79,20 @@ export default function Home() {
         </div>
       </section>
 
-      <TrinityRibbon />
-
-      <section className="section-band">
-        <EmailCapture
-          headline="The Agentic Income Brief"
-          sub="Weekly: what changed in the agent landscape, one stream teardown, pack updates. Factual, dated, unsubscribe in one click."
-          source="home-brief"
-          buttonLabel="Get the Brief"
-          successMessage="You're in. The next Brief ships this week."
-        />
-      </section>
-
       <section className="conversion-band motion-reveal">
         <div>
-          <div className="kicker text-[color:var(--color-gold)]">Implementation · apex — 2/month</div>
-          <h2 className="display-h2">Bring one valuable workflow.</h2>
+          <div className="kicker text-[color:var(--color-gold)]">Start with a real customer job</div>
+          <h2 className="display-h2">Map the first system before you buy anything.</h2>
           <p className="mt-3 max-w-xl text-[color:var(--color-muted)]">
-            The only human-gated product in the trinity: a scoped agent-team build with verification
-            evidence and a Git-backed handover. Scope first — no payment on this site.
+            Choose the right starting path, inspect the public method, or bring a credible workflow
+            into a scope-first implementation. No income promise and no payment before the work and
+            acceptance checks are defined.
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-          <Link href="/offers/implementation-sprint" className="cta">Request a scoped plan</Link>
-          <a href="https://github.com/frankxai/agenticincome" target="_blank" rel="noopener noreferrer" className="cta-secondary">
-            Audit us on GitHub
+          <Link href="/start" className="cta">Map my first system</Link>
+          <a href="https://github.com/frankxai/agentic-income-skills" target="_blank" rel="noopener noreferrer" className="cta-secondary">
+            Inspect the public method
           </a>
         </div>
       </section>

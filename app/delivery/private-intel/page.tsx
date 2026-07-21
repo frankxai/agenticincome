@@ -1,19 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { EmailCapture } from '@/components/EmailCapture'
 import { TrackOnView } from '@/components/TrackOnView'
 
 export const metadata: Metadata = {
-  title: 'Private Intel Delivery',
-  description: 'Post-checkout delivery desk for the Agentic Income Private Intel membership.',
+  title: 'Operator Evidence Brief Delivery',
+  description: 'Prepared post-checkout delivery desk for the Agentic Income Operator Evidence Brief.',
   robots: { index: false, follow: false },
 }
 
 const memberSteps = [
   ['Confirm membership', 'Use the provider receipt as proof of active membership when checkout is live.'],
-  ['Read the brief', 'Start with the current payer brief, catalog changes, and priority watchlist.'],
-  ['Pick one move', 'Choose one stack opportunity or content route to act on before the next brief arrives.'],
-  ['Use Q&A window', 'Bring narrow payer, stack, or route questions to the private Q&A window.'],
+  ['Read the evidence', 'Start with runtime, authority, evaluation, cost, and priority re-verification changes.'],
+  ['Pick one move', 'Choose one bounded system change, validation task, or risk decision before the next brief.'],
+  ['Use Q&A window', 'Bring narrow operating, evidence, authority, or evaluation questions to the member window.'],
 ]
 
 export default function PrivateIntelDelivery() {
@@ -22,10 +21,10 @@ export default function PrivateIntelDelivery() {
       <TrackOnView event="delivery_view" payload={{ offer: 'private-intel', source: 'delivery-page' }} />
       <section className="grid gap-8 lg:grid-cols-[1fr_22rem] lg:items-start">
         <div>
-          <div className="kicker">Private Intel delivery</div>
-          <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink">Keep the payer map current.</h1>
+          <div className="kicker">Operator Evidence Brief delivery</div>
+          <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink">Keep a live Outcome Pack current.</h1>
           <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">
-            This is the post-checkout handoff route for Private Intel. It defines the membership rhythm before the payment provider is connected.
+            This is the prepared post-checkout handoff for the Operator Evidence Brief. It defines the verification rhythm before recurring checkout is connected.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link href="/offers/private-intel" className="cta">
@@ -48,7 +47,7 @@ export default function PrivateIntelDelivery() {
       <section className="section-band">
         <div className="section-heading motion-reveal">
           <div className="kicker">Member rhythm</div>
-          <h2>Brief, choose, act, update.</h2>
+          <h2>Verify, choose, act, record.</h2>
           <p>The membership is valuable only when it turns market change into a concrete next move.</p>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-4">
@@ -62,14 +61,17 @@ export default function PrivateIntelDelivery() {
         </div>
       </section>
 
-      <section className="section-band">
-        <EmailCapture
-          headline="Request Private Intel access"
-          sub="Get the membership launch notification and the current first-loop checklist while checkout is being connected."
-          source="delivery-private-intel"
-          buttonLabel="Request access"
-          successMessage="Request received. You are on the Private Intel access list."
-        />
+      <section className="section-band rounded-2xl border border-border bg-surface/70 p-6 sm:p-8">
+        <div className="kicker">Current access state</div>
+        <h2 className="mt-3 text-3xl font-semibold text-ink">Membership delivery is not live yet.</h2>
+        <p className="mt-4 max-w-2xl leading-7 text-muted">
+          Recurring checkout and owned-audience intake are not connected, so this page does not
+          pretend to retain a request. Current public research and operating contracts remain open.
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link href="/blog" className="cta">Read public research</Link>
+          <Link href="/proof" className="cta-secondary">Inspect the proof standard</Link>
+        </div>
       </section>
     </div>
   )

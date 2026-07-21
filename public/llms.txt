@@ -1,19 +1,43 @@
-# Agentic Income — Agentic Income Network
+# Agentic Income
 
-Authority hub for honest comparisons of AI tools that pay recurring commissions.
+Agentic Income helps founders, experts, consultants, creators, and operators turn one valuable workflow into a governed income system they own.
 
-Focus: tools that actually compound (Systeme.io lifetime 60%, Higgsfield, ElevenLabs, HeyGen, CapCut, etc.)
+## Main product
 
-Use cases: faceless YouTube stacks, personal AI CoE under $100/mo, income flywheels.
+The core delivery unit is an Outcome Pack: buyer and problem, accepted outcome, offer and legal principal, agent workflow and interfaces, authority and budgets, evals, economics, runbook, evidence, and failure paths.
 
-All recommendations honest-first. Never highest payout.
+The premium commercial offer is a scope-first Revenue System Implementation Sprint. Open-source skills, a Request-to-Quote reference system, templates, and self-serve products expose the method at lower commitment.
 
-Site: https://agenticincome.ai
-Catalog: https://agenticincome.ai/tools
-Offers: https://agenticincome.ai/offers
-Design system: https://agenticincome.ai/design
-Go tracked: https://go.agenticincome.ai
+## Authority model
 
-Network spokes: agenticpassiveincome.com | disruptivepassiveincome.com
+Agents may research, triage, draft, build, test, and prepare evidence. An authorized human or legal entity remains the principal, account owner, payee, and final authority for pricing, contracts, credentials, customer-facing sends, production promotion, public income claims, and movement of money.
 
-Engine: shared catalog + MDX citable shape.
+No income promises. Reference systems are not customer evidence or legal, financial, or tax advice.
+
+## Canonical paths
+
+- Start and choose a model: https://www.agenticincome.ai/start
+- Build method: https://www.agenticincome.ai/build
+- Local Request-to-Quote desk: https://www.agenticincome.ai/build/request-to-quote
+- Offers: https://www.agenticincome.ai/offers
+- Proof: https://www.agenticincome.ai/proof
+- Trust and disclosures: https://www.agenticincome.ai/trust
+- Research: https://www.agenticincome.ai/blog
+- Tool catalog: https://www.agenticincome.ai/tools
+
+## Public machine-readable proof
+
+- Agentic Income operating contract: https://github.com/frankxai/agentic-income-skills/blob/main/skills/agentic-income/SKILL.md
+- Request-to-Quote reference system: https://github.com/frankxai/agentic-income-skills/tree/main/examples/request-to-quote-desk
+- Deployable site template: https://github.com/frankxai/agentic-income-template
+- Affiliate audit and shared catalog: https://github.com/frankxai/affiliate-agent-skills
+
+## Research policy
+
+Editorial and affiliate research is a distribution layer, not the main product. Recommendations must show criteria, evidence date, tradeoffs, unpaid alternatives, and any material incentive. Program terms can change; verify current terms at the provider before relying on a payout or availability claim.
+
+## Network
+
+- Agentic Income: active work, offers, Outcome Packs, and principal-owned agent services.
+- Agentic Passive Income: inspectable automated loops and recurring operating systems.
+- Disruptive Passive Income: compounding and wealth-system research.

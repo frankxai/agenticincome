@@ -9,16 +9,16 @@ export const metadata: Metadata = {
   alternates: { canonical: '/offers' },
   openGraph: {
     title: 'Offers',
-    description: 'Direct products and memberships from the Agentic Income network. Own your outcome beyond affiliate.',
+    description: 'Choose between the free Outcome Pack starter, a self-serve Blueprint, an operator brief, or scope-first implementation.',
     url: '/offers',
   },
 }
 
 const promiseStrip = [
-  ['Implementation', 'Scope and build one revenue system with repository and preview evidence.'],
-  ['Free', 'Learn the first loop without buying another tool.'],
-  ['Blueprint', 'Install the operating desk and content architecture.'],
-  ['Intel', 'Keep the payer map current as the market moves.'],
+  ['Implementation', 'Scope and build one Outcome Pack with repository, checks, preview, and handoff evidence.'],
+  ['Free', 'Map the first system and inspect the public contract without an email gate.'],
+  ['Blueprint', 'Install the complete Outcome Pack design and validation desk.'],
+  ['Operator Brief', 'Keep a live system current as runtimes, costs, and authority patterns change.'],
 ]
 
 export default function Offers() {
@@ -28,7 +28,8 @@ export default function Offers() {
         <div className="kicker">Implementation and products</div>
         <h1 className="mt-3 text-5xl font-semibold text-ink">Choose the right depth.</h1>
         <p className="mt-4 text-xl leading-8 text-muted">
-          Request a scoped implementation, start with the free operating path, install the Blueprint yourself, or keep the opportunity map current with Private Intel.
+          Start with the public method, use the Blueprint to design independently, keep a live
+          system current with the Operator Brief, or request scope-first implementation.
         </p>
       </section>
 
@@ -45,7 +46,9 @@ export default function Offers() {
         <div>
           <div className="text-sm font-semibold text-gold">Before you buy</div>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-            Free delivery is live. The implementation sprint is scope-first and does not take payment here. Digital-product checkout falls back honestly to request access until provider links are connected.
+            Free delivery is live. The implementation sprint is scope-first and takes no payment
+            here. Paid product and membership checkout are not live; their routes state that clearly
+            and fall back to an honest request state.
           </p>
         </div>
         <Link href="/trust" className="cta-secondary">
@@ -86,7 +89,7 @@ export default function Offers() {
                 <div className="text-center text-[11px] leading-5 text-muted">
                   {offer.checkout.fallback === 'delivery'
                     ? 'Instant on-site delivery.'
-                    : 'Secure checkout and post-purchase handoff are provider-ready.'}
+                    : 'Checkout is not live; inspect the access state before submitting anything.'}
                 </div>
               </div>
             </div>
@@ -98,7 +101,7 @@ export default function Offers() {
         Every route uses the same evidence standard: concrete scope, inspectable delivery, honest access state, and no outcome claims that cannot be supported.
         <div className="mt-3">
           <Link href="/start" className="text-accent">
-            Return to the free playbook
+            Return to the free capability map
           </Link>
         </div>
       </section>

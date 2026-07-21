@@ -2,9 +2,8 @@
  * The 7-Day Agentic Income Challenge — a free, evergreen lead-magnet path.
  *
  * Self-contained data (no filesystem, no email-sequence infrastructure): each day
- * is one concrete action that maps to a real `/ai` pack command or knowledge-base
- * file, so the reader can start the actual system today. The framing is capability,
- * never income — see knowledge/05-honest-marketing.md for the doctrine this obeys.
+ * is one concrete action that maps to the public Agentic Income operating contract,
+ * so the reader can begin with no email gate or private repository dependency.
  */
 export type ChallengeDay = {
   day: number
@@ -18,67 +17,69 @@ export type ChallengeDay = {
   hrefLabel: string
 }
 
-const KNOWLEDGE = 'https://github.com/frankxai/agenticincome/blob/main/knowledge'
+const PUBLIC_REPO = 'https://github.com/frankxai/agentic-income-skills'
 
 export const challengeDays: ChallengeDay[] = [
   {
     day: 1,
-    title: 'Assess your real leverage',
-    command: '/ai assess',
+    title: 'Choose one buyer and one painful job',
+    command: '/agentic-income discover',
     action:
-      'Install the /ai pack and run the assessment. It audits your skills, sites, socials, and assets into a leverage read — where proof and distribution already overlap. Output: a written capability inventory.',
-    href: '/pack',
-    hrefLabel: 'Install the /ai pack',
+      'Start with a person or team you can understand and reach. Capture the job, current process, urgency, constraints, and evidence that the problem is real.',
+    href: '/start',
+    hrefLabel: 'Use the capability map',
   },
   {
     day: 2,
-    title: 'Pick one income model',
+    title: 'Name the principal and the boundary',
     action:
-      'Choose a single model from your real constraints — a service, a product, or a system. One category, not five. Read the model economics with their labor floors and failure modes, then commit to one.',
-    href: `${KNOWLEDGE}/02-income-models.md`,
-    hrefLabel: 'Read: Income Models',
+      'Identify the human or legal entity that owns the offer, accounts, credentials, customer obligation, and money. List what the agent may prepare and what requires approval.',
+    href: `${PUBLIC_REPO}/blob/main/docs/income-system-v1.md`,
+    hrefLabel: 'Inspect the open contract',
   },
   {
     day: 3,
-    title: 'Architect the business',
-    command: '/ai architect',
+    title: 'Define the accepted outcome',
+    command: '/agentic-income validate',
     action:
-      'Turn the model into a full plan: every number a labeled scenario, every plan carrying a kill criterion. No projections dressed as promises — a structure you could actually run.',
-    href: '/pack',
-    hrefLabel: 'See the pack stages',
+      'Write what done means, how it will be checked, which claims are out of scope, and the smallest demand signal that justifies a build.',
+    href: '/build',
+    hrefLabel: 'See the four-stage build path',
   },
   {
     day: 4,
-    title: 'Choose the honest tool stack',
+    title: 'Scaffold the owned Outcome Pack',
+    command: 'npm run income:init -- --output=../my-income-system',
     action:
-      'Assemble the minimum machine — checkout (merchant of record), email, hosting, analytics. Inspect the live catalog; every tool carries its cost and a non-affiliate alternative, so you pick on fit, not on payout.',
-    href: '/tools',
-    hrefLabel: 'Inspect the tool catalog',
+      'Clone the public repository, install dependencies, run the tests, and create an owned working copy. Keep credentials and customer data out of Git and model context.',
+    href: PUBLIC_REPO,
+    hrefLabel: 'Open the MIT repository',
   },
   {
     day: 5,
-    title: 'Design the offer',
-    command: '/ai offer',
+    title: 'Design the workflow and human gates',
+    command: '/agentic-income build',
     action:
-      'Shape one offer: outcome-anchored pricing, scope armor, and the agent team that delivers it. See how offers are packaged honestly — boundaries stated, delivery path defined before promotion.',
-    href: '/offers',
-    hrefLabel: 'See offer patterns',
+      'Map inputs, outputs, tools, handoffs, failure paths, budgets, revocation, evals, support, and the exact moments an authorized principal must decide.',
+    href: `${PUBLIC_REPO}/tree/main/examples/request-to-quote-desk`,
+    hrefLabel: 'Inspect the reference system',
   },
   {
     day: 6,
-    title: 'Write copy that passes both gates',
+    title: 'Validate the contract and evidence',
+    command: 'npm run income:validate -- income-system.json',
     action:
-      'Draft your landing page so it earns engineer respect and an FTC yawn at the same time. Write toward capability, never dollars: name the machinery, show the honest costs, and disclose every affiliate link before the click.',
-    href: `${KNOWLEDGE}/05-honest-marketing.md`,
-    hrefLabel: 'Read: Honest Marketing',
+      'Run the schema and policy validator. Then test the accepted outcome, document limitations, and label every artifact as reference or customer evidence.',
+    href: `${PUBLIC_REPO}/blob/main/schemas/income-system.v1.schema.json`,
+    hrefLabel: 'Inspect the machine-readable schema',
   },
   {
     day: 7,
-    title: 'Ship it, then operate the loop',
-    command: '/ai ship · /ai operate',
+    title: 'Publish proof, then make one operating decision',
+    command: '/agentic-income prove · improve',
     action:
-      'Publish the offer through self-serve checkout, then start the weekly loop: numbers, delivery QA, a freshness check, a kill-criteria verdict, one experiment. You finish the week with a live, real system — the outcome is honestly yours either way.',
-    href: '/trust',
-    hrefLabel: 'Read the trust standard',
+      'Publish only what the evidence supports. Record quality, economics, incidents, freshness, and the next bounded change. Stop when the validation threshold or kill criterion fails.',
+    href: '/proof',
+    hrefLabel: 'See the proof standard',
   },
 ]

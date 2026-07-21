@@ -1,34 +1,41 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { payingPrograms } from '@/lib/affiliate'
 import { TrackOnView } from '@/components/TrackOnView'
 
 export const metadata: Metadata = {
   title: 'Starter Kit Delivery',
-  description: 'The Agentic Income first-loop starter kit: choose a category, write the comparison, route the payer, and capture the audience.',
+  description: 'The Agentic Income Outcome Pack starter: choose one buyer, define an accepted outcome, map authority, and make a reasoned first-system decision.',
   robots: { index: false, follow: false },
 }
 
 const sprint = [
-  ['00-05', 'Choose a category', 'Pick one tool category you have real experience with and where people already compare options.'],
-  ['05-12', 'Name the question', 'Write the exact query the page will answer: best X for Y, X vs Y, or is X worth it.'],
-  ['12-20', 'Draft the answer shape', 'Short answer, comparison table, honest pick, alternatives, FAQ, disclosure.'],
-  ['20-25', 'Route the payer', 'Map the honest winner to the catalog and only add a paid route when it fits.'],
-  ['25-30', 'Capture the next step', 'Add one email promise that helps the reader finish the same workflow.'],
+  ['00-05', 'Choose the buyer', 'Name a person or team you understand and can realistically reach.'],
+  ['05-12', 'Capture the job', 'Write the current workflow, pain, urgency, constraints, and evidence that the problem exists.'],
+  ['12-20', 'Define acceptance', 'State the smallest valuable outcome, how it will be checked, and what is explicitly out of scope.'],
+  ['20-25', 'Map authority', 'Separate agent preparation from human approval for price, contracts, sends, credentials, production, and money.'],
+  ['25-30', 'Make the decision', 'Choose one next validation action and a clear revise-or-stop condition before building.'],
 ]
 
-export default function StarterKitDelivery() {
-  const programs = payingPrograms().slice(0, 6)
+const packParts = [
+  ['Buyer and problem', 'Who has the job, why it matters, and what the current process costs.'],
+  ['Outcome and acceptance', 'What done means and which checks decide whether it was achieved.'],
+  ['Offer and principal', 'Who owns the obligation, accounts, commercial terms, and relationship.'],
+  ['Workflow and interfaces', 'Inputs, outputs, tools, handoffs, failures, and versioned artifacts.'],
+  ['Authority and budgets', 'Automatic actions, approvals, revocation, credentials, and spend limits.'],
+  ['Evals and operations', 'Quality, economics, evidence, runbook, incidents, and next decisions.'],
+] as const
 
+export default function StarterKitDelivery() {
   return (
     <div className="py-16">
       <TrackOnView event="delivery_view" payload={{ offer: 'starter-kit', source: 'delivery-page' }} />
       <section className="grid gap-8 lg:grid-cols-[1fr_22rem] lg:items-start">
         <div>
           <div className="kicker">Delivery</div>
-          <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink">Income Flywheel Starter Kit</h1>
+          <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink">Outcome Pack Starter</h1>
           <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">
-            Use this to build the first loop: one comparison, one honest recommendation, one recurring-payer route, and one owned-audience capture.
+            Use this to shape the first serious business test: one buyer, one valuable workflow, one
+            accepted outcome, one authority model, and one evidence-backed next decision.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <a href="/downloads/agentic-income-starter-kit.md" className="cta" download>
@@ -43,7 +50,8 @@ export default function StarterKitDelivery() {
         <aside className="rounded-2xl border border-border bg-surface/80 p-5">
           <div className="text-sm font-semibold text-gold">First win</div>
           <p className="mt-3 text-sm leading-6 text-muted">
-            By the end of this kit, you should know what page to publish first, which payer route belongs behind it, and what the email capture should promise.
+            By the end of this kit, you should know whether a workflow deserves validation, what the
+            agent may prepare, what an authorized principal must approve, and what artifact comes next.
           </p>
         </aside>
       </section>
@@ -51,8 +59,8 @@ export default function StarterKitDelivery() {
       <section className="section-band">
         <div className="section-heading motion-reveal">
           <div className="kicker">30-minute sprint</div>
-          <h2>Turn intent into a page plan.</h2>
-          <p>Do the smallest complete loop before adding more tools, products, or automation.</p>
+          <h2>Turn experience into a business test.</h2>
+          <p>Do the smallest complete reasoning loop before adding more agents, tools, products, or automation.</p>
         </div>
         <div className="mt-8 grid gap-3">
           {sprint.map(([time, title, body]) => (
@@ -68,43 +76,28 @@ export default function StarterKitDelivery() {
       </section>
 
       <section className="section-band">
-        <div className="grid gap-8 lg:grid-cols-2">
-          <div>
-            <div className="kicker">Recurring shortlist</div>
-            <h2 className="mt-3 text-4xl font-semibold text-ink">Build around programs that can compound.</h2>
-            <p className="mt-4 text-muted">
-              This shortlist comes from the same catalog powering the site. Verify terms before publishing because affiliate programs change.
-            </p>
-          </div>
-          <div className="overflow-hidden rounded-xl border border-border bg-surface/80">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="text-left text-muted">
-                  <th className="px-4 py-3">Tool</th>
-                  <th className="px-4 py-3">Commission</th>
-                  <th className="px-4 py-3">Recurring</th>
-                </tr>
-              </thead>
-              <tbody>
-                {programs.map((program) => (
-                  <tr key={program.tool} className="border-t border-border">
-                    <td className="px-4 py-3 font-semibold text-ink">{program.tool}</td>
-                    <td className="px-4 py-3 text-ink">{program.commission}</td>
-                    <td className="px-4 py-3 text-muted">{program.recurring}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        <div className="section-heading motion-reveal">
+          <div className="kicker">Minimum viable Outcome Pack</div>
+          <h2>Six parts make the system inspectable.</h2>
+          <p>A polished agent demo is not a business system until these contracts exist.</p>
         </div>
+        <dl className="mt-8 grid gap-3">
+          {packParts.map(([term, description], index) => (
+            <div key={term} className="grid gap-2 rounded-xl border border-border bg-surface/70 p-5 sm:grid-cols-[2.5rem_11rem_1fr]">
+              <span className="font-mono text-sm font-semibold text-accent">0{index + 1}</span>
+              <dt className="font-semibold text-ink">{term}</dt>
+              <dd className="text-sm leading-6 text-muted">{description}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       <section className="section-band">
         <div className="grid gap-5 md:grid-cols-3">
           {[
-            ['Trust rule', 'Best fit first. Payout second. If the recommendation cannot survive disclosure, remove it.'],
-            ['Page shape', 'Short answer, comparison table, honest pick, alternatives, FAQ, disclosure, next step.'],
-            ['Upgrade path', 'When the first loop is clear, install the Blueprint so every future comparison follows the same desk.'],
+            ['Authority rule', 'Agents prepare. An authorized person or legal entity approves commitments, credentials, production, and money.'],
+            ['Evidence rule', 'Reference systems prove the method. Only accepted, permissioned delivery evidence can support a customer claim.'],
+            ['Upgrade path', 'When the business test is credible, use the Blueprint or implementation sprint to complete the full Outcome Pack.'],
           ].map(([title, body]) => (
             <div key={title} className="card motion-reveal">
               <div className="text-sm font-semibold text-gold">{title}</div>

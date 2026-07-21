@@ -3,34 +3,34 @@ import Link from 'next/link'
 const models = [
   {
     label: 'Primary model',
-    title: 'Agent-as-a-Service',
-    body: 'A scoped implementation engagement for founders who need one revenue workflow designed, built, instrumented, and handed over.',
-    proof: 'Outcome: a Git-backed system and verified preview, not a strategy deck.',
+    title: 'Outcome Pack implementation',
+    body: 'A scope-first engagement for teams with one valuable workflow that should become a governed, repeatable customer service.',
+    proof: 'Outcome: offer, authority model, working workflow, acceptance tests, runbook, evidence, and owned repository.',
     href: '/offers/implementation-sprint',
-    cta: 'Inspect the implementation sprint',
+    cta: 'Inspect implementation',
   },
   {
     label: 'Product layer',
-    title: 'Digital products',
-    body: 'Self-serve playbooks, templates, and private intelligence package the same operating method at lower commitment.',
-    proof: 'Starter Kit is delivered on-site; paid access stays clearly marked until checkout is connected.',
+    title: 'Self-serve systems',
+    body: 'The free skill, reference system, templates, and future paid playbooks package the same method for independent builders.',
+    proof: 'Public delivery is available now. Paid access remains clearly marked until secure checkout is actually connected.',
     href: '/offers',
     cta: 'Compare products',
   },
   {
     label: 'Distribution layer',
-    title: 'Open-source proof',
-    body: 'Public skills, catalog logic, and a deployable template make the system inspectable before anyone buys implementation.',
-    proof: 'MIT repositories expose the method; private delivery adds scope, integration, and accountability.',
+    title: 'Open proof',
+    body: 'Public contracts, schemas, examples, and a deployable template let humans and agents inspect the method before anyone buys.',
+    proof: 'Open source exposes the method. Private delivery adds context, integration, judgment, and accountability.',
     href: 'https://github.com/frankxai/agentic-income-skills',
     cta: 'Open the skills repository',
     external: true,
   },
   {
-    label: 'Authority layer',
-    title: 'Editorial and affiliate',
-    body: 'Reader-first comparisons earn attention and may monetize through disclosed links only when the recommendation still holds without the incentive.',
-    proof: 'The methodology, freshness, alternatives, and material incentive remain visible.',
+    label: 'Distribution layer',
+    title: 'Reader-first research',
+    body: 'Dated comparisons earn attention and may use disclosed affiliate routes only when the recommendation survives without the incentive.',
+    proof: 'Criteria, freshness, alternatives, and material incentives stay visible. Research supports the product; it is not the product.',
     href: '/trust',
     cta: 'Read the trust standard',
   },
@@ -41,11 +41,12 @@ export function RevenueCapabilitySection() {
     <section id="capabilities" className="section-band">
       <div className="grid gap-8 lg:grid-cols-[0.76fr_1.24fr] lg:items-end">
         <div className="section-heading motion-reveal">
-          <div className="kicker">Business model</div>
-          <h2>One engine. Four ways to create value.</h2>
+          <div className="kicker">The business architecture</div>
+          <h2>The product is a working system—not an agent-shaped promise.</h2>
         </div>
         <p className="max-w-2xl text-lg leading-8 text-muted motion-reveal">
-          Implementation is the premium service. Products make the method accessible. Open source proves the engineering. Editorial research compounds authority without becoming the product itself.
+          Implementation is the commercial core. Self-serve systems make the method accessible.
+          Open source proves the contracts. Research compounds reach without confusing the category.
         </p>
       </div>
 

@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { CheckoutLink } from '@/components/CheckoutLink'
 import { EmailCapture } from '@/components/EmailCapture'
 import { checkoutPath, checkoutUrl, getOffer, offers } from '@/lib/offers'
+import { getLaunchReadiness } from '@/lib/readiness'
 
 type OfferPageProps = {
   params: Promise<{ slug: string }>
@@ -42,6 +43,8 @@ export default async function OfferDetail({ params }: OfferPageProps) {
   const liveCheckout = checkoutUrl(offer)
   const isFree = offer.checkout.fallback === 'delivery'
   const isScoped = offer.accessMode === 'scope-first'
+  const captureAvailable = getLaunchReadiness().captureMode !== 'unwired'
+  const actionAvailable = isFree || Boolean(liveCheckout) || captureAvailable
   const accessSteps = [
     ['01', 'Click', offer.checkoutOutcome],
     ['02', 'Deliver', `The handoff route is ${offer.deliveryPath}. ${offer.receiptInstruction}`],
@@ -56,14 +59,20 @@ export default async function OfferDetail({ params }: OfferPageProps) {
           <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink">{offer.title}</h1>
           <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">{offer.promise}</p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <CheckoutLink
-              href={checkoutPath(offer)}
-              className="cta"
-              offer={offer.slug}
-              source="offer-detail"
-            >
-              {offer.cta}
-            </CheckoutLink>
+            {actionAvailable ? (
+              <CheckoutLink
+                href={checkoutPath(offer)}
+                className="cta"
+                offer={offer.slug}
+                source="offer-detail"
+              >
+                {offer.cta}
+              </CheckoutLink>
+            ) : (
+              <Link href={isScoped ? '/build/request-to-quote' : '/start'} className="cta">
+                {isScoped ? 'Prepare the workflow brief' : 'Use the free system'}
+              </Link>
+            )}
             {isFree ? (
               <Link href={offer.deliveryPath} className="cta-secondary">
                 View delivery path
@@ -176,7 +185,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
         </div>
       </section>
 
-      {!isFree && !liveCheckout ? (
+      {!isFree && !liveCheckout && captureAvailable ? (
         <section id="request-access" className="section-band">
           <EmailCapture
             headline={`Request ${offer.shortTitle} access`}
@@ -187,6 +196,27 @@ export default async function OfferDetail({ params }: OfferPageProps) {
             buttonLabel="Request access"
             successMessage="Request received. You are on the access list."
           />
+        </section>
+      ) : null}
+
+      {!isFree && !liveCheckout && !captureAvailable ? (
+        <section id="request-access" className="section-band rounded-2xl border border-border bg-surface/70 p-6 sm:p-8">
+          <div className="kicker">Current access state</div>
+          <h2 className="mt-3 text-3xl font-semibold text-ink">Online intake is not connected.</h2>
+          <p className="mt-4 max-w-3xl leading-7 text-muted">
+            This site cannot retain an access request yet, so it does not claim that one was received.
+            {isScoped
+              ? ' Prepare a local Request-to-Quote brief now; commercial scope and a real intake path must be agreed separately.'
+              : ' Use the free public system now and return after secure checkout, owned capture, and support delivery are verified.'}
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href={isScoped ? '/build/request-to-quote' : '/start'} className="cta">
+              {isScoped ? 'Open the local scoping desk' : 'Use the free system'}
+            </Link>
+            <a href="https://github.com/frankxai/agentic-income-skills" target="_blank" rel="noopener noreferrer" className="cta-secondary">
+              Inspect the public contract
+            </a>
+          </div>
         </section>
       ) : null}
     </div>

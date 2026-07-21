@@ -1,100 +1,98 @@
-<div align="center">
-
 # Agentic Income
 
-## The hours are over. The machines are yours.
+**Turn one valuable workflow into an income system you own.**
 
-### Build income with AI agents — machinery you can inspect, education you can verify, packs you can install.
+[agenticincome.ai](https://www.agenticincome.ai) helps founders, experts, consultants, creators, and operators package credible work as a governed agent service. Agents research, structure, build, test, and document. A human or legal entity remains the principal, account owner, payee, and final authority for commitments, credentials, production, and money.
 
-**[agenticincome.ai](https://agenticincome.ai)** · the hub of the trinity:
-[**EARN** /ai](https://agenticincome.ai) → [**AUTOMATE** /api](https://agenticpassiveincome.com) → [**COMPOUND** /dpi](https://disruptivepassiveincome.com)
+No income promises. No agent-shaped theater. The product is an inspectable system with acceptance checks, authority boundaries, evidence, and an operating handoff.
 
-</div>
+## The core product: an Outcome Pack
 
----
+An Outcome Pack is the complete delivery contract for principal-owned agent work:
 
-Something structural changed in 2025–2026: the same agent runtimes that write software now research markets, draft offers, build sites, wire checkouts, and run weekly operating loops. One person directing an agent team can deliver what took a four-person agency three weeks — in two days.
+- buyer, problem, outcome, and acceptance criteria;
+- offer, legal principal, commercial boundary, and support terms;
+- workflow, interfaces, tools, handoffs, and failure paths;
+- authority, budgets, approvals, revocation, and credential rules;
+- evals, economics, runbook, evidence, and operating decisions.
 
-That collapses the oldest constraint on solo income: **your hours**.
+The premium commercial offer is the [Revenue System Implementation Sprint](https://www.agenticincome.ai/offers/implementation-sprint): a scope-first build with a Git-backed repository, checks, Vercel preview, documented limitations, and handoff. No payment is taken on the site before scope and acceptance are agreed.
 
-This repo is the operating manual and the toolkit for that shift. No income promises, no guru theater — we publish the machinery, the honest costs, and the actual packs this business runs on. **Audit us**: every pipeline, registry, and design decision in this ecosystem is public.
+## Start free
 
-## Install the pack — `/ai`, the Income Architect
+The public funnel is intentionally inspectable:
 
-Works with **Claude Code** (richest experience), with a portable core for **Codex, Gemini CLI, Cursor, and OpenCode** ([guide](packs/PORTABLE.md)).
+1. [Map the first system](https://www.agenticincome.ai/start).
+2. [Inspect the build method](https://www.agenticincome.ai/build).
+3. [Try the local Request-to-Quote desk](https://www.agenticincome.ai/build/request-to-quote).
+4. Use the public operating contract or choose the appropriate offer depth.
+
+Public machine-readable proof lives in [frankxai/agentic-income-skills](https://github.com/frankxai/agentic-income-skills):
 
 ```bash
-# Claude Code
-/plugin marketplace add frankxai/agenticincome
-/plugin install ai-pack@agenticincome
-
-# then, inside any project:
-/ai
+git clone https://github.com/frankxai/agentic-income-skills.git
+cd agentic-income-skills
+npm install
+npm test
+npm run income:init -- --output=../my-income-system
 ```
 
-`/ai` runs a staged build of your income system — every stage ends with a **written artifact in your repo**, never advice that evaporates:
+Then ask a capable coding agent:
 
-| Stage | What happens | Artifact |
-|---|---|---|
-| `/ai assess` | Audits your skills, sites, socials, and assets into a leverage read | `income/00-capability-inventory.md` |
-| `/ai architect` | Picks your income model, writes the full business plan — scenario-honest economics, kill criteria included | `income/01-income-architecture.md` |
-| `/ai offer` | Designs the offer, pricing, and the agent team that delivers it | `income/02-offer.md` |
-| `/ai ship` | Landing page, merchant-of-record checkout, launch runbook — self-service end to end | `income/03-launch-runbook.md` |
-| `/ai operate` | The weekly operator loop: numbers, delivery QA, one experiment | `income/weekly/*.md` |
+```text
+/agentic-income build a request-to-quote desk for Amsterdam renovation
+businesses, with human approval before pricing or outbound commitments.
+```
 
-Under the hood: four specialist agents (income-architect, offer-strategist, delivery-engineer, proof-writer) and four skills (capability-audit, pricing-architecture, agent-fulfillment-design, honest-marketing). All readable, all forkable, all MIT.
+The public repository ships:
 
-## The knowledge base — factual, dated, re-verified on a loop
+- `skills/agentic-income/SKILL.md` — discover, validate, build, sell, deliver, operate, publish, prove, and improve;
+- `schemas/income-system.v1.schema.json` — machine-readable system and authority contract;
+- `scripts/validate-income-system.mjs` — schema and policy validation;
+- `scripts/scaffold-income-system.mjs` — owned Outcome Pack scaffold;
+- `examples/request-to-quote-desk` — complete governed reference system.
 
-Every file carries `last_verified` frontmatter and a quarterly review cycle. Current pass: **2026-07-11**.
+## Business architecture
 
-| | |
-|---|---|
-| [01 · The Agent Landscape](knowledge/01-landscape.md) | Claude Code, Codex, Gemini CLI, OpenCode, OpenClaw, Hermes, MCP — what to use for what, right now |
-| [02 · Income Models](knowledge/02-income-models.md) | Services → products → systems: the three mechanisms, real economics, the path through them |
-| [03 · Agent Fulfillment](knowledge/03-agent-fulfillment.md) | The five delivery patterns, quality floors, and the two-day sprint anatomy |
-| [04 · The Tool Stack](knowledge/04-tool-stack.md) | The five-slot minimum machine — merchant of record, email, web, analytics, agents — legal-light by construction |
-| [05 · Honest Marketing](knowledge/05-honest-marketing.md) | Selling without income claims: the FTC/EU floor and the voice that converts by showing machinery |
-| [06 · Attested Cases](knowledge/06-cases.md) | Proof with provenance — the case format and the standing library |
-| [07 · Field Dossier](knowledge/07-field-dossier.md) | The raw verified research — every claim sourced, conflicts flagged |
-| [Integrations](knowledge/integrations/claude-code.md) | Run it with Claude Code · [Codex/portable](knowledge/integrations/codex.md) · [OpenClaw, safely](knowledge/integrations/openclaw-safely.md) · [Hermes](knowledge/integrations/hermes.md) |
+1. **Implementation:** scope and build a complete Outcome Pack.
+2. **Self-serve:** free starter, public skill, reference system, and prepared paid Blueprint.
+3. **Open proof:** schemas, examples, templates, validators, and live routes.
+4. **Research:** dated, reader-first editorial and disclosed affiliate comparisons as a secondary distribution layer.
 
-**The spine:** read [THE MANIFESTO](MANIFESTO.md) — ten rules that explain every decision in these repos.
+Paid Blueprint and membership checkout, owned-audience capture, and analytics forwarding must remain visibly unavailable until the corresponding production services are configured. `/api/readiness` reports the current launch state.
 
-## The business model (ours, in the open)
+## Human and agent authority
 
-We run the same architecture we teach — five layers, self-service end to end:
+Agents may prepare research, triage, drafts, code, tests, and evidence inside declared capabilities. Explicit approval is required for:
 
-1. **Open core (MIT/CC-BY):** this repo — knowledge base, `/ai` pack, templates. Free forever.
-2. **The Brief:** weekly email — landscape diffs, one stream teardown, pack updates.
-3. **Self-serve products** (merchant of record; no calls, no funnels): **Starter Kit** (free) · **Income Architecture Blueprint** ($67) · **Agent Team Pro** ($129) · **Private Intel** ($19/mo).
-4. **Disclosed affiliate research:** recommendations that survive without the incentive, routed through the inspectable [go.agenticincome.ai](https://github.com/frankxai/go-agenticincome) redirector, non-affiliate alternative always named.
-5. **Implementation Sprint** (apex, 2/month): scope-first agent-team delivery, documented as attested cases.
+- pricing, contracts, and public income claims;
+- customer-facing sends and production promotion;
+- credential grants and permission increases;
+- purchases, transfers, custody, or movement of money.
 
-No earnings claims anywhere — we sell machinery and education, never outcomes. Full doctrine: [knowledge/05](knowledge/05-honest-marketing.md).
+Secrets, private customer data, and unrestricted financial authority do not belong in a system manifest, Git repository, or model context.
 
-## The trinity
+## Network boundary
 
-| Property | Job | Pack |
-|---|---|---|
-| **[agenticincome.ai](https://agenticincome.ai)** (here) | EARN — capability → offers → revenue systems | `/ai` |
-| **[agenticpassiveincome.com](https://agenticpassiveincome.com)** | AUTOMATE — streams that run on loops you can inspect | `/api` |
-| **[disruptivepassiveincome.com](https://disruptivepassiveincome.com)** | COMPOUND — sovereign wealth architecture, decoupled from hours | `/dpi` |
+- **Agentic Income:** active paid work, offers, Outcome Packs, and principal-owned agent services.
+- **[Agentic Passive Income](https://www.agenticpassiveincome.com):** owned assets and automated loops with bounded maintenance.
+- **[Disruptive Passive Income](https://disruptivepassiveincome.com):** simulation-first compounding and wealth-system research.
 
-Related machinery: [go-agenticincome](https://github.com/frankxai/go-agenticincome) (link router) · [agentic-income-template](https://github.com/frankxai/agentic-income-template) (deployable site starter) · [awesome-agentic-income](https://github.com/frankxai/awesome-agentic-income) (curated field) · [hermes](https://github.com/frankxai/hermes) (workflow governance) · [dpi](https://github.com/frankxai/dpi) (the wealth substrate).
+Affiliate-program data and honest recommendation auditing are shared through [frankxai/affiliate-agent-skills](https://github.com/frankxai/affiliate-agent-skills). Program terms change; verify current provider terms before relying on commission, cookie, region, or availability claims.
 
 ## Site development
 
-Next.js 16 · React 19 · Tailwind 4 · GSAP. `pnpm install --frozen-lockfile && pnpm dev`. Release gates: type-check, link-check, build, visual evidence (`AGENTS.md` is the repo contract; `DESIGN.md`/`TASTE.md` the doctrine).
+Next.js 16 · React 19 · Tailwind 4 · GSAP · Vercel
 
-## License & disclaimers
+```bash
+pnpm install --frozen-lockfile
+pnpm typecheck
+pnpm test
+pnpm build
+```
 
-Code and packs MIT · curated registries CC-BY-4.0 · paid products separate personal license. Educational content, not financial advice. Affiliate relationships disclosed inline wherever they exist.
+Repository policy lives in `AGENTS.md`. Brand and product foundations live in `CREATOR.md`, `design/BRAND.md`, and the homepage page/scene specs. Production promotion requires local gates, responsive visual QA, a verified Vercel preview, and explicit approval for production-impacting changes.
 
-<div align="center">
+## License and disclaimers
 
-**Install the pack. Run `/ai assess`. Ship something real this week.**
-
-*Built and operated by the agent teams it ships — that's the proof.*
-
-</div>
+Public skills, schemas, scripts, and reference systems are MIT licensed in their public repository. Curated registries may use CC-BY-4.0. Paid products use separate terms when checkout is live. Educational content is not financial, legal, or tax advice. Affiliate relationships are disclosed before compensated routes.

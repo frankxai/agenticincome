@@ -5,31 +5,31 @@ import { TrackedLink } from '@/components/TrackedLink'
 const steps = [
   {
     number: '01',
-    role: 'Input',
-    title: 'Load the evidence',
-    body: 'Point the audit at a Markdown content directory. It reads the public program catalog and can accept an optional traffic file.',
-    output: 'Content paths + catalog records',
+    role: 'Buyer signal',
+    title: 'Capture the request',
+    body: 'Record the customer job, current process, success condition, constraints, non-goals, and missing information before proposing a solution.',
+    output: 'Structured request brief',
   },
   {
     number: '02',
     role: 'Agent',
-    title: 'Find the gaps',
-    body: 'The script matches program aliases against the content and finds active programs that have no configured route.',
-    output: 'Prioritized gaps, not automatic links',
+    title: 'Prepare the scope',
+    body: 'Research the workflow, surface ambiguity, draft the bounded outcome, map authority, and propose acceptance checks.',
+    output: 'Non-binding scope draft',
   },
   {
     number: '03',
     role: 'Artifact',
-    title: 'Write the audit',
-    body: 'The run produces AUDIT.md with programs to verify, affected posts, optional traffic context, and the disclosure text.',
-    output: 'A reviewable Markdown decision file',
+    title: 'Assemble the Outcome Pack',
+    body: 'Package the offer, interfaces, workflow, authority, budgets, evals, economics, runbooks, evidence, and failure paths as one inspectable system.',
+    output: 'Versioned Outcome Pack',
   },
   {
     number: '04',
     role: 'Human gate',
-    title: 'Approve before publishing',
-    body: 'A person verifies current terms, recommendation fit, disclosure, and the destination before any public link or partner action.',
-    output: 'Explicit publish or reject decision',
+    title: 'Approve the commitment',
+    body: 'An authorized principal approves pricing, contractual language, customer-facing sends, production promotion, credentials, and money movement.',
+    output: 'Explicit approve, revise, or reject decision',
   },
 ]
 
@@ -42,23 +42,26 @@ export function AgentWorkflowProof() {
           <h2 id="workflow-proof-title">One real run. Every boundary visible.</h2>
         </div>
         <p className="max-w-2xl text-lg leading-8 text-muted motion-reveal">
-          The open-source affiliate audit is a concrete reference workflow: known inputs, executable source, a reviewable output, and a human decision before anything becomes public.
+          The public Request-to-Quote desk is a concrete reference system: known inputs, a bounded
+          agent role, a reviewable scope artifact, and an authorized human decision before a customer
+          receives any commitment.
         </p>
       </div>
 
       <div className="workflow-proof motion-reveal">
-        <div className="workflow-command" aria-label="Affiliate audit command">
+        <div className="workflow-command" aria-label="Outcome Pack scaffold command">
           <div className="workflow-command-topline">
-            <span>affiliate-audit / local run</span>
-            <strong>MIT · no autonomous publishing</strong>
+            <span>agentic-income / local scaffold</span>
+            <strong>MIT · no autonomous commitments</strong>
           </div>
-          <code>node scripts/affiliate-audit.mjs --content=&lt;site&gt;/content --write</code>
+          <code>npm run income:init -- --output=../my-income-system</code>
           <p>
-            The command reads files and writes an audit. It does not join a program, change a public page, send a message, or claim revenue.
+            The command scaffolds a reviewable income-system workspace. It does not price the work,
+            sign a contract, contact a buyer, deploy to production, receive money, or claim revenue.
           </p>
         </div>
 
-        <ol className="workflow-steps" aria-label="Affiliate audit workflow stages">
+        <ol className="workflow-steps" aria-label="Outcome Pack workflow stages">
           {steps.map((step) => (
             <li key={step.number} className="workflow-step">
               <div className="workflow-step-meta">
@@ -75,35 +78,35 @@ export function AgentWorkflowProof() {
         <div className="workflow-evidence">
           <div>
             <span className="panel-label">Source evidence</span>
-            <p>Inspect the skill contract and executable script directly on GitHub. These links are the proof; the diagram is only the explanation.</p>
+            <p>Inspect the skill contract and the complete reference system directly on GitHub. These artifacts are the proof; the diagram is only the explanation.</p>
           </div>
           <div className="workflow-actions">
             <TrackedLink
-              href="https://github.com/frankxai/agentic-income-skills/blob/main/skills/affiliate-audit/SKILL.md"
+              href="https://github.com/frankxai/agentic-income-skills/blob/main/skills/agentic-income/SKILL.md"
               target="_blank"
               rel="noopener noreferrer"
               className="cta-secondary"
               event="workflow_proof_clicked"
               payload={{ source: 'homepage-workflow', state: 'skill-contract' }}
             >
-              Inspect the skill contract
+              Inspect the operating contract
             </TrackedLink>
             <TrackedLink
-              href="https://github.com/frankxai/agentic-income-skills/blob/main/scripts/affiliate-audit.mjs"
+              href="https://github.com/frankxai/agentic-income-skills/tree/main/examples/request-to-quote-desk"
               target="_blank"
               rel="noopener noreferrer"
               className="cta-secondary"
               event="workflow_proof_clicked"
               payload={{ source: 'homepage-workflow', state: 'executable-source' }}
             >
-              Inspect executable source
+              Inspect the reference system
             </TrackedLink>
           </div>
         </div>
       </div>
 
       <p className="workflow-boundary">
-        Reference implementation only. It demonstrates the operating method; it is not customer evidence or a revenue result.
+        Reference implementation only. It demonstrates the contract and authority model; it is not customer evidence, legal advice, or a revenue result.
       </p>
     </section>
   )

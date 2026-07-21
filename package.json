@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@11.5.0",
-  "description": "Agentic Income — implementation services, open systems, and practical products for building trustworthy AI revenue engines.",
+  "description": "Agentic Income — principal-owned Outcome Packs, governed agent services, open contracts, and scope-first implementation.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

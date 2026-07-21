@@ -4,8 +4,9 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 const INSTALL = [
-  '/plugin marketplace add frankxai/agenticincome',
-  '/plugin install ai-pack@agenticincome',
+  'git clone https://github.com/frankxai/agentic-income-skills.git',
+  'cd agentic-income-skills && npm install && npm test',
+  'npm run income:init -- --output=../my-income-system',
 ]
 
 function CopyLine({ text }: { text: string }) {
@@ -36,19 +37,18 @@ export function PackTerminal() {
     <section className="section-band" id="pack">
       <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="section-heading motion-reveal">
-          <div className="kicker text-[color:var(--color-accent)]">The pack · open machinery</div>
+          <div className="kicker text-[color:var(--color-accent)]">Open operating contract · MIT</div>
           <h2 className="display-h2">
-            <span className="font-mono text-[0.85em] text-[color:var(--color-accent)]">/ai</span> — an income
-            architect in your terminal.
+            <span className="font-mono text-[0.78em] text-[color:var(--color-accent)]">/agentic-income</span>
+            {' '}— build an Outcome Pack in your own repo.
           </h2>
           <p className="mt-4 text-lg font-semibold text-[color:var(--color-ink)]">
-            Not a course you watch. A team you command.
+            An inspectable contract for humans and coding agents.
           </p>
           <p className="mt-3 text-[color:var(--color-muted)]">
-            Five staged commands, four specialist agents, four skills — installable in Claude Code,
-            portable to Codex, Gemini CLI, Cursor, and OpenCode. Every stage ends with a written
-            artifact in <em className="not-italic text-[color:var(--color-ink)]">your</em> repo. Advice that
-            lives only in a chat doesn’t exist.
+            The public repository ships the operating skill, JSON Schema, validator, scaffold, and
+            Request-to-Quote reference system. It is runtime-portable because the intelligence and
+            authority rules live in readable files—not in a private plugin.
           </p>
           <div className="mt-6 grid gap-2">
             {INSTALL.map((cmd) => (
@@ -57,29 +57,28 @@ export function PackTerminal() {
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href="/pack" className="cta-secondary">Pack details</Link>
-            <a href="https://github.com/frankxai/agenticincome" rel="noopener" className="cta-secondary">
+            <a href="https://github.com/frankxai/agentic-income-skills" target="_blank" rel="noopener noreferrer" className="cta-secondary">
               Read the source — it’s MIT
             </a>
           </div>
         </div>
 
-        <div className="terminal motion-reveal" role="img" aria-label="Example /ai session: assess produces a capability inventory, architect produces an income architecture with a kill criterion">
+        <div className="terminal motion-reveal" role="img" aria-label="Example agentic-income session: build produces a principal-owned Outcome Pack with human approval gates">
           <div className="terminal-bar">
             <i /><i /><i />
-            <span className="ml-2">claude — /ai session</span>
+            <span className="ml-2">agent — /agentic-income session</span>
           </div>
           <div className="terminal-body">
-            <div className="t-cmd">/ai assess</div>
-            <div className="t-out">Reading surfaces… <span className="t-accent">newsletter (1.4k)</span> · <span className="t-accent">github (37 repos)</span> · <span className="t-accent">yt (2.1k)</span></div>
-            <div className="t-out">Leverage read: 2 candidates where proof × distribution already overlap.</div>
-            <div className="t-out">→ wrote <span className="t-artifact">income/00-capability-inventory.md</span></div>
-            <div className="t-cmd mt-3">/ai architect</div>
-            <div className="t-out">Entry model: <span className="t-accent">services</span> — cash horizon 30d, strong payment evidence.</div>
-            <div className="t-out">The one play: “agent workflow implementation for boutique studios.”</div>
-            <div className="t-out">Economics: ranges + assumptions only. Scenario, not forecast.</div>
-            <div className="t-out">Kill criterion: 2 paid engagements by <span className="t-accent">Aug 22</span> — or stop.</div>
-            <div className="t-out">→ wrote <span className="t-artifact">income/01-income-architecture.md</span></div>
-            <div className="t-cmd mt-3">/ai offer<span className="t-caret ml-2" /></div>
+            <div className="t-cmd">/agentic-income build a request-to-quote desk</div>
+            <div className="t-out">Principal: <span className="t-accent">Amsterdam renovation business</span></div>
+            <div className="t-out">Buyer job: turn an incomplete project request into a reviewable scope brief.</div>
+            <div className="t-out">Authority: agent may triage and draft; pricing and outbound commitments require approval.</div>
+            <div className="t-out">→ wrote <span className="t-artifact">income-system.json</span></div>
+            <div className="t-out">→ wrote <span className="t-artifact">agent-card.json</span></div>
+            <div className="t-cmd mt-3">npm run income:validate -- income-system.json</div>
+            <div className="t-out"><span className="t-accent">PASS</span> · schema · authority · evals · economics · evidence</div>
+            <div className="t-out">Next gate: principal approves scope language before any customer-facing send.</div>
+            <div className="t-cmd mt-3">/agentic-income prove<span className="t-caret ml-2" /></div>
           </div>
         </div>
       </div>

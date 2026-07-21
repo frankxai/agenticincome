@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   applicationName: site.name,
   title: { default: `${site.name} — ${site.tagline}`, template: `%s · ${site.name}` },
   description: site.description,
-  keywords: ['Agent as a Service', 'AI implementation', 'revenue systems', 'agent skills', 'digital products', 'AI tool comparisons'],
+  keywords: ['Agent as a Service', 'Outcome Pack', 'AI workflow implementation', 'governed AI agents', 'principal-owned agents', 'revenue systems'],
   authors: [{ name: site.author }],
   creator: site.author,
   publisher: site.name,
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     description: site.description,
     siteName: site.name,
     type: 'website',
-    images: [{ url: ogImage, width: 1200, height: 630, alt: 'Agentic Income revenue system implementation' }],
+    images: [{ url: ogImage, width: 1200, height: 630, alt: 'Agentic Income principal-owned Outcome Pack implementation' }],
   },
   twitter: {
     card: 'summary_large_image',

@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 import { site } from '@/lib/site'
 
 export const dynamic = 'force-static'
-export const alt = 'Agentic Income - revenue systems built with agents and delivered with proof'
+export const alt = 'Agentic Income - principal-owned Outcome Packs built with governed agents and delivered with proof'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 

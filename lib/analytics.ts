@@ -3,6 +3,7 @@ const EVENT_PROPERTIES = {
   checkout_click: ['path', 'href', 'source', 'offer', 'ts'],
   checkout_redirect: ['path', 'href', 'offer', 'state', 'ts'],
   checkout_fallback_request: ['path', 'href', 'offer', 'state', 'ts'],
+  'start_path_clicked': ['path', 'href', 'source', 'ts'],
   'implementation_request_clicked': ['path', 'href', 'source', 'ts'],
   'open_source_proof_clicked': ['path', 'href', 'source', 'ts'],
   'workflow_proof_clicked': ['path', 'href', 'source', 'ts'],

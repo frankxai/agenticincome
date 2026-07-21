@@ -8,9 +8,9 @@ export const site = {
   domain: 'agenticincome.ai',
   url: 'https://www.agenticincome.ai',
   role: 'hub', // 'hub' (flagship) | 'spoke'
-  tagline: 'Build income with AI agents — machinery you can inspect.',
+  tagline: 'Turn valuable workflows into income systems you own.',
   description:
-    'The engineering discipline of agentic income: a dated, re-verified knowledge base, the installable /ai Income Architect pack, self-serve products, and attested proof. No income promises — machinery and education.',
+    'For founders, experts, consultants, and operators: package one valuable workflow into a governed agent service with a clear offer, acceptance checks, public proof, and a system you own.',
   author: 'Frank Riemer',
   // Hub links down to its spokes; spokes link up to the hub. Topical authority + referral flow.
   network: [
@@ -18,12 +18,12 @@ export const site = {
     { name: 'Disruptive Passive Income', url: 'https://disruptivepassiveincome.com', stage: 'COMPOUND', pack: '/dpi', blurb: 'The sovereign wealth substrate — income architecture structurally decoupled from hours.' },
   ],
   nav: [
+    { label: 'Start', href: '/start' },
     { label: 'Build', href: '/build' },
     { label: 'Operate', href: '/operate' },
     { label: 'Proof', href: '/proof' },
     { label: 'Offers', href: '/offers' },
     { label: 'Trust', href: '/trust' },
-    { label: 'Pack', href: '/pack' },
   ],
 } as const
 

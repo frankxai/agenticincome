@@ -1,88 +1,154 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { payingPrograms } from '@/lib/affiliate'
-import { EmailCapture } from '@/components/EmailCapture'
 
 export const metadata: Metadata = {
-  title: 'Start Here',
-  description: 'The 3-step path to building an income system with AI agents — what to build, in what order, and why it compounds.',
+  title: 'Find Your First Agentic Income System',
+  description: 'Choose the right starting path for one valuable workflow: a governed service, a self-serve product, or reader-first research.',
   alternates: { canonical: '/start' },
   openGraph: {
-    title: 'Start Here',
-    description: 'The 3-step path to building an income system with AI agents — what to build, in what order, and why it compounds.',
+    title: 'Find Your First Agentic Income System',
+    description: 'A practical path from expertise to one principal-owned Outcome Pack.',
     url: '/start',
   },
 }
 
+const startingPaths = [
+  {
+    label: 'Fastest path to a real buyer',
+    title: 'Turn a service workflow into an Outcome Pack',
+    fit: 'You know a painful business process, can reach the buyer, and can judge the quality of the result.',
+    first: 'Capture one real customer request, success condition, constraint, and human approval boundary.',
+    artifact: 'A governed service contract and Request-to-Quote reference system.',
+    href: '/build',
+    cta: 'Build the service path',
+  },
+  {
+    label: 'Best for an existing method or audience',
+    title: 'Package a repeatable method as a product',
+    fit: 'People already ask you the same question, use your framework, or want your templates and operating process.',
+    first: 'Prove the manual method, define what the buyer receives, and make the first useful delivery self-serve.',
+    artifact: 'A product brief, delivery path, support boundary, and honest upgrade decision.',
+    href: '/offers',
+    cta: 'Inspect product paths',
+  },
+  {
+    label: 'Best for trusted research and distribution',
+    title: 'Build recommendation-led media carefully',
+    fit: 'You have real experience with a category and can publish better decisions than a generic tool directory.',
+    first: 'Choose one decision, state the criteria, date the evidence, disclose incentives, and preserve unpaid alternatives.',
+    artifact: 'A citable comparison with a reader-first route and an owned next step.',
+    href: '/trust',
+    cta: 'Read the trust standard',
+  },
+] as const
+
+const outcomePack = [
+  ['Buyer and problem', 'Who has the job, why it matters now, and what the current process costs.'],
+  ['Outcome and acceptance', 'What “done” means, how it will be checked, and which claims are explicitly out of scope.'],
+  ['Offer and principal', 'The legal or human account owner, pricing decision, terms, support, and customer relationship.'],
+  ['Workflow and interfaces', 'Agent steps, tools, inputs, outputs, handoffs, failure paths, and versioned artifacts.'],
+  ['Authority and budgets', 'What may run automatically, what requires approval, and how access can be revoked.'],
+  ['Evals and operations', 'Quality checks, evidence, economics, runbook, incident path, and the next operating decision.'],
+] as const
+
 export default function Start() {
-  const top = payingPrograms().slice(0, 6)
-
   return (
-    <div className="py-14">
-      <div className="kicker">Start here</div>
-      <h1 className="mt-3 text-5xl font-semibold text-ink">Build the first revenue loop.</h1>
-      <p className="mt-4 max-w-2xl text-lg text-muted">
-        You do not need a finished product to begin. Start with one question you can answer from experience,
-        document the tradeoffs, and give readers an honest next step they can choose to keep.
-      </p>
+    <>
+      <section className="section-band pt-20">
+        <div className="kicker">Free capability map</div>
+        <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink sm:text-6xl">
+          Find the first income system your experience can actually support.
+        </h1>
+        <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">
+          Begin with a buyer, a useful outcome, and evidence you can judge—not an agent persona or
+          a passive-income claim. Choose the path that matches the assets you already have.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a
+            href="https://github.com/frankxai/agentic-income-skills/blob/main/skills/agentic-income/SKILL.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta"
+          >
+            Open the free operating skill
+          </a>
+          <Link href="/build/request-to-quote" className="cta-secondary">
+            Try the local Request-to-Quote desk
+          </Link>
+        </div>
+        <p className="mt-4 max-w-3xl text-sm leading-6 text-muted">
+          No email gate. No income prediction. The reference desk runs in your browser and sends
+          nothing. The open skill is designed for humans and coding agents to inspect together.
+        </p>
+      </section>
 
-      <div className="mt-8 grid gap-4 md:grid-cols-3">
-        {[
-          ['Find the signal', 'Choose one tool category where people already compare, switch, and buy.'],
-          ['Protect the trust', 'Write the answer so the useful recommendation survives disclosure and payout pressure.'],
-          ['Capture the asset', 'Route the click, capture the email, and package the workflow into a product path.'],
-        ].map(([title, body]) => (
-          <div key={title} className="card motion-reveal">
-            <div className="text-sm font-semibold text-gold">{title}</div>
-            <p className="mt-3 text-sm leading-6 text-muted">{body}</p>
+      <section className="section-band" aria-labelledby="starting-path-title">
+        <div className="section-heading motion-reveal">
+          <div className="kicker">Choose by starting advantage</div>
+          <h2 id="starting-path-title">Three paths. One honest order of operations.</h2>
+          <p>Services usually validate fastest. Products follow repeated demand. Research compounds distribution when you have earned a point of view.</p>
+        </div>
+        <div className="mt-8 grid gap-4 lg:grid-cols-3">
+          {startingPaths.map((path, index) => (
+            <article key={path.title} className="card motion-reveal flex h-full flex-col">
+              <div className="font-mono text-sm font-semibold text-accent">0{index + 1}</div>
+              <div className="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-gold">{path.label}</div>
+              <h3 className="mt-3 text-2xl font-semibold leading-tight text-ink">{path.title}</h3>
+              <dl className="mt-5 grid gap-4 text-sm leading-6">
+                <div>
+                  <dt className="font-semibold text-ink">Choose this when</dt>
+                  <dd className="mt-1 text-muted">{path.fit}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-ink">First move</dt>
+                  <dd className="mt-1 text-muted">{path.first}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-ink">First artifact</dt>
+                  <dd className="mt-1 text-muted">{path.artifact}</dd>
+                </div>
+              </dl>
+              <Link href={path.href} className="mt-6 inline-flex text-sm font-semibold text-accent underline underline-offset-4">
+                {path.cta}
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-band" aria-labelledby="outcome-pack-map-title">
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
+          <div className="section-heading motion-reveal">
+            <div className="kicker">Minimum viable Outcome Pack</div>
+            <h2 id="outcome-pack-map-title">The six things the system must make inspectable.</h2>
+            <p>If one is missing, the agent may still look impressive while the business remains fragile.</p>
           </div>
-        ))}
-      </div>
-
-      <ol className="mt-10 space-y-6">
-        {[
-          { t: 'Pick one tool category you actually use', d: 'Voice, video, writing, coding — whatever you have real opinions about. Authentic beats broad. You can only recommend honestly what you\'ve touched.' },
-          { t: 'Write the comparison in an inspectable shape', d: 'Lead with the answer, show the criteria, name the tradeoffs, date the evidence, and disclose any material incentive.' },
-          { t: 'Offer a useful next step', d: 'Add a link only when it fits the recommendation. Offer an email or product path only when its delivery and data handling are clear.' },
-        ].map((s, i) => (
-          <li key={s.t} className="flex gap-4 rounded-xl border border-border glass p-5">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-accent/15 font-bold text-accent">{i + 1}</span>
-            <div>
-              <div className="font-semibold text-ink">{s.t}</div>
-              <p className="mt-1 text-sm text-muted">{s.d}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-
-      <h2 className="mt-14 text-2xl font-bold text-ink">The recurring-payer shortlist</h2>
-      <p className="mt-2 max-w-2xl text-muted">The programs worth building around, ranked by fit and recurring potential. The point is not to chase payout; it is to route trust where it belongs.</p>
-      <div className="mt-6 overflow-hidden rounded-xl border border-border glass">
-        <table className="w-full text-sm">
-          <thead><tr className="text-left text-muted">
-            <th className="px-4 py-3">Tool</th><th className="px-4 py-3">Commission</th><th className="px-4 py-3">Recurring</th>
-          </tr></thead>
-          <tbody>
-            {top.map((p) => (
-              <tr key={p.tool} className="border-t border-border">
-                <td className="px-4 py-3 font-semibold text-ink">{p.tool}</td>
-                <td className="px-4 py-3 text-ink">{p.commission}</td>
-                <td className="px-4 py-3 text-muted">{p.recurring}</td>
-              </tr>
+          <dl className="grid gap-3">
+            {outcomePack.map(([term, description], index) => (
+              <div key={term} className="grid gap-2 rounded-xl border border-border bg-surface/70 p-5 sm:grid-cols-[2.5rem_11rem_1fr]">
+                <span className="font-mono text-sm font-semibold text-accent">0{index + 1}</span>
+                <dt className="font-semibold text-ink">{term}</dt>
+                <dd className="text-sm leading-6 text-muted">{description}</dd>
+              </div>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </dl>
+        </div>
+      </section>
 
-      <div className="mt-10">
-        <Link href="/blog" className="font-medium text-accent hover:underline">See the comparisons in action</Link>
-        <span className="mx-3 text-muted/40">·</span>
-        <Link href="/delivery/starter-kit" className="font-medium text-accent hover:underline">Open the starter kit</Link>
-        <span className="mx-3 text-muted/40">·</span>
-        <Link href="/offers" className="font-medium text-accent hover:underline">Inspect the paid systems</Link>
-      </div>
-
-      <EmailCapture headline="Want the build order as a checklist?" sub="Get the step-by-step path and top recurring shortlist. No noise." />
-    </div>
+      <section className="conversion-band motion-reveal">
+        <div>
+          <div className="kicker text-gold">Need implementation depth?</div>
+          <h2 className="display-h2">Bring one credible workflow.</h2>
+          <p className="mt-3 max-w-xl text-muted">
+            The implementation sprint defines the buyer, scope, authority, acceptance checks, and
+            evidence before commercial terms are agreed. No payment is taken on this site.
+          </p>
+        </div>
+        <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
+          <Link href="/offers/implementation-sprint" className="cta">Inspect the sprint</Link>
+          <Link href="/build" className="cta-secondary">See the build method</Link>
+        </div>
+      </section>
+    </>
   )
 }

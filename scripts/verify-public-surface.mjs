@@ -10,6 +10,9 @@ const files = {
   analytics: read('lib/analytics.ts'),
   subscribe: read('app/api/subscribe/route.ts'),
   start: read('app/start/page.tsx'),
+  pack: read('app/pack/page.tsx'),
+  challenge: read('app/challenge/page.tsx'),
+  llms: read('public/llms.txt'),
   privacy: read('app/privacy/page.tsx'),
   notFound: read('app/not-found.tsx'),
   footer: read('components/Footer.tsx'),
@@ -26,15 +29,16 @@ const forbidText = (file, value, label) => {
 }
 
 requireText('home', '<AgentWorkflowProof />', 'workflow is present on the homepage')
-requireText('workflow', 'node scripts/affiliate-audit.mjs', 'workflow shows the executable command')
+requireText('workflow', 'npm run income:init', 'workflow shows the executable Outcome Pack scaffold')
 requireText('workflow', 'Human gate', 'workflow exposes human approval')
-requireText('workflow', 'It does not join a program', 'workflow exposes autonomy boundary')
+requireText('workflow', 'does not price the work', 'workflow exposes commercial autonomy boundary')
 requireText('workflow', 'Reference implementation only', 'workflow avoids customer-proof overclaim')
-requireText('workflow', '/skills/affiliate-audit/SKILL.md', 'workflow links the public skill contract')
-requireText('workflow', '/scripts/affiliate-audit.mjs', 'workflow links executable source')
+requireText('workflow', '/skills/agentic-income/SKILL.md', 'workflow links the public operating contract')
+requireText('workflow', '/examples/request-to-quote-desk', 'workflow links the complete reference system')
 
 for (const event of [
   'implementation_request_clicked',
+  'start_path_clicked',
   'open_source_proof_clicked',
   'workflow_proof_clicked',
   'subscribe_unwired',
@@ -46,6 +50,10 @@ requireText('subscribe', 'readBoundedJson(req)', 'intake body is bounded before 
 
 forbidText('start', 'what ranks and what AI search engines lift verbatim', 'unsupported ranking claim')
 forbidText('start', 'every reader is either income', 'dehumanizing outcome claim')
+
+for (const file of ['home', 'hero', 'workflow', 'start', 'pack', 'challenge', 'llms']) {
+  forbidText(file, 'https://github.com/frankxai/agenticincome', 'public proof must not link the private application repository')
+}
 
 requireText('privacy', "alternates: { canonical: '/privacy' }", 'privacy canonical metadata')
 requireText('notFound', 'robots: { index: false, follow: false }', '404 noindex metadata')

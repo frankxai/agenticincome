@@ -6,32 +6,24 @@ const PRODUCTS = [
     price: 'Free',
     free: true,
     state: 'delivered on-site',
-    body: 'The /ai pack, the knowledge base, and the first-week runbook. Everything needed to ship a first offer — no email required for the repo.',
+    body: 'The capability map, public operating contract, local Request-to-Quote desk, and first-system worksheet. No email gate.',
     href: '/start',
     cta: 'Start free',
   },
   {
-    name: 'Income Architecture Blueprint',
+    name: 'Outcome Pack Blueprint',
     price: '$67',
     state: 'request access — checkout arriving',
-    body: 'Deep business-plan kits per income model: worked economics, fulfillment runbooks, launch sequences. The paid depth behind /ai architect.',
-    href: '/offers',
+    body: 'The complete design desk: buyer, offer, acceptance, authority, evals, economics, evidence, and operating runbook.',
+    href: '/offers/blueprint',
     cta: 'View the offer',
   },
   {
-    name: 'Agent Team Pro',
-    price: '$129',
-    state: 'request access — checkout arriving',
-    body: 'The premium agent team: extended specialists, delivery loops, QA gates, and 12 months of pack updates as the landscape shifts.',
-    href: '/offers',
-    cta: 'View the offer',
-  },
-  {
-    name: 'Private Intel',
+    name: 'Operator Evidence Brief',
     price: '$19/mo',
     state: 'request access — checkout arriving',
-    body: 'Operator briefings: registry alpha, program-term changes, landscape diffs that affect running machines — before the quarterly public pass.',
-    href: '/offers',
+    body: 'Monthly runtime, authority, evaluation, cost, and re-verification notes for people operating live Outcome Packs.',
+    href: '/offers/private-intel',
     cta: 'View the offer',
   },
 ]
@@ -50,7 +42,7 @@ export function ProductLadder() {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-10 grid gap-4 sm:grid-cols-3">
         {PRODUCTS.map((p) => (
           <div key={p.name} className={`price-card motion-reveal ${p.free ? '' : 'is-commercial'}`}>
             <div className={`price-tag ${p.free ? 'free' : ''}`}>{p.price}</div>
@@ -67,7 +59,7 @@ export function ProductLadder() {
       <p className="motion-reveal mt-6 max-w-3xl font-mono text-[0.7rem] leading-relaxed text-[color:var(--color-muted)]">
         NO INCOME PROMISES — we sell machinery and education, never outcomes. Some research links
         are commission links, always disclosed inline, with a non-affiliate alternative named.
-        Doctrine: <a className="underline decoration-[color:var(--color-border)] underline-offset-2 hover:text-[color:var(--color-ink)]" href="https://github.com/frankxai/agenticincome/blob/main/knowledge/05-honest-marketing.md" rel="noopener">knowledge/05 — honest marketing</a>.
+        Operating contract: <a className="underline decoration-[color:var(--color-border)] underline-offset-2 hover:text-[color:var(--color-ink)]" href="https://github.com/frankxai/agentic-income-skills/blob/main/skills/agentic-income/SKILL.md" target="_blank" rel="noopener noreferrer">public Agentic Income skill</a>.
       </p>
     </section>
   )

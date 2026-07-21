@@ -1,18 +1,17 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { challengeDays } from '@/lib/challenge'
-import { EmailCapture } from '@/components/EmailCapture'
 import { FaqSection } from '@/components/FaqSection'
 
 export const metadata: Metadata = {
   title: 'The 7-Day Agentic Income Challenge',
   description:
-    'A free, evergreen 7-day path: one concrete build step a day using the /ai pack and the knowledge base — assess, pick a model, architect, ship, operate. Capability, never income claims.',
+    'A free, evergreen seven-day path from one buyer problem to a validated, principal-owned Outcome Pack using the public Agentic Income skill.',
   alternates: { canonical: '/challenge' },
   openGraph: {
     title: 'The 7-Day Agentic Income Challenge',
     description:
-      'One concrete build step a day using the /ai pack and the knowledge base. A live, real system by day seven — no income claims.',
+      'One concrete artifact a day using the public operating contract. A reviewable Outcome Pack by day seven — no income claims.',
     url: '/challenge',
   },
 }
@@ -20,11 +19,11 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: 'Will I make money doing this?',
-    a: 'No promises — the challenge is built to say so honestly. You will finish the week with a live, real system, which is the part that is not in doubt. Whether it earns is up to your market, your effort, and time. We market machinery and education, never outcomes.',
+    a: 'No. The challenge improves the quality of a business test; it does not create demand or guarantee a result. Whether the system earns depends on the buyer, offer, delivery, market, evidence, and continued human work.',
   },
   {
     q: 'Is it actually free?',
-    a: 'Yes. The /ai pack is MIT-licensed and the knowledge base is public. No credit card, no “free trial” that bills you later, no upsell hidden inside day one. The paid products are depth and updates — never required to finish the week.',
+    a: 'Yes. The operating skill, schema, validator, scaffold, and reference system are MIT-licensed in a public repository. No account, card, customer data, or private credential is required.',
   },
   {
     q: 'How much time does each day take?',
@@ -36,7 +35,7 @@ const faqs = [
   },
   {
     q: 'Do I need to already know how to code?',
-    a: 'You need a terminal and a coding agent (Claude Code is the reference runtime; Codex, Gemini CLI, Cursor, and OpenCode run the pack too). The pack does the heavy lifting — it interviews you and writes the artifacts. You direct it.',
+    a: 'You need Node.js 20 or newer for the validator and scaffold. A capable coding agent helps, but the contracts are readable and the reference system can be inspected without handing an agent unrestricted authority.',
   },
 ]
 
@@ -45,21 +44,21 @@ export default function ChallengePage() {
     <>
       <section className="section-band pt-20">
         <div className="section-heading motion-reveal">
-          <div className="kicker text-[color:var(--color-accent)]">Free · evergreen · MIT pack</div>
+          <div className="kicker text-[color:var(--color-accent)]">Free · evergreen · public MIT contract</div>
           <h1 className="display-h2 !text-[clamp(2.2rem,4.5vw,3.4rem)]">
             The 7-Day <span className="text-[color:var(--color-accent)]">Agentic Income</span> Challenge
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-[color:var(--color-muted)]">
-            Seven days, one small real action each day — assess your leverage, pick a model, architect the business,
-            choose an honest stack, design the offer, write copy that passes both gates, then ship and operate. No
-            “$10k/mo passive” claims. You end the week with a live, real system in your own terminal and repo.
+            Seven days, one reviewable artifact each day: buyer, principal, accepted outcome,
+            Outcome Pack, authority model, validation evidence, and one operating decision. You
+            finish with a serious business test in your own repository—not an income prediction.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link href="/pack" className="cta">
-              Get the /ai pack
+              Open the operating skill
             </Link>
             <Link href="/start" className="cta-secondary">
-              Start with the free kit
+              Use the capability map
             </Link>
           </div>
         </div>
@@ -102,46 +101,35 @@ export default function ChallengePage() {
       <section className="section-band max-w-3xl">
         <div className="section-heading motion-reveal">
           <div className="kicker">The one rule</div>
-          <h2 className="display-h2">The recommendation has to work without the payout.</h2>
+          <h2 className="display-h2">Agents prepare. An authorized principal commits.</h2>
           <p>
-            The challenge teaches the exact system this site runs on: best fit first, affiliate route second, every
-            compensated link disclosed in plain language before you reach it. See the full{' '}
-            <Link href="/disclosure" className="text-[color:var(--color-accent)] underline underline-offset-2">
-              affiliate disclosure
-            </Link>{' '}
-            for the specifics, or the{' '}
+            Research, triage, drafts, tests, and evidence gathering can run automatically. Pricing,
+            contracts, public income claims, production promotion, customer sends, credential
+            grants, and movement of money require explicit authority and an auditable approval. Read the{' '}
             <Link href="/trust" className="text-[color:var(--color-accent)] underline underline-offset-2">
               trust standard
             </Link>{' '}
-            for how the recommendations get made.
+            for the complete boundary.
           </p>
         </div>
       </section>
 
-      <EmailCapture
-        headline="Get the 7-Day Challenge Brief"
-        sub="One honest, concrete build step a day, by email. No income claims — just the next real thing to do."
-        source="challenge"
-        buttonLabel="Start Day 1"
-        successMessage="You’re in. Day 1 — assess your real leverage — is on its way."
-      />
-
-      <section className="section-band">
-        <div className="section-heading motion-reveal">
-          <div className="kicker">Prefer to move now?</div>
-          <h2 className="display-h2">Skip the wait. Install the pack today.</h2>
+      <section className="conversion-band motion-reveal">
+        <div>
+          <div className="kicker">No email gate</div>
+          <h2 className="display-h2">Start the full challenge now.</h2>
           <p>
-            The whole challenge is powered by the free /ai pack — five staged commands, four specialist agents,
-            four skills. You can run Day 1 the moment it is installed.
+            The full operating contract, schema, validator, scaffold, and Request-to-Quote reference
+            system are public. Clone them, inspect them, and keep the resulting system in your repo.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <a href="https://github.com/frankxai/agenticincome" rel="noopener" className="cta">
-              Get the pack on GitHub
-            </a>
-            <Link href="/pack" className="cta-secondary">
-              See how the pack works
-            </Link>
-          </div>
+        </div>
+        <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
+          <a href="https://github.com/frankxai/agentic-income-skills" target="_blank" rel="noopener noreferrer" className="cta">
+            Open the public repository
+          </a>
+          <Link href="/pack" className="cta-secondary">
+            See what ships
+          </Link>
         </div>
       </section>
 

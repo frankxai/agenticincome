@@ -1,32 +1,54 @@
-# Running the /ai pack outside Claude Code
+# Running Agentic Income across agent runtimes
 
-The pack's intelligence is plain markdown — commands, agents, and skills are readable prompts, not binaries. Claude Code gives the richest experience (plugin install, subagents, scheduled loops), but the full system runs anywhere an agent can read files.
+The public operating skill is plain Markdown. Its scaffold and validator are
+Node.js scripts. No private app repository or Claude marketplace listing is
+required.
 
-## Codex CLI / Cursor / Windsurf
+## Install the public source
 
-1. Clone this repo (or add it as a submodule/reference folder in your workspace):
-   ```bash
-   git clone https://github.com/frankxai/agenticincome ~/packs/agenticincome
-   ```
-2. Point your agent at a stage file as the instruction, e.g.:
-   > "Read `~/packs/agenticincome/commands/ai-assess.md` and execute it for me. My surfaces: <links>."
-3. The repo ships `AGENTS.md` (the cross-vendor repo contract Codex reads natively). Working inside a clone, Codex picks up the doctrine automatically.
-4. Specialist roles: paste the relevant `agents/*.md` body as a role prompt when a stage calls for it (e.g. offer-strategist during pricing).
+Requires Node.js 20 or newer:
 
-## Gemini CLI / OpenCode
+```bash
+git clone https://github.com/frankxai/agentic-income-skills.git
+cd agentic-income-skills
+npm install
+npm test
+npm run income:init -- --output=../my-income-system
+npm run income:validate -- ../my-income-system/income-system.json
+```
 
-Same pattern — these runtimes follow markdown instructions and honor repo context files. Load the command file for your stage, keep `knowledge/` in the workspace so facts resolve locally.
+## Claude Code, Codex, Cursor, Gemini CLI, and OpenCode
 
-## Any chat model (minimum viable)
+Point the runtime at
+[`skills/agentic-income/SKILL.md`](https://github.com/frankxai/agentic-income-skills/blob/main/skills/agentic-income/SKILL.md)
+and state a mode and goal:
 
-Paste the body of `commands/ai.md` as the system prompt, attach the `knowledge/` files that stage cites, and insist on the artifact contract: every session ends with the markdown file written into your own repo (`income/…`). The artifacts — not the chat — are the product.
+```text
+/agentic-income build a request-to-quote desk for Amsterdam renovation
+businesses, with human approval before pricing or outbound commitments.
+```
 
-## What you lose without Claude Code
+If the runtime does not support slash-style skill invocation, use the same text
+as a direct instruction:
 
-- One-command install/updates (`/plugin install ai-pack@agenticincome`)
-- Automatic subagent fan-out for the specialist roles
-- Scheduled `/ai operate` loops (recreate with cron + your runtime's headless mode)
+```text
+Read skills/agentic-income/SKILL.md. Use build mode for this goal: ...
+```
+
+## What the scripts prove
+
+- `npm run income:init` creates an owned copy of the reference Outcome Pack.
+- `npm run income:validate` checks the published schema and non-negotiable
+  authority policies.
+- `npm test` runs the public repository test suite.
+
+These checks do not prove demand, production security, delivery quality,
+customer acceptance, or economic performance. Those require separate evidence
+and human review.
 
 ## What never changes
 
-Artifacts in your repo · honest economics · kill criteria · the two-question copy gate. The doctrine is runtime-independent — that's deliberate: runtimes churn quarterly, your income architecture shouldn't.
+The human or legal entity remains principal. Customer-owned accounts and
+credentials stay customer-owned. Prices, contracts, transfers, permission
+increases, destructive actions, and public income claims require explicit human
+approval.

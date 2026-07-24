@@ -4,8 +4,11 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 const INSTALL = [
-  '/plugin marketplace add frankxai/agenticincome',
-  '/plugin install ai-pack@agenticincome',
+  'git clone https://github.com/frankxai/agentic-income-skills.git',
+  'cd agentic-income-skills && npm install',
+  'npm run income:init -- --output=../my-income-system',
+  'npm run income:validate -- ../my-income-system/income-system.json',
+  'npm test',
 ]
 
 function CopyLine({ text }: { text: string }) {
@@ -36,19 +39,17 @@ export function PackTerminal() {
     <section className="section-band" id="pack">
       <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="section-heading motion-reveal">
-          <div className="kicker text-[color:var(--color-accent)]">The pack · open machinery</div>
+          <div className="kicker text-[color:var(--color-accent)]">Public system · open machinery · MIT</div>
           <h2 className="display-h2">
-            <span className="font-mono text-[0.85em] text-[color:var(--color-accent)]">/ai</span> — an income
-            architect in your terminal.
+            Clone the contract. Create an Outcome Pack you own.
           </h2>
           <p className="mt-4 text-lg font-semibold text-[color:var(--color-ink)]">
-            Not a course you watch. A team you command.
+            No marketplace claim. No private-repository dependency.
           </p>
           <p className="mt-3 text-[color:var(--color-muted)]">
-            Five staged commands, four specialist agents, four skills — installable in Claude Code,
-            portable to Codex, Gemini CLI, Cursor, and OpenCode. Every stage ends with a written
-            artifact in <em className="not-italic text-[color:var(--color-ink)]">your</em> repo. Advice that
-            lives only in a chat doesn’t exist.
+            The public repository contains the operating skill, machine-readable schema, validator,
+            scaffold, and a governed Request-to-Quote reference system. It requires Node.js 20 or
+            newer and works with any capable coding agent that can read the skill contract.
           </p>
           <div className="mt-6 grid gap-2">
             {INSTALL.map((cmd) => (
@@ -56,30 +57,34 @@ export function PackTerminal() {
             ))}
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/pack" className="cta-secondary">Pack details</Link>
-            <a href="https://github.com/frankxai/agenticincome" rel="noopener" className="cta-secondary">
-              Read the source — it’s MIT
+            <Link href="/pack" className="cta-secondary">See what ships</Link>
+            <a
+              href="https://github.com/frankxai/agentic-income-skills"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-secondary"
+            >
+              Inspect the public MIT source
             </a>
           </div>
         </div>
 
-        <div className="terminal motion-reveal" role="img" aria-label="Example /ai session: assess produces a capability inventory, architect produces an income architecture with a kill criterion">
+        <div
+          className="terminal motion-reveal"
+          role="img"
+          aria-label="Public Agentic Income repository commands for scaffolding, validating, and testing an owned Outcome Pack"
+        >
           <div className="terminal-bar">
             <i /><i /><i />
-            <span className="ml-2">claude — /ai session</span>
+            <span className="ml-2">shell — public source workflow</span>
           </div>
           <div className="terminal-body">
-            <div className="t-cmd">/ai assess</div>
-            <div className="t-out">Reading surfaces… <span className="t-accent">newsletter (1.4k)</span> · <span className="t-accent">github (37 repos)</span> · <span className="t-accent">yt (2.1k)</span></div>
-            <div className="t-out">Leverage read: 2 candidates where proof × distribution already overlap.</div>
-            <div className="t-out">→ wrote <span className="t-artifact">income/00-capability-inventory.md</span></div>
-            <div className="t-cmd mt-3">/ai architect</div>
-            <div className="t-out">Entry model: <span className="t-accent">services</span> — cash horizon 30d, strong payment evidence.</div>
-            <div className="t-out">The one play: “agent workflow implementation for boutique studios.”</div>
-            <div className="t-out">Economics: ranges + assumptions only. Scenario, not forecast.</div>
-            <div className="t-out">Kill criterion: 2 paid engagements by <span className="t-accent">Aug 22</span> — or stop.</div>
-            <div className="t-out">→ wrote <span className="t-artifact">income/01-income-architecture.md</span></div>
-            <div className="t-cmd mt-3">/ai offer<span className="t-caret ml-2" /></div>
+            <div className="t-cmd">npm run income:init -- --output=../my-income-system</div>
+            <div className="t-out">Creates an owned copy of the Request-to-Quote reference system.</div>
+            <div className="t-out">→ writes <span className="t-artifact">../my-income-system/income-system.json</span></div>
+            <div className="t-cmd mt-3">npm run income:validate -- ../my-income-system/income-system.json</div>
+            <div className="t-out">Checks schema, deny-by-default authority, approval gates, budgets, and secret-bearing fields.</div>
+            <div className="t-cmd mt-3">npm test<span className="t-caret ml-2" /></div>
           </div>
         </div>
       </div>

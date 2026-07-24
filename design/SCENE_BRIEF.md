@@ -1,25 +1,29 @@
-# Homepage Scene Brief — 2026-07-10
+# Homepage Scene Brief — 2026-07-24
 
 ## Creative Thesis
 
-The revenue engine is assembled in public: a precise build path and inspectable artifacts replace both AI spectacle and income hype.
+The revenue engine is assembled in public: a precise build path and inspectable
+artifacts replace both AI spectacle and income hype.
 
 ## Static Frame
 
-An obsidian build room with one editorial claim on the left and a coded four-stage implementation panel on the right. The lower rail links to actual public systems and a live directory.
+The existing obsidian build-room composition remains. The install terminal now
+shows only commands a visitor can execute against the public MIT repository:
+clone, install, scaffold, validate, and test.
 
 ## Signature Motion
 
-Job: communicate delivery order. Implementation stages resolve in sequence; later proof appears only as it enters the viewport. Timing is restrained and finishes in a useful static state.
+Unchanged. Motion communicates delivery order. The public-source truth repair
+adds no new movement and changes no timing, layout, or responsive behavior.
 
 ## Reduced Motion
 
-All content is fully visible at rest. Sequence reveals, path drawing, and transitions collapse to immediate static output.
+Unchanged. All content remains fully visible at rest.
 
-## Asset Decision
+## Source decision
 
-Tier C system-authored product proof. No new generated media, video, 3D, or external assets are justified for this pass. Existing generated media is not used as the primary homepage asset.
-
-## Workflow Proof Scene
-
-The public affiliate-audit workflow is the inspectable proof object: a real command, documented inputs, executable source, `AUDIT.md` output, and a human approval boundary before public or partner action. Its GitHub links are the evidence; the on-page system panel explains the evidence without inventing a run result.
+The public proof object is
+`https://github.com/frankxai/agentic-income-skills`: the operating skill,
+IncomeSystem schema, scaffold, validator, and governed Request-to-Quote example.
+The private application repository is not presented as public source or as a
+Claude marketplace.

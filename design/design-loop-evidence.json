@@ -108,5 +108,35 @@
     "Online intake, paid checkout, and analytics forwarding remain environment-dependent and must not be described as live without runtime evidence.",
     "The 195px reflow keeps the mobile navigation as an intentionally horizontal internal scroller while the document itself has no horizontal overflow.",
     "Production remains on the prior healthy deployment; this branch is preview-only."
-  ]
+  ],
+  "public_install_truth": {
+    "version": "2026-07-24",
+    "scope": "Copy-and-source integrity repair; no layout, typography, asset, motion, or responsive behavior change.",
+    "public_repository": "https://github.com/frankxai/agentic-income-skills",
+    "executable_scripts": [
+      "npm run income:init",
+      "npm run income:validate",
+      "npm test"
+    ],
+    "forbidden_public_claims": [
+      "https://github.com/frankxai/agenticincome",
+      "/plugin marketplace add frankxai/agenticincome",
+      "/plugin install ai-pack@agenticincome"
+    ],
+    "artifacts": [
+      "components/PackTerminal.tsx",
+      "app/pack/page.tsx",
+      "tests/public-install-truth.test.mjs"
+    ],
+    "checks": [
+      {
+        "name": "recursive-public-install-contract",
+        "status": "pass",
+        "evidence": "node --test tests/public-install-truth.test.mjs: 3 tests passed locally against the prepared source set."
+      }
+    ],
+    "pending": [
+      "Repository-wide test, type-check, lint, static link check, public-surface verification, and production build on the Git-backed preview."
+    ]
+  }
 }

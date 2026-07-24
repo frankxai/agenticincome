@@ -1,4 +1,4 @@
-const KB = 'https://github.com/frankxai/agenticincome/blob/main/knowledge'
+import Link from 'next/link'
 
 const MODELS = [
   {
@@ -10,7 +10,8 @@ const MODELS = [
       ['Coupling', 'still your hours'],
       ['Job', 'fund the next model'],
     ],
-    href: `${KB}/02-income-models.md`,
+    href: '/build',
+    cta: 'Inspect the build path',
   },
   {
     stage: 'Model 2 · months 2–3',
@@ -21,7 +22,8 @@ const MODELS = [
       ['Margin', '~95% via merchant of record'],
       ['The game', 'distribution'],
     ],
-    href: `${KB}/02-income-models.md`,
+    href: '/offers',
+    cta: 'Inspect current offers',
   },
   {
     stage: 'Model 3 · months 3–6',
@@ -32,7 +34,8 @@ const MODELS = [
       ['Ceiling', 'highest of the three'],
       ['Next', '/api streams → /dpi portfolio'],
     ],
-    href: `${KB}/02-income-models.md`,
+    href: '/operate',
+    cta: 'Inspect the operating loop',
   },
 ]
 
@@ -44,14 +47,14 @@ export function PathSection() {
         <h2 className="display-h2">Three models. One order. <span className="text-[color:var(--color-accent)]">Each funds the next.</span></h2>
         <p className="mt-4 max-w-2xl text-[color:var(--color-muted)]">
           Services buy your runway, products package your judgment, systems decouple your calendar.
-          The <code className="rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-1.5 py-0.5 text-[0.85em]">/ai architect</code> stage
-          computes your entry point from what you already have — with a kill criterion attached.
+          The public operating contract helps choose an entry point from what you already have —
+          with acceptance and stop conditions attached.
         </p>
       </div>
 
       <div className="mt-10 grid gap-4 lg:grid-cols-3">
         {MODELS.map((m, i) => (
-          <a key={m.name} href={m.href} rel="noopener" className="path-card motion-reveal group">
+          <Link key={m.name} href={m.href} className="path-card motion-reveal group">
             <div className="path-stage">{m.stage}</div>
             <h3>
               <span className="mr-2 font-mono text-sm text-[color:var(--color-muted)]">0{i + 1}</span>
@@ -67,9 +70,9 @@ export function PathSection() {
               ))}
             </dl>
             <span className="mt-1 font-mono text-[0.68rem] uppercase tracking-widest text-[color:var(--color-muted)] transition group-hover:text-[color:var(--color-accent)]">
-              Read the economics →
+              {m.cta} →
             </span>
-          </a>
+          </Link>
         ))}
       </div>
     </section>

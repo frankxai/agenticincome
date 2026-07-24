@@ -36,7 +36,7 @@ const faqs = [
   },
   {
     q: 'Do I need to already know how to code?',
-    a: 'You need Node.js 20 or newer for the validator and scaffold. A capable coding agent helps, but the contracts are readable and the reference system can be inspected without handing an agent unrestricted authority.',
+    a: 'Node.js 20 or newer runs the validator and scaffold. The contracts remain readable without an agent; a coding agent can apply them without receiving unrestricted authority.',
   },
 ]
 

@@ -1,58 +1,70 @@
 ---
-title: "Run the trinity with Claude Code"
-last_verified: 2026-07-11
+title: "Run Agentic Income with Claude Code"
+last_verified: 2026-07-24
 review_cycle: quarterly
 ---
 
-# Claude Code — the reference runtime
+# Claude Code — use the public operating skill
 
-Claude Code is the richest home for the packs: plugins install in one command, specialist agents fan out as subagents, and loops run as scheduled sessions. This guide takes you from zero to a working `/ai` session.
+Agentic Income does not require a private marketplace. Claude Code can read the
+public Markdown skill directly; Node.js runs the public scaffold and validator.
 
-## Setup (10 minutes)
+## Setup
+
+Install Claude Code using Anthropic's current official instructions, then clone
+and verify the public Agentic Income repository:
 
 ```bash
-# 1. Install (Node 18+)
-npm install -g @anthropic-ai/claude-code
-
-# 2. Authenticate — a Claude Pro/Max plan includes usage, or use an API key
-claude   # follow the login prompt
-
-# 3. Add the trinity marketplaces (inside any Claude Code session)
-/plugin marketplace add frankxai/agenticincome
-/plugin marketplace add frankxai/agenticpassiveincome
-
-# 4. Install the packs you need
-/plugin install ai-pack@agenticincome
-/plugin install api-pack@agenticpassiveincome
-
-# dpi is fork-first by doctrine: clone github.com/frankxai/dpi and run /dpi inside it
+git clone https://github.com/frankxai/agentic-income-skills.git
+cd agentic-income-skills
+npm install
+npm test
+npm run income:init -- --output=../my-income-system
 ```
 
-## Your first session (the honest path)
+The repository requires Node.js 20 or newer.
 
-Work inside a git repo — the packs write artifacts and artifacts deserve version control:
+## Your first session
+
+Start Claude Code in the cloned public repository or a workspace that can read it:
 
 ```bash
-mkdir my-income && cd my-income && git init
 claude
-> /ai
 ```
 
-The router interviews you (4 questions max), routes you to a stage, and ends with a file in `income/`. Commit it. That commit is day one of a business with provenance.
+Then ask:
 
-## What Claude Code adds over other runtimes
+```text
+Read skills/agentic-income/SKILL.md. Use validate mode for ../my-income-system.
+Name missing buyer evidence, acceptance criteria, authority gates, evals,
+economics, and stop conditions. Update only reviewable artifacts.
+```
 
-- **Subagent fan-out:** `/ai offer` can run offer-strategist and delivery-engineer as parallel specialists with an adversarial review pass.
-- **Scheduled loops:** `/ai operate` weekly without you remembering — set a scheduled run (or a cron job invoking `claude -p "/ai operate"` headless) with output landing as a PR you review Monday morning.
-- **Hooks & gates:** wire a pre-publish hook so nothing public ships without the two-question copy gate (engineer respect / FTC yawn).
-- **MCP reach:** connect your analytics, checkout (Polar), and repo hosts so `/ai operate` pulls real numbers instead of asking you to paste them.
+The skill's portable invocation form is:
 
-## Cost honesty
+```text
+/agentic-income MODE GOAL
+```
 
-A weekly operator loop plus a build session or two typically fits comfortably inside a Pro/Max plan; heavy build weeks on API pay-as-you-go are a real cost line — **log agent spend in your weekly artifact next to revenue.** Margin only exists if you measure it (knowledge/03, quality floor #5).
+Supported modes are discover, validate, build, sell, deliver, operate, publish,
+prove, and improve.
 
-## Troubleshooting
+## Validate the owned system
 
-- `/ai` not found after install → restart the session; check `/plugin` lists ai-pack as enabled.
-- Commands exist but feel generic → you're outside the repo; the pack reads `knowledge/` for facts and doctrine, so run it where the pack (or your clone) is visible.
-- Artifacts not appearing → the pack writes relative to your working directory; run from your project root.
+```bash
+npm run income:validate -- ../my-income-system/income-system.json
+npm test
+```
+
+The validator checks the public schema and non-negotiable policy rules. It does
+not grant production authority or prove demand, security, customer acceptance,
+or economic performance.
+
+## Authority boundary
+
+Agents may research, classify, draft, run tests, and propose reversible changes.
+A human or legal entity must approve prices, contracts, customer-facing sends,
+production credentials, wider permissions, destructive actions, transfers, and
+public income claims.
+
+Public source: [frankxai/agentic-income-skills](https://github.com/frankxai/agentic-income-skills).

@@ -7,7 +7,7 @@ const INSTALL = [
   'git clone https://github.com/frankxai/agentic-income-skills.git',
   'cd agentic-income-skills && npm install',
   'npm run income:init -- --output=../my-income-system',
-  'npm run income:validate -- examples/request-to-quote-desk/income-system.json',
+  'npm run income:validate -- ../my-income-system/income-system.json',
   'npm test',
 ]
 

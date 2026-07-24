@@ -400,7 +400,7 @@ export function AssemblyHero() {
             the surplus — and inspect every gear.
           </p>
           <div className="assembly-actions">
-            <Link href="/pack" className="cta">Install /ai — free</Link>
+            <Link href="/pack" className="cta">Open the public system — free</Link>
             <a href="#the-shift" className="cta-secondary">
               Watch it assemble ↓
             </a>

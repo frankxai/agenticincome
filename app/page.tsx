@@ -15,9 +15,9 @@ import { sortedPosts } from '@/lib/posts'
 const featured = sortedPosts.filter((post) => post.featured).slice(0, 2)
 
 export const metadata: Metadata = {
-  title: 'Build income with AI agents — machinery you can inspect',
+  title: 'Build income systems with AI agents — machinery you can inspect',
   description:
-    'Income is becoming an engineering discipline. A dated, re-verified knowledge base, the installable /ai Income Architect pack, self-serve products, and attested proof. No income promises — machinery and education.',
+    'Income is becoming an engineering discipline. Public Outcome Pack contracts, an executable scaffold and validator, dated research, practical products, and attested proof. No income promises.',
   alternates: { canonical: '/' },
   openGraph: { url: '/' },
 }
@@ -91,8 +91,13 @@ export default function Home() {
         </div>
         <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
           <Link href="/offers/implementation-sprint" className="cta">Request a scoped plan</Link>
-          <a href="https://github.com/frankxai/agenticincome" target="_blank" rel="noopener noreferrer" className="cta-secondary">
-            Audit us on GitHub
+          <a
+            href="https://github.com/frankxai/agentic-income-skills"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta-secondary"
+          >
+            Inspect the public system
           </a>
         </div>
       </section>

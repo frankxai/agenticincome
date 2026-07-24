@@ -1,55 +1,89 @@
 # The First Week — a runbook
 
-> From nothing to a shipped machine-in-progress in seven honest days. This is the
-> Starter Kit's spine. No income promised; momentum guaranteed only if you do the work.
+> From an observed buyer problem to one reviewable Outcome Pack in seven honest
+> days. No income promised; each day ends with an artifact or decision.
 
-## Day 0 — the setup (45 min)
+## Day 0 — clone and verify the public system (45 min)
 
-1. Pick your runtime: [Claude Code](../knowledge/integrations/claude-code.md) (richest) or [Codex/portable](../knowledge/integrations/codex.md).
-2. Install the pack (`/plugin marketplace add frankxai/agenticincome` → `/plugin install ai-pack@agenticincome`).
-3. Make the repo that will hold your business: `mkdir my-income && cd my-income && git init`.
-4. Read [THE MANIFESTO](../MANIFESTO.md) once. It's ten rules; it takes six minutes; it will save you six months.
+Requires Node.js 20 or newer.
 
-## Day 1 — assess (60–90 min)
+```bash
+git clone https://github.com/frankxai/agentic-income-skills.git
+cd agentic-income-skills
+npm install
+npm test
+npm run income:init -- --output=../my-income-system
+```
 
-Run `/ai assess`. Give it every surface you have — site, socials, newsletter, GitHub, portfolio — with honest numbers. Commit `income/00-capability-inventory.md`. **The leverage read at the bottom is the week's most important output:** where your proof and your distribution already overlap.
+Open the [public Agentic Income skill](https://github.com/frankxai/agentic-income-skills/blob/main/skills/agentic-income/SKILL.md). It is plain Markdown, so Claude Code, Codex, Gemini CLI, Cursor, OpenCode, and other capable agents can read it without a marketplace plugin.
 
-## Day 2 — architect (60–90 min)
+## Day 1 — observe the buyer (60–90 min)
 
-Run `/ai architect`. Fight for one thing: **ONE play.** The agent will refuse to plan five; let it. Commit `income/01-income-architecture.md`. Read the kill criterion out loud. If it doesn't scare you slightly, it isn't one — tighten it.
+Ask your agent to use `/agentic-income discover`. Name one buyer, the repeated
+workflow, current cost, urgency, budget evidence, acceptance signal, and support
+burden. Write the evidence into your owned Outcome Pack. Do not rank an idea
+high because the technology is interesting.
 
-## Day 3 — offer (90 min)
+## Day 2 — validate one service (60–90 min)
 
-Run `/ai offer`. The output that matters most isn't the price — it's the **NOT-included list** (scope armor) and the fulfillment runbook (which agents deliver what, gated how). Commit `income/02-offer.md`.
+Use `/agentic-income validate`. Choose one fixed outcome, one price test, one
+acceptance contract, and one kill criterion. Record what would make the service
+unsafe, too bespoke, or too expensive to support.
 
-## Day 4 — build day (half day)
+## Day 3 — complete the system contract (90 min)
 
-No new documents. Build the smallest real version of the delivery machinery from the runbook: the intake brief template, the agent roles, the verification step. Test it on a fake client/buyer — yourself, yesterday. Fix what embarrassed you.
+Fill in `income-system.json`: legal principal, agent identity, buyer, offer,
+interfaces, authority, budgets, evals, economics, operations, and evidence. The
+agent may draft. A person or legal entity remains responsible for commitments,
+accounts, credentials, and money.
 
-## Day 5 — ship (half day)
+## Day 4 — build the smallest real path (half day)
 
-Run `/ai ship`. Landing copy (capability-framed, honest-costs block included), merchant-of-record checkout or intake form, launch posts for the surfaces you already have. Commit `income/03-launch-runbook.md`, then **execute it the same day.** Modest and live beats impressive and imaginary — that's rule X.
+Use `/agentic-income build`. Implement the smallest repeatable input-to-output
+path. Keep production credentials and customer data out of the manifest and
+model context. Use the Request-to-Quote example as a reference, not as proof
+that another market will buy.
 
-## Day 6 — breathe, watch, log
+## Day 5 — validate and inspect (half day)
 
-Don't touch the offer. Note what happened in a plain text file: visits, replies, questions, silence. Silence is data too.
+From the public repository:
 
-## Day 7 — operate (30 min)
+```bash
+npm run income:validate -- ../my-income-system/income-system.json
+npm test
+```
 
-Run `/ai operate` — your first weekly loop. Numbers, one QA check, one experiment for next week, kill-criterion status. Commit `income/weekly/<year-week>.md`. Book the same 30 minutes next week. **The loop is the business now; protect it.**
+A passing validator proves only that the document satisfies the published
+schema and policy checks. It does not prove demand, delivery quality, security,
+or customer acceptance.
+
+## Day 6 — prepare the public explanation
+
+Use `/agentic-income sell`. Write the buyer, accepted outcome, scope, process,
+authority boundary, evidence, limitations, price state, and next action. No
+income promise. No customer claim without consent and accepted delivery evidence.
+
+## Day 7 — decide (30 min)
+
+Review the buyer evidence, validation result, implementation cost, authority
+risk, and support burden. Choose one: implement, revise, or stop. Record the
+reason and the next evidence required.
 
 ---
 
 ## After week one
 
-- 4+ weeks of consistent delivery → package it: `/ai architect` again, Model 2 (product).
-- A product with steady distribution → automate a stream: the [`/api` pack](https://github.com/frankxai/agenticpassiveincome).
-- A stream running stable → govern the portfolio: the [`/dpi` substrate](https://github.com/frankxai/dpi).
-- Something real shipped? [Submit an attested case](../.github/ISSUE_TEMPLATE/case-submission.yml) — honest failures welcome, method always shown.
+- A paid, accepted service with repeatable inputs → improve its evals and runbook.
+- A stable service decision that repeats → package the reusable judgment.
+- An owned asset that sells on a bounded loop → move it to Agentic Passive Income.
+- Capital, crypto, lending, staking, trading, or yield work → move it to DPI.
 
 ## When you get stuck
 
-Stuck on *what to sell* → re-read your leverage candidates; pick the boring one with payment evidence.
-Stuck on *price* → the [pricing-architecture skill](../skills/pricing-architecture/SKILL.md); comparables, then one number.
-Stuck on *fear of shipping* → the honest-costs block exists precisely so you can publish without pretending. Ship it plain.
-Stuck on *time* → halve the scope, never the loop. A small machine on a steady loop beats a grand machine on none.
+Stuck on the buyer → interview someone who owns the workflow.
+Stuck on scope → define the smallest accepted output and everything excluded.
+Stuck on authority → deny by default and add a named human approval.
+Stuck on proof → distinguish system evidence, accepted delivery, and settled economics.
+Stuck on complexity → reduce integrations before adding agents.
+
+Public source: [frankxai/agentic-income-skills](https://github.com/frankxai/agentic-income-skills).

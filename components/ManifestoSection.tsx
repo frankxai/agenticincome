@@ -20,10 +20,11 @@ export function ManifestoSection() {
       </div>
       <a
         className="manifesto-link motion-reveal"
-        href="https://github.com/frankxai/agenticincome/blob/main/MANIFESTO.md"
-        rel="noopener"
+        href="https://github.com/frankxai/agentic-income-skills/blob/main/skills/agentic-income/SKILL.md"
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        Read the ten rules — THE MANIFESTO →
+        Inspect the public operating contract →
       </a>
     </section>
   )

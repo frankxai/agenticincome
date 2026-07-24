@@ -6,7 +6,7 @@ const PRODUCTS = [
     price: 'Free',
     free: true,
     state: 'delivered on-site',
-    body: 'The /ai pack, the knowledge base, and the first-week runbook. Everything needed to ship a first offer — no email required for the repo.',
+    body: 'The public operating skill, schema, validator, scaffold, reference system, and first-system runbook. No account is required for the repository.',
     href: '/start',
     cta: 'Start free',
   },
@@ -14,7 +14,7 @@ const PRODUCTS = [
     name: 'Income Architecture Blueprint',
     price: '$67',
     state: 'request access — checkout arriving',
-    body: 'Deep business-plan kits per income model: worked economics, fulfillment runbooks, launch sequences. The paid depth behind /ai architect.',
+    body: 'Deep business-plan kits per income model: worked economics, fulfillment runbooks, launch sequences. The paid depth behind the public method.',
     href: '/offers',
     cta: 'View the offer',
   },
@@ -22,7 +22,7 @@ const PRODUCTS = [
     name: 'Agent Team Pro',
     price: '$129',
     state: 'request access — checkout arriving',
-    body: 'The premium agent team: extended specialists, delivery loops, QA gates, and 12 months of pack updates as the landscape shifts.',
+    body: 'The premium agent team: extended specialists, delivery loops, QA gates, and 12 months of updates as the landscape shifts.',
     href: '/offers',
     cta: 'View the offer',
   },
@@ -41,12 +41,11 @@ export function ProductLadder() {
     <section className="section-band" id="products">
       <div className="section-heading motion-reveal">
         <div className="kicker text-[color:var(--color-gold)]">Products · commercial — labeled honestly</div>
-        <h2 className="display-h2">Everything important is free. <span className="text-[color:var(--color-gold)]">Depth is $67.</span></h2>
+        <h2 className="display-h2">The operating contract is public. <span className="text-[color:var(--color-gold)]">Depth is $67.</span></h2>
         <p className="mt-4 max-w-2xl text-[color:var(--color-muted)]">
-          The packs, the knowledge, the manifesto — free forever, MIT. What we sell is depth and
-          updates: complete business-plan kits, premium agent teams, operator intel. Self-serve
-          through a merchant of record, no calls, no funnels, 30-day refunds. And nothing below
-          says “buy” until checkout actually exists — access states render from reality.
+          The operating skill, schema, validator, scaffold, and reference system are MIT licensed
+          in a public repository. Paid products add implementation depth and updates. Nothing below
+          says “buy” until checkout exists; access states render from reality.
         </p>
       </div>
 
@@ -67,7 +66,7 @@ export function ProductLadder() {
       <p className="motion-reveal mt-6 max-w-3xl font-mono text-[0.7rem] leading-relaxed text-[color:var(--color-muted)]">
         NO INCOME PROMISES — we sell machinery and education, never outcomes. Some research links
         are commission links, always disclosed inline, with a non-affiliate alternative named.
-        Doctrine: <a className="underline decoration-[color:var(--color-border)] underline-offset-2 hover:text-[color:var(--color-ink)]" href="https://github.com/frankxai/agenticincome/blob/main/knowledge/05-honest-marketing.md" rel="noopener">knowledge/05 — honest marketing</a>.
+        Contract: <a className="underline decoration-[color:var(--color-border)] underline-offset-2 hover:text-[color:var(--color-ink)]" href="https://github.com/frankxai/agentic-income-skills/blob/main/skills/agentic-income/SKILL.md" target="_blank" rel="noopener noreferrer">public Agentic Income skill</a>.
       </p>
     </section>
   )

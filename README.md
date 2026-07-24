@@ -72,7 +72,7 @@ The reusable, public operating contract remains [agentic-income-skills](https://
 1. **Open core (MIT):** the public skill, schema, scaffold, validator, and reference system.
 2. **The Brief:** weekly landscape diffs, one stream teardown, and system updates.
 3. **Self-serve products:** Starter Kit (free), Income Architecture Blueprint ($67), Agent Team Pro ($129), and Private Intel ($19/mo). Paid access remains visibly unavailable until checkout is connected.
-4. **Disclosed affiliate research:** recommendations that survive without the incentive, routed through the inspectable [go.agenticincome.ai](https://github.com/frankxai/go-agenticincome) redirector.
+4. **Disclosed affiliate research:** recommendations that survive without the incentive. Compensated destinations are labeled before the click, with a non-affiliate alternative named when one exists.
 5. **Implementation Sprint:** scope-first agent-system delivery documented with acceptance and evidence.
 
 No earnings claims anywhere. We sell machinery and education, never outcomes.
@@ -85,7 +85,7 @@ No earnings claims anywhere. We sell machinery and education, never outcomes.
 | **[agenticpassiveincome.com](https://agenticpassiveincome.com)** | AUTOMATE — owned assets that run on bounded loops |
 | **[disruptivepassiveincome.com](https://disruptivepassiveincome.com)** | COMPOUND — simulation-first portfolio and wealth-system research |
 
-Related machinery: [agentic-income-skills](https://github.com/frankxai/agentic-income-skills) · [go-agenticincome](https://github.com/frankxai/go-agenticincome) · [agentic-income-template](https://github.com/frankxai/agentic-income-template) · [awesome-agentic-income](https://github.com/frankxai/awesome-agentic-income) · [hermes](https://github.com/frankxai/hermes) · [dpi](https://github.com/frankxai/dpi).
+Public machinery: [agentic-income-skills](https://github.com/frankxai/agentic-income-skills) · [affiliate-agent-skills](https://github.com/frankxai/affiliate-agent-skills) · [agentic-income-template](https://github.com/frankxai/agentic-income-template) · [awesome-agentic-income](https://github.com/frankxai/awesome-agentic-income).
 
 ## Site development
 

@@ -7,7 +7,7 @@
 ### Build income systems with AI agents — machinery you can inspect, public contracts you can run.
 
 **[agenticincome.ai](https://agenticincome.ai)** · the hub of the trinity:
-[**EARN** /ai](https://agenticincome.ai) → [**AUTOMATE** /api](https://agenticpassiveincome.com) → [**COMPOUND** /dpi](https://disruptivepassiveincome.com)
+[**EARN**](https://agenticincome.ai) → [**AUTOMATE**](https://agenticpassiveincome.com) → [**COMPOUND**](https://disruptivepassiveincome.com)
 
 </div>
 

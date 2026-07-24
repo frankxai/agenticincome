@@ -30,6 +30,7 @@ const privateRepositoryLink =
 const privateRepositoryVariants = [
   ['bare', 'https://github.com/frankxai/agenticincome'],
   ['git clone', 'https://github.com/frankxai/agenticincome.git'],
+  ['git clone blob path', 'https://github.com/frankxai/agenticincome.git/blob/main/README.md'],
   ['query', 'https://github.com/frankxai/agenticincome?tab=readme'],
   ['fragment', 'https://github.com/frankxai/agenticincome#readme'],
   ['blob path', 'https://github.com/frankxai/agenticincome/blob/main/README.md'],
@@ -37,6 +38,7 @@ const privateRepositoryVariants = [
 const publicRepositoryVariants = [
   'https://github.com/frankxai/agentic-income-skills',
   'https://github.com/frankxai/agentic-income-skills.git',
+  'https://github.com/frankxai/agentic-income-skills.git/blob/main/README.md',
   'https://github.com/frankxai/agentic-income-skills?tab=readme',
   'https://github.com/frankxai/agentic-income-skills#quick-start',
   'https://github.com/frankxai/agentic-income-skills/blob/main/README.md',

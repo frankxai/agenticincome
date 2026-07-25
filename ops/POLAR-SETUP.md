@@ -61,9 +61,36 @@ Products → (product) → Benefits → **File Downloads** benefit:
 
 ## 5. Wiring checkout into the site
 
-The site already has the full plumbing: `/api/checkout?offer=<slug>` (in `app/api/checkout/route.ts`) reads an env var per offer from `lib/offers.ts` (`checkout.envKey`), validates https, appends `utm_*`/`ref` attribution, and redirects. Missing env var → honest request-access fallback. So wiring = env vars + two code touches.
+There are two checkout paths in `app/api/checkout/route.ts`. Both are wired, both are fail-closed, and they are independent — you can activate either or both.
+
+| | **Path A — static link** (`GET`) | **Path B — API session** (`POST`, preferred) |
+|---|---|---|
+| Mechanism | Redirects to a checkout link you copy out of the Polar dashboard | Calls the Polar checkouts API and creates a session per click |
+| Config | `AGENTIC_INCOME_*_CHECKOUT_URL` via `lib/offers.ts` (`checkout.envKey`) | `POLAR_ACCESS_TOKEN` + `POLAR_PRODUCT_ID_*` via `lib/polar.ts` |
+| Gate | Env var present and https | Catalog `status` **and** env, both required |
+| Success URL | Baked into the Polar product | Built per product from the catalog's `delivery.path` |
+| Attribution | Appends `utm_*`/`ref` to the outgoing URL | Fires `checkout_click` / `checkout_redirect` events |
+| Missing config | Honest request-access fallback | 503 + machine-readable `reason` |
+
+Path B is preferred: the success URL follows the catalog instead of a link you copied months ago, and refusals are explicit rather than a silent redirect. Path A stays because the offer-page CTA still uses it whenever Path B is not live.
+
+**Path B's second gate is the point.** Setting the env vars alone cannot open checkout — `products/catalog.json` `status` must also start with `for sale` (see `_checkoutGate` in that file, and §5.4). Setting the catalog alone cannot either. Checkout therefore cannot be opened as a side effect of an environment change or a merge.
 
 ### 5.1 Env vars (Vercel → Project → Settings → Environment Variables, Production)
+
+Names and purpose are also documented in `.env.example`.
+
+**Path B (preferred):**
+
+| Env var | Value |
+|---|---|
+| `POLAR_ACCESS_TOKEN` | Organization Access Token (Polar → Settings → Developers). Server-side only — never `NEXT_PUBLIC_`. |
+| `POLAR_PRODUCT_ID_BLUEPRINT` | Polar product id for `blueprint` |
+| `POLAR_PRODUCT_ID_PRIVATE_INTEL` | Polar product id for `private-intel` |
+| `POLAR_PRODUCT_ID_AGENT_TEAM_PRO` | Leave unset until the payload exists (§4) |
+| `POLAR_SUCCESS_URL` | Site origin, e.g. `https://agenticincome.ai`. The per-product path comes from the catalog's `delivery.path`. |
+
+**Path A (legacy static links):**
 
 | Env var | Value |
 |---|---|
@@ -71,7 +98,9 @@ The site already has the full plumbing: `/api/checkout?offer=<slug>` (in `app/ap
 | `AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL` | Polar checkout link for private-intel |
 | `AGENTIC_INCOME_AGENT_TEAM_PRO_CHECKOUT_URL` | Polar checkout link for agent-team-pro *(new — requires §5.2)* |
 
-Redeploy after setting (env is read at request time in the route, but redeploy to be safe and to refresh statically-rendered offer pages that call `checkoutUrl()`).
+Redeploy after setting. The route reads env at request time, but the statically-rendered offer pages call `checkoutUrl()` and `isCheckoutLive()` at render — they keep showing the old state until rebuilt.
+
+No CSP change is needed: checkout is a top-level navigation to Polar, not an embedded frame or a cross-origin XHR, so `connect-src 'self'` in `vercel.json` still covers the `POST /api/checkout` call. If Polar checkout is ever embedded in an iframe instead, `frame-src` has to be widened — and that is a deliberate decision, not a patch.
 
 ### 5.2 Code touches (exact files)
 
@@ -90,10 +119,37 @@ Redeploy after setting (env is read at request time in the route, but redeploy t
 - Create: `/delivery/agent-team-pro`.
 - Each paid delivery page should state: what was purchased, the file list, the license line, the 30-day refund line, and the support boundary.
 
+### 5.4 Flip the catalog status gate (Path B only — do this last)
+
+Nothing above opens checkout on its own. The final gate is `products/catalog.json`, and it should only be flipped once the Polar product exists, the files are uploaded, and the env vars are set:
+
+```diff
+       "id": "blueprint",
+-      "status": "built — checkout gated pending Polar product and file upload"
++      "status": "for sale — private delivery via Polar"
+```
+
+The gate is the literal prefix `for sale` (case-insensitive), checked by `PURCHASABLE_STATUS_PREFIX` in `lib/polar.ts`. Any other wording keeps the product refused, so a typo fails closed rather than opening a sale.
+
+Rules that stay in force:
+
+- `starter-kit` keeps its free status — it is delivered on-site and must never be sold through checkout. `POST /api/checkout` refuses it with `free_product` regardless of env.
+- `agent-team-pro` keeps `payload not assembled — not for sale` until the payload in §4 actually exists. Do not flip it to sell a product that has nothing to deliver.
+- The `_note` repo-privacy rule still applies: paid payloads must be out of the public tree, or the repo stays private.
+
+Once flipped and redeployed, `/offers/blueprint` renders a real buy button instead of "Reserve Blueprint access" (label from `checkout.buyLabel` in `lib/offers.ts`), and the access-path panel says checkout is live.
+
+**Rolling back:** unset `POLAR_ACCESS_TOKEN` and redeploy, or revert the status string. Either one independently returns every surface to the request-access state — neither leaves a page claiming a product is buyable when it is not.
+
 ## 6. Test-purchase checklist (per paid product — do not skip)
 
+> **Path B has never touched the live Polar API.** The request shape in `lib/polar.ts` (`POST https://api.polar.sh/v1/checkouts/` with `{ products: [id], success_url }`, reading `url` off the response) was written against Polar's documented current API — `products` as an array, since the singular `product_id` is deprecated — but outbound calls to `api.polar.sh` are blocked from the environment it was built in, so it has only been verified as far as "the gates open and the request is attempted." The first item below is therefore a genuine test, not a formality. If Polar answers unusably the route returns 502 `checkout_upstream_failed` and the button falls back to request-access, so a wrong field name degrades to the honest state rather than a broken checkout.
+
+
 - [ ] Polar sandbox OR a real purchase with your own card (real is better; refund after).
-- [ ] `agenticincome.ai/offers/<slug>` → CTA → `/api/checkout?offer=<slug>` redirects to Polar (not the request-access fallback).
+- [ ] Path B: `agenticincome.ai/offers/<slug>` → CTA is a buy button → click reaches a Polar-hosted checkout (not the request-access fallback).
+- [ ] Path B: `POST /api/checkout` with a still-gated id (e.g. `agent-team-pro`) returns 503 `checkout_gated`, and with `starter-kit` returns 400 `free_product`. Confirm before announcing — this is the guard that stops an unfinished product being sold.
+- [ ] Path A (if used): `/api/checkout?offer=<slug>` redirects to Polar (not the request-access fallback).
 - [ ] `utm_source=test&ref=qa` on the offer URL survives to the Polar checkout URL (attribution passthrough).
 - [ ] Complete purchase → redirected to the correct `/delivery/<slug>` page.
 - [ ] Receipt email arrives from Polar; seller name is correct.

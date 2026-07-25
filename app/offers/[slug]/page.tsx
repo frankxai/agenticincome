@@ -3,7 +3,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { CheckoutLink } from '@/components/CheckoutLink'
 import { EmailCapture } from '@/components/EmailCapture'
+import { PolarCheckoutButton } from '@/components/PolarCheckoutButton'
 import { checkoutPath, checkoutUrl, getOffer, offers } from '@/lib/offers'
+import { isCheckoutLive } from '@/lib/polar'
 
 type OfferPageProps = {
   params: Promise<{ slug: string }>
@@ -40,6 +42,10 @@ export default async function OfferDetail({ params }: OfferPageProps) {
   if (!offer) notFound()
 
   const liveCheckout = checkoutUrl(offer)
+  // Server-side truth: the Polar API path is live only when the catalog permits
+  // the sale AND the Polar env is set for this product. False until then, which
+  // keeps the existing request-access CTA exactly as it is.
+  const polarCheckoutLive = isCheckoutLive(offer.slug)
   const isFree = offer.checkout.fallback === 'delivery'
   const isScoped = offer.accessMode === 'scope-first'
   const accessSteps = [
@@ -56,14 +62,24 @@ export default async function OfferDetail({ params }: OfferPageProps) {
           <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink">{offer.title}</h1>
           <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">{offer.promise}</p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <CheckoutLink
-              href={checkoutPath(offer)}
-              className="cta"
-              offer={offer.slug}
-              source="offer-detail"
-            >
-              {offer.cta}
-            </CheckoutLink>
+            {polarCheckoutLive ? (
+              <PolarCheckoutButton
+                productId={offer.slug}
+                source="offer-detail"
+                gatedHref={`/offers/${offer.slug}#request-access`}
+                gatedCta={offer.cta}
+                buyLabel={offer.checkout.buyLabel ?? offer.cta}
+              />
+            ) : (
+              <CheckoutLink
+                href={checkoutPath(offer)}
+                className="cta"
+                offer={offer.slug}
+                source="offer-detail"
+              >
+                {offer.cta}
+              </CheckoutLink>
+            )}
             {isFree ? (
               <Link href={offer.deliveryPath} className="cta-secondary">
                 View delivery path
@@ -83,6 +99,8 @@ export default async function OfferDetail({ params }: OfferPageProps) {
               ? 'Delivered instantly on-site.'
               : isScoped
                 ? 'Scope, acceptance checks, and commercial terms are agreed before implementation.'
+              : polarCheckoutLive
+                ? 'Checkout is live. Polar.sh is the merchant of record and handles VAT and sales tax.'
               : liveCheckout
                 ? 'Live checkout URL is configured.'
                 : 'Checkout is provider-ready; request access until the payment link is connected.'}

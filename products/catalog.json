@@ -1,6 +1,7 @@
 {
   "_comment": "Polar-ready product catalog for agenticincome.ai. Source of truth for product metadata; ops/POLAR-SETUP.md is the runbook that turns these entries into live Polar products. Prices in cents. interval: null = one-time purchase.",
   "_note": "Paid payloads must move to private delivery (Polar file delivery or a private repo granted via license key) before this repo goes public. Until then, products/blueprint/*.md and products/private-intel/*.md are the paid content sitting in a private repo — do NOT open-source this repo with them in it.",
+  "_checkoutGate": "`status` is the machine-readable sale gate read by lib/polar.ts. A product may be sold ONLY when its status starts with 'for sale' (case-insensitive); every other value refuses checkout, so an unrecognized or misspelled status fails closed instead of opening a sale. Setting the POLAR_* env vars alone does not open checkout — the status here must be flipped too. Activation checklist: ops/POLAR-SETUP.md.",
   "updatedAt": "2026-07-11",
   "merchant_of_record": "polar.sh",
   "refund_policy": "30-day no-questions refund on all paid one-time products; subscriptions cancelable anytime, first-month refund on request.",
@@ -10,6 +11,7 @@
       "name": "Income Flywheel Starter Kit",
       "price_cents": 0,
       "interval": null,
+      "status": "free — delivered on-site, never sold through checkout",
       "description": "The free first loop: pick one category, structure one honest comparison, route one recurring payer, and capture your first owned-audience relationship. Delivered instantly on-site with a checklist you can execute in 30 minutes.",
       "delivery": {
         "type": "on-site",
@@ -23,6 +25,7 @@
       "name": "Income Architecture Blueprint",
       "price_cents": 6700,
       "interval": null,
+      "status": "built — checkout gated pending Polar product and file upload",
       "description": "Three complete business-plan kits — services, products, systems — each with a fully worked fictional example, scenario economics with named assumptions, an agent-role fulfillment runbook, a launch checklist, and a kill-criterion worksheet. Designed to be driven by the free /ai pack; every number is a labeled scenario, never a promise.",
       "delivery": {
         "type": "polar-files",
@@ -41,6 +44,7 @@
       "name": "Agent Team Pro",
       "price_cents": 12900,
       "interval": null,
+      "status": "payload not assembled — not for sale",
       "description": "The premium delivery crew: advanced agent definitions, fulfillment workflows, and operating loops that extend the free /ai pack into a full production system, with 12 months of updates included. Built from the same machinery that runs this business; no outcomes are promised, machinery is.",
       "delivery": {
         "type": "polar-files+private-repo",
@@ -56,6 +60,7 @@
       "name": "Private Intel",
       "price_cents": 1900,
       "interval": "month",
+      "status": "built — checkout gated pending Polar product and file upload",
       "description": "A monthly operator briefing: payer-term drift from the verified registry, landscape changes that affect income machinery, audit notes, and a priority watchlist. Factual and dated — intelligence, not hype.",
       "delivery": {
         "type": "polar-files+email",

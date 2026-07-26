@@ -23,6 +23,12 @@ export type Offer = {
     provider: 'internal' | 'external'
     envKey?: string
     fallback: 'delivery' | 'request-access'
+    /**
+     * Label shown once Polar checkout is live for this offer (see lib/polar.ts).
+     * `cta` above stays the pre-checkout, request-access wording; this replaces
+     * it only when the server confirms a real checkout exists.
+     */
+    buyLabel?: string
   }
 }
 
@@ -147,6 +153,7 @@ export const offers: Offer[] = [
       provider: 'external',
       envKey: 'AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL',
       fallback: 'request-access',
+      buyLabel: 'Get the Blueprint',
     },
   },
   {
@@ -188,6 +195,7 @@ export const offers: Offer[] = [
       provider: 'external',
       envKey: 'AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL',
       fallback: 'request-access',
+      buyLabel: 'Start Private Intel',
     },
   },
 ]

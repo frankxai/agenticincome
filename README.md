@@ -105,3 +105,9 @@ Public skills, schemas, scripts, and reference systems are MIT licensed in their
 **Clone the public system. Create one Outcome Pack. Validate it before implementation.**
 
 </div>
+
+---
+
+[![Built on SIP](https://img.shields.io/badge/Built%20on-SIP-blue.svg)](https://github.com/frankxai/Starlight-Intelligence-System)
+
+**Built on SIP** — this repo composes the [Starlight Intelligence Protocol](https://github.com/frankxai/Starlight-Intelligence-System) (substrate for memory, attestation, and sovereignty). Attribution per the SIP sovereignty clause; vertical canon declined.

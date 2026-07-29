@@ -1,35 +1,33 @@
-'use client'
-
 import { TrackedLink } from '@/components/TrackedLink'
 
 const steps = [
   {
     number: '01',
     role: 'Input',
-    title: 'Load the evidence',
-    body: 'Point the audit at a Markdown content directory. It reads the public program catalog and can accept an optional traffic file.',
-    output: 'Content paths + catalog records',
+    title: 'Capture the request',
+    body: 'Accept one supported B2B service request, preserve its source, and ask for required information when the record is incomplete.',
+    output: 'Traceable qualification record',
   },
   {
     number: '02',
     role: 'Agent',
-    title: 'Find the gaps',
-    body: 'The script matches program aliases against the content and finds active programs that have no configured route.',
-    output: 'Prioritized gaps, not automatic links',
+    title: 'Prepare the work',
+    body: 'Classify the request, propose schedule options, update one idempotent CRM record, and draft from the approved service catalog.',
+    output: 'Reviewable quote draft',
   },
   {
     number: '03',
-    role: 'Artifact',
-    title: 'Write the audit',
-    body: 'The run produces AUDIT.md with programs to verify, affected posts, optional traffic context, and the disclosure text.',
-    output: 'A reviewable Markdown decision file',
+    role: 'Human gate',
+    title: 'Approve the commitment',
+    body: 'A commercial owner approves the price and send. Contracts, price changes, financial actions, and ambiguous commitments remain denied by default.',
+    output: 'Explicit approve or reject decision',
   },
   {
     number: '04',
-    role: 'Human gate',
-    title: 'Approve before publishing',
-    body: 'A person verifies current terms, recommendation fit, disclosure, and the destination before any public link or partner action.',
-    output: 'Explicit publish or reject decision',
+    role: 'Evidence',
+    title: 'Measure and operate',
+    body: 'Acceptance checks verify required fields, unapproved-price prevention, CRM traceability, and human-rated draft quality before any public claim.',
+    output: 'Eval record + runbook decision',
   },
 ]
 
@@ -38,23 +36,26 @@ export function AgentWorkflowProof() {
     <section id="workflow-proof" className="section-band" aria-labelledby="workflow-proof-title">
       <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
         <div className="section-heading motion-reveal">
-          <div className="kicker">Inspectable agent workflow</div>
-          <h2 id="workflow-proof-title">One real run. Every boundary visible.</h2>
+          <div className="kicker">Inspectable reference Outcome Pack</div>
+          <h2 id="workflow-proof-title">One governed service. Every boundary visible.</h2>
         </div>
         <p className="max-w-2xl text-lg leading-8 text-muted motion-reveal">
-          The open-source affiliate audit is a concrete reference workflow: known inputs, executable source, a reviewable output, and a human decision before anything becomes public.
+          The public Request-to-Quote desk is deliberately narrow: supported B2B service requests,
+          known actions, explicit denials, acceptance checks, budgets, rollback, and a human decision
+          before any binding commercial commitment.
         </p>
       </div>
 
       <div className="workflow-proof motion-reveal">
-        <div className="workflow-command" aria-label="Affiliate audit command">
+        <div className="workflow-command" aria-label="Request-to-Quote validation command">
           <div className="workflow-command-topline">
-            <span>affiliate-audit / local run</span>
-            <strong>MIT · no autonomous publishing</strong>
+            <span>request-to-quote-desk / local validation</span>
+            <strong>Verified 29 Jul 2026 · MIT</strong>
           </div>
-          <code>node scripts/affiliate-audit.mjs --content=&lt;site&gt;/content --write</code>
+          <code>npm run income:validate -- examples/request-to-quote-desk/income-system.json</code>
           <p>
-            The command reads files and writes an audit. It does not join a program, change a public page, send a message, or claim revenue.
+            The validator checks the system contract. It does not connect credentials, send a quote,
+            change a price, sign a contract, move money, or prove customer demand.
           </p>
         </div>
 
@@ -79,31 +80,32 @@ export function AgentWorkflowProof() {
           </div>
           <div className="workflow-actions">
             <TrackedLink
-              href="https://github.com/frankxai/agentic-income-skills/blob/main/skills/affiliate-audit/SKILL.md"
+              href="https://github.com/frankxai/agentic-income-skills/tree/main/examples/request-to-quote-desk"
               target="_blank"
               rel="noopener noreferrer"
               className="cta-secondary"
               event="workflow_proof_clicked"
-              payload={{ source: 'homepage-workflow', state: 'skill-contract' }}
+              payload={{ source: 'homepage-workflow', state: 'reference-pack' }}
             >
-              Inspect the skill contract
+              Inspect the reference pack
             </TrackedLink>
             <TrackedLink
-              href="https://github.com/frankxai/agentic-income-skills/blob/main/scripts/affiliate-audit.mjs"
+              href="https://github.com/frankxai/agentic-income-skills/blob/main/schemas/income-system.v1.schema.json"
               target="_blank"
               rel="noopener noreferrer"
               className="cta-secondary"
               event="workflow_proof_clicked"
-              payload={{ source: 'homepage-workflow', state: 'executable-source' }}
+              payload={{ source: 'homepage-workflow', state: 'income-system-schema' }}
             >
-              Inspect executable source
+              Inspect the system schema
             </TrackedLink>
           </div>
         </div>
       </div>
 
       <p className="workflow-boundary">
-        Reference implementation only. It demonstrates the operating method; it is not customer evidence or a revenue result.
+        Reference implementation only. Replace the example principal, domains, providers, terms,
+        budgets, evals, system hash, and evidence before production use. This is not customer proof or an income result.
       </p>
     </section>
   )

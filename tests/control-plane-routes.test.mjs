@@ -4,16 +4,18 @@ import test from 'node:test'
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
 
-test('control-plane routes publish the build, operate, and proof lifecycle', () => {
+test('public navigation leads with the free path, evidence, method, and scope-first build', () => {
   const navigation = read('lib/site.ts')
   const build = read('app/build/page.tsx')
   const operate = read('app/operate/page.tsx')
   const proof = read('app/proof/page.tsx')
 
-  for (const route of ['/build', '/operate', '/proof']) {
+  for (const route of ['/start', '/proof', '/pack', '/offers/implementation-sprint']) {
     assert.match(navigation, new RegExp(`href: '${route}'`))
   }
 
+  // The deeper lifecycle remains addressable even though internal operating
+  // taxonomy no longer crowds the primary audience navigation.
   assert.match(build, /Agents prepare\. An authorized principal commits\./)
   assert.match(operate, /Autonomy increases only with evidence\./)
   assert.match(proof, /System evidence—not customer income evidence\./)

@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 import { site } from '@/lib/site'
 
 export const dynamic = 'force-static'
-export const alt = 'Agentic Income - revenue systems built with agents and delivered with proof'
+export const alt = 'Agentic Income — turn one valuable workflow into an income system you own'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -14,7 +14,7 @@ export default function Image() {
           width: '100%',
           height: '100%',
           display: 'flex',
-          background: 'linear-gradient(135deg, #05070d 0%, #0b1220 52%, #111827 100%)',
+          background: 'linear-gradient(135deg, #05060a 0%, #07100f 52%, #0a0c14 100%)',
           color: '#f8fafc',
           fontFamily: 'Inter, Arial, sans-serif',
           position: 'relative',
@@ -26,7 +26,7 @@ export default function Image() {
             position: 'absolute',
             inset: 0,
             background:
-              'radial-gradient(circle at 75% 25%, #60a5fa44, transparent 34%), radial-gradient(circle at 88% 70%, #f59e0b33, transparent 30%)',
+              'radial-gradient(circle at 75% 25%, #10b98133, transparent 34%), radial-gradient(circle at 88% 70%, #f59e0b24, transparent 30%)',
           }}
         />
         <div
@@ -50,16 +50,16 @@ export default function Image() {
               padding: '10px 18px',
               borderRadius: 999,
               border: '1px solid rgba(219,234,254,0.18)',
-              color: '#60a5fa',
+              color: '#10b981',
               fontSize: 24,
               fontWeight: 800,
             }}
           >
-            AGENT-AS-A-SERVICE / {site.domain}
+            OUTCOME PACK / {site.domain}
           </div>
           <div style={{ marginTop: 42, fontSize: 78, fontWeight: 900, lineHeight: 0.95 }}>{site.name}</div>
-          <div style={{ marginTop: 28, fontSize: 34, fontWeight: 700, color: '#d1fae5' }}>{site.tagline}</div>
-          <div style={{ marginTop: 24, fontSize: 24, lineHeight: 1.35, color: '#94a3b8' }}>{site.description}</div>
+          <div style={{ marginTop: 28, fontSize: 34, fontWeight: 700, color: '#d1fae5' }}>Turn one valuable workflow into an income system you own.</div>
+          <div style={{ marginTop: 24, fontSize: 24, lineHeight: 1.35, color: '#94a3b8' }}>Free Field Guide · Open contracts · Scope-first builds</div>
         </div>
       </div>
     ),

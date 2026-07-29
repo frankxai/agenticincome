@@ -1,7 +1,7 @@
 type ReadinessItem = {
   id: string
   label: string
-  category: 'checkout' | 'capture' | 'analytics' | 'observability'
+  category: 'free product' | 'public proof' | 'capture' | 'service' | 'commerce' | 'analytics' | 'observability'
   configured: boolean
   requiredForFullLaunch: boolean
   detail: string
@@ -25,55 +25,70 @@ function hasEmailEnv(name: string) {
 }
 
 export function getLaunchReadiness() {
-  const blueprintCheckout = hasSecureUrlEnv('AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL')
-  const privateIntelCheckout = hasSecureUrlEnv('AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL')
   const subscribeWebhook = hasSecureUrlEnv('SUBSCRIBE_WEBHOOK_URL')
   const conciergeEmail = hasEmailEnv('ACCESS_REQUEST_EMAIL')
   const analyticsWebhook = hasSecureUrlEnv('ANALYTICS_WEBHOOK_URL')
   const captureConfigured = subscribeWebhook || conciergeEmail
+  const anyPaidCheckout =
+    hasSecureUrlEnv('AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL') ||
+    hasSecureUrlEnv('AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL')
 
   const items: ReadinessItem[] = [
     {
-      id: 'blueprint_checkout',
-      label: 'Blueprint checkout',
-      category: 'checkout',
-      configured: blueprintCheckout,
+      id: 'field_guide',
+      label: 'Free Field Guide',
+      category: 'free product',
+      configured: true,
       requiredForFullLaunch: true,
-      detail: blueprintCheckout
-        ? 'Paid Blueprint clicks can leave the site for secure checkout.'
-        : 'Blueprint clicks fall back to request-access.',
+      detail: 'The buyer map, Outcome Pack anatomy, verified commands, public source, and reference desk are available without payment or email.',
     },
     {
-      id: 'private_intel_checkout',
-      label: 'Private Intel checkout',
-      category: 'checkout',
-      configured: privateIntelCheckout,
+      id: 'public_commands',
+      label: 'Public scaffold, validator, and tests',
+      category: 'public proof',
+      configured: true,
       requiredForFullLaunch: true,
-      detail: privateIntelCheckout
-        ? 'Membership clicks can leave the site for recurring checkout.'
-        : 'Membership clicks fall back to request-access.',
+      detail: 'The canonical MIT repository exposes income:init, income:validate, tests, the IncomeSystem schema, and a Request-to-Quote reference pack.',
     },
     {
-      id: 'owned_capture',
-      label: 'Owned-audience capture',
+      id: 'outcome_pack_lab_intake',
+      label: 'Outcome Pack Lab intake',
       category: 'capture',
       configured: captureConfigured,
       requiredForFullLaunch: true,
       detail: subscribeWebhook
-        ? 'Access requests forward to the configured owned-audience endpoint.'
+        ? 'Selective Lab applications forward to the configured intake endpoint.'
         : conciergeEmail
-          ? 'Access requests can open a concierge email handoff.'
-          : 'Access requests return a request ID but are not routed to an operator.',
+          ? 'Applications use a transparent concierge email handoff and are received only after the applicant sends it.'
+          : 'Applications are disabled. The site does not collect or claim to retain an email without a verified destination.',
     },
     {
-      id: 'analytics_forwarding',
-      label: 'Analytics forwarding',
+      id: 'scope_first_build',
+      label: 'Outcome Pack Build Sprint',
+      category: 'service',
+      configured: true,
+      requiredForFullLaunch: true,
+      detail: 'The commercial offer is scope-first: buyer, acceptance, ownership, delivery, support, and terms must be agreed before payment.',
+    },
+    {
+      id: 'paid_checkout',
+      label: 'Self-serve paid checkout',
+      category: 'commerce',
+      configured: anyPaidCheckout,
+      requiredForFullLaunch: false,
+      detail: anyPaidCheckout
+        ? 'At least one legacy digital-product provider route is configured.'
+        : 'Intentionally deferred. Paid self-serve products are not part of the primary launch funnel.',
+    },
+    {
+      id: 'custom_analytics_forwarding',
+      label: 'Custom first-party event forwarding',
       category: 'analytics',
       configured: analyticsWebhook,
-      requiredForFullLaunch: true,
+      requiredForFullLaunch: false,
       detail: analyticsWebhook
-        ? 'First-party events forward to the configured analytics endpoint.'
-        : 'First-party events validate locally but are not forwarded.',
+        ? 'Allowlisted first-party events forward to the configured endpoint.'
+        : 'Optional custom forwarding is not connected; email addresses are never sent to analytics.',
     },
     {
       id: 'vercel_observability',
@@ -88,14 +103,17 @@ export function getLaunchReadiness() {
   const required = items.filter((item) => item.requiredForFullLaunch)
   const configuredRequired = required.filter((item) => item.configured)
   const fullLaunchReady = configuredRequired.length === required.length
+  const captureMode: 'webhook' | 'manual_email' | 'unwired' =
+    subscribeWebhook ? 'webhook' : conciergeEmail ? 'manual_email' : 'unwired'
 
   return {
-    version: '2026-06-26',
+    version: '2026-07-29',
     checkedAt: new Date().toISOString(),
     fullLaunchReady,
     configuredRequired: configuredRequired.length,
     requiredTotal: required.length,
-    captureMode: subscribeWebhook ? 'webhook' : conciergeEmail ? 'manual_email' : 'unwired',
+    captureMode,
+    commercialMode: 'scope-first',
     items,
   }
 }

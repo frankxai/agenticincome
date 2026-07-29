@@ -3,46 +3,46 @@ import { TrackedLink } from '@/components/TrackedLink'
 const deliveryStages = [
   {
     number: '01',
-    title: 'Audit',
-    body: 'Choose one customer job, revenue path, and constraint worth solving.',
+    title: 'Discover',
+    body: 'Choose one buyer, painful job, and credible advantage worth testing.',
   },
   {
     number: '02',
-    title: 'Architect',
-    body: 'Define the offer, agent workflow, product surface, and evidence plan.',
+    title: 'Define',
+    body: 'Specify the outcome, acceptance checks, economics, and stop conditions.',
   },
   {
     number: '03',
-    title: 'Implement',
-    body: 'Build the workflow and customer-facing surface in a Git-backed system.',
+    title: 'Build',
+    body: 'Implement the governed workflow and customer path in an owned repository.',
   },
   {
     number: '04',
-    title: 'Verify',
-    body: 'Prove the build, preview, handoff, and next operating decision.',
+    title: 'Prove',
+    body: 'Run the checks, record limits, and hand over evidence—not a demo claim.',
   },
 ]
 
 const proofAssets = [
   {
-    label: 'Open-source skills',
-    value: 'Installable operating brain',
-    href: 'https://github.com/frankxai/agentic-income-skills',
+    label: 'Open contract',
+    value: 'Agentic Income skill',
+    href: 'https://github.com/frankxai/agentic-income-skills/blob/main/skills/agentic-income/SKILL.md',
   },
   {
-    label: 'Shared catalog',
-    value: 'Auditable recommendation data',
-    href: 'https://github.com/frankxai/affiliate-agent-skills',
+    label: 'Typed system',
+    value: 'IncomeSystem schema',
+    href: 'https://github.com/frankxai/agentic-income-skills/blob/main/schemas/income-system.v1.schema.json',
   },
   {
-    label: 'Deployable template',
-    value: 'Next.js reference implementation',
-    href: 'https://github.com/frankxai/agentic-income-template',
+    label: 'Reference pack',
+    value: 'Request-to-Quote desk',
+    href: 'https://github.com/frankxai/agentic-income-skills/tree/main/examples/request-to-quote-desk',
   },
   {
-    label: 'Live routing layer',
-    value: 'Inspectable program directory',
-    href: 'https://go.agenticincome.ai/programs',
+    label: 'Executable proof',
+    value: 'Scaffold · validate · test',
+    href: 'https://github.com/frankxai/agentic-income-skills#verify-before-you-trust-it',
   },
 ]
 
@@ -54,22 +54,24 @@ export function IncomeDeskHero() {
 
       <div className="hero-content mx-auto w-full max-w-6xl px-4 sm:px-6">
         <div className="hero-copy motion-reveal">
-          <div className="kicker">Agent-as-a-Service · open systems · digital products</div>
+          <div className="kicker">Free field guide · open contracts · scope-first builds</div>
           <h1 id="home-title" className="hero-title">
-            <span>Build the revenue engine.</span>
-            <span>Keep the leverage.</span>
+            <span>Turn one valuable workflow</span>
+            <span>into an income system you own.</span>
           </h1>
           <p className="hero-subtitle">
-            Agentic Income turns one valuable workflow into a trustworthy offer, a working product surface, and an operating system your team can continue after handoff.
+            Package a buyer, accepted outcome, governed workflow, and evidence into one Outcome Pack.
+            Agents can research, build, and verify. You keep the judgment, customer relationship,
+            accounts, repository, and IP.
           </p>
           <div className="hero-actions">
             <TrackedLink
-              href="/offers/implementation-sprint"
+              href="/start"
               className="cta w-full sm:w-auto"
-              event="implementation_request_clicked"
+              event="owned_offer_clicked"
               payload={{ source: 'homepage-hero' }}
             >
-              Request an implementation plan
+              Start the free Field Guide
             </TrackedLink>
             <TrackedLink
               href="https://github.com/frankxai/agentic-income-skills"
@@ -79,21 +81,22 @@ export function IncomeDeskHero() {
               event="open_source_proof_clicked"
               payload={{ source: 'homepage-hero' }}
             >
-              Inspect the open-source system
+              Inspect the public method
             </TrackedLink>
           </div>
           <p className="hero-note">
-            No revenue promises. Scope, evidence, delivery, and acceptance checks are agreed before implementation begins.
+            No income promise. The Field Guide is free and ungated. Any build is scoped around
+            acceptance, ownership, authority, evidence, and stop conditions before payment.
           </p>
         </div>
 
         <aside className="hero-panel" data-hero-panel aria-label="Agentic Income implementation model">
           <div className="desk-header">
             <div>
-              <div className="text-xs uppercase text-muted">Revenue system build</div>
-              <div className="mt-1 text-lg font-semibold text-ink">From workflow to verified preview</div>
+              <div className="text-xs uppercase text-muted">Outcome Pack</div>
+              <div className="mt-1 text-lg font-semibold text-ink">From expertise to accepted service</div>
             </div>
-            <div className="status-dot">Git-backed</div>
+            <div className="status-dot">Principal-owned</div>
           </div>
 
           <div className="engine-stage-list">
@@ -110,8 +113,10 @@ export function IncomeDeskHero() {
 
           <div className="desk-footer">
             <div>
-              <div className="text-xs text-muted">Delivery evidence</div>
-              <div className="mt-1 text-sm font-semibold text-ink">Repository · checks · Vercel preview · handoff</div>
+              <div className="text-xs text-muted">Reviewable system</div>
+              <div className="mt-1 text-sm font-semibold text-ink">
+                Offer · workflow · authority · evals · runbook · evidence
+              </div>
             </div>
           </div>
         </aside>

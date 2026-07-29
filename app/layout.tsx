@@ -5,7 +5,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
-import { MotionRuntime } from '@/components/MotionRuntime'
 import { site } from '@/lib/site'
 
 const ogImage = '/opengraph-image'
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
   applicationName: site.name,
   title: { default: `${site.name} — ${site.tagline}`, template: `%s · ${site.name}` },
   description: site.description,
-  keywords: ['Agent as a Service', 'AI implementation', 'revenue systems', 'agent skills', 'digital products', 'AI tool comparisons'],
+  keywords: ['Outcome Pack', 'Agent as a Service', 'AI implementation', 'governed AI agents', 'agent skills', 'principal-owned systems'],
   authors: [{ name: site.author }],
   creator: site.author,
   publisher: site.name,
@@ -46,7 +45,7 @@ export const metadata: Metadata = {
     description: site.description,
     siteName: site.name,
     type: 'website',
-    images: [{ url: ogImage, width: 1200, height: 630, alt: 'Agentic Income revenue system implementation' }],
+    images: [{ url: ogImage, width: 1200, height: 630, alt: 'Agentic Income — own the outcome' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -72,7 +71,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <a href="#main-content" className="skip-link">Skip to content</a>
         <Nav />
-        <MotionRuntime />
         <main id="main-content" className="mx-auto w-full max-w-6xl px-4 sm:px-6">{children}</main>
         <Footer />
         <Analytics />

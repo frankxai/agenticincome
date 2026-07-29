@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { MarketEvidence } from '@/components/MarketEvidence'
 
 export const metadata: Metadata = {
   title: 'Agentic Income Proof Standard',
@@ -82,11 +83,13 @@ export default function ProofPage() {
             evidence is required before an income result becomes a public claim.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/build" className="cta">Build a governed system</Link>
+            <Link href="/start" className="cta">Start with the free map</Link>
             <Link href="/trust" className="cta-secondary">Read the trust standard</Link>
           </div>
         </div>
       </section>
+
+      <MarketEvidence />
 
       <section className="section-band" aria-labelledby="evidence-layers-title">
         <div className="section-heading">

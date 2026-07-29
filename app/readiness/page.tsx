@@ -4,13 +4,13 @@ import { getLaunchReadiness } from '@/lib/readiness'
 
 export const metadata: Metadata = {
   title: 'Launch Readiness',
-  description: 'No-secret production readiness state for Agentic Income checkout, capture, and analytics.',
+  description: 'No-secret production readiness state for the Agentic Income Field Guide, public proof, waitlist intake, and scope-first service.',
   robots: { index: false, follow: false },
 }
 
 export default function ReadinessPage() {
   const readiness = getLaunchReadiness()
-  const statusText = readiness.fullLaunchReady ? 'Full launch ready' : 'Preview ready'
+  const statusText = readiness.fullLaunchReady ? 'Application launch ready' : 'Public value live · intake gated'
 
   return (
     <div className="py-16">
@@ -19,7 +19,8 @@ export default function ReadinessPage() {
           <div className="kicker">Launch readiness</div>
           <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink">Production should be a gate, not a hunch.</h1>
           <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">
-            This page shows the no-secret runtime state for the revenue system. It proves whether checkout, access capture, and analytics are wired before the main domain is promoted.
+            This page shows the no-secret runtime state for the free product, public proof, selective
+            intake, and scope-first service. Paid checkout is not required for this launch.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link href="/trust" className="cta">
@@ -37,7 +38,7 @@ export default function ReadinessPage() {
             {readiness.configuredRequired}/{readiness.requiredTotal}
           </div>
           <p className="mt-3 text-sm leading-6 text-muted">
-            Required launch systems configured. Current capture mode: {readiness.captureMode.replace('_', ' ')}.
+            Required launch systems configured. Current intake mode: {readiness.captureMode.replace('_', ' ')}.
           </p>
         </aside>
       </section>
@@ -51,7 +52,7 @@ export default function ReadinessPage() {
                 <div className={`rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] ${
                   item.configured ? 'border-accent/50 text-accent' : 'border-gold/40 text-gold'
                 }`}>
-                  {item.configured ? 'Configured' : 'Missing'}
+                  {item.configured ? 'Configured' : item.requiredForFullLaunch ? 'Missing' : 'Optional'}
                 </div>
               </div>
               <h2 className="mt-4 text-2xl font-semibold text-ink">{item.label}</h2>
@@ -63,7 +64,9 @@ export default function ReadinessPage() {
 
       <section className="section-band max-w-4xl border-t border-border pt-8 text-sm leading-6 text-muted">
         <p>
-          The JSON gate is available at <code>/api/readiness</code>. It returns <code>503</code> until all required launch systems are configured and <code>200</code> when the system is ready for full production promotion.
+          The JSON gate is available at <code>/api/readiness</code>. It returns <code>503</code> until the
+          required selective intake is configured and <code>200</code> when applications can be received.
+          The free Field Guide, public commands, and scope-first product remain usable while intake is gated.
         </p>
       </section>
     </div>

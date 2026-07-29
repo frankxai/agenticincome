@@ -62,7 +62,11 @@ export default async function OfferDetail({ params }: OfferPageProps) {
           <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink">{offer.title}</h1>
           <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">{offer.promise}</p>
           <div className="mt-7 flex flex-wrap gap-3">
-            {polarCheckoutLive ? (
+            {isScoped ? (
+              <Link href="/waitlist" className="cta">
+                Join the scoping waitlist
+              </Link>
+            ) : polarCheckoutLive ? (
               <PolarCheckoutButton
                 productId={offer.slug}
                 source="offer-detail"
@@ -194,7 +198,21 @@ export default async function OfferDetail({ params }: OfferPageProps) {
         </div>
       </section>
 
-      {!isFree && !liveCheckout ? (
+      {isScoped ? (
+        <section id="request-access" className="section-band">
+          <div className="conversion-band">
+            <div>
+              <div className="kicker">Selective intake · coming soon</div>
+              <h2>Fit before scope. Scope before payment.</h2>
+              <p>
+                Bring one real buyer problem and a workflow you can judge. The same application
+                opens the path to the founding Lab or a bounded Build Sprint when implementation is the better fit.
+              </p>
+            </div>
+            <Link href="/waitlist" className="cta">Inspect the intake</Link>
+          </div>
+        </section>
+      ) : !isFree && !liveCheckout ? (
         <section id="request-access" className="section-band">
           <EmailCapture
             headline={`Request ${offer.shortTitle} access`}

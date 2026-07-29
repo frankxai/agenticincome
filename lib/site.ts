@@ -8,9 +8,9 @@ export const site = {
   domain: 'agenticincome.ai',
   url: 'https://www.agenticincome.ai',
   role: 'hub', // 'hub' (flagship) | 'spoke'
-  tagline: 'Build income with AI agents — machinery you can inspect.',
+  tagline: 'Own the outcome.',
   description:
-    'The engineering discipline of agentic income: a dated, re-verified knowledge base, the installable /ai Income Architect pack, self-serve products, and attested proof. No income promises — machinery and education.',
+    'Turn one valuable workflow into a governed income system you own. Start with the free Field Guide, inspect the public method, or scope an Outcome Pack build.',
   author: 'Frank Riemer',
   // Hub links down to its spokes; spokes link up to the hub. Topical authority + referral flow.
   network: [
@@ -18,12 +18,10 @@ export const site = {
     { name: 'Disruptive Passive Income', url: 'https://disruptivepassiveincome.com', stage: 'COMPOUND', pack: '/dpi', blurb: 'The sovereign wealth substrate — income architecture structurally decoupled from hours.' },
   ],
   nav: [
-    { label: 'Build', href: '/build' },
-    { label: 'Operate', href: '/operate' },
-    { label: 'Proof', href: '/proof' },
-    { label: 'Offers', href: '/offers' },
-    { label: 'Trust', href: '/trust' },
-    { label: 'Pack', href: '/pack' },
+    { label: 'Start free', shortLabel: 'Start', href: '/start' },
+    { label: 'Evidence', shortLabel: 'Evidence', href: '/proof' },
+    { label: 'Method', shortLabel: 'Method', href: '/pack' },
+    { label: 'Build Sprint', shortLabel: 'Build', href: '/offers/implementation-sprint' },
   ],
 } as const
 

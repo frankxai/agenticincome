@@ -1,107 +1,98 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { checkoutPath, offers } from '@/lib/offers'
-import { CheckoutLink } from '@/components/CheckoutLink'
 
 export const metadata: Metadata = {
-  title: 'Offers',
-  description: 'Scoped Agent-as-a-Service implementation, practical digital products, and transparent access states from Agentic Income.',
+  title: 'Choose Your Outcome Pack Path',
+  description: 'Start with the free Field Guide, apply to the selective Outcome Pack Lab, or inspect a scope-first Outcome Pack Build Sprint.',
   alternates: { canonical: '/offers' },
   openGraph: {
-    title: 'Offers',
-    description: 'Direct products and memberships from the Agentic Income network. Own your outcome beyond affiliate.',
+    title: 'Agentic Income paths',
+    description: 'Free value first. Selective cohort next. Scope-first implementation only when useful.',
     url: '/offers',
   },
 }
 
-const promiseStrip = [
-  ['Implementation', 'Scope and build one revenue system with repository and preview evidence.'],
-  ['Free', 'Learn the first loop without buying another tool.'],
-  ['Blueprint', 'Install the operating desk and content architecture.'],
-  ['Intel', 'Keep the payer map current as the market moves.'],
-]
+const paths = [
+  {
+    number: '01',
+    state: 'Free · live now',
+    title: 'Agentic Income Field Guide',
+    description: 'Map a buyer, choose the right income path, understand the six-part Outcome Pack, and run the public scaffold and validator.',
+    includes: ['30-minute opportunity map', 'Service, product, and research paths', 'Verified public commands', 'No email or payment gate'],
+    href: '/start',
+    cta: 'Start free',
+    featured: true,
+  },
+  {
+    number: '02',
+    state: 'Selective · coming soon',
+    title: 'Outcome Pack Lab',
+    description: 'A small working cohort for accountable operators who bring one real buyer problem and a workflow they can judge.',
+    includes: ['Buyer and outcome contract', 'Authority and eval design', 'Peer review around real work', 'No guaranteed place or result'],
+    href: '/waitlist',
+    cta: 'Inspect the founding waitlist',
+    featured: false,
+  },
+  {
+    number: '03',
+    state: 'Commercial · scope first',
+    title: 'Outcome Pack Build Sprint',
+    description: 'A bounded implementation for one accepted customer outcome, delivered in principal-owned accounts and source with a verification bundle.',
+    includes: ['Outcome Pack contract', 'Governed workflow implementation', 'Preview and quality gates', 'Runbook, evidence, and handoff'],
+    href: '/offers/implementation-sprint',
+    cta: 'Inspect the build scope',
+    featured: false,
+  },
+] as const
 
 export default function Offers() {
   return (
-    <div className="py-16">
-      <section className="max-w-4xl">
-        <div className="kicker">Implementation and products</div>
-        <h1 className="mt-3 text-5xl font-semibold text-ink">Choose the right depth.</h1>
-        <p className="mt-4 text-xl leading-8 text-muted">
-          Request a scoped implementation, start with the free operating path, install the Blueprint yourself, or keep the opportunity map current with Private Intel.
-        </p>
-      </section>
-
-      <section className="mt-8 grid gap-4 md:grid-cols-4" aria-label="Agentic Income offer ladder">
-        {promiseStrip.map(([title, body]) => (
-          <div key={title} className="card motion-reveal">
-            <div className="text-sm font-semibold text-gold">{title}</div>
-            <p className="mt-3 text-sm leading-6 text-muted">{body}</p>
-          </div>
-        ))}
-      </section>
-
-      <section className="mt-8 grid gap-4 rounded-2xl border border-border bg-surface/70 p-5 md:grid-cols-[1fr_auto] md:items-center">
-        <div>
-          <div className="text-sm font-semibold text-gold">Before you buy</div>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-            Free delivery is live. The implementation sprint is scope-first and does not take payment here. Digital-product checkout falls back honestly to request access until provider links are connected.
+    <>
+      <section className="section-band pt-20">
+        <div className="max-w-4xl">
+          <div className="kicker">One method · three depths</div>
+          <h1 className="mt-3 text-5xl font-semibold leading-[1.02] text-ink sm:text-6xl">
+            Get the method before you consider buying the build.
+          </h1>
+          <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">
+            The Field Guide is the complete first step. The Lab is selective and coming soon. The
+            Build Sprint is for a specific accepted outcome—not open-ended consulting.
           </p>
         </div>
-        <Link href="/trust" className="cta-secondary">
-          Read trust standard
-        </Link>
       </section>
 
-      <section className="mt-12 grid gap-6">
-        {offers.map((offer) => (
-          <article key={offer.slug} className="rounded-2xl border border-border bg-surface/80 p-6 motion-reveal">
-            <div className="grid gap-8 lg:grid-cols-[1fr_18rem] lg:items-center">
-              <div>
-                <div className="uppercase text-[10px] text-accent">{offer.tier}</div>
-                <h2 className="mt-1 text-3xl font-semibold">{offer.title}</h2>
-                <div className="mt-1 text-2xl font-medium text-ink/90">{offer.price}</div>
-                <p className="mt-3 max-w-2xl text-muted">{offer.summary}</p>
-                <ul className="mt-5 grid gap-2 text-sm text-muted sm:grid-cols-2">
-                  {offer.deliverables.slice(0, 4).map((item) => (
-                    <li key={item} className="flex gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
+      <section className="section-band" aria-label="Agentic Income product paths">
+        <div className="offer-lanes">
+          {paths.map((path) => (
+            <article key={path.number} className="offer-lane" data-featured={path.featured || undefined}>
+              <div className="offer-lane-number">{path.number}</div>
+              <div className="offer-lane-copy">
+                <div className="panel-label">{path.state}</div>
+                <h2>{path.title}</h2>
+                <p>{path.description}</p>
+                <ul>
+                  {path.includes.map((item) => <li key={item}>{item}</li>)}
                 </ul>
               </div>
-              <div className="grid gap-3">
-                <CheckoutLink
-                  href={checkoutPath(offer)}
-                  className="cta text-center"
-                  offer={offer.slug}
-                  source="offers-index"
-                >
-                  {offer.cta}
-                </CheckoutLink>
-                <Link href={`/offers/${offer.slug}`} className="cta-secondary text-center">
-                  Inspect product
-                </Link>
-                <div className="text-center text-[11px] leading-5 text-muted">
-                  {offer.checkout.fallback === 'delivery'
-                    ? 'Instant on-site delivery.'
-                    : 'Secure checkout and post-purchase handoff are provider-ready.'}
-                </div>
-              </div>
-            </div>
-          </article>
-        ))}
-      </section>
-
-      <section className="mt-16 max-w-4xl border-t border-border pt-8 text-sm leading-6 text-muted">
-        Every route uses the same evidence standard: concrete scope, inspectable delivery, honest access state, and no outcome claims that cannot be supported.
-        <div className="mt-3">
-          <Link href="/start" className="text-accent">
-            Return to the free playbook
-          </Link>
+              <Link href={path.href} className={path.featured ? 'cta' : 'cta-secondary'}>
+                {path.cta}
+              </Link>
+            </article>
+          ))}
         </div>
       </section>
-    </div>
+
+      <section className="conversion-band">
+        <div>
+          <div className="kicker">Commercial rule</div>
+          <h2>Nothing is sold before the outcome is scoped.</h2>
+          <p>
+            No live checkout is required for this launch. Buyer, acceptance, authority, ownership,
+            delivery, support, and commercial terms come before payment.
+          </p>
+        </div>
+        <Link href="/trust" className="cta-secondary">Read the trust standard</Link>
+      </section>
+    </>
   )
 }

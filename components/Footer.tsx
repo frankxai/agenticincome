@@ -22,15 +22,24 @@ export function Footer() {
             </ul>
           </div>
           <div className="sm:col-span-2">
-            <div className="text-xs font-semibold uppercase text-muted">Operating system</div>
+            <div className="text-xs font-semibold uppercase text-muted">Explore</div>
             <div className="mt-3 flex flex-wrap gap-3 text-sm">
               {site.nav.map((item) => (
                 <Link key={item.href} href={item.href} className="text-ink hover:text-accent">
                   {item.label}
                 </Link>
               ))}
-              <Link href="/delivery/starter-kit" className="text-ink hover:text-accent">
-                Delivery
+              <Link href="/waitlist" className="text-ink hover:text-accent">
+                Outcome Pack Lab
+              </Link>
+              <Link href="/offers" className="text-ink hover:text-accent">
+                Product paths
+              </Link>
+              <Link href="/blog" className="text-ink hover:text-accent">
+                Research
+              </Link>
+              <Link href="/readiness" className="text-ink hover:text-accent">
+                Readiness
               </Link>
               <Link href="/disclosure" className="text-ink hover:text-accent">
                 Disclosure
@@ -43,7 +52,7 @@ export function Footer() {
         </div>
         <div className="mt-10 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <span suppressHydrationWarning>© {new Date().getFullYear()} {site.name}. Built by {site.author}.</span>
-          <span>Implementation, products, and disclosed tool research. No revenue promises.</span>
+          <span>Free education, scope-first implementation, and disclosed research. No income promises.</span>
         </div>
       </div>
     </footer>

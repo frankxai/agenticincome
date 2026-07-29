@@ -4,11 +4,11 @@ import { checkoutReadiness, supportPolicies, trustPrinciples } from '@/lib/trust
 
 export const metadata: Metadata = {
   title: 'Trust Standard',
-  description: 'How Agentic Income handles recommendations, affiliate disclosure, checkout readiness, delivery, support, and refunds.',
+  description: 'How Agentic Income handles evidence, human authority, recommendations, selective intake, scope, delivery, and commercial readiness.',
   alternates: { canonical: '/trust' },
   openGraph: {
     title: 'Trust Standard',
-    description: 'How Agentic Income handles recommendations, affiliate disclosure, checkout readiness, delivery, support, and refunds.',
+    description: 'Evidence types, human authority, reader-first recommendations, selective intake, and scope-first commercial terms.',
     url: '/trust',
   },
 }
@@ -18,13 +18,17 @@ export default function TrustPage() {
     <div className="py-16">
       <section className="max-w-4xl border-b border-border pb-14">
         <div className="kicker">Trust standard</div>
-        <h1 className="mt-3 max-w-4xl break-words text-4xl font-semibold leading-[1.04] text-ink sm:text-5xl">The recommendation is never for sale.</h1>
+        <h1 className="mt-3 max-w-4xl break-words text-4xl font-semibold leading-[1.04] text-ink sm:text-5xl">
+          Evidence before claims. Scope before payment. A principal before the agent.
+        </h1>
         <p className="mt-5 text-xl leading-8 text-muted">
-          Agentic Income can earn from affiliate links and direct products. The rule is simple: the best fit wins first, the payout route comes second, and the handoff must be clear before anyone clicks.
+          Agentic Income may earn from implementation, direct products, and disclosed affiliate
+          research. The method, evidence type, human authority, access state, and commercial
+          boundary remain visible before anyone commits.
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
-          <Link href="/tools" className="cta">
-            Inspect catalog
+          <Link href="/proof" className="cta">
+            Inspect evidence
           </Link>
           <Link href="/offers" className="cta-secondary">
             Review offers
@@ -54,9 +58,9 @@ export default function TrustPage() {
       <section className="section-band">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="section-heading motion-reveal">
-            <div className="kicker">Checkout readiness</div>
+            <div className="kicker">Commercial readiness</div>
             <h2>No broken funnel theater.</h2>
-            <p>When paid provider links are absent, the site asks for access instead of pretending checkout is live.</p>
+            <p>The launch is free-first and scope-first. Checkout is not used to manufacture a finished product.</p>
           </div>
           <div className="grid gap-3">
             {checkoutReadiness.map((item) => (
@@ -72,7 +76,7 @@ export default function TrustPage() {
         <div className="section-heading motion-reveal">
           <div className="kicker">Support and refunds</div>
           <h2>Boundaries are part of the product.</h2>
-          <p>Each tier states what is included so the buyer knows whether they are buying a kit, a template system, or recurring intelligence.</p>
+          <p>Each path states what is live, what is coming soon, what is selective, and what must be scoped before payment.</p>
         </div>
         <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-surface/80">
           <table className="w-full text-sm">

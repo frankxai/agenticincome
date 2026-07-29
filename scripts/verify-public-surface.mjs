@@ -7,6 +7,8 @@ const files = {
   home: read('app/page.tsx'),
   hero: read('components/IncomeDeskHero.tsx'),
   workflow: read('components/AgentWorkflowProof.tsx'),
+  evidence: read('components/MarketEvidence.tsx'),
+  waitlist: read('components/WaitlistForm.tsx'),
   analytics: read('lib/analytics.ts'),
   subscribe: read('app/api/subscribe/route.ts'),
   start: read('app/start/page.tsx'),
@@ -26,12 +28,18 @@ const forbidText = (file, value, label) => {
 }
 
 requireText('home', '<AgentWorkflowProof />', 'workflow is present on the homepage')
-requireText('workflow', 'node scripts/affiliate-audit.mjs', 'workflow shows the executable command')
+requireText('home', '<MarketEvidence />', 'sourced market evidence is present on the homepage')
+requireText('home', '<OutcomePackBlueprint />', 'the product anatomy is present on the homepage')
+forbidText('home', '<AssemblyHero />', 'the heavy abstract canvas hero is not mounted')
+requireText('workflow', 'npm run income:validate -- examples/request-to-quote-desk/income-system.json', 'workflow shows the verified executable command')
 requireText('workflow', 'Human gate', 'workflow exposes human approval')
-requireText('workflow', 'It does not join a program', 'workflow exposes autonomy boundary')
+requireText('workflow', 'It does not connect credentials', 'workflow exposes autonomy boundary')
 requireText('workflow', 'Reference implementation only', 'workflow avoids customer-proof overclaim')
-requireText('workflow', '/skills/affiliate-audit/SKILL.md', 'workflow links the public skill contract')
-requireText('workflow', '/scripts/affiliate-audit.mjs', 'workflow links executable source')
+requireText('workflow', '/examples/request-to-quote-desk', 'workflow links the public reference pack')
+requireText('workflow', '/schemas/income-system.v1.schema.json', 'workflow links the public schema')
+requireText('evidence', 'not Agentic Income customer results', 'market evidence is not presented as first-party proof')
+requireText('evidence', 'Marketplace data', 'market evidence labels source type')
+requireText('evidence', 'Vendor-published customer story', 'vendor stories are labelled')
 
 for (const event of [
   'implementation_request_clicked',
@@ -41,8 +49,12 @@ for (const event of [
 ]) requireText('analytics', `'${event}'`, `analytics allowlist includes ${event}`)
 
 requireText('subscribe', "mode === 'unwired' ? 'subscribe_unwired' : 'subscribe_success'", 'unwired intake is not recorded as success')
+requireText('subscribe', "error: 'intake_unavailable'", 'unwired intake fails closed')
 requireText('subscribe', 'isSameOriginRequest(req)', 'intake is same-origin only')
 requireText('subscribe', 'readBoundedJson(req)', 'intake body is bounded before parsing')
+requireText('waitlist', "if (!intakeAvailable)", 'waitlist form is hidden when intake is unwired')
+requireText('waitlist', 'Nothing was stored', 'waitlist error states its persistence boundary')
+requireText('waitlist', '<label htmlFor=', 'waitlist fields use visible labels')
 
 forbidText('start', 'what ranks and what AI search engines lift verbatim', 'unsupported ranking claim')
 forbidText('start', 'every reader is either income', 'dehumanizing outcome claim')
@@ -61,6 +73,8 @@ for (const header of [
 
 requireText('css', '.hero-actions > *', 'hero CTA containment')
 requireText('css', '.workflow-steps', 'workflow responsive system')
+requireText('css', '.market-evidence-grid', 'market evidence responsive system')
+requireText('css', '.waitlist-form', 'waitlist form design system')
 
 if (failures.length) {
   console.error(`Public-surface verification failed:\n- ${failures.join('\n- ')}`)

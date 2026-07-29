@@ -29,6 +29,7 @@ export function EmailCapture({
 }) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
   const [result, setResult] = useState<SubscribeResult | null>(null)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const doneMessage =
     result?.mode === 'unwired'
@@ -60,12 +61,13 @@ export function EmailCapture({
         </div>
       ) : (
         <form
-          className="mx-auto mt-5 flex max-w-md flex-col gap-3 sm:flex-row"
+          className="mx-auto mt-5 grid max-w-md gap-3 text-left sm:grid-cols-[1fr_auto] sm:items-end"
           onSubmit={async (e) => {
             e.preventDefault()
             const form = e.currentTarget
             const email = (form.elements.namedItem('email') as HTMLInputElement).value
             setStatus('loading')
+            setErrorMessage('')
             try {
               const response = await fetch('/api/subscribe', {
                 method: 'POST',
@@ -82,23 +84,34 @@ export function EmailCapture({
                 setStatus('done')
               } else {
                 trackClientEvent('subscribe_error', { source, state: String(response.status) })
+                setErrorMessage(
+                  data?.error === 'intake_unavailable'
+                    ? 'Intake is not connected. Nothing was stored.'
+                    : 'That did not send. Check the email and try once more.',
+                )
                 setStatus('error')
               }
             } catch {
               trackClientEvent('subscribe_error', { source, state: 'network_error' })
+              setErrorMessage('The network request failed. Nothing was stored; please try again.')
               setStatus('error')
             }
           }}
         >
-          <input
-            name="email"
-            type="email"
-            required
-            placeholder="you@email.com"
-            aria-label="Email address"
-            autoComplete="email"
-            className="flex-1 rounded-xl border border-border bg-bg px-5 py-3 text-sm outline-none focus:border-accent"
-          />
+          <div>
+            <label htmlFor={`email-${source}`} className="mb-2 block text-xs font-semibold text-ink">
+              Email address
+            </label>
+            <input
+              id={`email-${source}`}
+              name="email"
+              type="email"
+              required
+              placeholder="you@email.com"
+              autoComplete="email"
+              className="min-h-12 w-full rounded-xl border border-border bg-bg px-5 py-3 text-base outline-none focus:border-accent"
+            />
+          </div>
           <button type="submit" className="rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-bg" disabled={status === 'loading'}>
             {status === 'loading' ? 'Sending' : buttonLabel}
           </button>
@@ -106,7 +119,7 @@ export function EmailCapture({
       )}
 
       {status === 'error' ? (
-        <p className="mt-3 text-sm text-gold">That did not send. Check the email and try once more.</p>
+        <p className="mt-3 text-sm text-gold" role="alert">{errorMessage}</p>
       ) : null}
 
       <div className="mt-4 text-[11px] text-muted">

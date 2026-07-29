@@ -1,9 +1,9 @@
 {
-  "version": "2026-07-10",
-  "task": "Reposition and implement AgenticIncome as the canonical revenue engine with scoped Agent-as-a-Service, digital products, open-source proof, and reader-first research.",
-  "surface": "AgenticIncome homepage, offer system, navigation, metadata, and production governance",
-  "audience": "Founder-led teams with one valuable workflow who need an inspectable revenue-system implementation",
-  "first_read": "AgenticIncome builds revenue systems with agents and delivers repository, verification, preview, and handoff evidence.",
+  "version": "2026-07-29",
+  "task": "Consolidate Agentic Income around a free, executable Field Guide; a selective Outcome Pack Lab waitlist; and a scope-first Outcome Pack Build Sprint, then verify preview and production.",
+  "surface": "Homepage, Field Guide, evidence library, waitlist, offer system, navigation, metadata, runtime readiness, and production governance",
+  "audience": "AI-native founders, experts, consultants, creator-operators, and boutique teams with one valuable workflow and judgment they can apply to the result",
+  "first_read": "Turn one valuable workflow into a governed income system you own; start with the free Field Guide.",
   "standards": [
     "C:/Users/frank/starlight/repos/DESIGN_TASTE.md",
     "C:/Users/frank/starlight/repos/WEB_EXPERIENCE_STANDARD.md",
@@ -22,96 +22,115 @@
       "label": "Public open-source proof",
       "source": "https://github.com/frankxai/agentic-income-skills",
       "reason": "Real installable operating system linked from the first viewport."
+    },
+    {
+      "label": "Agentic Income brand world v1",
+      "source": "design/qa/agentic-income-brand-world-v1.png",
+      "reason": "Internal visual direction for the Outcome Pack category; not used as unverifiable customer-facing product UI."
     }
   ],
   "direction": {
     "keep": [
-      "Trust desk and dated recommendation method",
-      "Coded exact-text system diagrams",
-      "Native scroll and reduced-motion route"
+      "Coded exact-text product diagrams",
+      "Public skill, schema, scaffold, validator, tests, and reference system",
+      "Evidence layers, trust desk, and dated recommendation method",
+      "Obsidian material world with emerald, cyan, amber, and warm ivory",
+      "Native scroll and complete reduced-motion route"
     ],
     "avoid": [
       "Affiliate-first brand positioning",
       "Passive-income promises",
       "Internal operating language",
-      "Decorative 3D or generated hero filler"
+      "Decorative generated hero filler",
+      "Four equal-weight paid offers",
+      "Fake scarcity, fake waitlist counts, and vendor evidence presented as customer proof",
+      "The 340vh canvas hero and labour-erasure language"
     ],
-    "signature": "A coded four-stage implementation model—Audit, Architect, Implement, Verify—backed by links to real public systems.",
+    "signature": "The Principal's Outcome Desk: a coded four-stage Outcome Pack—Discover, Define, Build, Prove—backed by executable public systems and a human authority boundary.",
     "system": [
-      "Tier C coded product proof as the primary hero asset",
+      "Tier C coded product proof as the production hero asset",
       "Obsidian, emerald, cyan, and amber FrankX tokens",
-      "GSAP only for hierarchy and delivery-order causality",
-      "Static complete state for reduced motion"
+      "One primary action per viewport and no mobile navigation overflow",
+      "GSAP only for restrained hierarchy and delivery-order causality",
+      "Static complete state for reduced motion",
+      "Generated imagery retained as internal brand direction only"
     ]
   },
   "asset_quality": {
     "tier": "C",
-    "source_method": "product-capture",
+    "source_method": "code-authored product proof plus internal generated brand direction",
     "provenance": "owned",
     "why_premium": "The primary asset is exact, source-backed product architecture rendered in code and linked to real repositories rather than decorative generated media.",
     "shortcut_risk": "low",
-    "context_tested": true
+    "context_tested": false
   },
   "artifacts": [
     {
       "path_or_url": "components/IncomeDeskHero.tsx",
       "kind": "web-ui",
-      "inspected": true,
-      "notes": "Inspected in the production build at 1440px, 390px, reduced motion, and 195px 200%-equivalent reflow. Hero CTAs remain inside the viewport and the coded delivery model stays legible."
+      "inspected": false,
+      "notes": "Pending implementation and responsive preview inspection."
     },
     {
-      "path_or_url": "components/AgentWorkflowProof.tsx",
-      "kind": "web-ui",
+      "path_or_url": "design/qa/agentic-income-brand-world-v1.png",
+      "kind": "brand-direction",
       "inspected": true,
-      "notes": "The exact affiliate-audit command, four-stage input/agent/artifact/human-gate chain, autonomy boundary, and two public GitHub source links were inspected in desktop and mobile crops."
+      "notes": "Generated and visually inspected as an internal identity overview. It is not used as public product proof."
+    },
+    {
+      "path_or_url": "components/MarketEvidence.tsx",
+      "kind": "web-ui",
+      "inspected": false,
+      "notes": "Pending implementation and source-link verification."
     }
   ],
   "checks": [
     {
       "name": "asset-tier",
       "status": "pass",
-      "evidence": "Tier C exact UI and source-backed proof; no generated or external asset introduced."
+      "evidence": "Tier C exact UI remains the production asset; generated brand imagery is internal direction only."
     },
     {
       "name": "export-inspection",
-      "status": "pass",
-      "evidence": "CDP exports: C:/Users/frank/.starlight/evidence/agenticincome-pr9-repair-2026-07-10/desktop-final.png, mobile-390-final.png, workflow-final.png, mobile-workflow-final.png, reduced-motion-final.png, and reflow-200-percent-final.png."
+      "status": "pending",
+      "evidence": "Before-state captures exist at .visual-proof/before-production-20260729; final preview and production captures are pending."
     },
     {
       "name": "build",
-      "status": "pass",
-      "evidence": "pnpm install --frozen-lockfile, ESLint with zero warnings, type-check, static link check, public-surface regression, and Next.js production build passed with 30 routes."
+      "status": "pending",
+      "evidence": "Frozen install, lint, tests, type-check, static links, public verification, and production build are pending after implementation."
     },
     {
-      "name": "dependency-security",
+      "name": "public-command-proof",
       "status": "pass",
-      "evidence": "PostCSS override raised the vulnerable 8.4.31 transitive version to 8.5.15; the lockfile contains no 8.4.31 entry."
+      "evidence": "On 2026-07-29 the canonical public repository passed 5/5 tests; the Request-to-Quote example validated; income:init created a fresh scaffold; and the fresh scaffold passed income:validate."
     },
     {
       "name": "visual-qa",
-      "status": "pass",
-      "evidence": "CDP verification passed desktop, 390px mobile, reduced motion, logical keyboard order with visible focus, privacy and 404 metadata, and 195px reflow without document overflow. Local Vercel analytics-script 404s were isolated as localhost-only; no page exceptions occurred."
+      "status": "pending",
+      "evidence": "Desktop, mobile, reduced-motion, keyboard, reflow, and final source inspection are pending."
     },
     {
       "name": "public-integrity",
-      "status": "pass",
-      "evidence": "The workflow links executable source, states the human publish gate, and disclaims customer/revenue proof. Unwired intake records subscribe_unwired, unsupported ranking/income claims are removed, and privacy/404/security contracts are regression-tested."
+      "status": "pending",
+      "evidence": "Implementation must fail closed when intake is unwired, label every external evidence type, preserve privacy, and avoid unsupported outcome claims."
     }
   ],
   "score": {
-    "total": 28,
+    "total": 0,
     "max": 30,
-    "notes": "First read 5, brand fit 4, craft 4, accessibility/responsive/reduced motion 5, factual/provenance integrity 5, intended-surface usefulness 5."
+    "notes": "Pending final evidence gate."
   },
-  "decision": "ship",
+  "decision": "implement",
   "known_risks": [
-    "Online intake, paid checkout, and analytics forwarding remain environment-dependent and must not be described as live without runtime evidence.",
-    "The 195px reflow keeps the mobile navigation as an intentionally horizontal internal scroller while the document itself has no horizontal overflow.",
-    "Production remains on the prior healthy deployment; this branch is preview-only."
+    "Vercel currently has no environment variables. Online waitlist intake must fail closed and must not claim retention until SUBSCRIBE_WEBHOOK_URL or ACCESS_REQUEST_EMAIL is configured.",
+    "Paid checkout is intentionally outside the primary funnel; no product is described as purchasable until fulfillment and provider evidence exist.",
+    "External market examples are platform data or vendor-published customer stories, not Agentic Income customer results.",
+    "Production remains on the prior healthy deployment until the Git-backed preview passes all gates."
   ],
   "public_install_truth": {
-    "version": "2026-07-24",
-    "scope": "Copy-and-source integrity repair; no layout, typography, asset, motion, or responsive behavior change.",
+    "version": "2026-07-29",
+    "scope": "Public command surface independently executed against the canonical public repository.",
     "public_repository": "https://github.com/frankxai/agentic-income-skills",
     "executable_scripts": [
       "npm run income:init",
@@ -130,13 +149,13 @@
     ],
     "checks": [
       {
-        "name": "recursive-public-install-contract",
+        "name": "fresh-scaffold-and-validation",
         "status": "pass",
-        "evidence": "node --test tests/public-install-truth.test.mjs: 3 tests passed locally against the prepared source set."
+        "evidence": "npm test passed 5/5; the Request-to-Quote example validated; npm run income:init produced a fresh scaffold; the scaffold then passed npm run income:validate."
       }
     ],
     "pending": [
-      "Repository-wide test, type-check, lint, static link check, public-surface verification, and production build on the Git-backed preview."
+      "Repository-wide lint, test, type-check, static link check, public-surface verification, production build, and Git-backed preview."
     ]
   }
 }

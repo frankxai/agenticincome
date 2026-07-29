@@ -2,22 +2,30 @@
 
 # Agentic Income
 
-## The hours are over. The machines are yours.
+## Own the outcome.
 
-### Build income systems with AI agents — machinery you can inspect, public contracts you can run.
+### Turn one valuable workflow into a governed income system you own.
 
-**[agenticincome.ai](https://agenticincome.ai)** · the hub of the trinity:
-[**EARN**](https://agenticincome.ai) → [**AUTOMATE**](https://agenticpassiveincome.com) → [**COMPOUND**](https://disruptivepassiveincome.com)
+**[Start with the free Field Guide](https://agenticincome.ai/start)** ·
+**[inspect the public method](https://github.com/frankxai/agentic-income-skills)**
 
 </div>
 
 ---
 
-Something structural changed in 2025–2026: the same agent runtimes that write software now research markets, draft offers, build sites, wire checkouts, and run weekly operating loops. One person directing an agent team can deliver work that once required a small firm.
+Agentic Income is the open Field Guide and implementation studio for
+principal-owned **Outcome Packs**: governed agent services built around one
+buyer, one accepted outcome, and assets the principal keeps.
 
-That changes the oldest constraint on solo income: your hours.
+Agents can research, structure, draft, build, test, document, and monitor. A
+person or legal entity remains accountable for pricing, contracts, credentials,
+customer sends, production, movement of money, and acceptance. There are no
+income promises.
 
-Agentic Income publishes the machinery, honest costs, and operating discipline without promising a result. The reusable system is public in [frankxai/agentic-income-skills](https://github.com/frankxai/agentic-income-skills): inspectable contracts, executable scripts, and a governed reference implementation under MIT.
+The reusable method is public in
+[frankxai/agentic-income-skills](https://github.com/frankxai/agentic-income-skills):
+inspectable contracts, an IncomeSystem schema, executable scaffold and
+validator, tests, and a governed Request-to-Quote reference pack under MIT.
 
 ## Run the public system
 
@@ -70,12 +78,13 @@ The reusable, public operating contract remains [agentic-income-skills](https://
 ## The business model
 
 1. **Open core (MIT):** the public skill, schema, scaffold, validator, and reference system.
-2. **The Brief:** weekly landscape diffs, one stream teardown, and system updates.
-3. **Self-serve products:** Starter Kit (free), Income Architecture Blueprint ($67), Agent Team Pro ($129), and Private Intel ($19/mo). Paid access remains visibly unavailable until checkout is connected.
-4. **Disclosed affiliate research:** recommendations that survive without the incentive. Compensated destinations are labeled before the click, with a non-affiliate alternative named when one exists.
-5. **Implementation Sprint:** scope-first agent-system delivery documented with acceptance and evidence.
+2. **Free Field Guide:** buyer map, path decision, Outcome Pack anatomy, verified commands, and evidence rules with no email gate.
+3. **Outcome Pack Lab:** a selective, coming-soon founding cohort for accountable operators who bring one real workflow they can judge.
+4. **Outcome Pack Build Sprint:** scope-first implementation of one accepted outcome in principal-owned accounts and source, with verification and handoff.
+5. **Disclosed research:** dated recommendations and affiliate routes that survive without the incentive and remain secondary to the product.
 
-No earnings claims anywhere. We sell machinery and education, never outcomes.
+Self-serve paid experiments remain out of the primary funnel until checkout,
+delivery, support, and refund evidence are all live. No earnings claims anywhere.
 
 ## The trinity
 
@@ -89,7 +98,7 @@ Public machinery: [agentic-income-skills](https://github.com/frankxai/agentic-in
 
 ## Site development
 
-Next.js 16 · React 19 · Tailwind 4 · GSAP.
+Next.js 16 · React 19 · Tailwind 4.
 
 ```bash
 pnpm install --frozen-lockfile
@@ -102,6 +111,14 @@ Public skills, schemas, scripts, and reference systems are MIT licensed in their
 
 <div align="center">
 
-**Clone the public system. Create one Outcome Pack. Validate it before implementation.**
+**Map one buyer. Define one accepted outcome. Own the system that delivers it.**
 
 </div>
+
+---
+
+[![Built on SIP](https://img.shields.io/badge/Built%20on-SIP-blue.svg)](https://github.com/frankxai/Starlight-Intelligence-System)
+
+**Built on SIP** — this repository composes the
+[Starlight Intelligence Protocol](https://github.com/frankxai/Starlight-Intelligence-System)
+for memory, attestation, governance, and sovereignty.

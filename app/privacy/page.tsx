@@ -32,7 +32,7 @@ export default function PrivacyPage() {
         <div>
           <h2 className="text-2xl font-semibold text-ink">Access requests</h2>
           <p className="mt-3">
-            When an intake webhook is configured, the email address and source are sent to that configured service. When a concierge address is configured, the site can prepare a mail message for you to send. When neither exists, the site does not retain the address and says so in the interface.
+            When an intake webhook is configured, the email address, source, and application fields are sent to that configured service. When a concierge address is configured, the site prepares a mail message for you to review and send. When neither exists, the application form is disabled; no address is submitted or retained.
           </p>
         </div>
         <div>
@@ -50,7 +50,7 @@ export default function PrivacyPage() {
         <div>
           <h2 className="text-2xl font-semibold text-ink">Current runtime state</h2>
           <p className="mt-3">
-            The no-secret readiness page shows whether intake, paid checkout, and analytics forwarding are configured without exposing credentials.
+            The no-secret readiness page shows whether the free product, public proof, selective intake, scope-first service, optional paid checkout, and optional custom analytics forwarding are configured without exposing credentials.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Link href="/readiness" className="cta-secondary">Inspect readiness</Link>

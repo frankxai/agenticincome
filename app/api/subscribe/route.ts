@@ -11,8 +11,13 @@ import {
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PUBLIC_EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const ROLE_VALUES = new Set(['founder', 'expert', 'creator', 'boutique-team', 'other'])
 
-function conciergeMailto(source: string, requestId: string) {
+function conciergeMailto(
+  source: string,
+  requestId: string,
+  application: { role: string; workflow: string; goal: string },
+) {
   const contact = process.env.ACCESS_REQUEST_EMAIL
   if (!contact || !PUBLIC_EMAIL_PATTERN.test(contact)) return null
 
@@ -21,10 +26,12 @@ function conciergeMailto(source: string, requestId: string) {
     [
       `Request ID: ${requestId}`,
       `Source: ${source}`,
-      'Please send this message from the address you want us to use for delivery updates.',
+      application.role ? `Role: ${application.role}` : '',
+      application.workflow ? `Workflow: ${application.workflow}` : '',
+      application.goal ? `Desired outcome: ${application.goal}` : '',
       '',
-      'I want access to the Agentic Income offer above. Please send the next available checkout or onboarding path.',
-    ].join('\n'),
+      'Please send this message from the address you want us to use for delivery updates.',
+    ].filter(Boolean).join('\n'),
   )
 
   return `mailto:${contact}?subject=${subject}&body=${body}`
@@ -61,7 +68,7 @@ export async function POST(req: Request) {
   const payload = typeof body.value === 'object' && body.value !== null
     ? body.value as Record<string, unknown>
     : {}
-  const { email, source = 'agenticincome' } = payload
+  const { email, source = 'agenticincome', role = '', workflow = '', goal = '' } = payload
   const normalized = typeof email === 'string' ? email.trim().toLowerCase() : ''
 
   if (!EMAIL_PATTERN.test(normalized)) {
@@ -69,28 +76,56 @@ export async function POST(req: Request) {
   }
 
   const normalizedSource = typeof source === 'string' && source.trim() ? source.trim().slice(0, 80) : 'agenticincome'
-  const requestId = createSubscribeRequestId()
-  const webhook = process.env.SUBSCRIBE_WEBHOOK_URL
-  if (webhook) {
-    const response = await fetch(webhook, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'Idempotency-Key': requestId,
-      },
-      body: JSON.stringify({
-        email: normalized,
-        source: normalizedSource,
-        requestId,
-        tags: ['agentic-income', 'payer-brief'],
-      }),
-    })
+  const normalizedRole = typeof role === 'string' ? role.trim().slice(0, 40) : ''
+  const normalizedWorkflow = typeof workflow === 'string' ? workflow.trim().slice(0, 800) : ''
+  const normalizedGoal = typeof goal === 'string' ? goal.trim().slice(0, 600) : ''
+  const isLabApplication = normalizedSource.includes('outcome-pack-lab')
 
-    if (!response.ok) {
+  if (
+    isLabApplication &&
+    (
+      !ROLE_VALUES.has(normalizedRole) ||
+      normalizedWorkflow.length < 20 ||
+      normalizedGoal.length < 20
+    )
+  ) {
+    return NextResponse.json({ ok: false, error: 'invalid_application' }, { status: 400 })
+  }
+
+  const application = {
+    role: normalizedRole,
+    workflow: normalizedWorkflow,
+    goal: normalizedGoal,
+  }
+  const requestId = createSubscribeRequestId()
+  const webhook = process.env.SUBSCRIBE_WEBHOOK_URL?.trim()
+  if (webhook) {
+    const response = await fetch(
+      webhook,
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'Idempotency-Key': requestId,
+        },
+        body: JSON.stringify({
+          email: normalized,
+          source: normalizedSource,
+          requestId,
+          application,
+          tags: isLabApplication
+            ? ['agentic-income', 'outcome-pack-lab', 'founding-cohort']
+            : ['agentic-income', 'access-request'],
+        }),
+        signal: AbortSignal.timeout(5_000),
+      },
+    ).catch(() => null)
+
+    if (!response?.ok) {
       await forwardAnalyticsEvent({
         event: 'subscribe_error',
         source: normalizedSource,
-        state: String(response.status),
+        state: response ? String(response.status) : 'webhook_unreachable',
         requestId,
         ts: new Date().toISOString(),
       })
@@ -108,7 +143,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true, mode: 'webhook', requestId })
   }
 
-  const mailto = conciergeMailto(normalizedSource, requestId)
+  const mailto = conciergeMailto(normalizedSource, requestId, application)
   const mode = mailto ? 'manual_email' : 'unwired'
 
   await forwardAnalyticsEvent({
@@ -118,6 +153,13 @@ export async function POST(req: Request) {
     requestId,
     ts: new Date().toISOString(),
   })
+
+  if (mode === 'unwired') {
+    return NextResponse.json(
+      { ok: false, error: 'intake_unavailable' },
+      { status: 503, headers: { 'Retry-After': '3600' } },
+    )
+  }
 
   return NextResponse.json({
     ok: true,

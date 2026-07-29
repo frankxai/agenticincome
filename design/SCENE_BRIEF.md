@@ -1,29 +1,44 @@
-# Homepage Scene Brief — 2026-07-24
+# Homepage Scene Brief — 2026-07-29
 
 ## Creative Thesis
 
-The revenue engine is assembled in public: a precise build path and inspectable
-artifacts replace both AI spectacle and income hype.
+Own the outcome. A principal's quiet operating desk turns one valuable human
+workflow into a governed service whose buyer, acceptance, authority, economics,
+runbook, and evidence can all be inspected.
 
 ## Static Frame
 
-The existing obsidian build-room composition remains. The install terminal now
-shows only commands a visitor can execute against the public MIT repository:
-clone, install, scaffold, validate, and test.
+An obsidian editorial field with one direct human promise on the left and a
+compact coded Outcome Pack on the right. The pack resolves from buyer to
+accepted outcome to workflow to evidence, with the human principal visible as
+the approval and ownership boundary. An artifact rail links to the public skill,
+schema, reference desk, and deployable template.
 
 ## Signature Motion
 
-Unchanged. Motion communicates delivery order. The public-source truth repair
-adds no new movement and changes no timing, layout, or responsive behavior.
+Motion communicates delivery order once: Discover, Define, Build, Prove.
+Marketing reveals are restrained and resolve into a fully useful static state.
+Navigation and high-frequency actions do not animate. Hover movement is gated
+to fine pointers.
 
 ## Reduced Motion
 
-Unchanged. All content remains fully visible at rest.
+All content is visible at rest. Translational reveals, path drawing, stagger,
+canvas, parallax, and scale motion are removed. Color and focus feedback remain.
+
+## Visual asset decision
+
+Tier C coded product proof is the production hero. Generated media is not used
+as the primary customer-facing asset because exact product architecture explains
+the offer more clearly and avoids unverifiable UI. A generated internal brand
+world board is retained at
+`design/qa/agentic-income-brand-world-v1.png` as visual direction evidence only.
 
 ## Source decision
 
-The public proof object is
-`https://github.com/frankxai/agentic-income-skills`: the operating skill,
-IncomeSystem schema, scaffold, validator, and governed Request-to-Quote example.
+The public proof object is `https://github.com/frankxai/agentic-income-skills`:
+the operating skill, IncomeSystem schema, scaffold, validator, tests, and
+governed Request-to-Quote example. Market examples link to current first-party
+platform data or vendor-published customer stories and are labelled as such.
 The private application repository is not presented as public source or as a
-Claude marketplace.
+marketplace.

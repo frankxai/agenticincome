@@ -109,7 +109,7 @@ export function EmailCapture({
               required
               placeholder="you@email.com"
               autoComplete="email"
-              className="min-h-12 w-full rounded-xl border border-border bg-bg px-5 py-3 text-base outline-none focus:border-accent"
+              className="min-h-12 w-full rounded-xl border border-border bg-bg px-5 py-3 text-base focus:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             />
           </div>
           <button type="submit" className="rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-bg" disabled={status === 'loading'}>

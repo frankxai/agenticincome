@@ -95,6 +95,12 @@ body::before {
   .glass { transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease; }
 }
 
+/* mobile nav strip: right-edge fade signals there is more to scroll */
+.mobile-nav-fade {
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 2.5rem), rgba(0,0,0,0.2));
+  mask-image: linear-gradient(to right, black calc(100% - 2.5rem), rgba(0,0,0,0.2));
+}
+
 .prose-ai {
   max-width: 46rem;
   line-height: 1.78;

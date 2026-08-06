@@ -25,7 +25,7 @@ export function Nav() {
         </div>
       </nav>
       <div className="border-t border-border/50 sm:hidden">
-        <div className="mx-auto flex max-w-6xl gap-4 overflow-x-auto px-6 py-2 text-xs font-semibold text-muted">
+        <div className="mobile-nav-fade mx-auto flex max-w-6xl gap-4 overflow-x-auto px-6 py-2 text-xs font-semibold text-muted">
           {site.nav.map((item) => (
             <Link
               key={item.href}

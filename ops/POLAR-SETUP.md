@@ -30,6 +30,11 @@ Dashboard → Products → **New Product**, once per catalog entry. Copy `name`,
 | `blueprint` | Digital product | $67.00 (6700¢) | One-time |
 | `agent-team-pro` | Digital product | $129.00 (12900¢) | One-time |
 | `private-intel` | Subscription | $19.00/mo (1900¢) | Monthly recurring |
+| `claims-guard-pack` | Digital product | $39.00 (3900¢) | One-time |
+| `abos-pack-bundle` | Digital product | $99.00 (9900¢) | One-time |
+| `vibe-os-pack` | Digital product | $24.00 (2400¢) | One-time |
+
+**Cross-repo packs (added 2026-08-07):** the three pack products' payloads live in sibling repos, not this one — `claims-guard-pack` and `abos-pack-bundle` in `frankxai/agentic-business-os` (see `packs/claims-guard-pack/PRODUCT.md` and `packs/PRODUCT-BUNDLE.md` there), `vibe-os-pack` in `frankxai/vibe-os` (see its root `PRODUCT.md`). Each PRODUCT.md carries the exact zip recipe. Both source repos are MIT and public; the catalog descriptions already say so — do not add exclusivity language in the Polar fields. Before creating these Polar products: assemble the zip per the PRODUCT.md, upload it as the File Downloads benefit, then set the env var (§5.1) and flip the catalog status (§5.4). Until all three happen, checkout stays refused by construction.
 
 For each product:
 
@@ -88,6 +93,9 @@ Names and purpose are also documented in `.env.example`.
 | `POLAR_PRODUCT_ID_BLUEPRINT` | Polar product id for `blueprint` |
 | `POLAR_PRODUCT_ID_PRIVATE_INTEL` | Polar product id for `private-intel` |
 | `POLAR_PRODUCT_ID_AGENT_TEAM_PRO` | Leave unset until the payload exists (§4) |
+| `POLAR_PRODUCT_ID_CLAIMS_GUARD_PACK` | Leave unset until the pack zip is uploaded (§2, cross-repo packs) |
+| `POLAR_PRODUCT_ID_ABOS_PACK_BUNDLE` | Leave unset until the bundle zip is uploaded (§2, cross-repo packs) |
+| `POLAR_PRODUCT_ID_VIBE_OS_PACK` | Leave unset until the pack zip is uploaded (§2, cross-repo packs) |
 | `POLAR_SUCCESS_URL` | Site origin, e.g. `https://agenticincome.ai`. The per-product path comes from the catalog's `delivery.path`. |
 
 **Path A (legacy static links):**
@@ -135,6 +143,7 @@ Rules that stay in force:
 
 - `starter-kit` keeps its free status — it is delivered on-site and must never be sold through checkout. `POST /api/checkout` refuses it with `free_product` regardless of env.
 - `agent-team-pro` keeps `payload not assembled — not for sale` until the payload in §4 actually exists. Do not flip it to sell a product that has nothing to deliver.
+- `claims-guard-pack`, `abos-pack-bundle`, and `vibe-os-pack` keep their gated status until their zips (assembled from the sibling repos per §2, cross-repo packs) are uploaded to Polar AND their `/delivery/<id>` pages exist (§5.3 pattern — none are created yet). Same rule: nothing to deliver, nothing for sale.
 - The `_note` repo-privacy rule still applies: paid payloads must be out of the public tree, or the repo stays private.
 
 Once flipped and redeployed, `/offers/blueprint` renders a real buy button instead of "Reserve Blueprint access" (label from `checkout.buyLabel` in `lib/offers.ts`), and the access-path panel says checkout is live.

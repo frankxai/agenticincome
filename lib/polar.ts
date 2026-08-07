@@ -33,6 +33,13 @@ const PRODUCT_ID_ENV_KEYS: Record<string, string> = {
   blueprint: 'POLAR_PRODUCT_ID_BLUEPRINT',
   'agent-team-pro': 'POLAR_PRODUCT_ID_AGENT_TEAM_PRO',
   'private-intel': 'POLAR_PRODUCT_ID_PRIVATE_INTEL',
+  // Cross-repo packs (payloads live in sibling repos — see each catalog
+  // entry's delivery.files). Mapped like agent-team-pro: the row makes
+  // activation possible later; the env var stays unset and the catalog
+  // status stays gated until the packaged zip exists on Polar.
+  'claims-guard-pack': 'POLAR_PRODUCT_ID_CLAIMS_GUARD_PACK',
+  'abos-pack-bundle': 'POLAR_PRODUCT_ID_ABOS_PACK_BUNDLE',
+  'vibe-os-pack': 'POLAR_PRODUCT_ID_VIBE_OS_PACK',
 }
 
 /** The only catalog `status` prefix that means "this may be sold". */

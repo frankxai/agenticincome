@@ -2,7 +2,7 @@
   "_comment": "Polar-ready product catalog for agenticincome.ai. Source of truth for product metadata; ops/POLAR-SETUP.md is the runbook that turns these entries into live Polar products. Prices in cents. interval: null = one-time purchase.",
   "_note": "Paid payloads must move to private delivery (Polar file delivery or a private repo granted via license key) before this repo goes public. Until then, products/blueprint/*.md and products/private-intel/*.md are the paid content sitting in a private repo — do NOT open-source this repo with them in it.",
   "_checkoutGate": "`status` is the machine-readable sale gate read by lib/polar.ts. A product may be sold ONLY when its status starts with 'for sale' (case-insensitive); every other value refuses checkout, so an unrecognized or misspelled status fails closed instead of opening a sale. Setting the POLAR_* env vars alone does not open checkout — the status here must be flipped too. Activation checklist: ops/POLAR-SETUP.md.",
-  "updatedAt": "2026-07-11",
+  "updatedAt": "2026-08-07",
   "merchant_of_record": "polar.sh",
   "refund_policy": "30-day no-questions refund on all paid one-time products; subscriptions cancelable anytime, first-month refund on request.",
   "products": [
@@ -70,6 +70,54 @@
         ]
       },
       "license": "Personal subscription — briefs are for the subscriber's own use. Not for resale or redistribution. Access ends with the subscription."
+    },
+    {
+      "id": "claims-guard-pack",
+      "name": "Claims Guard Pack",
+      "price_cents": 3900,
+      "interval": null,
+      "status": "built in frankxai/agentic-business-os — checkout gated pending packaged zip, Polar product, and file upload",
+      "description": "The pre-publish gate from the Agentic Business OS: one skill that audits business copy through five gates — regulated claim language (zero-tolerance), citations, brand voice, AI-slop, structure — and returns pass/warn/fail with specific corrections. Uploads into any Claude.ai project or repo. The source is MIT and public on GitHub; this is the packaged, versioned edition. Not legal advice and not exclusive content — see the pack's PRODUCT.md.",
+      "delivery": {
+        "type": "polar-files",
+        "path": "/delivery/claims-guard-pack",
+        "files": [
+          "claims-guard-pack-v0.1.0.zip (assembled at packaging time from packs/claims-guard-pack/ in frankxai/agentic-business-os: SKILL.md + manifest.json + PRODUCT.md)"
+        ]
+      },
+      "license": "Underlying source is MIT-licensed and public (github.com/frankxai/agentic-business-os); the purchase is the packaged edition and MIT terms apply."
+    },
+    {
+      "id": "abos-pack-bundle",
+      "name": "Agentic Business OS Pack Bundle",
+      "price_cents": 9900,
+      "interval": null,
+      "status": "built in frankxai/agentic-business-os — checkout gated pending packaged zip, Polar product, and file upload",
+      "description": "All four Agentic Business OS skill packs in one package: Claims Guard (pre-publish gate), Business Intelligence (file-based business memory), Design Contract (design.md + taste.md authoring), and Weekly Rhythm (founder-sized Monday/Friday loop), plus the pack registry and install guide. Skill files, not software — they direct an AI harness; no app, no account. Source is MIT and public on GitHub; this is the packaged, versioned edition. No business-outcome claims — see packs/PRODUCT-BUNDLE.md.",
+      "delivery": {
+        "type": "polar-files",
+        "path": "/delivery/abos-pack-bundle",
+        "files": [
+          "abos-pack-bundle-v0.1.0.zip (assembled at packaging time from packs/ in frankxai/agentic-business-os: 4 pack folders + registry.json + README.md + PRODUCT-BUNDLE.md)"
+        ]
+      },
+      "license": "Underlying source is MIT-licensed and public (github.com/frankxai/agentic-business-os); the purchase is the packaged edition and MIT terms apply."
+    },
+    {
+      "id": "vibe-os-pack",
+      "name": "Vibe OS Pack",
+      "price_cents": 2400,
+      "interval": null,
+      "status": "built in frankxai/vibe-os — checkout gated pending packaged zip, Polar product, and file upload",
+      "description": "The Vibe OS toolkit: three Claude Code skills for Suno-focused AI-music prompt engineering, four Python audio tools (state-to-prompt generator, mixer, two tone/binaural generators), research-cited documentation including the state-change whitepaper, and two example session scripts. Turns a target state (focus, workout, sleep, …) into a concrete music prompt plus optional tone layering. Not medical or therapeutic — the docs cite published research; no health outcomes are promised. Music generation itself requires your own Suno (or similar) account. Source is MIT and public on GitHub; this is the packaged edition — see PRODUCT.md in frankxai/vibe-os.",
+      "delivery": {
+        "type": "polar-files",
+        "path": "/delivery/vibe-os-pack",
+        "files": [
+          "vibe-os-pack.zip (assembled at packaging time from frankxai/vibe-os: skills/ + tools/ + docs/ + examples/ + requirements.txt + README.md + LICENSE + PRODUCT.md)"
+        ]
+      },
+      "license": "Underlying source is MIT-licensed and public (github.com/frankxai/vibe-os); the purchase is the packaged edition and MIT terms apply."
     }
   ]
 }

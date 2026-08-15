@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { checkoutPath, offers } from '@/lib/offers'
+import { checkoutPath, checkoutUrl, offers } from '@/lib/offers'
 import { CheckoutLink } from '@/components/CheckoutLink'
+import { isCheckoutLive } from '@/lib/polar'
 
 export const metadata: Metadata = {
   title: 'Offers',
@@ -45,7 +46,7 @@ export default function Offers() {
         <div>
           <div className="text-sm font-semibold text-gold">Before you buy</div>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-            Free delivery is live. The implementation sprint is scope-first and does not take payment here. Digital-product checkout falls back honestly to request access until provider links are connected.
+            Free delivery is live. The implementation sprint is scope-first and does not take payment here. Digital-product checkout is being connected — request access until the payment link goes live.
           </p>
         </div>
         <Link href="/trust" className="cta-secondary">
@@ -54,44 +55,56 @@ export default function Offers() {
       </section>
 
       <section className="mt-12 grid gap-6">
-        {offers.map((offer) => (
-          <article key={offer.slug} className="rounded-2xl border border-border bg-surface/80 p-6 motion-reveal">
-            <div className="grid gap-8 lg:grid-cols-[1fr_18rem] lg:items-center">
-              <div>
-                <div className="uppercase text-[10px] text-accent">{offer.tier}</div>
-                <h2 className="mt-1 text-3xl font-semibold">{offer.title}</h2>
-                <div className="mt-1 text-2xl font-medium text-ink/90">{offer.price}</div>
-                <p className="mt-3 max-w-2xl text-muted">{offer.summary}</p>
-                <ul className="mt-5 grid gap-2 text-sm text-muted sm:grid-cols-2">
-                  {offer.deliverables.slice(0, 4).map((item) => (
-                    <li key={item} className="flex gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="grid gap-3">
-                <CheckoutLink
-                  href={checkoutPath(offer)}
-                  className="cta text-center"
-                  offer={offer.slug}
-                  source="offers-index"
-                >
-                  {offer.cta}
-                </CheckoutLink>
-                <Link href={`/offers/${offer.slug}`} className="cta-secondary text-center">
-                  Inspect product
-                </Link>
-                <div className="text-center text-[11px] leading-5 text-muted">
-                  {offer.checkout.fallback === 'delivery'
-                    ? 'Instant on-site delivery.'
-                    : 'Secure checkout and post-purchase handoff are provider-ready.'}
+        {offers.map((offer) => {
+          const isFree = offer.checkout.fallback === 'delivery'
+          const isScoped = offer.accessMode === 'scope-first'
+          const polarLive = isCheckoutLive(offer.slug)
+          const staticLive = checkoutUrl(offer)
+          const checkoutReady = polarLive || staticLive
+
+          return (
+            <article key={offer.slug} className="rounded-2xl border border-border bg-surface/80 p-6 motion-reveal">
+              <div className="grid gap-8 lg:grid-cols-[1fr_18rem] lg:items-center">
+                <div>
+                  <div className="uppercase text-[10px] text-accent">{offer.tier}</div>
+                  <h2 className="mt-1 text-3xl font-semibold">{offer.title}</h2>
+                  <div className="mt-1 text-2xl font-medium text-ink/90">{offer.price}</div>
+                  <p className="mt-3 max-w-2xl text-muted">{offer.summary}</p>
+                  <ul className="mt-5 grid gap-2 text-sm text-muted sm:grid-cols-2">
+                    {offer.deliverables.slice(0, 4).map((item) => (
+                      <li key={item} className="flex gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="grid gap-3">
+                  <CheckoutLink
+                    href={checkoutPath(offer)}
+                    className="cta text-center"
+                    offer={offer.slug}
+                    source="offers-index"
+                  >
+                    {offer.cta}
+                  </CheckoutLink>
+                  <Link href={`/offers/${offer.slug}`} className="cta-secondary text-center">
+                    Inspect product
+                  </Link>
+                  <div className="text-center text-[11px] leading-5 text-muted">
+                    {isFree
+                      ? 'Instant on-site delivery.'
+                      : isScoped
+                        ? 'No payment on this site — scope first.'
+                        : checkoutReady
+                          ? 'Checkout is connected.'
+                          : 'Checkout arriving — request access.'}
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          )
+        })}
       </section>
 
       <section className="mt-16 max-w-4xl border-t border-border pt-8 text-sm leading-6 text-muted">

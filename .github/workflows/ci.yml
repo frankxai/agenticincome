@@ -3,7 +3,27 @@ name: CI
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - '.github/release.yml'
+      - '.github/scripts/release-*'
+      - '.github/scripts/validate-release-ledger.mjs'
+      - '.github/workflows/draft-release.yml'
+      - '.github/workflows/release-contract.yml'
+      - 'CHANGELOG.md'
+      - 'RELEASING.md'
+      - 'docs/releases/**'
+      - 'docs/RELEASE-FOUNDATION-*.md'
   pull_request:
+    paths-ignore:
+      - '.github/release.yml'
+      - '.github/scripts/release-*'
+      - '.github/scripts/validate-release-ledger.mjs'
+      - '.github/workflows/draft-release.yml'
+      - '.github/workflows/release-contract.yml'
+      - 'CHANGELOG.md'
+      - 'RELEASING.md'
+      - 'docs/releases/**'
+      - 'docs/RELEASE-FOUNDATION-*.md'
 
 concurrency:
   group: agenticincome-ci-${{ github.workflow }}-${{ github.ref }}

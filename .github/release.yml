@@ -1,0 +1,30 @@
+changelog:
+  exclude:
+    labels:
+      - skip-changelog
+      - no-user-impact
+  categories:
+    - title: Product and delivery
+      labels:
+        - feature
+        - product
+        - delivery
+    - title: Trust, safety, and compliance
+      labels:
+        - security
+        - trust
+        - compliance
+        - accessibility
+    - title: Open systems and knowledge
+      labels:
+        - open-source
+        - knowledge
+        - documentation
+    - title: Reliability
+      labels:
+        - fix
+        - performance
+        - reliability
+    - title: Other meaningful changes
+      labels:
+        - "*"

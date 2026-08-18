@@ -1,0 +1,36 @@
+{
+  "_comment": "The three operator income models. Derived from knowledge/02-income-models.md (last_verified 2026-07-11) and lib/offers.ts. Ranges are honest and hedged on purpose — no invented stats, no income promises.",
+  "updatedAt": "2026-08-16",
+  "models": [
+    {
+      "id": "services",
+      "name": "Services — sell agent-assisted delivery",
+      "summary": "Sell an outcome to a specific client; your agent team compresses delivery cost while you keep discovery, trust, and the final gate. The funding stage, not the destination.",
+      "timeToFirstDollar": "typically days to weeks — depends entirely on your existing network and ability to scope real work",
+      "upfrontCost": "near zero beyond an agent runtime subscription; the real investment is scoping and trust-building time",
+      "laborProfile": "labor-coupled: your hours cap revenue. Agents compress delivery, not discovery or client trust. Cap concurrent clients before quality collapses.",
+      "failureMode": "scope creep — agents make delivery cheap but discovery expensive — and staying here forever instead of skimming service weeks into building products",
+      "firstPlaybook": "/start"
+    },
+    {
+      "id": "products",
+      "name": "Products — sell what your agents help you build",
+      "summary": "Package the decisions you made in service work — templates, packs, kits, agent-native products — and sell them self-serve through a merchant of record.",
+      "timeToFirstDollar": "typically weeks to months — volume is the whole game, and volume comes from distribution you already have or must build",
+      "upfrontCost": "low cash, high time: a merchant of record takes a per-sale fee instead of upfront cost, but the build and the audience are unpaid until they compound",
+      "laborProfile": "front-loaded build plus a permanent maintenance promise — a product is a promise of upkeep, and stale products refund",
+      "failureMode": "no distribution — the product is rarely the bottleneck, the audience is",
+      "firstPlaybook": "/delivery/starter-kit"
+    },
+    {
+      "id": "systems",
+      "name": "Systems — operate assets with maintenance measured honestly",
+      "summary": "Own an asset that produces income with maintenance measured in hours per month — a publication, an evergreen product line, a disclosed affiliate property.",
+      "timeToFirstDollar": "typically weeks to months — the slowest of the three; the compounding asset is usually distribution, not the content itself",
+      "upfrontCost": "hosting and tooling are cheap; the real cost is months of unpaid compounding time before the asset carries itself",
+      "laborProfile": "structurally decoupled from hours, never zero — every real system has a maintenance floor, and we publish it instead of pretending otherwise",
+      "failureMode": "pretending 'passive' means zero hours, then abandoning the maintenance floor until the asset decays",
+      "firstPlaybook": "/operate"
+    }
+  ]
+}

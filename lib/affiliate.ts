@@ -14,6 +14,10 @@ export type Program = {
   ourLink?: string | null
   status?: string
   note?: string
+  verifiedAt?: string
+  commissionNote?: string
+  commissionSourceUrl?: string
+  commissionVerifiedAt?: string
 }
 
 const PROGRAMS = catalog.programs as Program[]
@@ -36,6 +40,25 @@ export function findProgram(tool: string): Program | undefined {
 export function getLink(tool: string): string | null {
   const p = findProgram(tool)
   return p?.ourLink ?? null
+}
+
+/** Slug for MCP + registry lookups: "Systeme.io" → "systeme-io". */
+export function programSlug(p: Program): string {
+  return p.tool.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+}
+
+export function findProgramBySlug(slug: string): Program | undefined {
+  return PROGRAMS.find((p) => programSlug(p) === slug.trim().toLowerCase())
+}
+
+/**
+ * Programs whose commission terms were re-verified against the program's own
+ * page on 2026-08-16 — the only rows the partner-economics tables render.
+ */
+export function verifiedEconomicsPrograms(): Program[] {
+  return PROGRAMS
+    .filter((p) => p.hasProgram && Boolean(p.commissionVerifiedAt))
+    .sort((a, b) => (a.priority ?? 99) - (b.priority ?? 99))
 }
 
 /** Programs worth joining, ranked by priority — drives the "monetize" surfaces. */

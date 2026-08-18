@@ -13,7 +13,7 @@ const PRODUCTS = [
   {
     name: 'Income Architecture Blueprint',
     price: '$67',
-    state: 'request access — checkout arriving',
+    state: 'waitlist — opens when ready',
     body: 'Deep business-plan kits per income model: worked economics, fulfillment runbooks, launch sequences. The paid depth behind the public method.',
     href: '/offers',
     cta: 'View the offer',
@@ -21,7 +21,7 @@ const PRODUCTS = [
   {
     name: 'Agent Team Pro',
     price: '$129',
-    state: 'request access — checkout arriving',
+    state: 'waitlist — opens when ready',
     body: 'The premium agent team: extended specialists, delivery loops, QA gates, and 12 months of updates as the landscape shifts.',
     href: '/offers',
     cta: 'View the offer',
@@ -29,7 +29,7 @@ const PRODUCTS = [
   {
     name: 'Private Intel',
     price: '$19/mo',
-    state: 'request access — checkout arriving',
+    state: 'waitlist — opens when ready',
     body: 'Operator briefings: registry alpha, program-term changes, landscape diffs that affect running machines — before the quarterly public pass.',
     href: '/offers',
     cta: 'View the offer',

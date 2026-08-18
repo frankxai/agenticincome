@@ -46,7 +46,7 @@ export default function Offers() {
         <div>
           <div className="text-sm font-semibold text-gold">Before you buy</div>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-            Free delivery is live. The implementation sprint is scope-first and does not take payment here. Digital-product checkout is being connected — request access until the payment link goes live.
+            Free delivery is live. The implementation sprint is scope-first and does not take payment here. Digital-product checkout is not yet open — request access to be notified when it launches.
           </p>
         </div>
         <Link href="/trust" className="cta-secondary">
@@ -98,7 +98,7 @@ export default function Offers() {
                         ? 'No payment on this site — scope first.'
                         : checkoutReady
                           ? 'Checkout is connected.'
-                          : 'Checkout arriving — request access.'}
+                          : 'Waitlist — opens when ready.'}
                   </div>
                 </div>
               </div>

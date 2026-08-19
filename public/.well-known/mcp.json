@@ -1,0 +1,16 @@
+{
+  "name": "agentic-income",
+  "endpoint": "https://www.agenticincome.ai/api/mcp",
+  "transport": "streamable-http",
+  "description": "The Agentic Income operator system as an MCP server: income-model playbooks, a verified partner-program registry with disclosed affiliate economics, an honest product catalog, and a deterministic fit check. No income promises — machinery and education.",
+  "tools": [
+    "list_income_models",
+    "get_income_model",
+    "search_partner_programs",
+    "get_partner_program",
+    "list_products",
+    "fit_check",
+    "get_playbook"
+  ],
+  "docs": "https://www.agenticincome.ai/mcp"
+}

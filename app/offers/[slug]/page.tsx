@@ -103,7 +103,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
                 ? 'Checkout is live. Polar.sh is the merchant of record and handles VAT and sales tax.'
               : liveCheckout
                 ? 'Live checkout URL is configured.'
-                : 'Checkout is provider-ready; request access until the payment link is connected.'}
+                : 'Request access — checkout opens when provider link is connected.'}
           </p>
           <div className="mt-5 rounded-xl border border-border bg-bg/60 p-4 text-xs leading-6 text-muted">
             {isFree
@@ -112,7 +112,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
                 ? 'No payment is taken here. The intake route records interest only when the configured service is available.'
               : liveCheckout
                 ? 'Secure payment provider checkout is connected.'
-                : 'Secure checkout is being connected. Request access and receive the current checklist now.'}
+                : 'Checkout is not yet live. Request access to be notified when it opens.'}
           </div>
           <Link href="/trust" className="mt-4 inline-flex text-xs font-semibold text-accent">
             Trust, support, and refunds

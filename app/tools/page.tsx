@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { payingPrograms } from '@/lib/affiliate'
+import { payingPrograms, verifiedEconomicsPrograms } from '@/lib/affiliate'
 import Link from 'next/link'
 import { TrackedLink } from '@/components/TrackedLink'
 
@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 
 export default function Tools() {
   const programs = payingPrograms()
+  const verified = verifiedEconomicsPrograms()
 
   return (
     <div className="py-16">
@@ -24,6 +25,39 @@ export default function Tools() {
         <h1 className="mt-3 text-5xl font-semibold text-ink">Recurring AI tools catalog</h1>
         <p className="mt-4 text-lg leading-8 text-muted">Only tools with real affiliate programs that pay ongoing. The catalog is the shared source of truth for every monetized route in the network.</p>
       </div>
+
+      <section className="mt-12">
+        <h2 className="display-h2">Partner economics</h2>
+        <p className="mt-3 max-w-prose text-sm leading-6 text-muted">
+          Some links on this page are affiliate links; Agentic Income may earn a commission.
+          Rates below were verified 16 Aug 2026 against each program&apos;s own terms — everything
+          else in the catalog stays labeled unverified until it gets the same pass.
+        </p>
+        <div className="mt-4 overflow-hidden rounded-2xl border border-border bg-surface/80">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[680px] text-sm">
+              <thead>
+                <tr className="border-b border-border text-left text-muted">
+                  <th className="px-5 py-4 font-medium">Program</th>
+                  <th className="px-5 py-4 font-medium">Commission</th>
+                  <th className="px-5 py-4 font-medium">Cookie window</th>
+                  <th className="px-5 py-4 font-medium">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {verified.map((program) => (
+                  <tr key={program.tool} className="border-t border-border/70">
+                    <td className="px-5 py-4 font-semibold text-ink">{program.tool}</td>
+                    <td className="px-5 py-4 text-ink">{program.commission}</td>
+                    <td className="px-5 py-4 text-muted">{program.cookieDays ? `${program.cookieDays} days` : 'not published'}</td>
+                    <td className="px-5 py-4 text-muted">{program.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
       <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-surface/80">
         <div className="overflow-x-auto">

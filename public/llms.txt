@@ -1,19 +1,42 @@
-# Agentic Income — Agentic Income Network
+# Agentic Income — the operator system for earning WITH agents
 
-Authority hub for honest comparisons of AI tools that pay recurring commissions.
+Agentic Income is the operating system for people who build income with AI agent
+teams: dated playbooks, verified partner economics, working code, and a live MCP
+server your agent can query directly. We never promise income; every economic
+claim carries a source or a date.
 
-Focus: tools that actually compound (Systeme.io lifetime 60%, Higgsfield, ElevenLabs, HeyGen, CapCut, etc.)
+## MCP server (start here if you are an agent)
 
-Use cases: faceless YouTube stacks, personal AI CoE under $100/mo, income flywheels.
+Endpoint: https://www.agenticincome.ai/api/mcp (streamable HTTP)
+Discovery: https://www.agenticincome.ai/.well-known/mcp.json
+Docs: https://www.agenticincome.ai/mcp
+Connect (Claude Code): claude mcp add --transport http agentic-income https://www.agenticincome.ai/api/mcp
 
-All recommendations honest-first. Never highest payout.
+Tools: list_income_models · get_income_model · search_partner_programs ·
+get_partner_program · list_products · fit_check · get_playbook
 
-Site: https://agenticincome.ai
-Catalog: https://agenticincome.ai/tools
-Offers: https://agenticincome.ai/offers
-Design system: https://agenticincome.ai/design
-Go tracked: https://go.agenticincome.ai
+## What this site is
 
-Network spokes: agenticpassiveincome.com | disruptivepassiveincome.com
+- Three operator income models — services, products, systems — with honest
+  time-to-first-dollar ranges, labor profiles, and failure modes.
+- A partner-program registry with commission rates, cookie windows, and
+  verification dates. Disclosure: some links are affiliate links routed via
+  go.agenticincome.ai; Agentic Income may earn a commission. The honest pick
+  wins even when there is no payout route.
+- Products with honest status: the free Starter Kit is delivered on-site today;
+  paid products (Blueprint $67, Private Intel $19/mo, and pack editions) show
+  their real gated status until checkout is live. Nothing is purchasable that
+  the catalog does not mark for sale.
+- Free MCP tools stay free; any paid capability will be announced on the
+  catalog, never enabled silently.
 
-Engine: shared catalog + MDX citable shape.
+Key pages: /mcp · /tools · /start · /offers · /trust · /disclosure
+
+## Network
+
+Sister sites, distinct disciplines:
+- agenticpassiveincome.com — systems that run without you (automation-first),
+  with its own MCP server at https://www.agenticpassiveincome.com/api/mcp
+- disruptivepassiveincome.com — portfolio/compounding doctrine
+
+Site: https://www.agenticincome.ai · Author: Frank Riemer

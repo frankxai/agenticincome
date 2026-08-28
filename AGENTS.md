@@ -37,3 +37,17 @@ For visual work, inspect desktop, mobile, and reduced-motion output and validate
 - Use Vercel native Git integration only.
 - Push one coherent branch and verify one preview deployment.
 - Never promote to production or mutate domains without explicit approval.
+
+<!-- STARLIGHT-EDITORIAL:START -->
+## Editorial contract
+
+Brand: **Agentic Income** (`agentic-income`)
+
+- Read `CREATOR.md` before changing public or customer-facing copy.
+- Apply the registered brand voice and the shared editorial gate.
+- Reject generated prestige language, rhetorical contrast formulas, invented claims, and abstract labels that hide simple facts.
+- Keep public labels in sentence case.
+- Run the changed-copy editorial audit before release.
+
+Pinned source: https://github.com/frankxai/starlight-design-intelligence/blob/50ae34c7ac06e6c083f277ca96c3bde8f0a39b43/brand-packs/agentic-income/COPY.md
+<!-- STARLIGHT-EDITORIAL:END -->

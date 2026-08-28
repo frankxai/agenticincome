@@ -1,0 +1,30 @@
+{
+  "schema_version": "starlight.editorial_contract.v1",
+  "brand_id": "agentic-income",
+  "source": {
+    "repository": "frankxai/starlight-design-intelligence",
+    "ref": "50ae34c7ac06e6c083f277ca96c3bde8f0a39b43",
+    "profile": "brand-packs/agentic-income/COPY.md",
+    "profile_sha256": "daa7c572b32eca22af84a248a4c98a343faa5ac215b6ff0cd0e4541c2af5a50e"
+  },
+  "content_roots": [
+    "app",
+    "components",
+    "content",
+    "data",
+    "lib",
+    "pages",
+    "src"
+  ],
+  "generated_files": [
+    "CREATOR.md",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "GEMINI.md",
+    ".github/copilot-instructions.md",
+    ".cursor/rules/editorial.mdc",
+    ".agents/skills/frank-brand-editor/SKILL.md",
+    ".github/workflows/starlight-editorial-contract.yml",
+    ".starlight/editorial-contract.json"
+  ]
+}

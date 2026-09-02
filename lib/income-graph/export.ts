@@ -23,11 +23,11 @@ export type IncomeSystemDraft = {
 }
 
 function first(graph: IncomeGraph, type: GraphNode['type']): GraphNode | undefined {
-  return (graph.nodes ?? []).find((n) => n.type === type)
+  return (Array.isArray(graph?.nodes) ? graph.nodes : []).find((n) => n.type === type)
 }
 
 export function projectToIncomeSystem(graph: IncomeGraph): IncomeSystemDraft {
-  const nodes = graph.nodes ?? []
+  const nodes = Array.isArray(graph?.nodes) ? graph.nodes : []
   const offer = first(graph, 'Offer')
   const customer = first(graph, 'Customer')
   const problem = first(graph, 'Problem')
@@ -78,11 +78,11 @@ export function projectToIncomeSystem(graph: IncomeGraph): IncomeSystemDraft {
     apiVersion: 'agenticincome.ai/v1',
     kind: 'IncomeSystem',
     metadata: {
-      id: graph.metadata?.id ?? OPEN,
-      name: graph.metadata?.name ?? OPEN,
-      version: graph.metadata?.version ?? '0.1.0',
+      id: graph?.metadata?.id ?? OPEN,
+      name: graph?.metadata?.name ?? OPEN,
+      version: graph?.metadata?.version ?? '0.1.0',
       ownerPrincipalId: OPEN,
-      createdAt: graph.metadata?.updatedAt ?? OPEN,
+      createdAt: graph?.metadata?.updatedAt ?? OPEN,
     },
     spec: {
       principal: {
@@ -105,7 +105,7 @@ export function projectToIncomeSystem(graph: IncomeGraph): IncomeSystemDraft {
         excludedSegments: [],
       },
       outcome: {
-        statement: graph.metadata?.thesis ?? OPEN,
+        statement: graph?.metadata?.thesis ?? OPEN,
         acceptanceCriteria: [],
       },
       authority: {
@@ -183,8 +183,8 @@ export type InstallableTask = {
 }
 
 export function exportTasks(graph: IncomeGraph): InstallableTask[] {
-  const nodes = graph.nodes ?? []
-  const edges = graph.edges ?? []
+  const nodes = Array.isArray(graph?.nodes) ? graph.nodes : []
+  const edges = Array.isArray(graph?.edges) ? graph.edges : []
   const byId = new Map(nodes.map((n) => [n.id, n]))
   const tasks: InstallableTask[] = []
 
@@ -246,10 +246,10 @@ export function exportTasks(graph: IncomeGraph): InstallableTask[] {
 /** The tasks as a markdown checklist an agent can be handed directly. */
 export function tasksToMarkdown(graph: IncomeGraph, tasks: InstallableTask[]): string {
   const lines = [
-    `# Operating tasks — ${graph.metadata?.name ?? 'income system'}`,
+    `# Operating tasks — ${graph?.metadata?.name ?? 'income system'}`,
     '',
-    `Thesis: ${graph.metadata?.thesis ?? 'not stated'}`,
-    `Principal: ${graph.metadata?.principal ?? 'not named'}`,
+    `Thesis: ${graph?.metadata?.thesis ?? 'not stated'}`,
+    `Principal: ${graph?.metadata?.principal ?? 'not named'}`,
     '',
     'Gated tasks may not complete until the named approver releases them. An agent that',
     'completes a gated task without a release has exceeded its authority.',

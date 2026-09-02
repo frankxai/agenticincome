@@ -32,8 +32,8 @@ export type Economics = {
 const MONTHLY: Record<string, number> = { once: 0, monthly: 1, yearly: 1 / 12 }
 
 export function computeEconomics(graph: IncomeGraph): Economics {
-  const nodes = graph.nodes ?? []
-  const edges = graph.edges ?? []
+  const nodes = Array.isArray(graph?.nodes) ? graph.nodes : []
+  const edges = Array.isArray(graph?.edges) ? graph.edges : []
   const notes: string[] = []
   const currencies = new Set<string>()
 

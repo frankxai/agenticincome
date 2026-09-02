@@ -3,9 +3,11 @@
 import { useState } from 'react'
 import referenceGraph from '@/data/income-graph-request-to-quote.json'
 import {
+  draftIncomeGraph,
   reviewIncomeGraph,
   projectToIncomeSystem,
   type IncomeGraph,
+  type IncomeGraphDraft,
   type WorkbenchReport,
 } from '@/lib/income-graph'
 
@@ -18,6 +20,8 @@ const SEVERITY_LABEL = { error: 'Blocking', warning: 'Watch' } as const
 
 export function IncomeGraphWorkbench() {
   const [source, setSource] = useState('')
+  const [thesis, setThesis] = useState('')
+  const [draft, setDraft] = useState<IncomeGraphDraft | null>(null)
   const [outcome, setOutcome] = useState<Outcome>({ state: 'idle' })
 
   function review(text: string) {
@@ -44,6 +48,16 @@ export function IncomeGraphWorkbench() {
 
   function loadReference() {
     const text = JSON.stringify(referenceGraph, null, 2)
+    setDraft(null)
+    setSource(text)
+    review(text)
+  }
+
+  function draftFromThesis() {
+    const today = new Date().toISOString().slice(0, 10)
+    const drafted = draftIncomeGraph(thesis, { today })
+    const text = JSON.stringify(drafted.graph, null, 2)
+    setDraft(drafted)
     setSource(text)
     review(text)
   }
@@ -60,6 +74,47 @@ export function IncomeGraphWorkbench() {
             Paste an IncomeGraph document. Nothing is uploaded, stored, or sent anywhere — the same
             functions the MCP server runs are executing locally in this page. The review never
             predicts revenue; it reports what your graph asserts and what it cannot support.
+          </p>
+        </div>
+
+        <div className="mt-8">
+          <div className="kicker">Step one · start from a sentence</div>
+          <h3 className="mt-2 text-xl font-semibold text-ink">
+            Write the thesis you already believe.
+          </h3>
+          <p className="mt-2 max-w-3xl leading-7 text-muted">
+            Who has the problem, what you would sell them, and why they would pay. The workbench
+            builds the smallest graph that can carry it and then tells you which claim in your own
+            sentence nothing supports — before you have filled in a single field.
+          </p>
+          <label className="mt-5 block text-sm font-semibold text-ink" htmlFor="thesis-source">
+            Your thesis
+          </label>
+          <textarea
+            id="thesis-source"
+            value={thesis}
+            onChange={(event) => setThesis(event.target.value)}
+            rows={3}
+            placeholder="Small renovation firms lose qualified inbound work because nobody turns a messy request into a scope brief within a day, and they will pay €180 per brief for someone who does."
+            className="mt-2 w-full rounded-xl border border-border bg-bg/60 p-4 leading-7 text-ink"
+          />
+          <button
+            type="button"
+            className="cta mt-4"
+            onClick={draftFromThesis}
+            disabled={thesis.trim().length < 12}
+          >
+            Draft the graph and attack it
+          </button>
+        </div>
+
+        {draft ? <DraftVerdict draft={draft} /> : null}
+
+        <div className="mt-10 border-t border-border pt-8">
+          <div className="kicker">Step two · review a graph</div>
+          <p className="mt-2 max-w-3xl leading-7 text-muted">
+            The drafted document appears below, and you can paste your own over it. Every change is
+            re-reviewed by the same functions, locally.
           </p>
         </div>
 
@@ -85,6 +140,7 @@ export function IncomeGraphWorkbench() {
           value={source}
           onChange={(event) => {
             setSource(event.target.value)
+            setDraft(null)
             setOutcome({ state: 'idle' })
           }}
           spellCheck={false}
@@ -102,6 +158,58 @@ export function IncomeGraphWorkbench() {
         {outcome.state === 'reviewed' ? <Report outcome={outcome} /> : null}
       </div>
     </section>
+  )
+}
+
+/**
+ * The refusal, first. A buyer's first paste should meet judgment about their own
+ * sentence, not twenty structural findings about semver strings.
+ */
+function DraftVerdict({ draft }: { draft: IncomeGraphDraft }) {
+  const hours = draft.unsupported.reduce((sum, claim) => sum + claim.costInFounderHours, 0)
+
+  return (
+    <div className="mt-8 rounded-xl border border-border bg-bg/40 p-5 sm:p-6" role="status">
+      <div className="kicker">What your thesis cannot support</div>
+      <p className="mt-3 max-w-3xl text-lg leading-8 text-ink">{draft.headline}</p>
+
+      {draft.unsupported.length > 0 ? (
+        <ol className="mt-6 space-y-5">
+          {draft.unsupported.map((claim) => (
+            <li key={`${claim.path}${claim.claim}`} className="border-l-2 border-accent pl-4">
+              <p className="leading-7 text-ink">“{claim.claim}”</p>
+              <p className="mt-1 leading-7 text-muted">{claim.why}</p>
+              <p className="mt-1 leading-7 text-muted">
+                <span className="font-semibold text-ink">What would settle it: </span>
+                {claim.evidenceThatWouldSettleIt}
+              </p>
+              <p className="mt-1 text-sm leading-6 text-muted">
+                About {claim.costInFounderHours} founder hour
+                {claim.costInFounderHours === 1 ? '' : 's'} · {claim.path}
+              </p>
+            </li>
+          ))}
+        </ol>
+      ) : null}
+
+      {draft.unsupported.length > 0 ? (
+        <p className="mt-6 max-w-3xl leading-7 text-muted">
+          Total: about {hours} founder hours of evidence gathering. Everything else in the graph can
+          wait until you know whether this part is true.
+        </p>
+      ) : null}
+
+      <h4 className="mt-8 text-sm font-semibold uppercase tracking-wide text-muted">
+        What the draft had to assume
+      </h4>
+      <ul className="mt-3 space-y-2">
+        {draft.assumptions.map((assumption) => (
+          <li key={assumption} className="leading-7 text-muted">
+            {assumption}
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 

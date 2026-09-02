@@ -9,12 +9,17 @@
  */
 
 import { runAdversarialChecks } from './adversarial.ts'
+import { draftIncomeGraph, type IncomeGraphDraft, type UnsupportedClaim } from './draft.ts'
 import { checkEconomics, computeEconomics, type Economics } from './economics.ts'
 import { exportTasks, projectToIncomeSystem, tasksToMarkdown, type InstallableTask } from './export.ts'
-import { validateStructure } from './validate.ts'
-import type { Finding, IncomeGraph } from './model.ts'
+import { migrateGraph } from './migrate.ts'
+import { notAGraph, validateStructure } from './validate.ts'
+import { SCHEMA_ID, type Finding, type IncomeGraph } from './model.ts'
 
 export type WorkbenchReport = {
+  /** The schema the review was run under, and whether the input had to be migrated to it. */
+  schema: string
+  migratedFrom: string | null
   /** True only when there are zero error-severity findings. */
   valid: boolean
   /**
@@ -58,8 +63,18 @@ function sortFindings(findings: Finding[]): Finding[] {
  * @param today ISO date used for future-dating checks. Passed in, never read
  * from the clock, so results are reproducible.
  */
-export function reviewIncomeGraph(graph: IncomeGraph, today: string): WorkbenchReport {
+export function reviewIncomeGraph(input: IncomeGraph, today: string): WorkbenchReport {
+  // A caller who sends null, a string, or an array gets findings back like
+  // anyone else. This function is a review, so it never throws at its own user.
+  if (typeof input !== 'object' || input === null || Array.isArray(input)) {
+    return emptyReport([notAGraph(input)])
+  }
+
+  const migration = migrateGraph(input)
+  const graph = migration.graph
+
   const findings = sortFindings([
+    ...migration.findings,
     ...validateStructure(graph),
     ...runAdversarialChecks(graph, today),
     ...checkEconomics(graph),
@@ -100,6 +115,8 @@ export function reviewIncomeGraph(graph: IncomeGraph, today: string): WorkbenchR
   }
 
   return {
+    schema: SCHEMA_ID,
+    migratedFrom: migration.migrated ? migration.fromApiVersion : null,
     valid,
     activation,
     economicEvent,
@@ -111,13 +128,32 @@ export function reviewIncomeGraph(graph: IncomeGraph, today: string): WorkbenchR
   }
 }
 
+const EMPTY_GRAPH = { nodes: [], edges: [] } as unknown as IncomeGraph
+
+function emptyReport(findings: Finding[]): WorkbenchReport {
+  return {
+    schema: SCHEMA_ID,
+    migratedFrom: null,
+    valid: false,
+    activation: 'blocked',
+    economicEvent: null,
+    findings,
+    counts: { errors: findings.length, warnings: 0 },
+    economics: computeEconomics(EMPTY_GRAPH),
+    tasks: [],
+    nextDecisions: ['Send an IncomeGraph document. There is nothing here to review.'],
+  }
+}
+
 export {
   computeEconomics,
+  draftIncomeGraph,
   exportTasks,
+  migrateGraph,
   projectToIncomeSystem,
   tasksToMarkdown,
   runAdversarialChecks,
   validateStructure,
 }
 export * from './model.ts'
-export type { Economics, InstallableTask }
+export type { Economics, IncomeGraphDraft, InstallableTask, UnsupportedClaim }

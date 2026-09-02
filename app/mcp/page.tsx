@@ -51,7 +51,13 @@ const TOOLS = [
   {
     name: 'describe_income_graph_schema',
     args: '—',
-    returns: 'The IncomeGraph.v1 vocabulary: 17 node types, the legal edges between them, and the fields every node and edge must carry.',
+    returns: 'The IncomeGraph.v1.1 vocabulary: 18 node types, the legal edges between them, the fields every node and edge must carry, and the four rules that surprise drafters.',
+  },
+  {
+    name: 'draft_income_graph',
+    args: '{ thesis, today, principal? }',
+    returns:
+      'Start here. A plain-text thesis becomes the smallest well-formed graph, led by the claims in it that nothing supports, what evidence would settle each one, and what that costs in founder hours. Invents nothing; every assumption is returned.',
   },
   {
     name: 'get_reference_income_graph',

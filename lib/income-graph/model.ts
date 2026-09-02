@@ -13,6 +13,17 @@
  * surface, and node --test all execute this same code and must agree.
  */
 
+/**
+ * Wire versions. v1.1 adds: a `Human` node type (so a gate approver can resolve
+ * to a person rather than a string), a required `irreversible` boolean on every
+ * workflow step, and checkable-evidence rules. A v1 document is still accepted —
+ * `migrate.ts` upgrades it and flags every value it had to assume.
+ */
+export const SCHEMA_ID = 'IncomeGraph.v1.1'
+export const CURRENT_API_VERSION = 'agenticincome.ai/v1.1'
+export const SUPPORTED_API_VERSIONS = ['agenticincome.ai/v1', 'agenticincome.ai/v1.1'] as const
+export type ApiVersion = (typeof SUPPORTED_API_VERSIONS)[number]
+
 export const NODE_TYPES = [
   'Problem',
   'Customer',
@@ -23,6 +34,7 @@ export const NODE_TYPES = [
   'Asset',
   'Workflow',
   'AgentRole',
+  'Human',
   'HumanGate',
   'Cost',
   'RevenueObservation',
@@ -71,7 +83,7 @@ export const EDGE_RULES: Record<EdgeType, { from: readonly NodeType[]; to: reado
   performs: { from: ['AgentRole'], to: ['Workflow'] },
   gates: { from: ['HumanGate'], to: ['Workflow'] },
   produces: { from: ['Workflow'], to: ['Asset'] },
-  incurs: { from: ['Workflow', 'Asset', 'Channel', 'AgentRole', 'Maintenance', 'Offer'], to: ['Cost'] },
+  incurs: { from: ['Workflow', 'Asset', 'Channel', 'AgentRole', 'Human', 'Maintenance', 'Offer'], to: ['Cost'] },
   observes: { from: ['RevenueObservation'], to: ['Offer'] },
   tests: { from: ['Experiment'], to: [...NODE_TYPES] },
   threatens: { from: ['Risk'], to: [...NODE_TYPES] },
@@ -107,10 +119,21 @@ export type GraphNodeBase = {
   notes?: string
 }
 
+export const EVIDENCE_KINDS = ['interview', 'transcript', 'payment', 'listing', 'analytics', 'document'] as const
+export type EvidenceKind = (typeof EVIDENCE_KINDS)[number]
+
+/** A gate approver must resolve to one of these, or to metadata.principal. */
+export const HUMAN_ROLES = ['founder', 'operator', 'approver'] as const
+export type HumanRole = (typeof HUMAN_ROLES)[number]
+
 /** Type-specific payloads. Every field is optional at the type level and enforced by rules. */
 export type NodeData = {
   /** Customer / Problem / Offer: a statement about demand that requires Evidence. */
   demandClaim?: string
+  /** Any node: long-form prose. Scanned for demand language exactly like notes. */
+  description?: string
+  /** Customer / Offer: how many units the founder assumes will move. An assumption, never an observation. */
+  volumeAssumption?: { unitsPerMonth?: number; conversionRate?: number; basis?: string }
   /** Offer: the price the buyer pays, and the unit it buys. */
   price?: { currency: string; amount: number; unit: string }
   /** Offer: scarcity shown to buyers. countBasis must name what produces the number. */
@@ -137,6 +160,11 @@ export type NodeData = {
   observed?: { currency: string; amount: number; occurredAt: string; units: number }
   /** Evidence: what the source actually says. */
   finding?: string
+  /** Evidence: what kind of artifact the source is, and how many observations it covers. */
+  kind?: EvidenceKind
+  n?: number
+  /** Human: what this person is to the system. A gate approver must be one of these. */
+  role?: HumanRole
   /** Experiment: the falsifiable prediction and its decision rule. */
   hypothesis?: string
   decisionRule?: string
@@ -172,7 +200,7 @@ export type GraphEdge = {
 }
 
 export type IncomeGraph = {
-  apiVersion: 'agenticincome.ai/v1'
+  apiVersion: ApiVersion
   kind: 'IncomeGraph'
   metadata: {
     id: string

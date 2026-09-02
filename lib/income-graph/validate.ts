@@ -5,9 +5,11 @@
  */
 
 import {
+  CURRENT_API_VERSION,
   EDGE_RULES,
   EDGE_TYPES,
   ISO_DATE,
+  SUPPORTED_API_VERSIONS,
   NODE_ID,
   NODE_TYPES,
   REQUIRED_FOR_ACTIVATION,
@@ -99,8 +101,15 @@ function checkCommon(
 function structural(graph: IncomeGraph): Finding[] {
   const out: Finding[] = []
 
-  if (graph.apiVersion !== 'agenticincome.ai/v1') {
-    out.push(finding('S00', '/apiVersion', 'apiVersion must be agenticincome.ai/v1', 'Set apiVersion to agenticincome.ai/v1.'))
+  if (!SUPPORTED_API_VERSIONS.includes(str(graph.apiVersion) as never)) {
+    out.push(
+      finding(
+        'S00',
+        '/apiVersion',
+        `apiVersion must be one of: ${SUPPORTED_API_VERSIONS.join(', ')}`,
+        `Set apiVersion to ${CURRENT_API_VERSION}. A v1 document is still accepted and migrated.`,
+      ),
+    )
   }
   if (graph.kind !== 'IncomeGraph') {
     out.push(finding('S00', '/kind', 'kind must be IncomeGraph', 'Set kind to IncomeGraph.'))
@@ -339,7 +348,18 @@ function completeness(graph: IncomeGraph): Finding[] {
   return out
 }
 
+/** The one finding a caller gets when the input is not a document at all. */
+export function notAGraph(value: unknown): Finding {
+  return finding(
+    'S00',
+    '/',
+    `input is ${value === null ? 'null' : Array.isArray(value) ? 'an array' : typeof value}, not an IncomeGraph document`,
+    `Send a JSON object with apiVersion ${CURRENT_API_VERSION}, kind IncomeGraph, metadata, nodes, and edges.`,
+  )
+}
+
 export function validateStructure(graph: IncomeGraph): Finding[] {
+  if (typeof graph !== 'object' || graph === null || Array.isArray(graph)) return [notAGraph(graph)]
   const out = structural(graph)
   // Completeness rules read the graph as if it parsed; skip them when it did not.
   if (!out.some((f) => f.code === 'S02' && (f.path === '/nodes' || f.path === '/edges'))) {

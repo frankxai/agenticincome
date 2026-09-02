@@ -20,12 +20,12 @@ const CHECKS = [
   {
     code: 'A01',
     name: 'Hype',
-    what: 'Language that promises an outcome you do not control, or an absence of work that is never true.',
+    what: 'Money asserted alongside the absence of work, certainty about an outcome you do not control, or a deadline on someone else’s money. Matched on stems and distance, so paraphrasing the genre does not clear it. One accidental phrase warns; two block.',
   },
   {
     code: 'A02',
     name: 'Fabricated demand',
-    what: 'Every claim that someone wants this must be pointed at by an Evidence node with a source and a date. Revenue needs a receipt.',
+    what: 'Every claim that someone wants this needs an Evidence node whose source a stranger could open — a URL, a file path, or an interview record naming a person and a date — and a finding that records what the source actually said. A price or a volume is a demand claim with a number on it, and demand language in prose is one too. Revenue needs a receipt.',
   },
   {
     code: 'A03',
@@ -35,7 +35,7 @@ const CHECKS = [
   {
     code: 'A04',
     name: 'Unauthorized execution',
-    what: 'Every irreversible agent step needs a named human gate, and every agent role denies signing, repricing, moving money, and raising its own budget.',
+    what: 'Every step that reaches outside your system is irreversible whether or not it says so, every irreversible step needs a human gate, and that gate’s approver must resolve to a person — a Human node or the named principal, never an agent role. Every agent role denies signing, repricing, moving money, and raising its own budget.',
   },
 ]
 
@@ -51,9 +51,11 @@ export default function WorkbenchPage() {
             One income system, modelled so it can be argued with.
           </h1>
           <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">
-            Most income advice cannot be checked. A graph can. You state the problem, the customer,
-            the offer, the workflow, who is allowed to do what, what it costs in money and in your
-            own hours, and the condition under which you stop. Then the workbench attacks it.
+            Start with the sentence you already believe. The workbench drafts the smallest graph
+            that can carry it, then names the claim in your own thesis that nothing supports, the
+            evidence that would settle it, and what getting that evidence costs you in hours. The
+            full model — problem, customer, offer, workflow, authority, costs, kill criterion — is
+            what you graduate into, not the toll gate.
           </p>
           <p className="mt-5 max-w-3xl leading-8 text-muted">
             It will not tell you what you will earn. It reports what your own document asserts, what

@@ -1,10 +1,10 @@
 {
-  "apiVersion": "agenticincome.ai/v1",
+  "apiVersion": "agenticincome.ai/v1.1",
   "kind": "IncomeGraph",
   "metadata": {
     "id": "request-to-quote-desk",
     "name": "Request-to-quote desk for renovation contractors",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "updatedAt": "2026-09-02",
     "principal": "Frank Riemer",
     "thesis": "Small renovation firms lose qualified inbound work because nobody turns a messy request into a reviewable scope brief within a day, and they will pay per brief for someone who does."
@@ -58,7 +58,9 @@
       "visibility": "buyer",
       "evaluation": "Re-verify the dossier entry each quarter; drop the claim if the source is withdrawn or cannot be reproduced.",
       "data": {
-        "finding": "The dossier records that scoping work is done outside business hours by the owner, and that written scopes lag the request by more than a day."
+        "finding": "The dossier records that scoping work is done outside business hours by the owner, and that written scopes lag the request by more than a day.",
+        "kind": "document",
+        "n": 1
       }
     },
     {
@@ -75,7 +77,9 @@
       "visibility": "buyer",
       "evaluation": "Replace with a paid order. A stated price is not a paid price; this node is downgraded the moment a real invoice exists.",
       "data": {
-        "finding": "Firms describe per-brief pricing as easier to approve than a retainer. No money has changed hands, so this remains a stated preference."
+        "finding": "Firms describe per-brief pricing as easier to approve than a retainer. No money has changed hands, so this remains a stated preference.",
+        "kind": "document",
+        "n": 1
       }
     },
     {
@@ -92,7 +96,11 @@
       "visibility": "public",
       "evaluation": "The buyer accepts the brief without rewriting it. A brief that is rewritten before use did not deliver the outcome.",
       "data": {
-        "price": { "currency": "EUR", "amount": 180, "unit": "scope brief" },
+        "price": {
+          "currency": "EUR",
+          "amount": 180,
+          "unit": "scope brief"
+        },
         "demandClaim": "A per-brief price is approvable without a procurement conversation."
       }
     },
@@ -195,6 +203,23 @@
       }
     },
     {
+      "id": "human-frank",
+      "type": "Human",
+      "label": "Frank Riemer",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "https://agenticincome.ai/about",
+        "date": "2026-09-02",
+        "method": "named principal of this graph"
+      },
+      "version": "1.0.0",
+      "visibility": "public",
+      "evaluation": "Reachable within a working day, and the release log shows this person, not an agent, releasing every gate.",
+      "data": {
+        "role": "founder"
+      }
+    },
+    {
       "id": "gate-customer-facing",
       "type": "HumanGate",
       "label": "Release before anything reaches the customer",
@@ -208,7 +233,10 @@
       "visibility": "public",
       "evaluation": "Every delivered brief has a recorded release by the named approver, timestamped before delivery.",
       "data": {
-        "gatedStepIds": ["deliver", "agreement"],
+        "gatedStepIds": [
+          "deliver",
+          "agreement"
+        ],
         "approver": "Frank Riemer"
       }
     },
@@ -241,7 +269,11 @@
       "visibility": "private",
       "evaluation": "Compare against the provider invoice monthly. A variance above 25 percent invalidates the break-even number.",
       "data": {
-        "amount": { "currency": "EUR", "amount": 40, "period": "monthly" },
+        "amount": {
+          "currency": "EUR",
+          "amount": 40,
+          "period": "monthly"
+        },
         "borneByBuyer": false
       }
     },
@@ -309,7 +341,9 @@
       "version": "1.0.0",
       "visibility": "private",
       "evaluation": "The review happens on cadence or the asset is marked stale on the surface that uses it.",
-      "data": { "cadenceDays": 30 }
+      "data": {
+        "cadenceDays": 30
+      }
     },
     {
       "id": "kill-no-paid-brief",
@@ -337,7 +371,10 @@
       "from": "customer-owner-operator",
       "to": "problem-slow-scoping",
       "owner": "Frank Riemer",
-      "provenance": { "source": "knowledge/07-field-dossier.md", "date": "2026-08-14" },
+      "provenance": {
+        "source": "knowledge/07-field-dossier.md",
+        "date": "2026-08-14"
+      },
       "version": "1.0.0",
       "visibility": "public",
       "evaluation": "Drop the edge if discovery calls describe a different bottleneck."
@@ -348,7 +385,10 @@
       "from": "offer-scope-brief",
       "to": "customer-owner-operator",
       "owner": "Frank Riemer",
-      "provenance": { "source": "app/build/request-to-quote/page.tsx", "date": "2026-09-02" },
+      "provenance": {
+        "source": "app/build/request-to-quote/page.tsx",
+        "date": "2026-09-02"
+      },
       "version": "1.0.0",
       "visibility": "public",
       "evaluation": "The buyer accepts the brief without rewriting it."
@@ -359,7 +399,10 @@
       "from": "evidence-scoping-delay",
       "to": "problem-slow-scoping",
       "owner": "Frank Riemer",
-      "provenance": { "source": "knowledge/07-field-dossier.md", "date": "2026-08-14" },
+      "provenance": {
+        "source": "knowledge/07-field-dossier.md",
+        "date": "2026-08-14"
+      },
       "version": "1.0.0",
       "visibility": "buyer",
       "evaluation": "Re-verified quarterly with the dossier."
@@ -370,7 +413,10 @@
       "from": "evidence-willingness",
       "to": "customer-owner-operator",
       "owner": "Frank Riemer",
-      "provenance": { "source": "knowledge/07-field-dossier.md#pricing", "date": "2026-08-14" },
+      "provenance": {
+        "source": "knowledge/07-field-dossier.md#pricing",
+        "date": "2026-08-14"
+      },
       "version": "1.0.0",
       "visibility": "buyer",
       "evaluation": "Superseded by a paid invoice when one exists."
@@ -381,7 +427,10 @@
       "from": "evidence-willingness",
       "to": "offer-scope-brief",
       "owner": "Frank Riemer",
-      "provenance": { "source": "knowledge/07-field-dossier.md#pricing", "date": "2026-08-14" },
+      "provenance": {
+        "source": "knowledge/07-field-dossier.md#pricing",
+        "date": "2026-08-14"
+      },
       "version": "1.0.0",
       "visibility": "buyer",
       "evaluation": "Superseded by a paid invoice when one exists."
@@ -392,7 +441,10 @@
       "from": "channel-trade-associations",
       "to": "customer-owner-operator",
       "owner": "Frank Riemer",
-      "provenance": { "source": "knowledge/05-honest-marketing.md", "date": "2026-08-14" },
+      "provenance": {
+        "source": "knowledge/05-honest-marketing.md",
+        "date": "2026-08-14"
+      },
       "version": "1.0.0",
       "visibility": "public",
       "evaluation": "Twenty contacts produce two discovery calls."
@@ -403,7 +455,10 @@
       "from": "workflow-request-to-brief",
       "to": "offer-scope-brief",
       "owner": "Frank Riemer",
-      "provenance": { "source": "https://github.com/frankxai/agentic-income-skills", "date": "2026-09-02" },
+      "provenance": {
+        "source": "https://github.com/frankxai/agentic-income-skills",
+        "date": "2026-09-02"
+      },
       "version": "1.0.0",
       "visibility": "public",
       "evaluation": "Ten requests run end to end without a gate bypass."
@@ -414,7 +469,10 @@
       "from": "role-scope-drafter",
       "to": "workflow-request-to-brief",
       "owner": "Frank Riemer",
-      "provenance": { "source": "https://github.com/frankxai/agentic-income-skills", "date": "2026-09-02" },
+      "provenance": {
+        "source": "https://github.com/frankxai/agentic-income-skills",
+        "date": "2026-09-02"
+      },
       "version": "1.0.0",
       "visibility": "public",
       "evaluation": "Weekly run-log read against allowedActions."
@@ -425,7 +483,10 @@
       "from": "gate-customer-facing",
       "to": "workflow-request-to-brief",
       "owner": "Frank Riemer",
-      "provenance": { "source": "https://github.com/frankxai/agentic-income-skills", "date": "2026-09-02" },
+      "provenance": {
+        "source": "https://github.com/frankxai/agentic-income-skills",
+        "date": "2026-09-02"
+      },
       "version": "1.0.0",
       "visibility": "public",
       "evaluation": "Every delivery has a timestamped release."
@@ -436,7 +497,10 @@
       "from": "workflow-request-to-brief",
       "to": "asset-brief-template",
       "owner": "Frank Riemer",
-      "provenance": { "source": "components/RequestToQuoteDesk.tsx", "date": "2026-09-02" },
+      "provenance": {
+        "source": "components/RequestToQuoteDesk.tsx",
+        "date": "2026-09-02"
+      },
       "version": "1.0.0",
       "visibility": "buyer",
       "evaluation": "The template changes only through the maintenance review."
@@ -447,7 +511,10 @@
       "from": "workflow-request-to-brief",
       "to": "cost-model-usage",
       "owner": "Frank Riemer",
-      "provenance": { "source": "knowledge/04-tool-stack.md", "date": "2026-08-14" },
+      "provenance": {
+        "source": "knowledge/04-tool-stack.md",
+        "date": "2026-08-14"
+      },
       "version": "1.0.0",
       "visibility": "private",
       "evaluation": "Monthly invoice comparison."
@@ -458,7 +525,10 @@
       "from": "workflow-request-to-brief",
       "to": "cost-founder-time",
       "owner": "Frank Riemer",
-      "provenance": { "source": "operating log", "date": "2026-09-02" },
+      "provenance": {
+        "source": "operating log",
+        "date": "2026-09-02"
+      },
       "version": "1.0.0",
       "visibility": "private",
       "evaluation": "Time the next ten releases."
@@ -469,7 +539,10 @@
       "from": "maintenance-template-review",
       "to": "asset-brief-template",
       "owner": "Frank Riemer",
-      "provenance": { "source": "operating log", "date": "2026-09-02" },
+      "provenance": {
+        "source": "operating log",
+        "date": "2026-09-02"
+      },
       "version": "1.0.0",
       "visibility": "private",
       "evaluation": "Cadence met or the asset is marked stale."
@@ -480,7 +553,10 @@
       "from": "risk-liability",
       "to": "offer-scope-brief",
       "owner": "Frank Riemer",
-      "provenance": { "source": "app/trust/page.tsx", "date": "2026-09-02" },
+      "provenance": {
+        "source": "app/trust/page.tsx",
+        "date": "2026-09-02"
+      },
       "version": "1.0.0",
       "visibility": "public",
       "evaluation": "Non-binding statement present on every delivered brief."
@@ -491,7 +567,10 @@
       "from": "experiment-first-ten",
       "to": "offer-scope-brief",
       "owner": "Frank Riemer",
-      "provenance": { "source": "operating log", "date": "2026-09-02" },
+      "provenance": {
+        "source": "operating log",
+        "date": "2026-09-02"
+      },
       "version": "1.0.0",
       "visibility": "private",
       "evaluation": "Ten answered or declined contacts."
@@ -502,10 +581,27 @@
       "from": "kill-no-paid-brief",
       "to": "offer-scope-brief",
       "owner": "Frank Riemer",
-      "provenance": { "source": "operating log", "date": "2026-09-02" },
+      "provenance": {
+        "source": "operating log",
+        "date": "2026-09-02"
+      },
       "version": "1.0.0",
       "visibility": "private",
       "evaluation": "Checked on the review date against paid invoices only."
+    },
+    {
+      "id": "e-human-cost-founder",
+      "type": "incurs",
+      "from": "human-frank",
+      "to": "cost-founder-time",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "operating log",
+        "date": "2026-09-02"
+      },
+      "version": "1.0.0",
+      "visibility": "private",
+      "evaluation": "The hours land on this person and nobody else."
     }
   ]
 }

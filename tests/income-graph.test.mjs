@@ -103,8 +103,9 @@ test('A01 catches hype language wherever it hides', () => {
   node(graph, 'offer-scope-brief').label = 'Passive income from scope briefs, guaranteed'
   const report = reviewIncomeGraph(graph, TODAY)
   const hype = report.findings.filter((f) => f.code === 'A01')
-  assert.equal(hype.length, 2)
+  assert.ok(hype.length >= 2, 'the lexicon and the structural rules both fire')
   assert.ok(hype.every((f) => f.path === '/nodes/offer-scope-brief/label'))
+  assert.ok(hype.every((f) => f.severity === 'error'), 'two or more matches block')
 })
 
 test('A01 does not fire on honest mechanism language', () => {
@@ -177,15 +178,15 @@ test('A04 blocks an irreversible agent step with no human gate', () => {
   assert.match(unauthorized[0].message, /irreversible agent step "deliver"/)
 })
 
-test('A04 warns when a step reads irreversible but claims otherwise', () => {
+test('A04 blocks — no longer merely warns — when a step reaching outside claims to be reversible', () => {
   const graph = clone()
   const workflow = node(graph, 'workflow-request-to-brief')
   workflow.data.steps.find((s) => s.id === 'deliver').irreversible = false
-  const warnings = reviewIncomeGraph(graph, TODAY).findings.filter(
-    (f) => f.code === 'A04' && f.severity === 'warning',
+  const found = reviewIncomeGraph(graph, TODAY).findings.filter(
+    (f) => f.code === 'A04' && f.severity === 'error',
   )
-  assert.equal(warnings.length, 1)
-  assert.match(warnings[0].message, /reads as irreversible/)
+  assert.equal(found.length, 1)
+  assert.match(found[0].message, /reaches outside your system/)
 })
 
 test('A04 requires the four estate-wide denied actions on every agent role', () => {
@@ -324,8 +325,9 @@ test('the published JSON Schema is generated from the model and is not stale', a
   assert.equal(committed, `${JSON.stringify(buildSchema(), null, 2)}\n`)
 })
 
-test('the vocabulary is closed: 17 node types and their edge rules', () => {
-  assert.equal(NODE_TYPES.length, 17)
-  assert.equal(new Set(NODE_TYPES).size, 17)
+test('the vocabulary is closed: 18 node types and their edge rules', () => {
+  assert.equal(NODE_TYPES.length, 18)
+  assert.equal(new Set(NODE_TYPES).size, 18)
+  assert.ok(NODE_TYPES.includes('Human'), 'v1.1: a gate approver must resolve to a person')
   assert.equal(new Set(EDGE_TYPES).size, EDGE_TYPES.length)
 })

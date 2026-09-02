@@ -14,7 +14,10 @@ import path from 'node:path'
 import {
   EDGE_RULES,
   EDGE_TYPES,
+  EVIDENCE_KINDS,
   NODE_TYPES,
+  SCHEMA_ID,
+  SUPPORTED_API_VERSIONS,
   VISIBILITIES,
 } from '../lib/income-graph/model.ts'
 
@@ -44,14 +47,14 @@ export function buildSchema() {
   return {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
     $id: 'https://agenticincome.ai/schemas/income-graph.v1.schema.json',
-    title: 'Agentic Income System Graph v1',
+    title: `Agentic Income System Graph (${SCHEMA_ID})`,
     description:
-      'The relational model of one income system. Generated from lib/income-graph/model.ts — edit the TypeScript, not this file. The document contract it drafts (IncomeSystem.v1) is owned by github.com/frankxai/agentic-income-skills.',
+      'The relational model of one income system. Generated from lib/income-graph/model.ts — edit the TypeScript, not this file. v1.1 requires irreversible on every workflow step and adds the Human node type a gate approver must resolve to; a v1 document is still accepted and migrated, with every assumed value reported as an M01 finding. The document contract it drafts (IncomeSystem.v1) is owned by github.com/frankxai/agentic-income-skills.',
     type: 'object',
     additionalProperties: false,
     required: ['apiVersion', 'kind', 'metadata', 'nodes', 'edges'],
     properties: {
-      apiVersion: { const: 'agenticincome.ai/v1' },
+      apiVersion: { enum: [...SUPPORTED_API_VERSIONS] },
       kind: { const: 'IncomeGraph' },
       metadata: {
         type: 'object',
@@ -71,6 +74,19 @@ export function buildSchema() {
     },
     $defs: {
       provenance,
+      workflowStep: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['id', 'action', 'irreversible', 'actor'],
+        description:
+          'irreversible is required at v1.1. A v1 step that omits it is migrated to true — unknown is treated as dangerous, not as safe.',
+        properties: {
+          id: { type: 'string', minLength: 1 },
+          action: { type: 'string', minLength: 1 },
+          irreversible: { type: 'boolean' },
+          actor: { enum: ['agent', 'human'] },
+        },
+      },
       node: {
         type: 'object',
         additionalProperties: false,
@@ -79,8 +95,19 @@ export function buildSchema() {
           ...common,
           type: { enum: [...NODE_TYPES] },
           label: { type: 'string', minLength: 1 },
-          notes: { type: 'string' },
-          data: { type: 'object' },
+          notes: { type: 'string', description: 'Scanned for demand language exactly like data.demandClaim.' },
+          data: {
+            type: 'object',
+            properties: {
+              steps: { type: 'array', items: { $ref: '#/$defs/workflowStep' } },
+              kind: { enum: [...EVIDENCE_KINDS], description: 'Evidence only: what kind of artifact the source is.' },
+              approver: {
+                type: 'string',
+                description:
+                  'HumanGate only: must resolve to a Human node (id or label) or to metadata.principal. An AgentRole is rejected.',
+              },
+            },
+          },
         },
       },
       edge: {

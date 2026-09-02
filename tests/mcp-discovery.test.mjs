@@ -9,7 +9,7 @@ const routeSource = read('app/api/mcp/[transport]/route.ts')
 const registeredTools = [...routeSource.matchAll(/registerTool\(\s*'([a-z_]+)'/g)].map((m) => m[1])
 
 test('.well-known/mcp.json matches the registered MCP tools exactly', () => {
-  assert.equal(registeredTools.length, 7, 'expected exactly 7 registered tools')
+  assert.equal(registeredTools.length, 12, 'expected exactly 12 registered tools')
   assert.deepEqual([...wellKnown.tools].sort(), [...registeredTools].sort())
 })
 

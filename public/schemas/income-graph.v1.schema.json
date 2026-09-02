@@ -1,0 +1,485 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenticincome.ai/schemas/income-graph.v1.schema.json",
+  "title": "Agentic Income System Graph v1",
+  "description": "The relational model of one income system. Generated from lib/income-graph/model.ts — edit the TypeScript, not this file. The document contract it drafts (IncomeSystem.v1) is owned by github.com/frankxai/agentic-income-skills.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "metadata",
+    "nodes",
+    "edges"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "agenticincome.ai/v1"
+    },
+    "kind": {
+      "const": "IncomeGraph"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "version",
+        "updatedAt",
+        "principal",
+        "thesis"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+        },
+        "updatedAt": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "principal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "thesis": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/edge"
+      }
+    }
+  },
+  "$defs": {
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "date"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "description": "URL, file path, or named artifact. Never \"internal knowledge\"."
+        },
+        "date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "method": {
+          "type": "string"
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "label",
+        "owner",
+        "provenance",
+        "version",
+        "visibility",
+        "evaluation"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+        },
+        "visibility": {
+          "enum": [
+            "public",
+            "buyer",
+            "private"
+          ]
+        },
+        "evaluation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The check that would prove this wrong."
+        },
+        "type": {
+          "enum": [
+            "Problem",
+            "Customer",
+            "Offer",
+            "Evidence",
+            "Channel",
+            "Partner",
+            "Asset",
+            "Workflow",
+            "AgentRole",
+            "HumanGate",
+            "Cost",
+            "RevenueObservation",
+            "Experiment",
+            "Risk",
+            "Maintenance",
+            "KillCriterion",
+            "Receipt"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "from",
+        "to",
+        "owner",
+        "provenance",
+        "version",
+        "visibility",
+        "evaluation"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+        },
+        "visibility": {
+          "enum": [
+            "public",
+            "buyer",
+            "private"
+          ]
+        },
+        "evaluation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The check that would prove this wrong."
+        },
+        "type": {
+          "enum": [
+            "serves",
+            "suffers",
+            "evidences",
+            "reaches",
+            "supplies",
+            "fulfills",
+            "performs",
+            "gates",
+            "produces",
+            "incurs",
+            "observes",
+            "tests",
+            "threatens",
+            "maintains",
+            "retires",
+            "attests"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"
+        },
+        "to": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "serves"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "serves: Offer -> Customer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "suffers"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "suffers: Customer -> Problem"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "evidences"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "evidences: Evidence -> Problem|Customer|Offer|Evidence|Channel|Partner|Asset|Workflow|AgentRole|HumanGate|Cost|RevenueObservation|Experiment|Risk|Maintenance|KillCriterion|Receipt"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "reaches"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "reaches: Channel -> Customer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "supplies"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "supplies: Partner -> Channel|Offer|Asset|Workflow"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "fulfills"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "fulfills: Workflow -> Offer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "performs"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "performs: AgentRole -> Workflow"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "gates"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "gates: HumanGate -> Workflow"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "produces"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "produces: Workflow -> Asset"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "incurs"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "incurs: Workflow|Asset|Channel|AgentRole|Maintenance|Offer -> Cost"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "observes"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "observes: RevenueObservation -> Offer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "tests"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "tests: Experiment -> Problem|Customer|Offer|Evidence|Channel|Partner|Asset|Workflow|AgentRole|HumanGate|Cost|RevenueObservation|Experiment|Risk|Maintenance|KillCriterion|Receipt"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "threatens"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "threatens: Risk -> Problem|Customer|Offer|Evidence|Channel|Partner|Asset|Workflow|AgentRole|HumanGate|Cost|RevenueObservation|Experiment|Risk|Maintenance|KillCriterion|Receipt"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "maintains"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "maintains: Maintenance -> Asset|Workflow|Channel"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "retires"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "retires: KillCriterion -> Problem|Customer|Offer|Evidence|Channel|Partner|Asset|Workflow|AgentRole|HumanGate|Cost|RevenueObservation|Experiment|Risk|Maintenance|KillCriterion|Receipt"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "attests"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "attests: Receipt -> RevenueObservation|Experiment|Evidence|Maintenance"
+          }
+        }
+      ]
+    }
+  }
+}

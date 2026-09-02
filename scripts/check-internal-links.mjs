@@ -32,7 +32,7 @@ for (const file of files) {
   const links = [...content.matchAll(/href=["']([^"']+)["']/g)].map(m => m[1])
 
   for (const href of links) {
-    if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('#') || href.startsWith('/go.') || href.startsWith('/downloads/')) continue
+    if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('#') || href.startsWith('/go.') || href.startsWith('/downloads/') || href.startsWith('/schemas/')) continue
     if (href.startsWith('/blog/') || href.startsWith('/')) {
       const clean = href.split('?')[0].split('#')[0]
       if (!knownRoutes.has(clean) && !fs.existsSync(path.join(APP, clean.replace(/^\//, '') + '/page.tsx')) && !fs.existsSync(path.join(APP, clean.replace(/^\//, '') + '/page.mdx'))) {

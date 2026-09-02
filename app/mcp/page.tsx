@@ -48,6 +48,31 @@ const TOOLS = [
     args: '{ slug }',
     returns: 'The free starter kit in full markdown (slug "starter-kit") or dated knowledge-track summaries (e.g. "02-income-models").',
   },
+  {
+    name: 'describe_income_graph_schema',
+    args: '—',
+    returns: 'The IncomeGraph.v1 vocabulary: 17 node types, the legal edges between them, and the fields every node and edge must carry.',
+  },
+  {
+    name: 'get_reference_income_graph',
+    args: '—',
+    returns: 'The worked request-to-quote graph. A live thesis with costs and no revenue yet — the shape to copy, not a success story.',
+  },
+  {
+    name: 'review_income_graph',
+    args: '{ graph, today }',
+    returns: 'Findings, activation verdict, and cost and founder-hour arithmetic. Four adversarial checks: hype language, fabricated demand, dark patterns, unauthorized execution.',
+  },
+  {
+    name: 'draft_income_system_manifest',
+    args: '{ graph }',
+    returns: 'A draft IncomeSystem.v1 manifest plus every required field the graph cannot know. The open-core validator remains the gate.',
+  },
+  {
+    name: 'export_income_system_tasks',
+    args: '{ graph }',
+    returns: 'Installable operating tasks: workflow steps with their human gates, maintenance cadences, kill-review dates, experiment decisions.',
+  },
 ]
 
 const DESKTOP_CONFIG = `{
@@ -167,6 +192,7 @@ export default function McpPage() {
 
       <div className="mt-12 flex flex-wrap gap-3">
         <Link href="/start" className="cta">Start free</Link>
+        <Link href="/workbench" className="cta-secondary">Income system workbench</Link>
         <Link href="/tools" className="cta-secondary">Partner economics</Link>
       </div>
     </div>

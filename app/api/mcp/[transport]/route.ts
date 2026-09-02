@@ -9,6 +9,16 @@ import { fitCheck, AUTOMATION_POINTER } from '@/lib/fit-check'
 import { programSlug, type Program } from '@/lib/affiliate'
 import { catalogRefusal, isPolarConfigured, type CatalogProduct } from '@/lib/polar'
 import catalog from '@/products/catalog.json'
+import referenceGraph from '@/data/income-graph-request-to-quote.json'
+import {
+  exportTasks,
+  projectToIncomeSystem,
+  reviewIncomeGraph,
+  tasksToMarkdown,
+  NODE_TYPES,
+  EDGE_RULES,
+  type IncomeGraph,
+} from '@/lib/income-graph'
 
 export const maxDuration = 60
 
@@ -201,6 +211,81 @@ const handler = createMcpHandler(
           format: 'markdown',
           summary: truncated ? `${full.slice(0, 2400)}\n\n[…truncated summary — full track ships with the free pack]` : full,
         })
+      },
+    )
+
+    server.registerTool(
+      'describe_income_graph_schema',
+      {
+        description:
+          'The IncomeGraph.v1 vocabulary: the 17 node types, the legal edges between them, and the fields every node and edge must carry. Read this before drafting a graph.',
+      },
+      async () =>
+        json({
+          apiVersion: 'agenticincome.ai/v1',
+          kind: 'IncomeGraph',
+          schemaUrl: `${site.url}/schemas/income-graph.v1.schema.json`,
+          nodeTypes: NODE_TYPES,
+          edges: EDGE_RULES,
+          requiredOnEveryNodeAndEdge: [
+            'owner',
+            'provenance.source',
+            'provenance.date',
+            'version',
+            'visibility',
+            'evaluation',
+          ],
+          documentContract:
+            'The IncomeSystem.v1 manifest contract is owned by github.com/frankxai/agentic-income-skills. This graph drafts it; that repository validates it.',
+        }),
+    )
+
+    server.registerTool(
+      'get_reference_income_graph',
+      {
+        description:
+          'A complete worked IncomeGraph for the request-to-quote desk. Use it as the shape to copy — it is a live thesis with no revenue yet, not a success story.',
+      },
+      async () => json(referenceGraph),
+    )
+
+    server.registerTool(
+      'review_income_graph',
+      {
+        description:
+          'Run the workbench over an IncomeGraph: structure, completeness, honest economics, and four adversarial checks — hype language, fabricated demand, dark patterns, and unauthorized execution. Returns findings, an activation verdict, and cost and founder-hour arithmetic. It never predicts revenue.',
+        inputSchema: {
+          graph: z.unknown().describe('An IncomeGraph.v1 document.'),
+          today: z
+            .string()
+            .regex(/^\d{4}-\d{2}-\d{2}$/)
+            .describe('ISO date used for future-dating checks, so results are reproducible.'),
+        },
+      },
+      async ({ graph, today }) => json(reviewIncomeGraph(graph as IncomeGraph, today)),
+    )
+
+    server.registerTool(
+      'draft_income_system_manifest',
+      {
+        description:
+          'Project an IncomeGraph into a draft IncomeSystem.v1 manifest and list every required field the graph cannot know. The draft is not valid until the open-core validator in frankxai/agentic-income-skills passes it.',
+        inputSchema: { graph: z.unknown().describe('An IncomeGraph.v1 document.') },
+      },
+      async ({ graph }) => json(projectToIncomeSystem(graph as IncomeGraph)),
+    )
+
+    server.registerTool(
+      'export_income_system_tasks',
+      {
+        description:
+          'Export the installable operating tasks for an IncomeGraph — workflow steps with their human gates, maintenance cadences, kill-criterion review dates, and experiment decisions — as JSON and as a markdown checklist.',
+        inputSchema: { graph: z.unknown().describe('An IncomeGraph.v1 document.') },
+      },
+      async ({ graph }) => {
+        const typed = graph as IncomeGraph
+        const tasks = exportTasks(typed)
+        return json({ tasks, markdown: tasksToMarkdown(typed, tasks) })
       },
     )
   },

@@ -51,6 +51,37 @@ The public repository ships:
 
 No Claude marketplace or private-repository plugin is required or advertised.
 
+## The workbench — model one income system, then attack it
+
+`/workbench` and five MCP tools operate on **IncomeGraph.v1**: seventeen node types (Problem,
+Customer, Offer, Evidence, Channel, Partner, Asset, Workflow, AgentRole, HumanGate, Cost,
+RevenueObservation, Experiment, Risk, Maintenance, KillCriterion, Receipt) and the legal
+relationships between them. Every node and edge carries an owner, a source, a date, a version, a
+visibility, and the evaluation rule that would prove it wrong.
+
+The review is deterministic and runs the same code in the browser, over MCP, and under `node --test`:
+
+| Check | What it refuses |
+|---|---|
+| A01 hype | Language promising an outcome the seller does not control |
+| A02 fabricated demand | A demand claim with no dated Evidence node; revenue with no Receipt |
+| A03 dark patterns | Scarcity with no basis, recurring charges with no exit, undisclosed buyer-borne costs |
+| A04 unauthorized execution | An irreversible agent step with no named HumanGate; an AgentRole that does not deny signing, repricing, moving money, or raising its own budget |
+
+Economics are arithmetic on your own numbers: monthly cost floor, founder hours, break-even units.
+**Observed revenue counts only when a Receipt attests it.** Activation is a validated manifest plus a
+first real market test — a valid graph with no revenue reports `ready-to-test`, never "activated".
+
+`draft_income_system_manifest` projects the graph into an **IncomeSystem.v1** draft and lists every
+required field it cannot know. That document contract is owned by
+[agentic-income-skills](https://github.com/frankxai/agentic-income-skills) and is not redefined here;
+its validator remains the gate.
+
+```bash
+node --test tests/income-graph.test.mjs         # 26 tests including every adversarial check
+node scripts/gen-income-graph-schema.mjs --check # the published JSON Schema is generated, never hand-edited
+```
+
 ## The knowledge base — factual, dated, re-verified on a loop
 
 The site research library carries dated sources and a quarterly review cycle:

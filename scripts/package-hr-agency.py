@@ -10,7 +10,7 @@ root = Path(__file__).resolve().parents[1]
 product = root / "products/hr-agency-launch-kit"
 manifest_path = product / "manifest.json"
 manifest = json.loads(manifest_path.read_text())
-if manifest["productId"] != "hr-agency-launch-kit" or manifest["version"] != "0.1.0":
+if manifest["productId"] != "hr-agency-launch-kit" or manifest["version"] != "0.2.0":
     raise SystemExit("Unexpected product/version")
 if len(sys.argv) != 2:
     raise SystemExit("Usage: python3 scripts/package-hr-agency.py <output.zip>")
@@ -33,7 +33,7 @@ output = Path(sys.argv[1])
 output.parent.mkdir(parents=True, exist_ok=True)
 with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
     for name, data in sorted(entries):
-        info = zipfile.ZipInfo(f"hr-agency-launch-kit-v0.1.0/{name}", (2026, 9, 10, 0, 0, 0))
+        info = zipfile.ZipInfo(f"hr-agency-launch-kit-v0.2.0/{name}", (2026, 9, 10, 0, 0, 0))
         info.compress_type = zipfile.ZIP_DEFLATED
         info.external_attr = 0o100644 << 16
         archive.writestr(info, data)

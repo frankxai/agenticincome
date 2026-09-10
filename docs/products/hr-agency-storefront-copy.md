@@ -1,73 +1,41 @@
-# Storefront copy and funnel specification
+# Agency Studio storefront copy
 
-Status: proposed copy, not a published offer.
-Target future route: /offers/hr-agency-launch-kit
-Existing catalog identity: hr-agency-launch-kit
-Free preview: /downloads/ai-native-hr-agency-sample.md
+Status: page-ready copy, not implemented UI or a published paid offer.
+Existing product identity: hr-agency-launch-kit. Proposed route: /offers/hr-agency-launch-kit.
 
 ## Hero
 
-Build an AI-native HR agency.
+Build an HR agency with better systems and deeper human service.
 
-Turn your recruiting expertise into a clear service, a connected workflow and a business you can cost before you sell.
+Six reusable service packs help you turn your expertise into clear offers, dependable workflows and work your clients can evaluate.
 
-An editable launch kit for experienced recruiters and AI builders working with HR practitioners. Design one offer, rehearse the delivery and decide where human expertise earns a premium.
+Design your service. Set what software may do. Define the human expertise included. Show the evidence behind your quality claims.
 
-Primary action during review: Read the free sample.
-Future purchase action, only after verified checkout: Get the launch kit — $149.
-Subline: Proposed one-time price in US dollars before applicable tax. Vendor subscriptions and implementation are separate.
+Review action: Read the free sample.
+Future action after commerce verification: Get Agency Studio — $499 once before tax.
 
-## What you build
+## Product demonstration
 
-An agency with a defined client, a repeatable service and a named expert behind every important decision.
+Show a real configuration result and client offer generated from the fictional talent-delivery example. Requested automation is A3; missing controls keep the proposal at A1. Explain why, then show human work, fee assumptions and the cost of doubled review time. Mark the example fictional.
 
-Use AI for research preparation, interview coordination, evidence organization and follow-through. Design higher service levels around structured human interviews, leadership conversations and onboarding.
+## What is included
 
-## Inside the kit
+Six service packs: agency operations, hiring, onboarding, team agreements, retreats and people-operations improvement. Each has an editable brief, delivery playbook and generated example offer.
 
-A complete business blueprint. Eight workflow recipes. Editable scope, role, evidence, outreach, knowledge, decision and onboarding templates. A fictional practice engagement with acceptance checks. A dated tool guide. A local economics calculator with stress scenarios.
+Working local tools for configuration, evidence assessment, offers and economics. Four implementation architecture templates. Co-selling and ownership schedules. Eight original practitioner session drafts and pilot measures.
 
-The base product works without an upsell. Start with fictional files; connect client accounts only after the workflow and permissions have been verified.
+The product is complete for its offline practice use. Connected providers and hosted operations need separate implementation. No vendor accounts, Ana live time or certification are included.
 
-## Show the product
+## Commercial choices
 
-Demonstrate the fictional interview excerpt and its evidence sheet. Let visitors inspect the sample before asking for an email. Show the calculator's assumptions alongside its output. Label all financial examples synthetic.
+Proposed one-agency license for up to five internal users. Adapt templates into client deliverables. Source redistribution excluded. Written install/template support proposed for 30 days. Final terms and support destination required before checkout.
 
-Do not use earnings screenshots, invented testimonials, urgency counters or vendor customer results as proof of our product.
+An approved Ana module and a deployment-partner edition may follow. Their rights, author involvement and contents are unresolved; do not offer them for purchase yet.
 
-## Two ladders
+## Measurement
 
-Our product: free sample → complete launch kit → later tested automation edition or approved expert-method module.
-The buyer's agency: managed operations → expert recruitment → leadership and onboarding.
+Track sample use, actual checkout completion, file delivery, accepted practice case, support minutes and refunds. No new analytics is implemented in this change. Never collect candidate, clinical or participant-private data for marketing telemetry.
 
-The buyer is paying for reusable materials. Their clients are paying for scoped professional services.
+## Visual release state
 
-## Questions buyers need answered
-
-Do I need HR experience?
-This is designed for practitioners or builders partnered with a qualified practitioner. It does not replace professional judgment.
-
-Are tools included?
-No. The guide helps select and qualify tools. Accounts, subscriptions and implementation are separate.
-
-Does it include Ana's time or certification?
-No. Any future expert collaboration will state its author, scope and terms explicitly.
-
-Can I use the templates with clients?
-The proposed license permits adapted client deliverables for one purchasing agency and up to five internal users; resale of the source kit is excluded. Final terms are shown before purchase.
-
-Is this available now?
-The sample is prepared for preview. The full kit is a review edition; paid checkout and delivery must be verified before sale.
-
-## Journey and measurement
-
-One acquisition source → free sample → product detail → configured checkout → private file receipt → practice-case completion.
-
-Proposed events: hr_sample_open, hr_sample_download, hr_offer_view, hr_checkout_completed, hr_kit_delivered, hr_practice_accepted, hr_refund, hr_support_minutes. These events are a specification, not instrumented telemetry. Record only necessary product/transaction references; never send candidate or clinical data to analytics.
-
-Email drafts, only for people who have actually requested product updates:
-- Sample follow-up: point to the worked evidence example and ask the recipient to try their own role brief.
-- Product announcement: list exact contents, price, license, support and what is excluded.
-- Activation: link the practice case and explain how to request help.
-
-Messages remain drafts. No audience or sending connector has been activated.
+The repository web-release-gate requires desktop and mobile capture before UI changes. The supported browser API exposes no viewport control, so UI work remains deferred. This file prepares a concrete storefront without claiming a visual release.

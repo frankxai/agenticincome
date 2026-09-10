@@ -1,17 +1,17 @@
 {
   "productId": "hr-agency-launch-kit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "review-edition-not-for-sale",
   "builtOn": "2026-09-10",
   "sourceContract": "https://github.com/frankxai/agentic-income-skills/blob/main/schemas/income-system.v1.schema.json",
   "files": [
     {
       "path": "00-START-HERE.md",
-      "sha256": "51f4ae4d3d4bb51811057733777f6575b52493596fb959af8e7d006ffbb2120d"
+      "sha256": "572132a3f16a43738fcdcbabe4c3735ac60104ed4c3a5c1bb4c61fd4d63411f4"
     },
     {
       "path": "01-BUSINESS-BLUEPRINT.md",
-      "sha256": "c373c36a858d37c5f67cecec84eb03f4183b8a09dca155a162f6995ca95f3a17"
+      "sha256": "cb162e38cc2be946b59a2cb6409ef9797a3ccb7198b1a20e0bd379da6a0b11af"
     },
     {
       "path": "02-HUMAN-SERVICE-LAYERS.md",
@@ -34,8 +34,44 @@
       "sha256": "b050d91a32b403bf29d05c454d356ebc5dd8116499c9de6cca32939666a1d0db"
     },
     {
+      "path": "07-STUDIO-PRODUCT.md",
+      "sha256": "eab4123caf295b141ea5e8fd1996d77779613c2ef6ca3ba2d3637511274eb8b0"
+    },
+    {
+      "path": "08-AUTONOMY-AND-QUALITY.md",
+      "sha256": "f157158a6acae408f5becb4ffb5919670244d351060057bf69bdf55af48079b7"
+    },
+    {
+      "path": "09-ARCHITECTURES-AND-CONNECTORS.md",
+      "sha256": "0b592e921f6fe48b4a39f4bfb7817a1812f19c0622c0068bdebcfd2f8fa8097a"
+    },
+    {
+      "path": "10-RETREATS-AND-HUMAN-PRACTICE.md",
+      "sha256": "3b3f9bb79778f32adfa496098c519fea3ceccae6e71b0b8b272b3af299df7f84"
+    },
+    {
+      "path": "11-COSELL-AND-OWNERSHIP.md",
+      "sha256": "6cfb7059fd8d2aea53472a4f91045c15bccbf72725bd587dc5d88d6988285f1c"
+    },
+    {
+      "path": "12-PILOT-AND-SUCCESS.md",
+      "sha256": "9683c18356a50f89f3bf209f735c9ef7e417aa6e7d639c4a98eea69389444ef8"
+    },
+    {
+      "path": "13-OPERATING-MANUAL.md",
+      "sha256": "cbf2fa975d52346ac021952cad0062cc9652e4f7b63c196665a968cd986b0050"
+    },
+    {
+      "path": "ANA-REVIEW.md",
+      "sha256": "2a52b779ba6a8ab7f2f8aff750fc2b1eac70516521e4f026ce764df9939165bb"
+    },
+    {
       "path": "LICENSE-AND-SUPPORT.md",
-      "sha256": "c369fa83a3e5ee290d02cc93fcc6d5b4a5183b5be8ca7f267962f27ff244398c"
+      "sha256": "dfd67f0b9e45cdda043667e80157cb55f061cdfb0a3637b2a49959f5a722ab92"
+    },
+    {
+      "path": "examples/agency-desk.json",
+      "sha256": "affafc7322fe426cb0390261129ae4eaf6fab4d21d133a9386cd3090374e59a3"
     },
     {
       "path": "examples/economics-scenarios.json",
@@ -46,8 +82,116 @@
       "sha256": "7e3634be9d620364a5e3a349666cf629304dba4e06710be6ac4af6d197a3f77f"
     },
     {
+      "path": "examples/onboarding.json",
+      "sha256": "f9d408dd5a8b446ac031360baf40aff6e0eeb63b4e214e1c7bdc234be90d5cec"
+    },
+    {
+      "path": "examples/people-operations.json",
+      "sha256": "979a111c1341899ec0338cbef247a13ecdfac6857c4725df6eb53d7fa5036f06"
+    },
+    {
+      "path": "examples/quality-rehearsal.json",
+      "sha256": "2fa6e329e9bdc16cd3df5c9eb70c5e9a241a8267bc4ffa5b15d7d1cec367ddeb"
+    },
+    {
+      "path": "examples/retreat-outcomes.json",
+      "sha256": "092f53b16e00baf8ab4dd91761450a1d348ae13ba1dff62fa1e2ec29f0a5a908"
+    },
+    {
+      "path": "examples/talent-delivery.json",
+      "sha256": "b38d83ad1f15bd221e3d27b2e8ae386377ea6a5e75eaa2765466b313828cbe37"
+    },
+    {
+      "path": "examples/team-practice.json",
+      "sha256": "7f8f7fba591ab26b15753216049304ec062e6a95baaae444af41370d6c38362c"
+    },
+    {
+      "path": "services/README.md",
+      "sha256": "406941cfb0126131057d213742acca9c3981f77bce4b3d8f30bb9fcd699830c9"
+    },
+    {
+      "path": "services/agency-desk/CLIENT-BRIEF.md",
+      "sha256": "304cfa232a89f83fa979453ef1ba38fccca49cfb466bd3babe4820d9db8e32cb"
+    },
+    {
+      "path": "services/agency-desk/EXAMPLE-OFFER.md",
+      "sha256": "9a4154ccf8ad61397d969ac7eebcdb1629fa9edcdb5ef076c36ce0fe7a2c1bc5"
+    },
+    {
+      "path": "services/agency-desk/PLAYBOOK.md",
+      "sha256": "52cb23d2201b96912d824d365d30bf650c4c49ce07479a001ad14d6211373f11"
+    },
+    {
+      "path": "services/onboarding/CLIENT-BRIEF.md",
+      "sha256": "9bc7b3da5adf755c01f3bd3eef4d62bd25d64fa48e00f2108c8bad8ad82d924d"
+    },
+    {
+      "path": "services/onboarding/EXAMPLE-OFFER.md",
+      "sha256": "2a689265aa2476b41d2747838f649cf30a2051acccb6283a930e02970ee98e2c"
+    },
+    {
+      "path": "services/onboarding/PLAYBOOK.md",
+      "sha256": "c23ec2a171631dec784efc333b05d9bb24aad7997ad4c7eed4ee726cc9a1450e"
+    },
+    {
+      "path": "services/people-operations/CLIENT-BRIEF.md",
+      "sha256": "2676529e2abd68f54b594d1ef1b79e2a0e44c9040aaeb89dc18119577317bb20"
+    },
+    {
+      "path": "services/people-operations/EXAMPLE-OFFER.md",
+      "sha256": "3dc7eceea3b2f5f96c5742db5befab63a7777269ace9799250eef80c05cc1f7a"
+    },
+    {
+      "path": "services/people-operations/PLAYBOOK.md",
+      "sha256": "187510db9f9d28e118e6c99381e556ef1817ed70f6ebfc9ed76702bf63a1aca4"
+    },
+    {
+      "path": "services/retreat-outcomes/CLIENT-BRIEF.md",
+      "sha256": "60c1051946db201581cda3425216063edda37f34975662795297ab7a983f1c32"
+    },
+    {
+      "path": "services/retreat-outcomes/EXAMPLE-OFFER.md",
+      "sha256": "5fa632c39147cfac521c82d265718a4e440c88b81af0f0c1094cb2e384ff97d0"
+    },
+    {
+      "path": "services/retreat-outcomes/PLAYBOOK.md",
+      "sha256": "0d95b892f2dfca595ba02212cb1d3f8ab2ba86043f584ce65e7bc8bffa3ad2d6"
+    },
+    {
+      "path": "services/talent-delivery/CLIENT-BRIEF.md",
+      "sha256": "0d1cbc77785e342d7e843d97296ac857bc49b5eb9cd62bbe3c1290942c67353a"
+    },
+    {
+      "path": "services/talent-delivery/EXAMPLE-OFFER.md",
+      "sha256": "d36b05759322ef6d67897047db91d003da082203db61c3b9e85ae95828f27f58"
+    },
+    {
+      "path": "services/talent-delivery/PLAYBOOK.md",
+      "sha256": "d864e1f5d64b9c4f5a69614677c22fe6079d5430b5d8e3a5e8c6423e62b84d22"
+    },
+    {
+      "path": "services/team-practice/CLIENT-BRIEF.md",
+      "sha256": "c5bce265a49c1f34d339bcda35acebfa49e7bb581b20199afebbf607205434e9"
+    },
+    {
+      "path": "services/team-practice/EXAMPLE-OFFER.md",
+      "sha256": "dfaa0fc865f40a023dd065fe019cb50145ec9301fec148a6cb522df99f6ea888"
+    },
+    {
+      "path": "services/team-practice/PLAYBOOK.md",
+      "sha256": "d61e3f48c866a5a059dfb60c2accd2e4e65057f9e2c1669e44709df549537068"
+    },
+    {
+      "path": "studio/catalog.json",
+      "sha256": "7ea3a5ee228cf68cb2fb039a8373c52df295151972f9882c423661d78092b6e8"
+    },
+    {
       "path": "templates/client-scope.md",
       "sha256": "0f027b3e5b24c85d64dd4841bca0107fc9c7cd8875732fd5e803624af9d8e0d7"
+    },
+    {
+      "path": "templates/connector-acceptance.csv",
+      "sha256": "09b1001c30686810eced0d750cad3a27081bb8157cc6fdd96cc5f6ca5bd448f0"
     },
     {
       "path": "templates/economics-formulas.md",
@@ -74,12 +218,32 @@
       "sha256": "9b3c500fe7f2c9cd47524ac619434d89acf3e669b181668706858163de366ed7"
     },
     {
+      "path": "templates/partner-schedule.md",
+      "sha256": "a155382709eb1a9a0a11a5cdd462c2adb48cd056ed63f44b05c8953b7bebbe46"
+    },
+    {
+      "path": "templates/retreat-outcome-brief.md",
+      "sha256": "fdf17c53f55c95471d809ffdcdacb0b8b97943b0ff3b4057ea1c756bd1e67542"
+    },
+    {
       "path": "templates/role-brief.md",
       "sha256": "e347e06b6d242756d3a62c78baf42fb134d2831cce11e2bc58bda5280c7b8429"
     },
     {
+      "path": "templates/studio-metrics.csv",
+      "sha256": "fc28e2bf58e34a7996ba8b5fc71110c1ed8efc0c190ed5ae08a79fc19983f0fc"
+    },
+    {
       "path": "templates/weekly-decisions.md",
       "sha256": "d2cf5aafc03a62ac40c9d14bf9e62574d076be03bc79c74f49185c690ddb724e"
+    },
+    {
+      "path": "tools/agency.mjs",
+      "sha256": "760ea516c9f9e0abdfbe447e7858aac54b55b90bafd7953f7aca7652a0f577fd"
+    },
+    {
+      "path": "tools/agency.test.mjs",
+      "sha256": "c50768e2a331cf3182eb08d36c2a31e64ed3971e9fe8e0688c4b4f48579809f4"
     },
     {
       "path": "tools/economics.mjs",
@@ -89,5 +253,6 @@
       "path": "tools/economics.test.mjs",
       "sha256": "000104ce3944bccf68ca92b5fd8e85a2bdb187a4beb355b895c3e6b63622cd19"
     }
-  ]
+  ],
+  "name": "AI-native HR Agency Studio"
 }

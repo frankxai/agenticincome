@@ -1,47 +1,46 @@
-# AI-native HR Agency Launch Kit
-Version 0.1.0 · English review edition · 10 September 2026
+# AI-native HR Agency Studio
+Version 0.2.0 · English review edition · 10 September 2026
 
-Build an agency that uses AI for preparation and coordination, and charges for the human judgment its clients need.
+A full operating product for HR agencies: configure services, set automation boundaries, assess quality evidence, produce client offers and develop higher-value human work.
 
-This is an editable digital product: a business blueprint, workflow playbook, client-service ladder, tool-selection guide, reusable templates, fictional practice case and a working economics calculator. It is not a hosted HR platform or an account-connected agent team. No vendor subscription is included.
+This expands the original HR Agency Launch Kit. Its stable product ID remains `hr-agency-launch-kit`. Read [the Studio product overview](07-STUDIO-PRODUCT.md) for the business model and [Ana’s review note](ANA-REVIEW.md) for the proposed collaboration.
 
-## Your first useful result
+## Start with a usable result
 
-Use the fictional case to produce one bounded client offer, a role brief, an interview evidence sheet and a costed delivery plan. The acceptance standard is a reviewed set of usable artifacts, not how many prompts you ran.
-
-1. Read [the business blueprint](01-BUSINESS-BLUEPRINT.md) and select one niche and service.
-2. Choose the human service level in [the service model](02-HUMAN-SERVICE-LAYERS.md).
-3. Work through [the operating playbook](03-WORKFLOW-PLAYBOOK.md) with the templates.
-4. Run the included scenario calculator. Node.js 20+ is the only requirement:
+1. Choose one of the six [service packs](services/README.md).
+2. Read [autonomy and quality](08-AUTONOMY-AND-QUALITY.md) and pick the human service your client needs.
+3. Run the included configuration and offer tool from this folder:
 
 ```bash
-node tools/economics.mjs examples/economics-scenarios.json
-node --test tools/economics.test.mjs
+node tools/agency.mjs configure examples/talent-delivery.json
+node tools/agency.mjs offer examples/talent-delivery.json
+node --test tools/agency.test.mjs tools/economics.test.mjs
 ```
 
-No coding is required to use the Markdown and CSV templates. Open Markdown in your document workspace, import CSVs into your spreadsheet, and use [the formula reference](templates/economics-formulas.md) when you prefer a spreadsheet.
+Node.js 20+ is the only software requirement for the CLI. No credentials or subscriptions are needed. Markdown and CSV templates work without code. Full instructions: [operating manual](13-OPERATING-MANUAL.md).
 
 ## Included
 
-| Asset | Useful output |
+| Part | What you can produce |
 | --- | --- |
-| Business blueprint | Buyer, niche, offer, acquisition experiment and operating model |
-| Human service layers | Three scoped client services with explicit human work |
-| Workflow playbook | Eight workflows with inputs, outputs, decisions and recovery |
-| Tool guide | Dated vendor evidence and a qualification exercise |
-| Practice case | Fictional brief, interview excerpt, outreach and acceptance checks |
-| Templates | Client scope, role brief, interview evidence, outreach review, knowledge register, weekly decisions, onboarding and measurement |
-| Economics tool | Contribution, break-even, capacity and stressed scenarios |
-| Architecture mapping | Reuse of the existing IncomeSystem contract and Ana HR kit |
+| Six service packs | Scoped operations, hiring, onboarding, team, retreat and people-operations offers |
+| Four architecture templates | Portable, connected agency, retreat studio or managed network proposal |
+| Autonomy framework | A0–A4 operating limits by workflow |
+| Quality assessment | Q0–Q3 assessment of supplied evidence with freshness and incident handling |
+| Human delivery models | Three levels with specific work, scope and human-hour budgets |
+| Working software | Service configuration, offer generation, quality assessment and stress-tested economics |
+| Editable templates | Client briefs, knowledge, evidence, outreach, onboarding, partner terms and outcomes |
+| Retreat bridge | Reuse of existing Retreat OS and participant/outcome workflows |
+| Practitioner module draft | Eight original session cards for Ana to review and develop |
+| Co-selling blueprint | Referral, author, deployment and delivery economics; rights schedule |
+| Pilot measures | Acceptance, effort, support cost, reliability and contribution |
 
-The case and all financial numbers are synthetic. Local arithmetic checks cannot establish client demand, hiring quality or a live vendor integration.
+The original [business blueprint](01-BUSINESS-BLUEPRINT.md), [hiring case](05-PRACTICE-CASE.md) and [economics calculator](templates/economics-formulas.md) remain useful supporting material. The Studio documents extend their narrower scope.
 
-## Review edition and delivery
+## Review state
 
-The proposed product price is US$149 once, before applicable tax; it is a test hypothesis. Checkout is closed. The proposed license allows one purchasing agency and up to five internal users to adapt templates into client deliverables; resale of the source kit is excluded. See [license and support](LICENSE-AND-SUPPORT.md).
+The expanded Studio price hypothesis is $499 once before tax for one agency with up to five internal users. Checkout is closed; license, private delivery, support and practitioner acceptance require completion before sale. See [license and support](LICENSE-AND-SUPPORT.md).
 
-The full kit belongs in private file delivery. The separate public sample is intentionally limited. Updating this kit does not publish private company or candidate records.
+The configuration tool runs locally. Architecture choices do not connect providers. Every generated workflow sets execution disabled. Quality results assess submitted records and do not authenticate them. All supplied examples are fictional; no customer savings, hiring outcomes or revenue are claimed.
 
-Ana-inspired human practice is a proposed collaboration direction. This edition does not claim Ana's authorship, endorsement, training credentials or approval, and contains none of her private clinical material. A separately approved method module can follow.
-
-Start with one completed practice engagement. Use the acceptance checklist in the case before using real client data.
+Ana’s method, attribution, compensation and live involvement are proposals for her review. No license to her unpublished work or private materials is granted. Start with one accepted practice case, then qualify one real integration through the agency’s authorized process.

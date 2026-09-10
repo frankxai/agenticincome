@@ -1,43 +1,43 @@
-# Build an AI-native HR agency
-A sample from the AI-native HR Agency Launch Kit · 10 September 2026
+# AI-native HR Agency Studio
+Free sample · English · Version 0.2.0 · 10 September 2026
 
-Use AI to organize the hiring work. Charge for the judgment and personal attention your clients need.
+Build an agency with dependable operations and a human service model clients can understand and buy.
 
-## One bounded service
+Use software to prepare and coordinate work. Charge for defined delivery, expert judgment, deeper human access and evidence of accepted outcomes.
 
-Start with one hiring role: clarify the brief, organize permitted candidate evidence, coordinate interviews, prepare decisions and hand over onboarding. Keep a named practitioner accountable for the method and the employer accountable for hiring.
+## Six services an agency can build
 
-| Service level | What the client buys |
+Agency knowledge and delivery desk; structured talent delivery; onboarding and manager enablement; team working agreements; retreat planning and outcome delivery; people operations improvement.
+
+Start with one service. Keep the client’s existing source systems and a named professional accountable for the work.
+
+## Three independent choices
+
+| Choice | Meaning |
 | --- | --- |
-| Managed hiring operations | Research preparation, coordination, reviewed evidence and clear updates |
-| Expert recruitment | Additional structured human interviews, calibration and work-sample review |
-| Leadership and onboarding | Additional team working agreements, manager support and first-month integration |
+| Autonomy A0–A4 | Manual work through bounded, monitored operations across systems |
+| Quality Q0–Q3 | Unverified work through independently reviewed task samples and monitored live evidence |
+| Human service H1–H3 | Managed preparation, expert delivery and embedded partnership with defined human work |
 
-Respectful candidate communication, a human contact route and fair review belong in every level. Premium service adds expertise and depth.
+These are product-specific levels, not certification. A premium fee does not earn a quality rating. A high automation level does not authorize hiring decisions, financial commitments or disclosure of private records.
 
-## Try the method
+## Try one useful artifact
 
 Fictional interview excerpt:
 > I coordinated a six-week rollout for twelve customer accounts. I kept a checklist and held weekly reviews with support. I do not have the activation numbers.
 
-A useful evidence sheet says: candidate reports coordination experience; independent verification and activation results are missing. It asks to review a permitted work sample. It does not invent improved activation or infer a personality trait.
+A useful evidence sheet records reported coordination experience, missing activation results and the need for permitted supporting evidence. It does not invent performance improvement or a personality trait.
 
-Your first artifact:
-- One role and business outcome.
-- Three job-relevant criteria with observable evidence.
-- A named reviewer and hiring decision owner.
-- A human interview option.
-- A volume cap and delivery acceptance.
-- A cost calculation that includes review, corrections, tools and acquisition.
+Build a role brief with three observable criteria, a named reviewer, a human interview option, a delivery cap and an acceptance test. Include review and correction time in its cost.
 
-## Tool choices
+For a team retreat, start with two decisions and one artifact each role will use afterward. Assign owners and review accepted work at day 7 and day 30. Attendance alone does not establish value.
 
-Retain the existing ATS and office suite. Evaluate native sourcing, outreach and interview tools before building adapters. An available MCP connection is not proof that a workflow is configured or reliable.
+## The full product
 
-## The full kit
+The review edition contains six editable service packs, four architecture templates, a local configuration and offer generator, a quality-evidence assessment tool, economics stress tests, retreat handoffs, original practitioner session drafts and a co-selling blueprint.
 
-The review edition contains a business blueprint, eight workflow recipes, editable templates, a fictional practice case, a tool-selection guide and a local economics calculator. Vendor subscriptions and client implementation are separate.
+The practice tools run locally with Node.js 20+ and require no provider subscription. Connected architectures remain specifications; account setup and client implementation are separate. The tool generates proposals and does not execute external actions.
 
-Proposed price: US$149 once, before applicable tax. This is a pre-release proposal; checkout and paid delivery are not active. The sample is free. No earnings, hiring or time-saving results are promised.
+Proposed Studio price: $499 once in US dollars before applicable tax. This is a pre-release review edition. Checkout and paid delivery are not active. No customer savings, earnings, hiring results or Ana endorsement are claimed.
 
-Agentic Income: https://www.agenticincome.ai/
+[Agentic Income](https://www.agenticincome.ai/)

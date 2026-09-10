@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "engagementId": "people-operations-practice",
+  "serviceId": "people-operations",
+  "architectureId": "connected-agency",
+  "humanLevel": "H2",
+  "requestedAutonomy": 3,
+  "qualityTarget": "Q2",
+  "asOf": "2026-09-10",
+  "controls": {},
+  "quality": {
+    "version": "0.2.0",
+    "scopeId": "people-operations",
+    "workflowVersion": "workflow-0.2.0",
+    "asOf": "2026-09-10",
+    "evidence": []
+  },
+  "economics": {
+    "engagements": 2,
+    "hourlyCost": 90,
+    "fixedMonthlyCost": 150,
+    "acquisitionCost": 300,
+    "allocatedSetupCost": 200,
+    "availableHours": 120,
+    "deliveryFraction": 0.7,
+    "refundFraction": 0.03,
+    "processingFraction": 0.04,
+    "qualityReviewHours": 2,
+    "contingencyFraction": 0.1
+  }
+}

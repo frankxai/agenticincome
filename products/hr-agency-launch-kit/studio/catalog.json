@@ -1,0 +1,498 @@
+{
+  "productId": "hr-agency-launch-kit",
+  "version": "0.2.0",
+  "name": "AI-native HR Agency Studio",
+  "currency": "USD",
+  "pricingStatus": "Synthetic price hypotheses before tax; vendor subscriptions and third-party delivery costs excluded.",
+  "autonomyLevels": [
+    {
+      "id": "A0",
+      "name": "Manual",
+      "meaning": "People perform and approve the work."
+    },
+    {
+      "id": "A1",
+      "name": "Prepared",
+      "meaning": "Software researches and drafts; people release outputs."
+    },
+    {
+      "id": "A2",
+      "name": "Supervised",
+      "meaning": "A person approves each external change."
+    },
+    {
+      "id": "A3",
+      "name": "Bounded",
+      "meaning": "Preauthorized routine work runs within explicit limits; exceptions go to an owner."
+    },
+    {
+      "id": "A4",
+      "name": "Managed",
+      "meaning": "Bounded workflows coordinate across systems with monitored recovery and an accountable service owner."
+    }
+  ],
+  "humanLevels": [
+    {
+      "id": "H1",
+      "name": "Managed preparation",
+      "index": 0
+    },
+    {
+      "id": "H2",
+      "name": "Expert delivery",
+      "index": 1
+    },
+    {
+      "id": "H3",
+      "name": "Embedded partnership",
+      "index": 2
+    }
+  ],
+  "services": [
+    {
+      "id": "agency-desk",
+      "name": "Agency knowledge and delivery desk",
+      "unit": "30-day client workspace",
+      "cap": "One client; up to five active roles and twenty delivery milestones. Recruiting interviews excluded.",
+      "fees": [
+        900,
+        1800,
+        3000
+      ],
+      "hours": [
+        6,
+        12,
+        20
+      ],
+      "tools": 80,
+      "outcomes": [
+        "Source register with access owners and review dates",
+        "Weekly decisions brief with proposed meeting changes",
+        "Accepted milestone to invoice-preparation handoff"
+      ],
+      "workflowIds": [
+        "knowledge",
+        "weekly-decisions",
+        "invoice"
+      ],
+      "qualityReview": "Check twenty source-to-output links and every invoice total against accepted milestones.",
+      "humanExtras": [
+        "Named owner reviews the weekly brief and invoice drafts.",
+        "Adds two 45-minute client decision sessions and source cleanup.",
+        "Adds one 90-minute operating-design session and a 30-day adoption review."
+      ]
+    },
+    {
+      "id": "talent-delivery",
+      "name": "Structured talent delivery",
+      "unit": "30-day role engagement",
+      "cap": "One open role; up to 25 completed screens. No guaranteed hire.",
+      "fees": [
+        1500,
+        3500,
+        7500
+      ],
+      "hours": [
+        8,
+        16,
+        30
+      ],
+      "tools": 180,
+      "outcomes": [
+        "Accepted role criteria and sourcing brief",
+        "Reviewed outreach and source-linked interview evidence",
+        "Human hiring decision handoff and agreed next steps"
+      ],
+      "workflowIds": [
+        "role-intake",
+        "sourcing",
+        "outreach",
+        "screening",
+        "decision"
+      ],
+      "qualityReview": "Blind-review twenty evidence statements against transcripts; sample candidate experience separately.",
+      "humanExtras": [
+        "Recruiter reviews screens; employer conducts selection interviews.",
+        "Adds up to six 45-minute structured human interviews and calibration.",
+        "Adds a 90-minute team agreement session, two check-ins and a 30-day integration review."
+      ]
+    },
+    {
+      "id": "onboarding",
+      "name": "Onboarding and manager enablement",
+      "unit": "30-day cohort",
+      "cap": "Up to three new hires and their managers; one role family.",
+      "fees": [
+        900,
+        2000,
+        4000
+      ],
+      "hours": [
+        6,
+        12,
+        24
+      ],
+      "tools": 60,
+      "outcomes": [
+        "Role-specific 30-day plan with accepted learning artifacts",
+        "Documented ownership and access requests",
+        "Manager and new-hire review with unresolved blockers"
+      ],
+      "workflowIds": [
+        "knowledge",
+        "onboarding",
+        "weekly-decisions"
+      ],
+      "qualityReview": "Verify every task has an owner, due date and acceptance test; measure accepted artifacts due by day 30.",
+      "humanExtras": [
+        "Owner reviews plans and weekly blockers.",
+        "Adds a 45-minute kickoff and two 30-minute manager sessions.",
+        "Adds up to three 45-minute individual role-transition sessions and a cohort integration review."
+      ]
+    },
+    {
+      "id": "team-practice",
+      "name": "Team working agreements",
+      "unit": "30-day team engagement",
+      "cap": "One team of up to eight people. Workplace facilitation; no clinical service.",
+      "fees": [
+        1500,
+        3500,
+        6500
+      ],
+      "hours": [
+        8,
+        18,
+        32
+      ],
+      "tools": 60,
+      "outcomes": [
+        "Team-approved decision and communication agreements",
+        "One implemented meeting experiment with a baseline",
+        "30-day review of agreements used and work completed"
+      ],
+      "workflowIds": [
+        "knowledge",
+        "team-session",
+        "weekly-decisions"
+      ],
+      "qualityReview": "Every agreement needs an owner and review date; private reflection never becomes an employee score.",
+      "humanExtras": [
+        "Facilitator prepares and reviews one 60-minute agreement session.",
+        "Adds a 90-minute facilitated session and two team check-ins.",
+        "Adds two 60-minute leadership sessions, structured dissent preparation and a 30-day review."
+      ]
+    },
+    {
+      "id": "retreat-outcomes",
+      "name": "Retreat planning and outcome delivery",
+      "unit": "One event plus 30-day follow-through",
+      "cap": "One team, 8\u201320 participants, up to two program days. Travel, venue, food and accommodation excluded.",
+      "fees": [
+        1800,
+        4500,
+        9000
+      ],
+      "hours": [
+        12,
+        30,
+        56
+      ],
+      "tools": 120,
+      "outcomes": [
+        "Outcome brief, comparable supplier assumptions and readiness packet",
+        "Timed runbook with named decision owners and participation alternatives",
+        "Reconciled service costs and accepted day-7/day-30 action handoff"
+      ],
+      "workflowIds": [
+        "retreat-plan",
+        "retreat-commit",
+        "team-session",
+        "retreat-close",
+        "invoice"
+      ],
+      "qualityReview": "Compare every commitment to scope and receipt; track accepted actions due by day 30, not attendance alone.",
+      "humanExtras": [
+        "Remote planning support; client supplies onsite host and facilitator.",
+        "Adds one facilitated program day; named onsite host remains separately scoped.",
+        "Adds two facilitated program days and two integration sessions; qualified onsite support still separately budgeted."
+      ]
+    },
+    {
+      "id": "people-operations",
+      "name": "People operations improvement",
+      "unit": "30-day improvement cycle",
+      "cap": "One company, up to 30 employees and two defined process improvements. Payroll, legal advice and employee investigations excluded.",
+      "fees": [
+        1500,
+        4000,
+        8000
+      ],
+      "hours": [
+        10,
+        24,
+        44
+      ],
+      "tools": 120,
+      "outcomes": [
+        "Accepted process baseline and source register",
+        "Two implemented process artifacts with accountable owners",
+        "Service review covering effort, exceptions and accepted improvements"
+      ],
+      "workflowIds": [
+        "knowledge",
+        "weekly-decisions",
+        "onboarding",
+        "invoice"
+      ],
+      "qualityReview": "Verify process outputs against their signed acceptance checks; retain an explicit human escalation route.",
+      "humanExtras": [
+        "Operations lead reviews outputs weekly.",
+        "Adds two 60-minute manager workshops and process coaching.",
+        "Adds four 60-minute leadership working sessions and facilitated implementation follow-through."
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "knowledge",
+      "name": "Refresh authorized knowledge",
+      "kind": "read",
+      "maxAutonomy": 4,
+      "inputs": [
+        "Authorized source IDs",
+        "Access scope",
+        "Review dates"
+      ],
+      "output": "Source-linked brief and stale-record exceptions"
+    },
+    {
+      "id": "weekly-decisions",
+      "name": "Prepare weekly decisions",
+      "kind": "draft",
+      "maxAutonomy": 4,
+      "inputs": [
+        "Work status",
+        "Decision owner",
+        "Due dates"
+      ],
+      "output": "Decision brief and meeting-change proposals"
+    },
+    {
+      "id": "invoice",
+      "name": "Prepare invoice from accepted work",
+      "kind": "financial",
+      "maxAutonomy": 1,
+      "inputs": [
+        "Accepted milestone",
+        "Billing revision",
+        "Commercial terms"
+      ],
+      "output": "Checked invoice draft for finance"
+    },
+    {
+      "id": "role-intake",
+      "name": "Agree role evidence",
+      "kind": "draft",
+      "maxAutonomy": 4,
+      "inputs": [
+        "Client brief",
+        "Role criteria",
+        "Reviewer"
+      ],
+      "output": "Role brief and unknowns"
+    },
+    {
+      "id": "sourcing",
+      "name": "Research role-relevant evidence",
+      "kind": "read",
+      "maxAutonomy": 3,
+      "inputs": [
+        "Approved brief",
+        "Authorized sources"
+      ],
+      "output": "Source-linked research for recruiter review"
+    },
+    {
+      "id": "outreach",
+      "name": "Send a reviewed outreach batch",
+      "kind": "external-message",
+      "maxAutonomy": 3,
+      "inputs": [
+        "Approved audience",
+        "Exact message digest",
+        "Opt-out check"
+      ],
+      "output": "Provider receipt or reconciliation exception"
+    },
+    {
+      "id": "screening",
+      "name": "Run disclosed optional screening",
+      "kind": "external-message",
+      "maxAutonomy": 3,
+      "inputs": [
+        "Role-specific rubric",
+        "Reviewed invitation",
+        "Human alternative"
+      ],
+      "output": "Transcript and job-related evidence for review"
+    },
+    {
+      "id": "decision",
+      "name": "Advance or reject a candidate",
+      "kind": "employment-decision",
+      "maxAutonomy": 1,
+      "inputs": [
+        "Reviewed evidence",
+        "Accountable decision maker"
+      ],
+      "output": "Human decision and rationale"
+    },
+    {
+      "id": "onboarding",
+      "name": "Maintain onboarding tasks",
+      "kind": "routine-write",
+      "maxAutonomy": 4,
+      "inputs": [
+        "Accepted plan",
+        "Task owner",
+        "Approved workspace"
+      ],
+      "output": "Verified task updates and unresolved blockers"
+    },
+    {
+      "id": "team-session",
+      "name": "Facilitate team work",
+      "kind": "human-practice",
+      "maxAutonomy": 1,
+      "inputs": [
+        "Agreed purpose",
+        "Facilitator",
+        "Participation alternatives"
+      ],
+      "output": "Accepted working agreements"
+    },
+    {
+      "id": "retreat-plan",
+      "name": "Prepare retreat decision packet",
+      "kind": "draft",
+      "maxAutonomy": 4,
+      "inputs": [
+        "Sponsor brief",
+        "Participant count",
+        "Dated estimates"
+      ],
+      "output": "Outcome brief, readiness issues and runbook"
+    },
+    {
+      "id": "retreat-commit",
+      "name": "Commit venue or travel spend",
+      "kind": "financial",
+      "maxAutonomy": 1,
+      "inputs": [
+        "Current quote",
+        "Budget owner",
+        "Terms"
+      ],
+      "output": "Human commitment decision"
+    },
+    {
+      "id": "retreat-close",
+      "name": "Close costs and outcomes",
+      "kind": "draft",
+      "maxAutonomy": 4,
+      "inputs": [
+        "Source-linked costs",
+        "Accepted actions",
+        "Day-30 evidence"
+      ],
+      "output": "Reconciliation exceptions and accepted outcome review"
+    }
+  ],
+  "architectures": [
+    {
+      "id": "portable",
+      "name": "Portable agency",
+      "maxAutonomy": 1,
+      "stack": [
+        "Existing ATS or reviewed files",
+        "Existing document workspace",
+        "Included local tools"
+      ],
+      "fit": "Single practitioner proving one service before connecting accounts.",
+      "requiredControls": [],
+      "status": "Local configuration and template generation implemented"
+    },
+    {
+      "id": "connected-agency",
+      "name": "Connected agency",
+      "maxAutonomy": 3,
+      "stack": [
+        "Incumbent ATS; Recruit CRM or Ashby if suitable",
+        "Existing knowledge and task tools",
+        "Governed n8n workflows",
+        "Existing accounting system"
+      ],
+      "fit": "One agency with recurring clients and a named operations owner.",
+      "requiredControls": [
+        "tenantIsolation",
+        "sourcePermissions",
+        "authenticatedApprovals",
+        "idempotency",
+        "providerReadback",
+        "budgetLimits",
+        "killSwitch",
+        "retentionOwner"
+      ],
+      "status": "Architecture and connector acceptance contract; accounts unconnected"
+    },
+    {
+      "id": "retreat-studio",
+      "name": "Retreat and team studio",
+      "maxAutonomy": 3,
+      "stack": [
+        "Existing Retreat OS per-organization deployment",
+        "Existing HR client workspace",
+        "Existing finance system",
+        "Governed n8n or durable worker"
+      ],
+      "fit": "Agency adding team offsites and measured follow-through.",
+      "requiredControls": [
+        "tenantIsolation",
+        "sourcePermissions",
+        "authenticatedApprovals",
+        "idempotency",
+        "providerReadback",
+        "budgetLimits",
+        "killSwitch",
+        "retentionOwner"
+      ],
+      "status": "Adapter specification to existing Retreat OS; cross-product runtime unconnected"
+    },
+    {
+      "id": "managed-network",
+      "name": "Managed agency network",
+      "maxAutonomy": 4,
+      "stack": [
+        "Tenant-scoped Starlight service boundary",
+        "Incumbent ATS per agency",
+        "Durable worker; evaluate Temporal for long-running work",
+        "Per-agency credentials and audited event store"
+      ],
+      "fit": "Repeat deployments after independent agency pilots justify managed operations.",
+      "requiredControls": [
+        "tenantIsolation",
+        "sourcePermissions",
+        "authenticatedApprovals",
+        "idempotency",
+        "providerReadback",
+        "budgetLimits",
+        "killSwitch",
+        "retentionOwner",
+        "durableRecovery",
+        "independentReview"
+      ],
+      "status": "Reference design; hosted service not implemented"
+    }
+  ]
+}

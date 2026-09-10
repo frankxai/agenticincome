@@ -1,0 +1,2 @@
+record_id,engagement_id,service_id,workflow_version,metric,period_start,period_end,numerator,denominator,unit,baseline_value,observed_value,scope_change,source_ref,reviewer_ref,synthetic,status
+example-1,fictional-engagement,talent-delivery,workflow-0.2.0,accepted_deliverables,2026-09-01,2026-09-10,,,deliverables,,,,fictional:pending,fictional:reviewer,true,unmeasured

@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "scopeId": "talent-delivery",
+  "workflowVersion": "workflow-0.2.0",
+  "asOf": "2026-09-10",
+  "evidence": [
+    {
+      "id": "fictional-benchmark",
+      "scopeId": "talent-delivery",
+      "workflowVersion": "workflow-0.2.0",
+      "kind": "benchmark",
+      "reviewerRef": "fictional-reviewer-2",
+      "independent": true,
+      "synthetic": true,
+      "checkedAt": "2026-09-10",
+      "sampleSize": 20,
+      "accepted": 20,
+      "materialErrors": 0,
+      "criticalIncidents": 0,
+      "evidenceRef": "fictional:benchmark-record"
+    }
+  ]
+}

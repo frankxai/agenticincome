@@ -49,7 +49,7 @@ A bounded diagnostic can be a paid first engagement, but it must be independentl
 
 Agentic Income sells the kit and teaches the business model. Starlight contributes reusable intelligence and workflow contracts. GenCreator can produce approved recruitment and training assets. Ana can contribute a distinctive expert module after rights, authorship and compensation are agreed.
 
-Launch one complete SKU before a bundle of promises. Proposed base: US$149, one agency, up to five internal users, editable client deliverables, no vendor subscriptions or implementation service. A later automation edition must include tested provider-specific configurations. A later human-practice module must contain expert-reviewed exercises and teaching, not a synthetic imitation of Ana.
+Launch one complete SKU before a bundle of promises. The original narrow Launch Kit proposed US$149; this expanded Studio review edition proposes US$499 for one agency and up to five internal users, with editable client deliverables and no vendor subscriptions or implementation service. See the Studio product overview for current scope. A later automation edition must include tested provider-specific configurations. A later human-practice module must contain expert-reviewed exercises and teaching, not a synthetic imitation of Ana.
 
 The product is useful without an upsell: buyers can define, cost and rehearse a service from the base kit. Every next product solves a demonstrated next problem.
 

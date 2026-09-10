@@ -1,7 +1,7 @@
 {
   "_comment": "Polar-ready product catalog for agenticincome.ai. Source of truth for product metadata; ops/POLAR-SETUP.md is the runbook that turns these entries into live Polar products. Prices in cents. interval: null = one-time purchase.",
-  "_note": "Paid payloads must move to private delivery (Polar file delivery or a private repo granted via license key) before this repo goes public. Until then, products/blueprint/*.md and products/private-intel/*.md are the paid content sitting in a private repo — do NOT open-source this repo with them in it.",
-  "_checkoutGate": "`status` is the machine-readable sale gate read by lib/polar.ts. A product may be sold ONLY when its status starts with 'for sale' (case-insensitive); every other value refuses checkout, so an unrecognized or misspelled status fails closed instead of opening a sale. Setting the POLAR_* env vars alone does not open checkout — the status here must be flipped too. Activation checklist: ops/POLAR-SETUP.md.",
+  "_note": "Paid payloads must move to private delivery (Polar file delivery or a private repo granted via license key) before this repo goes public. Until then, products/blueprint/*.md and products/private-intel/*.md are the paid content sitting in a private repo \u2014 do NOT open-source this repo with them in it.",
+  "_checkoutGate": "`status` is the machine-readable sale gate read by lib/polar.ts. A product may be sold ONLY when its status starts with 'for sale' (case-insensitive); every other value refuses checkout, so an unrecognized or misspelled status fails closed instead of opening a sale. Setting the POLAR_* env vars alone does not open checkout \u2014 the status here must be flipped too. Activation checklist: ops/POLAR-SETUP.md.",
   "updatedAt": "2026-09-10",
   "merchant_of_record": "polar.sh",
   "refund_policy": "30-day no-questions refund on all paid one-time products; subscriptions cancelable anytime, first-month refund on request.",
@@ -11,7 +11,7 @@
       "name": "Income Flywheel Starter Kit",
       "price_cents": 0,
       "interval": null,
-      "status": "free — delivered on-site, never sold through checkout",
+      "status": "free \u2014 delivered on-site, never sold through checkout",
       "description": "The free first loop: pick one category, structure one honest comparison, route one recurring payer, and capture your first owned-audience relationship. Delivered instantly on-site with a checklist you can execute in 30 minutes.",
       "delivery": {
         "type": "on-site",
@@ -25,8 +25,8 @@
       "name": "Income Architecture Blueprint",
       "price_cents": 6700,
       "interval": null,
-      "status": "built — checkout gated pending Polar product and file upload",
-      "description": "Three complete business-plan kits — services, products, systems — each with a fully worked fictional example, scenario economics with named assumptions, an agent-role fulfillment runbook, a launch checklist, and a kill-criterion worksheet. Designed to be driven by the free /ai pack; every number is a labeled scenario, never a promise.",
+      "status": "built \u2014 checkout gated pending Polar product and file upload",
+      "description": "Three complete business-plan kits \u2014 services, products, systems \u2014 each with a fully worked fictional example, scenario economics with named assumptions, an agent-role fulfillment runbook, a launch checklist, and a kill-criterion worksheet. Designed to be driven by the free /ai pack; every number is a labeled scenario, never a promise.",
       "delivery": {
         "type": "polar-files",
         "path": "/delivery/blueprint",
@@ -37,31 +37,31 @@
           "products/blueprint/system-kit.md"
         ]
       },
-      "license": "Personal license — purchased copies are for the buyer's own business. Not for resale or redistribution."
+      "license": "Personal license \u2014 purchased copies are for the buyer's own business. Not for resale or redistribution."
     },
     {
       "id": "agent-team-pro",
       "name": "Agent Team Pro",
       "price_cents": 12900,
       "interval": null,
-      "status": "payload not assembled — not for sale",
+      "status": "payload not assembled \u2014 not for sale",
       "description": "The premium delivery crew: advanced agent definitions, fulfillment workflows, and operating loops that extend the free /ai pack into a full production system, with 12 months of updates included. Built from the same machinery that runs this business; no outcomes are promised, machinery is.",
       "delivery": {
         "type": "polar-files+private-repo",
         "path": "/delivery/agent-team-pro",
         "files": [
-          "products/agent-team-pro/ (payload to be assembled — see _note; target: agents/, workflows/, loops/, 00-README.md)"
+          "products/agent-team-pro/ (payload to be assembled \u2014 see _note; target: agents/, workflows/, loops/, 00-README.md)"
         ]
       },
-      "license": "Personal license — purchased copies are for the buyer's own business. Not for resale or redistribution. Includes 12 months of updates via license key."
+      "license": "Personal license \u2014 purchased copies are for the buyer's own business. Not for resale or redistribution. Includes 12 months of updates via license key."
     },
     {
       "id": "private-intel",
       "name": "Private Intel",
       "price_cents": 1900,
       "interval": "month",
-      "status": "built — checkout gated pending Polar product and file upload",
-      "description": "A monthly operator briefing: payer-term drift from the verified registry, landscape changes that affect income machinery, audit notes, and a priority watchlist. Factual and dated — intelligence, not hype.",
+      "status": "built \u2014 checkout gated pending Polar product and file upload",
+      "description": "A monthly operator briefing: payer-term drift from the verified registry, landscape changes that affect income machinery, audit notes, and a priority watchlist. Factual and dated \u2014 intelligence, not hype.",
       "delivery": {
         "type": "polar-files+email",
         "path": "/delivery/private-intel",
@@ -69,15 +69,15 @@
           "products/private-intel/<YYYY-MM>-BRIEF.md (monthly)"
         ]
       },
-      "license": "Personal subscription — briefs are for the subscriber's own use. Not for resale or redistribution. Access ends with the subscription."
+      "license": "Personal subscription \u2014 briefs are for the subscriber's own use. Not for resale or redistribution. Access ends with the subscription."
     },
     {
       "id": "claims-guard-pack",
       "name": "Claims Guard Pack",
       "price_cents": 3900,
       "interval": null,
-      "status": "built in frankxai/agentic-business-os — checkout gated pending packaged zip, Polar product, and file upload",
-      "description": "The pre-publish gate from the Agentic Business OS: one skill that audits business copy through five gates — regulated claim language (zero-tolerance), citations, brand voice, AI-slop, structure — and returns pass/warn/fail with specific corrections. Uploads into any Claude.ai project or repo. The source is MIT and public on GitHub; this is the packaged, versioned edition. Not legal advice and not exclusive content — see the pack's PRODUCT.md.",
+      "status": "built in frankxai/agentic-business-os \u2014 checkout gated pending packaged zip, Polar product, and file upload",
+      "description": "The pre-publish gate from the Agentic Business OS: one skill that audits business copy through five gates \u2014 regulated claim language (zero-tolerance), citations, brand voice, AI-slop, structure \u2014 and returns pass/warn/fail with specific corrections. Uploads into any Claude.ai project or repo. The source is MIT and public on GitHub; this is the packaged, versioned edition. Not legal advice and not exclusive content \u2014 see the pack's PRODUCT.md.",
       "delivery": {
         "type": "polar-files",
         "path": "/delivery/claims-guard-pack",
@@ -92,8 +92,8 @@
       "name": "Agentic Business OS Pack Bundle",
       "price_cents": 9900,
       "interval": null,
-      "status": "built in frankxai/agentic-business-os — checkout gated pending packaged zip, Polar product, and file upload",
-      "description": "All four Agentic Business OS skill packs in one package: Claims Guard (pre-publish gate), Business Intelligence (file-based business memory), Design Contract (design.md + taste.md authoring), and Weekly Rhythm (founder-sized Monday/Friday loop), plus the pack registry and install guide. Skill files, not software — they direct an AI harness; no app, no account. Source is MIT and public on GitHub; this is the packaged, versioned edition. No business-outcome claims — see packs/PRODUCT-BUNDLE.md.",
+      "status": "built in frankxai/agentic-business-os \u2014 checkout gated pending packaged zip, Polar product, and file upload",
+      "description": "All four Agentic Business OS skill packs in one package: Claims Guard (pre-publish gate), Business Intelligence (file-based business memory), Design Contract (design.md + taste.md authoring), and Weekly Rhythm (founder-sized Monday/Friday loop), plus the pack registry and install guide. Skill files, not software \u2014 they direct an AI harness; no app, no account. Source is MIT and public on GitHub; this is the packaged, versioned edition. No business-outcome claims \u2014 see packs/PRODUCT-BUNDLE.md.",
       "delivery": {
         "type": "polar-files",
         "path": "/delivery/abos-pack-bundle",
@@ -108,8 +108,8 @@
       "name": "Vibe OS Pack",
       "price_cents": 2400,
       "interval": null,
-      "status": "built in frankxai/vibe-os — checkout gated pending packaged zip, Polar product, and file upload",
-      "description": "The Vibe OS toolkit: three Claude Code skills for Suno-focused AI-music prompt engineering, four Python audio tools (state-to-prompt generator, mixer, two tone/binaural generators), research-cited documentation including the state-change whitepaper, and two example session scripts. Turns a target state (focus, workout, sleep, …) into a concrete music prompt plus optional tone layering. Not medical or therapeutic — the docs cite published research; no health outcomes are promised. Music generation itself requires your own Suno (or similar) account. Source is MIT and public on GitHub; this is the packaged edition — see PRODUCT.md in frankxai/vibe-os.",
+      "status": "built in frankxai/vibe-os \u2014 checkout gated pending packaged zip, Polar product, and file upload",
+      "description": "The Vibe OS toolkit: three Claude Code skills for Suno-focused AI-music prompt engineering, four Python audio tools (state-to-prompt generator, mixer, two tone/binaural generators), research-cited documentation including the state-change whitepaper, and two example session scripts. Turns a target state (focus, workout, sleep, \u2026) into a concrete music prompt plus optional tone layering. Not medical or therapeutic \u2014 the docs cite published research; no health outcomes are promised. Music generation itself requires your own Suno (or similar) account. Source is MIT and public on GitHub; this is the packaged edition \u2014 see PRODUCT.md in frankxai/vibe-os.",
       "delivery": {
         "type": "polar-files",
         "path": "/delivery/vibe-os-pack",
@@ -121,20 +121,20 @@
     },
     {
       "id": "hr-agency-launch-kit",
-      "name": "AI-native HR Agency Launch Kit",
-      "price_cents": 14900,
+      "name": "AI-native HR Agency Studio",
+      "price_cents": 49900,
       "interval": null,
-      "status": "review edition built — not for sale; price hypothesis, private delivery and expert review pending",
-      "description": "An editable business blueprint for an AI-native HR agency: eight workflow recipes, a human service model, client templates, a fictional practice engagement, dated tool research and a local economics calculator. The US$149 price is a proposal. Vendor subscriptions, account connections and implementation are separate.",
+      "status": "review edition 0.2.0 built \u2014 not for sale; price hypothesis, practitioner review and verified private delivery pending",
+      "description": "Six scoped HR service packs, a local service and offer configurator, autonomy and quality-evidence assessment, four architecture templates, retreat and team-practice modules, and co-selling economics. English review edition; provider accounts and checkout remain unconnected.",
       "delivery": {
-        "type": "polar-files — planned; current path is the free preview only",
+        "type": "polar-files \u2014 planned; current path is the free preview only",
         "path": "/downloads/ai-native-hr-agency-sample.md",
         "files": [
           "products/hr-agency-launch-kit/00-START-HERE.md",
           "products/hr-agency-launch-kit/manifest.json"
         ]
       },
-      "license": "Proposed: one purchasing agency, up to five internal users; adaptation into client deliverables permitted; source-kit resale excluded. Final terms and private delivery require release review."
+      "license": "Proposed one-agency license, up to five internal users, client-deliverable adaptation allowed; source redistribution and additional agency deployment rights excluded."
     }
   ]
 }

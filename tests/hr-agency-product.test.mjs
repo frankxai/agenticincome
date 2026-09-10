@@ -5,6 +5,7 @@ import path from 'node:path'
 import test from 'node:test'
 import { getFreePlaybook, freePlaybookSlugs } from '../lib/free-playbooks.ts'
 import '../products/hr-agency-launch-kit/tools/economics.test.mjs'
+import '../products/hr-agency-launch-kit/tools/agency.test.mjs'
 
 test('the public sample returns its exact artifact and preserves starter delivery', () => {
   const sample = getFreePlaybook('hr-agency-sample')
@@ -24,7 +25,7 @@ test('private bundle manifest describes exact reviewed files without public deli
   const root = 'products/hr-agency-launch-kit'
   const manifest = JSON.parse(readFileSync(path.join(root, 'manifest.json'), 'utf8'))
   assert.equal(manifest.productId, 'hr-agency-launch-kit')
-  assert.equal(manifest.version, '0.1.0')
+  assert.equal(manifest.version, '0.2.0')
   assert.ok(manifest.files.length >= 20)
   assert.equal(new Set(manifest.files.map(f => f.path)).size, manifest.files.length)
   for (const file of manifest.files) {
@@ -37,7 +38,7 @@ test('private bundle manifest describes exact reviewed files without public deli
 test('catalog keeps the review edition closed and points only at its free preview', () => {
   const catalog = JSON.parse(readFileSync('products/catalog.json', 'utf8'))
   const item = catalog.products.find(p => p.id === 'hr-agency-launch-kit')
-  assert.equal(item.price_cents, 14900)
+  assert.equal(item.price_cents, 49900)
   assert.ok(!item.status.trim().toLowerCase().startsWith('for sale'))
   assert.equal(item.delivery.path, '/downloads/ai-native-hr-agency-sample.md')
   assert.ok(readFileSync('public' + item.delivery.path, 'utf8').includes('pre-release'))

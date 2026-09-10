@@ -1,0 +1,13 @@
+check_id,tenant_ref,provider,version,action,expected_result,evidence_ref,checked_at,reviewer_ref,status
+read-scope,,,,,Allowed records only,,,,not_run
+deny-tenant,,,,,Foreign tenant access denied,,,,not_run
+deny-field,,,,,Forbidden field change denied,,,,not_run
+approval-digest,,,,,Changed payload requires renewed approval,,,,not_run
+replay,,,,,Repeated action causes no duplicate effect,,,,not_run
+timeout-after-success,,,,,Reconcile existing effect before any retry,,,,not_run
+webhook-auth,,,,,Invalid signature rejected,,,,not_run
+webhook-replay,,,,,Duplicate event recorded without duplicate effect,,,,not_run
+readback,,,,,Observed state matches approved intent,,,,not_run
+kill-switch,,,,,Revoked workflow cannot execute,,,,not_run
+retention,,,,,Authorized deletion and residual copies recorded,,,,not_run
+human-route,,,,,Candidate can reach named human,,,,not_run

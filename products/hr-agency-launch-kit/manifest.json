@@ -1,0 +1,93 @@
+{
+  "productId": "hr-agency-launch-kit",
+  "version": "0.1.0",
+  "status": "review-edition-not-for-sale",
+  "builtOn": "2026-09-10",
+  "sourceContract": "https://github.com/frankxai/agentic-income-skills/blob/main/schemas/income-system.v1.schema.json",
+  "files": [
+    {
+      "path": "00-START-HERE.md",
+      "sha256": "51f4ae4d3d4bb51811057733777f6575b52493596fb959af8e7d006ffbb2120d"
+    },
+    {
+      "path": "01-BUSINESS-BLUEPRINT.md",
+      "sha256": "c373c36a858d37c5f67cecec84eb03f4183b8a09dca155a162f6995ca95f3a17"
+    },
+    {
+      "path": "02-HUMAN-SERVICE-LAYERS.md",
+      "sha256": "3597a513804a6ac3e9ad3e7aa8d4dfa04bb743b2c5309b9be195ff6d030bb4a5"
+    },
+    {
+      "path": "03-WORKFLOW-PLAYBOOK.md",
+      "sha256": "5a6f949ba88bfe4239a405a1dcb3275a104cc5fef1888b120994300a97a76c8b"
+    },
+    {
+      "path": "04-TOOL-DECISIONS.md",
+      "sha256": "22a6552f785a45ee9113ad2762d32eab740a9fffb58432ab7b7bfd3d1511b9dc"
+    },
+    {
+      "path": "05-PRACTICE-CASE.md",
+      "sha256": "a8156e3f9098e25c789aa9157f63d418751ce8a9869851e96a25d75988cf9ce2"
+    },
+    {
+      "path": "06-ARCHITECTURE-AND-REUSE.md",
+      "sha256": "b050d91a32b403bf29d05c454d356ebc5dd8116499c9de6cca32939666a1d0db"
+    },
+    {
+      "path": "LICENSE-AND-SUPPORT.md",
+      "sha256": "c369fa83a3e5ee290d02cc93fcc6d5b4a5183b5be8ca7f267962f27ff244398c"
+    },
+    {
+      "path": "examples/economics-scenarios.json",
+      "sha256": "92c1f4e4326986a19aee2c6372168bb881292a09f28578f67433ce277ebfb789"
+    },
+    {
+      "path": "examples/first-client-offer.md",
+      "sha256": "7e3634be9d620364a5e3a349666cf629304dba4e06710be6ac4af6d197a3f77f"
+    },
+    {
+      "path": "templates/client-scope.md",
+      "sha256": "0f027b3e5b24c85d64dd4841bca0107fc9c7cd8875732fd5e803624af9d8e0d7"
+    },
+    {
+      "path": "templates/economics-formulas.md",
+      "sha256": "4aaa9a0255bb6b58b7448dee37e0f8d41200362602b5c5d70e4907bdf11c1ffe"
+    },
+    {
+      "path": "templates/interview-evidence.csv",
+      "sha256": "f1e334572aa79a45288a788f10e45d8fb38d74dd7cc39817c41ea5f331da24a0"
+    },
+    {
+      "path": "templates/knowledge-register.csv",
+      "sha256": "92c94c6222800b2d5bfc43cfa58de6379941c9feb653ba135f71f7bc4903ea17"
+    },
+    {
+      "path": "templates/measurement-log.csv",
+      "sha256": "e4ba66d4006fa483bac111f96339a42b55e9a7856762a250a8ce003e33328139"
+    },
+    {
+      "path": "templates/onboarding-plan.md",
+      "sha256": "617f91c05fb9af288245ae9f2ee8c0accd42fabee9bc575f95ec1a1eed80b428"
+    },
+    {
+      "path": "templates/outreach-review.csv",
+      "sha256": "9b3c500fe7f2c9cd47524ac619434d89acf3e669b181668706858163de366ed7"
+    },
+    {
+      "path": "templates/role-brief.md",
+      "sha256": "e347e06b6d242756d3a62c78baf42fb134d2831cce11e2bc58bda5280c7b8429"
+    },
+    {
+      "path": "templates/weekly-decisions.md",
+      "sha256": "d2cf5aafc03a62ac40c9d14bf9e62574d076be03bc79c74f49185c690ddb724e"
+    },
+    {
+      "path": "tools/economics.mjs",
+      "sha256": "05a9e3b264575b9094a4a0a60580a505d5b9a02e0fef8329235f40d2336f051c"
+    },
+    {
+      "path": "tools/economics.test.mjs",
+      "sha256": "000104ce3944bccf68ca92b5fd8e85a2bdb187a4beb355b895c3e6b63622cd19"
+    }
+  ]
+}

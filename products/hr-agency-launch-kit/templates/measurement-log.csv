@@ -1,0 +1,2 @@
+engagement_id,period,phase,milestone_id,accepted,coordination_minutes,review_minutes,correction_minutes,human_service_minutes,provider_cost_usd,acquisition_cost_usd,candidate_experience_score,candidate_format,notes
+fictional-engagement-001,example_only,baseline,milestone-001,false,,,,,,,,,Blank measurement template; not outcome data

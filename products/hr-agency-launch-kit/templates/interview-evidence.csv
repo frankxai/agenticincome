@@ -1,0 +1,2 @@
+candidate_id,role_id,criterion_id,criterion,source_id,source_revision,reported_evidence,observed_work_evidence,interpretation,missing_evidence,human_follow_up,reviewer,review_status
+fictional-candidate-001,fictional-role-001,onboarding,Onboarding coordination,source-interview-001,1,Reports coordinating twelve accounts over six weeks,Not supplied,Requires verification,Independent outcome evidence,Review permitted work sample,,draft

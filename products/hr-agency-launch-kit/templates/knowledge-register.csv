@@ -1,0 +1,2 @@
+source_id,client_id,purpose,system_of_record,source_link,revision,source_owner,allowed_roles,last_checked_on,review_due_on,retention_rule,visibility,approval_ref
+source-role-001,fictional-client-001,role_preparation,approved_documents,local:fictional-case,1,fictional-hiring-manager,recruiting_preparation,2026-09-10,2026-09-17,practice_only,synthetic,fictional-practice

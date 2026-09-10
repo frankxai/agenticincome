@@ -9,6 +9,7 @@ import { fitCheck, AUTOMATION_POINTER } from '@/lib/fit-check'
 import { programSlug, type Program } from '@/lib/affiliate'
 import { catalogRefusal, isPolarConfigured, type CatalogProduct } from '@/lib/polar'
 import catalog from '@/products/catalog.json'
+import { freePlaybookSlugs, getFreePlaybook } from '@/lib/free-playbooks'
 
 export const maxDuration = 60
 
@@ -175,23 +176,18 @@ const handler = createMcpHandler(
       'get_playbook',
       {
         description:
-          "Playbook content by slug: 'starter-kit' returns the full free starter kit; knowledge slugs (e.g. '02-income-models') return dated track summaries.",
+          "Free playbooks: 'starter-kit' or 'hr-agency-sample'. Knowledge slugs (e.g. '02-income-models') return dated summaries. Paid product files are not exposed.",
         inputSchema: { slug: z.string() },
       },
       async ({ slug }) => {
         const clean = slug.trim().toLowerCase()
-        if (clean === 'starter-kit') {
-          const text = readFileSync(
-            path.join(process.cwd(), 'public', 'downloads', 'agentic-income-starter-kit.md'),
-            'utf8',
-          )
-          return json({ slug: 'starter-kit', format: 'markdown', content: text })
-        }
+        const freePlaybook = getFreePlaybook(clean)
+        if (freePlaybook) return json(freePlaybook)
         const known = KNOWLEDGE_SLUGS.find((s) => s.toLowerCase() === clean)
         if (!known) {
           return json({
             error: `Unknown playbook slug: ${slug}`,
-            available: ['starter-kit', ...KNOWLEDGE_SLUGS],
+            available: [...freePlaybookSlugs, ...KNOWLEDGE_SLUGS],
           })
         }
         const full = readFileSync(path.join(process.cwd(), 'knowledge', `${known}.md`), 'utf8')

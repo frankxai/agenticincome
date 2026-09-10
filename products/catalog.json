@@ -2,7 +2,7 @@
   "_comment": "Polar-ready product catalog for agenticincome.ai. Source of truth for product metadata; ops/POLAR-SETUP.md is the runbook that turns these entries into live Polar products. Prices in cents. interval: null = one-time purchase.",
   "_note": "Paid payloads must move to private delivery (Polar file delivery or a private repo granted via license key) before this repo goes public. Until then, products/blueprint/*.md and products/private-intel/*.md are the paid content sitting in a private repo — do NOT open-source this repo with them in it.",
   "_checkoutGate": "`status` is the machine-readable sale gate read by lib/polar.ts. A product may be sold ONLY when its status starts with 'for sale' (case-insensitive); every other value refuses checkout, so an unrecognized or misspelled status fails closed instead of opening a sale. Setting the POLAR_* env vars alone does not open checkout — the status here must be flipped too. Activation checklist: ops/POLAR-SETUP.md.",
-  "updatedAt": "2026-08-07",
+  "updatedAt": "2026-09-10",
   "merchant_of_record": "polar.sh",
   "refund_policy": "30-day no-questions refund on all paid one-time products; subscriptions cancelable anytime, first-month refund on request.",
   "products": [
@@ -118,6 +118,23 @@
         ]
       },
       "license": "Underlying source is MIT-licensed and public (github.com/frankxai/vibe-os); the purchase is the packaged edition and MIT terms apply."
+    },
+    {
+      "id": "hr-agency-launch-kit",
+      "name": "AI-native HR Agency Launch Kit",
+      "price_cents": 14900,
+      "interval": null,
+      "status": "review edition built — not for sale; price hypothesis, private delivery and expert review pending",
+      "description": "An editable business blueprint for an AI-native HR agency: eight workflow recipes, a human service model, client templates, a fictional practice engagement, dated tool research and a local economics calculator. The US$149 price is a proposal. Vendor subscriptions, account connections and implementation are separate.",
+      "delivery": {
+        "type": "polar-files — planned; current path is the free preview only",
+        "path": "/downloads/ai-native-hr-agency-sample.md",
+        "files": [
+          "products/hr-agency-launch-kit/00-START-HERE.md",
+          "products/hr-agency-launch-kit/manifest.json"
+        ]
+      },
+      "license": "Proposed: one purchasing agency, up to five internal users; adaptation into client deliverables permitted; source-kit resale excluded. Final terms and private delivery require release review."
     }
   ]
 }

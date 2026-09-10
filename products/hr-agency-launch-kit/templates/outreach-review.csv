@@ -1,0 +1,2 @@
+recipient_ref,audience,role_or_offer_id,source_ref,source_checked_on,channel,message_revision,job_relevant_personalization,duplicate_check,suppression_check,reply_received,reviewer,approval_ref,provider_message_id,status
+fictional-recipient-001,candidate,fictional-role-001,source-role-001,2026-09-10,email,1,Replace with permitted current source,not_checked,not_checked,false,,,,draft_do_not_send

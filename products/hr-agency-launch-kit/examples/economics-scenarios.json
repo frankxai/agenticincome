@@ -1,0 +1,54 @@
+{
+  "version": "0.1.0",
+  "notice": "All numbers are synthetic planning assumptions, not vendor prices or earnings forecasts.",
+  "scenarios": [
+    {
+      "id": "managed-operations",
+      "currency": "USD",
+      "clients": 3,
+      "feePerClient": 1500,
+      "humanHoursPerClient": 8,
+      "hourlyCost": 75,
+      "variableToolCostPerClient": 150,
+      "fixedToolCost": 450,
+      "acquisitionCost": 600,
+      "allocatedSetupCost": 300,
+      "refundFraction": 0.03,
+      "processingFraction": 0.04,
+      "availableHours": 120,
+      "deliveryFraction": 0.7
+    },
+    {
+      "id": "expert-recruitment",
+      "currency": "USD",
+      "clients": 3,
+      "feePerClient": 3500,
+      "humanHoursPerClient": 16,
+      "hourlyCost": 100,
+      "variableToolCostPerClient": 250,
+      "fixedToolCost": 450,
+      "acquisitionCost": 900,
+      "allocatedSetupCost": 450,
+      "refundFraction": 0.03,
+      "processingFraction": 0.04,
+      "availableHours": 120,
+      "deliveryFraction": 0.7
+    },
+    {
+      "id": "leadership-onboarding",
+      "currency": "USD",
+      "clients": 2,
+      "feePerClient": 7500,
+      "humanHoursPerClient": 30,
+      "hourlyCost": 125,
+      "variableToolCostPerClient": 400,
+      "fixedToolCost": 450,
+      "acquisitionCost": 1200,
+      "allocatedSetupCost": 600,
+      "refundFraction": 0.03,
+      "processingFraction": 0.04,
+      "availableHours": 120,
+      "deliveryFraction": 0.7
+    }
+  ]
+}

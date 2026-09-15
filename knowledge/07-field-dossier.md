@@ -1,3 +1,9 @@
+---
+title: "Research Dossier — Agentic AI Income Properties"
+last_verified: 2026-07-11
+review_cycle: quarterly
+---
+
 # Research Dossier — Agentic AI Income Properties
 **Compiled:** 2026-07-11 · **Method:** live web search + direct page fetches, July 11, 2026. Every claim carries a source URL. Items that could not be confirmed against a primary source are marked **UNVERIFIED**. Conflicting sources are flagged.
 

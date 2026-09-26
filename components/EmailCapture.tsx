@@ -33,7 +33,9 @@ export function EmailCapture({
   const doneMessage =
     result?.mode === 'unwired'
       ? 'This site cannot retain the request yet. Save the reference below and return when online intake is connected.'
-      : successMessage
+      : result?.mode === 'manual_email'
+        ? 'Your email is not saved yet. Send the concierge note below and we will hold your place.'
+        : successMessage
 
   return (
     <div className="my-10 card text-center">

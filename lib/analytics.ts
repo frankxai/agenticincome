@@ -11,6 +11,7 @@ const EVENT_PROPERTIES = {
   subscribe_success: ['path', 'source', 'state', 'requestId', 'ts'],
   subscribe_error: ['path', 'source', 'state', 'requestId', 'ts'],
   'subscribe_unwired': ['path', 'source', 'state', 'requestId', 'ts'],
+  'subscribe_manual': ['path', 'source', 'state', 'requestId', 'ts'],
   comparison_criteria_opened: ['path', 'source', 'tool', 'state', 'ts'],
   disclosure_seen: ['path', 'source', 'state', 'ts'],
   affiliate_route_clicked: ['path', 'href', 'source', 'tool', 'state', 'ts'],

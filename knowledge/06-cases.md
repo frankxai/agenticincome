@@ -1,6 +1,6 @@
 ---
 title: "Attested Cases — proof with provenance"
-last_verified: 2026-07-11
+last_verified: 2026-09-28
 review_cycle: quarterly
 ---
 
@@ -36,8 +36,8 @@ Rules: no case without artifacts; no revenue figure without its cost figure; no 
 
 | Case | Model | What it proves |
 |---|---|---|
-| **This trinity itself** | System | Three properties + packs + pipelines, built and operated by agent teams — every repo, workflow, and design decision public. The permanent Exhibit A. |
-| **The `go.` redirector** | System | A production affiliate-link router (security model, catalog sync, disclosure headers) built as a weekend-scale agent delivery — [repo](https://github.com/frankxai/go-agenticincome). |
+| **This trinity itself** | System | Three properties + packs + pipelines, built and operated by agent teams — every repo, workflow, and design decision in version control, to be published at launch (private as of 2026-09-28). The permanent Exhibit A. |
+| **The `go.` redirector** | System | A production affiliate-link router (security model, catalog sync, disclosure headers) built as a weekend-scale agent delivery — repo `frankxai/go-agenticincome` (private as of 2026-09-28). |
 | *Sprint cases* | Service | Sanitized implementation-sprint write-ups land here as they clear consent — format above, artifacts included. |
 | *Pack-user cases* | Product/System | Opt-in submissions from creators who shipped with `/ai`, `/api`, or `/dpi` — submission via issue template `case-submission.yml`, verified before publication. |
 
@@ -47,4 +47,4 @@ An empty slot in this table stays visibly empty until a real case fills it. A li
 
 Shipped something with the packs? Open an issue with the `case-submission` template: what you built, artifacts we can verify, what it costs to run, whether we may name you. We verify before publishing, we never pay for cases, and we publish honest failures too — a documented dead end with a clean post-mortem teaches more than a highlight reel.
 
-*Back to the [index](00-INDEX.md) · or install the pack and go build: [README](../README.md#install-the-pack).*
+*Back to the [index](00-INDEX.md) · or install the pack and go build: [README](../README.md#run-the-public-system).*

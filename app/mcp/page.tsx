@@ -51,7 +51,7 @@ const TOOLS = [
   {
     name: 'describe_income_graph_schema',
     args: '—',
-    returns: 'The IncomeGraph.v1.1 vocabulary: 18 node types, the legal edges between them, the fields every node and edge must carry, and the four rules that surprise drafters.',
+    returns: 'The IncomeGraph.v1.1 vocabulary: 18 node types, the legal edges between them, the fields every node and edge must carry, and the rules that surprise drafters, including when a chain is refused.',
   },
   {
     name: 'draft_income_graph',
@@ -67,7 +67,7 @@ const TOOLS = [
   {
     name: 'review_income_graph',
     args: '{ graph, today }',
-    returns: 'Findings, activation verdict, and cost and founder-hour arithmetic. Four adversarial checks: hype language, fabricated demand, dark patterns, unauthorized execution.',
+    returns: 'Findings, activation verdict, one settlement verdict per offer, and cost and founder-hour arithmetic. Adversarial checks plus the rail: merchant account, signed receipt, a narrow on-chain right, or refuse.',
   },
   {
     name: 'draft_income_system_manifest',

@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import referenceGraph from '@/data/income-graph-request-to-quote.json'
+import { callStaysOff, quoteAgentCall } from '@/lib/income-graph/agent-call'
 import {
   draftIncomeGraph,
   reviewIncomeGraph,
@@ -14,21 +15,31 @@ import {
 type Outcome =
   | { state: 'idle' }
   | { state: 'parse-error'; message: string }
-  | { state: 'reviewed'; report: WorkbenchReport; missing: string[]; today: string }
+  | { state: 'reviewed'; report: WorkbenchReport; missing: string[]; today: string; graph: IncomeGraph }
 
 const SEVERITY_LABEL = { error: 'Blocking', warning: 'Watch' } as const
+
+const RAIL_LABEL = {
+  'fiat-account': 'Merchant account',
+  'signed-receipt': 'Signed receipt',
+  'machine-payment': 'Metered agent payment',
+  'on-chain-right': 'On-chain right',
+  refuse: 'Not for sale',
+} as const
 
 export function IncomeGraphWorkbench() {
   const [source, setSource] = useState('')
   const [thesis, setThesis] = useState('')
   const [draft, setDraft] = useState<IncomeGraphDraft | null>(null)
   const [outcome, setOutcome] = useState<Outcome>({ state: 'idle' })
+  const [editorNote, setEditorNote] = useState<string | null>(null)
 
   function review(text: string) {
     let parsed: unknown
     try {
       parsed = JSON.parse(text)
     } catch (error) {
+      setEditorNote(null)
       setOutcome({
         state: 'parse-error',
         message: error instanceof Error ? error.message : 'The input is not valid JSON.',
@@ -38,13 +49,31 @@ export function IncomeGraphWorkbench() {
     // The clock is read once, here, and passed in — the review function itself is pure.
     const today = new Date().toISOString().slice(0, 10)
     const graph = parsed as IncomeGraph
+    setEditorNote(null)
     setOutcome({
       state: 'reviewed',
       report: reviewIncomeGraph(graph, today),
       missing: projectToIncomeSystem(graph).missing,
       today,
+      graph,
     })
   }
+
+  useEffect(() => {
+    const text = source.trim()
+    if (!text) return
+    const handle = window.setTimeout(() => {
+      try {
+        JSON.parse(text)
+      } catch {
+        if (text.endsWith('}')) review(text)
+        else setEditorNote('Still writing. A finished graph reviews itself.')
+        return
+      }
+      review(text)
+    }, 280)
+    return () => window.clearTimeout(handle)
+  }, [source])
 
   function loadReference() {
     const text = JSON.stringify(referenceGraph, null, 2)
@@ -113,8 +142,8 @@ export function IncomeGraphWorkbench() {
         <div className="mt-10 border-t border-border pt-8">
           <div className="kicker">Step two · review a graph</div>
           <p className="mt-2 max-w-3xl leading-7 text-muted">
-            The drafted document appears below, and you can paste your own over it. Every change is
-            re-reviewed by the same functions, locally.
+            Paste a graph, or keep typing. When the JSON closes, the same functions review it here.
+            Nothing leaves the browser.
           </p>
         </div>
 
@@ -146,8 +175,17 @@ export function IncomeGraphWorkbench() {
           spellCheck={false}
           rows={12}
           placeholder='{ "apiVersion": "agenticincome.ai/v1", "kind": "IncomeGraph", … }'
-          className="mt-2 w-full rounded-xl border border-border bg-bg/60 p-4 font-mono text-xs leading-6 text-ink"
+          className="mt-2 w-full rounded-xl border border-border bg-bg/60 p-4 font-mono text-xs leading-6 text-ink outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) review(source)
+          }}
         />
+
+        {editorNote ? (
+          <p role="status" className="mt-3 text-sm text-muted">
+            {editorNote}
+          </p>
+        ) : null}
 
         {outcome.state === 'parse-error' ? (
           <p role="status" className="mt-6 rounded-xl border border-border p-4 text-sm text-muted">
@@ -214,7 +252,7 @@ function DraftVerdict({ draft }: { draft: IncomeGraphDraft }) {
 }
 
 function Report({ outcome }: { outcome: Extract<Outcome, { state: 'reviewed' }> }) {
-  const { report, missing, today } = outcome
+  const { report, missing, today, graph } = outcome
   const { economics } = report
 
   return (
@@ -269,6 +307,29 @@ function Report({ outcome }: { outcome: Extract<Outcome, { state: 'reviewed' }> 
           projection that anyone buys.
         </p>
       ) : null}
+
+      <h3 className="mt-10 text-xl font-semibold text-ink">Where the payment clears</h3>
+      <p className="mt-2 max-w-3xl leading-7 text-muted">One offer, one rail. The line under it says who would pay. The call stays off.</p>
+      {report.settlements.length > 0 ? (
+        <ul className="mt-4 space-y-4">
+          {report.settlements.map((verdict) => {
+            const quote = quoteAgentCall(graph, today, { offerId: verdict.offerId })
+            return (
+              <li key={verdict.offerId} className="border-l-2 border-border pl-4">
+                <div className="flex flex-wrap items-baseline gap-x-3 text-xs font-semibold uppercase tracking-wide text-muted">
+                  <span className={verdict.admitted ? '' : 'text-accent'}>{RAIL_LABEL[verdict.rail]}</span>
+                  <span className="font-mono normal-case tracking-normal">{verdict.offerId}</span>
+                </div>
+                <p className="mt-1 leading-7 text-ink">{verdict.label}</p>
+                <p className="mt-1 leading-7 text-ink">{callStaysOff(quote)}</p>
+                <p className="mt-1 leading-7 text-muted">{verdict.because}</p>
+              </li>
+            )
+          })}
+        </ul>
+      ) : (
+        <p className="mt-3 leading-7 text-muted">This graph has no offer, so there is nothing to clear.</p>
+      )}
 
       <h3 className="mt-10 text-xl font-semibold text-ink">
         {report.findings.length === 0

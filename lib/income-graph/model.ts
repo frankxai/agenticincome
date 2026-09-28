@@ -140,6 +140,22 @@ export type NodeData = {
   scarcity?: { claim: string; countBasis?: string }
   /** Offer: how a buyer stops paying. Required when price.unit is recurring. */
   cancellation?: string
+  /**
+   * Offer: where payment clears. Absent means fiat-account, unless the offer
+   * text names a chain, which is then an error. Allowed rails live in settlement.ts.
+   */
+  settlement?: {
+    rail?: string
+    right?: string
+    strangerEnforcement?: string
+    chain?: string
+    /** machine-payment: x402 or mpp. */
+    protocol?: string
+    /** machine-payment: usdc or eurc. */
+    asset?: string
+    /** machine-payment: the most an agent may spend before a person raises the cap. */
+    spendCap?: { amount?: number; currency?: string; period?: string }
+  }
   /** Workflow: ordered steps. */
   steps?: WorkflowStep[]
   /** AgentRole: what the agent may do without asking. */
@@ -218,7 +234,7 @@ export type IncomeGraph = {
 export type Severity = 'error' | 'warning'
 
 export type Finding = {
-  /** Stable code: S## structural, C## completeness, A## adversarial, E## economics. */
+  /** Stable code: S## structural, C## completeness, A## adversarial, E## economics, R## settlement rail. */
   code: string
   severity: Severity
   /** JSON-pointer-ish path into the graph. */

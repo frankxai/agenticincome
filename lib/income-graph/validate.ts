@@ -244,6 +244,7 @@ function completeness(graph: IncomeGraph): Finding[] {
   const offers = nodes.filter((n) => n.type === 'Offer')
   for (const offer of offers) {
     const index = nodes.indexOf(offer)
+    if (offer.data?.settlement?.rail === 'refuse') continue
     const served = edges.some((e) => e.type === 'serves' && e.from === offer.id)
     if (!served) {
       out.push(

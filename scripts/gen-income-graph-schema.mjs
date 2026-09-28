@@ -20,6 +20,15 @@ import {
   SUPPORTED_API_VERSIONS,
   VISIBILITIES,
 } from '../lib/income-graph/model.ts'
+import {
+  MACHINE_ASSETS,
+  MACHINE_CAP_PERIODS,
+  MACHINE_CHAINS,
+  MACHINE_PROTOCOLS,
+  ON_CHAIN_RIGHTS,
+  SETTLEMENT_CHAINS,
+  SETTLEMENT_RAILS,
+} from '../lib/income-graph/settlement.ts'
 
 const OUT = path.join(process.cwd(), 'public', 'schemas', 'income-graph.v1.schema.json')
 
@@ -105,6 +114,29 @@ export function buildSchema() {
                 type: 'string',
                 description:
                   'HumanGate only: must resolve to a Human node (id or label) or to metadata.principal. An AgentRole is rejected.',
+              },
+              settlement: {
+                type: 'object',
+                additionalProperties: false,
+                description:
+                  'Offer only. Absent means fiat-account, unless the offer text names a chain or a machine-payment protocol, which blocks. on-chain-right is a license, a royalty split, or resaleable access. machine-payment is x402 or mpp in usdc or eurc, per request or session, inside a human spend cap.',
+                properties: {
+                  rail: { enum: [...SETTLEMENT_RAILS] },
+                  right: { enum: [...ON_CHAIN_RIGHTS] },
+                  strangerEnforcement: { type: 'string', minLength: 1 },
+                  chain: { enum: [...new Set([...SETTLEMENT_CHAINS, ...MACHINE_CHAINS])] },
+                  protocol: { enum: [...MACHINE_PROTOCOLS] },
+                  asset: { enum: [...MACHINE_ASSETS] },
+                  spendCap: {
+                    type: 'object',
+                    additionalProperties: false,
+                    properties: {
+                      amount: { type: 'number', exclusiveMinimum: 0 },
+                      currency: { type: 'string', minLength: 1 },
+                      period: { enum: [...MACHINE_CAP_PERIODS] },
+                    },
+                  },
+                },
               },
             },
           },

@@ -5,11 +5,11 @@ import { TrackedLink } from '@/components/TrackedLink'
 
 export const metadata: Metadata = {
   title: 'AI Tools Catalog',
-  description: 'Live catalog of AI tools with real affiliate programs, each marked recurring or one-time. The exact programs powering the Agentic Income flywheel.',
+  description: 'Live catalog of AI tools with real affiliate programs, showing whether each payout recurs, pays once, or is not yet confirmed. The exact programs powering the Agentic Income flywheel.',
   alternates: { canonical: '/tools' },
   openGraph: {
     title: 'AI Tools Catalog',
-    description: 'Live catalog of AI tools with real affiliate programs, each marked recurring or one-time. The exact programs powering the Agentic Income flywheel.',
+    description: 'Live catalog of AI tools with real affiliate programs, showing whether each payout recurs, pays once, or is not yet confirmed. The exact programs powering the Agentic Income flywheel.',
     url: '/tools',
   },
 }
@@ -23,7 +23,7 @@ export default function Tools() {
       <div className="max-w-3xl">
         <div className="kicker">Engine</div>
         <h1 className="mt-3 text-5xl font-semibold text-ink">AI tools catalog</h1>
-        <p className="mt-4 text-lg leading-8 text-muted">Only tools with real affiliate programs. The Recurring column shows which payouts recur and which pay once. The catalog is the shared source of truth for every monetized route in the network.</p>
+        <p className="mt-4 text-lg leading-8 text-muted">Only tools with real affiliate programs. The Recurring column shows whether each payout recurs, pays once, mixes both, or is not yet confirmed (n/c). The catalog is the shared source of truth for every monetized route in the network.</p>
       </div>
 
       <section className="mt-12">

@@ -15,6 +15,7 @@
     "type-check": "tsc --noEmit",
     "links:check:static": "node scripts/check-internal-links.mjs",
     "verify:public": "node scripts/verify-public-surface.mjs",
+    "schema:income-graph": "node scripts/gen-income-graph-schema.mjs",
     "merge:gate": "pnpm lint && pnpm test && pnpm type-check && pnpm links:check:static && pnpm verify:public && pnpm build",
     "predeploy": "npm run merge:gate && npm run sync:catalog"
   },

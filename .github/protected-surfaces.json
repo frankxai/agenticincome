@@ -1,0 +1,19 @@
+{
+  "$comment": "Surfaces of agenticincome.ai that already work and must be evolved, not replaced. Enforced by scripts/governance/surface-guard.mjs. A change needs a Surface change brief that says how every job survives; `rearchitect` changes and `locked` surfaces also need Frank's surface-approved label. Add a surface when a page proves its value; remove one only with Frank's word. Jobs are matched as words in the brief's Keeps line, so keep them distinct. Estate view: starlight graph/protected-surfaces.graph.json.",
+  "surfaces": [
+    {
+      "id": "homepage",
+      "policy": "evolve",
+      "paths": ["app/page.tsx"],
+      "jobs": ["positioning", "proof", "income truth", "next step"],
+      "why": "The compressed expression of Agentic Income: who it is for, what is proven, and honest numbers about what agents earn. A narrower rewrite that passes its own tests can still erase it (the frankx.ai homepage was replaced exactly that way on 2026-08-27)."
+    },
+    {
+      "id": "offer-pages",
+      "policy": "evolve",
+      "paths": ["app/offers/**", "app/pack/**"],
+      "jobs": ["offer clarity", "price truth", "next step"],
+      "why": "Where a reader decides to buy the pack or an offer. Every claim and price here is reviewed; a rewrite that changes the offer is a business decision, not a refactor."
+    }
+  ]
+}

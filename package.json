@@ -5,6 +5,7 @@
   "packageManager": "pnpm@11.5.0",
   "description": "Agentic Income — implementation services, open systems, and practical products for building trustworthy AI revenue engines.",
   "scripts": {
+    "test:governance": "node --test scripts/tests/governance-gates.test.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

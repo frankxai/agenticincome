@@ -59,7 +59,7 @@ review_cycle: quarterly
 |---|---|---|---|---|---|
 | Kit (ConvertKit) | 50% for first 12 mo; then tiered 10/15/20% (Bronze 10+/Silver 50+/Gold 100+ referrals/yr) | Yes (indefinite via tiers) | Not stated on official page (3rd parties: 60–90d) | PartnerStack | https://kit.com/affiliates |
 | Beehiiv | 50% of referred revenue for 12 mo (cap $15,000/customer) | Yes (12 mo) | 60d, first-touch | Direct (app.beehiiv.com/partner_program) | https://www.beehiiv.com/support/article/23352219299095-getting-started-with-the-beehiiv-partner-program |
-| Notion | Up to $50/activated signup + 20% of year-one revenue | Year-one only | 180d | PartnerStack | https://www.notion.com/affiliates — accepting applications again (re-verified 2026-09-28; it was closed to new affiliates on 2026-07-11) |
+| Notion | Up to $50/activated signup + 20% of year-one revenue | Year-one only | 180d, last-click | PartnerStack | https://www.notion.com/affiliates — accepting applications again (re-verified 2026-09-28; it was closed to new affiliates on 2026-07-11). Last-click per the official FAQ: "Commissions are paid on a last-click basis" |
 | ElevenLabs | 22% for first 12 mo (11% on Business plan) | Yes (12 mo) | Not stated officially (3rd parties: 90d) | PartnerStack | https://elevenlabs.io/affiliates-terms · https://market.partnerstack.com/program/elevenlabsinc |
 | Semrush | Per-product CPA: $300 (Semrush One), $200 (SEO Toolkit, Traffic & Market), $100 (AI Visibility/Content/Ads), $50 (Local/Social) + $10/trial | No (CPA) | 120d, last-click | Impact | https://www.semrush.com/lp/affiliate-program/en/ |
 | Hostinger | Starts at 40%, grows with sales volume | No (one-time) | Not stated officially (3rd parties: 30d) | Direct | https://www.hostinger.com/affiliates |

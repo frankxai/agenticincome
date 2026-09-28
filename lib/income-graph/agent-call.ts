@@ -71,7 +71,6 @@ export function quoteAgentCall(graph: IncomeGraph, today: string, request: unkno
       ? { currency: price.currency, amount: price.amount, unit: price.unit }
       : null
   const settlement = offer.data?.settlement
-  const cap = settlement?.spendCap?.amount
   if (verdict.rail === 'machine-payment' && typeof request.claimedRemaining === 'number' && priced && request.claimedRemaining < priced.amount) {
     return {
       ...blank(offerId),

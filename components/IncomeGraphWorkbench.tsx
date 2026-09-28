@@ -73,8 +73,6 @@ export function IncomeGraphWorkbench() {
       review(text)
     }, 280)
     return () => window.clearTimeout(handle)
-    // review reads only the text passed in.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [source])
 
   function loadReference() {

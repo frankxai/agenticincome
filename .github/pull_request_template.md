@@ -13,8 +13,11 @@ Commands run with results, preview URL, screenshots or measurements.
 <!--
 Only if this PR touches a protected surface (.github/protected-surfaces.json): copy the brief below OUT of this
 comment and fill it in (text inside the comment is ignored by the Surface Guard check).
-Kind: evolve (improve in place) or rearchitect (new structure; needs Frank's surface-approved label).
-Keeps: one entry per job of that surface, e.g. for the homepage: positioning, proof, income truth, next step.
+Kind: evolve (improve in place) or rearchitect (new structure; needs Frank's surface-approved label, re-applied
+after any new commit).
+Keeps: "job: how it survives" for every job of that surface, separated by ";". For the homepage the jobs are
+positioning, proof, income truth, next step. Example:
+Keeps: positioning: <how it survives>; proof: <how it survives>; income truth: <how it survives>; next step: <how it survives>
 
 ### Surface change brief
 Surface: homepage

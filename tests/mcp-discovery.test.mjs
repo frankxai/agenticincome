@@ -27,9 +27,11 @@ test('the MCP server discloses affiliate links in registry responses', () => {
 test('partner economics rows carry a verification date and source', () => {
   const programs = JSON.parse(read('data/programs.json')).programs
   const verified = programs.filter((p) => p.commissionVerifiedAt)
-  assert.ok(verified.length >= 5, 'expected at least the five 2026-08-16 verified programs')
+  assert.ok(verified.length >= 5, 'expected at least five programs verified against their own terms')
   for (const p of verified) {
-    assert.equal(p.commissionVerifiedAt, '2026-08-16')
+    assert.match(p.commissionVerifiedAt, /^\d{4}-\d{2}-\d{2}$/, `${p.tool} verification date is not YYYY-MM-DD`)
+    assert.ok(p.commissionVerifiedAt >= '2026-08-16', `${p.tool} verification predates the first official-terms pass`)
+    assert.ok(Date.parse(p.commissionVerifiedAt) <= Date.now(), `${p.tool} verification date is in the future`)
     assert.ok(p.commissionSourceUrl, `${p.tool} verified without a source URL`)
     assert.ok(p.commission, `${p.tool} verified without a commission string`)
   }

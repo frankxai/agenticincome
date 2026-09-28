@@ -13,6 +13,7 @@ import { draftIncomeGraph, type IncomeGraphDraft, type UnsupportedClaim } from '
 import { checkEconomics, computeEconomics, type Economics } from './economics.ts'
 import { exportTasks, projectToIncomeSystem, tasksToMarkdown, type InstallableTask } from './export.ts'
 import { migrateGraph } from './migrate.ts'
+import { analyzeSettlement, type SettlementVerdict } from './settlement.ts'
 import { notAGraph, validateStructure } from './validate.ts'
 import { SCHEMA_ID, type Finding, type IncomeGraph } from './model.ts'
 
@@ -32,6 +33,8 @@ export type WorkbenchReport = {
   findings: Finding[]
   counts: { errors: number; warnings: number }
   economics: Economics
+  /** One verdict per Offer, in document order. A clean offer with no rail is fiat-account. */
+  settlements: SettlementVerdict[]
   tasks: InstallableTask[]
   nextDecisions: string[]
 }
@@ -73,11 +76,13 @@ export function reviewIncomeGraph(input: IncomeGraph, today: string): WorkbenchR
   const migration = migrateGraph(input)
   const graph = migration.graph
 
+  const settlement = analyzeSettlement(graph)
   const findings = sortFindings([
     ...migration.findings,
     ...validateStructure(graph),
     ...runAdversarialChecks(graph, today),
     ...checkEconomics(graph),
+    ...settlement.findings,
   ])
 
   const errors = findings.filter((f) => f.severity === 'error').length
@@ -113,6 +118,16 @@ export function reviewIncomeGraph(input: IncomeGraph, today: string): WorkbenchR
       `This costs ${economics.founderHoursPerMonth} founder hours a month. Decide what you are giving up for them.`,
     )
   }
+  if (settlement.verdicts.some((verdict) => verdict.rail === 'machine-payment' && verdict.admitted)) {
+    nextDecisions.push(
+      'A metered agent payment is admitted on paper. Leave the endpoint off until a fiat offer on this graph is activated by an attested payment.',
+    )
+  }
+  if (settlement.verdicts.some((verdict) => verdict.rail === 'on-chain-right' && verdict.admitted)) {
+    nextDecisions.push(
+      'A chain right is admitted on paper. A person still has to sign the registration step. Nothing in that admission is a reason to mint a collection.',
+    )
+  }
 
   return {
     schema: SCHEMA_ID,
@@ -123,6 +138,7 @@ export function reviewIncomeGraph(input: IncomeGraph, today: string): WorkbenchR
     findings,
     counts: { errors, warnings },
     economics,
+    settlements: settlement.verdicts,
     tasks: exportTasks(graph),
     nextDecisions,
   }
@@ -140,6 +156,7 @@ function emptyReport(findings: Finding[]): WorkbenchReport {
     findings,
     counts: { errors: findings.length, warnings: 0 },
     economics: computeEconomics(EMPTY_GRAPH),
+    settlements: [],
     tasks: [],
     nextDecisions: ['Send an IncomeGraph document. There is nothing here to review.'],
   }
@@ -156,4 +173,4 @@ export {
   validateStructure,
 }
 export * from './model.ts'
-export type { Economics, IncomeGraphDraft, InstallableTask, UnsupportedClaim }
+export type { Economics, IncomeGraphDraft, InstallableTask, SettlementVerdict, UnsupportedClaim }

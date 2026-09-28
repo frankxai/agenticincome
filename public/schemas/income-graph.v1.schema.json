@@ -220,6 +220,73 @@
             "approver": {
               "type": "string",
               "description": "HumanGate only: must resolve to a Human node (id or label) or to metadata.principal. An AgentRole is rejected."
+            },
+            "settlement": {
+              "type": "object",
+              "additionalProperties": false,
+              "description": "Offer only. Absent means fiat-account, unless the offer text names a chain or a machine-payment protocol, which blocks. on-chain-right is a license, a royalty split, or resaleable access. machine-payment is x402 or mpp in usdc or eurc, per request or session, inside a human spend cap.",
+              "properties": {
+                "rail": {
+                  "enum": [
+                    "fiat-account",
+                    "signed-receipt",
+                    "machine-payment",
+                    "on-chain-right",
+                    "refuse"
+                  ]
+                },
+                "right": {
+                  "enum": [
+                    "license",
+                    "royalty-split",
+                    "resaleable-access"
+                  ]
+                },
+                "strangerEnforcement": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "chain": {
+                  "enum": [
+                    "base",
+                    "story",
+                    "solana",
+                    "tempo"
+                  ]
+                },
+                "protocol": {
+                  "enum": [
+                    "x402",
+                    "mpp"
+                  ]
+                },
+                "asset": {
+                  "enum": [
+                    "usdc",
+                    "eurc"
+                  ]
+                },
+                "spendCap": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "amount": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "currency": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "period": {
+                      "enum": [
+                        "day",
+                        "month"
+                      ]
+                    }
+                  }
+                }
+              }
             }
           }
         }

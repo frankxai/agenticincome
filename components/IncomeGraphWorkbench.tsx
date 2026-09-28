@@ -18,6 +18,14 @@ type Outcome =
 
 const SEVERITY_LABEL = { error: 'Blocking', warning: 'Watch' } as const
 
+const RAIL_LABEL = {
+  'fiat-account': 'Merchant account',
+  'signed-receipt': 'Signed receipt',
+  'machine-payment': 'Metered agent payment',
+  'on-chain-right': 'On-chain right',
+  refuse: 'Not for sale',
+} as const
+
 export function IncomeGraphWorkbench() {
   const [source, setSource] = useState('')
   const [thesis, setThesis] = useState('')
@@ -269,6 +277,30 @@ function Report({ outcome }: { outcome: Extract<Outcome, { state: 'reviewed' }> 
           projection that anyone buys.
         </p>
       ) : null}
+
+      <h3 className="mt-10 text-xl font-semibold text-ink">Where the payment clears</h3>
+      <p className="mt-2 max-w-3xl leading-7 text-muted">
+        Each offer gets one rail. A file, a seat, or a month clears in a merchant account. A signed
+        receipt proves what happened. An agent call can clear in USDC or EURC, per request or per
+        session, inside a spend cap a person raises. A chain is admitted for a license, a royalty
+        split, or access a stranger has to enforce after the seller is gone.
+      </p>
+      {report.settlements.length > 0 ? (
+        <ul className="mt-4 space-y-4">
+          {report.settlements.map((verdict) => (
+            <li key={verdict.offerId} className="border-l-2 border-border pl-4">
+              <div className="flex flex-wrap items-baseline gap-x-3 text-xs font-semibold uppercase tracking-wide text-muted">
+                <span className={verdict.admitted ? '' : 'text-accent'}>{RAIL_LABEL[verdict.rail]}</span>
+                <span className="font-mono normal-case tracking-normal">{verdict.offerId}</span>
+              </div>
+              <p className="mt-1 leading-7 text-ink">{verdict.label}</p>
+              <p className="mt-1 leading-7 text-muted">{verdict.because}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-3 leading-7 text-muted">This graph has no offer, so there is nothing to clear.</p>
+      )}
 
       <h3 className="mt-10 text-xl font-semibold text-ink">
         {report.findings.length === 0

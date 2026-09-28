@@ -58,6 +58,27 @@ const nodeData = z
     }),
     scarcity: z.object({ claim: z.string(), countBasis: z.string().optional() }),
     cancellation: z.string(),
+    settlement: z
+      .object({
+        rail: z
+          .string()
+          .describe('fiat-account, signed-receipt, on-chain-right, or refuse. A wrong value is an R03 finding, not a transport error.'),
+        right: z.string().describe('On-chain only: license, royalty-split, or resaleable-access.'),
+        strangerEnforcement: z
+          .string()
+          .describe('On-chain only: who enforces the right after the seller is gone, in at least eight words.'),
+        chain: z.string().describe('On-chain right: base, story, or solana. Machine payment: base, solana, or tempo.'),
+        protocol: z.string().describe('Machine payment only: x402 or mpp.'),
+        asset: z.string().describe('Machine payment only: usdc or eurc.'),
+        spendCap: z
+          .object({
+            amount: z.number(),
+            currency: z.string(),
+            period: z.string().describe('day or month'),
+          })
+          .partial(),
+      })
+      .partial(),
     steps: z.array(workflowStep),
     allowedActions: z.array(z.string()),
     deniedActions: z.array(z.string()),

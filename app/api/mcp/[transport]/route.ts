@@ -224,7 +224,7 @@ const handler = createMcpHandler(
       'describe_income_graph_schema',
       {
         description:
-          'The IncomeGraph.v1 vocabulary: the 17 node types, the legal edges between them, and the fields every node and edge must carry. Read this before drafting a graph.',
+          'The IncomeGraph.v1 vocabulary: the 18 node types, the legal edges between them, the fields every node and edge must carry, and the settlement rails. Read this before drafting a graph.',
       },
       async () =>
         json({
@@ -248,6 +248,7 @@ const handler = createMcpHandler(
             'A HumanGate approver must resolve to a Human node or to metadata.principal; an AgentRole is rejected.',
             `Evidence.provenance.source must be an http(s) URL, a file path, or "interview:<name> <YYYY-MM-DD>", and data.kind should be one of: ${EVIDENCE_KINDS.join(', ')}.`,
             'A Customer or Offer carrying a price or a volume assumption needs an evidences edge, and demand language in notes or description needs one too.',
+            'An offer that mentions an NFT, a token, a mint, a smart contract, x402, or MPP must set data.settlement.rail. machine-payment is x402 or mpp, in usdc or eurc, per request or session, on base, solana, or tempo, inside a human spend cap, with a facilitator cost. on-chain-right is a license, a royalty split, or resaleable access a stranger enforces after the seller is gone. A collection, a coin, a yield, an agent identity sold as an NFT, or an agent that can mint is refused.',
           ],
           documentContract:
             'The IncomeSystem.v1 manifest contract is owned by github.com/frankxai/agentic-income-skills. This graph drafts it; that repository validates it.',
@@ -267,7 +268,7 @@ const handler = createMcpHandler(
       'review_income_graph',
       {
         description:
-          'Run the workbench over an IncomeGraph: structure, completeness, honest economics, and four adversarial checks — hype language, fabricated demand, dark patterns, and unauthorized execution. Returns findings, an activation verdict, and cost and founder-hour arithmetic. It never predicts revenue.',
+          'Run the workbench over an IncomeGraph: structure, completeness, honest economics, four adversarial checks, and the settlement rail. A chain offer is refused unless it is a right a stranger must enforce after the seller is gone. Returns findings, an activation verdict, one settlement verdict per offer, and cost and founder-hour arithmetic. It never predicts revenue.',
         inputSchema: {
           graph: incomeGraphSchema,
           today: z

@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0",
+  "updatedAt": "2026-08-10",
+  "repository": {
+    "owner": "frankxai",
+    "name": "agenticincome",
+    "visibility": "private",
+    "role": "versioned-product",
+    "publicDomain": "agenticincome.ai"
+  },
+  "production": {
+    "vercelProject": "agenticincome",
+    "publicChangelogPath": "/changelog",
+    "verificationStatus": "not-reverified-in-this-lane"
+  },
+  "releasePolicy": {
+    "githubReleaseMode": "draft-only",
+    "versioning": "annotated-semantic-tags-only",
+    "cadence": "meaningful-change-only",
+    "publicChangelog": "preview-and-visual-review-required",
+    "commercialClaims": "evidence-and-owner-approval-required"
+  },
+  "releases": [
+    {
+      "slug": "gated-catalog-products",
+      "status": "merged",
+      "mergedThrough": "2026-08-07",
+      "recordedAt": "2026-08-10",
+      "title": "Gated catalog product expansion",
+      "summary": "Added three catalog products to the existing fail-closed commercial rail while preserving manual activation and delivery prerequisites.",
+      "category": "product-catalog",
+      "audience": "creators-and-operators",
+      "highlights": [
+        "Added Claims Guard, Agentic Business OS, and Vibe OS entries to the product catalog.",
+        "Extended the setup checklist and product mapping while keeping checkout gates closed by default."
+      ],
+      "sourcePullRequests": [23],
+      "limitations": [
+        "The products remain gated until packaged files, merchant products, delivery configuration, and owner approval are complete."
+      ]
+    },
+    {
+      "slug": "ci-and-web-release-gates",
+      "status": "merged",
+      "mergedThrough": "2026-07-30",
+      "recordedAt": "2026-08-10",
+      "title": "CI and web release gates",
+      "summary": "Strengthened continuous-integration coverage and installed the repository web-excellence contract for future public-interface changes.",
+      "category": "quality-and-reliability",
+      "audience": "developers-and-reviewers",
+      "highlights": [
+        "Adjusted the merge gate so draft pull requests receive current repository validation.",
+        "Installed the mechanical web-excellence gate and session contracts for UI work."
+      ],
+      "sourcePullRequests": [22, 19],
+      "limitations": [
+        "Mechanical checks do not replace desktop, mobile, reduced-motion, accessibility, or human visual review."
+      ]
+    },
+    {
+      "slug": "checkout-and-source-truth",
+      "status": "merged",
+      "mergedThrough": "2026-07-26",
+      "recordedAt": "2026-08-10",
+      "title": "Checkout and source-truth hardening",
+      "summary": "Added a fail-closed Polar checkout path and corrected public installation guidance to point to executable open-source artifacts.",
+      "category": "commerce-and-trust",
+      "audience": "prospective-buyers-and-builders",
+      "highlights": [
+        "Added an API checkout route beside the existing URL path with catalog, mapping, and credential gates.",
+        "Replaced private or non-executable install references with the public Agentic Income skills repository and tested commands."
+      ],
+      "sourcePullRequests": [18, 17],
+      "limitations": [
+        "A sandbox purchase and current production verification are still required before any checkout capability is presented as active."
+      ]
+    },
+    {
+      "slug": "control-plane-and-education-hub",
+      "status": "merged",
+      "mergedThrough": "2026-07-12",
+      "recordedAt": "2026-08-10",
+      "title": "Control-plane and education hub",
+      "summary": "Established the education-first Agentic Income hub, portable pack guidance, and browser-local delivery reference surfaces.",
+      "category": "product-foundation",
+      "audience": "creators-and-implementation-buyers",
+      "highlights": [
+        "Added the knowledge base, portable Income Architect pack, and structured product paths.",
+        "Added Build, Operate, Proof, and browser-local request-to-quote reference routes with explicit authority lanes."
+      ],
+      "sourcePullRequests": [14, 10],
+      "limitations": [
+        "The request-to-quote desk is browser-local and does not send customer data, issue contracts, or move money."
+      ]
+    },
+    {
+      "slug": "implementation-engine-and-trust",
+      "status": "merged",
+      "mergedThrough": "2026-07-11",
+      "recordedAt": "2026-08-10",
+      "title": "Implementation engine and trust desk",
+      "summary": "Repositioned the product around scoped implementation and added an inspectable trust comparison surface with honest access states.",
+      "category": "positioning-and-trust",
+      "audience": "founders-and-ai-operators",
+      "highlights": [
+        "Organized the experience around Audit, Architect, Implement, and Verify with repository-backed proof.",
+        "Added comparison criteria, disclosure, freshness, ownership, and paid or unpaid route states before click-through."
+      ],
+      "sourcePullRequests": [9, 7],
+      "limitations": [
+        "The historical release evidence left final production promotion and some visual acceptance decisions human-gated."
+      ]
+    },
+    {
+      "slug": "visual-and-audit-portability",
+      "status": "merged",
+      "mergedThrough": "2026-06-22",
+      "recordedAt": "2026-08-10",
+      "title": "Visual and audit portability",
+      "summary": "Added branded visual assets and made repository audit execution more portable across supported Node environments.",
+      "category": "assets-and-tooling",
+      "audience": "developers-and-content-operators",
+      "highlights": [
+        "Added the initial GitHub and infographic visual asset suite.",
+        "Updated audit execution to use the active Node runtime instead of an environment-specific binary assumption."
+      ],
+      "sourcePullRequests": [6, 5, 4],
+      "limitations": [
+        "Asset presence alone is not current proof of production placement, licensing review, or responsive visual quality."
+      ]
+    },
+    {
+      "slug": "foundation-accessibility-and-ci",
+      "status": "merged",
+      "mergedThrough": "2026-06-15",
+      "recordedAt": "2026-08-10",
+      "title": "Foundation accessibility and CI",
+      "summary": "Established the repository CI baseline and improved form accessibility, licensing, and audit-script portability.",
+      "category": "foundation",
+      "audience": "developers-and-site-visitors",
+      "highlights": [
+        "Added the initial GitHub Actions continuous-integration workflow.",
+        "Improved email-input accessibility and guarded affiliate-audit script execution across environments."
+      ],
+      "sourcePullRequests": [3, 2, 1],
+      "limitations": [
+        "This baseline record does not certify current production accessibility or end-to-end email retention."
+      ]
+    }
+  ]
+}

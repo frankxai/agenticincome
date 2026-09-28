@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { payingPrograms, verifiedEconomicsPrograms } from '@/lib/affiliate'
+import { payingPrograms, verifiedEconomicsPrograms, verifiedRangeLabel } from '@/lib/affiliate'
 import Link from 'next/link'
 import { TrackedLink } from '@/components/TrackedLink'
 
@@ -30,7 +30,7 @@ export default function Tools() {
         <h2 className="display-h2">Partner economics</h2>
         <p className="mt-3 max-w-prose text-sm leading-6 text-muted">
           Some links on this page are affiliate links; Agentic Income may earn a commission.
-          Rates below were verified 16 Aug 2026 against each program&apos;s own terms — everything
+          Rates below were verified {verifiedRangeLabel(verified)} against each program&apos;s own terms — everything
           else in the catalog stays labeled unverified until it gets the same pass.
         </p>
         <div className="mt-4 overflow-hidden rounded-2xl border border-border bg-surface/80">

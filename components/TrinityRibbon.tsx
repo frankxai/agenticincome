@@ -21,10 +21,10 @@ const PROPERTIES = [
     stage: 'Compound',
     cls: 't-compound',
     pack: '/dpi',
-    name: 'Disruptive Passive Income',
-    domain: 'disruptivepassiveincome.com',
-    href: 'https://disruptivepassiveincome.com',
-    body: 'The sovereign wealth substrate: income architecture structurally decoupled from hours. A doctrine, not a funnel — your ledger stays local.',
+    name: 'Compound Layer',
+    domain: null,
+    href: null,
+    body: 'The sovereign wealth substrate: income architecture structurally decoupled from hours. A doctrine, not a funnel — lives on this hub, not a separate public brand.',
   },
 ]
 
@@ -50,9 +50,11 @@ export function TrinityRibbon() {
               </div>
               <h3 className="font-display text-xl font-bold">{p.name}</h3>
               <p className="text-sm leading-relaxed text-[color:var(--color-muted)]">{p.body}</p>
-              <span className="mt-1 font-mono text-[0.68rem] uppercase tracking-widest text-[color:var(--color-muted)]">
-                {p.domain}{p.href ? ' →' : ''}
-              </span>
+              {p.domain && (
+                <span className="mt-1 font-mono text-[0.68rem] uppercase tracking-widest text-[color:var(--color-muted)]">
+                  {p.domain}{p.href ? ' →' : ''}
+                </span>
+              )}
             </>
           )
           return p.href ? (

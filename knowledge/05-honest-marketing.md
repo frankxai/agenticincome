@@ -1,6 +1,6 @@
 ---
 title: "Honest Marketing — selling without income claims"
-last_verified: 2026-07-11
+last_verified: 2026-09-28
 review_cycle: quarterly
 ---
 
@@ -10,7 +10,7 @@ The "make money with AI" category is a reputational superfund site. That is not 
 
 ## The legal floor (US/EU, July 2026)
 
-1. **No earnings claims.** Not "make $10k/mo," not "results not typical" fine print under a Lambo. The FTC's **Operation AI Comply** (running since Sept 2024, active through 2025–26) has prosecuted exactly this — the Click Profit and Workado actions targeted baseless "AI passive income" claims, and AI-attached earnings claims are the agency's highest-risk category. Separately, the Consumer Reviews Rule bans fake or AI-generated reviews at up to **$51,744 per violation**. Our standard is stricter than the law: **we do not market outcomes at all — we market machinery and education.**
+1. **No earnings claims.** Not "make $10k/mo," not "results not typical" fine print under a Lambo. The FTC's **Operation AI Comply** (running since Sept 2024, active through 2025–26) has prosecuted exactly this — the 2025 [Click Profit action](https://www.ftc.gov/news-events/news/press-releases/2025/03/ftc-acts-stop-click-profit-online-business-opportunity-has-cost-consumers-least-14-million) targeted baseless "AI-powered" passive-income claims, and AI-attached earnings claims are the agency's highest-risk category. Separately, the Consumer Reviews Rule bans fake or AI-generated reviews at up to **$53,088 per violation** ([FTC 2025 adjustment](https://www.ftc.gov/news-events/news/press-releases/2025/02/ftc-publishes-inflation-adjusted-civil-penalty-amounts-2025)). Our standard is stricter than the law: **we do not market outcomes at all — we market machinery and education.**
 2. **Affiliate disclosure, always, before the click.** Every surface carrying a compensated link labels it plainly ("we may earn a commission — here's our selection doctrine"), and our `go.` redirector sends disclosure headers on every hop. Disclosure lives next to the link, not in a footer.
 3. **Material-connection honesty in content.** If we were paid, gifted, or partnered, the artifact says so at the top. If we haven't used a tool hands-on, the evidence label says "desk review" — the labels are part of the product.
 4. **EU specifics:** consumer-facing digital sales need clear pre-contract information, withdrawal-right handling (your MoR does this — Slot 1 was load-bearing), and no dark patterns. **EU AI Act Article 50 applies from Aug 2, 2026:** chat-style AI must disclose it's AI, generative outputs need machine-readable "AI-generated" marking, deepfakes must be labeled — penalties to €15M or 3% of turnover. If your content pipeline is agentic (ours is), record AI-assistance provenance now; it's cheap today and mandatory tomorrow.
@@ -20,7 +20,7 @@ The "make money with AI" category is a reputational superfund site. That is not 
 
 - **Recommendation survives the incentive.** Before any tool enters the registry with an affiliate link, it must already be recommended without one — and every recommendation names a credible non-affiliate alternative. If the alternative is better for a segment, we say so *first*.
 - **Honest costs on everything.** Every stream, product, and pattern we publish carries its labor floor, latency to first result, and failure modes. This single habit converts better than any urgency timer ever built, because the reader can feel the absence of the con.
-- **Show the machinery.** Our pipelines, registries, and workflows are public repos. "Audit us" is the strongest CTA in this category and nobody else can afford to say it.
+- **Show the machinery.** Our pipelines, registries, and workflows are built to be published as repos (as of 2026-09-28 they are still private pending launch). "Audit us" is the strongest CTA in this category and nobody else can afford to say it.
 
 ## What inspiring-and-honest sounds like (the voice)
 

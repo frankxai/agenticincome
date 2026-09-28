@@ -1,6 +1,6 @@
 ---
 title: "The Tool Stack — the minimum machine, legal-light"
-last_verified: 2026-07-11
+last_verified: 2026-09-28
 review_cycle: quarterly
 ---
 
@@ -10,10 +10,10 @@ The goal is a business with **no employees, no invoices to chase, no VAT registr
 
 ## Slot 1 — Checkout: Merchant of Record (the legal-light keystone)
 
-Sell digital products through a **Merchant of Record (MoR)** — they are legally the seller; they handle global sales tax/VAT, refunds, chargebacks, and compliance. You ship product; they ship paperwork. For a solo creator selling packs and kits internationally, this single choice removes ~90% of the legal surface area.
+Sell digital products through a **Merchant of Record (MoR)** — they are legally the seller; they handle global sales tax/VAT, refunds, chargebacks, and compliance. You ship product; they ship paperwork. For a solo creator selling packs and kits internationally, this single choice removes most of the tax and refund surface area.
 
-- **Our default (July 2026): Polar.sh.** True MoR, open-source, developer-first — checkout links, license keys, file delivery, GitHub-native, usage-based billing built for AI products. 5% + $0.50 on the free tier, cheaper on paid plans — versus Gumroad's ~13–19% all-in. Built for exactly this product shape (packs, templates, kits).
-- **The field:** Lemon Squeezy is now effectively a migration path into **Stripe Managed Payments** (same 5% + $0.50; invite-preview through early 2026) — fine if you're already there, transition risk if you're starting new. **Paddle** suits vetted recurring SaaS, not template packs. **Whop** (~6–7% all-in with tax handling) is the right second surface when you add a paid community with marketplace distribution. **Gumroad** is the zero-code fallback, priciest per sale.
+- **Our default (September 2026): Polar.sh.** True MoR, open-source, developer-first — checkout links, license keys, file delivery, GitHub-native, usage-based billing built for AI products. 5% + $0.50 on the free tier, cheaper on paid plans ([fees](https://polar.sh/docs/merchant-of-record/fees)) — versus Gumroad's 10% + $0.50 plus card processing, roughly 13–17% all-in on a $19–$149 product ([fees](https://gumroad.com/help/article/66-gumroads-fees)). Built for exactly this product shape (packs, templates, kits).
+- **The field:** Lemon Squeezy is now effectively a migration path into **Stripe Managed Payments** ([3.5% on top of standard Stripe processing](https://support.stripe.com/questions/managed-payments-pricing)) — fine if you're already there, transition risk if you're starting new. **Paddle** suits vetted recurring SaaS, not template packs. **Whop** (processing 2.7% + $0.30 plus opt-in add-ons such as 2% tax remittance — [fees](https://docs.whop.com/fees)) is the right second surface when you add a paid community with marketplace distribution. **Gumroad** is the zero-code fallback, priciest per sale.
 - **Not MoR:** raw Stripe. Cheaper per-transaction, but *you* become the seller of record — tax registrations and refund ops land on you. Wrong trade at this stage. (Full comparison with sources: [07 — Field Dossier](07-field-dossier.md) §3; fees re-verified quarterly.)
 
 ## Slot 2 — Email: the only audience you own
@@ -34,18 +34,18 @@ Privacy-first analytics (Vercel Analytics / Plausible-class) + your MoR's revenu
 
 Covered in [01](01-landscape.md) and [03](03-agent-fulfillment.md): one Tier-1 runtime (build), optionally one Tier-2 operator (run). Their credentials live in a secrets manager, never in repos; scoped tokens per surface; spend caps on everything that bills per use.
 
-## The reference stack (what this business runs, July 2026)
+## The reference stack (what this business runs, September 2026)
 
 | Slot | Choice | Why |
 |---|---|---|
-| Checkout | MoR (Lemon Squeezy / Polar) | Zero tax/refund ops, personal-license products |
+| Checkout | MoR — Polar (fail-closed path wired; not yet verified live) | Zero tax/refund ops, personal-license products |
 | Email | Beehiiv or Kit (final call in registry) | Owned audience + partner economics |
 | Web | Next.js 16 + Vercel | Agent-friendly deploys, preview gates |
 | Analytics | Vercel Analytics + GSC | Private, sufficient, zero banners |
 | Agents | Claude Code (+ packs) · OpenClaw as operator · Hermes for governed cron | Build / run / govern |
-| Links | Self-hosted `go.` redirector ([go-agenticincome](https://github.com/frankxai/go-agenticincome)) | Swappable, disclosed, no third-party link tax |
+| Links | Self-hosted `go.` redirector (`frankxai/go-agenticincome`, private repo) | Swappable, disclosed, no third-party link tax |
 
-**Total fixed cost of the machine: roughly the price of two streaming subscriptions**, plus usage-based agent spend that scales with revenue-producing work. That asymmetry — near-zero fixed cost, capability rented by the hour — is why the solo-with-agents model works at all.
+**Fixed cost of the machine stays low** — mostly free tiers and a few modest subscriptions — plus usage-based agent spend that scales with the work you actually run. That asymmetry — near-zero fixed cost, capability rented by the hour — is why the solo-with-agents model works at all.
 
 ## What you deliberately don't have
 

@@ -9,6 +9,22 @@ import { fitCheck, AUTOMATION_POINTER } from '@/lib/fit-check'
 import { programSlug, type Program } from '@/lib/affiliate'
 import { catalogRefusal, isPolarConfigured, type CatalogProduct } from '@/lib/polar'
 import catalog from '@/products/catalog.json'
+import referenceGraph from '@/data/income-graph-request-to-quote.json'
+import {
+  draftIncomeGraph,
+  exportTasks,
+  projectToIncomeSystem,
+  reviewIncomeGraph,
+  tasksToMarkdown,
+  CURRENT_API_VERSION,
+  EVIDENCE_KINDS,
+  NODE_TYPES,
+  EDGE_RULES,
+  SCHEMA_ID,
+  SUPPORTED_API_VERSIONS,
+  type IncomeGraph,
+} from '@/lib/income-graph'
+import { incomeGraphSchema } from '@/lib/income-graph/zod'
 
 export const maxDuration = 60
 
@@ -201,6 +217,116 @@ const handler = createMcpHandler(
           format: 'markdown',
           summary: truncated ? `${full.slice(0, 2400)}\n\n[…truncated summary — full track ships with the free pack]` : full,
         })
+      },
+    )
+
+    server.registerTool(
+      'describe_income_graph_schema',
+      {
+        description:
+          'The IncomeGraph.v1 vocabulary: the 18 node types, the legal edges between them, the fields every node and edge must carry, and the settlement rails. Read this before drafting a graph.',
+      },
+      async () =>
+        json({
+          schema: SCHEMA_ID,
+          apiVersion: CURRENT_API_VERSION,
+          acceptedApiVersions: SUPPORTED_API_VERSIONS,
+          kind: 'IncomeGraph',
+          schemaUrl: `${site.url}/schemas/income-graph.v1.schema.json`,
+          nodeTypes: NODE_TYPES,
+          edges: EDGE_RULES,
+          requiredOnEveryNodeAndEdge: [
+            'owner',
+            'provenance.source',
+            'provenance.date',
+            'version',
+            'visibility',
+            'evaluation',
+          ],
+          rulesThatSurpriseDrafters: [
+            'Every workflow step needs an explicit irreversible boolean. A v1 step without one is migrated to true.',
+            'A HumanGate approver must resolve to a Human node or to metadata.principal; an AgentRole is rejected.',
+            `Evidence.provenance.source must be an http(s) URL, a file path, or "interview:<name> <YYYY-MM-DD>", and data.kind should be one of: ${EVIDENCE_KINDS.join(', ')}.`,
+            'A Customer or Offer carrying a price or a volume assumption needs an evidences edge, and demand language in notes or description needs one too.',
+            'An offer that mentions an NFT, a token, a mint, a smart contract, x402, or MPP must set data.settlement.rail. machine-payment is x402 or mpp, in usdc or eurc, per request or session, on base, solana, or tempo, inside a human spend cap, with a facilitator cost. on-chain-right is a license, a royalty split, or resaleable access a stranger enforces after the seller is gone. A collection, a coin, a yield, an agent identity sold as an NFT, or an agent that can mint is refused.',
+          ],
+          documentContract:
+            'The IncomeSystem.v1 manifest contract is owned by github.com/frankxai/agentic-income-skills. This graph drafts it; that repository validates it.',
+        }),
+    )
+
+    server.registerTool(
+      'get_reference_income_graph',
+      {
+        description:
+          'A complete worked IncomeGraph for the request-to-quote desk. Use it as the shape to copy — it is a live thesis with no revenue yet, not a success story.',
+      },
+      async () => json(referenceGraph),
+    )
+
+    server.registerTool(
+      'review_income_graph',
+      {
+        description:
+          'Run the workbench over an IncomeGraph: structure, completeness, honest economics, four adversarial checks, and the settlement rail. A chain offer is refused unless it is a right a stranger must enforce after the seller is gone. Returns findings, an activation verdict, one settlement verdict per offer, and cost and founder-hour arithmetic. It never predicts revenue.',
+        inputSchema: {
+          graph: incomeGraphSchema,
+          today: z
+            .string()
+            .regex(/^\d{4}-\d{2}-\d{2}$/)
+            .describe('ISO date used for future-dating checks, so results are reproducible.'),
+        },
+      },
+      async ({ graph, today }) => json(reviewIncomeGraph(graph as unknown as IncomeGraph, today)),
+    )
+
+    server.registerTool(
+      'draft_income_graph',
+      {
+        description:
+          'Start here. Turn a plain-text business thesis into the smallest well-formed IncomeGraph, and lead with the refusal: which claims in the founder’s own sentence nothing supports, what evidence would settle each one, and what that evidence costs in founder hours. Invents no evidence, no revenue, and no buyer — every assumed value is returned in `assumptions`.',
+        inputSchema: {
+          thesis: z
+            .string()
+            .min(12)
+            .describe('One or two sentences: who has the problem, what you would sell them, and why they would pay.'),
+          today: z
+            .string()
+            .regex(/^\d{4}-\d{2}-\d{2}$/)
+            .describe('ISO date. Used for provenance and the kill-review date, so the draft is reproducible.'),
+          principal: z
+            .string()
+            .optional()
+            .describe('The named person accountable for the system. Becomes the Human node and the gate approver.'),
+        },
+      },
+      async ({ thesis, today, principal }) => {
+        const draft = draftIncomeGraph(thesis, { today, principal })
+        return json({ ...draft, review: reviewIncomeGraph(draft.graph, today) })
+      },
+    )
+
+    server.registerTool(
+      'draft_income_system_manifest',
+      {
+        description:
+          'Project an IncomeGraph into a draft IncomeSystem.v1 manifest and list every required field the graph cannot know. The draft is not valid until the open-core validator in frankxai/agentic-income-skills passes it.',
+        inputSchema: { graph: incomeGraphSchema },
+      },
+      async ({ graph }) => json(projectToIncomeSystem(graph as IncomeGraph)),
+    )
+
+    server.registerTool(
+      'export_income_system_tasks',
+      {
+        description:
+          'Export the installable operating tasks for an IncomeGraph — workflow steps with their human gates, maintenance cadences, kill-criterion review dates, and experiment decisions — as JSON and as a markdown checklist.',
+        inputSchema: { graph: incomeGraphSchema },
+      },
+      async ({ graph }) => {
+        const typed = graph as IncomeGraph
+        const tasks = exportTasks(typed)
+        return json({ tasks, markdown: tasksToMarkdown(typed, tasks) })
       },
     )
   },

@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import test from 'node:test'
 
-import { quoteAgentCall } from '../lib/income-graph/agent-call.ts'
+import { callStaysOff, quoteAgentCall } from '../lib/income-graph/agent-call.ts'
 
 const TODAY = '2026-09-26'
 const REFERENCE = JSON.parse(
@@ -31,6 +31,7 @@ test('a fiat offer quotes the buyer and keeps the call off', () => {
   assert.equal(quote.executable, false)
   assert.equal(quote.disposition, 'quote')
   assert.equal(quote.payer, 'buyer')
+  assert.equal(callStaysOff(quote), 'The buyer pays. The call stays off.')
   assert.equal(quote.price.amount, 180)
   assert.ok(quote.operatorPaysRuntime.monthly >= 40)
   assert.equal(quote.protocol, null)
@@ -90,6 +91,7 @@ test('their agent is quoted for a metered call and still cannot execute it', () 
   assert.equal(quoted.payer, 'calling-agent')
   assert.equal(quoted.protocol, 'x402')
   assert.equal(quoted.executable, false)
+  assert.equal(callStaysOff(quoted), 'Their agent would pay. The call stays off.')
   assert.match(quoted.reason, /endpoint stays off/)
   assert.ok(quoted.operatorPaysRuntime.monthly >= 5)
 

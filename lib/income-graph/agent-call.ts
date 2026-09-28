@@ -26,6 +26,16 @@ export type AgentCallQuote = {
 
 const BANNED_KEY = /^(privatekey|seedphrase|mnemonic|walletkey|apikey|secret|autopay|execute|ready|approved|authorization)$/
 
+/** One line a person can read. The call is off in every branch. */
+export function callStaysOff(quote: AgentCallQuote): string {
+  if (quote.executable !== false) {
+    throw new Error('A quote cannot execute.')
+  }
+  if (quote.disposition === 'refuse' || quote.payer === 'none') return 'Nobody is paid. The call stays off.'
+  if (quote.payer === 'calling-agent') return 'Their agent would pay. The call stays off.'
+  return 'The buyer pays. The call stays off.'
+}
+
 export function quoteAgentCall(graph: IncomeGraph, today: string, request: unknown): AgentCallQuote {
   const empty = blank('')
   const banned = bannedPaths(request)

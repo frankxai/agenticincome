@@ -1,6 +1,6 @@
 ---
 title: "Agent Fulfillment — how agents deliver the work"
-last_verified: 2026-07-11
+last_verified: 2026-09-28
 review_cycle: quarterly
 ---
 
@@ -35,7 +35,7 @@ OpenClaw-class: persistent, messaging-native, reactive + scheduled. Right for: t
 1. **Brief before build.** Every delivery starts from a written spec the client/buyer can read. `/ai offer` produces this.
 2. **Artifacts, not vibes.** Every engagement ends with repo-committed deliverables + a handover doc. Git-backed delivery is the differentiator clients remember.
 3. **Verification is a stage, not a hope.** Typecheck/build/link-check for code; source-check for research; render-check for content. Agents verify agents; you audit the verification.
-4. **Provenance on everything.** Date + method + reviewer on every artifact (the SIP attestation pattern from [dpi](https://github.com/frankxai/dpi)). This is what "inspectable" means commercially: your buyer can see how it was made.
+4. **Provenance on everything.** Date + method + reviewer on every artifact (the SIP attestation pattern from [dpi](https://github.com/frankxai/dpi), a private repo as of 2026-09-28). This is what "inspectable" means commercially: your buyer can see how it was made.
 5. **Cost telemetry.** Track token/tool spend per delivery. Agent margin only exists if you measure it — put the number in your ledger next to the revenue.
 
 ## Worked example — the two-day implementation sprint
@@ -49,6 +49,6 @@ Day 2  Pipeline pattern: end-to-end run with the client's real data behind a
        installed (Loop pattern) → invoice
 ```
 
-One person, ~12 focused hours, delivery that a 2022 agency would have staffed with four people for three weeks. That compression — priced on outcome — is the entire economic basis of Model 1, and the case format in [06](06-cases.md) shows real instances with provenance.
+One person, ~12 focused hours (an illustrative plan, not a measured case), for work a traditional agency would typically staff across several people and weeks. That compression — priced on outcome — is the entire economic basis of Model 1, and the case format in [06](06-cases.md) shows real instances with provenance.
 
 *Next: [04 — The Tool Stack](04-tool-stack.md): the minimum machine around the agents.*

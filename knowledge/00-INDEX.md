@@ -1,12 +1,12 @@
 ---
 title: "Knowledge Base Index"
-last_verified: 2026-07-11
+last_verified: 2026-09-28
 review_cycle: quarterly
 ---
 
 # The Agentic Income Knowledge Base
 
-Everything here is **dated, sourced, and re-verified on a loop**. Every file carries `last_verified` frontmatter. When you read a file, check the date. When a file goes stale past its review cycle, the `knowledge-refresh` workflow flags it and the weekly Brief publishes the diff. That is the freshness contract — the same one the `/ai` pack enforces on the knowledge it generates for you.
+Everything here is **dated, sourced, and re-verified on a loop**. Every file carries `last_verified` frontmatter. When you read a file, check the date. When a file goes stale past its review cycle, the monthly `knowledge-freshness` workflow flags it, the `/ai-refresh` loop re-verifies it, and the weekly Brief publishes the diff. That is the freshness contract — the same one the `/ai` pack enforces on the knowledge it generates for you.
 
 ## The map
 
@@ -18,7 +18,7 @@ Everything here is **dated, sourced, and re-verified on a loop**. Every file car
 | [04](04-tool-stack.md) | **The Tool Stack** | Checkout (merchant of record), email, hosting, analytics — the minimum machine, legal-light |
 | [05](05-honest-marketing.md) | **Honest Marketing** | Selling without income claims: FTC disclosure, EU rules, trust surfaces that convert |
 | [06](06-cases.md) | **Attested Cases** | Real builds with provenance — the case format and the standing library |
-| [07](07-field-dossier.md) | **Field Dossier (2026-07-11)** | The raw verified research: runtime states, affiliate program terms, MoR fees, market stats, regulatory notes — every claim sourced |
+| [07](07-field-dossier.md) | **Field Dossier (compiled 2026-07-11, re-verified 2026-09-28)** | The raw verified research: runtime states, affiliate program terms, MoR fees, market stats, regulatory notes — every claim sourced |
 
 ## Integration guides — run this with your runtime
 
@@ -33,7 +33,7 @@ Everything here is **dated, sourced, and re-verified on a loop**. Every file car
 
 - **Reading order for a first pass:** 01 → 02 → pick your model → 03 → 04 → 05.
 - **With the pack:** install the `/ai` pack and run `/ai assess` — it reads this knowledge base and applies it to *your* inventory of skills, surfaces, and constraints.
-- **Siblings:** passive stream mechanics live at [agenticpassiveincome](https://github.com/frankxai/agenticpassiveincome) (`/api` pack). Wealth architecture doctrine lives at [dpi](https://github.com/frankxai/dpi) (`/dpi` pack). This repo is the hub: start from zero here.
+- **Siblings:** passive stream mechanics live at [agenticpassiveincome](https://github.com/frankxai/agenticpassiveincome) (`/api` pack). Wealth architecture doctrine lives at [dpi](https://github.com/frankxai/dpi) (`/dpi` pack). This repo is the hub: start from zero here. (As of 2026-09-28 the sibling repos are private, so those links need repo access.)
 
 ## Contribution & corrections
 

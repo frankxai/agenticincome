@@ -1,6 +1,6 @@
 ---
 title: "Income Models — services, products, systems"
-last_verified: 2026-07-11
+last_verified: 2026-09-28
 review_cycle: quarterly
 ---
 
@@ -10,7 +10,7 @@ Every legitimate way a solo creator converts agentic capability into revenue red
 
 ## Model 1 — Services (agent-amplified labor)
 
-**Mechanism:** you sell an outcome to a specific client; agents compress your delivery cost by 5–20×.
+**Mechanism:** you sell an outcome to a specific client; agents compress your delivery cost.
 
 - **Examples that work in 2026:** AI workflow implementation for small firms, content-system builds, site + funnel builds, data/report automation, "agent audits" of existing businesses.
 - **Economics:** highest hourly yield of the three, fastest to first dollar (days, not months). A scoped implementation that took a 2019 freelancer three weeks is now a 2–4 day delivery with an agent team — but **price the outcome, not your hours**, or the compression benefits your client instead of you.
@@ -22,7 +22,7 @@ Every legitimate way a solo creator converts agentic capability into revenue red
 **Mechanism:** you package the *decisions* you made in service work — templates, packs, blueprints, kits — and sell them self-serve.
 
 - **Examples:** agent packs (like the ones in this repo), template systems, business-plan kits, prompt/workflow libraries with real depth, niche datasets, micro-tools.
-- **Economics:** price range that reliably clears self-serve without sales calls: **$19–$149**. Above that, buyers expect humans. Margin ~95% with a merchant of record. Volume is the whole game, and volume = distribution (see [05](05-honest-marketing.md)).
+- **Economics:** price range that reliably clears self-serve without sales calls: **$19–$149**. Above that, buyers expect humans. After merchant-of-record fees (e.g. Polar's 5% + $0.50 starter rate — see [07](07-field-dossier.md) §3) you keep roughly 87–95% of each sale in that range, before your own costs. Volume is the whole game, and volume = distribution (see [05](05-honest-marketing.md)).
 - **Honest costs:** a product is a promise of maintenance. Stale products refund and reputation-burn. Budget the refresh loop before you launch (our packs automate theirs — copy that pattern).
 - **The 2026 edge:** *agent-native products* — products that are themselves agents/skills/workflows the buyer installs — have structurally better retention than PDFs and courses, because they do work instead of assigning it.
 
@@ -30,7 +30,7 @@ Every legitimate way a solo creator converts agentic capability into revenue red
 
 **Mechanism:** you own an asset that produces income with maintenance measured in hours per month — a publication, a product line with evergreen distribution, an affiliate property, a licensed catalog.
 
-- This is the domain of the sibling properties: [agenticpassiveincome.com](https://agenticpassiveincome.com) teaches the stream mechanics (`/api` pack); [dpi](https://github.com/frankxai/dpi) governs the portfolio layer (`/dpi` pack).
+- This is the domain of the sibling properties: [agenticpassiveincome.com](https://agenticpassiveincome.com) teaches the stream mechanics (`/api` pack); [dpi](https://github.com/frankxai/dpi) (private repo as of 2026-09-28) governs the portfolio layer (`/dpi` pack).
 - **Economics:** slowest to first dollar (weeks to months), highest ceiling, and the only model whose yield curve is decoupled from your calendar. The compounding asset is usually **distribution** (audience, SEO, syndication), not the content itself.
 - **Honest costs:** "passive" means *structurally decoupled from hours*, not zero hours. Every real system has a maintenance floor — we publish it per-stream in the Stream Atlas instead of pretending otherwise.
 

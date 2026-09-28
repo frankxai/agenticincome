@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { AgentWorkflowProof } from '@/components/AgentWorkflowProof'
-import { verifiedEconomicsPrograms } from '@/lib/affiliate'
+import { verifiedEconomicsPrograms, verifiedRangeLabel } from '@/lib/affiliate'
 import incomeModels from '@/data/income-models.json'
 import catalog from '@/products/catalog.json'
 
@@ -145,7 +145,7 @@ export default function Home() {
           </div>
         </div>
         <p className="mt-4 text-xs leading-6 text-muted">
-          Affiliate links disclosed. Rates verified 16 Aug 2026 against each program&apos;s own terms.
+          Affiliate links disclosed. Rates verified {verifiedRangeLabel(verified)} against each program&apos;s own terms.
         </p>
       </section>
 

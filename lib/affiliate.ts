@@ -53,12 +53,33 @@ export function findProgramBySlug(slug: string): Program | undefined {
 
 /**
  * Programs whose commission terms were re-verified against the program's own
- * page on 2026-08-16 — the only rows the partner-economics tables render.
+ * page (commissionVerifiedAt + commissionSourceUrl) — the only rows the
+ * partner-economics tables render. Deprioritized and closed programs stay out
+ * of those tables even when their terms are verified.
  */
 export function verifiedEconomicsPrograms(): Program[] {
   return PROGRAMS
     .filter((p) => p.hasProgram && Boolean(p.commissionVerifiedAt))
+    .filter((p) => p.status !== 'deprioritized' && p.status !== 'closed' && p.status !== 'dead-end')
     .sort((a, b) => (a.priority ?? 99) - (b.priority ?? 99))
+}
+
+const VERIFIED_DATE = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+
+/**
+ * Human label for when the partner-economics rows were verified, derived from
+ * the data so the copy can never drift from the catalog: "on 28 Sep 2026" or
+ * "between 16 Aug 2026 and 28 Sep 2026".
+ */
+export function verifiedRangeLabel(programs: Program[] = verifiedEconomicsPrograms()): string {
+  const dates = programs
+    .map((p) => p.commissionVerifiedAt)
+    .filter((d): d is string => Boolean(d))
+    .sort()
+  if (dates.length === 0) return 'on no date yet'
+  const first = VERIFIED_DATE.format(new Date(`${dates[0]}T00:00:00Z`))
+  const last = VERIFIED_DATE.format(new Date(`${dates[dates.length - 1]}T00:00:00Z`))
+  return first === last ? `on ${first}` : `between ${first} and ${last}`
 }
 
 /** Programs worth joining, ranked by priority — drives the "monetize" surfaces. */

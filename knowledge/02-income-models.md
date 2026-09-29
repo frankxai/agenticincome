@@ -1,6 +1,6 @@
 ---
 title: "Income Models — services, products, systems"
-last_verified: 2026-09-28
+last_verified: 2026-09-29
 review_cycle: quarterly
 ---
 

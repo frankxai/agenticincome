@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { checkoutPath, checkoutUrl, offers } from '@/lib/offers'
 import { CheckoutLink } from '@/components/CheckoutLink'
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   description: 'Scoped Agent-as-a-Service implementation, practical digital products, and transparent access states from Agentic Income.',
   alternates: { canonical: '/offers' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'Offers',
     description: 'Direct products and memberships from the Agentic Income network. Own your outcome beyond affiliate.',
     url: '/offers',

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { payingPrograms } from '@/lib/affiliate'
 import { EmailCapture } from '@/components/EmailCapture'
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
   description: 'The 3-step path to building an income system with AI agents — what to build, in what order, and why it compounds.',
   alternates: { canonical: '/start' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'Start Here',
     description: 'The 3-step path to building an income system with AI agents — what to build, in what order, and why it compounds.',
     url: '/start',

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     'Run a supervised weekly loop for research, delivery, verification, maintenance, and improvement without granting agents unlimited authority.',
   alternates: { canonical: '/operate' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'Operate Agentic Income Systems',
     description:
       'A supervised operating loop with explicit automatic, review, and principal-approval boundaries.',

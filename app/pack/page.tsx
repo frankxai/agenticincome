@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { PackTerminal } from '@/components/PackTerminal'
 
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Clone the public MIT Agentic Income system, create an owned Outcome Pack, validate its authority policy, and inspect the Request-to-Quote reference implementation.',
   alternates: { canonical: '/pack' },
-  openGraph: { url: '/pack' },
+  openGraph: { ...baseOpenGraph, url: '/pack' },
 }
 
 const STAGES = [

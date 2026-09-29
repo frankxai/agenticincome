@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     'Separate inspectable system evidence, accepted delivery evidence, and settled economic evidence before publishing income claims.',
   alternates: { canonical: '/proof' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'Agentic Income Proof Standard',
     description:
       'A three-layer evidence standard for systems, delivery, and settled economics.',

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { RequestToQuoteDesk } from '@/components/RequestToQuoteDesk'
 
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
     'Create a browser-local request and scope brief for a governed agent delivery system. Nothing is submitted or priced automatically.',
   alternates: { canonical: '/build/request-to-quote' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'Request-to-Quote Reference Desk',
     description:
       'A browser-local reference utility for turning a customer request into a reviewable scope brief.',

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import { payingPrograms, verifiedEconomicsPrograms, verifiedRangeLabel } from '@/lib/affiliate'
 import Link from 'next/link'
 import { TrackedLink } from '@/components/TrackedLink'
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
   description: 'Live catalog of AI tools with real affiliate programs, showing whether each payout recurs, pays once, or is not yet confirmed. The exact programs powering the Agentic Income flywheel.',
   alternates: { canonical: '/tools' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'AI Tools Catalog',
     description: 'Live catalog of AI tools with real affiliate programs, showing whether each payout recurs, pays once, or is not yet confirmed. The exact programs powering the Agentic Income flywheel.',
     url: '/tools',

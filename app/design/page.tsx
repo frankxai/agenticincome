@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import { brandPillars, designTokens, motionSystem, qualityGate, swarmLeads } from '@/lib/design'
 
 export const metadata: Metadata = {
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
   description: 'The Agentic Income design, motion, and trust operating system.',
   alternates: { canonical: '/design' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'Design System',
     description: 'The Agentic Income design, motion, and trust operating system.',
     url: '/design',

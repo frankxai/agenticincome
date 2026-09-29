@@ -1,8 +1,11 @@
+import { baseOpenGraph } from '@/lib/open-graph'
+
 export const metadata = {
   title: 'The Agentic Income Flywheel: Honest Comparisons + Recurring Tools + Owned Audience (2026)',
   description: 'The exact system that turns one ranking comparison into recurring commissions, an email list, and content that earns for years. Real numbers, the tools that actually pay, and how the three sites in the network compound together.',
   alternates: { canonical: '/blog/the-agentic-income-flywheel-2026' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'The Agentic Income Flywheel: Honest Comparisons + Recurring Tools + Owned Audience (2026)',
     description: 'The exact system that turns one ranking comparison into recurring commissions, an email list, and content that earns for years. Real numbers, the tools that actually pay, and how the three sites in the network compound together.',
     url: '/blog/the-agentic-income-flywheel-2026',

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { McpPlayground } from '@/components/McpPlayground'
 
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'agenticincome.ai is an MCP server. Connect Claude Code, Claude Desktop, or any streamable-HTTP client and query income models, partner economics, products, and playbooks directly.',
   alternates: { canonical: '/mcp' },
-  openGraph: { url: '/mcp' },
+  openGraph: { ...baseOpenGraph, url: '/mcp' },
 }
 
 const ENDPOINT = 'https://www.agenticincome.ai/api/mcp'

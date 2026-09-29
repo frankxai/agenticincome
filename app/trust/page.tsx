@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { checkoutReadiness, supportPolicies, trustPrinciples } from '@/lib/trust'
 
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
   description: 'How Agentic Income handles recommendations, affiliate disclosure, checkout readiness, delivery, support, and refunds.',
   alternates: { canonical: '/trust' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'Trust Standard',
     description: 'How Agentic Income handles recommendations, affiliate disclosure, checkout readiness, delivery, support, and refunds.',
     url: '/trust',

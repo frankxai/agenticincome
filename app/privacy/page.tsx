@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
   description: 'How Agentic Income handles access requests, analytics events, and outbound links.',
   alternates: { canonical: '/privacy' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'Privacy',
     description: 'How Agentic Income handles access requests, analytics events, and outbound links.',
     url: '/privacy',

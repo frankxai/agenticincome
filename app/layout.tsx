@@ -6,9 +6,8 @@ import './globals.css'
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
 import { MotionRuntime } from '@/components/MotionRuntime'
+import { baseOpenGraph, ogImage } from '@/lib/open-graph'
 import { site } from '@/lib/site'
-
-const ogImage = '/opengraph-image'
 
 const geistSans = Geist({
   subsets: ['latin'],
@@ -42,11 +41,9 @@ export const metadata: Metadata = {
   manifest: '/manifest.webmanifest',
   icons: { icon: '/icon.svg', shortcut: '/icon.svg', apple: '/icon.svg' },
   openGraph: {
+    ...baseOpenGraph,
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
-    siteName: site.name,
-    type: 'website',
-    images: [{ url: ogImage, width: 1200, height: 630, alt: 'Agentic Income revenue system implementation' }],
   },
   twitter: {
     card: 'summary_large_image',

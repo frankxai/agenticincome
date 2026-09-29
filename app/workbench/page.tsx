@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { IncomeGraphWorkbench } from '@/components/IncomeGraphWorkbench'
 import { EDGE_RULES, NODE_TYPES } from '@/lib/income-graph'
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
     'Model one income system as an inspectable graph, review it against adversarial checks for hype, fabricated demand, dark patterns, and unauthorized execution, and export the operating tasks. No income claims.',
   alternates: { canonical: '/workbench' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'Income system workbench',
     description:
       'Design, review, and operate one income system with agents while keeping the judgment. Runs in your browser and over MCP.',

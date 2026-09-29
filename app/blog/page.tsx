@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { sortedPosts } from '@/lib/posts'
 
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
   description: 'Honest, AEO-ready comparisons of the AI tools that actually make creators money.',
   alternates: { canonical: '/blog' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'AI Tool Comparisons',
     description: 'Honest, AEO-ready comparisons of the AI tools that actually make creators money.',
     url: '/blog',

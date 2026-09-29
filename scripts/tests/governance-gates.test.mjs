@@ -271,7 +271,7 @@ test('the registry protects the homepage and names every job it does', () => {
   const real = JSON.parse(readFileSync(new URL('../../.github/protected-surfaces.json', import.meta.url), 'utf8'))
   const home = real.surfaces.find((s) => s.id === 'homepage')
   assert.equal(home.policy, 'evolve')
-  assert.deepEqual(home.paths, ['app/page.tsx', 'data/income-models.json'])
+  assert.deepEqual(home.paths, ['app/page.tsx', 'data/income-models.json', 'components/AgentWorkflowProof*', 'lib/affiliate.ts', 'products/catalog.json'])
   assert.deepEqual(home.jobs, ['positioning', 'proof', 'income truth', 'next step'])
   assert.ok(real.surfaces.find((s) => s.id === 'homepage').paths.includes('data/income-models.json'), 'homepage: data/income-models.json')
   assert.ok(real.surfaces.find((s) => s.id === 'offer-pages').paths.includes('lib/offers.ts'), 'offer-pages: lib/offers.ts')

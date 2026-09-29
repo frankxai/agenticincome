@@ -4,7 +4,7 @@
     {
       "id": "homepage",
       "policy": "evolve",
-      "paths": ["app/page.tsx", "data/income-models.json"],
+      "paths": ["app/page.tsx", "data/income-models.json", "components/AgentWorkflowProof*", "lib/affiliate.ts", "products/catalog.json"],
       "jobs": ["positioning", "proof", "income truth", "next step"],
       "why": "The compressed expression of Agentic Income: who it is for, what is proven, and honest numbers about what agents earn. The income figures come from data/income-models.json, so it is part of the page's income truth. A narrower rewrite that passes its own tests can still erase it (the frankx.ai homepage was replaced exactly that way on 2026-08-27)."
     },

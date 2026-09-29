@@ -1,11 +1,11 @@
 ---
 title: "Research Dossier — Agentic AI Income Properties"
-last_verified: 2026-09-28
+last_verified: 2026-09-29
 review_cycle: quarterly
 ---
 
 # Research Dossier — Agentic AI Income Properties
-**Compiled:** 2026-07-11 · **Re-verified:** 2026-09-28 · **Method:** live web search + direct page fetches (official pages, GitHub API, registry APIs). Every claim carries a source URL. Items that could not be confirmed against a primary source are marked **UNVERIFIED**. Conflicting sources are flagged.
+**Compiled:** 2026-07-11 · **Re-verified:** 2026-09-28 (Notion and accelerator entries 2026-09-29) · **Method:** live web search + direct page fetches (official pages, GitHub API, registry APIs). Every claim carries a source URL. Items that could not be confirmed against a primary source are marked **UNVERIFIED**. Conflicting sources are flagged.
 
 ---
 
@@ -152,4 +152,4 @@ Sources: https://www.lemonsqueezy.com/blog/2026-update · https://www.lemonsquee
 
 ---
 
-*End of dossier. All URLs originally accessed 2026-07-11 and re-checked 2026-09-28; claims that could not be re-verified against a primary source were removed or are marked inline. Conflicts and UNVERIFIED items are marked inline; re-verify commission terms at signup time since programs change without notice (Descript's 2024 flat-fee switch, Notion's mid-2026 closure to new affiliates, and Semrush's move to per-product CPA are recent examples).*
+*End of dossier. All URLs originally accessed 2026-07-11 and re-checked 2026-09-28 (Notion and accelerator entries 2026-09-29); claims that could not be re-verified against a primary source were removed or are marked inline. Conflicts and UNVERIFIED items are marked inline; re-verify commission terms at signup time since programs change without notice (Descript's 2024 flat-fee switch, Notion's mid-2026 closure to new affiliates, and Semrush's move to per-product CPA are recent examples).*

@@ -47,7 +47,7 @@ export const posts: Post[] = [
   {
     slug: 'personal-ai-coe-under-100',
     title: 'How to Build a Personal AI Center of Excellence Under $100/mo',
-    dek: 'The exact stack an AI architect runs at home — the same 6-pillar system Fortune 500s pay millions for, for under $100 a month.',
+    dek: 'A personal AI Center of Excellence: one tool for each of six capabilities, for under $100 a month.',
     query: 'personal ai stack under 100',
     date: '2026-06-08',
     cluster: 'income',
@@ -57,7 +57,7 @@ export const posts: Post[] = [
   {
     slug: 'the-agentic-income-flywheel-2026',
     title: 'The Agentic Income Flywheel: Honest Comparisons + Recurring Tools + Owned Audience (2026)',
-    dek: 'The exact system that turns one ranking comparison into recurring commissions, an email list, and content that earns for years across the whole network.',
+    dek: 'How one honest comparison, recurring-commission programs, and an owned email list work together across the network, with program terms taken from the live catalog.',
     query: 'agentic income flywheel method',
     date: '2026-06-14',
     cluster: 'income',

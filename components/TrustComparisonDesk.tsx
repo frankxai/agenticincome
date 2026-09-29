@@ -104,12 +104,12 @@ const ROUTES: TrustRoute[] = [
     href: '/tools',
     bestFor: 'Teams comparing video tools where direct affiliate terms are changing.',
     avoidIf: 'You need a route that is confirmed safe for primary promotion today.',
-    rankingReason: 'The catalog marks Pika as verify because similar names and program terms can drift. The CTA downgrades until terms are current.',
-    payoutModel: 'Verify',
+    rankingReason: 'The catalog lists Pika as a dead end: no official affiliate program was found on 2026-09-28, and the 30% recurring figure seen online belongs to a different company (pika.style). No paid route is offered.',
+    payoutModel: 'No official program',
     lastVerified: '2026-06-12',
     nextReview: 'Immediate',
     criteria: { fit: 78, value: 74, quality: 82, maintainability: 58, risk: 64 },
-    alternatives: ['Higgsfield for proven creator route', 'Topaz for high-AOV upscaling', 'Pollo for aggregator coverage'],
+    alternatives: ['Higgsfield for a verified creator route', 'Topaz for high-AOV upscaling', 'Pollo for aggregator coverage'],
   },
 ]
 

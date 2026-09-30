@@ -1,11 +1,11 @@
 ---
 title: "Research Dossier — Agentic AI Income Properties"
-last_verified: 2026-09-28
+last_verified: 2026-09-29
 review_cycle: quarterly
 ---
 
 # Research Dossier — Agentic AI Income Properties
-**Compiled:** 2026-07-11 · **Re-verified:** 2026-09-28 · **Method:** live web search + direct page fetches (official pages, GitHub API, registry APIs). Every claim carries a source URL. Items that could not be confirmed against a primary source are marked **UNVERIFIED**. Conflicting sources are flagged.
+**Compiled:** 2026-07-11 · **Re-verified:** 2026-09-28 (Notion and accelerator entries 2026-09-29) · **Method:** live web search + direct page fetches (official pages, GitHub API, registry APIs). Every claim carries a source URL. Items that could not be confirmed against a primary source are marked **UNVERIFIED**. Conflicting sources are flagged.
 
 ---
 
@@ -59,7 +59,7 @@ review_cycle: quarterly
 |---|---|---|---|---|---|
 | Kit (ConvertKit) | 50% for first 12 mo; then tiered 10/15/20% (Bronze 10+/Silver 50+/Gold 100+ referrals/yr) | Yes (indefinite via tiers) | Not stated on official page (3rd parties: 60–90d) | PartnerStack | https://kit.com/affiliates |
 | Beehiiv | 50% of referred revenue for 12 mo (cap $15,000/customer) | Yes (12 mo) | 60d, first-touch | Direct (app.beehiiv.com/partner_program) | https://www.beehiiv.com/support/article/23352219299095-getting-started-with-the-beehiiv-partner-program |
-| Notion | Up to $50/activated signup + 20% of year-one revenue | Year-one only | 180d, last-click | PartnerStack | https://www.notion.com/affiliates — accepting applications again (re-verified 2026-09-28; it was closed to new affiliates on 2026-07-11). Last-click per the official FAQ: "Commissions are paid on a last-click basis" |
+| Notion | Up to $50/activated signup + 20% of year-one revenue | Year-one only | 180d, last-click | PartnerStack | https://www.notion.com/affiliates — **closed to new affiliates**: the live page reads "Program is currently not accepting new affiliates" (checked 2026-09-29; also closed on 2026-07-11). Terms shown are the published ones for existing affiliates. Last-click per the official FAQ: "Commissions are paid on a last-click basis" |
 | ElevenLabs | 22% for first 12 mo (11% on Business plan) | Yes (12 mo) | Not stated officially (3rd parties: 90d) | PartnerStack | https://elevenlabs.io/affiliates-terms · https://market.partnerstack.com/program/elevenlabsinc |
 | Semrush | Per-product CPA: $300 (Semrush One), $200 (SEO Toolkit, Traffic & Market), $100 (AI Visibility/Content/Ads), $50 (Local/Social) + $10/trial | No (CPA) | 120d, last-click | Impact | https://www.semrush.com/lp/affiliate-program/en/ |
 | Hostinger | Starts at 40%, grows with sales volume | No (one-time) | Not stated officially (3rd parties: 30d) | Direct | https://www.hostinger.com/affiliates |
@@ -130,10 +130,10 @@ Sources: https://www.lemonsqueezy.com/blog/2026-update · https://www.lemonsquee
 
 ## 5. COMPETITIVE LANDSCAPE — "make money with AI/agents" education (2026)
 
-*Member counts and prices re-checked on live pages 2026-09-28; all are self-reported by the operators.*
+*Member counts and published prices re-checked on live pages 2026-09-28; all are self-reported by the programs. Where a program does not publish a price, the entry says so and any third-party figure is marked **UNVERIFIED**.*
 
 1. **AI Automation Society / AIS+ (Nate Herk, Skool):** free community ~463k members; AIS+ $129/mo (~3.5k members); n8n-centric courses + templates. Differentiation gap: single-tool (n8n) lens, agency-service framing, thin on open-source agent runtimes and product/affiliate economics. https://www.skool.com/ai-automation-society/about · https://www.skool.com/ai-automation-society-plus/about
-2. **AI Automation Agency Hub + AAA Accelerator (Liam Ottley/Morningside AI):** free Skool hub (~335k members) funneling to a high-ticket accelerator whose price is disclosed on sales calls (reviewer-reported in the thousands of dollars). Gap: high-ticket sales-call model, client-services (AAA) focus rather than products/open-core. https://www.skool.com/learn-ai/about · https://onlinetrainingreviewer.com/reviews/aaa-accelerator-review-liam-ottley (secondary)
+2. **AI Automation Agency Hub + AAA Accelerator (Liam Ottley/Morningside AI):** free Skool hub (~335k members) funneling to a high-ticket accelerator with no price published on the hub page (re-checked 2026-09-29: the hub is free and only says "check out AAA Accelerator"). A third-party reviewer reports the price is disclosed on sales calls and runs to thousands of dollars (secondary, **UNVERIFIED**). Gap: high-ticket sales-call model, client-services (AAA) focus rather than products/open-core. https://www.skool.com/learn-ai/about · https://onlinetrainingreviewer.com/reviews/aaa-accelerator-review-liam-ottley (secondary)
 3. **The Rundown (Rundown AI):** free daily newsletter (2M+ readers, self-reported) funds the brand; paid Pro plan $29/mo for courses/guides. Gap: broad AI upskilling, not an income-system playbook; no code-level agent depth. https://www.therundown.ai/subscribe · https://app.therundown.ai/plans
 4. **Ben's Bites (Ben Tossell):** free newsletter (171k+ subscribers), now positioned around building with agents, plus paid Pro/courses; builder/tool-review angle. Gap: news-and-analysis first; monetization education is secondary. https://www.bensbites.com/
 5. **Superhuman AI (Zain Kahn):** free daily brief, 2M+ subscribers (self-reported) — ad-supported media model. Gap: 3-minute news format, no hands-on build path. https://www.superhuman.ai/
@@ -152,4 +152,4 @@ Sources: https://www.lemonsqueezy.com/blog/2026-update · https://www.lemonsquee
 
 ---
 
-*End of dossier. All URLs originally accessed 2026-07-11 and re-checked 2026-09-28; claims that could not be re-verified against a primary source were removed or are marked inline. Conflicts and UNVERIFIED items are marked inline; re-verify commission terms at signup time since programs change without notice (Descript's 2024 flat-fee switch, Notion's mid-2026 closure and reopening, and Semrush's move to per-product CPA are recent examples).*
+*End of dossier. All URLs originally accessed 2026-07-11 and re-checked 2026-09-28 (Notion and accelerator entries 2026-09-29); claims that could not be re-verified against a primary source were removed or are marked inline. Conflicts and UNVERIFIED items are marked inline; re-verify commission terms at signup time since programs change without notice (Descript's 2024 flat-fee switch, Notion's mid-2026 closure to new affiliates, and Semrush's move to per-product CPA are recent examples).*

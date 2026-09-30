@@ -130,7 +130,7 @@ Sources: https://www.lemonsqueezy.com/blog/2026-update · https://www.lemonsquee
 
 ## 5. COMPETITIVE LANDSCAPE — "make money with AI/agents" education (2026)
 
-*Member counts and published prices re-checked on live pages 2026-09-28; all are self-reported by the operators. Where an operator does not publish a price, the entry says so and any third-party figure is marked **UNVERIFIED**.*
+*Member counts and published prices re-checked on live pages 2026-09-28; all are self-reported by the programs. Where a program does not publish a price, the entry says so and any third-party figure is marked **UNVERIFIED**.*
 
 1. **AI Automation Society / AIS+ (Nate Herk, Skool):** free community ~463k members; AIS+ $129/mo (~3.5k members); n8n-centric courses + templates. Differentiation gap: single-tool (n8n) lens, agency-service framing, thin on open-source agent runtimes and product/affiliate economics. https://www.skool.com/ai-automation-society/about · https://www.skool.com/ai-automation-society-plus/about
 2. **AI Automation Agency Hub + AAA Accelerator (Liam Ottley/Morningside AI):** free Skool hub (~335k members) funneling to a high-ticket accelerator with no price published on the hub page (re-checked 2026-09-29: the hub is free and only says "check out AAA Accelerator"). A third-party reviewer reports the price is disclosed on sales calls and runs to thousands of dollars (secondary, **UNVERIFIED**). Gap: high-ticket sales-call model, client-services (AAA) focus rather than products/open-core. https://www.skool.com/learn-ai/about · https://onlinetrainingreviewer.com/reviews/aaa-accelerator-review-liam-ottley (secondary)

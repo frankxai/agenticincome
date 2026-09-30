@@ -11,7 +11,7 @@
     {
       "id": "offer-pages",
       "policy": "evolve",
-      "paths": ["app/offers/**", "app/pack/**", "lib/offers.ts", "components/PackTerminal*", "components/CheckoutLink*", "components/PolarCheckoutButton*", "app/api/checkout/**"],
+      "paths": ["app/offers/**", "app/pack/**", "lib/offers.ts", "components/PackTerminal*", "components/CheckoutLink*", "components/PolarCheckoutButton*", "app/api/checkout/**", "lib/polar.ts"],
       "jobs": ["offer clarity", "price truth", "next step"],
       "why": "Where a reader decides to buy the pack or an offer. The offer catalog (lib/offers.ts), the pack terminal, the checkout buttons and the checkout route decide what is sold and for how much, so they are part of the surface. Every claim and price here is reviewed; a rewrite that changes the offer is a business decision, not a refactor."
     }

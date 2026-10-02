@@ -81,7 +81,7 @@ export function getLaunchReadiness() {
       category: 'observability',
       configured: true,
       requiredForFullLaunch: false,
-      detail: 'The root layout includes Vercel Web Analytics and Speed Insights components; the project features are enabled in Vercel.',
+      detail: 'The root layout includes the Vercel Web Analytics and Speed Insights components and sends interaction events as Vercel custom events. Collection starts only once both features are enabled on the Vercel project; this page cannot confirm that project setting.',
     },
   ]
 

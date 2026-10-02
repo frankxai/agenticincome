@@ -63,7 +63,8 @@ const faqs = [
 ]
 
 export default function DisclosurePage() {
-  const active = payingPrograms()
+  // Only programs with a routed link can pay today; unjoined or paused rows (ourLink null) stay on /tools.
+  const active = payingPrograms().filter((program) => Boolean(program.ourLink))
 
   return (
     <>

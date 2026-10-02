@@ -100,3 +100,21 @@ export async function forwardAnalyticsEvent(event: AnalyticsEvent): Promise<bool
     clearTimeout(timeout)
   }
 }
+
+// Vercel Web Analytics custom events accept only 2 properties per event on
+// the Pro plan (8 with Web Analytics Plus) and are not collected on Hobby.
+// Keep the payload to the two most useful low-cardinality labels. Never send
+// href, requestId, or timestamps: Vercel records the page and time itself,
+// and hrefs can carry query data.
+const VERCEL_PROPERTY_PRIORITY = ['tool', 'offer', 'source', 'state'] as const
+export const VERCEL_MAX_EVENT_PROPERTIES = 2
+
+export function toVercelEventProperties(event: AnalyticsEvent): Record<string, string> {
+  const properties: Record<string, string> = {}
+  for (const key of VERCEL_PROPERTY_PRIORITY) {
+    if (Object.keys(properties).length >= VERCEL_MAX_EVENT_PROPERTIES) break
+    const value = event[key]
+    if (typeof value === 'string' && value) properties[key] = value.slice(0, 96)
+  }
+  return properties
+}

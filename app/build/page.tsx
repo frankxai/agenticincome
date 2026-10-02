@@ -65,6 +65,9 @@ export default function BuildPage() {
             <Link href="/build/request-to-quote" className="cta">
               Open the Request-to-Quote desk
             </Link>
+            <Link href="/workbench" className="cta-secondary">
+              Review the system in the workbench
+            </Link>
             <Link href="/offers/implementation-sprint" className="cta-secondary">
               Inspect the implementation sprint
             </Link>

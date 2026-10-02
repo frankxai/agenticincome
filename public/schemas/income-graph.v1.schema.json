@@ -1,0 +1,610 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenticincome.ai/schemas/income-graph.v1.schema.json",
+  "title": "Agentic Income System Graph (IncomeGraph.v1.1)",
+  "description": "The relational model of one income system. Generated from lib/income-graph/model.ts — edit the TypeScript, not this file. v1.1 requires irreversible on every workflow step and adds the Human node type a gate approver must resolve to; a v1 document is still accepted and migrated, with every assumed value reported as an M01 finding. The document contract it drafts (IncomeSystem.v1) is owned by github.com/frankxai/agentic-income-skills.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "metadata",
+    "nodes",
+    "edges"
+  ],
+  "properties": {
+    "apiVersion": {
+      "enum": [
+        "agenticincome.ai/v1",
+        "agenticincome.ai/v1.1"
+      ]
+    },
+    "kind": {
+      "const": "IncomeGraph"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "version",
+        "updatedAt",
+        "principal",
+        "thesis"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+        },
+        "updatedAt": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "principal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "thesis": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/edge"
+      }
+    }
+  },
+  "$defs": {
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "date"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "description": "URL, file path, or named artifact. Never \"internal knowledge\"."
+        },
+        "date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "method": {
+          "type": "string"
+        }
+      }
+    },
+    "workflowStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "action",
+        "irreversible",
+        "actor"
+      ],
+      "description": "irreversible is required at v1.1. A v1 step that omits it is migrated to true — unknown is treated as dangerous, not as safe.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "irreversible": {
+          "type": "boolean"
+        },
+        "actor": {
+          "enum": [
+            "agent",
+            "human"
+          ]
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "label",
+        "owner",
+        "provenance",
+        "version",
+        "visibility",
+        "evaluation"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+        },
+        "visibility": {
+          "enum": [
+            "public",
+            "buyer",
+            "private"
+          ]
+        },
+        "evaluation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The check that would prove this wrong."
+        },
+        "type": {
+          "enum": [
+            "Problem",
+            "Customer",
+            "Offer",
+            "Evidence",
+            "Channel",
+            "Partner",
+            "Asset",
+            "Workflow",
+            "AgentRole",
+            "Human",
+            "HumanGate",
+            "Cost",
+            "RevenueObservation",
+            "Experiment",
+            "Risk",
+            "Maintenance",
+            "KillCriterion",
+            "Receipt"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string",
+          "description": "Scanned for demand language exactly like data.demandClaim."
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "steps": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/workflowStep"
+              }
+            },
+            "kind": {
+              "enum": [
+                "interview",
+                "transcript",
+                "payment",
+                "listing",
+                "analytics",
+                "document"
+              ],
+              "description": "Evidence only: what kind of artifact the source is."
+            },
+            "approver": {
+              "type": "string",
+              "description": "HumanGate only: must resolve to a Human node (id or label) or to metadata.principal. An AgentRole is rejected."
+            },
+            "settlement": {
+              "type": "object",
+              "additionalProperties": false,
+              "description": "Offer only. Absent means fiat-account, unless the offer text names a chain or a machine-payment protocol, which blocks. on-chain-right is a license, a royalty split, or resaleable access. machine-payment is x402 or mpp in usdc or eurc, per request or session, inside a human spend cap.",
+              "properties": {
+                "rail": {
+                  "enum": [
+                    "fiat-account",
+                    "signed-receipt",
+                    "machine-payment",
+                    "on-chain-right",
+                    "refuse"
+                  ]
+                },
+                "right": {
+                  "enum": [
+                    "license",
+                    "royalty-split",
+                    "resaleable-access"
+                  ]
+                },
+                "strangerEnforcement": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "chain": {
+                  "enum": [
+                    "base",
+                    "story",
+                    "solana",
+                    "tempo"
+                  ]
+                },
+                "protocol": {
+                  "enum": [
+                    "x402",
+                    "mpp"
+                  ]
+                },
+                "asset": {
+                  "enum": [
+                    "usdc",
+                    "eurc"
+                  ]
+                },
+                "spendCap": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "amount": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "currency": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "period": {
+                      "enum": [
+                        "day",
+                        "month"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "from",
+        "to",
+        "owner",
+        "provenance",
+        "version",
+        "visibility",
+        "evaluation"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+        },
+        "visibility": {
+          "enum": [
+            "public",
+            "buyer",
+            "private"
+          ]
+        },
+        "evaluation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The check that would prove this wrong."
+        },
+        "type": {
+          "enum": [
+            "serves",
+            "suffers",
+            "evidences",
+            "reaches",
+            "supplies",
+            "fulfills",
+            "performs",
+            "gates",
+            "produces",
+            "incurs",
+            "observes",
+            "tests",
+            "threatens",
+            "maintains",
+            "retires",
+            "attests"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"
+        },
+        "to": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "serves"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "serves: Offer -> Customer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "suffers"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "suffers: Customer -> Problem"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "evidences"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "evidences: Evidence -> Problem|Customer|Offer|Evidence|Channel|Partner|Asset|Workflow|AgentRole|Human|HumanGate|Cost|RevenueObservation|Experiment|Risk|Maintenance|KillCriterion|Receipt"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "reaches"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "reaches: Channel -> Customer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "supplies"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "supplies: Partner -> Channel|Offer|Asset|Workflow"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "fulfills"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "fulfills: Workflow -> Offer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "performs"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "performs: AgentRole -> Workflow"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "gates"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "gates: HumanGate -> Workflow"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "produces"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "produces: Workflow -> Asset"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "incurs"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "incurs: Workflow|Asset|Channel|AgentRole|Human|Maintenance|Offer -> Cost"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "observes"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "observes: RevenueObservation -> Offer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "tests"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "tests: Experiment -> Problem|Customer|Offer|Evidence|Channel|Partner|Asset|Workflow|AgentRole|Human|HumanGate|Cost|RevenueObservation|Experiment|Risk|Maintenance|KillCriterion|Receipt"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "threatens"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "threatens: Risk -> Problem|Customer|Offer|Evidence|Channel|Partner|Asset|Workflow|AgentRole|Human|HumanGate|Cost|RevenueObservation|Experiment|Risk|Maintenance|KillCriterion|Receipt"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "maintains"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "maintains: Maintenance -> Asset|Workflow|Channel"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "retires"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "retires: KillCriterion -> Problem|Customer|Offer|Evidence|Channel|Partner|Asset|Workflow|AgentRole|Human|HumanGate|Cost|RevenueObservation|Experiment|Risk|Maintenance|KillCriterion|Receipt"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "attests"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "description": "attests: Receipt -> RevenueObservation|Experiment|Evidence|Maintenance"
+          }
+        }
+      ]
+    }
+  }
+}

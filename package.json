@@ -5,6 +5,7 @@
   "packageManager": "pnpm@11.5.0",
   "description": "Agentic Income — implementation services, open systems, and practical products for building trustworthy AI revenue engines.",
   "scripts": {
+    "test:governance": "node --test scripts/tests/governance-gates.test.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -24,7 +25,7 @@
     "@vercel/speed-insights": "^2.0.0",
     "gsap": "^3.15.0",
     "mcp-handler": "^1.1.0",
-    "next": "^16.3.5",
+    "next": "^16.3.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "zod": "^3.25.76"

@@ -3,16 +3,17 @@ import Link from 'next/link'
 import { challengeDays } from '@/lib/challenge'
 import { EmailCapture } from '@/components/EmailCapture'
 import { FaqSection } from '@/components/FaqSection'
+import { CommerceChallengeBoard } from '@/components/CommerceChallengeBoard'
 
 export const metadata: Metadata = {
-  title: 'The 7-Day Agentic Income Challenge',
+  title: 'Agentic Income Challenge: AI Shop Experiment and 7-Day Guide',
   description:
-    'A free, evergreen seven-day path using the public Agentic Income skill, scaffold, and validator to create one reviewable Outcome Pack. Capability, never income claims.',
+    'Inspect the AI-shop experiment, download equal-condition model prompts and build one owned Outcome Pack with the free seven-day guide. Evidence before income claims.',
   alternates: { canonical: '/challenge' },
   openGraph: {
-    title: 'The 7-Day Agentic Income Challenge',
+    title: 'The Agentic Income Challenge',
     description:
-      'One reviewable artifact a day using the public operating contract. A serious business test by day seven — no income claims.',
+      'One AI-shop experiment, equal-condition model prompts and a free seven-day build path. Plans and observed outcomes remain distinct.',
     url: '/challenge',
   },
 }
@@ -55,17 +56,20 @@ export default function ChallengePage() {
             You finish with a serious business test in your own repository — not an income prediction.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <Link href="/pack" className="cta">
+            <a href="#experiments" className="cta">
+              Inspect the AI shop experiment
+            </a>
+            <Link href="/pack" className="cta-secondary">
               Open the public system
             </Link>
-            <Link href="/start" className="cta-secondary">
-              Start with the free map
-            </Link>
+            <a href="#seven-day-guide" className="cta-secondary">The seven-day guide</a>
           </div>
         </div>
       </section>
 
-      <section className="section-band">
+      <CommerceChallengeBoard />
+
+      <section id="seven-day-guide" className="section-band scroll-mt-24">
         <div className="section-heading motion-reveal">
           <div className="kicker">What you build, day by day</div>
           <h2 className="display-h2">Seven small, real steps. No teaching-only days.</h2>
@@ -120,11 +124,11 @@ export default function ChallengePage() {
       </section>
 
       <EmailCapture
-        headline="Get the 7-Day Challenge Brief"
-        sub="One honest, concrete build step a day, by email. No income claims — just the next real thing to do."
+        headline="Request challenge updates"
+        sub="The full experiment brief downloads above without signup. Request future updates through the available intake route."
         source="challenge"
-        buttonLabel="Start Day 1"
-        successMessage="You’re in. Day 1 — create the owned system — is on its way."
+        buttonLabel="Request updates"
+        successMessage="Your update request reached the configured intake service. No daily email sequence is promised."
       />
 
       <section className="section-band">

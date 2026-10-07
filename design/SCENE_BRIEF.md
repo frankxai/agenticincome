@@ -27,3 +27,7 @@ The public proof object is
 IncomeSystem schema, scaffold, validator, and governed Request-to-Quote example.
 The private application repository is not presented as public source or as a
 Claude marketplace.
+
+## Challenge experiment addition — 2026-10-07
+
+See `CHALLENGE_SCENE_BRIEF.md`: a documentary experiment board using the existing obsidian/emerald system. No new imagery, font, logo or authored motion.

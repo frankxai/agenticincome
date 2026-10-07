@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "protocolVersion": "2026-10-07.1",
+  "updatedAt": "2026-10-07",
+  "startAt": null,
+  "round": {
+    "id": "ai-shop-workflow-edition",
+    "title": "Build an AI shop that earns trust",
+    "hypothesis": "A useful sample, a precise offer and reliable delivery can convert qualified interest into independently activated workflows.",
+    "buyer": "Founders and small studios building their first reusable AI workflow",
+    "offer": "AI Workflow Edition",
+    "proposedPriceEur": 149,
+    "status": "planned",
+    "primaryMetric": "Independently activated, fulfilled paid orders",
+    "primaryMetricValue": null,
+    "timeBudgetMinutes": 60,
+    "runtimeBudgetEur": 10,
+    "spendingAuthorized": false,
+    "evidence": [],
+    "decision": null,
+    "readiness": [
+      {
+        "label": "Offer and complete sample",
+        "state": "planned"
+      },
+      {
+        "label": "Sandbox purchase-to-delivery test",
+        "state": "planned"
+      },
+      {
+        "label": "Public customer sales",
+        "state": "unverified"
+      },
+      {
+        "label": "Measured demand and activation",
+        "state": "unverified"
+      }
+    ],
+    "baselineRevision": null,
+    "toolAccessProfile": "isolated-source-and-preview-v1"
+  },
+  "checkpoints": [
+    {
+      "id": "1h",
+      "label": "1 hour",
+      "offsetHours": 1,
+      "title": "One complete proposition",
+      "deliverable": "A working preview, useful sample, transparent offer, cost model and test receipt.",
+      "acceptance": "A new visitor can understand the scope and open the sample without an account. All unavailable purchase actions say so.",
+      "state": "planned",
+      "evidence": []
+    },
+    {
+      "id": "12h",
+      "label": "12 hours",
+      "offsetHours": 12,
+      "title": "Delivery earns the purchase",
+      "deliverable": "A qualified checkout in sandbox mode, entitlement checks, download delivery and failure recovery.",
+      "acceptance": "Test receipts prove successful delivery, declined-payment handling, refund/revocation and support instructions. Public sale waits for verification.",
+      "state": "planned",
+      "evidence": []
+    },
+    {
+      "id": "48h",
+      "label": "48 hours",
+      "offsetHours": 48,
+      "title": "Ask the market",
+      "deliverable": "One demonstration and one offer variation, with consent-based measurement of qualified visits, interest and activation.",
+      "acceptance": "Report traffic source, denominator, observation window and measurement limits. No winner from an underpowered split test.",
+      "state": "planned",
+      "evidence": []
+    },
+    {
+      "id": "72h",
+      "label": "72 hours",
+      "offsetHours": 72,
+      "title": "Make the evidence decide",
+      "deliverable": "A continue, revise or stop decision, supported by delivery, demand, costs and support evidence.",
+      "acceptance": "Actual receipts remain separate from targets; buyers' identities and private records stay private.",
+      "state": "planned",
+      "evidence": []
+    },
+    {
+      "id": "monthly",
+      "label": "Monthly",
+      "offsetHours": null,
+      "title": "Keep the system worth owning",
+      "deliverable": "Review net contribution, activation, refunds, support, policy freshness and retained customer value.",
+      "acceptance": "Renew, improve or retire the offer. Recheck supplier terms and remove unsupported or expired claims.",
+      "state": "planned",
+      "evidence": []
+    }
+  ],
+  "rubric": [
+    {
+      "id": "buyer_value",
+      "label": "Buyer value",
+      "weight": 25,
+      "evidence": "A complete sample and a specific, independently usable outcome"
+    },
+    {
+      "id": "working_delivery",
+      "label": "Working delivery",
+      "weight": 25,
+      "evidence": "Preview, meaningful tests and honest access states"
+    },
+    {
+      "id": "evidence_integrity",
+      "label": "Evidence integrity",
+      "weight": 20,
+      "evidence": "Source dates, measured costs and reproducible receipts"
+    },
+    {
+      "id": "experience",
+      "label": "Experience and accessibility",
+      "weight": 15,
+      "evidence": "Desktop/mobile evidence, keyboard access and complete reduced-motion state"
+    },
+    {
+      "id": "economics",
+      "label": "Economics and maintainability",
+      "weight": 15,
+      "evidence": "Contribution model, support burden, ownership and rollback"
+    }
+  ],
+  "submissions": [
+    {
+      "id": "codex",
+      "family": "Codex",
+      "modelVersion": null,
+      "status": "not_run",
+      "startedAt": null,
+      "completedAt": null,
+      "elapsedMinutes": null,
+      "runtimeCostEur": null,
+      "score": null,
+      "evidence": [],
+      "promptPath": "/downloads/ai-shop-challenge/codex.md",
+      "ethicalReview": "unreviewed",
+      "baselineRevision": null,
+      "protocolVersion": "2026-10-07.1",
+      "toolAccessProfile": "isolated-source-and-preview-v1",
+      "toolAccessVerified": false,
+      "review": null
+    },
+    {
+      "id": "grok",
+      "family": "Grok",
+      "modelVersion": null,
+      "status": "not_run",
+      "startedAt": null,
+      "completedAt": null,
+      "elapsedMinutes": null,
+      "runtimeCostEur": null,
+      "score": null,
+      "evidence": [],
+      "promptPath": "/downloads/ai-shop-challenge/grok.md",
+      "ethicalReview": "unreviewed",
+      "baselineRevision": null,
+      "protocolVersion": "2026-10-07.1",
+      "toolAccessProfile": "isolated-source-and-preview-v1",
+      "toolAccessVerified": false,
+      "review": null
+    },
+    {
+      "id": "claude",
+      "family": "Claude",
+      "modelVersion": null,
+      "status": "not_run",
+      "startedAt": null,
+      "completedAt": null,
+      "elapsedMinutes": null,
+      "runtimeCostEur": null,
+      "score": null,
+      "evidence": [],
+      "promptPath": "/downloads/ai-shop-challenge/claude.md",
+      "ethicalReview": "unreviewed",
+      "baselineRevision": null,
+      "protocolVersion": "2026-10-07.1",
+      "toolAccessProfile": "isolated-source-and-preview-v1",
+      "toolAccessVerified": false,
+      "review": null
+    },
+    {
+      "id": "gemini",
+      "family": "Gemini",
+      "modelVersion": null,
+      "status": "not_run",
+      "startedAt": null,
+      "completedAt": null,
+      "elapsedMinutes": null,
+      "runtimeCostEur": null,
+      "score": null,
+      "evidence": [],
+      "promptPath": "/downloads/ai-shop-challenge/gemini.md",
+      "ethicalReview": "unreviewed",
+      "baselineRevision": null,
+      "protocolVersion": "2026-10-07.1",
+      "toolAccessProfile": "isolated-source-and-preview-v1",
+      "toolAccessVerified": false,
+      "review": null
+    },
+    {
+      "id": "kimi",
+      "family": "Kimi",
+      "modelVersion": null,
+      "status": "not_run",
+      "startedAt": null,
+      "completedAt": null,
+      "elapsedMinutes": null,
+      "runtimeCostEur": null,
+      "score": null,
+      "evidence": [],
+      "promptPath": "/downloads/ai-shop-challenge/kimi.md",
+      "ethicalReview": "unreviewed",
+      "baselineRevision": null,
+      "protocolVersion": "2026-10-07.1",
+      "toolAccessProfile": "isolated-source-and-preview-v1",
+      "toolAccessVerified": false,
+      "review": null
+    },
+    {
+      "id": "glm",
+      "family": "GLM",
+      "modelVersion": null,
+      "status": "not_run",
+      "startedAt": null,
+      "completedAt": null,
+      "elapsedMinutes": null,
+      "runtimeCostEur": null,
+      "score": null,
+      "evidence": [],
+      "promptPath": "/downloads/ai-shop-challenge/glm.md",
+      "ethicalReview": "unreviewed",
+      "baselineRevision": null,
+      "protocolVersion": "2026-10-07.1",
+      "toolAccessProfile": "isolated-source-and-preview-v1",
+      "toolAccessVerified": false,
+      "review": null
+    },
+    {
+      "id": "deepseek",
+      "family": "DeepSeek",
+      "modelVersion": null,
+      "status": "not_run",
+      "startedAt": null,
+      "completedAt": null,
+      "elapsedMinutes": null,
+      "runtimeCostEur": null,
+      "score": null,
+      "evidence": [],
+      "promptPath": "/downloads/ai-shop-challenge/deepseek.md",
+      "ethicalReview": "unreviewed",
+      "baselineRevision": null,
+      "protocolVersion": "2026-10-07.1",
+      "toolAccessProfile": "isolated-source-and-preview-v1",
+      "toolAccessVerified": false,
+      "review": null
+    },
+    {
+      "id": "nemotron",
+      "family": "NVIDIA Nemotron",
+      "modelVersion": null,
+      "status": "not_run",
+      "startedAt": null,
+      "completedAt": null,
+      "elapsedMinutes": null,
+      "runtimeCostEur": null,
+      "score": null,
+      "evidence": [],
+      "promptPath": "/downloads/ai-shop-challenge/nemotron.md",
+      "ethicalReview": "unreviewed",
+      "baselineRevision": null,
+      "protocolVersion": "2026-10-07.1",
+      "toolAccessProfile": "isolated-source-and-preview-v1",
+      "toolAccessVerified": false,
+      "review": null
+    }
+  ]
+}

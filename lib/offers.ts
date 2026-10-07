@@ -1,3 +1,5 @@
+import { catalogRefusal, findCatalogProduct } from './polar.ts'
+
 export type Offer = {
   slug: string
   tier: string
@@ -208,14 +210,25 @@ export function checkoutPath(offer: Offer): string {
   return `/api/checkout?offer=${offer.slug}`
 }
 
+// Explicit mappings between the published paid offers and the canonical
+// products/catalog.json IDs. Scope-first services and free delivery do not
+// acquire a paid checkout by receiving an environment URL.
+const OFFER_CATALOG_PRODUCT_IDS: Readonly<Record<string, string>> = {
+  blueprint: 'blueprint',
+  'private-intel': 'private-intel',
+}
+
 export function checkoutUrl(offer: Offer): string | null {
+  const productId = OFFER_CATALOG_PRODUCT_IDS[offer.slug]
+  const product = productId ? findCatalogProduct(productId) : undefined
+  if (!product || catalogRefusal(product)) return null
   if (!offer.checkout.envKey) return null
   const value = process.env[offer.checkout.envKey]
   if (!value) return null
 
   try {
     const url = new URL(value)
-    return url.protocol === 'https:' ? url.toString() : null
+    return url.protocol === 'https:' && !url.username && !url.password ? url.toString() : null
   } catch {
     return null
   }

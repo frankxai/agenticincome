@@ -46,6 +46,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
   // the sale AND the Polar env is set for this product. False until then, which
   // keeps the existing request-access CTA exactly as it is.
   const polarCheckoutLive = isCheckoutLive(offer.slug)
+  const checkoutReady = polarCheckoutLive || Boolean(liveCheckout)
   const isFree = offer.checkout.fallback === 'delivery'
   const isScoped = offer.accessMode === 'scope-first'
   const accessSteps = [
@@ -101,7 +102,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
                 ? 'Scope, acceptance checks, and commercial terms are agreed before implementation.'
               : polarCheckoutLive
                 ? 'Checkout is live. Polar.sh is the merchant of record and handles VAT and sales tax.'
-              : liveCheckout
+              : checkoutReady
                 ? 'Live checkout URL is configured.'
                 : 'Request access — checkout opens when provider link is connected.'}
           </p>
@@ -110,7 +111,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
               ? 'Internal free delivery route is live.'
               : isScoped
                 ? 'No payment is taken here. The intake route records interest only when the configured service is available.'
-              : liveCheckout
+              : checkoutReady
                 ? 'Secure payment provider checkout is connected.'
                 : 'Checkout is not yet live. Request access to be notified when it opens.'}
           </div>
@@ -194,7 +195,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
         </div>
       </section>
 
-      {!isFree && !liveCheckout ? (
+      {!isFree && !checkoutReady ? (
         <section id="request-access" className="section-band">
           <EmailCapture
             headline={`Request ${offer.shortTitle} access`}

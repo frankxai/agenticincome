@@ -36,7 +36,7 @@
       "Internal operating language",
       "Decorative 3D or generated hero filler"
     ],
-    "signature": "A coded four-stage implementation model—Audit, Architect, Implement, Verify—backed by links to real public systems.",
+    "signature": "A coded four-stage implementation model\u2014Audit, Architect, Implement, Verify\u2014backed by links to real public systems.",
     "system": [
       "Tier C coded product proof as the primary hero asset",
       "Obsidian, emerald, cyan, and amber FrankX tokens",
@@ -138,5 +138,13 @@
     "pending": [
       "Repository-wide test, type-check, lint, static link check, public-surface verification, and production build on the Git-backed preview."
     ]
+  },
+  "challenge_experiment": {
+    "version": "2026-10-07",
+    "manifest": "design/challenge-design-evidence.json",
+    "selected_direction": "documentary experiment board",
+    "decision": "preview-only",
+    "score": null,
+    "mobile_visual_status": "pending"
   }
 }

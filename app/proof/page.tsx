@@ -84,6 +84,7 @@ export default function ProofPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/build" className="cta">Build a governed system</Link>
             <Link href="/trust" className="cta-secondary">Read the trust standard</Link>
+            <Link href="/challenge#experiments" className="cta-secondary">Inspect the AI shop experiment</Link>
           </div>
         </div>
       </section>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Direction 1: curriculum continuation</title><desc id="desc">The existing seven-day guide dominates. The experiment appears as a secondary resource.</desc>
+  <rect width="1200" height="800" fill="#05060A"/><g fill="#F1F3F9" font-family="sans-serif"><text x="80" y="95" font-size="18" fill="#10B981">01 / Curriculum continuation</text><text x="80" y="175" font-size="48">Seven days. One owned system.</text><text x="80" y="225" font-size="20" fill="#8A90A8">Preserve the current learning path as the first read.</text></g>
+  <g fill="#0A0C14" stroke="#1A1F2E"><rect x="80" y="280" width="1040" height="76" rx="12"/><rect x="80" y="370" width="1040" height="76" rx="12"/><rect x="80" y="460" width="1040" height="76" rx="12"/><rect x="80" y="550" width="1040" height="76" rx="12"/></g>
+  <g font-family="sans-serif" font-size="24" fill="#F1F3F9"><text x="110" y="327">01   Create the owned system</text><text x="110" y="417">02   Choose the buyer and outcome</text><text x="110" y="507">03   Define the delivery contract</text><text x="110" y="597">04–07   Build, explain and validate</text></g>
+  <path d="M80 680H1120" stroke="#1A1F2E"/><text x="80" y="735" font-family="sans-serif" font-size="22" fill="#10B981">Secondary resource: inspect the AI-shop experiment</text>
+</svg>

@@ -35,3 +35,7 @@ remain available for lower-commitment users.
 
 No hero video or WebGL is introduced by this repair. Existing composition,
 motion, responsive behavior, and visual tokens remain unchanged.
+
+## Challenge experiment addition — 2026-10-07
+
+The `/challenge` extension is specified in `CHALLENGE_PAGE_SPEC.md`. It adds a source-backed experiment record and equal-condition model prompts while preserving the evergreen curriculum and public install contract.

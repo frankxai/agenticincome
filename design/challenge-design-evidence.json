@@ -1,0 +1,105 @@
+{
+  "version": "2026-10-07",
+  "task": "Extend the challenge with an evidence-led experiment and equal-condition model prompts; close the configured-link bypass of paid catalog readiness.",
+  "surface": "/challenge; contextual link from /proof",
+  "base_commit": "c23f8f782df96cc91c93b82a3ff0717b744944d2",
+  "base_tree": "f8734f3ca346cd1f1176f07efedf922326f05433",
+  "selected_direction": "documentary experiment board",
+  "directions": [
+    {
+      "path": "design/directions/challenge-curriculum.svg",
+      "sha256": "5cc0080f480ed26f3d65b72fdde8cc9b048d4e0cff345b9ff6d62d8c4f392ebc"
+    },
+    {
+      "path": "design/directions/challenge-scoreboard.svg",
+      "sha256": "a318b0cabc72107f63821415e81ed51b5b21bf7ab32e71f467ddd33f8299f80d"
+    },
+    {
+      "path": "design/directions/challenge-documentary.svg",
+      "sha256": "468d3f9945d5f0922ebac817f3fd174d8c763e8a0bd5712cbf04d628b542c61f"
+    }
+  ],
+  "references": [
+    "AGENTS.md",
+    "DESIGN.md",
+    "TASTE.md",
+    "SYSTEM.md",
+    "SKILL.md",
+    "design/CHALLENGE_PAGE_SPEC.md",
+    "design/CHALLENGE_SCENE_BRIEF.md"
+  ],
+  "asset_provenance": "Exact coded protocol and data; no new raster assets, font, logo or motion.",
+  "captures": {
+    "before_desktop": {
+      "path": "/workspace/scratch/agenticincome-challenge-before-desktop-2026-10-07.jpg",
+      "source": "https://www.agenticincome.ai/challenge",
+      "inspected": true
+    },
+    "before_mobile": null,
+    "after_desktop": null,
+    "after_mobile": null,
+    "after_reduced_motion": null
+  },
+  "checks": [
+    {
+      "name": "frozen-install",
+      "status": "pass",
+      "evidence": "pnpm install --frozen-lockfile; 542 packages installed; lockfile unchanged."
+    },
+    {
+      "name": "meaningful-tests",
+      "status": "pass",
+      "evidence": "pnpm test: 103/103 passed, including 6 experiment protocol tests and 3 canonical checkout-gate regressions."
+    },
+    {
+      "name": "type-check",
+      "status": "pass",
+      "evidence": "pnpm run type-check"
+    },
+    {
+      "name": "static-links",
+      "status": "pass",
+      "evidence": "pnpm run links:check:static"
+    },
+    {
+      "name": "lint",
+      "status": "pass",
+      "evidence": "pnpm run lint; zero warnings"
+    },
+    {
+      "name": "public-integrity",
+      "status": "pass",
+      "evidence": "pnpm run verify:public; existing public contracts pass."
+    },
+    {
+      "name": "build",
+      "status": "pass",
+      "evidence": "pnpm run build; Next.js 16.3.6 builds 41 routes."
+    },
+    {
+      "name": "source-security",
+      "status": "pass-with-existing-low-finding",
+      "evidence": "Estate guard: 0 critical/high/medium, 1 low in existing CLAUDE.md."
+    },
+    {
+      "name": "visual-verification",
+      "status": "pending",
+      "evidence": "Live desktop baseline captured. Preview desktop and complete mobile/tablet/reflow/reduced-motion evidence pending."
+    },
+    {
+      "name": "configured-checkout-runtime",
+      "status": "pass",
+      "evidence": "Built with synthetic HTTPS checkout URLs. Local production server GET tests preserved free delivery and scoped intake, kept Blueprint/Private Intel request-access, returned readiness 503, and rendered no live-checkout claim. Receipt: /workspace/scratch/9910619f3c9e/income-checkout-smoke.json."
+    }
+  ],
+  "independent_review": "Source reviewed by separate release_verifier; scoring provenance, public language and future-state copy findings addressed. Runtime review remains pending.",
+  "score": null,
+  "decision": "preview-only",
+  "known_risks": [
+    "No model run, purchase, measured demand or revenue has occurred in this protocol.",
+    "Record updates are versioned source changes; this board is not an automatic model runner or customer event store.",
+    "The browser exposes no supported viewport resizing/emulation. Mobile/tablet/reflow/reduced-motion rendered captures remain blocked; source responsiveness is not visual proof.",
+    "Strict world-class release evidence and independent rendered review are incomplete; do not describe this work as production-qualified.",
+    "No checkout, intake or analytics configuration was activated. Canonical catalog readiness now gates hosted checkout links, the Polar path and public readiness."
+  ]
+}

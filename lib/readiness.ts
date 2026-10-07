@@ -1,3 +1,6 @@
+import { checkoutUrl, getOffer } from './offers.ts'
+import { isCheckoutLive } from './polar.ts'
+
 type ReadinessItem = {
   id: string
   label: string
@@ -25,8 +28,10 @@ function hasEmailEnv(name: string) {
 }
 
 export function getLaunchReadiness() {
-  const blueprintCheckout = hasSecureUrlEnv('AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL')
-  const privateIntelCheckout = hasSecureUrlEnv('AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL')
+  const blueprintOffer = getOffer('blueprint')!
+  const privateIntelOffer = getOffer('private-intel')!
+  const blueprintCheckout = Boolean(checkoutUrl(blueprintOffer)) || isCheckoutLive('blueprint')
+  const privateIntelCheckout = Boolean(checkoutUrl(privateIntelOffer)) || isCheckoutLive('private-intel')
   const subscribeWebhook = hasSecureUrlEnv('SUBSCRIBE_WEBHOOK_URL')
   const conciergeEmail = hasEmailEnv('ACCESS_REQUEST_EMAIL')
   const analyticsWebhook = hasSecureUrlEnv('ANALYTICS_WEBHOOK_URL')
@@ -41,7 +46,7 @@ export function getLaunchReadiness() {
       requiredForFullLaunch: true,
       detail: blueprintCheckout
         ? 'Paid Blueprint clicks can leave the site for secure checkout.'
-        : 'Blueprint clicks fall back to request-access.',
+        : 'Blueprint remains request-access until the catalog permits sale and its provider is configured.',
     },
     {
       id: 'private_intel_checkout',
@@ -51,7 +56,7 @@ export function getLaunchReadiness() {
       requiredForFullLaunch: true,
       detail: privateIntelCheckout
         ? 'Membership clicks can leave the site for recurring checkout.'
-        : 'Membership clicks fall back to request-access.',
+        : 'Membership remains request-access until the catalog permits sale and its provider is configured.',
     },
     {
       id: 'owned_capture',

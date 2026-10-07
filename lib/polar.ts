@@ -1,13 +1,12 @@
-import catalog from '@/products/catalog.json'
+import catalog from '../products/catalog.json' with { type: 'json' }
 
 /**
  * Server-side Polar.sh checkout client. Import only from route handlers and
  * server components — it reads secrets from process.env.
  *
- * This is the API-created-session path. It is separate from, and does not
- * replace, the static checkout-link path in lib/offers.ts (`checkoutUrl`) that
- * the GET handler in app/api/checkout/route.ts uses. Both are gated
- * independently and neither can invent availability.
+ * This is the API-created-session path. The static checkout-link path in
+ * lib/offers.ts also uses this catalog gate. A configured link or token never
+ * overrides the catalog's readiness state.
  *
  * Fail-closed by construction. Three independent gates must all pass:
  *

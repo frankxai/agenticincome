@@ -146,5 +146,18 @@
     "decision": "preview-only",
     "score": null,
     "mobile_visual_status": "pending"
+  },
+  "optional_motion_targets": {
+    "version": "2026-10-08",
+    "scope": "Guard absent hero, engine-stage and signal-route targets; preserve all present-scene tween values, reduced-motion early return and context cleanup.",
+    "decision": "preview-only",
+    "score": null,
+    "source_base": "78e361b92e411ebf0dc90cd4e6cc7f89788b0c5d",
+    "checks": {
+      "focused_runtime_test": "pass: 4 effect-execution tests including absent targets, present-scene timing/trigger, missing board and reduced motion",
+      "required_checks": "pass: lint, 107 tests, typecheck, static links, public surface, Next build (41 routes)",
+      "independent_preview_review": "pending",
+      "mobile_motion_gate": "blocked: no supported rendered capture in current browser surface"
+    }
   }
 }

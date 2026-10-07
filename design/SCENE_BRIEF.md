@@ -31,3 +31,10 @@ Claude marketplace.
 ## Challenge experiment addition — 2026-10-07
 
 See `CHALLENGE_SCENE_BRIEF.md`: a documentary experiment board using the existing obsidian/emerald system. No new imagery, font, logo or authored motion.
+
+## Optional animation targets — 2026-10-08
+
+Keep the authored homepage sequence. Routes without its hero, engine or signal
+board must not initialize those tweens. A signal-route tween also requires its
+actual board trigger. Reduced motion remains the complete static sequence;
+context cleanup stays intact. Full mobile/motion evidence is still pending.

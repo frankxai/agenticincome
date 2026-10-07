@@ -31,8 +31,9 @@ export function MotionRuntime() {
         )
       })
 
-      gsap.fromTo(
-        '[data-hero-panel]',
+      const heroPanels = gsap.utils.toArray<HTMLElement>('[data-hero-panel]')
+      if (heroPanels.length > 0) gsap.fromTo(
+        heroPanels,
         { autoAlpha: 0.94, y: 12, scale: 0.992 },
         {
           autoAlpha: 1,
@@ -45,8 +46,9 @@ export function MotionRuntime() {
         },
       )
 
-      gsap.fromTo(
-        '[data-engine-stage]',
+      const engineStages = gsap.utils.toArray<HTMLElement>('[data-engine-stage]')
+      if (engineStages.length > 0) gsap.fromTo(
+        engineStages,
         { autoAlpha: 0.72, x: 10 },
         {
           autoAlpha: 1,
@@ -92,8 +94,10 @@ export function MotionRuntime() {
         )
       })
 
-      gsap.fromTo(
-        '.signal-route',
+      const signalBoard = document.querySelector<HTMLElement>('.signal-board')
+      const signalRoutes = gsap.utils.toArray<HTMLElement>('.signal-route')
+      if (signalBoard && signalRoutes.length > 0) gsap.fromTo(
+        signalRoutes,
         { autoAlpha: 0, y: 14 },
         {
           autoAlpha: 1,
@@ -103,7 +107,7 @@ export function MotionRuntime() {
           ease: 'power3.out',
           clearProps: 'transform,opacity,visibility',
           scrollTrigger: {
-            trigger: '.signal-board',
+            trigger: signalBoard,
             start: 'top 78%',
             once: true,
           },

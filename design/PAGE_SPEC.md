@@ -39,3 +39,10 @@ motion, responsive behavior, and visual tokens remain unchanged.
 ## Challenge experiment addition — 2026-10-07
 
 The `/challenge` extension is specified in `CHALLENGE_PAGE_SPEC.md`. It adds a source-backed experiment record and equal-condition model prompts while preserving the evergreen curriculum and public install contract.
+
+## Optional animation targets — 2026-10-08
+
+Initialize hero, engine-stage and signal-route motion only when the route contains
+its targets. Preserve homepage tween values, visible static content and the
+reduced-motion early return. This repairs off-homepage runtime warnings; it adds
+no section, animation, checkout capability or conversion claim.

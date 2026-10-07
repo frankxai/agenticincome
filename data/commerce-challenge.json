@@ -16,7 +16,16 @@
     "timeBudgetMinutes": 60,
     "runtimeBudgetEur": 10,
     "spendingAuthorized": false,
-    "evidence": [],
+    "evidence": [
+      {
+        "label": "Free planning kit desktop preview — production and mobile pending",
+        "href": "https://starlight-technology-k6zmvvl9c-starlight-intelligence.vercel.app/ai"
+      },
+      {
+        "label": "Planning kit PR #40 — 43 tests and CI verified",
+        "href": "https://github.com/frankxai/starlight-technology/pull/40"
+      }
+    ],
     "decision": null,
     "readiness": [
       {
@@ -47,8 +56,17 @@
       "title": "One complete proposition",
       "deliverable": "A working preview, useful sample, transparent offer, cost model and test receipt.",
       "acceptance": "A new visitor can understand the scope and open the sample without an account. All unavailable purchase actions say so.",
-      "state": "planned",
-      "evidence": []
+      "state": "in_progress",
+      "evidence": [
+        {
+          "label": "Free planning kit desktop preview — production and mobile pending",
+          "href": "https://starlight-technology-k6zmvvl9c-starlight-intelligence.vercel.app/ai"
+        },
+        {
+          "label": "Planning kit PR #40 — 43 tests and CI verified",
+          "href": "https://github.com/frankxai/starlight-technology/pull/40"
+        }
+      ]
     },
     {
       "id": "12h",

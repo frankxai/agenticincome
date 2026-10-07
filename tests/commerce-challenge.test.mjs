@@ -72,6 +72,7 @@ test('public evidence refuses credentials, query data and executable URLs', () =
 
 test('checkpoints cannot claim verification without evidence or begin without a clock', () => {
   const ledger = copy()
+  ledger.checkpoints[0].evidence = []
   ledger.checkpoints[0].state = 'verified'
   assert.throws(() => parseChallengeLedger(ledger))
   ledger.checkpoints[0].state = 'planned'

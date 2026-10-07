@@ -104,7 +104,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
                 ? 'Checkout is live. Polar.sh is the merchant of record and handles VAT and sales tax.'
               : checkoutReady
                 ? 'Live checkout URL is configured.'
-                : 'Request access — checkout opens when provider link is connected.'}
+                : 'Request access — purchases open after catalog, delivery and merchant checkout verification.'}
           </p>
           <div className="mt-5 rounded-xl border border-border bg-bg/60 p-4 text-xs leading-6 text-muted">
             {isFree
@@ -201,7 +201,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
             headline={`Request ${offer.shortTitle} access`}
             sub={isScoped
               ? 'Share your email to request the current scoping path. If online intake is not connected, the page will say so before claiming receipt.'
-              : 'Get notified when the checkout opens and receive the current first-loop checklist immediately.'}
+              : 'Request an availability update through the current intake route. No product or checklist is delivered by this request.'}
             source={`offer-${offer.slug}`}
             buttonLabel="Request access"
             successMessage="Request received. You are on the access list."

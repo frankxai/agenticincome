@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "version": "2026-10-08.2",
+  "updatedAt": "2026-10-08",
+  "decisionStatus": "blocked",
+  "offers": [
+    {
+      "offerId": "blueprint",
+      "label": "Agentic Income Blueprint",
+      "gates": [
+        {"id":"merchant_eligibility","label":"Merchant and account eligibility","category":"merchant","state":"unverified","requiredForFullLaunch":true,"detail":"Record account-specific acceptance for this exact offer, merchant mode, business and country before enabling payment.","evidence":[]},
+        {"id":"owned_rights_inventory","label":"Owned rights and deliverable inventory","category":"rights","state":"unverified","requiredForFullLaunch":true,"detail":"List every paid file, runtime, licence, third-party input and customer right for this offer; customer data, provider accounts and keys are not inventory.","evidence":[]},
+        {"id":"price_tax_consumer_terms","label":"Price, tax and consumer terms","category":"terms","state":"unverified","requiredForFullLaunch":true,"detail":"Verify the final price, merchant identity, tax treatment, withdrawal/consent flow, support promise and refund terms for this exact offer.","evidence":[]},
+        {"id":"signed_payment_webhook","label":"Signed payment event","category":"fulfilment","state":"unverified","requiredForFullLaunch":true,"detail":"Prove signature verification, payment-status recheck and rejection of forged, incomplete or replayed events for this offer in an authorised test environment.","evidence":[]},
+        {"id":"idempotent_entitlement","label":"Idempotent entitlement","category":"entitlement","state":"unverified","requiredForFullLaunch":true,"detail":"Prove the same accepted payment can grant this offer's correct entitlement once and only once without widening account authority.","evidence":[]},
+        {"id":"private_delivery","label":"Private delivery","category":"delivery","state":"unverified","requiredForFullLaunch":true,"detail":"Prove the entitled buyer receives this offer's correct version through an allowlisted private URL without exposing customer prompts or files.","evidence":[]},
+        {"id":"failure_replay_recovery","label":"Failure, replay and recovery","category":"recovery","state":"unverified","requiredForFullLaunch":true,"detail":"Test delayed, duplicate, declined and interrupted flows for this offer plus a documented operator recovery path and incident record.","evidence":[]},
+        {"id":"refund_revocation","label":"Refund and revocation","category":"recovery","state":"unverified","requiredForFullLaunch":true,"detail":"Prove this offer's refund handling, access revocation where lawful, durable confirmation and reconciliation without claiming unearned revenue.","evidence":[]},
+        {"id":"support_privacy_security","label":"Support, privacy and security","category":"assurance","state":"unverified","requiredForFullLaunch":true,"detail":"Verify this offer's support ownership, data minimisation, retention, secret isolation, auditability and tested rollback/revocation path.","evidence":[]}
+      ]
+    },
+    {
+      "offerId": "private-intel",
+      "label": "Private Intel Membership",
+      "gates": [
+        {"id":"merchant_eligibility","label":"Merchant and account eligibility","category":"merchant","state":"unverified","requiredForFullLaunch":true,"detail":"Record account-specific acceptance for this exact recurring offer, merchant mode, business and country before enabling payment.","evidence":[]},
+        {"id":"owned_rights_inventory","label":"Owned rights and deliverable inventory","category":"rights","state":"unverified","requiredForFullLaunch":true,"detail":"List every recurring deliverable, runtime, licence, third-party input and member right; customer data, provider accounts and keys are not inventory.","evidence":[]},
+        {"id":"price_tax_consumer_terms","label":"Price, tax and consumer terms","category":"terms","state":"unverified","requiredForFullLaunch":true,"detail":"Verify the recurring price and cadence, merchant identity, tax treatment, cancellation, withdrawal/consent, support and refund terms for this exact offer.","evidence":[]},
+        {"id":"signed_payment_webhook","label":"Signed payment event","category":"fulfilment","state":"unverified","requiredForFullLaunch":true,"detail":"Prove signature verification, payment-status recheck and rejection of forged, incomplete or replayed initial, renewal and cancellation events in an authorised test environment.","evidence":[]},
+        {"id":"idempotent_entitlement","label":"Idempotent entitlement","category":"entitlement","state":"unverified","requiredForFullLaunch":true,"detail":"Prove each accepted subscription event grants or preserves the correct membership entitlement once and only once without widening account authority.","evidence":[]},
+        {"id":"private_delivery","label":"Private delivery","category":"delivery","state":"unverified","requiredForFullLaunch":true,"detail":"Prove the entitled member receives the correct current version through an allowlisted private path without exposing customer prompts or files.","evidence":[]},
+        {"id":"failure_replay_recovery","label":"Failure, replay and recovery","category":"recovery","state":"unverified","requiredForFullLaunch":true,"detail":"Test delayed, duplicate, declined, renewal, cancellation and interrupted flows plus a documented operator recovery path and incident record.","evidence":[]},
+        {"id":"refund_revocation","label":"Refund, cancellation and revocation","category":"recovery","state":"unverified","requiredForFullLaunch":true,"detail":"Prove refund and cancellation handling, access revocation where lawful, durable confirmation and reconciliation without claiming unearned revenue.","evidence":[]},
+        {"id":"support_privacy_security","label":"Support, privacy and security","category":"assurance","state":"unverified","requiredForFullLaunch":true,"detail":"Verify recurring support ownership, data minimisation, retention, secret isolation, auditability and tested rollback/revocation path.","evidence":[]}
+      ]
+    }
+  ]
+}

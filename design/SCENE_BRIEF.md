@@ -38,3 +38,14 @@ Keep the authored homepage sequence. Routes without its hero, engine or signal
 board must not initialize those tweens. A signal-route tween also requires its
 actual board trigger. Reduced motion remains the complete static sequence;
 context cleanup stays intact. Full mobile/motion evidence is still pending.
+
+
+## Evidence-gated paid readiness — 2026-10-08
+
+Selected direction: preserve the existing obsidian evidence board and replace
+the vague configured/missing story with two precise states: configuration and
+reviewed evidence. No new imagery, typography or motion is introduced. The
+opening sentence names the consequential distinction—checkout configuration is
+not fulfilment—and the card grid exposes every missing gate without implying
+sales, eligibility or customer activity.
+

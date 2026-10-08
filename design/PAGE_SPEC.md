@@ -46,3 +46,17 @@ Initialize hero, engine-stage and signal-route motion only when the route contai
 its targets. Preserve homepage tween values, visible static content and the
 reduced-motion early return. This repairs off-homepage runtime warnings; it adds
 no section, animation, checkout capability or conversion claim.
+
+
+## Evidence-gated paid readiness — 2026-10-08
+
+The existing `/readiness` route now separates runtime configuration from
+reviewed commercial evidence. Its recipient is the owner or release reviewer;
+its job is to prevent a configured checkout from being mistaken for a fulfilled
+order. The primary action remains inspection. The signature proof is the
+machine-readable set of nine offer-specific merchant, rights, terms,
+fulfilment, recovery and assurance gates for each of the two paid offers
+(18 required evidence gates total). Layout, typography, motion and navigation
+remain unchanged; production stays blocked pending mobile and full release
+evidence.
+

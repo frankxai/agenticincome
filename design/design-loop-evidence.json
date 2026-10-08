@@ -36,7 +36,7 @@
       "Internal operating language",
       "Decorative 3D or generated hero filler"
     ],
-    "signature": "A coded four-stage implementation model\u2014Audit, Architect, Implement, Verify\u2014backed by links to real public systems.",
+    "signature": "A coded four-stage implementation model—Audit, Architect, Implement, Verify—backed by links to real public systems.",
     "system": [
       "Tier C coded product proof as the primary hero asset",
       "Obsidian, emerald, cyan, and amber FrankX tokens",
@@ -159,5 +159,22 @@
       "independent_preview_review": "pending",
       "mobile_motion_gate": "blocked: no supported rendered capture in current browser surface"
     }
+  },
+  "commercial_readiness": {
+    "version": "2026-10-08.2",
+    "route": "/readiness",
+    "recipient": "Owner or release reviewer deciding whether paid launch is supportable",
+    "job": "Separate runtime configuration from reviewed merchant, rights, terms and fulfilment evidence",
+    "selected_direction": "Preserve the existing obsidian evidence board and expose the complete missing-gate contract",
+    "decision": "preview-only",
+    "visual_change": "Copy and additional evidence cards within the existing responsive composition; no new imagery, type, motion or navigation",
+    "checks": {
+      "activation_manifest": "source review pass: both paid offers have nine offer-specific required gates (18 total); every gate starts unverified with no evidence",
+      "false_positive_regressions": "local syntax and manifest checks pass; full focused/required CI pending",
+      "required_checks": "pending",
+      "independent_preview_review": "pending",
+      "mobile_release_gate": "blocked: existing mobile capture and complete release evidence remain unavailable"
+    }
   }
 }
+

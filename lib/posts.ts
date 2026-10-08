@@ -46,8 +46,8 @@ export const posts: Post[] = [
   },
   {
     slug: 'personal-ai-coe-under-100',
-    title: 'How to Build a Personal AI Center of Excellence Under $100/mo',
-    dek: 'A personal AI Center of Excellence: one tool for each of six capabilities, for under $100 a month.',
+    title: 'How to Build a Personal AI Center of Excellence from About $79/mo',
+    dek: 'A personal AI Center of Excellence: one tool for each of six capabilities, from about $79 a month.',
     query: 'personal ai stack under 100',
     date: '2026-06-08',
     cluster: 'income',

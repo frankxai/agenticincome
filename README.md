@@ -15,8 +15,6 @@
 
 Something structural changed in 2025–2026: the same agent runtimes that write software now research markets, draft offers, build sites, wire checkouts, and run weekly operating loops.
 
-That changes the oldest constraint on solo income: your hours.
-
 Agentic Income publishes the machinery, honest costs, and operating discipline without promising a result. The reusable system is public in [frankxai/agentic-income-skills](https://github.com/frankxai/agentic-income-skills): inspectable contracts, executable scripts, and a governed reference implementation under MIT.
 
 ## Run the public system

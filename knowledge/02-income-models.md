@@ -13,7 +13,7 @@ Every legitimate way a solo creator converts agentic capability into revenue red
 **Mechanism:** you sell an outcome to a specific client; agents compress your delivery cost.
 
 - **Examples that work in 2026:** AI workflow implementation for small firms, content-system builds, site + funnel builds, data/report automation, "agent audits" of existing businesses.
-- **Economics:** highest hourly yield of the three, fastest to first dollar. A scoped implementation that took a 2019 freelancer three weeks is now a 2–4 day delivery with an agent team — but **price the outcome, not your hours**, or the compression benefits your client instead of you.
+- **Economics:** highest hourly yield of the three, fastest to first dollar. **Price the outcome, not your hours**, or the compression benefits your client instead of you.
 - **Honest costs:** still labor-coupled. Scope creep is the killer; agents make delivery cheap but discovery and trust expensive. Cap concurrent clients before quality collapses.
 - **The trap:** staying here forever. Services are the funding stage, not the destination. Skim 20% of every service week into building Model 2 assets.
 
@@ -37,9 +37,9 @@ Every legitimate way a solo creator converts agentic capability into revenue red
 ## The path (what `/ai architect` actually computes)
 
 ```
-Weeks 1–4     Model 1: one scoped service offer. Goal: first revenue + 2 delivery case artifacts.
-Months 2–3    Model 2: package the delivery system you just used. Goal: first 10 self-serve sales.
-Months 3–6    Model 3: pick ONE stream that compounds your existing surfaces. Goal: first system live with a weekly loop.
+Stage 1       Model 1: one scoped service offer. Goal: first revenue + 2 delivery case artifacts.
+Stage 2       Model 2: package the delivery system you just used. Goal: first 10 self-serve sales.
+Stage 3       Model 3: pick ONE stream that compounds your existing surfaces. Goal: first system live with a weekly loop.
 Ongoing       /dpi: track each asset in your ledger, gate-check quarterly, kill what stalls.
 ```
 
@@ -49,7 +49,7 @@ The ratios matter more than the calendar: **one** offer, **one** product, **one*
 
 | Your situation | Enter at | Why |
 |---|---|---|
-| Skills but no audience, need money in ≤30 days | Services | Only model with day-scale latency to cash |
+| Skills but no audience | Services | Doesn't depend on an audience |
 | Existing audience or traffic surface (even small) | Products | Distribution is the hard part; you have a seed |
 | Existing income, building for the decade | Systems + dpi | You can afford the latency for the decoupling |
 

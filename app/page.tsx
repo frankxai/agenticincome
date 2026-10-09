@@ -77,11 +77,11 @@ export default function Home() {
               <div className="t-out"><span className="t-accent">$</span> <span className="text-ink">claude mcp add --transport http agentic-income \</span></div>
               <div className="t-out">    https://www.agenticincome.ai/api/mcp</div>
               <div className="t-cmd mt-3">fit_check hours=10 budget=200 audience=no code=yes</div>
-              <div className="t-out">{'{'} "model": "services",</div>
-              <div className="t-out">  "why": "10 focused hours and working code</div>
+              <div className="t-out">{'{'} &quot;model&quot;: &quot;services&quot;,</div>
+              <div className="t-out">  &quot;why&quot;: &quot;10 focused hours and working code</div>
               <div className="t-out">    skills price you into agent-assisted</div>
-              <div className="t-out">    delivery work first.",</div>
-              <div className="t-out">  "read": "/start" {'}'}<span className="t-caret ml-2" /></div>
+              <div className="t-out">    delivery work first.&quot;,</div>
+              <div className="t-out">  &quot;read&quot;: &quot;/start&quot; {'}'}<span className="t-caret ml-2" /></div>
             </div>
           </div>
         </div>
@@ -145,7 +145,7 @@ export default function Home() {
           </div>
         </div>
         <p className="mt-4 text-xs leading-6 text-muted">
-          Affiliate links disclosed. Rates verified {verifiedRangeLabel(verified)} against each program's own terms.
+          Affiliate links disclosed. Rates verified {verifiedRangeLabel(verified)} against each program&apos;s own terms.
         </p>
       </section>
 

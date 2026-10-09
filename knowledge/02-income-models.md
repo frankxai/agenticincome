@@ -13,7 +13,7 @@ Every legitimate way a solo creator converts agentic capability into revenue red
 **Mechanism:** you sell an outcome to a specific client; agents compress your delivery cost.
 
 - **Examples that work in 2026:** AI workflow implementation for small firms, content-system builds, site + funnel builds, data/report automation, "agent audits" of existing businesses.
-- **Economics:** highest hourly yield of the three, fastest to first dollar (days, not months). A scoped implementation that took a 2019 freelancer three weeks is now a 2–4 day delivery with an agent team — but **price the outcome, not your hours**, or the compression benefits your client instead of you.
+- **Economics:** highest hourly yield of the three, fastest to first dollar. A scoped implementation that took a 2019 freelancer three weeks is now a 2–4 day delivery with an agent team — but **price the outcome, not your hours**, or the compression benefits your client instead of you.
 - **Honest costs:** still labor-coupled. Scope creep is the killer; agents make delivery cheap but discovery and trust expensive. Cap concurrent clients before quality collapses.
 - **The trap:** staying here forever. Services are the funding stage, not the destination. Skim 20% of every service week into building Model 2 assets.
 
@@ -31,7 +31,7 @@ Every legitimate way a solo creator converts agentic capability into revenue red
 **Mechanism:** you own an asset that produces income with maintenance measured in hours per month — a publication, a product line with evergreen distribution, an affiliate property, a licensed catalog.
 
 - This is the domain of the sibling properties: [agenticpassiveincome.com](https://agenticpassiveincome.com) teaches the stream mechanics (`/api` pack); [dpi](https://github.com/frankxai/dpi) (private repo as of 2026-09-28) governs the portfolio layer (`/dpi` pack).
-- **Economics:** slowest to first dollar (weeks to months), highest ceiling, and the only model whose yield curve is decoupled from your calendar. The compounding asset is usually **distribution** (audience, SEO, syndication), not the content itself.
+- **Economics:** slowest to first dollar, highest ceiling, and the only model whose yield curve is decoupled from your calendar. The compounding asset is usually **distribution** (audience, SEO, syndication), not the content itself.
 - **Honest costs:** "passive" means *structurally decoupled from hours*, not zero hours. Every real system has a maintenance floor — we publish it per-stream in the Stream Atlas instead of pretending otherwise.
 
 ## The path (what `/ai architect` actually computes)

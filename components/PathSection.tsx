@@ -6,7 +6,6 @@ const MODELS = [
     name: 'Services',
     body: 'Sell one scoped outcome; an agent team compresses delivery 5–20×. Price the outcome — the compression surplus is yours, not your client’s.',
     econ: [
-      ['First dollar', 'days'],
       ['Coupling', 'still your hours'],
       ['Job', 'fund the next model'],
     ],
@@ -30,7 +29,6 @@ const MODELS = [
     name: 'Systems',
     body: 'Own a machine that produces with maintenance measured in hours per month. “Passive” means structurally decoupled — never zero. We publish every maintenance floor.',
     econ: [
-      ['First dollar', 'weeks–months'],
       ['Ceiling', 'highest of the three'],
       ['Next', '/api streams → /dpi portfolio'],
     ],

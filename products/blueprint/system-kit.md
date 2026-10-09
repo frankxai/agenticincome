@@ -13,7 +13,7 @@ You already have income — from services, products, or a day job — and you ar
 Two sentences of doctrine before anything else:
 
 1. **"Passive" is a structure, not a nap.** Every real system has a maintenance floor — hours per month that keep it alive. This kit makes you compute and publish yours before you build.
-2. **Systems are slowest to first dollar and highest ceiling.** Weeks to months of latency. If you need money soon, this is the wrong kit — go to [Services](service-kit.md).
+2. **Systems are slowest to first dollar and highest ceiling.** If you need money soon, this is the wrong kit — go to [Services](service-kit.md).
 
 The deep stream mechanics live with the siblings: [agenticpassiveincome.com](https://agenticpassiveincome.com) (`/api` pack — stream automation) and [disruptivepassiveincome.com](https://disruptivepassiveincome.com) (`/dpi` pack — portfolio governance). This kit is the *business plan* layer that decides whether a stream deserves to exist.
 

@@ -13,3 +13,5 @@ overrides:
   js-yaml@>=4.0.0 <4.3.2: ^4.3.2
   nanoid@>=3.0.0 <3.3.18: ^3.3.18
   qs@<6.16.0: ^6.16.0
+  source-map-js@<1.2.2: 1.2.2
+  '@modelcontextprotocol/sdk@<1.31.0': 1.31.0

@@ -15,6 +15,8 @@ overrides:
   js-yaml@>=4.0.0 <4.3.2: ^4.3.2
   nanoid@>=3.0.0 <3.3.18: ^3.3.18
   qs@<6.16.0: ^6.16.0
+  source-map-js@<1.2.2: 1.2.2
+  '@modelcontextprotocol/sdk@<1.31.0': 1.31.0
 
 importers:
 
@@ -31,7 +33,7 @@ importers:
         version: 3.15.0
       mcp-handler:
         specifier: ^1.1.0
-        version: 1.1.0(@modelcontextprotocol/sdk@1.26.0(zod@3.25.76))(next@16.3.6(@babel/core@7.29.7)(@types/node@22.19.20)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
+        version: 1.1.0(@modelcontextprotocol/sdk@1.31.0(zod@3.25.76))(next@16.3.6(@babel/core@7.29.7)(@types/node@22.19.20)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       next:
         specifier: ^16.3.6
         version: 16.3.6(@babel/core@7.29.7)(@types/node@22.19.20)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -426,8 +428,8 @@ packages:
       '@types/react': '>=16'
       react: '>=16'
 
-  '@modelcontextprotocol/sdk@1.26.0':
-    resolution: {integrity: sha512-Y5RmPncpiDtTXDbLKswIJzTqu2hyBKxTNsgKqKclDbhIgg1wgtf1fRuvxgTnRfcnxtvvgbIEcqUOzZrJ6iSReg==}
+  '@modelcontextprotocol/sdk@1.31.0':
+    resolution: {integrity: sha512-UvTMgnNlnIBO/22ob2RcVGDlcvOslQs8T59+FTGdA0L27a39fdGF/EDETNtDVK4DZGpwomlsYpRdA8UXcVL/pw==}
     engines: {node: '>=18'}
     peerDependencies:
       '@cfworker/json-schema': ^4.1.1
@@ -2001,7 +2003,7 @@ packages:
     resolution: {integrity: sha512-MVCES7g18gcoZy+R/3v5nadkUMzMAWdos8jRl6DyljOKvd2/ZKDmwlCjL6zp4vo+7FeCXOYL1uWinHWlkKAAUg==}
     hasBin: true
     peerDependencies:
-      '@modelcontextprotocol/sdk': 1.26.0
+      '@modelcontextprotocol/sdk': 1.31.0
       next: '>=13.0.0'
     peerDependenciesMeta:
       next:
@@ -2495,10 +2497,6 @@ packages:
   side-channel@1.1.1:
     resolution: {integrity: sha512-6x6dK6zJdpTzF4sQeNYxwtvBzf6Eg4GtlesS94HOvTudUeyK2WXAaIfmDgsyslYrRBeFIlsi54AYsFGUuhmvrQ==}
     engines: {node: '>= 0.4'}
-
-  source-map-js@1.2.1:
-    resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
-    engines: {node: '>=0.10.0'}
 
   source-map-js@1.2.2:
     resolution: {integrity: sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==}
@@ -3125,7 +3123,7 @@ snapshots:
       '@types/react': 19.2.17
       react: 19.2.7
 
-  '@modelcontextprotocol/sdk@1.26.0(zod@3.25.76)':
+  '@modelcontextprotocol/sdk@1.31.0(zod@3.25.76)':
     dependencies:
       '@hono/node-server': 1.19.17(hono@4.13.13)
       ajv: 8.20.0
@@ -3247,7 +3245,7 @@ snapshots:
       jiti: 2.7.0
       lightningcss: 1.32.0
       magic-string: 0.30.21
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
       tailwindcss: 4.3.0
 
   '@tailwindcss/oxide-android-arm64@4.3.0':
@@ -4787,9 +4785,9 @@ snapshots:
 
   math-intrinsics@1.1.0: {}
 
-  mcp-handler@1.1.0(@modelcontextprotocol/sdk@1.26.0(zod@3.25.76))(next@16.3.6(@babel/core@7.29.7)(@types/node@22.19.20)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)):
+  mcp-handler@1.1.0(@modelcontextprotocol/sdk@1.31.0(zod@3.25.76))(next@16.3.6(@babel/core@7.29.7)(@types/node@22.19.20)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)):
     dependencies:
-      '@modelcontextprotocol/sdk': 1.26.0(zod@3.25.76)
+      '@modelcontextprotocol/sdk': 1.31.0(zod@3.25.76)
       chalk: 5.6.2
       commander: 11.1.0
       redis: 4.7.1
@@ -5593,8 +5591,6 @@ snapshots:
       side-channel-list: 1.0.1
       side-channel-map: 1.0.1
       side-channel-weakmap: 1.0.2
-
-  source-map-js@1.2.1: {}
 
   source-map-js@1.2.2: {}
 

@@ -2,7 +2,7 @@
 
 # Agentic Income
 
-## The hours are over. The machines are yours.
+## Agentic Income publishes playbooks, dated partner terms and an MCP server for people who sell services delivered with AI agents, without income promises.
 
 ### Build income systems with AI agents — machinery you can inspect, public contracts you can run.
 
@@ -13,7 +13,7 @@
 
 ---
 
-Something structural changed in 2025–2026: the same agent runtimes that write software now research markets, draft offers, build sites, wire checkouts, and run weekly operating loops. One person directing an agent team can deliver work that once required a small firm.
+Something structural changed in 2025–2026: the same agent runtimes that write software now research markets, draft offers, build sites, wire checkouts, and run weekly operating loops.
 
 That changes the oldest constraint on solo income: your hours.
 
@@ -53,8 +53,8 @@ No Claude marketplace or private-repository plugin is required or advertised.
 
 ## The workbench — model one income system, then attack it
 
-`/workbench` and five MCP tools operate on **IncomeGraph.v1**: seventeen node types (Problem,
-Customer, Offer, Evidence, Channel, Partner, Asset, Workflow, AgentRole, HumanGate, Cost,
+`/workbench` and five MCP tools operate on **IncomeGraph.v1**: eighteen node types (Problem,
+Customer, Offer, Evidence, Channel, Partner, Asset, Workflow, AgentRole, Human, HumanGate, Cost,
 RevenueObservation, Experiment, Risk, Maintenance, KillCriterion, Receipt) and the legal
 relationships between them. Every node and edge carries an owner, a source, a date, a version, a
 visibility, and the evaluation rule that would prove it wrong.

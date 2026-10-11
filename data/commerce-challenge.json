@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "protocolVersion": "2026-10-07.1",
-  "updatedAt": "2026-10-07",
+  "updatedAt": "2026-10-11",
   "startAt": null,
   "round": {
     "id": "ai-shop-workflow-edition",
@@ -17,6 +17,14 @@
     "runtimeBudgetEur": 10,
     "spendingAuthorized": false,
     "evidence": [
+      {
+        "label": "Run the original Source-to-Brief Lab — local export and human review",
+        "href": "/downloads/ai-shop-challenge/workflow-lab.md"
+      },
+      {
+        "label": "11 October launch review — repair before scaling; outcomes unknown",
+        "href": "/downloads/ai-shop-challenge/launch-repair-review.md"
+      },
       {
         "label": "Free planning kit desktop preview — production and mobile pending",
         "href": "https://starlight-technology-k6zmvvl9c-starlight-intelligence.vercel.app/ai"
@@ -59,6 +67,10 @@
       "state": "in_progress",
       "evidence": [
         {
+          "label": "Run the original Source-to-Brief Lab — local export and human review",
+          "href": "/downloads/ai-shop-challenge/workflow-lab.md"
+        },
+        {
           "label": "Free planning kit desktop preview — production and mobile pending",
           "href": "https://starlight-technology-k6zmvvl9c-starlight-intelligence.vercel.app/ai"
         },
@@ -75,8 +87,13 @@
       "title": "Delivery earns the purchase",
       "deliverable": "A qualified checkout in sandbox mode, entitlement checks, download delivery and failure recovery.",
       "acceptance": "Test receipts prove successful delivery, declined-payment handling, refund/revocation and support instructions. Public sale waits for verification.",
-      "state": "planned",
-      "evidence": []
+      "state": "blocked",
+      "evidence": [
+        {
+          "label": "11 October launch review — repair before scaling; outcomes unknown",
+          "href": "/downloads/ai-shop-challenge/launch-repair-review.md"
+        }
+      ]
     },
     {
       "id": "48h",
@@ -85,18 +102,28 @@
       "title": "Ask the market",
       "deliverable": "One demonstration and one offer variation, with consent-based measurement of qualified visits, interest and activation.",
       "acceptance": "Report traffic source, denominator, observation window and measurement limits. No winner from an underpowered split test.",
-      "state": "planned",
-      "evidence": []
+      "state": "blocked",
+      "evidence": [
+        {
+          "label": "11 October launch review — repair before scaling; outcomes unknown",
+          "href": "/downloads/ai-shop-challenge/launch-repair-review.md"
+        }
+      ]
     },
     {
       "id": "72h",
       "label": "72 hours",
       "offsetHours": 72,
-      "title": "Make the evidence decide",
-      "deliverable": "A continue, revise or stop decision, supported by delivery, demand, costs and support evidence.",
+      "title": "Repair before scaling",
+      "deliverable": "Review recorded: repair measurement and one complete paid delivery path. Customer outcomes and total costs remain unknown.",
       "acceptance": "Actual receipts remain separate from targets; buyers' identities and private records stay private.",
-      "state": "planned",
-      "evidence": []
+      "state": "blocked",
+      "evidence": [
+        {
+          "label": "11 October launch review — repair before scaling; outcomes unknown",
+          "href": "/downloads/ai-shop-challenge/launch-repair-review.md"
+        }
+      ]
     },
     {
       "id": "monthly",
@@ -106,7 +133,12 @@
       "deliverable": "Review net contribution, activation, refunds, support, policy freshness and retained customer value.",
       "acceptance": "Renew, improve or retire the offer. Recheck supplier terms and remove unsupported or expired claims.",
       "state": "planned",
-      "evidence": []
+      "evidence": [
+        {
+          "label": "11 October launch review — repair before scaling; outcomes unknown",
+          "href": "/downloads/ai-shop-challenge/launch-repair-review.md"
+        }
+      ]
     }
   ],
   "rubric": [
@@ -296,3 +328,4 @@
     }
   ]
 }
+

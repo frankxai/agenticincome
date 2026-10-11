@@ -101,5 +101,27 @@
     "The browser exposes no supported viewport resizing/emulation. Mobile/tablet/reflow/reduced-motion rendered captures remain blocked; source responsiveness is not visual proof.",
     "Strict world-class release evidence and independent rendered review are incomplete; do not describe this work as production-qualified.",
     "No checkout, intake or analytics configuration was activated. Canonical catalog readiness now gates hosted checkout links, the Polar path and public readiness."
-  ]
+  ],
+  "workflow_lab_refresh": {
+    "version": "2026-10-11.1",
+    "scope": "Original local executable/sample/guide; public-safe launch review; progress data within unchanged documentary board.",
+    "source_base": "13e1680758bdfbf78191fed936ec9adbf1e9992e",
+    "component_or_motion_change": false,
+    "customer_result": null,
+    "competition_score": null,
+    "decision": "preview-only",
+    "checks": {
+      "frozen_install": "pass: lockfile unchanged; restored source hashes match GitHub baseline except declared changes",
+      "required_checks": "pass: lint, 120 tests, type-check, static links, public-surface verification, 41-route Next build",
+      "independent_source_review": "pass: independent verifier reran 10 focused tests and OSC/ANSI/BEL/bidi + field-roundtrip probes; no new source blocker",
+      "exact_preview": "pending",
+      "full_visual_release": "unverified: inherited mobile/reflow/reduced-motion evidence remains open"
+    },
+    "known_limits": [
+      "Source and rights assertions require human inspection; local identity is not authenticated.",
+      "No model/network/telemetry call; local receipt is never automatic customer evidence.",
+      "No real paid edition, checkout, customer activation or model run is established.",
+      "No layout/asset/motion implementation; cinematic guide is a plan for actual artifact recording."
+    ]
+  }
 }

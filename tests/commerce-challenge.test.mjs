@@ -20,6 +20,24 @@ test('all competitors begin unrun and unscored under one shared budget', () => {
   }
 })
 
+test('launch repair is visible without manufacturing a competition start or customer outcome', () => {
+  const ledger = parseChallengeLedger(copy())
+  assert.equal(ledger.updatedAt, '2026-10-11')
+  assert.equal(ledger.startAt, null)
+  assert.equal(ledger.round.baselineRevision, null)
+  assert.equal(ledger.round.primaryMetricValue, null)
+  assert.equal(ledger.round.decision, null)
+  for (const id of ['12h', '48h', '72h']) {
+    const checkpoint = ledger.checkpoints.find((item) => item.id === id)
+    assert.equal(checkpoint.state, 'blocked')
+    assert.ok(checkpoint.evidence.some((item) => item.href.endsWith('launch-repair-review.md')))
+  }
+  for (const item of ledger.round.evidence.filter((item) => item.href.startsWith('/downloads/'))) {
+    assert.ok(existsSync(new URL(`../public${item.href}`, import.meta.url)))
+  }
+  assert.ok(ledger.round.evidence.some((item) => item.href.endsWith('workflow-lab.md')))
+})
+
 test('no score, cost or completion may be attached to an unrun competitor', () => {
   for (const field of ['elapsedMinutes', 'runtimeCostEur']) {
     const ledger = copy()
@@ -91,3 +109,4 @@ test('each downloadable model prompt contains the identical shared protocol', ()
     assert.ok(readFileSync(path, 'utf8').endsWith(brief))
   }
 })
+

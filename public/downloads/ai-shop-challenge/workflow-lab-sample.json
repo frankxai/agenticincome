@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "fixture": true,
+  "project": "A creator's source-to-storyboard handoff",
+  "buyer": "A small studio preparing one short product demonstration",
+  "job": "Turn approved campaign notes into a reviewable production brief before generating media.",
+  "sources": [
+    { "id": "scope", "title": "Original synthetic studio scope note", "url": "https://example.com/fixtures/scope", "recordedAt": "2026-10-11", "rights": "owned" },
+    { "id": "experience", "title": "Original synthetic experience requirements", "url": "https://example.com/fixtures/experience", "recordedAt": "2026-10-11", "rights": "owned" }
+  ],
+  "claims": [
+    { "id": "one-outcome", "text": "Show one complete input-to-result journey: approved notes, a source-linked brief, an export and a human review.", "sourceIds": ["scope"], "state": "approved" },
+    { "id": "owned-runtime", "text": "The reference lab uses local Node.js and makes no network request or model call. It does not promise AI generation or saved time.", "sourceIds": ["scope"], "state": "approved" },
+    { "id": "cinematic-causality", "text": "Use four deliberate chapters: Gather, Shape, Inspect, Own. Each scene reveals the actual artifact; cuts do not imply hidden automation.", "sourceIds": ["scope", "experience"], "state": "approved" },
+    { "id": "accessibility", "text": "Provide captions, legible source labels, pause and skip controls, a complete static transcript and optional audio that begins only after consent.", "sourceIds": ["experience"], "state": "approved" },
+    { "id": "ethical-boundary", "text": "Use owned or licensed material. Do not show customer records, fabricate testimonials or portray proposed paid checkout as available.", "sourceIds": ["experience"], "state": "approved" }
+  ],
+  "nextActions": [
+    "Inspect the original notes and identify any unsupported statement before producing media.",
+    "Capture the actual lab run and export; keep synthetic fixture labels visible.",
+    "Storyboard Gather as an input close-up, Shape as the artifact transformation, Inspect as source and boundary checks, and Own as the export handoff.",
+    "Ask a reviewer to inspect the output against every source and rights assertion before approving the brief."
+  ],
+  "openQuestions": []
+}

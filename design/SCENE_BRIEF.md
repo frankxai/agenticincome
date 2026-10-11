@@ -49,3 +49,7 @@ opening sentence names the consequential distinction—checkout configuration is
 not fulfilment—and the card grid exposes every missing gate without implying
 sales, eligibility or customer activity.
 
+
+## Portable source-to-brief lab and progress correction — 2026-10-11
+
+Preserve the current static documentary composition and every interaction. The proof object is the actual local source → draft → export → human review artifact, with fixture labels and no customer-evidence claim. The lab guide defines Gather → Shape → Inspect → Own for a later actual cinematic recording; no new media or animation is delivered or certified by this change.

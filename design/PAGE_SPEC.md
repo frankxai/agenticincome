@@ -60,3 +60,7 @@ fulfilment, recovery and assurance gates for each of the two paid offers
 remain unchanged; production stays blocked pending mobile and full release
 evidence.
 
+
+## Portable source-to-brief lab and progress correction — 2026-10-11
+
+Content/data/download work within the existing documentary board. Add a complete local executable lab and its source-linked example; link it through the existing EvidenceLinks rows. Reflect the documented 12h/48h/72h blocked commercial checkpoints without starting the model round or assigning outcomes. No component, layout, navigation, typography, image, motion, checkout or telemetry code changes. Inspect the actual exact-head preview and its downloads. Full inherited mobile/reflow/reduced-motion release evidence remains open; a data-only refresh does not satisfy it.

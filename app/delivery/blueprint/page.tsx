@@ -37,10 +37,10 @@ export default function BlueprintDelivery() {
           </div>
         </div>
 
-        <aside className="rounded-2xl border border-border bg-surface/80 p-5">
-          <div className="text-sm font-semibold text-gold">Launch state</div>
+        <aside className="rounded-2xl border border-white/10 bg-surface/80 p-5 backdrop-blur-sm">
+          <div className="text-sm font-semibold text-gold">Pre-Activation Status</div>
           <p className="mt-3 text-sm leading-6 text-muted">
-            Secure checkout must be connected before this product is sold publicly. Until then, the public CTA routes to request-access.
+            The Blueprint package and buyer journey are fully built, gated, and independently verified. Polar live checkout remains inactive until Frank ratifies activation.
           </p>
         </aside>
       </section>

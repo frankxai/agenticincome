@@ -316,3 +316,188 @@ test('a signed receipt is a proof, and the payment still has a merchant account'
   assert.equal(report.settlements[0].rail, 'signed-receipt')
   assert.match(report.settlements[0].because, /merchant account/)
 })
+
+test('an mpp session meter with monthly cap on Tempo in EURC is admitted and endpoint stays off until fiat activated', () => {
+  const graph = clone()
+  meter(graph, {
+    protocol: 'mpp',
+    asset: 'eurc',
+    chain: 'tempo',
+    spendCap: { amount: 100, currency: 'EUR', period: 'month' },
+  })
+  node(graph, 'offer-scope-brief').data.price.unit = 'session'
+  const report = reviewIncomeGraph(graph, TODAY)
+  assert.deepEqual(
+    report.findings.filter((finding) => finding.severity === 'error'),
+    [],
+  )
+  assert.equal(report.settlements[0].rail, 'machine-payment')
+  assert.equal(report.settlements[0].admitted, true)
+  assert.ok(report.nextDecisions.some((line) => line.includes('Leave the endpoint off until a fiat offer')))
+})
+
+test('meter with invalid protocol, asset, chain, unit, or cap period is blocked with R06 findings', () => {
+  for (const patch of [
+    { protocol: 'unknown-protocol' },
+    { asset: 'btc' },
+    { chain: 'ethereum' },
+    { spendCap: { amount: 10, currency: 'USD', period: 'year' } },
+    { spendCap: { amount: 0, currency: 'USD', period: 'day' } },
+  ]) {
+    const graph = clone()
+    meter(graph, patch)
+    const report = reviewIncomeGraph(graph, TODAY)
+    assert.ok(
+      report.findings.some((f) => f.code === 'R06'),
+      `Expected R06 finding for patch ${JSON.stringify(patch)}`,
+    )
+    assert.equal(report.settlements[0].admitted, false)
+  }
+})
+
+test('when a fiat offer on the graph is activated by an attested payment, the meter leave-endpoint-off decision is omitted', () => {
+  const graph = clone()
+  // Leave offer-scope-brief as a fiat offer
+  // Add Evidence and a second offer that uses machine-payment
+  graph.nodes.push({
+    id: 'evidence-mpp',
+    type: 'Evidence',
+    label: 'MPP pricing quote',
+    ...stamp({ provenance: { source: 'https://example.com/quote', date: TODAY } }),
+    data: { finding: 'Metered session access priced at five euros per session according to official agreement text', kind: 'document' },
+  })
+  graph.nodes.push({
+    id: 'offer-mpp-meter',
+    type: 'Offer',
+    label: 'Metered session access',
+    ...stamp({}),
+    data: {
+      price: { currency: 'EUR', amount: 5, unit: 'session' },
+      settlement: {
+        rail: 'machine-payment',
+        protocol: 'mpp',
+        asset: 'eurc',
+        chain: 'tempo',
+        spendCap: { amount: 100, currency: 'EUR', period: 'month' },
+      },
+    },
+  })
+  graph.edges.push({
+    id: 'e-evidences-mpp',
+    type: 'evidences',
+    from: 'evidence-mpp',
+    to: 'offer-mpp-meter',
+    ...stamp({}),
+  })
+  graph.edges.push({
+    id: 'e-serves-mpp',
+    type: 'serves',
+    from: 'offer-mpp-meter',
+    to: 'customer-owner-operator',
+    ...stamp({}),
+  })
+  node(graph, 'workflow-request-to-brief').data.steps.push({
+    id: 'raise-mpp-cap',
+    action: 'Raise the spend cap for the agent buyer',
+    irreversible: true,
+    actor: 'human',
+  })
+  node(graph, 'gate-customer-facing').data.gatedStepIds.push('raise-mpp-cap')
+  graph.edges.push({
+    id: 'e-fulfills-mpp',
+    type: 'fulfills',
+    from: 'workflow-request-to-brief',
+    to: 'offer-mpp-meter',
+    ...stamp({}),
+  })
+  graph.nodes.push({
+    id: 'cost-facilitator-mpp',
+    type: 'Cost',
+    label: 'Facilitator and network fee',
+    ...stamp({}),
+    data: { amount: { currency: 'EUR', amount: 5, period: 'monthly' }, borneByBuyer: false },
+  })
+  graph.edges.push({
+    id: 'e-incurs-mpp-fac',
+    type: 'incurs',
+    from: 'offer-mpp-meter',
+    to: 'cost-facilitator-mpp',
+    ...stamp({}),
+  })
+
+  // Before activation, decision line is present
+  const reportUnactivated = reviewIncomeGraph(graph, TODAY)
+  assert.ok(reportUnactivated.nextDecisions.some((line) => line.includes('Leave the endpoint off until a fiat offer')))
+
+  // Now activate the fiat offer (offer-scope-brief)
+  graph.nodes.push({
+    id: 'receipt-fiat-1',
+    type: 'Receipt',
+    label: 'Bank settlement receipt',
+    ...stamp({}),
+    data: { artifact: 'receipts/fiat-1.pdf' },
+  })
+  graph.nodes.push({
+    id: 'rev-fiat-1',
+    type: 'RevenueObservation',
+    label: 'First customer payment',
+    ...stamp({}),
+    data: { observed: { currency: 'EUR', amount: 180, occurredAt: TODAY, units: 1 } },
+  })
+  graph.edges.push({
+    id: 'e-attests-rev-1',
+    type: 'attests',
+    from: 'receipt-fiat-1',
+    to: 'rev-fiat-1',
+    ...stamp({}),
+  })
+  graph.edges.push({
+    id: 'e-observes-rev-1',
+    type: 'observes',
+    from: 'rev-fiat-1',
+    to: 'offer-scope-brief',
+    ...stamp({}),
+  })
+
+  const reportActivated = reviewIncomeGraph(graph, TODAY)
+  assert.equal(reportActivated.activation, 'activated')
+  assert.ok(!reportActivated.nextDecisions.some((line) => line.includes('Leave the endpoint off until a fiat offer')))
+})
+
+test('a revenue observation on a machine-payment offer does not satisfy the fiat offer activation requirement', () => {
+  const graph = clone()
+  meter(graph)
+  // Attest revenue on the machine-payment offer itself
+  graph.nodes.push({
+    id: 'receipt-meter-1',
+    type: 'Receipt',
+    label: 'Meter receipt',
+    ...stamp({}),
+    data: { artifact: 'receipts/meter-1.pdf' },
+  })
+  graph.nodes.push({
+    id: 'rev-meter-1',
+    type: 'RevenueObservation',
+    label: 'Meter payment',
+    ...stamp({}),
+    data: { observed: { currency: 'USD', amount: 50, occurredAt: TODAY, units: 25 } },
+  })
+  graph.edges.push({
+    id: 'e-attests-meter-1',
+    type: 'attests',
+    from: 'receipt-meter-1',
+    to: 'rev-meter-1',
+    ...stamp({}),
+  })
+  graph.edges.push({
+    id: 'e-observes-meter-1',
+    type: 'observes',
+    from: 'rev-meter-1',
+    to: 'offer-scope-brief',
+    ...stamp({}),
+  })
+
+  const report = reviewIncomeGraph(graph, TODAY)
+  // Even though revenue was observed, no FIAT offer was activated, so the decision line stays
+  assert.ok(report.nextDecisions.some((line) => line.includes('Leave the endpoint off until a fiat offer')))
+})

@@ -6,20 +6,20 @@ import incomeModels from '@/data/income-models.json'
 import catalog from '@/products/catalog.json'
 
 export const metadata: Metadata = {
-  title: 'Earn with agents. Keep the judgment.',
+  title: 'Agentic Income — Canonical Agent-as-a-Service Revenue Engine',
   description:
-    'The operating system for people who build income with AI agent teams: playbooks, partner economics, working code — and a live MCP server your agents can query right now. We never promise income.',
+    'The canonical revenue operating system for Agent-as-a-Service delivery: productized implementation, digital products, and open-core proof. Clear scope, inspectable deliverables, and human-gated authority — zero income promises.',
   alternates: { canonical: '/' },
   openGraph: { url: '/' },
 }
 
 const MCP_TOOLS = [
-  { name: 'list_income_models', desc: 'The three operator models with honest economics.' },
-  { name: 'get_income_model', desc: 'One model in full, plus which playbook to read first.' },
+  { name: 'list_income_models', desc: 'The three revenue delivery routes with customer jobs and deliverables.' },
+  { name: 'get_income_model', desc: 'One route in full, including deliverables, scope, and next actions.' },
   { name: 'search_partner_programs', desc: 'The partner registry: rates, cookies, status, disclosed links.' },
   { name: 'get_partner_program', desc: 'Full record with commission note, source URL, verification date.' },
   { name: 'list_products', desc: 'The catalog with real availability — purchasable is false until checkout is live.' },
-  { name: 'fit_check', desc: 'Deterministic recommendation: which model fits your hours, budget, audience, skills.' },
+  { name: 'fit_check', desc: 'Deterministic recommendation: which route fits your hours, budget, audience, skills.' },
   { name: 'get_playbook', desc: 'The free starter kit and dated knowledge-track summaries.' },
 ]
 
@@ -49,17 +49,17 @@ export default function Home() {
       <section className="section-band">
         <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
-            <div className="kicker">Agentic Income — the operator system</div>
+            <div className="kicker">Agentic Income — Agent-as-a-Service Engine</div>
             <h1 className="assembly-title">
-              Earn with agents. <span>Keep the judgment.</span>
+              Agent-as-a-Service. <span>Engineered revenue.</span>
             </h1>
             <p className="assembly-sub">
-              The operating system for people who build income with AI agent teams: playbooks,
-              partner economics, working code — and a live MCP server your agents can query right
-              now. Claims are dated. Outcomes are yours. We never promise income.
+              The canonical revenue operating system: productized implementation sprints, digital
+              products, and open-core reference systems. Scoped deliverables, inspectable code, and
+              human approval gates — zero outcome promises.
             </p>
             <div className="assembly-actions">
-              <Link href="/mcp" className="cta">Connect your agent</Link>
+              <Link href="/offers" className="cta">View implementation scope</Link>
               <Link href="/start" className="cta-secondary">Start free</Link>
             </div>
           </div>
@@ -87,11 +87,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 2 — the three operator models */}
+      {/* SECTION 2 — the three service & delivery routes */}
       <section className="section-band">
         <div className="section-heading motion-reveal">
-          <div className="kicker">Income models · honest ranges only</div>
-          <h2 className="display-h2">Three ways operators earn.</h2>
+          <div className="kicker">Revenue Engine · Customer-Facing Routes</div>
+          <h2 className="display-h2">Three delivery routes for customer value.</h2>
         </div>
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
           {models.map((model) => (
@@ -100,11 +100,11 @@ export default function Home() {
               <h3>{model.name}</h3>
               <p className="text-sm leading-relaxed text-[color:var(--color-muted)]">{model.summary}</p>
               <div className="path-econ">
-                <b>Labor:</b> {model.laborProfile}
+                <b>Execution:</b> {model.laborProfile}
                 <br />
-                <b>First dollar:</b> {model.timeToFirstDollar}
+                <b>Timeframe:</b> {model.timeToFirstDollar}
                 <br />
-                <b>What kills it:</b> {model.failureMode}
+                <b>Risk boundary:</b> {model.failureMode}
               </div>
             </div>
           ))}

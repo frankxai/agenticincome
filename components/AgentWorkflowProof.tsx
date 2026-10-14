@@ -8,7 +8,7 @@ const steps = [
     role: 'Input',
     title: 'Load request & evidence',
     body: 'Point the agent pipeline at customer repository content and program records. Accepts content paths, catalog data, and traffic context.',
-    output: 'Structured content paths + verified catalog records',
+    output: 'Structured content paths + catalog records',
   },
   {
     number: '02',
@@ -52,7 +52,7 @@ export function AgentWorkflowProof() {
             <span>affiliate-audit / local run</span>
             <strong>MIT · no autonomous publishing</strong>
           </div>
-          <code>node scripts/affiliate-audit.mjs --content=&lt;site&gt;/content --write</code>
+          <code>node scripts/affiliate-audit.mjs --content=<site>/content --write</code>
           <p>
             The command reads files and writes an audit. It does not join a program, change a public page, send a message, or claim revenue.
           </p>

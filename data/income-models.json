@@ -6,8 +6,8 @@
       "id": "services",
       "name": "Productized Implementation — Agent-as-a-Service",
       "summary": "Customer job: Deploy custom AI agent workflows for your team. We scope, test, and deliver repo-committed code with human gates, while client teams maintain authority.",
-      "timeToFirstDollar": "scoped implementation sprint — fixed 2-day or custom timeframe based on acceptance checks",
-      "upfrontCost": "fixed implementation scope — no hidden recurring fees or unverified costs",
+      "timeToFirstDollar": "scoped implementation sprint — timeframe agreed with acceptance checks",
+      "upfrontCost": "scope and price agreed before work starts",
       "laborProfile": "delivery-bounded: scoped deliverables, concrete test suites, and explicit human approval gates before production execution",
       "failureMode": "unbounded scope creep — clear boundaries, non-goals, and acceptance criteria prevent misaligned expectations",
       "firstPlaybook": "/start"
@@ -15,21 +15,21 @@
     {
       "id": "products",
       "name": "Digital Products — Self-Serve Blueprints & Kits",
-      "summary": "Customer job: Install production-proven agent architectures, prompt packs, and starter kits self-serve via merchant of record.",
-      "timeToFirstDollar": "instant self-serve delivery — access blueprints and starter code immediately upon availability",
-      "upfrontCost": "one-time digital product price — complete with source code, schemas, and usage docs",
+      "summary": "Customer job: Install agent architectures, prompt packs, and starter kits self-serve via merchant of record.",
+      "timeToFirstDollar": "self-serve delivery once checkout is live (not yet)",
+      "upfrontCost": "one-time digital product price",
       "laborProfile": "self-directed implementation: executable assets, automated schemas, and step-by-step guides",
-      "failureMode": "lack of maintenance — products carry explicit versioning and maintenance promises to prevent staleness",
+      "failureMode": "lack of maintenance — products go stale without dated updates",
       "firstPlaybook": "/delivery/starter-kit"
     },
     {
       "id": "systems",
-      "name": "Selective Affiliate & Open Core — Verified Proof Systems",
-      "summary": "Customer job: Inspect open-source reference implementations and query verified partner economics without hidden incentives.",
+      "name": "Selective Affiliate & Open Core",
+      "summary": "Customer job: Inspect open-source reference implementations and query dated partner economics without hidden incentives.",
       "timeToFirstDollar": "open access & verified partner tables — inspectable MIT code and dated commission terms",
       "upfrontCost": "zero cost for open-core skills — MIT-licensed skills and schemas you can run locally",
-      "laborProfile": "transparent research: disclosed partner recommendations and quarterly re-verified terms",
-      "failureMode": "undisclosed incentives — every compensated destination is explicitly labeled with non-affiliate alternatives",
+      "laborProfile": "transparent research: disclosed partner recommendations and dated partner terms",
+      "failureMode": "undisclosed incentives — compensated links must be labeled",
       "firstPlaybook": "/operate"
     }
   ]

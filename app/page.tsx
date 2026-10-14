@@ -121,7 +121,7 @@ export default function Home() {
           <Link href="/tools" className="cta-secondary">Full catalog</Link>
         </div>
         <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-surface/80 motion-reveal">
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Partner economics comparison">
             <table className="w-full min-w-[680px] text-sm">
               <thead>
                 <tr className="border-b border-border text-left text-muted">
@@ -249,3 +249,4 @@ export default function Home() {
     </>
   )
 }
+

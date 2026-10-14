@@ -52,7 +52,7 @@ export function AgentWorkflowProof() {
             <span>affiliate-audit / local run</span>
             <strong>MIT · no autonomous publishing</strong>
           </div>
-          <code>node scripts/affiliate-audit.mjs --content=<site>/content --write</code>
+          <code>node scripts/affiliate-audit.mjs --content={'<site>'}/content --write</code>
           <p>
             The command reads files and writes an audit. It does not join a program, change a public page, send a message, or claim revenue.
           </p>

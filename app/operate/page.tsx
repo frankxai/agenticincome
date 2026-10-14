@@ -58,7 +58,6 @@ export default function OperatePage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/pack" className="cta">Install the /ai pack</Link>
             <Link href="/proof" className="cta-secondary">Inspect the proof standard</Link>
-            <Link href="/command" className="cta-secondary">Income Command Center</Link>
           </div>
         </div>
       </section>

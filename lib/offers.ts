@@ -147,7 +147,7 @@ export const offers: Offer[] = [
     upgradePath: 'Private Intel keeps the payer map current and adds monthly opportunity notes.',
     deliveryPath: '/delivery/blueprint',
     checkoutOutcome: 'When the payment link is configured, the provider should redirect buyers to the Blueprint delivery desk.',
-    refundPolicy: '30-day no-questions refund via the merchant of record: reply to the receipt or email us within 30 days of purchase and it is refunded in full.',
+    refundPolicy: 'No checkout is active for this product. Refund terms will be published before any payment is taken.',
     receiptInstruction: 'Keep the provider receipt. The delivery desk explains access, install order, and support boundaries.',
     checkout: {
       provider: 'external',

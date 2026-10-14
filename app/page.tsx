@@ -6,9 +6,9 @@ import incomeModels from '@/data/income-models.json'
 import catalog from '@/products/catalog.json'
 
 export const metadata: Metadata = {
-  title: 'Agentic Income — Canonical Agent-as-a-Service Revenue Engine',
+  title: 'Agentic Income — Agent-as-a-Service implementation, products, and disclosed research',
   description:
-    'The canonical revenue operating system for Agent-as-a-Service delivery: productized implementation, digital products, and open-core proof. Clear scope, inspectable deliverables, and human-gated authority — zero income promises.',
+    'An operating system for Agent-as-a-Service delivery: productized implementation, digital products, and open-core proof. Clear scope, inspectable deliverables, and human-gated authority — zero income promises.',
   alternates: { canonical: '/' },
   openGraph: { url: '/' },
 }
@@ -51,10 +51,10 @@ export default function Home() {
           <div>
             <div className="kicker">Agentic Income — Agent-as-a-Service Engine</div>
             <h1 className="assembly-title">
-              Agent-as-a-Service. <span>Engineered revenue.</span>
+              Agent-as-a-Service.
             </h1>
             <p className="assembly-sub">
-              The canonical revenue operating system: productized implementation sprints, digital
+              An operating system for productized implementation sprints, digital
               products, and open-core reference systems. Scoped deliverables, inspectable code, and
               human approval gates — zero outcome promises.
             </p>
@@ -77,11 +77,11 @@ export default function Home() {
               <div className="t-out"><span className="t-accent">$</span> <span className="text-ink">claude mcp add --transport http agentic-income \</span></div>
               <div className="t-out">    https://www.agenticincome.ai/api/mcp</div>
               <div className="t-cmd mt-3">fit_check hours=10 budget=200 audience=no code=yes</div>
-              <div className="t-out">{'{'} &quot;model&quot;: &quot;services&quot;,</div>
-              <div className="t-out">  &quot;why&quot;: &quot;10 focused hours and working code</div>
+              <div className="t-out">{'{'} "model": "services",</div>
+              <div className="t-out">  "why": "10 focused hours and working code</div>
               <div className="t-out">    skills price you into agent-assisted</div>
-              <div className="t-out">    delivery work first.&quot;,</div>
-              <div className="t-out">  &quot;read&quot;: &quot;/start&quot; {'}'}<span className="t-caret ml-2" /></div>
+              <div className="t-out">    delivery work first.",</div>
+              <div className="t-out">  "read": "/start" {'}'}<span className="t-caret ml-2" /></div>
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@ export default function Home() {
       {/* SECTION 2 — the three service & delivery routes */}
       <section className="section-band">
         <div className="section-heading motion-reveal">
-          <div className="kicker">Revenue Engine · Customer-Facing Routes</div>
+          <div className="kicker">Delivery routes</div>
           <h2 className="display-h2">Three delivery routes for customer value.</h2>
         </div>
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
@@ -145,7 +145,7 @@ export default function Home() {
           </div>
         </div>
         <p className="mt-4 text-xs leading-6 text-muted">
-          Affiliate links disclosed. Rates verified {verifiedRangeLabel(verified)} against each program&apos;s own terms.
+          Affiliate links disclosed. Rates verified {verifiedRangeLabel(verified)} against each program's own terms.
         </p>
       </section>
 

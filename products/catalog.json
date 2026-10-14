@@ -4,7 +4,6 @@
   "_checkoutGate": "`status` is the machine-readable sale gate read by lib/polar.ts. A product may be sold ONLY when its status starts with 'for sale' (case-insensitive); every other value refuses checkout, so an unrecognized or misspelled status fails closed instead of opening a sale. Setting the POLAR_* env vars alone does not open checkout — the status here must be flipped too. Activation checklist: ops/POLAR-SETUP.md.",
   "updatedAt": "2026-08-07",
   "merchant_of_record": "polar.sh",
-  "refund_policy": "30-day no-questions refund on all paid one-time products; subscriptions cancelable anytime, first-month refund on request.",
   "products": [
     {
       "id": "starter-kit",

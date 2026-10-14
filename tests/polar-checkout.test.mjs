@@ -24,12 +24,19 @@ test('catalog contains all expected products', () => {
   assert.ok(ids.includes('agent-team-pro'))
 })
 
-test('blueprint catalog status is flipped to for sale', () => {
+test('blueprint stays checkout-gated until the Polar product and file upload are verified', () => {
   const blueprint = catalog.products.find((p) => p.id === 'blueprint')
   assert.ok(blueprint)
   assert.equal(blueprint.price_cents, 6700)
-  assert.ok(blueprint.status.toLowerCase().startsWith('for sale'))
-  assert.equal(catalogRefusal(blueprint), null)
+  assert.equal(blueprint.status, 'built — checkout gated pending Polar product and file upload')
+  assert.equal(catalogRefusal(blueprint), 'checkout_gated')
+})
+
+test('no paid product is for sale', () => {
+  for (const product of catalog.products) {
+    if (product.price_cents === 0) continue
+    assert.equal(catalogRefusal(product), 'checkout_gated', product.id)
+  }
 })
 
 test('starter-kit is free and refused for sale', () => {

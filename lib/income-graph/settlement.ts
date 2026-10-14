@@ -786,6 +786,43 @@ function admitOnChain(graph: IncomeGraph, offer: GraphNode): Finding[] {
   return out
 }
 
+/** True when at least one fiat offer on the graph has an attested revenue observation. */
+export function hasActivatedFiatOffer(graph: IncomeGraph): boolean {
+  const nodes = nodesOf(graph)
+  const edges = edgesOf(graph)
+
+  const settlement = analyzeSettlement(graph)
+  const fiatOfferIds = new Set(
+    settlement.verdicts
+      .filter((v) => v.admitted && (v.rail === 'fiat-account' || v.rail === 'signed-receipt'))
+      .map((v) => v.offerId),
+  )
+
+  if (fiatOfferIds.size === 0) return false
+
+  const receiptIds = new Set(nodes.filter((n) => n.type === 'Receipt').map((n) => n.id))
+  const attestedObsIds = new Set(
+    edges
+      .filter((e) => e.type === 'attests' && receiptIds.has(e.from))
+      .map((e) => e.to),
+  )
+
+  for (const obsNode of nodes.filter((n) => n.type === 'RevenueObservation')) {
+    if (!attestedObsIds.has(obsNode.id)) continue
+    const amount = obsNode.data?.observed?.amount ?? 0
+    if (amount <= 0) continue
+
+    const observesEdges = edges.filter((e) => e.type === 'observes' && e.from === obsNode.id)
+    for (const edge of observesEdges) {
+      if (fiatOfferIds.has(edge.to)) {
+        return true
+      }
+    }
+  }
+
+  return false
+}
+
 /** Whole-phrase probe used by tests that want to know why a sentence did not match. */
 export function settlementProbe(text: string): { chain: string[]; refuse: string[] } {
   return { chain: chainSignals(text), refuse: refuseSignals(text) }

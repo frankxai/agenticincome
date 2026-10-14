@@ -99,3 +99,119 @@ test('their agent is quoted for a metered call and still cannot execute it', () 
   assert.equal(capped.disposition, 'refuse')
   assert.match(capped.reason, /cap/)
 })
+
+test('their agent is quoted for an mpp session meter and quote reason reflects fiat activation state', () => {
+  const graph = clone()
+  // Add Evidence and an offer for mpp meter
+  graph.nodes.push({
+    id: 'evidence-mpp',
+    type: 'Evidence',
+    label: 'MPP pricing quote',
+    ...STAMP,
+    provenance: { source: 'https://example.com/quote', date: TODAY },
+    data: { finding: 'Metered session access priced at five euros per session according to official agreement text', kind: 'document' },
+  })
+  graph.nodes.push({
+    id: 'offer-mpp-meter',
+    type: 'Offer',
+    label: 'Metered session access',
+    ...STAMP,
+    data: {
+      price: { currency: 'EUR', amount: 5, unit: 'session' },
+      settlement: {
+        rail: 'machine-payment',
+        protocol: 'mpp',
+        asset: 'eurc',
+        chain: 'tempo',
+        spendCap: { amount: 100, currency: 'EUR', period: 'month' },
+      },
+    },
+  })
+  graph.edges.push({
+    id: 'e-evidences-mpp',
+    type: 'evidences',
+    from: 'evidence-mpp',
+    to: 'offer-mpp-meter',
+    ...STAMP,
+  })
+  graph.edges.push({
+    id: 'e-serves-mpp',
+    type: 'serves',
+    from: 'offer-mpp-meter',
+    to: 'customer-owner-operator',
+    ...STAMP,
+  })
+  node(graph, 'workflow-request-to-brief').data.steps.push({
+    id: 'raise-mpp-cap',
+    action: 'Raise the spend cap for the agent buyer',
+    irreversible: true,
+    actor: 'human',
+  })
+  node(graph, 'gate-customer-facing').data.gatedStepIds.push('raise-mpp-cap')
+  graph.edges.push({
+    id: 'e-fulfills-mpp',
+    type: 'fulfills',
+    from: 'workflow-request-to-brief',
+    to: 'offer-mpp-meter',
+    ...STAMP,
+  })
+  graph.nodes.push({
+    id: 'cost-facilitator-mpp',
+    type: 'Cost',
+    label: 'Facilitator and network fee',
+    ...STAMP,
+    data: { amount: { currency: 'EUR', amount: 5, period: 'monthly' }, borneByBuyer: false },
+  })
+  graph.edges.push({
+    id: 'e-incurs-mpp-fac',
+    type: 'incurs',
+    from: 'offer-mpp-meter',
+    to: 'cost-facilitator-mpp',
+    ...STAMP,
+  })
+
+  // Before fiat offer activation
+  const quotedBefore = quoteAgentCall(graph, TODAY, { offerId: 'offer-mpp-meter', claimedRemaining: 100 })
+  assert.equal(quotedBefore.disposition, 'quote')
+  assert.equal(quotedBefore.payer, 'calling-agent')
+  assert.equal(quotedBefore.protocol, 'mpp')
+  assert.equal(quotedBefore.asset, 'eurc')
+  assert.equal(quotedBefore.chain, 'tempo')
+  assert.equal(quotedBefore.executable, false)
+  assert.match(quotedBefore.reason, /The endpoint stays off until a fiat offer on this graph is activated/)
+
+  // Activate fiat offer (offer-scope-brief)
+  graph.nodes.push({
+    id: 'receipt-fiat-1',
+    type: 'Receipt',
+    label: 'Bank settlement receipt',
+    ...STAMP,
+    data: { artifact: 'receipts/fiat-1.pdf' },
+  })
+  graph.nodes.push({
+    id: 'rev-fiat-1',
+    type: 'RevenueObservation',
+    label: 'First customer payment',
+    ...STAMP,
+    data: { observed: { currency: 'EUR', amount: 180, occurredAt: TODAY, units: 1 } },
+  })
+  graph.edges.push({
+    id: 'e-attests-rev-1',
+    type: 'attests',
+    from: 'receipt-fiat-1',
+    to: 'rev-fiat-1',
+    ...STAMP,
+  })
+  graph.edges.push({
+    id: 'e-observes-rev-1',
+    type: 'observes',
+    from: 'rev-fiat-1',
+    to: 'offer-scope-brief',
+    ...STAMP,
+  })
+
+  // After fiat offer activation
+  const quotedAfter = quoteAgentCall(graph, TODAY, { offerId: 'offer-mpp-meter', claimedRemaining: 100 })
+  assert.equal(quotedAfter.disposition, 'quote')
+  assert.match(quotedAfter.reason, /A fiat offer on this graph is activated/)
+})

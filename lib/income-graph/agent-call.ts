@@ -5,6 +5,7 @@
  */
 
 import { reviewIncomeGraph } from './index.ts'
+import { hasActivatedFiatOffer } from './settlement.ts'
 import type { IncomeGraph } from './model.ts'
 
 export type AgentCallQuote = {
@@ -80,10 +81,13 @@ export function quoteAgentCall(graph: IncomeGraph, today: string, request: unkno
     }
   }
 
+  const activatedFiat = hasActivatedFiatOffer(graph)
   const payer = verdict.rail === 'machine-payment' ? 'calling-agent' : 'buyer'
   const reason =
     verdict.rail === 'machine-payment'
-      ? 'Quote only. Their agent would pay this price in a stablecoin. You still pay the model. The endpoint stays off until a fiat offer on this graph is activated.'
+      ? activatedFiat
+        ? 'Quote only. Their agent would pay this price in a stablecoin. You still pay the model. A fiat offer on this graph is activated.'
+        : 'Quote only. Their agent would pay this price in a stablecoin. You still pay the model. The endpoint stays off until a fiat offer on this graph is activated.'
       : verdict.rail === 'on-chain-right'
         ? 'Quote only. The buyer pays for the right. A person signs the registration. The agent does not.'
         : 'Quote only. The buyer pays in a merchant account. You pay the runtime unless a cost says the buyer bears it.'

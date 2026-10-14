@@ -13,7 +13,7 @@ import { draftIncomeGraph, type IncomeGraphDraft, type UnsupportedClaim } from '
 import { checkEconomics, computeEconomics, type Economics } from './economics.ts'
 import { exportTasks, projectToIncomeSystem, tasksToMarkdown, type InstallableTask } from './export.ts'
 import { migrateGraph } from './migrate.ts'
-import { analyzeSettlement, type SettlementVerdict } from './settlement.ts'
+import { analyzeSettlement, hasActivatedFiatOffer, type SettlementVerdict } from './settlement.ts'
 import { notAGraph, validateStructure } from './validate.ts'
 import { SCHEMA_ID, type Finding, type IncomeGraph } from './model.ts'
 
@@ -119,9 +119,11 @@ export function reviewIncomeGraph(input: IncomeGraph, today: string): WorkbenchR
     )
   }
   if (settlement.verdicts.some((verdict) => verdict.rail === 'machine-payment' && verdict.admitted)) {
-    nextDecisions.push(
-      'A metered agent payment is admitted on paper. Leave the endpoint off until a fiat offer on this graph is activated by an attested payment.',
-    )
+    if (!hasActivatedFiatOffer(graph)) {
+      nextDecisions.push(
+        'A metered agent payment is admitted on paper. Leave the endpoint off until a fiat offer on this graph is activated by an attested payment.',
+      )
+    }
   }
   if (settlement.verdicts.some((verdict) => verdict.rail === 'on-chain-right' && verdict.admitted)) {
     nextDecisions.push(
@@ -166,6 +168,7 @@ export {
   computeEconomics,
   draftIncomeGraph,
   exportTasks,
+  hasActivatedFiatOffer,
   migrateGraph,
   projectToIncomeSystem,
   tasksToMarkdown,

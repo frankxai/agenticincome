@@ -140,6 +140,10 @@ export function runCli(args) {
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  try { process.stdout.write(runCli(process.argv.slice(2)) + '\n') }
+  try {
+    const args = process.argv.slice(2)
+    const output = runCli(args)
+    process.stdout.write(args[0] === 'markdown' ? output : output + '\n')
+  }
   catch { process.stderr.write('Workflow Lab: input, integrity or review validation failed. See the local guide; no output was accepted.\n'); process.exitCode = 1 }
 }

@@ -3,6 +3,7 @@ import { readFileSync, mkdtempSync, writeFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { spawnSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
 import test from 'node:test'
 import { buildBrief, recordReview, validateBundle } from '../public/downloads/ai-shop-challenge/workflow-lab.mjs'
 
@@ -27,7 +28,11 @@ test('the complete local journey exports a source-linked artifact and explicit h
     writeFileSync(draft, built.stdout)
     const exported = spawnSync(process.execPath, [script.pathname, 'markdown', draft], { encoding: 'utf8' })
     assert.equal(exported.status, 0, exported.stderr)
-    assert.equal(exported.stdout.trimEnd(), bundle.markdown.trimEnd())
+    assert.equal(exported.stdout, bundle.markdown)
+    const markdownPath = join(dir, 'brief.md')
+    writeFileSync(markdownPath, exported.stdout)
+    const exportedArtifactHash = createHash('sha256').update(readFileSync(markdownPath)).digest('hex')
+    assert.equal(exportedArtifactHash, bundle.manifest.artifactSha256)
     assert.match(exported.stdout, /Synthetic example/)
     const review = join(dir, 'review.json')
     writeFileSync(review, JSON.stringify(reviewFor(bundle)))
@@ -36,6 +41,7 @@ test('the complete local journey exports a source-linked artifact and explicit h
     const receipt = JSON.parse(received.stdout)
     assert.equal(receipt.kind, 'local-human-attestation')
     assert.equal(receipt.decision, 'accept')
+    assert.equal(receipt.artifactSha256, exportedArtifactHash)
     assert.equal(receipt.fixture, true)
     assert.equal(receipt.customerEvidenceEligible, false)
   } finally { rmSync(dir, { recursive: true, force: true }) }

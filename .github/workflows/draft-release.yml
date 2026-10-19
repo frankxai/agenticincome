@@ -15,7 +15,7 @@ concurrency:
 jobs:
   draft-release:
     name: Validate tag and create draft
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER == 'railway' && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-latest' }}
     timeout-minutes: 5
     steps:
       - name: Check out full history

@@ -39,7 +39,7 @@ concurrency:
 jobs:
   validate:
     name: Validate product release ledger
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER == 'railway' && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-latest' }}
     timeout-minutes: 5
     steps:
       - name: Check out repository

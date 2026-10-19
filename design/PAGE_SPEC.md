@@ -35,3 +35,17 @@ remain available for lower-commitment users.
 
 No hero video or WebGL is introduced by this repair. Existing composition,
 motion, responsive behavior, and visual tokens remain unchanged.
+
+## Command preview truth repair — 2026-10-16
+
+Surface: `/command` metadata and introductory copy, plus `components/IncomeCommandDesk.tsx`.
+
+The route is a public illustrative interface. No account identity, access-control boundary,
+live agent fleet, approval queue, revenue, CI result, or activity receipt is established by
+this page. Display unconnected or unverified values and explicitly illustrative workflow
+examples. Do not use relative timestamps, green verified states, fleet counts, or passing
+checks as substitutes for connected evidence. The connected-activity view remains empty.
+
+This repair changes text and example data in the existing composition. Authentication,
+telemetry, data adapters, commerce, and production release remain separate implementation
+work. Recheck desktop, mobile, keyboard, and reduced-motion output before promotion.

@@ -138,5 +138,38 @@
     "pending": [
       "Repository-wide test, type-check, lint, static link check, public-surface verification, and production build on the Git-backed preview."
     ]
+  },
+  "command_truth_repair": {
+    "version": "2026-10-16",
+    "scope": "Copy and example-data correction on /command; no authenticated workspace or telemetry implementation.",
+    "artifacts": [
+      "app/command/page.tsx",
+      "components/IncomeCommandDesk.tsx"
+    ],
+    "changes": [
+      "Label public illustrative preview in metadata, route introduction, and component header.",
+      "Replace static operator, active-agent, approval, and validation assertions with unconnected/unverified states.",
+      "Mark workflow rows as examples; remove fabricated relative timestamps and verified statuses.",
+      "Show an empty connected-activity view and state that policy examples are not runtime enforcement."
+    ],
+    "checks": [
+      {
+        "name": "source-claim-check",
+        "status": "pass",
+        "evidence": "Prepared source contains no active fleet count, relative activity timestamps, verified execution status, real-time telemetry, private account claim, or 100%-passing assertion."
+      },
+      {
+        "name": "full-release-checks",
+        "status": "pending",
+        "evidence": "Frozen install, lint, tests, type-check, links, public-surface verification, build, security scan, Git-backed preview, and desktop/mobile/reduced-motion visual inspection have not been executed for this patch."
+      }
+    ],
+    "decision": "draft-review",
+    "known_risks": [
+      "The page remains public. This change supplies neither authentication nor a tenant boundary.",
+      "No live agents, approval queue, revenue, merchant state, or validation service is connected.",
+      "Existing main dependency security PR #72 is separate and must be resolved before production release.",
+      "Shared estate visual-warmup files referenced by Windows paths were not available in this connector-only checkout. Repo-local design contracts were read; visual verification remains pending."
+    ]
   }
 }

@@ -27,3 +27,11 @@ The public proof object is
 IncomeSystem schema, scaffold, validator, and governed Request-to-Quote example.
 The private application repository is not presented as public source or as a
 Claude marketplace.
+
+## Command preview truth repair — 2026-10-16
+
+The first visible state on `/command` identifies a public illustrative preview. A persistent
+notice names the absent account, activity, revenue, approval, and current-validation data.
+Example workflows carry explicit example labels and no relative timestamps. The inactive
+status marker is static; it does not imply a live heartbeat. Existing layout, visual tokens,
+and interaction structure are retained. No imagery, motion asset, or new dependency is added.

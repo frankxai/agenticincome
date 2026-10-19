@@ -31,7 +31,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER == 'railway' && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-latest' }}
     timeout-minutes: 15
     permissions:
       contents: read

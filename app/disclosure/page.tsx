@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { payingPrograms } from '@/lib/affiliate'
 import { trustPrinciples } from '@/lib/trust'
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
     'The full, honest affiliate disclosure for Agentic Income: how we choose tools, why the recommendation survives the incentive, and the live list of every program we can earn from — the same data file the site runs on.',
   alternates: { canonical: '/disclosure' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'Affiliate Disclosure',
     description:
       'How we choose tools, why the recommendation survives the incentive, and the live list of every program we can earn from.',

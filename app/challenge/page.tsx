@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { challengeDays } from '@/lib/challenge'
 import { EmailCapture } from '@/components/EmailCapture'
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
     'A free, evergreen seven-day path using the public Agentic Income skill, scaffold, and validator to create one reviewable Outcome Pack. Capability, never income claims.',
   alternates: { canonical: '/challenge' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'The 7-Day Agentic Income Challenge',
     description:
       'One reviewable artifact a day using the public operating contract. A serious business test by day seven — no income claims.',

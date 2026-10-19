@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { CheckoutLink } from '@/components/CheckoutLink'
@@ -28,6 +29,7 @@ export async function generateMetadata({ params }: OfferPageProps): Promise<Meta
     description: offer.summary,
     alternates: { canonical: `/offers/${offer.slug}` },
     openGraph: {
+      ...baseOpenGraph,
       title: offer.shortTitle,
       description: offer.summary,
       url: `/offers/${offer.slug}`,

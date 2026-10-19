@@ -1,8 +1,11 @@
+import { baseOpenGraph } from '@/lib/open-graph'
+
 export const metadata = {
   title: 'The Two-Day Implementation Sprint, Dissected',
   description: 'The full anatomy of a two-day AI agent implementation sprint — the five fulfillment patterns, the honest cost table (human hours + agent spend), and what clients actually receive.',
   alternates: { canonical: '/blog/two-day-sprint-dissected' },
   openGraph: {
+    ...baseOpenGraph,
     title: 'The Two-Day Implementation Sprint, Dissected',
     description: 'The full anatomy of a two-day AI agent implementation sprint — the five fulfillment patterns, the honest cost table (human hours + agent spend), and what clients actually receive.',
     url: '/blog/two-day-sprint-dissected',

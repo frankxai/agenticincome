@@ -29,3 +29,17 @@ test('unknown or misspelled statuses fail to the safe label', () => {
 test('free products read as free', () => {
   assert.equal(buyerStatus('free — delivered on-site, never sold through checkout', 0), 'Free, delivered on this site')
 })
+
+test('a zero price alone does not make something free, and a free-sounding status does not make a paid product free', () => {
+  assert.equal(buyerStatus('payload not assembled - not for sale', 0), 'Not on sale yet')
+  assert.equal(buyerStatus('', 0), 'Not on sale yet')
+  assert.equal(buyerStatus('free trial pending approval', 4900), 'Not on sale yet')
+  assert.equal(buyerStatus('for sale — private delivery via Polar', 0), 'Not on sale yet')
+})
+
+test('the homepage renders the label, not the raw status', () => {
+  const page = readFileSync(new URL('../app/page.tsx', import.meta.url), 'utf8')
+  assert.match(page, /buyerStatus\(product\.status, product\.price_cents\)/)
+  assert.doesNotMatch(page, /\{product\.status\}/)
+  assert.doesNotMatch(page, /title=\{product\.status\}/)
+})

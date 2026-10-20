@@ -199,7 +199,7 @@ export default function Home() {
             <div key={product.id} className={`price-card motion-reveal ${product.price_cents === 0 ? '' : 'is-commercial'}`}>
               <div className={`price-tag ${product.price_cents === 0 ? 'free' : ''}`}>{priceLabel(product)}</div>
               <h3 className="font-display text-lg font-bold">{product.name}</h3>
-              <div className="price-state" title={product.status}>{buyerStatus(product.status, product.price_cents)}</div>
+              <div className="price-state">{buyerStatus(product.status, product.price_cents)}</div>
               {product.price_cents === 0 ? (
                 <Link href="/delivery/starter-kit" className="cta-secondary mt-2 !min-h-0 !px-4 !py-2 text-sm">
                   Open the starter kit

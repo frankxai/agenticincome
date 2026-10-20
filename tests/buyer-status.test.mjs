@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict'
+import test from 'node:test'
+import { readFileSync } from 'node:fs'
+import { buyerStatus } from '../lib/buyer-status.ts'
+
+const catalog = JSON.parse(readFileSync(new URL('../products/catalog.json', import.meta.url), 'utf8'))
+const products = catalog.products ?? catalog
+
+test('every catalog status maps to a buyer label without pipeline wording', () => {
+  for (const product of products) {
+    const label = buyerStatus(product.status, product.price_cents)
+    assert.ok(['Free, delivered on this site', 'For sale, by private delivery', 'Not on sale yet'].includes(label), `${product.id}: ${label}`)
+    assert.doesNotMatch(label, /gated|pending|payload|zip|polar|frankxai/i)
+  }
+})
+
+test('only a "for sale" status reads as for sale', () => {
+  assert.equal(buyerStatus('for sale — private delivery via Polar', 6700), 'For sale, by private delivery')
+  assert.equal(buyerStatus('built — checkout gated pending Polar product and file upload', 12900), 'Not on sale yet')
+  assert.equal(buyerStatus('payload not assembled — not for sale', 12900), 'Not on sale yet')
+})
+
+test('unknown or misspelled statuses fail to the safe label', () => {
+  assert.equal(buyerStatus('', 4900), 'Not on sale yet')
+  assert.equal(buyerStatus('forsale', 4900), 'Not on sale yet')
+  assert.equal(buyerStatus('available soon', 4900), 'Not on sale yet')
+})
+
+test('free products read as free', () => {
+  assert.equal(buyerStatus('free — delivered on-site, never sold through checkout', 0), 'Free, delivered on this site')
+})

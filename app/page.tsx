@@ -4,6 +4,7 @@ import { AgentWorkflowProof } from '@/components/AgentWorkflowProof'
 import { verifiedEconomicsPrograms, verifiedRangeLabel } from '@/lib/affiliate'
 import incomeModels from '@/data/income-models.json'
 import catalog from '@/products/catalog.json'
+import { buyerStatus } from '@/lib/buyer-status'
 
 export const metadata: Metadata = {
   title: 'Agentic Income — Canonical Agent-as-a-Service Revenue Engine',
@@ -189,7 +190,7 @@ export default function Home() {
           <div className="kicker text-[color:var(--color-gold)]">Products · labeled honestly</div>
           <h2 className="display-h2">The catalog renders from reality.</h2>
           <p className="mt-3 max-w-xl text-[color:var(--color-muted)]">
-            Status strings come straight from the product catalog. Nothing says buy until checkout
+            Each label is read from the product catalog. Nothing says buy until checkout
             actually exists; today the free starter kit is the only live path.
           </p>
         </div>
@@ -198,7 +199,7 @@ export default function Home() {
             <div key={product.id} className={`price-card motion-reveal ${product.price_cents === 0 ? '' : 'is-commercial'}`}>
               <div className={`price-tag ${product.price_cents === 0 ? 'free' : ''}`}>{priceLabel(product)}</div>
               <h3 className="font-display text-lg font-bold">{product.name}</h3>
-              <div className="price-state">{product.status}</div>
+              <div className="price-state" title={product.status}>{buyerStatus(product.status, product.price_cents)}</div>
               {product.price_cents === 0 ? (
                 <Link href="/delivery/starter-kit" className="cta-secondary mt-2 !min-h-0 !px-4 !py-2 text-sm">
                   Open the starter kit

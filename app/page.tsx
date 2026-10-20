@@ -4,7 +4,7 @@ import { AgentWorkflowProof } from '@/components/AgentWorkflowProof'
 import { verifiedEconomicsPrograms, verifiedRangeLabel } from '@/lib/affiliate'
 import incomeModels from '@/data/income-models.json'
 import catalog from '@/products/catalog.json'
-import { buyerStatus } from '@/lib/buyer-status'
+import { buyerStatus, isFreeOnSite } from '@/lib/buyer-status'
 
 export const metadata: Metadata = {
   title: 'Agentic Income — Canonical Agent-as-a-Service Revenue Engine',
@@ -200,7 +200,7 @@ export default function Home() {
               <div className={`price-tag ${product.price_cents === 0 ? 'free' : ''}`}>{priceLabel(product)}</div>
               <h3 className="font-display text-lg font-bold">{product.name}</h3>
               <div className="price-state">{buyerStatus(product.status, product.price_cents)}</div>
-              {product.price_cents === 0 ? (
+              {isFreeOnSite(product.status, product.price_cents) ? (
                 <Link href="/delivery/starter-kit" className="cta-secondary mt-2 !min-h-0 !px-4 !py-2 text-sm">
                   Open the starter kit
                 </Link>

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync } from 'node:fs'
-import { buyerStatus } from '../lib/buyer-status.ts'
+import { buyerStatus, isFreeOnSite } from '../lib/buyer-status.ts'
 
 const catalog = JSON.parse(readFileSync(new URL('../products/catalog.json', import.meta.url), 'utf8'))
 const products = catalog.products ?? catalog
@@ -42,4 +42,11 @@ test('the homepage renders the label, not the raw status', () => {
   assert.match(page, /buyerStatus\(product\.status, product\.price_cents\)/)
   assert.doesNotMatch(page, /\{product\.status\}/)
   assert.doesNotMatch(page, /title=\{product\.status\}/)
+})
+
+test('the starter-kit link appears only for a product that is free on this site', () => {
+  const page = readFileSync(new URL('../app/page.tsx', import.meta.url), 'utf8')
+  assert.match(page, /isFreeOnSite\(product\.status, product\.price_cents\) \? \(\s*<Link href="\/delivery\/starter-kit"/)
+  assert.equal(isFreeOnSite('payload not assembled - not for sale', 0), false)
+  assert.equal(isFreeOnSite('free — delivered on-site, never sold through checkout', 0), true)
 })

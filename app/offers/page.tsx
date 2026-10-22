@@ -7,7 +7,7 @@ import { isCheckoutLive } from '@/lib/polar'
 
 export const metadata: Metadata = {
   title: 'Offers',
-  description: 'Scoped Agent-as-a-Service implementation, practical digital products, and transparent access states from Agentic Income.',
+  description: 'A free starter kit today, and two digital products on a waitlist until they pass their release gate. Transparent access states from Agentic Income.',
   alternates: { canonical: '/offers' },
   openGraph: {
     ...baseOpenGraph,
@@ -18,7 +18,6 @@ export const metadata: Metadata = {
 }
 
 const promiseStrip = [
-  ['Implementation', 'Scope and build one revenue system with repository and preview evidence.'],
   ['Free', 'Learn the first loop without buying another tool.'],
   ['Blueprint', 'Install the operating desk and content architecture.'],
   ['Intel', 'Keep the payer map current as the market moves.'],
@@ -28,14 +27,14 @@ export default function Offers() {
   return (
     <div className="py-16">
       <section className="max-w-4xl">
-        <div className="kicker">Implementation and products</div>
+        <div className="kicker">Products</div>
         <h1 className="mt-3 text-5xl font-semibold text-ink">Choose the right depth.</h1>
         <p className="mt-4 text-xl leading-8 text-muted">
-          Request a scoped implementation, start with the free operating path, install the Blueprint yourself, or keep the opportunity map current with Private Intel.
+          Start with the free operating path today. The Blueprint and Private Intel are on a waitlist until each passes its release gate.
         </p>
       </section>
 
-      <section className="mt-8 grid gap-4 md:grid-cols-4" aria-label="Agentic Income offer ladder">
+      <section className="mt-8 grid gap-4 md:grid-cols-3" aria-label="Agentic Income offer ladder">
         {promiseStrip.map(([title, body]) => (
           <div key={title} className="card motion-reveal">
             <div className="text-sm font-semibold text-gold">{title}</div>
@@ -48,7 +47,7 @@ export default function Offers() {
         <div>
           <div className="text-sm font-semibold text-gold">Before you buy</div>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-            Free delivery is live. The implementation sprint is scope-first and does not take payment here. Digital-product checkout is not yet open — request access to be notified when it launches.
+            Free delivery is live. Nothing else is for sale yet: digital-product checkout opens only after a product passes its release gate, and the waitlist hears first.
           </p>
         </div>
         <Link href="/trust" className="cta-secondary">
@@ -59,7 +58,6 @@ export default function Offers() {
       <section className="mt-12 grid gap-6">
         {offers.map((offer) => {
           const isFree = offer.checkout.fallback === 'delivery'
-          const isScoped = offer.accessMode === 'scope-first'
           const polarLive = isCheckoutLive(offer.slug)
           const staticLive = checkoutUrl(offer)
           const checkoutReady = polarLive || staticLive
@@ -96,9 +94,7 @@ export default function Offers() {
                   <div className="text-center text-[11px] leading-5 text-muted">
                     {isFree
                       ? 'Instant on-site delivery.'
-                      : isScoped
-                        ? 'No payment on this site — scope first.'
-                        : checkoutReady
+                      : checkoutReady
                           ? 'Checkout is connected.'
                           : 'Waitlist — opens when ready.'}
                   </div>

@@ -3,7 +3,7 @@ import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { CheckoutLink } from '@/components/CheckoutLink'
-import { EmailCapture } from '@/components/EmailCapture'
+import { Waitlist } from '@/components/Waitlist'
 import { PolarCheckoutButton } from '@/components/PolarCheckoutButton'
 import { checkoutPath, checkoutUrl, getOffer, offers } from '@/lib/offers'
 import { isCheckoutLive } from '@/lib/polar'
@@ -49,7 +49,6 @@ export default async function OfferDetail({ params }: OfferPageProps) {
   // keeps the existing request-access CTA exactly as it is.
   const polarCheckoutLive = isCheckoutLive(offer.slug)
   const isFree = offer.checkout.fallback === 'delivery'
-  const isScoped = offer.accessMode === 'scope-first'
   const accessSteps = [
     ['01', 'Click', offer.checkoutOutcome],
     ['02', 'Deliver', `The handoff route is ${offer.deliveryPath}. ${offer.receiptInstruction}`],
@@ -99,22 +98,18 @@ export default async function OfferDetail({ params }: OfferPageProps) {
           <p className="mt-3 text-sm leading-6 text-muted">
             {isFree
               ? 'Delivered instantly on-site.'
-              : isScoped
-                ? 'Scope, acceptance checks, and commercial terms are agreed before implementation.'
               : polarCheckoutLive
                 ? 'Checkout is live. Polar.sh is the merchant of record and handles VAT and sales tax.'
               : liveCheckout
                 ? 'Live checkout URL is configured.'
-                : 'Request access — checkout opens when provider link is connected.'}
+                : 'Waitlist only. Checkout opens after this product passes its release gate.'}
           </p>
           <div className="mt-5 rounded-xl border border-border bg-bg/60 p-4 text-xs leading-6 text-muted">
             {isFree
               ? 'Internal free delivery route is live.'
-              : isScoped
-                ? 'No payment is taken here. The intake route records interest only when the configured service is available.'
               : liveCheckout
                 ? 'Secure payment provider checkout is connected.'
-                : 'Checkout is not yet live. Request access to be notified when it opens.'}
+                : 'Nothing is for sale yet. Join the waitlist; it hears first when checkout opens.'}
           </div>
           <Link href="/trust" className="mt-4 inline-flex text-xs font-semibold text-accent">
             Trust, support, and refunds
@@ -198,14 +193,9 @@ export default async function OfferDetail({ params }: OfferPageProps) {
 
       {!isFree && !liveCheckout ? (
         <section id="request-access" className="section-band">
-          <EmailCapture
-            headline={`Request ${offer.shortTitle} access`}
-            sub={isScoped
-              ? 'Share your email to request the current scoping path. If online intake is not connected, the page will say so before claiming receipt.'
-              : 'Get notified when the checkout opens and receive the current first-loop checklist immediately.'}
-            source={`offer-${offer.slug}`}
-            buttonLabel="Request access"
-            successMessage="Request received. You are on the access list."
+          <Waitlist
+            headline={`Join the ${offer.shortTitle} waitlist`}
+            sub="No checkout exists yet. It opens after this product passes its release gate, and the waitlist hears first."
           />
         </section>
       ) : null}

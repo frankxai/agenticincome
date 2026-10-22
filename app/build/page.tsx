@@ -70,8 +70,8 @@ export default function BuildPage() {
             <Link href="/workbench" className="cta-secondary">
               Review the system in the workbench
             </Link>
-            <Link href="/offers/implementation-sprint" className="cta-secondary">
-              Inspect the implementation sprint
+            <Link href="/pack" className="cta-secondary">
+              Install the free /ai pack
             </Link>
           </div>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-muted">

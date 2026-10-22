@@ -55,7 +55,7 @@ export default function Image() {
               fontWeight: 800,
             }}
           >
-            AGENT-AS-A-SERVICE / {site.domain}
+            EARN WITH AGENTS / {site.domain}
           </div>
           <div style={{ marginTop: 42, fontSize: 78, fontWeight: 900, lineHeight: 0.95 }}>{site.name}</div>
           <div style={{ marginTop: 28, fontSize: 34, fontWeight: 700, color: '#d1fae5' }}>{site.tagline}</div>

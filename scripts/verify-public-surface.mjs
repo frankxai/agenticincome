@@ -5,11 +5,11 @@ import { readFileSync } from 'node:fs'
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
 const files = {
   home: read('app/page.tsx'),
-  hero: read('components/IncomeDeskHero.tsx'),
   workflow: read('components/AgentWorkflowProof.tsx'),
   analytics: read('lib/analytics.ts'),
   subscribe: read('app/api/subscribe/route.ts'),
-  'email-capture': read('components/EmailCapture.tsx'),
+  waitlist: read('app/api/waitlist/route.ts'),
+  'waitlist-store': read('lib/demand-capture/store.ts'),
   start: read('app/start/page.tsx'),
   privacy: read('app/privacy/page.tsx'),
   notFound: read('app/not-found.tsx'),
@@ -43,7 +43,10 @@ for (const event of [
 ]) requireText('analytics', `'${event}'`, `analytics allowlist includes ${event}`)
 
 requireText('subscribe', "mode === 'unwired' ? 'subscribe_unwired' : 'subscribe_manual'", 'intake without a store is never recorded as success')
-requireText('email-capture', "result?.mode === 'manual_email'", 'manual intake tells the visitor nothing was saved')
+requireText('waitlist-store', "throw new Error('KV not configured')", 'waitlist without a store never records a signup')
+requireText('waitlist', 'status: 503', 'waitlist without a store answers 503, never success')
+requireText('home', '<McpPlayground />', 'the live fit_check tool is on the homepage')
+forbidText('home', 'Agent-as-a-Service', 'no consulting offer on the homepage (TRUTH.md §1)')
 requireText('subscribe', 'isSameOriginRequest(req)', 'intake is same-origin only')
 requireText('subscribe', 'readBoundedJson(req)', 'intake body is bounded before parsing')
 

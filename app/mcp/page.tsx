@@ -168,7 +168,7 @@ export default function McpPage() {
       </section>
 
       <section className="mt-12">
-        <McpPlayground />
+        <McpPlayground className="mt-8" />
       </section>
 
       <section className="mt-14">

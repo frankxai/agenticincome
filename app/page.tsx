@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { AgentWorkflowProof } from '@/components/AgentWorkflowProof'
+import { McpPlayground } from '@/components/McpPlayground'
 import { verifiedEconomicsPrograms, verifiedRangeLabel } from '@/lib/affiliate'
 import incomeModels from '@/data/income-models.json'
 import catalog from '@/products/catalog.json'
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 }
 
 const MCP_TOOLS = [
-  { name: 'list_income_models', desc: 'The three operator models with honest economics.' },
+  { name: 'list_income_models', desc: 'The three income models with honest economics.' },
   { name: 'get_income_model', desc: 'One model in full, plus which playbook to read first.' },
   { name: 'search_partner_programs', desc: 'The partner registry: rates, cookies, status, disclosed links.' },
   { name: 'get_partner_program', desc: 'Full record with commission note, source URL, verification date.' },
@@ -45,11 +46,11 @@ export default function Home() {
 
   return (
     <>
-      {/* SECTION 1 — hero: the literal offer plus real MCP output */}
+      {/* SECTION 1 — hero: the offer, plus the live fit_check tool */}
       <section className="section-band">
         <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
-            <div className="kicker">Agentic Income — the operator system</div>
+            <div className="kicker">Agentic Income — earn with agent teams</div>
             <h1 className="assembly-title">
               Earn with agents. <span>Keep the judgment.</span>
             </h1>
@@ -62,36 +63,20 @@ export default function Home() {
               <Link href="/mcp" className="cta">Connect your agent</Link>
               <Link href="/start" className="cta-secondary">Start free</Link>
             </div>
+            <p className="mt-5 break-all font-mono text-xs text-muted">
+              claude mcp add --transport http agentic-income https://www.agenticincome.ai/api/mcp
+            </p>
           </div>
 
-          <div
-            className="terminal"
-            role="img"
-            aria-label="Terminal: connecting the agentic-income MCP server with Claude Code and running the fit_check tool, which returns a services-model recommendation"
-          >
-            <div className="terminal-bar">
-              <i /><i /><i />
-              <span className="ml-2">shell — live endpoint /api/mcp</span>
-            </div>
-            <div className="terminal-body">
-              <div className="t-out"><span className="t-accent">$</span> <span className="text-ink">claude mcp add --transport http agentic-income \</span></div>
-              <div className="t-out">    https://www.agenticincome.ai/api/mcp</div>
-              <div className="t-cmd mt-3">fit_check hours=10 budget=200 audience=no code=yes</div>
-              <div className="t-out">{'{'} &quot;model&quot;: &quot;services&quot;,</div>
-              <div className="t-out">  &quot;why&quot;: &quot;10 focused hours and working code</div>
-              <div className="t-out">    skills price you into agent-assisted</div>
-              <div className="t-out">    delivery work first.&quot;,</div>
-              <div className="t-out">  &quot;read&quot;: &quot;/start&quot; {'}'}<span className="t-caret ml-2" /></div>
-            </div>
-          </div>
+          <McpPlayground />
         </div>
       </section>
 
-      {/* SECTION 2 — the three operator models */}
+      {/* SECTION 2 — the three income models */}
       <section className="section-band">
         <div className="section-heading motion-reveal">
           <div className="kicker">Income models · honest ranges only</div>
-          <h2 className="display-h2">Three ways operators earn.</h2>
+          <h2 className="display-h2">Three ways to earn with agents.</h2>
         </div>
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
           {models.map((model) => (

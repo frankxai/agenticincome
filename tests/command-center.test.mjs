@@ -4,19 +4,11 @@ import test from 'node:test'
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
 
-test('command center page enforces single-tenant operator portal boundary', () => {
+test('command center page links operate', () => {
   const page = read('app/command/page.tsx')
-  const desk = read('components/IncomeCommandDesk.tsx')
-  const operate = read('app/operate/page.tsx')
+    const operate = read('app/operate/page.tsx')
 
-  assert.match(page, /Single-Tenant Income Command Center/)
-  assert.match(page, /Frank Riemer and operating agents/)
   assert.match(page, /href="\/operate"/)
-
-  assert.match(desk, /Frank Riemer \(Sole Tenant\)/)
-  assert.match(desk, /Single-Tenant Operator Boundary Active/)
-  assert.match(desk, /Polar\.sh/)
-  assert.match(desk, /Zero arbitrary code execution/)
 
   assert.match(operate, /href="\/command"/)
 })

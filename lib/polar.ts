@@ -6,8 +6,8 @@ import catalog from '@/products/catalog.json'
  *
  * This is the API-created-session path. It is separate from, and does not
  * replace, the static checkout-link path in lib/offers.ts (`checkoutUrl`) that
- * the GET handler in app/api/checkout/route.ts uses. Both are gated
- * independently and neither can invent availability.
+ * the GET handler in app/api/checkout/route.ts uses. That path also reads the
+ * catalog status below, so neither can open a sale the catalog refuses.
  *
  * Fail-closed by construction. Three independent gates must all pass:
  *

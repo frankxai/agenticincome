@@ -17,9 +17,9 @@ import {
 import { appendTrackingParams } from '@/lib/tracking'
 
 /**
- * GET — the static checkout-link path. Reads a per-offer `*_CHECKOUT_URL` env
- * var via lib/offers.ts and redirects, falling back to the offer's
- * request-access section when the link is not configured. Unchanged.
+ * GET — the static checkout-link path. Redirects to a per-offer `*_CHECKOUT_URL`
+ * only when products/catalog.json also permits the sale (lib/offers.ts
+ * `checkoutUrl`); otherwise it sends the visitor to the offer's waitlist section.
  *
  * POST — the Polar API path (lib/polar.ts). Creates a real checkout session
  * for a catalog product id. products/catalog.json is the server-side authority

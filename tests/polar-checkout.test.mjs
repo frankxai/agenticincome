@@ -24,12 +24,13 @@ test('catalog contains all expected products', () => {
   assert.ok(ids.includes('agent-team-pro'))
 })
 
-test('blueprint catalog status is flipped to for sale', () => {
+// Waitlist-first: no product is sold before it holds a PRODUCT-RELEASE-GATE PASS. Flip this
+// assertion only in the same change that links the gate receipt.
+test('blueprint stays gated until it passes the release gate', () => {
   const blueprint = catalog.products.find((p) => p.id === 'blueprint')
   assert.ok(blueprint)
   assert.equal(blueprint.price_cents, 6700)
-  assert.ok(blueprint.status.toLowerCase().startsWith('for sale'))
-  assert.equal(catalogRefusal(blueprint), null)
+  assert.equal(catalogRefusal(blueprint), 'checkout_gated')
 })
 
 test('starter-kit is free and refused for sale', () => {

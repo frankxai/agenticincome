@@ -2204,3 +2204,31 @@ body::before {
   .cta, .cta-secondary { transition: none; }
   .cta:hover, .cta-secondary:hover { transform: none; }
 }
+
+/* Standard estate waitlist (lib/demand-capture/WaitlistForm.tsx): the form ships unstyled
+   and each property voices it with its own tokens. */
+.wl-input { min-height: 2.9rem; border: 1px solid var(--color-border); border-radius: 0.75rem; background: var(--color-bg); color: var(--color-ink); padding: 0.75rem 1rem; font: inherit; font-size: 16px; }
+.wl-input::placeholder { color: var(--color-muted); }
+.wl-input:focus { border-color: var(--color-accent); outline: none; }
+.wl-btn { display: inline-flex; min-height: 2.9rem; align-items: center; justify-content: center; border-radius: 9999px; background: var(--color-accent); color: var(--color-bg); font-weight: 700; padding: 0.75rem 1.5rem; }
+.wl-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.wl-btn-quiet { background: transparent; color: var(--color-ink); border: 1px solid var(--color-border); }
+.wl-link { font-size: 0.875rem; color: var(--color-muted); text-decoration: underline; text-underline-offset: 2px; }
+.wl-note { font-size: 0.875rem; line-height: 1.5rem; color: var(--color-muted); }
+.wl-check { accent-color: var(--color-accent); width: 1rem; height: 1rem; }
+.wl-error { font-size: 0.875rem; color: #fca5a5; }
+.wl-panel { border: 1px solid var(--color-border); border-radius: 0.75rem; background: var(--color-surface-2); padding: 1rem 1.15rem; }
+.wl-panel-title { font-weight: 600; color: var(--color-ink); }
+.wl-panel-text { margin-top: 0.25rem; font-size: 0.875rem; color: var(--color-muted); }
+.wl-label { display: block; font-size: 0.875rem; color: var(--color-ink); }
+.wl-chip { min-height: 2.75rem; border: 1px solid var(--color-border); border-radius: 9999px; color: var(--color-muted); padding: 0.4rem 0.9rem; font-size: 0.875rem; transition: border-color 150ms ease, color 150ms ease; }
+.wl-chip-active { border-color: var(--color-accent); color: var(--color-accent); }
+@media (hover: hover) and (pointer: fine) {
+  .wl-btn:hover { opacity: 0.92; }
+  .wl-btn-quiet:hover { border-color: var(--color-accent); }
+  .wl-link:hover { color: var(--color-ink); }
+  .wl-chip:hover { border-color: var(--color-accent); color: var(--color-ink); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wl-chip { transition: none; }
+}

@@ -1,0 +1,16 @@
+{
+  "note": "Mirror of the agentic-income row in starlight/graph/products.graph.json, which is the source of truth. Edit the registry, then copy the row here; never change a stage, gate or waitlist value in this copy alone.",
+  "syncedFrom": "starlight/graph/products.graph.json",
+  "syncedAt": "2026-10-22",
+  "products": [
+    {
+      "id": "agentic-income",
+      "name": "Agentic Income",
+      "surface": "agenticincome.ai",
+      "stage": "concept",
+      "gate": "UNGATED",
+      "waitlist": { "enabled": true, "publicCountThreshold": 100, "foundingCohort": 100 },
+      "founding": ["Price lock", "Named", "Each new loop first", "The loop ledger with real figures"]
+    }
+  ]
+}

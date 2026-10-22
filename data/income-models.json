@@ -4,32 +4,32 @@
   "models": [
     {
       "id": "services",
-      "name": "Productized Implementation — Agent-as-a-Service",
-      "summary": "Customer job: Deploy custom AI agent workflows for your team. We scope, test, and deliver repo-committed code with human gates, while client teams maintain authority.",
-      "timeToFirstDollar": "scoped implementation sprint — fixed 2-day or custom timeframe based on acceptance checks",
-      "upfrontCost": "fixed implementation scope — no hidden recurring fees or unverified costs",
-      "laborProfile": "delivery-bounded: scoped deliverables, concrete test suites, and explicit human approval gates before production execution",
-      "failureMode": "unbounded scope creep — clear boundaries, non-goals, and acceptance criteria prevent misaligned expectations",
+      "name": "Services — sell agent-assisted delivery",
+      "summary": "Sell an outcome to a specific client; your agent team compresses delivery cost while you keep discovery, trust, and the final gate. The funding stage, not the destination.",
+      "timeToFirstDollar": "typically days to weeks — depends entirely on your existing network and ability to scope real work",
+      "upfrontCost": "near zero beyond an agent runtime subscription; the real investment is scoping and trust-building time",
+      "laborProfile": "labor-coupled: your hours cap revenue. Agents compress delivery, not discovery or client trust. Cap concurrent clients before quality collapses.",
+      "failureMode": "scope creep — agents make delivery cheap but discovery expensive — and staying here forever instead of skimming service weeks into building products",
       "firstPlaybook": "/start"
     },
     {
       "id": "products",
-      "name": "Digital Products — Self-Serve Blueprints & Kits",
-      "summary": "Customer job: Install production-proven agent architectures, prompt packs, and starter kits self-serve via merchant of record.",
-      "timeToFirstDollar": "instant self-serve delivery — access blueprints and starter code immediately upon availability",
-      "upfrontCost": "one-time digital product price — complete with source code, schemas, and usage docs",
-      "laborProfile": "self-directed implementation: executable assets, automated schemas, and step-by-step guides",
-      "failureMode": "lack of maintenance — products carry explicit versioning and maintenance promises to prevent staleness",
+      "name": "Products — sell what your agents help you build",
+      "summary": "Package the decisions you made in service work — templates, packs, kits, agent-native products — and sell them self-serve through a merchant of record.",
+      "timeToFirstDollar": "typically weeks to months — volume is the whole game, and volume comes from distribution you already have or must build",
+      "upfrontCost": "low cash, high time: a merchant of record takes a per-sale fee instead of upfront cost, but the build and the audience are unpaid until they compound",
+      "laborProfile": "front-loaded build plus a permanent maintenance promise — a product is a promise of upkeep, and stale products refund",
+      "failureMode": "no distribution — the product is rarely the bottleneck, the audience is",
       "firstPlaybook": "/delivery/starter-kit"
     },
     {
       "id": "systems",
-      "name": "Selective Affiliate & Open Core — Verified Proof Systems",
-      "summary": "Customer job: Inspect open-source reference implementations and query verified partner economics without hidden incentives.",
-      "timeToFirstDollar": "open access & verified partner tables — inspectable MIT code and dated commission terms",
-      "upfrontCost": "zero cost for open-core skills — MIT-licensed skills and schemas you can run locally",
-      "laborProfile": "transparent research: disclosed partner recommendations and quarterly re-verified terms",
-      "failureMode": "undisclosed incentives — every compensated destination is explicitly labeled with non-affiliate alternatives",
+      "name": "Systems — operate assets with maintenance measured honestly",
+      "summary": "Own an asset that produces income with maintenance measured in hours per month — a publication, an evergreen product line, a disclosed affiliate property.",
+      "timeToFirstDollar": "typically weeks to months — the slowest of the three; the compounding asset is usually distribution, not the content itself",
+      "upfrontCost": "hosting and tooling are cheap; the real cost is months of unpaid compounding time before the asset carries itself",
+      "laborProfile": "structurally decoupled from hours, never zero — every real system has a maintenance floor, and we publish it instead of pretending otherwise",
+      "failureMode": "pretending 'passive' means zero hours, then abandoning the maintenance floor until the asset decays",
       "firstPlaybook": "/operate"
     }
   ]

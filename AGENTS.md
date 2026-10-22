@@ -3,8 +3,9 @@
 ## Scope
 
 - Public commercial site for `agenticincome.ai`.
-- Primary model: scoped Agent-as-a-Service implementation.
-- Supporting models: digital products, open-source distribution, and disclosed editorial/affiliate research.
+- Primary model: the open operator system (live MCP server, free starter kit, open-source pack) and digital products.
+- No consulting, done-for-you or implementation engagements (starlight `TRUTH.md` §1). Paid products stay on the standard waitlist until they pass PRODUCT-RELEASE-GATE.
+- Supporting models: open-source distribution and disclosed editorial/affiliate research.
 - Production promotion, domain changes, checkout activation, and customer promises remain human-gated.
 
 ## Before Editing

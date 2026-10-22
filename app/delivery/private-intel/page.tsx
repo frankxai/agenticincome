@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { EmailCapture } from '@/components/EmailCapture'
+import { Waitlist } from '@/components/Waitlist'
 import { TrackOnView } from '@/components/TrackOnView'
 
 export const metadata: Metadata = {
@@ -63,12 +63,9 @@ export default function PrivateIntelDelivery() {
       </section>
 
       <section className="section-band">
-        <EmailCapture
-          headline="Request Private Intel access"
-          sub="Get the membership launch notification and the current first-loop checklist while checkout is being connected."
-          source="delivery-private-intel"
-          buttonLabel="Request access"
-          successMessage="Request received. You are on the Private Intel access list."
+        <Waitlist
+          headline="Join the Private Intel waitlist"
+          sub="The membership opens only after it passes its release gate, and the waitlist hears first. The free starter kit is live now."
         />
       </section>
     </div>

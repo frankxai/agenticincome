@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { EmailCapture } from '@/components/EmailCapture'
+import { Waitlist } from '@/components/Waitlist'
 import { TrackOnView } from '@/components/TrackOnView'
 
 export const metadata: Metadata = {
@@ -63,12 +63,9 @@ export default function BlueprintDelivery() {
       </section>
 
       <section className="section-band">
-        <EmailCapture
-          headline="Request Blueprint access"
-          sub="Get the launch notification and the current first-loop checklist while checkout is being connected."
-          source="delivery-blueprint"
-          buttonLabel="Request access"
-          successMessage="Request received. You are on the Blueprint access list."
+        <Waitlist
+          headline="Join the Blueprint waitlist"
+          sub="Checkout opens only after the Blueprint passes its release gate, and the waitlist hears first. The free starter kit is live now."
         />
       </section>
     </div>

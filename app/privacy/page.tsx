@@ -32,9 +32,9 @@ export default function PrivacyPage() {
 
       <section className="section-band max-w-3xl space-y-8 text-sm leading-7 text-muted">
         <div>
-          <h2 className="text-2xl font-semibold text-ink">Access requests</h2>
+          <h2 className="text-2xl font-semibold text-ink">The waitlist</h2>
           <p className="mt-3">
-            When an intake webhook is configured, the email address and source are sent to that configured service. When a concierge address is configured, the site can prepare a mail message for you to send. When neither exists, the site does not retain the address and says so in the interface.
+            Joining the waitlist stores your email, your consent, the page you joined from, the referring page, any utm_ tags in the address and the time, in the Agentic Income waitlist database. The optional questions afterwards (expected price, role, how soon, what you are trying to do) are stored only if you answer them. When an email provider is configured for the list, your address is also added there so the launch email can reach you. If the database is not configured, the form says so and nothing is kept.
           </p>
         </div>
         <div>

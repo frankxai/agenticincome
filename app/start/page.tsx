@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { payingPrograms } from '@/lib/affiliate'
-import { EmailCapture } from '@/components/EmailCapture'
+import { Waitlist } from '@/components/Waitlist'
 
 export const metadata: Metadata = {
   title: 'Start Here',
@@ -84,7 +84,10 @@ export default function Start() {
         <Link href="/offers" className="font-medium text-accent hover:underline">Inspect the paid systems</Link>
       </div>
 
-      <EmailCapture headline="Want the build order as a checklist?" sub="Get the step-by-step path and top recurring shortlist. No noise." />
+      <Waitlist
+        headline="Want to hear when the Blueprint opens?"
+        sub="The build order above is the free path and stays free. Join the waitlist for one email when the paid Blueprint opens."
+      />
     </div>
   )
 }

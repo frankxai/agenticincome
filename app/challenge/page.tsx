@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { challengeDays } from '@/lib/challenge'
-import { EmailCapture } from '@/components/EmailCapture'
+import { Waitlist } from '@/components/Waitlist'
 import { FaqSection } from '@/components/FaqSection'
 
 export const metadata: Metadata = {
@@ -121,12 +121,9 @@ export default function ChallengePage() {
         </div>
       </section>
 
-      <EmailCapture
-        headline="Get the 7-Day Challenge Brief"
-        sub="One honest, concrete build step a day, by email. No income claims — just the next real thing to do."
-        source="challenge"
-        buttonLabel="Start Day 1"
-        successMessage="You’re in. Day 1 — create the owned system — is on its way."
+      <Waitlist
+        headline="Want the Blueprint when it opens?"
+        sub="All seven days are on this page and stay free; nothing is emailed day by day. Join the waitlist and you get one email when the Blueprint opens."
       />
 
       <section className="section-band">

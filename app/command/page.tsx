@@ -26,10 +26,11 @@ export default function CommandPage() {
             Illustrative preview
           </div>
           <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-            Income workspace preview
+            Single-Tenant Income Command Center
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-slate-300">
             Explore an example income workspace. Account identity, agent activity, revenue, and
+            Frank Riemer and operating agents
             approval records are not connected. This public preview does not provide a private account boundary.
           </p>
           <div className="mt-6 flex flex-wrap gap-4 text-sm font-mono">

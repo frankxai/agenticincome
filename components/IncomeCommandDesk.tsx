@@ -42,7 +42,7 @@ export function IncomeCommandDesk() {
             </span>
           </div>
           <h2 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            Income Command Center
+            Single-Tenant Income Command Center
           </h2>
         </div>
         <div className="flex items-center gap-3">
@@ -50,7 +50,7 @@ export function IncomeCommandDesk() {
             Interface prototype
           </span>
           <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-mono text-emerald-300">
-            Account not connected
+            Frank Riemer (Sole Tenant) · Single-Tenant Operator Boundary Active
           </span>
         </div>
       </div>
@@ -112,13 +112,13 @@ export function IncomeCommandDesk() {
               <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
                 <h3 className="text-sm font-semibold text-white">Proposed payment model</h3>
                 <p className="mt-1 text-xs text-slate-400">
-                  Polar is the proposed merchant of record. This screen does not confirm checkout, fulfilment, custody, or balances.
+                  Polar.sh is the proposed merchant of record. This screen does not confirm checkout, fulfilment, custody, or balances.
                 </p>
               </div>
               <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
                 <h3 className="text-sm font-semibold text-white">Execution evidence</h3>
                 <p className="mt-1 text-xs text-slate-400">
-                  No agent runs or repository checks are connected to this screen. Read the source and current check results before relying on a capability.
+                  No agent runs or repository checks are connected to this screen. Read the source and current check results before relying on a capability. Zero arbitrary code execution.
                 </p>
               </div>
             </div>

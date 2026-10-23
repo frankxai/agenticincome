@@ -53,6 +53,14 @@ export function evaluateCheckoutGate(
   return { open: true, provider, adapter }
 }
 
+export type CheckoutMode = 'closed' | 'link' | 'session'
+
+/** `session` = open via POST only; `link` = open via the GET redirect too. */
+export function checkoutMode(decision: GateDecision): CheckoutMode {
+  if (!decision.open) return 'closed'
+  return decision.adapter.createsSession ? 'session' : 'link'
+}
+
 /** Gate, then ask the adapter for a hosted checkout URL. Never returns a guessed URL. */
 export async function openCheckout(
   sku: CommerceSku | null | undefined,

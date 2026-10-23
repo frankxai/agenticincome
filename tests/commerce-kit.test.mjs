@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import test from 'node:test'
 
-import { evaluateCheckoutGate, openCheckout } from '../lib/commerce/checkout.ts'
+import { checkoutMode, evaluateCheckoutGate, openCheckout } from '../lib/commerce/checkout.ts'
 import { commerceProvider, stripeLookupKey } from '../lib/commerce/config.ts'
 import { MemoryCommerceStore, UpstashCommerceStore, commerceStoreFromEnv } from '../lib/commerce/store.ts'
 import { checkoutSessionParams, STRIPE_API_VERSION } from '../lib/commerce/stripe.ts'
@@ -120,7 +120,28 @@ const STRIPE_ENV = {
   COMMERCE_PROVIDER: 'stripe',
   STRIPE_SECRET_KEY: 'sk_test_123',
   COMMERCE_SITE_URL: 'https://www.agenticincome.ai',
+  STRIPE_WEBHOOK_SECRET: 'whsec_test_preview',
+  KV_REST_API_URL: 'https://kv.example.upstash.io',
+  KV_REST_API_TOKEN: 'kv_test_token',
+  COMMERCE_DELIVERY_WEBHOOK_URL: 'https://hooks.example.com/delivery',
 }
+
+test('stripe stays closed without private fulfillment, and for recurring SKUs', () => {
+  assert.equal(evaluateCheckoutGate(skuFor('blueprint'), STRIPE_ENV).open, true)
+  for (const missing of ['STRIPE_SECRET_KEY', 'COMMERCE_SITE_URL', 'STRIPE_WEBHOOK_SECRET', 'KV_REST_API_URL', 'KV_REST_API_TOKEN', 'COMMERCE_DELIVERY_WEBHOOK_URL']) {
+    const env = { ...STRIPE_ENV, [missing]: '' }
+    assert.equal(evaluateCheckoutGate(skuFor('blueprint'), env).reason, 'provider_unconfigured', missing)
+  }
+  const monthly = skuFor('private-intel', { catalogStatus: 'for sale — test' })
+  assert.equal(evaluateCheckoutGate(monthly, STRIPE_ENV).reason, 'provider_unconfigured')
+})
+
+test('session providers are POST-only; static links may use the GET redirect', () => {
+  assert.equal(checkoutMode(evaluateCheckoutGate(skuFor('blueprint'), STRIPE_ENV)), 'session')
+  const link = { COMMERCE_PROVIDER: 'payment_link', AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL: LINK }
+  assert.equal(checkoutMode(evaluateCheckoutGate(skuFor('blueprint'), link)), 'link')
+  assert.equal(checkoutMode(evaluateCheckoutGate(skuFor('blueprint'), {})), 'closed')
+})
 
 test('stripe adapter creates a Managed Payments session only when the flag is true', async () => {
   for (const [flag, expected] of [['true', 'true'], [undefined, null], ['1', null]]) {
@@ -285,6 +306,25 @@ test('refund before paid writes a tombstone and blocks the late grant', async ()
   assert.equal(sent.length, 0)
 })
 
+test('subscription sessions never grant; foreign metadata-less reversals are not attributed', async () => {
+  const store = new MemoryCommerceStore()
+  const sub = await deliver(store, stripeEvent('evt_sub', 'checkout.session.completed', paidSession({ mode: 'subscription', payment_intent: null })))
+  assert.equal(sub.body.outcome, 'ignored')
+  assert.equal(store.entitlements.size, 0)
+
+  const foreign = await deliver(store, stripeEvent('evt_fr', 'charge.refunded', refundedCharge({ payment_intent: 'pi_other', metadata: {} })))
+  assert.equal(foreign.body.outcome, 'tombstoned')
+  assert.equal(foreign.body.sku, null)
+
+  const own = await deliver(store, stripeEvent('evt_or', 'charge.refunded', refundedCharge({ payment_intent: 'pi_own' })))
+  assert.equal(own.body.sku, 'blueprint')
+
+  await deliver(store, stripeEvent('evt_g', 'checkout.session.completed', paidSession({ payment_intent: 'pi_g' })))
+  const bare = await deliver(store, stripeEvent('evt_bd', 'charge.dispute.created', { id: 'dp_2', payment_intent: 'pi_g', amount: 6700, currency: 'usd', metadata: {} }))
+  assert.equal(bare.body.outcome, 'revoked')
+  assert.equal(bare.body.sku, 'blueprint')
+})
+
 test('refund or dispute after a grant revokes it; a partial refund does not', async () => {
   const store = new MemoryCommerceStore()
   await deliver(store, stripeEvent('evt_p1', 'checkout.session.completed', paidSession()))
@@ -330,6 +370,9 @@ test('fail-closed configuration: no secret or no store -> 503; other sites and u
   assert.equal((await handleStripeWebhook({ rawBody: body, signature, secret: '', store: new MemoryCommerceStore(), nowSeconds: NOW })).status, 503)
   assert.equal((await handleStripeWebhook({ rawBody: body, signature, secret: SECRET, store: null, nowSeconds: NOW })).status, 503)
   assert.equal(commerceStoreFromEnv({}), null)
+  // Blank KV_* placeholders never shadow a filled UPSTASH_* pair.
+  assert.ok(commerceStoreFromEnv({ KV_REST_API_URL: '', KV_REST_API_TOKEN: '', UPSTASH_REDIS_REST_URL: 'https://u.upstash.io', UPSTASH_REDIS_REST_TOKEN: 't' }))
+  assert.equal(commerceStoreFromEnv({ KV_REST_API_URL: 'https://kv.upstash.io', UPSTASH_REDIS_REST_TOKEN: 't' }), null)
 
   const store = new MemoryCommerceStore()
   const other = await deliver(store, stripeEvent('evt_o', 'checkout.session.completed', paidSession({ metadata: { site: 'othersite', sku: 'x', entitlement: 'othersite:x' } })))
@@ -374,13 +417,20 @@ test('Upstash store applies each event in one atomic EVAL', async () => {
 test('routes and pages use the commerce gate; refund copy is provider-accurate', () => {
   const read = (file) => readFileSync(path.join(process.cwd(), file), 'utf8')
   const checkout = read('app/api/checkout/route.ts')
-  assert.match(checkout, /openCommerceCheckout\(offer\.slug\)/)
-  assert.doesNotMatch(checkout, /checkoutUrl\(/)
-  assert.match(checkout, /commerceKillSwitchActive\(\)/)
+  const [getHandler, postHandler] = checkout.split('export async function POST')
+  assert.match(getHandler, /commerceGate\(offer\.slug\)/)
+  // GET never creates a provider session: session mode redirects to the offer page first.
+  assert.ok(getHandler.indexOf("mode === 'session'") < getHandler.indexOf('openCommerceCheckout('))
+  assert.match(postHandler, /openCommerceCheckout\(product\.id\)/)
+  assert.match(postHandler, /isSameOriginRequest\(req\)/)
+  assert.match(postHandler, /consumeAnalyticsRateLimit/)
+  assert.doesNotMatch(checkout, /checkoutUrl\(|isCheckoutLive\(|createCheckoutSession\(/)
+  assert.match(read('app/offers/page.tsx'), /isCommerceCheckoutOpen\(offer\.slug\)/)
+  assert.match(read('app/offers/[slug]/page.tsx'), /commerceCheckoutMode\(offer\.slug\)/)
   for (const page of ['app/offers/page.tsx', 'app/offers/[slug]/page.tsx']) {
-    assert.match(read(page), /isCommerceCheckoutOpen\(offer\.slug\)/)
-    assert.doesNotMatch(read(page), /checkoutUrl\(/)
+    assert.doesNotMatch(read(page), /checkoutUrl\(|isCheckoutLive\(/)
   }
+  assert.match(read('lib/readiness.ts'), /commerceGate\(slug\)\.open/)
   const webhook = read('app/api/webhooks/stripe/route.ts')
   assert.match(webhook, /await req\.text\(\)/)
   assert.doesNotMatch(webhook, /req\.json\(\)/)

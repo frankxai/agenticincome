@@ -26,10 +26,24 @@ checkout URL) never opens a sale, and flipping the catalog alone never does
 either. **Setting `COMMERCE_PROVIDER` in Production is the owner's release
 approval.** No agent sets it.
 
-The same gate drives the page CTAs (`isCommerceCheckoutOpen`) and the route,
-so a page never says "connected" while the route refuses. The Polar POST path
-(`lib/polar.ts`) also requires `COMMERCE_PROVIDER=polar` and honors the kill
-switch. The repo has no feature-flag SDK, so the kill switch is a plain env var
+The same gate drives the page CTAs (`commerceCheckoutMode`), `/readiness`,
+and both route methods, so a page never says "connected" while the route
+refuses. `lib/polar.ts` additionally requires `COMMERCE_PROVIDER=polar` and
+honors the kill switch on its own.
+
+**GET never creates provider state.** `GET /api/checkout` is a crawlable link,
+so it only follows a static link (`payment_link`). For session providers
+(`stripe`, `polar`) it redirects to the offer page, which renders the buy
+button; the button calls the same-origin, rate-limited `POST /api/checkout`,
+which creates the session. While a session provider is open, the
+`#request-access` section stays mounted as the fallback for a click-time
+failure.
+
+**Stripe counts as configured only with private fulfillment**, meaning all of
+`STRIPE_SECRET_KEY`, `COMMERCE_SITE_URL`, `STRIPE_WEBHOOK_SECRET` (`whsec_…`),
+a KV pair, and `COMMERCE_DELIVERY_WEBHOOK_URL`. The public `/delivery/*` page is
+not fulfillment. Stripe is also one-time SKUs only, so recurring SKUs stay
+closed (see §4). The repo has no feature-flag SDK, so the kill switch is a plain env var
 (change it, then redeploy, because the offer pages are rendered at build time).
 
 ## 2. Interface
@@ -64,7 +78,9 @@ Adapters:
   refuses unless amount, currency, and one-time/recurring shape equal the
   catalog.
 - **payment_link** — the static https link in the offer's `*_CHECKOUT_URL`
-  env var (the pre-kit behavior). A Stripe Payment Link works here: set
+  env var (the pre-kit behavior). The provider behind the link must deliver
+  the product itself, for example Polar file downloads or a Stripe Payment Link
+  plus this webhook with KV and a delivery sender configured. A Stripe Payment Link works here: set
   `metadata` on the link (it is copied to its Checkout Sessions) and the same
   webhook fulfills it.
 - **polar** — wraps `lib/polar.ts` `createCheckoutSession`.
@@ -114,9 +130,17 @@ with two implementations:
   `commerce:v1:event:{eventId}`, `commerce:v1:entitlement:{transactionId}`
   (hash), and `commerce:v1:tombstone:{transactionId}`.
 
-Subscriptions (Private Intel) are not fulfilled by this webhook yet. Renewals
-and cancellations need `invoice.paid` / `customer.subscription.deleted`
-handling before a `month` SKU is opened.
+Subscriptions (Private Intel) are not fulfilled by this webhook yet. A
+subscription Checkout Session has no PaymentIntent, so its refunds could not
+be matched to a grant. The Stripe adapter therefore refuses `month` SKUs, and
+the webhook acknowledges subscription sessions without granting. Opening one
+needs `invoice.paid` / `customer.subscription.deleted` handling keyed by
+subscription or invoice id.
+
+Analytics attribution: `purchase`/`refund` fire only for events that are
+provably this site's, meaning our `site` metadata or a grant in our store. A
+metadata-less reversal from another site on a shared account still writes a
+harmless tombstone but is never counted.
 
 ## 5. Events
 

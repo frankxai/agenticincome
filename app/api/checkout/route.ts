@@ -8,27 +8,26 @@ import {
   isSameOriginRequest,
   readBoundedJson,
 } from '@/lib/api-security'
-import { commerceKillSwitchActive } from '@/lib/commerce/config'
-import { openCommerceCheckout } from '@/lib/commerce/server'
-import {
-  catalogRefusal,
-  createCheckoutSession,
-  findCatalogProduct,
-  isCheckoutLive,
-} from '@/lib/polar'
+import { checkoutMode } from '@/lib/commerce/checkout'
+import { commerceGate, openCommerceCheckout } from '@/lib/commerce/server'
+import type { CheckoutClosedReason } from '@/lib/commerce/types'
+import { findCatalogProduct } from '@/lib/polar'
 import { appendTrackingParams } from '@/lib/tracking'
 
 /**
- * GET — the provider-neutral checkout path (lib/commerce/, docs/COMMERCE.md).
- * Redirects to a hosted checkout only when the double gate holds: the catalog
- * status starts with "for sale" AND the provider selected by COMMERCE_PROVIDER
- * is configured for the product (and COMMERCE_KILL_SWITCH is not set).
- * Otherwise — including the default, where COMMERCE_PROVIDER is unset — it
- * falls back to the offer's request-access section.
+ * Both methods go through the provider-neutral commerce gate (lib/commerce/,
+ * docs/COMMERCE.md): the catalog status starts with "for sale" AND the
+ * provider selected by COMMERCE_PROVIDER is configured for the product (and
+ * COMMERCE_KILL_SWITCH is not set). Default — COMMERCE_PROVIDER unset — is
+ * closed.
  *
- * POST — the Polar API path (lib/polar.ts). Creates a real checkout session
- * for a catalog product id. products/catalog.json is the server-side authority
- * on what may be sold and refuses everything today per its `_checkoutGate`.
+ * GET — the crawlable CTA link. It never creates provider state: it redirects
+ * to a static checkout link (`payment_link`), to the offer page when checkout
+ * needs a session (`stripe`, `polar` — the page renders the POST buy button),
+ * or to the offer's request-access section when closed.
+ *
+ * POST — creates a provider checkout session for a catalog product id, behind
+ * same-origin, content-type, and rate-limit checks.
  */
 
 export async function GET(req: Request) {
@@ -60,7 +59,26 @@ export async function GET(req: Request) {
     return NextResponse.redirect(target, 302)
   }
 
-  const checkout = await openCommerceCheckout(offer.slug)
+  const gate = commerceGate(offer.slug)
+  const mode = checkoutMode(gate)
+  if (mode === 'session') {
+    // Sessions are created only by the guarded POST; send the buyer to the
+    // offer page, which renders the buy button.
+    const target = appendTrackingParams(new URL(`/offers/${offer.slug}`, req.url), url.searchParams)
+    await forwardAnalyticsEvent({
+      event: 'checkout_redirect',
+      offer: offer.slug,
+      path: url.pathname,
+      href: `${target.pathname}${target.search}`,
+      state: 'session_checkout_page',
+      ts: new Date().toISOString(),
+    })
+    return NextResponse.redirect(target, 302)
+  }
+
+  const checkout = gate.open
+    ? await openCommerceCheckout(offer.slug)
+    : ({ ok: false, reason: gate.reason } as const)
   if (checkout.ok) {
     const target = appendTrackingParams(new URL(checkout.url), url.searchParams)
     await forwardAnalyticsEvent({
@@ -88,8 +106,26 @@ export async function GET(req: Request) {
   return NextResponse.redirect(fallback, 302)
 }
 
+/** Public refusal names (kept from the Polar-only POST contract). */
+function postRefusal(reason: CheckoutClosedReason): { reason: string; status: number } {
+  switch (reason) {
+    case 'unknown_product':
+      return { reason, status: 404 }
+    case 'free_product':
+      return { reason, status: 400 }
+    case 'kill_switch':
+      return { reason, status: 503 }
+    case 'catalog_not_for_sale':
+      return { reason: 'checkout_gated', status: 503 }
+    case 'checkout_upstream_failed':
+      return { reason, status: 502 }
+    default:
+      return { reason: 'checkout_unconfigured', status: 503 }
+  }
+}
+
 /**
- * Create a Polar checkout session for a catalog product.
+ * Create a provider checkout session for a catalog product.
  *
  * Every refusal carries a machine-readable `reason` so the buy button can
  * render the honest state instead of guessing:
@@ -97,8 +133,8 @@ export async function GET(req: Request) {
  *   400 free_product             — priced at zero; delivered on-site, not sold
  *   503 kill_switch              — COMMERCE_KILL_SWITCH closes every checkout
  *   503 checkout_gated           — catalog status is not a purchasable state
- *   503 checkout_unconfigured    — catalog permits it, Polar is not selected/configured
- *   502 checkout_upstream_failed — Polar refused or answered unusably
+ *   503 checkout_unconfigured    — no COMMERCE_PROVIDER, or it is not configured
+ *   502 checkout_upstream_failed — the provider refused or answered unusably
  *
  * No path returns a fabricated session, price, or availability.
  */
@@ -147,42 +183,27 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, reason: 'unknown_product' }, { status: 404 })
   }
 
-  const refusal = commerceKillSwitchActive()
-    ? 'kill_switch'
-    : (catalogRefusal(product) ?? (isCheckoutLive(product.id) ? null : 'checkout_unconfigured'))
-  if (refusal) {
+  const checkout = await openCommerceCheckout(product.id)
+  if (!checkout.ok) {
+    const refusal = postRefusal(checkout.reason)
     await forwardAnalyticsEvent({
       event: 'checkout_fallback_request',
       offer: product.id,
-      state: refusal,
+      state: checkout.reason,
       ts: new Date().toISOString(),
     })
     return NextResponse.json(
-      { ok: false, reason: refusal, productId: product.id, status: product.status },
-      { status: refusal === 'free_product' ? 400 : 503 },
-    )
-  }
-
-  const url = await createCheckoutSession(product.id)
-  if (!url) {
-    await forwardAnalyticsEvent({
-      event: 'checkout_fallback_request',
-      offer: product.id,
-      state: 'checkout_upstream_failed',
-      ts: new Date().toISOString(),
-    })
-    return NextResponse.json(
-      { ok: false, reason: 'checkout_upstream_failed', productId: product.id },
-      { status: 502 },
+      { ok: false, reason: refusal.reason, productId: product.id, status: product.status },
+      { status: refusal.status },
     )
   }
 
   await forwardAnalyticsEvent({
     event: 'checkout_redirect',
     offer: product.id,
-    href: url,
-    state: 'provider_checkout',
+    href: checkout.url,
+    state: `provider_checkout:${checkout.provider}`,
     ts: new Date().toISOString(),
   })
-  return NextResponse.json({ ok: true, productId: product.id, url })
+  return NextResponse.json({ ok: true, productId: product.id, url: checkout.url })
 }

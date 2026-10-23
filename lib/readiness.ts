@@ -1,3 +1,5 @@
+import { commerceGate } from '@/lib/commerce/server'
+
 type ReadinessItem = {
   id: string
   label: string
@@ -24,9 +26,14 @@ function hasEmailEnv(name: string) {
   return Boolean(value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
 }
 
+/** Checkout readiness comes from the same gate /api/checkout enforces (lib/commerce/). */
+function checkoutReady(slug: string): boolean {
+  return commerceGate(slug).open
+}
+
 export function getLaunchReadiness() {
-  const blueprintCheckout = hasSecureUrlEnv('AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL')
-  const privateIntelCheckout = hasSecureUrlEnv('AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL')
+  const blueprintCheckout = checkoutReady('blueprint')
+  const privateIntelCheckout = checkoutReady('private-intel')
   const subscribeWebhook = hasSecureUrlEnv('SUBSCRIBE_WEBHOOK_URL')
   const conciergeEmail = hasEmailEnv('ACCESS_REQUEST_EMAIL')
   const analyticsWebhook = hasSecureUrlEnv('ANALYTICS_WEBHOOK_URL')

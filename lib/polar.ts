@@ -5,9 +5,9 @@ import { commerceKillSwitchActive, commerceProvider } from '@/lib/commerce/confi
  * Server-side Polar.sh checkout client. Import only from route handlers and
  * server components — it reads secrets from process.env.
  *
- * This is the API-created-session path behind POST /api/checkout, and the
- * `polar` adapter of the provider-neutral commerce kit (lib/commerce/,
- * docs/COMMERCE.md) behind GET /api/checkout. Neither can invent availability.
+ * This is the API-created-session path: the `polar` adapter of the
+ * provider-neutral commerce kit (lib/commerce/server.ts, docs/COMMERCE.md),
+ * reached through POST /api/checkout. It cannot invent availability.
  *
  * Fail-closed by construction. Every gate must pass:
  *

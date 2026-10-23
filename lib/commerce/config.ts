@@ -59,6 +59,37 @@ export function httpsUrl(value: string | undefined | null): string | null {
   }
 }
 
+/**
+ * Upstash/Vercel KV REST credentials. Each pair is read as a unit and the first
+ * pair with both values non-empty wins, so blank KV_* placeholders copied from
+ * .env.example never shadow a filled UPSTASH_* pair.
+ */
+export function kvCredentials(env: CommerceEnv = processEnv()): { url: string; token: string } | null {
+  for (const [urlKey, tokenKey] of [
+    ['KV_REST_API_URL', 'KV_REST_API_TOKEN'],
+    ['UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN'],
+  ] as const) {
+    const url = read(env, urlKey)
+    const token = read(env, tokenKey)
+    if (url && token && url.startsWith('https://')) return { url, token }
+  }
+  return null
+}
+
+/**
+ * Private fulfillment for webhook-fulfilled providers (Stripe): a signed
+ * webhook, a durable entitlement store, and a delivery sender must all exist.
+ * The public /delivery page is not fulfillment, so without these the SKU stays
+ * closed rather than charging a buyer who would receive nothing private.
+ */
+export function webhookFulfillmentConfigured(env: CommerceEnv = processEnv()): boolean {
+  return Boolean(
+    read(env, 'STRIPE_WEBHOOK_SECRET').startsWith('whsec_') &&
+      kvCredentials(env) &&
+      httpsUrl(read(env, 'COMMERCE_DELIVERY_WEBHOOK_URL')),
+  )
+}
+
 /** `blueprint` -> `BLUEPRINT`, `private-intel` -> `PRIVATE_INTEL`. */
 export function skuEnvSuffix(sku: string): string {
   return sku.toUpperCase().replace(/[^A-Z0-9]+/g, '_')

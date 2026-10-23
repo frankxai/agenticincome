@@ -79,6 +79,12 @@ export type NormalizedCommerceEvent = {
 
 export type CommerceAdapter = {
   id: CommerceProviderId
+  /**
+   * True when createCheckout mutates provider state (creates a session). Such
+   * adapters are only reachable through the same-origin, rate-limited POST,
+   * never from a crawlable GET link.
+   */
+  createsSession: boolean
   /** True when the env carries everything this adapter needs for `sku`. No network. */
   isConfigured(sku: CommerceSku, env: CommerceEnv): boolean
   /** A hosted checkout https URL, or null — never a guessed or placeholder URL. */

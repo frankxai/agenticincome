@@ -4,6 +4,7 @@ import {
   skuEnvSuffix,
   stripeLookupKey,
   stripeManagedPaymentsEnabled,
+  webhookFulfillmentConfigured,
 } from './config.ts'
 import type {
   CheckoutContext,
@@ -199,6 +200,10 @@ export function normalizeStripeEvent(event: unknown): NormalizedCommerceEvent | 
   switch (type) {
     case 'checkout.session.completed':
     case 'checkout.session.async_payment_succeeded': {
+      // Subscription sessions carry no PaymentIntent, so their refunds could not
+      // be matched to the grant. Recurring SKUs stay closed (see isConfigured);
+      // a stray subscription event is acknowledged without granting.
+      if (object.mode === 'subscription') return null
       if (object.payment_status !== 'paid') return 'pending'
       const details = (object.customer_details ?? {}) as StripeObject
       return {
@@ -246,8 +251,16 @@ export function normalizeStripeEvent(event: unknown): NormalizedCommerceEvent | 
 
 export const stripeAdapter: CommerceAdapter = {
   id: 'stripe',
-  isConfigured(_sku, env) {
-    return Boolean(stripeSecretKey(env) && commerceSiteUrl(env))
+  createsSession: true,
+  isConfigured(sku, env) {
+    return Boolean(
+      // One-time only until subscription fulfillment (invoice ids) exists.
+      sku.interval === null &&
+        stripeSecretKey(env) &&
+        commerceSiteUrl(env) &&
+        // Never charge without private fulfillment behind the webhook.
+        webhookFulfillmentConfigured(env),
+    )
   },
   createCheckout,
   normalizeWebhook: normalizeStripeEvent,

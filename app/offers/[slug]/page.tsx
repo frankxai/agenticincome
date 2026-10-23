@@ -5,9 +5,8 @@ import { notFound } from 'next/navigation'
 import { CheckoutLink } from '@/components/CheckoutLink'
 import { EmailCapture } from '@/components/EmailCapture'
 import { PolarCheckoutButton } from '@/components/PolarCheckoutButton'
-import { isCommerceCheckoutOpen } from '@/lib/commerce/server'
+import { commerceCheckoutMode } from '@/lib/commerce/server'
 import { checkoutPath, getOffer, offers } from '@/lib/offers'
-import { isCheckoutLive } from '@/lib/polar'
 
 type OfferPageProps = {
   params: Promise<{ slug: string }>
@@ -44,13 +43,13 @@ export default async function OfferDetail({ params }: OfferPageProps) {
 
   if (!offer) notFound()
 
-  // Same double gate as GET /api/checkout: catalog "for sale" AND the
-  // COMMERCE_PROVIDER adapter configured (lib/commerce/checkout.ts).
-  const liveCheckout = isCommerceCheckoutOpen(offer.slug)
-  // Server-side truth: the Polar API path is live only when the catalog permits
-  // the sale AND the Polar env is set for this product. False until then, which
-  // keeps the existing request-access CTA exactly as it is.
-  const polarCheckoutLive = isCheckoutLive(offer.slug)
+  // Server-side truth, the same double gate as /api/checkout: catalog "for
+  // sale" AND the COMMERCE_PROVIDER adapter configured (lib/commerce/). Closed
+  // until then, which keeps the existing request-access CTA exactly as it is.
+  // `session` checkouts (Stripe, Polar) use the POST buy button.
+  const checkoutState = commerceCheckoutMode(offer.slug)
+  const liveCheckout = checkoutState !== 'closed'
+  const sessionCheckout = checkoutState === 'session'
   const isFree = offer.checkout.fallback === 'delivery'
   const isScoped = offer.accessMode === 'scope-first'
   const accessSteps = [
@@ -67,7 +66,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
           <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink">{offer.title}</h1>
           <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">{offer.promise}</p>
           <div className="mt-7 flex flex-wrap gap-3">
-            {polarCheckoutLive ? (
+            {sessionCheckout ? (
               <PolarCheckoutButton
                 productId={offer.slug}
                 source="offer-detail"
@@ -104,8 +103,8 @@ export default async function OfferDetail({ params }: OfferPageProps) {
               ? 'Delivered instantly on-site.'
               : isScoped
                 ? 'Scope, acceptance checks, and commercial terms are agreed before implementation.'
-              : polarCheckoutLive
-                ? 'Checkout is live. Polar.sh is the merchant of record and handles VAT and sales tax.'
+              : sessionCheckout
+                ? 'Checkout is live through a secure payment provider. Your receipt names the seller.'
               : liveCheckout
                 ? 'Live checkout URL is configured.'
                 : 'Request access — checkout opens when provider link is connected.'}
@@ -199,13 +198,16 @@ export default async function OfferDetail({ params }: OfferPageProps) {
         </div>
       </section>
 
-      {!isFree && !liveCheckout ? (
+      {/* Session checkout can still fail at click time, so its fallback target stays mounted. */}
+      {!isFree && checkoutState !== 'link' ? (
         <section id="request-access" className="section-band">
           <EmailCapture
             headline={`Request ${offer.shortTitle} access`}
             sub={isScoped
               ? 'Share your email to request the current scoping path. If online intake is not connected, the page will say so before claiming receipt.'
-              : 'Get notified when the checkout opens and receive the current first-loop checklist immediately.'}
+              : sessionCheckout
+                ? 'If checkout cannot open right now, leave your email and receive the access path as soon as it is available.'
+                : 'Get notified when the checkout opens and receive the current first-loop checklist immediately.'}
             source={`offer-${offer.slug}`}
             buttonLabel="Request access"
             successMessage="Request received. You are on the access list."

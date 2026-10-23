@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { checkoutPath, offers } from '@/lib/offers'
 import { CheckoutLink } from '@/components/CheckoutLink'
 import { isCommerceCheckoutOpen } from '@/lib/commerce/server'
-import { isCheckoutLive } from '@/lib/polar'
 
 export const metadata: Metadata = {
   title: 'Offers',
@@ -61,9 +60,8 @@ export default function Offers() {
         {offers.map((offer) => {
           const isFree = offer.checkout.fallback === 'delivery'
           const isScoped = offer.accessMode === 'scope-first'
-          const polarLive = isCheckoutLive(offer.slug)
-          const staticLive = isCommerceCheckoutOpen(offer.slug)
-          const checkoutReady = polarLive || staticLive
+          // Same gate as /api/checkout (covers Stripe, payment links, and Polar).
+          const checkoutReady = isCommerceCheckoutOpen(offer.slug)
 
           return (
             <article key={offer.slug} className="rounded-2xl border border-border bg-surface/80 p-6 motion-reveal">

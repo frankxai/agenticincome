@@ -127,7 +127,13 @@ export async function handleStripeWebhook(input: WebhookInput): Promise<WebhookR
         ? await deliverIfOwed(input.store, normalized.transactionId, input.deliver, now)
         : 'not_owed'
 
-    return { status: 200, body: { ok: true, outcome, delivery, type: eventType, sku: normalized.sku } }
+    // Attribute the event to one of our SKUs only when it provably is ours:
+    // our metadata, or a grant in our store. A metadata-less foreign reversal
+    // still tombstones (harmless) but never counts in this site's metrics.
+    let sku: string | null = normalized.site === site ? normalized.sku : null
+    if (!sku && outcome === 'revoked') sku = (await input.store.getEntitlement(normalized.transactionId))?.sku ?? null
+
+    return { status: 200, body: { ok: true, outcome, delivery, type: eventType, sku } }
   } catch {
     return { status: 500, body: { ok: false, reason: 'processing_failed', type: eventType } }
   }

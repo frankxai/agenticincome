@@ -3,6 +3,8 @@
 **For:** Frank · **Date:** 2026-07-11 · **Source of truth:** `products/catalog.json`
 **Goal:** all four products live on Polar.sh, checkout wired into the site, one test purchase verified per paid product.
 
+> **Update 2026-10-23 — provider-neutral commerce kit (`docs/COMMERCE.md`).** Checkout now runs through one gate in `lib/commerce/`. Polar opens only when **`COMMERCE_PROVIDER=polar`** is set in addition to the Polar env and the catalog `status`. The static-link path (Path A) needs **`COMMERCE_PROVIDER=payment_link`** instead. One provider is selected at a time, so Path A and Path B can no longer be activated side by side. `COMMERCE_KILL_SWITCH=1` closes every path. The sections below have been updated to match.
+
 Fees (from `knowledge/07-field-dossier.md` §3, verified 2026-07-11 — re-check at org creation): new Polar orgs created on/after May 27, 2026 pay **5% + $0.50 per transaction** on the free Starter tier; paid plans Pro $20/mo, Growth $100/mo, Scale $400/mo reduce rates; **+1.5% on non-US cards; $15 per dispute**. Polar is a true merchant of record — it is the legal seller and handles EU VAT and global sales tax, which is load-bearing for EU-based Frank.
 
 ---
@@ -66,24 +68,31 @@ Products → (product) → Benefits → **File Downloads** benefit:
 
 ## 5. Wiring checkout into the site
 
-There are two checkout paths in `app/api/checkout/route.ts`. Both are wired, both are fail-closed, and they are independent — you can activate either or both.
+Both checkout paths go through the commerce gate in `lib/commerce/` (see `docs/COMMERCE.md`). `COMMERCE_PROVIDER` selects exactly one of them, so they are alternatives, not independent switches.
 
-| | **Path A — static link** (`GET`) | **Path B — API session** (`POST`, preferred) |
+| | **Path A — static link** (`COMMERCE_PROVIDER=payment_link`) | **Path B — API session** (`COMMERCE_PROVIDER=polar`, preferred) |
 |---|---|---|
-| Mechanism | Redirects to a checkout link you copy out of the Polar dashboard | Calls the Polar checkouts API and creates a session per click |
+| Mechanism | `GET /api/checkout` redirects to a checkout link you copy out of the Polar dashboard | The offer-page buy button calls `POST /api/checkout`, which calls the Polar checkouts API and creates a session per click |
 | Config | `AGENTIC_INCOME_*_CHECKOUT_URL` via `lib/offers.ts` (`checkout.envKey`) | `POLAR_ACCESS_TOKEN` + `POLAR_PRODUCT_ID_*` via `lib/polar.ts` |
-| Gate | Env var present and https | Catalog `status` **and** env, both required |
+| Gate | Catalog `status` **and** `COMMERCE_PROVIDER` **and** env | Catalog `status` **and** `COMMERCE_PROVIDER` **and** env |
 | Success URL | Baked into the Polar product | Built per product from the catalog's `delivery.path` |
 | Attribution | Appends `utm_*`/`ref` to the outgoing URL | Fires `checkout_click` / `checkout_redirect` events |
 | Missing config | Honest request-access fallback | 503 + machine-readable `reason` |
 
-Path B is preferred: the success URL follows the catalog instead of a link you copied months ago, and refusals are explicit rather than a silent redirect. Path A stays because the offer-page CTA still uses it whenever Path B is not live.
+Path B is preferred: the success URL follows the catalog instead of a link you copied months ago, and refusals are explicit rather than a silent redirect. With Path B selected, `GET /api/checkout` (the index-page CTA) sends buyers to the offer page, where the buy button lives. A GET never creates a session.
 
-**Path B's second gate is the point.** Setting the env vars alone cannot open checkout — `products/catalog.json` `status` must also start with `for sale` (see `_checkoutGate` in that file, and §5.4). Setting the catalog alone cannot either. Checkout therefore cannot be opened as a side effect of an environment change or a merge.
+**The gates are the point.** Setting the env vars alone cannot open checkout. `products/catalog.json` `status` must also start with `for sale` (see `_checkoutGate` in that file, and §5.4), and `COMMERCE_PROVIDER` must name the path. Setting the catalog alone cannot open it either. Checkout therefore cannot be opened as a side effect of an environment change or a merge.
 
 ### 5.1 Env vars (Vercel → Project → Settings → Environment Variables, Production)
 
 Names and purpose are also documented in `.env.example`.
+
+**Selection (both paths):**
+
+| Env var | Value |
+|---|---|
+| `COMMERCE_PROVIDER` | `polar` for Path B, `payment_link` for Path A. This is the release switch; set it last, only with owner approval. |
+| `COMMERCE_KILL_SWITCH` | Leave unset. `1` closes every checkout path. |
 
 **Path B (preferred):**
 
@@ -106,7 +115,7 @@ Names and purpose are also documented in `.env.example`.
 | `AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL` | Polar checkout link for private-intel |
 | `AGENTIC_INCOME_AGENT_TEAM_PRO_CHECKOUT_URL` | Polar checkout link for agent-team-pro *(new — requires §5.2)* |
 
-Redeploy after setting. The route reads env at request time, but the statically-rendered offer pages call `checkoutUrl()` and `isCheckoutLive()` at render — they keep showing the old state until rebuilt.
+Redeploy after setting. The route reads env at request time, but the statically rendered offer pages evaluate the commerce gate (`commerceCheckoutMode()` / `isCommerceCheckoutOpen()`) at render, so they keep showing the old state until rebuilt.
 
 No CSP change is needed: checkout is a top-level navigation to Polar, not an embedded frame or a cross-origin XHR, so `connect-src 'self'` in `vercel.json` still covers the `POST /api/checkout` call. If Polar checkout is ever embedded in an iframe instead, `frame-src` has to be widened — and that is a deliberate decision, not a patch.
 
@@ -114,7 +123,7 @@ No CSP change is needed: checkout is a top-level navigation to Polar, not an emb
 
 1. **`lib/offers.ts`** — add an `agent-team-pro` offer entry (copy the `blueprint` entry shape) with:
    - `slug: 'agent-team-pro'`, `price: '$129'`, `checkout: { provider: 'external', envKey: 'AGENTIC_INCOME_AGENT_TEAM_PRO_CHECKOUT_URL', fallback: 'request-access' }`, `deliveryPath: '/delivery/agent-team-pro'`.
-   - `refundPolicy` fields: the 30-day no-questions text (§7) is already live on `blueprint` and `private-intel` (updated 2026-07-11); give `agent-team-pro` the same text when its entry is created.
+   - `refundPolicy` fields: reuse the provider-neutral 30-day text already on `blueprint` (updated 2026-10-23) when the entry is created.
 2. **`app/delivery/agent-team-pro/page.tsx`** — create (copy `app/delivery/blueprint/page.tsx` as the pattern).
 3. **`app/offers/[slug]/page.tsx`** — no changes needed; it renders from `lib/offers.ts` automatically (including the new offer via `generateStaticParams`).
 4. **`app/pack/page.tsx`** — currently links only to GitHub + `/start`. Add one `cta-secondary` link to `/offers/agent-team-pro` ("The pro crew") once live — the pack page is the natural upgrade surface.
@@ -127,9 +136,9 @@ No CSP change is needed: checkout is a top-level navigation to Polar, not an emb
 - Create: `/delivery/agent-team-pro`.
 - Each paid delivery page should state: what was purchased, the file list, the license line, the 30-day refund line, and the support boundary.
 
-### 5.4 Flip the catalog status gate (Path B only — do this last)
+### 5.4 Flip the catalog status gate (do this before selecting the provider)
 
-Nothing above opens checkout on its own. The final gate is `products/catalog.json`, and it should only be flipped once the Polar product exists, the files are uploaded, and the env vars are set:
+Nothing above opens checkout on its own. One gate is `products/catalog.json`. Flip it only once the Polar product exists, the files are uploaded, and the env vars are set:
 
 ```diff
        "id": "blueprint",
@@ -137,7 +146,7 @@ Nothing above opens checkout on its own. The final gate is `products/catalog.jso
 +      "status": "for sale — private delivery via Polar"
 ```
 
-The gate is the literal prefix `for sale` (case-insensitive), checked by `PURCHASABLE_STATUS_PREFIX` in `lib/polar.ts`. Any other wording keeps the product refused, so a typo fails closed rather than opening a sale.
+The gate is the literal prefix `for sale` (case-insensitive), checked by `catalogStatusIsForSale` in `lib/commerce/config.ts` (and `PURCHASABLE_STATUS_PREFIX` in `lib/polar.ts`). Any other wording keeps the product refused, so a typo fails closed rather than opening a sale. The last gate is `COMMERCE_PROVIDER` (§5.1).
 
 Rules that stay in force:
 
@@ -146,9 +155,9 @@ Rules that stay in force:
 - `claims-guard-pack`, `abos-pack-bundle`, and `vibe-os-pack` keep their gated status until their zips (assembled from the sibling repos per §2, cross-repo packs) are uploaded to Polar AND their `/delivery/<id>` pages exist (§5.3 pattern — none are created yet). Same rule: nothing to deliver, nothing for sale.
 - The `_note` repo-privacy rule still applies: paid payloads must be out of the public tree, or the repo stays private.
 
-Once flipped and redeployed, `/offers/blueprint` renders a real buy button instead of "Reserve Blueprint access" (label from `checkout.buyLabel` in `lib/offers.ts`), and the access-path panel says checkout is live.
+Once flipped, selected, and redeployed, `/offers/blueprint` renders a real buy button instead of "Reserve Blueprint access" (label from `checkout.buyLabel` in `lib/offers.ts`), and the access-path panel says checkout is live.
 
-**Rolling back:** unset `POLAR_ACCESS_TOKEN` and redeploy, or revert the status string. Either one independently returns every surface to the request-access state — neither leaves a page claiming a product is buyable when it is not.
+**Rolling back:** set `COMMERCE_KILL_SWITCH=1`, unset `COMMERCE_PROVIDER` or `POLAR_ACCESS_TOKEN`, or revert the status string, then redeploy. Any one of these returns every surface to the request-access state. None of them leaves a page claiming a product is buyable when it is not.
 
 ## 6. Test-purchase checklist (per paid product — do not skip)
 
@@ -158,7 +167,7 @@ Once flipped and redeployed, `/offers/blueprint` renders a real buy button inste
 - [ ] Polar sandbox OR a real purchase with your own card (real is better; refund after).
 - [ ] Path B: `agenticincome.ai/offers/<slug>` → CTA is a buy button → click reaches a Polar-hosted checkout (not the request-access fallback).
 - [ ] Path B: `POST /api/checkout` with a still-gated id (e.g. `agent-team-pro`) returns 503 `checkout_gated`, and with `starter-kit` returns 400 `free_product`. Confirm before announcing — this is the guard that stops an unfinished product being sold.
-- [ ] Path A (if used): `/api/checkout?offer=<slug>` redirects to Polar (not the request-access fallback).
+- [ ] Path A (if used, with `COMMERCE_PROVIDER=payment_link`): `/api/checkout?offer=<slug>` redirects to Polar (not the request-access fallback).
 - [ ] `utm_source=test&ref=qa` on the offer URL survives to the Polar checkout URL (attribution passthrough).
 - [ ] Complete purchase → redirected to the correct `/delivery/<slug>` page.
 - [ ] Receipt email arrives from Polar; seller name is correct.
@@ -166,13 +175,13 @@ Once flipped and redeployed, `/offers/blueprint` renders a real buy button inste
 - [ ] VAT: test with a EU billing address once — invoice must show VAT handled by Polar as MoR.
 - [ ] Refund the test purchase from the Polar dashboard; confirm refund email.
 - [ ] `private-intel` only: confirm subscription shows as active, then cancel; confirm access-state change.
-- [ ] Check the site's analytics events fired: `checkout_click`, `checkout_redirect` (state `provider_checkout`).
+- [ ] Check the site's analytics events fired: `checkout_click`, `checkout_redirect` (state `provider_checkout:polar`).
 
 ## 7. Refund policy text (publish on /trust and in each Polar product description footer)
 
 > **Refunds — 30 days, no questions.** If a paid product isn't what you needed, reply to your receipt or email us within 30 days of purchase and we refund it in full. No forms, no exit interview. (Private Intel: cancel anytime from the Polar customer portal; if your first month wasn't useful, ask and we'll refund it.) Refunds are processed by Polar.sh, our merchant of record, back to your original payment method.
 
-`lib/offers.ts` `refundPolicy` fields already match for blueprint + private-intel (updated 2026-07-11). Still to update: `agent-team-pro` when its offer entry is created, `/trust` page copy, `products/FULFILLMENT_RUNBOOK.md` support boundaries.
+The quote above is the Polar-specific wording for the Polar product fields. The site copy in `lib/offers.ts` is provider-neutral (updated 2026-10-23): "Refunds are handled by the payment provider shown on your receipt." It stays accurate whichever `COMMERCE_PROVIDER` is selected. Still to update: `agent-team-pro` when its offer entry is created, `/trust` page copy, `products/FULFILLMENT_RUNBOOK.md` support boundaries.
 
 ## 8. After launch
 

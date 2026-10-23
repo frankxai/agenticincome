@@ -29,11 +29,12 @@ export async function POST(req: Request) {
     deliver: deliveryNotifierFromEnv(env),
   })
 
+  // `sku` is set only for events attributable to this site's SKUs.
   const outcome = typeof result.body.outcome === 'string' ? result.body.outcome : null
-  const sku = typeof result.body.sku === 'string' ? result.body.sku : 'unknown'
-  if (outcome === 'granted') {
+  const sku = typeof result.body.sku === 'string' && result.body.sku ? result.body.sku : null
+  if (sku && outcome === 'granted') {
     await forwardAnalyticsEvent({ event: 'purchase', offer: sku, state: outcome, ts: new Date().toISOString() })
-  } else if (outcome === 'revoked' || outcome === 'tombstoned') {
+  } else if (sku && (outcome === 'revoked' || outcome === 'tombstoned')) {
     await forwardAnalyticsEvent({ event: 'refund', offer: sku, state: outcome, ts: new Date().toISOString() })
   }
 

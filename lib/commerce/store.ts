@@ -1,3 +1,4 @@
+import { kvCredentials } from './config.ts'
 import type { CommerceEnv } from './types.ts'
 
 /**
@@ -217,8 +218,6 @@ export class UpstashCommerceStore implements CommerceStore {
 
 /** The durable store, or null when no KV env is present (webhook then answers 503). */
 export function commerceStoreFromEnv(env: CommerceEnv, fetcher: typeof fetch = fetch): CommerceStore | null {
-  const url = (env.KV_REST_API_URL ?? env.UPSTASH_REDIS_REST_URL)?.trim()
-  const token = (env.KV_REST_API_TOKEN ?? env.UPSTASH_REDIS_REST_TOKEN)?.trim()
-  if (!url || !token || !url.startsWith('https://')) return null
-  return new UpstashCommerceStore(url, token, fetcher)
+  const credentials = kvCredentials(env)
+  return credentials ? new UpstashCommerceStore(credentials.url, credentials.token, fetcher) : null
 }

@@ -14,6 +14,8 @@ function linkFor(sku: CommerceSku, env: CommerceEnv): string | null {
 
 export const paymentLinkAdapter: CommerceAdapter = {
   id: 'payment_link',
+  // A static URL: following it creates nothing, so the GET redirect may use it.
+  createsSession: false,
   isConfigured(sku, env) {
     return linkFor(sku, env) !== null
   },

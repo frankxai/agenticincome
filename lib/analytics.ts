@@ -21,9 +21,15 @@ const EVENT_PROPERTIES = {
   stale_route_seen: ['path', 'source', 'tool', 'state', 'ts'],
   last_verified_visible: ['path', 'source', 'tool', 'state', 'ts'],
   trust_standard_clicked: ['path', 'href', 'source', 'ts'],
+  // Server-only: emitted by the verified payment webhook, never accepted from a browser.
+  purchase: ['offer', 'state', 'ts'],
+  refund: ['offer', 'state', 'ts'],
 } as const
 
 export type AnalyticsEventName = keyof typeof EVENT_PROPERTIES
+
+/** Events only the server may emit (after a signed provider webhook). */
+const SERVER_ONLY_EVENTS: ReadonlySet<string> = new Set<AnalyticsEventName>(['purchase', 'refund'])
 
 export type AnalyticsEvent = {
   event: AnalyticsEventName
@@ -54,10 +60,12 @@ function isAnalyticsEventName(value: string): value is AnalyticsEventName {
   return Object.prototype.hasOwnProperty.call(EVENT_PROPERTIES, value)
 }
 
+/** Validates a client-submitted event. Server-only events are always rejected here. */
 export function normalizeAnalyticsEvent(input: unknown): AnalyticsEvent | null {
   if (!input || typeof input !== 'object' || Array.isArray(input)) return null
   const record = input as Record<string, unknown>
   if (typeof record.event !== 'string' || !isAnalyticsEventName(record.event)) return null
+  if (SERVER_ONLY_EVENTS.has(record.event)) return null
 
   const allowedProperties = new Set<string>(['event', ...EVENT_PROPERTIES[record.event]])
   if (Object.keys(record).some((key) => !allowedProperties.has(key))) return null

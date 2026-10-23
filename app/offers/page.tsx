@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
-import { checkoutPath, checkoutUrl, offers } from '@/lib/offers'
+import { checkoutPath, offers } from '@/lib/offers'
 import { CheckoutLink } from '@/components/CheckoutLink'
+import { isCommerceCheckoutOpen } from '@/lib/commerce/server'
 import { isCheckoutLive } from '@/lib/polar'
 
 export const metadata: Metadata = {
@@ -61,7 +62,7 @@ export default function Offers() {
           const isFree = offer.checkout.fallback === 'delivery'
           const isScoped = offer.accessMode === 'scope-first'
           const polarLive = isCheckoutLive(offer.slug)
-          const staticLive = checkoutUrl(offer)
+          const staticLive = isCommerceCheckoutOpen(offer.slug)
           const checkoutReady = polarLive || staticLive
 
           return (

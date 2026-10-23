@@ -3,7 +3,7 @@
 > **Personal license — purchased copies are for the buyer's own business. Not for resale or redistribution.**
 
 **Version:** 2.0 · **Released:** 2026-07-11 · **Price:** $67 one-time · **Updates:** included for this major version
-**Sold via merchant of record (Polar.sh) — VAT/sales tax handled at checkout. 30-day no-questions refund.**
+**Sold through a hosted payment-provider checkout — your receipt names the seller. 30-day no-questions refund.**
 
 ---
 
@@ -58,7 +58,7 @@ Without the pack, the kits work as plain documents: fill them in by hand or with
 ## Support and refunds
 
 - Template-level support: email support for broken assets, unclear sections, and update notes for this major version.
-- **Refunds: 30 days, no questions asked**, via the merchant of record.
+- **Refunds: 30 days, no questions asked.** Refunds are handled by the payment provider shown on your receipt.
 - Found an error? Corrections with sources are contributions — file an issue.
 
 ---

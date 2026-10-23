@@ -1,20 +1,22 @@
 import catalog from '@/products/catalog.json'
+import { commerceKillSwitchActive, commerceProvider } from '@/lib/commerce/config'
 
 /**
  * Server-side Polar.sh checkout client. Import only from route handlers and
  * server components — it reads secrets from process.env.
  *
- * This is the API-created-session path. It is separate from, and does not
- * replace, the static checkout-link path in lib/offers.ts (`checkoutUrl`) that
- * the GET handler in app/api/checkout/route.ts uses. Both are gated
- * independently and neither can invent availability.
+ * This is the API-created-session path behind POST /api/checkout, and the
+ * `polar` adapter of the provider-neutral commerce kit (lib/commerce/,
+ * docs/COMMERCE.md) behind GET /api/checkout. Neither can invent availability.
  *
- * Fail-closed by construction. Three independent gates must all pass:
+ * Fail-closed by construction. Every gate must pass:
  *
  *   1. the catalog entry's `status` must start with "for sale" (see
  *      `_checkoutGate` in products/catalog.json),
- *   2. the product must be mapped to a POLAR_PRODUCT_ID_* env var, and
- *   3. that env var and POLAR_ACCESS_TOKEN must both be set.
+ *   2. the product must be mapped to a POLAR_PRODUCT_ID_* env var,
+ *   3. that env var and POLAR_ACCESS_TOKEN must both be set,
+ *   4. COMMERCE_PROVIDER must be `polar` (docs/COMMERCE.md), and
+ *   5. COMMERCE_KILL_SWITCH must not be set.
  *
  * With none of the env set and today's catalog, every entry point refuses and
  * every surface renders the honest "not connected" state it renders now.
@@ -62,6 +64,7 @@ export type CheckoutRefusal =
   | 'free_product'
   | 'checkout_gated'
   | 'checkout_unconfigured'
+  | 'kill_switch'
 
 const PRODUCTS = catalog.products as readonly CatalogProduct[]
 
@@ -98,14 +101,23 @@ export function isPolarConfigured(catalogId: string): boolean {
 }
 
 /**
- * True only when the catalog permits the sale AND Polar is configured for it.
- * Public surfaces render from this: false means show the existing
- * request-access state. It is false until ops/POLAR-SETUP.md is completed.
+ * True only when Polar is the selected commerce provider and no kill switch is
+ * set. Credentials alone never select a provider.
+ */
+function polarSelected(): boolean {
+  return commerceProvider() === 'polar' && !commerceKillSwitchActive()
+}
+
+/**
+ * True only when the catalog permits the sale AND Polar is configured and
+ * selected for it. Public surfaces render from this: false means show the
+ * existing request-access state. It is false until ops/POLAR-SETUP.md is
+ * completed and COMMERCE_PROVIDER=polar is set.
  */
 export function isCheckoutLive(catalogId: string): boolean {
   const product = findCatalogProduct(catalogId)
   if (!product || catalogRefusal(product)) return false
-  return isPolarConfigured(catalogId)
+  return polarSelected() && isPolarConfigured(catalogId)
 }
 
 /**
@@ -135,6 +147,7 @@ function successUrl(product: CatalogProduct): string | null {
 export async function createCheckoutSession(catalogId: string): Promise<string | null> {
   const product = findCatalogProduct(catalogId)
   if (!product || catalogRefusal(product)) return null
+  if (!polarSelected()) return null
 
   const token = process.env.POLAR_ACCESS_TOKEN?.trim()
   const productId = polarProductId(catalogId)

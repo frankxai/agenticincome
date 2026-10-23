@@ -147,7 +147,7 @@ export const offers: Offer[] = [
     upgradePath: 'Private Intel keeps the payer map current and adds monthly opportunity notes.',
     deliveryPath: '/delivery/blueprint',
     checkoutOutcome: 'When the payment link is configured, the provider should redirect buyers to the Blueprint delivery desk.',
-    refundPolicy: '30-day no-questions refund via the merchant of record: reply to the receipt or email us within 30 days of purchase and it is refunded in full.',
+    refundPolicy: '30-day no-questions refund: reply to the receipt or email us within 30 days of purchase and it is refunded in full. Refunds are handled by the payment provider shown on your receipt.',
     receiptInstruction: 'Keep the provider receipt. The delivery desk explains access, install order, and support boundaries.',
     checkout: {
       provider: 'external',
@@ -208,6 +208,12 @@ export function checkoutPath(offer: Offer): string {
   return `/api/checkout?offer=${offer.slug}`
 }
 
+/**
+ * The raw static checkout link for an offer, or null. This alone never opens a
+ * sale: GET /api/checkout and the offer pages go through the commerce gate
+ * (lib/commerce/checkout.ts), which also requires the catalog status and
+ * COMMERCE_PROVIDER=payment_link.
+ */
 export function checkoutUrl(offer: Offer): string | null {
   if (!offer.checkout.envKey) return null
   const value = process.env[offer.checkout.envKey]

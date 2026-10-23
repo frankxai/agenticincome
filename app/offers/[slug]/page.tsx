@@ -5,7 +5,8 @@ import { notFound } from 'next/navigation'
 import { CheckoutLink } from '@/components/CheckoutLink'
 import { EmailCapture } from '@/components/EmailCapture'
 import { PolarCheckoutButton } from '@/components/PolarCheckoutButton'
-import { checkoutPath, checkoutUrl, getOffer, offers } from '@/lib/offers'
+import { isCommerceCheckoutOpen } from '@/lib/commerce/server'
+import { checkoutPath, getOffer, offers } from '@/lib/offers'
 import { isCheckoutLive } from '@/lib/polar'
 
 type OfferPageProps = {
@@ -43,7 +44,9 @@ export default async function OfferDetail({ params }: OfferPageProps) {
 
   if (!offer) notFound()
 
-  const liveCheckout = checkoutUrl(offer)
+  // Same double gate as GET /api/checkout: catalog "for sale" AND the
+  // COMMERCE_PROVIDER adapter configured (lib/commerce/checkout.ts).
+  const liveCheckout = isCommerceCheckoutOpen(offer.slug)
   // Server-side truth: the Polar API path is live only when the catalog permits
   // the sale AND the Polar env is set for this product. False until then, which
   // keeps the existing request-access CTA exactly as it is.

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { forwardAnalyticsEvent } from '@/lib/analytics'
-import { checkoutUrl, getOffer } from '@/lib/offers'
+import { getOffer } from '@/lib/offers'
 import {
   analyticsClientKey,
   consumeAnalyticsRateLimit,
@@ -8,18 +8,23 @@ import {
   isSameOriginRequest,
   readBoundedJson,
 } from '@/lib/api-security'
+import { commerceKillSwitchActive } from '@/lib/commerce/config'
+import { openCommerceCheckout } from '@/lib/commerce/server'
 import {
   catalogRefusal,
   createCheckoutSession,
   findCatalogProduct,
-  isPolarConfigured,
+  isCheckoutLive,
 } from '@/lib/polar'
 import { appendTrackingParams } from '@/lib/tracking'
 
 /**
- * GET — the static checkout-link path. Reads a per-offer `*_CHECKOUT_URL` env
- * var via lib/offers.ts and redirects, falling back to the offer's
- * request-access section when the link is not configured. Unchanged.
+ * GET — the provider-neutral checkout path (lib/commerce/, docs/COMMERCE.md).
+ * Redirects to a hosted checkout only when the double gate holds: the catalog
+ * status starts with "for sale" AND the provider selected by COMMERCE_PROVIDER
+ * is configured for the product (and COMMERCE_KILL_SWITCH is not set).
+ * Otherwise — including the default, where COMMERCE_PROVIDER is unset — it
+ * falls back to the offer's request-access section.
  *
  * POST — the Polar API path (lib/polar.ts). Creates a real checkout session
  * for a catalog product id. products/catalog.json is the server-side authority
@@ -55,15 +60,15 @@ export async function GET(req: Request) {
     return NextResponse.redirect(target, 302)
   }
 
-  const liveCheckout = checkoutUrl(offer)
-  if (liveCheckout) {
-    const target = appendTrackingParams(new URL(liveCheckout), url.searchParams)
+  const checkout = await openCommerceCheckout(offer.slug)
+  if (checkout.ok) {
+    const target = appendTrackingParams(new URL(checkout.url), url.searchParams)
     await forwardAnalyticsEvent({
       event: 'checkout_redirect',
       offer: offer.slug,
       path: url.pathname,
       href: target.toString(),
-      state: 'provider_checkout',
+      state: `provider_checkout:${checkout.provider}`,
       ts: new Date().toISOString(),
     })
     return NextResponse.redirect(target, 302)
@@ -77,7 +82,7 @@ export async function GET(req: Request) {
     offer: offer.slug,
     path: url.pathname,
     href: `${fallback.pathname}${fallback.search}${fallback.hash}`,
-    state: 'checkout_url_missing',
+    state: checkout.reason,
     ts: new Date().toISOString(),
   })
   return NextResponse.redirect(fallback, 302)
@@ -90,8 +95,9 @@ export async function GET(req: Request) {
  * render the honest state instead of guessing:
  *   404 unknown_product          — no such id in products/catalog.json
  *   400 free_product             — priced at zero; delivered on-site, not sold
+ *   503 kill_switch              — COMMERCE_KILL_SWITCH closes every checkout
  *   503 checkout_gated           — catalog status is not a purchasable state
- *   503 checkout_unconfigured    — catalog permits it, Polar env is not set
+ *   503 checkout_unconfigured    — catalog permits it, Polar is not selected/configured
  *   502 checkout_upstream_failed — Polar refused or answered unusably
  *
  * No path returns a fabricated session, price, or availability.
@@ -141,7 +147,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, reason: 'unknown_product' }, { status: 404 })
   }
 
-  const refusal = catalogRefusal(product) ?? (isPolarConfigured(product.id) ? null : 'checkout_unconfigured')
+  const refusal = commerceKillSwitchActive()
+    ? 'kill_switch'
+    : (catalogRefusal(product) ?? (isCheckoutLive(product.id) ? null : 'checkout_unconfigured'))
   if (refusal) {
     await forwardAnalyticsEvent({
       event: 'checkout_fallback_request',

@@ -24,6 +24,8 @@ on:
       - 'RELEASING.md'
       - 'docs/releases/**'
       - 'docs/RELEASE-FOUNDATION-*.md'
+      - '**/*.md'
+      - 'docs/**'
 
 concurrency:
   group: agenticincome-ci-${{ github.workflow }}-${{ github.ref }}

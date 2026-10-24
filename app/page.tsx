@@ -184,8 +184,8 @@ export default function Home() {
           <h2 className="display-h2">The catalog renders from reality.</h2>
           <p className="mt-3 max-w-xl text-[color:var(--color-muted)]">
             Status strings come straight from the product catalog. Nothing says buy until checkout
-            actually exists; today the free starter kit is the only live path. Prices and offer
-            links appear only on products the catalog marks for sale.
+            actually exists; today the free starter kit is the only live path. Paid prices and
+            offer links appear only on products the catalog marks for sale.
           </p>
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

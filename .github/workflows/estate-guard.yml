@@ -11,9 +11,6 @@ name: estate-guard
 
 on:
   pull_request:
-    paths-ignore:
-      - '**/*.md'
-      - 'docs/**'
   push:
     branches: [main]
   schedule:
@@ -56,4 +53,3 @@ jobs:
             estate-guard-report.md
             .claude/ci/estate-guard/last-scan.json
           retention-days: 3
-          if-no-files-found: ignore

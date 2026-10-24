@@ -18,6 +18,20 @@ test('command center page presents illustrative preview workspace', () => {
   assert.match(operate, /href="\/command"/)
 })
 
+// PR #73 removed these claims because no account, runtime or validation source backs them.
+test('command center desk labels unconnected state and keeps removed live claims out', () => {
+  const page = read('app/command/page.tsx')
+  const desk = read('components/IncomeCommandDesk.tsx')
+
+  assert.match(desk, /Illustrative interface · no connected telemetry/)
+  assert.match(desk, /Account not connected/)
+  assert.match(desk, /no pass result is\s+claimed/)
+
+  for (const code of [page, desk]) {
+    assert.doesNotMatch(code, /Single-Tenant|Sole Tenant|Operator Boundary Active/)
+  }
+})
+
 test('command center components expose zero secrets and zero custody violations', () => {
   const page = read('app/command/page.tsx')
   const desk = read('components/IncomeCommandDesk.tsx')

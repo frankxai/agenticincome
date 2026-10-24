@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { IncomeCommandDesk } from '@/components/IncomeCommandDesk'
-import { baseOpenGraph } from '@/lib/open-graph'
 
 export const metadata: Metadata = {
   title: 'Income workspace · Illustrative preview',
@@ -9,7 +8,6 @@ export const metadata: Metadata = {
     'Public illustrative preview of an income workspace. No authenticated account, live agents, revenue, or approval telemetry is connected.',
   alternates: { canonical: '/command' },
   openGraph: {
-    ...baseOpenGraph,
     title: 'Income workspace · Illustrative preview',
     description:
       'Public illustrative preview with example workflows and unconnected activity.',

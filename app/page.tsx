@@ -239,7 +239,7 @@ export default function Home() {
             agenticpassiveincome.com
           </a>
           <a
-            href="https://www.agenticpassiveincome.com/api/mcp"
+            href="https://www.agenticpassiveincome.com/mcp"
             target="_blank"
             rel="noopener noreferrer"
             className="cta-secondary"
@@ -251,4 +251,3 @@ export default function Home() {
     </>
   )
 }
-

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
+import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { IncomeCommandDesk } from '@/components/IncomeCommandDesk'
-import { baseOpenGraph } from '@/lib/open-graph'
 
 export const metadata: Metadata = {
   title: 'Income workspace · Illustrative preview',

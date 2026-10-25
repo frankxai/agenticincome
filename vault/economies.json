@@ -836,28 +836,6 @@
       "takeRateBasis": "SaaS public offers; server products 20%"
     },
     {
-      "id": "apify-store-monthly-payout",
-      "name": "Apify Store",
-      "sector": "ai-agents",
-      "metric": "developer payouts in one month",
-      "value": 1700000,
-      "unit": "USD/month",
-      "valueText": "$1.7M paid out last month",
-      "period": "most recent month before 2026-10-25 (month not named)",
-      "takeRate": "developers receive 80% of revenue minus platform usage costs (Apify keeps 20%); 80% of rental fees",
-      "sellerCount": "95,033 Actors in Apify Store",
-      "sellableTypes": [
-        "Actors (scrapers, automations, AI agent tools, MCP servers)"
-      ],
-      "sourceUrl": "https://apify.com/challenge",
-      "sourceType": "primary",
-      "retrievedAt": "2026-10-25",
-      "note": "Revenue-share terms from docs.apify.com/platform/actors/publishing/monetize; Apify pages word the cost deduction inconsistently.",
-      "platform": "Apify Store",
-      "takeRateFraction": 0.2,
-      "takeRateBasis": "plus platform usage costs"
-    },
-    {
       "id": "apify-store-cumulative-payout",
       "name": "Apify Store",
       "sector": "ai-agents",
@@ -876,8 +854,8 @@
       "retrievedAt": "2026-10-25",
       "note": "Apify press release (syndicated). Same release: over $563,000 paid to community developers in September 2025 alone.",
       "platform": "Apify Store",
-      "takeRateFraction": null,
-      "takeRateBasis": null
+      "takeRateFraction": 0.2,
+      "takeRateBasis": "plus platform usage costs"
     },
     {
       "id": "rapidapi-marketplace-fee",
@@ -999,6 +977,34 @@
       "platform": "Unity Asset Store",
       "takeRateFraction": 0.3,
       "takeRateBasis": null
+    },
+    {
+      "id": "gumroad-discover-fee",
+      "name": "Gumroad",
+      "sector": "digital-goods",
+      "metric": "transaction fee (Discover marketplace sales)",
+      "value": 30,
+      "unit": "%",
+      "valueText": "30% on Discover marketplace sales",
+      "period": "2026",
+      "takeRate": "10% + $0.50 (profile or direct links); 30% (Discover marketplace)",
+      "sellerCount": null,
+      "sellableTypes": [
+        "eBooks",
+        "courses",
+        "templates",
+        "software and code",
+        "memberships",
+        "audio and video",
+        "design assets"
+      ],
+      "sourceUrl": "https://gumroad.com/pricing",
+      "sourceType": "primary",
+      "retrievedAt": "2026-10-25",
+      "note": "Same pricing page as gumroad-fee. Whether processing is included is not stated.",
+      "platform": "Gumroad",
+      "takeRateFraction": 0.3,
+      "takeRateBasis": "sales through the Discover marketplace"
     }
   ]
 }

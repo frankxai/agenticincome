@@ -1,6 +1,6 @@
 # Digital Economy Vault
 
-Author: Claude (Claude Code, Opus 5.5), 2026-10-25. Revision 1. Review state: unreviewed; needs a different-provider check before anything here reaches a public page.
+Author: Claude (Claude Code, Opus 5.5), 2026-10-25. Revision 2. Review state: Codex (review profile, read-only) spot-checked 13 rows on 2026-10-25: 11 matched, 1 mismatch removed (Apify monthly payout), 1 unreachable source confirmed on a second official page; one misleading margin and three overreaching strategy claims were corrected. Not yet ready for a public page: the full row set has not been re-verified.
 
 The vault is agenticincome.ai's working map of digital economies: where money moves, who takes a cut, what it costs us to supply a product, and which estate site plugs into which economy. It also holds the experiment and competition cards that test those ideas against real buyers.
 
@@ -31,13 +31,15 @@ Sell the map, not the commodity. Agenticincome.ai becomes the sourced, agent-que
 
 ### Why this and not reselling AI
 
-Reselling tokens, GPUs or generations is a price-transparent market. Routers publish vendor prices, so any markup is visible to the buyer and a vendor price cut erases it. Compare the inference rows in `supply-chain.json` with any router fee row: the router's margin is a few percent of spend, and it has the volume. The estate's doctrine already points the other way: the customer's agent and key are the runtime (BYOK, `TRUTH.md` section 2), and we sell the skill, template, workflow or knowledge on top.
+Reselling tokens, GPUs or generations is a price-transparent market. Vendors publish list prices and routers or gateways sell the same tokens for a 0 to 5.5% fee (`supply-chain.json`), so a buyer can see our markup and route around it. The `token-resale-markup` scenario keeps 11.3% at a 20% markup. The estate's doctrine already points the other way: the customer's agent and key are the runtime (BYOK, `TRUTH.md` section 2), and we sell the skill, template, workflow or knowledge on top.
+
+Demand for a paid brief is not yet evidenced. exp-002 tests it with a waitlist and a price band before anything is built for sale.
 
 Inference stays a cost line inside products priced per outcome (an Arcanea creation, a finished video), never a product on its own. `margins.json` shows where that holds and where it breaks.
 
 ### Go where the buyers already are
 
-Each marketplace in `economies.json` charges a take rate. That rate is the price of distribution, and for a company with no paid acquisition it is usually cheaper than building traffic. The rule: list on the marketplace with the buyers, keep email capture and the full catalog on our own site, and compare net revenue after take rate in an experiment before committing (exp-003, exp-004, exp-009).
+Each marketplace in `economies.json` charges a take rate. That rate is the price of distribution. The hypothesis: for a company with no paid acquisition it can cost less than building traffic. The vault has no acquisition-cost data yet, so exp-003, exp-004 and exp-009 compare net revenue after take rate before we commit. The working rule meanwhile: list where the buyers are, and keep email capture and the full catalog on our own site.
 
 ### One economy lane per brand
 

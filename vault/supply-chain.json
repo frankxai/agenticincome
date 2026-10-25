@@ -70,7 +70,8 @@
       "sourceUrl": "https://platform.claude.com/docs/en/about-claude/pricing",
       "retrievedAt": "2026-10-25",
       "confidence": "verified-official-page",
-      "priceKind": "unit"
+      "priceKind": "unit",
+      "confirmedBy": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview (Codex review 2026-10-25; pricing page timed out)"
     },
     {
       "id": "anthropic-sonnet-5-5-output",
@@ -84,7 +85,8 @@
       "sourceUrl": "https://platform.claude.com/docs/en/about-claude/pricing",
       "retrievedAt": "2026-10-25",
       "confidence": "verified-official-page",
-      "priceKind": "unit"
+      "priceKind": "unit",
+      "confirmedBy": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview (Codex review 2026-10-25; pricing page timed out)"
     },
     {
       "id": "anthropic-haiku-5-5-input",

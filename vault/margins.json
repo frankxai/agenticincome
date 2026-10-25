@@ -46,15 +46,28 @@
     },
     {
       "id": "gencreator-byok-pack-gumroad",
-      "title": "GenCreator: the same pack for $29 on Gumroad direct",
+      "title": "GenCreator: the same pack for $29 via a Gumroad direct link",
       "property": "gencreator",
-      "revenueModel": "marketplace-listing",
+      "revenueModel": "digital-product-mor",
       "priceUsd": 29,
       "priceIsHypothesis": true,
       "costLines": [],
       "feeLines": [{ "supplyId": "gumroad-direct-fee" }],
       "grossMarginPct": 88.3,
-      "note": "Gumroad's Discover marketplace sales take 30% instead; that is the price of its buyer traffic."
+      "note": "Direct-link sales bring no marketplace traffic; we supply the buyer. Compare the Discover scenario below."
+    },
+    {
+      "id": "gencreator-byok-pack-gumroad-discover",
+      "title": "GenCreator: the same pack for $29 sold through Gumroad Discover",
+      "property": "gencreator",
+      "revenueModel": "marketplace-listing",
+      "priceUsd": 29,
+      "priceIsHypothesis": true,
+      "costLines": [],
+      "feeLines": [],
+      "takeRateFrom": "gumroad-discover-fee",
+      "grossMarginPct": 70,
+      "note": "The 30% is the price of Gumroad's buyer traffic. Whether processing is extra is not stated on the pricing page."
     },
     {
       "id": "voiceover-pack",

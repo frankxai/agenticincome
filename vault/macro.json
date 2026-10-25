@@ -1,0 +1,323 @@
+{
+  "$comment": "Macro facts about digital economies. Scouted 2026-10-25 by a read-only research agent (page reads and API calls via WebFetch); chain count, top chains and top fee protocols re-measured by script against api.llama.fi at measuredAt. Values are as the source returned them; nothing here is an estimate.",
+  "updatedAt": "2026-10-25",
+  "measuredAt": "2026-10-25T17:06:01.773Z",
+  "facts": [
+    {
+      "id": "netcraft-sites-jul-2026",
+      "domain": "web",
+      "claim": "Netcraft's July 2026 Web Server Survey received responses from 1,494,915,628 sites across 305,348,459 domains and 14,772,048 web-facing computers",
+      "value": 1494915628,
+      "unit": "sites",
+      "asOf": "2026-07 (published 2026-07-27)",
+      "sourceUrl": "https://www.netcraft.com/blog/july-2026-web-server-survey",
+      "method": "page read (WebFetch). August, September and October 2026 survey URLs returned 404, so July is the latest found"
+    },
+    {
+      "id": "netcraft-domains-jul-2026",
+      "domain": "web",
+      "claim": "Domains in Netcraft's July 2026 survey",
+      "value": 305348459,
+      "unit": "domains",
+      "asOf": "2026-07",
+      "sourceUrl": "https://www.netcraft.com/blog/july-2026-web-server-survey",
+      "method": "page read (WebFetch). The page gives no overall active-site total, so none is reported here"
+    },
+    {
+      "id": "verisign-dnib-q2-2026",
+      "domain": "web",
+      "claim": "401.6 million domain name registrations across all TLDs at the end of Q2 2026",
+      "value": 401600000,
+      "unit": "registrations",
+      "asOf": "2026-06-30 (published 2026-07-23)",
+      "sourceUrl": "https://blog.verisign.com/domain-names/q2-2026-domain-name-industry-brief-quarterly-report/",
+      "method": "page read (WebFetch) of the Verisign blog. Q3 2026 brief not found"
+    },
+    {
+      "id": "verisign-com-q2-2026",
+      "domain": "web",
+      "claim": ".com base 166.6 million and .net 12.5 million registrations at the end of Q2 2026",
+      "value": 166600000,
+      "unit": "registrations",
+      "asOf": "2026-06-30",
+      "sourceUrl": "https://investor.verisign.com/news-releases/news-release-details/dnibcom-reports-internet-has-4016-million-domain-name",
+      "method": "web search summary of the Verisign IR release. A direct fetch got HTTP 403"
+    },
+    {
+      "id": "w3techs-wordpress-share",
+      "domain": "web",
+      "claim": "WordPress is used by 39.6% of all websites, a 58.3% share of the CMS market",
+      "value": 39.6,
+      "unit": "% of all websites",
+      "asOf": "2026-10-25",
+      "sourceUrl": "https://w3techs.com/technologies/overview/content_management",
+      "method": "page read (WebFetch)"
+    },
+    {
+      "id": "w3techs-shopify-share",
+      "domain": "web",
+      "claim": "Shopify is used by 5.3% of all websites, a 7.9% share of the CMS market",
+      "value": 5.3,
+      "unit": "% of all websites",
+      "asOf": "2026-10-25",
+      "sourceUrl": "https://w3techs.com/technologies/overview/content_management",
+      "method": "page read (WebFetch)"
+    },
+    {
+      "id": "w3techs-no-cms",
+      "domain": "web",
+      "claim": "32.1% of websites use no CMS that W3Techs detects",
+      "value": 32.1,
+      "unit": "% of all websites",
+      "asOf": "2026-10-25",
+      "sourceUrl": "https://w3techs.com/technologies/overview/content_management",
+      "method": "page read (WebFetch)"
+    },
+    {
+      "id": "shopify-merchant-count",
+      "domain": "web",
+      "claim": "Shopify does not publish an exact store or merchant count. Its official wording is 'millions of merchants' in 175+ countries",
+      "value": null,
+      "unit": "merchants",
+      "asOf": "2026-Q2",
+      "sourceUrl": "https://investors.shopify.com/",
+      "method": "web search. No primary exact figure was found, and third-party counts are left out"
+    },
+    {
+      "id": "defillama-chain-count",
+      "domain": "chains",
+      "claim": "DefiLlama's chains endpoint lists 421 chains",
+      "value": 421,
+      "unit": "chains",
+      "asOf": "2026-10-25",
+      "sourceUrl": "https://api.llama.fi/v2/chains",
+      "method": "API call GET https://api.llama.fi/v2/chains via WebFetch. Counted twice by the fetch model (a hand tally, then an enumerated name list 1..421), not by a script, because the shell was blocked; re-counted by script (array length) at 2026-10-25T17:06:01.773Z"
+    },
+    {
+      "id": "defillama-total-tvl",
+      "domain": "chains",
+      "claim": "Total DeFi TVL across all chains: $88,834,030,174",
+      "value": 88834030174,
+      "unit": "USD",
+      "asOf": "2026-10-25 (unix 1792886400)",
+      "sourceUrl": "https://api.llama.fi/v2/historicalChainTvl",
+      "method": "API call GET https://api.llama.fi/v2/historicalChainTvl, last array element. The previous day (1792800000) was 89,627,407,049"
+    },
+    {
+      "id": "defillama-stablecoin-supply",
+      "domain": "chains",
+      "claim": "Total circulating USD-pegged stablecoins: $302,616,607,151.24. EUR-pegged adds $836,842,250.78",
+      "value": 302616607151.24,
+      "unit": "USD",
+      "asOf": "2026-10-25 (unix 1792886400)",
+      "sourceUrl": "https://stablecoins.llama.fi/stablecoincharts/all",
+      "method": "API call GET https://stablecoins.llama.fi/stablecoincharts/all, last element, totalCirculatingUSD.peggedUSD. defillama.com/stablecoins returned 403"
+    },
+    {
+      "id": "defillama-fees-total-30d",
+      "domain": "chains",
+      "claim": "Fees across all protocols tracked in DefiLlama's fees overview: $2,321,715,312 over 30 days and $23,660,789,302 over 1 year. The 30-day total is -14.02% against the prior 30 days",
+      "value": 2321715312.29,
+      "unit": "USD (30d)",
+      "asOf": "2026-10-25",
+      "sourceUrl": "https://api.llama.fi/overview/fees?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true",
+      "method": "API call to the endpoint shown. Top-level total30d, total1y and change_30dover30d fields"
+    },
+    {
+      "id": "x402-what",
+      "domain": "agent-payments",
+      "claim": "x402 is an open standard from Coinbase that lets clients and servers make payments inside normal HTTP communication, using HTTP 402 Payment Required",
+      "value": null,
+      "unit": null,
+      "asOf": "2026-10-25",
+      "sourceUrl": "https://www.x402.org/",
+      "method": "page read (WebFetch)"
+    },
+    {
+      "id": "x402-30d-transactions",
+      "domain": "agent-payments",
+      "claim": "x402.org reports 75.41M transactions, $24.24M volume, 94.06K buyers and 22K sellers over the last 30 days",
+      "value": 75410000,
+      "unit": "transactions (30d)",
+      "asOf": "2026-08-25 (page's own 'last updated' date)",
+      "sourceUrl": "https://www.x402.org/",
+      "method": "page read (WebFetch). Coinbase's 160M+ 'last year' figure is a CEO social-media claim and its Q1 2026 deck figure came from secondary coverage, so neither is included"
+    },
+    {
+      "id": "acp-stripe-openai",
+      "domain": "agent-payments",
+      "claim": "The Agentic Commerce Protocol (ACP) is an open standard co-developed by Stripe and OpenAI. It launched with Instant Checkout in ChatGPT and uses Stripe Shared Payment Tokens scoped to a merchant and basket total",
+      "value": null,
+      "unit": null,
+      "asOf": "2025-09",
+      "sourceUrl": "https://stripe.com/newsroom/news/stripe-openai-instant-checkout",
+      "method": "web search of the Stripe newsroom release"
+    },
+    {
+      "id": "ap2-google",
+      "domain": "agent-payments",
+      "claim": "Google's Agent Payments Protocol (AP2) is an open protocol for agent-led payments that extends A2A and MCP. It uses Verifiable Credential 'mandates' (Intent, Cart, Payment) and launched with 60+ partners",
+      "value": null,
+      "unit": null,
+      "asOf": "2025-09-16",
+      "sourceUrl": "https://cloud.google.com/blog/products/ai-machine-learning/announcing-agents-to-payments-ap2-protocol",
+      "method": "web search. Only the Japanese edition of the Google Cloud blog surfaced; the English URL follows the same slug"
+    },
+    {
+      "id": "visa-trusted-agent-protocol",
+      "domain": "agent-payments",
+      "claim": "Visa's Trusted Agent Protocol is part of Visa Intelligent Commerce. It helps merchants tell trusted AI agents from bots using HTTP Message Signatures (RFC 9421)",
+      "value": null,
+      "unit": null,
+      "asOf": "2025-10",
+      "sourceUrl": "https://developer.visa.com/capabilities/trusted-agent-protocol/overview",
+      "method": "web search (Visa developer page plus a partner release)"
+    },
+    {
+      "id": "mastercard-agent-pay",
+      "domain": "agent-payments",
+      "claim": "Mastercard Agent Pay launched on 2025-04-29 with Mastercard Agentic Tokens and registration and verification of trusted AI agents. Microsoft is the lead AI partner",
+      "value": null,
+      "unit": null,
+      "asOf": "2025-04-29",
+      "sourceUrl": "https://newsroom.mastercard.com/news/press/2025/april/mastercard-unveils-agent-pay-pioneering-agentic-payments-technology-to-power-commerce-in-the-age-of-ai",
+      "method": "web search of the Mastercard newsroom release"
+    },
+    {
+      "id": "goldman-creator-economy-2027",
+      "domain": "creator",
+      "claim": "Goldman Sachs Research (Eric Sheridan) projects the creator economy TAM to reach about $480B by 2027, up from about $250B, with about 50M creators of whom about 4% are professionals earning over $100k a year",
+      "value": 480000000000,
+      "unit": "USD (2027 projection)",
+      "asOf": "2023 (report year)",
+      "sourceUrl": "https://www.goldmansachs.com/insights/articles/the-creator-economy-could-approach-half-a-trillion-dollars-by-2027",
+      "method": "web search of the Goldman Sachs insights page"
+    },
+    {
+      "id": "newzoo-games-2026",
+      "domain": "games",
+      "claim": "Newzoo forecasts the global games market at $213.9B in 2026 (+6.1% YoY): mobile $121.1B, console $46.9B, PC $45.9B, with 3.7B players",
+      "value": 213900000000,
+      "unit": "USD (2026 forecast)",
+      "asOf": "2026-09 (report coverage dated 2026-09-11; preliminary figures shown at Gamescom 2026-08)",
+      "sourceUrl": "https://www.medianews4u.com/global-games-market-to-reach-213-9-billion-as-player-base-hits-3-7-billion-newzoo-report/",
+      "method": "page read of secondary coverage of the Newzoo 2026 Global Games Market Report. A newzoo.com primary page was not found"
+    },
+    {
+      "id": "anthropic-run-rate-may-2026",
+      "domain": "ai",
+      "claim": "Anthropic stated its run-rate revenue crossed $47B in May 2026, in its Series H announcement ($65B raised at a $965B post-money valuation). Earlier official figures: $14B at the Series G, over $30B in April 2026",
+      "value": 47000000000,
+      "unit": "USD annualized run-rate",
+      "asOf": "2026-05-28",
+      "sourceUrl": "https://www.anthropic.com/news/series-h",
+      "method": "web search restricted to anthropic.com. A reported $65B run-rate (Bloomberg, end of July 2026) is press-sourced and left out"
+    },
+    {
+      "id": "huggingface-models",
+      "domain": "ai",
+      "claim": "Hugging Face Hub lists 3,186,261 models",
+      "value": 3186261,
+      "unit": "models",
+      "asOf": "2026-10-25",
+      "sourceUrl": "https://huggingface.co/models",
+      "method": "page read (WebFetch) of the 'Models N' counter"
+    },
+    {
+      "id": "huggingface-datasets",
+      "domain": "ai",
+      "claim": "Hugging Face Hub lists 1,105,509 datasets",
+      "value": 1105509,
+      "unit": "datasets",
+      "asOf": "2026-10-25",
+      "sourceUrl": "https://huggingface.co/datasets",
+      "method": "page read (WebFetch) of the 'Datasets N' counter"
+    }
+  ],
+  "topChainsSource": "https://api.llama.fi/v2/chains",
+  "topChainsByTvl": [
+    {
+      "name": "Ethereum",
+      "tvlUsd": 48726967742
+    },
+    {
+      "name": "Base",
+      "tvlUsd": 6024110152
+    },
+    {
+      "name": "Solana",
+      "tvlUsd": 5750716818
+    },
+    {
+      "name": "BSC",
+      "tvlUsd": 5739100111
+    },
+    {
+      "name": "Tron",
+      "tvlUsd": 5466027654
+    },
+    {
+      "name": "Bitcoin",
+      "tvlUsd": 4314819849
+    },
+    {
+      "name": "Hyperliquid L1",
+      "tvlUsd": 2385232119
+    },
+    {
+      "name": "Arbitrum",
+      "tvlUsd": 1455160026
+    },
+    {
+      "name": "Robinhood Chain",
+      "tvlUsd": 1132513503
+    },
+    {
+      "name": "Monad",
+      "tvlUsd": 984773306
+    }
+  ],
+  "topFeesSource": "https://api.llama.fi/overview/fees",
+  "topFeeProtocols30d": [
+    {
+      "name": "Tether",
+      "fees30dUsd": 524176977
+    },
+    {
+      "name": "Circle USDC",
+      "fees30dUsd": 211278737
+    },
+    {
+      "name": "PumpSwap",
+      "fees30dUsd": 115409983
+    },
+    {
+      "name": "Polymarket US",
+      "fees30dUsd": 87027606
+    },
+    {
+      "name": "Hyperliquid Perps",
+      "fees30dUsd": 78142292
+    },
+    {
+      "name": "Papertrade",
+      "fees30dUsd": 65014402
+    },
+    {
+      "name": "pump.fun",
+      "fees30dUsd": 64083719
+    },
+    {
+      "name": "Uniswap V4",
+      "fees30dUsd": 60266953
+    },
+    {
+      "name": "Lido",
+      "fees30dUsd": 51047730
+    },
+    {
+      "name": "Aave V3",
+      "fees30dUsd": 36566790
+    }
+  ]
+}

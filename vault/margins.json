@@ -1,0 +1,115 @@
+{
+  "$comment": "Unit-economics scenarios. priceUsd is OUR hypothesis, never a decided price (pricing is human-gated). Costs, fee rates and take rates are read from supply-chain.json and economies.json by id; quantities are in the supply row's own unit (tokens in millions, images in megapixels, video in seconds). The validator recomputes grossMarginPct and rejects any mismatch over 0.5 points. Payment fixed fees apply once per transaction, so packs are modelled as one transaction.",
+  "updatedAt": "2026-10-25",
+  "scenarios": [
+    {
+      "id": "arcanea-image-pack",
+      "title": "Arcanea: 200 image creations for $10",
+      "property": "arcanea",
+      "revenueModel": "subscription-saas",
+      "priceUsd": 10,
+      "priceIsHypothesis": true,
+      "costLines": [
+        { "supplyId": "fal-flux-schnell", "quantity": 200 },
+        { "supplyId": "anthropic-sonnet-5-5-input", "quantity": 0.4 },
+        { "supplyId": "anthropic-sonnet-5-5-output", "quantity": 0.1 }
+      ],
+      "feeLines": [{ "supplyId": "polar-starter-fee" }],
+      "grossMarginPct": 66,
+      "note": "Assumes 1 megapixel per image and about 2,000 input plus 500 output tokens of prompt shaping per creation."
+    },
+    {
+      "id": "arcanea-video-pack",
+      "title": "Arcanea: 10 ten-second video clips for $20",
+      "property": "arcanea",
+      "revenueModel": "usage-api-resale",
+      "priceUsd": 20,
+      "priceIsHypothesis": true,
+      "costLines": [
+        { "supplyId": "fal-kling-v3-pro-video", "quantity": 100 }
+      ],
+      "feeLines": [{ "supplyId": "polar-starter-fee" }],
+      "grossMarginPct": 22.5,
+      "note": "Premium video models are the thinnest line in the estate. Retries and failed generations would push this negative; price video per finished clip or route to a cheaper model."
+    },
+    {
+      "id": "gencreator-byok-pack-polar",
+      "title": "GenCreator: BYOK skill pack for $29 on own checkout",
+      "property": "gencreator",
+      "revenueModel": "byok-tooling",
+      "priceUsd": 29,
+      "priceIsHypothesis": true,
+      "costLines": [],
+      "feeLines": [{ "supplyId": "polar-starter-fee" }],
+      "grossMarginPct": 93.3,
+      "note": "The buyer's own agent and key run it, so inference cost to us is zero. Build and support time are not in a unit margin."
+    },
+    {
+      "id": "gencreator-byok-pack-gumroad",
+      "title": "GenCreator: the same pack for $29 on Gumroad direct",
+      "property": "gencreator",
+      "revenueModel": "marketplace-listing",
+      "priceUsd": 29,
+      "priceIsHypothesis": true,
+      "costLines": [],
+      "feeLines": [{ "supplyId": "gumroad-direct-fee" }],
+      "grossMarginPct": 88.3,
+      "note": "Gumroad's Discover marketplace sales take 30% instead; that is the price of its buyer traffic."
+    },
+    {
+      "id": "voiceover-pack",
+      "title": "Voiceover pack: 100,000 characters of TTS for $15",
+      "property": "gencreator",
+      "revenueModel": "usage-api-resale",
+      "priceUsd": 15,
+      "priceIsHypothesis": true,
+      "costLines": [
+        { "supplyId": "elevenlabs-api-tts-flash", "quantity": 100 }
+      ],
+      "feeLines": [{ "supplyId": "polar-starter-fee" }],
+      "grossMarginPct": 65,
+      "note": "Flash model at the API rate. Multilingual models cost twice as much per character."
+    },
+    {
+      "id": "apify-actor-subscription",
+      "title": "Affiliate-terms actor at $10 a month on a scraper store",
+      "property": "agenticincome",
+      "revenueModel": "marketplace-listing",
+      "priceUsd": 10,
+      "priceIsHypothesis": true,
+      "costLines": [],
+      "feeLines": [{ "supplyId": "apify-store-commission" }],
+      "grossMarginPct": 80,
+      "note": "Before platform usage costs, which the store deducts for pay-per-event actors and are not modelled here."
+    },
+    {
+      "id": "mcp-pay-per-call",
+      "title": "Paid MCP lookup at $0.01 per call over x402",
+      "property": "agenticpassiveincome",
+      "revenueModel": "pay-per-call",
+      "priceUsd": 0.01,
+      "priceIsHypothesis": true,
+      "costLines": [
+        { "supplyId": "anthropic-haiku-5-5-input", "quantity": 0.002 },
+        { "supplyId": "anthropic-haiku-5-5-output", "quantity": 0.0003 }
+      ],
+      "feeLines": [{ "supplyId": "coinbase-x402-facilitator" }],
+      "grossMarginPct": 86.5,
+      "note": "Assumes 2,000 input and 300 output tokens per call and a facilitator fee on every call; batch settlement or the free 1,000 monthly transactions would raise the margin."
+    },
+    {
+      "id": "token-resale-markup",
+      "title": "Reselling mid-tier output tokens at a 20% markup",
+      "property": "arcanea-dev",
+      "revenueModel": "usage-api-resale",
+      "priceUsd": 12,
+      "priceIsHypothesis": true,
+      "costLines": [
+        { "supplyId": "anthropic-sonnet-5-5-output", "quantity": 1 }
+      ],
+      "feeLines": [{ "supplyId": "stripe-us-card" }],
+      "grossMarginPct": 11.3,
+      "note": "1M output tokens sold for $12. Routers and gateways charge 0 to 5.5% on the same tokens, so a buyer can see the markup. This is the case against reselling tokens as a product. The Stripe US row is secondary; re-read before use."
+    }
+  ]
+}

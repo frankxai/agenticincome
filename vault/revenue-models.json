@@ -1,0 +1,175 @@
+{
+  "$comment": "Taxonomy of the ways money moves in digital economies. Structure only: no market numbers live here. Numbers live in economies.json, supply-chain.json and macro.json, each with a source URL and retrieval date. Margin formulas use the variable names defined in `variables`.",
+  "updatedAt": "2026-10-25",
+  "variables": {
+    "P": "price the buyer pays us, per unit",
+    "C": "our direct cost per unit (inference, media, hosting, fulfilment)",
+    "T": "platform or marketplace take rate, as a fraction",
+    "F": "payment / merchant-of-record fee, as a fraction",
+    "f": "payment fixed fee per transaction",
+    "R": "commission or revenue-share rate paid to us, as a fraction",
+    "V": "buyer spend at the partner, per period"
+  },
+  "models": [
+    {
+      "id": "affiliate-recurring",
+      "name": "Recurring affiliate commission",
+      "flow": "Reader clicks a disclosed link, subscribes at the partner, partner pays us a share of each renewal for the program's window.",
+      "unitMarginFormula": "R * V per period, for the program's recurring window; our C is content and hosting only",
+      "costDrivers": ["content production", "verification of terms", "traffic acquisition"],
+      "estateFit": ["agenticincome", "agenticpassiveincome", "disruptivepassiveincome", "go-agenticincome"],
+      "risks": ["terms change without notice", "program closes", "incentive bias in recommendations"],
+      "humanGates": ["new external partner signup", "public claims about income"]
+    },
+    {
+      "id": "digital-product-mor",
+      "name": "Own digital product via merchant of record",
+      "flow": "Buyer pays on our checkout (Polar, Lemon Squeezy, Paddle, Gumroad); MoR handles tax and remits.",
+      "unitMarginFormula": "P - P*F - f - C",
+      "costDrivers": ["build time", "support", "refunds"],
+      "estateFit": ["agenticincome", "gencreator", "frankx", "realityarchitect"],
+      "risks": ["low perceived value", "piracy", "refund rate"],
+      "humanGates": ["pricing", "checkout activation (waitlist-first until gate PASS)"]
+    },
+    {
+      "id": "marketplace-listing",
+      "name": "Listing on someone else's marketplace",
+      "flow": "We list a product where buyers already are (App Store, Steam, Envato, Framer, Apify Store, Shopify App Store); platform keeps T.",
+      "unitMarginFormula": "P*(1-T) - C",
+      "costDrivers": ["listing compliance", "reviews and support", "platform-specific build"],
+      "estateFit": ["gencreator", "arcanea", "starlight-tooling"],
+      "risks": ["platform policy changes", "discoverability is paid", "no buyer email ownership"],
+      "humanGates": ["first-time publication", "pricing"]
+    },
+    {
+      "id": "own-marketplace",
+      "name": "Running a marketplace",
+      "flow": "Third-party sellers list on our surface; we keep a take rate on GMV.",
+      "unitMarginFormula": "GMV * T_ours - payment costs - moderation and payout ops",
+      "costDrivers": ["seller acquisition", "trust and safety", "payout compliance (KYC, tax forms)"],
+      "estateFit": ["arcanea", "gencreator-community"],
+      "risks": ["cold-start on both sides", "regulated payouts", "fraud"],
+      "humanGates": ["legal terms", "payout rails", "money operations"]
+    },
+    {
+      "id": "subscription-saas",
+      "name": "Software subscription",
+      "flow": "Recurring fee for a hosted product.",
+      "unitMarginFormula": "(P - C_hosting - C_inference) * (1-F) per seat-month; LTV = margin / churn",
+      "costDrivers": ["inference per active user", "hosting", "support"],
+      "estateFit": ["arcanea", "gencreator", "starlight"],
+      "risks": ["inference cost grows with engagement", "churn"],
+      "humanGates": ["pricing", "auth and billing changes"]
+    },
+    {
+      "id": "usage-api-resale",
+      "name": "Metered API resale with markup",
+      "flow": "We buy tokens or media generations wholesale and sell metered access inside our product or API.",
+      "unitMarginFormula": "P_per_unit - C_per_unit, where C_per_unit is the vendor list price (minus caching or batch discounts)",
+      "costDrivers": ["vendor list price", "abuse and fraud", "rate limits"],
+      "estateFit": ["arcanea", "starlight"],
+      "risks": ["vendor price cuts erase the markup story", "routers (OpenRouter, AI Gateway) make price transparent", "vendor ToS on resale"],
+      "humanGates": ["pricing", "vendor terms review", "spend"]
+    },
+    {
+      "id": "byok-tooling",
+      "name": "Bring-your-own-key tooling",
+      "flow": "Customer's agent and API key are the runtime; we sell the skill, workflow or template, not the tokens (estate doctrine, TRUTH.md section 2).",
+      "unitMarginFormula": "P - P*F - f; C_inference is zero for us",
+      "costDrivers": ["build and eval time", "docs and support"],
+      "estateFit": ["gencreator", "agenticincome", "starlight-tooling", "frankx"],
+      "risks": ["setup friction for non-technical buyers"],
+      "humanGates": ["pricing", "first-time publication"]
+    },
+    {
+      "id": "agent-as-a-service",
+      "name": "Scoped implementation by agent teams",
+      "flow": "Fixed-scope build delivered by agents under human gates; buyer owns the repo.",
+      "unitMarginFormula": "P - agent compute - human review hours * rate",
+      "costDrivers": ["review time", "scope creep"],
+      "estateFit": ["agenticincome"],
+      "risks": ["hour-coupled if review does not shrink", "deprioritized per TRUTH.md"],
+      "humanGates": ["customer messages", "contracts"]
+    },
+    {
+      "id": "pay-per-call",
+      "name": "Pay-per-call agent endpoints",
+      "flow": "An agent pays per request (x402 over HTTP, Stripe agentic payments) for a tool or dataset we expose over MCP or HTTP.",
+      "unitMarginFormula": "P_call - C_call - rail fee",
+      "costDrivers": ["compute per call", "rail fees", "wallet or account custody"],
+      "estateFit": ["agenticincome", "agenticpassiveincome", "starlight"],
+      "risks": ["early rails, thin volume", "wallet actions are money operations"],
+      "humanGates": ["wallet setup", "pricing", "money operations (Doctrine 0: agents stage, humans execute)"]
+    },
+    {
+      "id": "ads-sponsorship",
+      "name": "Ads and sponsorship",
+      "flow": "Audience attention sold to advertisers or sponsors (newsletter slots, YouTube partner revenue).",
+      "unitMarginFormula": "CPM * impressions / 1000 - production cost",
+      "costDrivers": ["audience growth", "content production"],
+      "estateFit": ["frankx", "animelegends"],
+      "risks": ["needs scale", "brand dilution"],
+      "humanGates": ["sponsor contracts", "public claims"]
+    },
+    {
+      "id": "royalties-licensing",
+      "name": "Royalties and licensing",
+      "flow": "Music streams, sync licences, book royalties, IP licences paid per use.",
+      "unitMarginFormula": "per-use rate * uses - distribution fee",
+      "costDrivers": ["distribution", "rights clearance"],
+      "estateFit": ["arcanea-records", "frankx", "arcanea"],
+      "risks": ["low per-stream payouts", "AI-music platform rules on rights"],
+      "humanGates": ["rights and legal/IP", "contracts"]
+    },
+    {
+      "id": "games",
+      "name": "Games and UGC-platform payouts",
+      "flow": "Premium sales, in-app purchases, or payouts from a UGC platform (Roblox DevEx, Fortnite creator economy).",
+      "unitMarginFormula": "P*(1-T) - C for premium; payout-rate * engagement for UGC platforms",
+      "costDrivers": ["art and design", "live ops"],
+      "estateFit": ["arcanea", "animelegends"],
+      "risks": ["hit-driven", "platform-defined payouts"],
+      "humanGates": ["first-time publication", "pricing"]
+    },
+    {
+      "id": "data-products",
+      "name": "Datasets and intelligence feeds",
+      "flow": "Curated, sourced data sold as a subscription or per query (Private Intel, registries, MCP queries).",
+      "unitMarginFormula": "P - refresh cost per period",
+      "costDrivers": ["freshness (re-verification loops)", "licensing of inputs"],
+      "estateFit": ["agenticincome", "mind-intelligence", "domain-intelligence"],
+      "risks": ["staleness becomes a bug", "input licences forbid resale"],
+      "humanGates": ["pricing", "data licensing review"]
+    },
+    {
+      "id": "education-cohort",
+      "name": "Courses, cohorts and memberships",
+      "flow": "Paid learning or community access.",
+      "unitMarginFormula": "P*(1-F) - delivery cost per seat",
+      "costDrivers": ["live delivery", "community moderation"],
+      "estateFit": ["aiarchitectacademy", "gencreator-community", "arcanea-academy", "realityarchitect"],
+      "risks": ["hour-coupled live delivery", "completion rates"],
+      "humanGates": ["pricing", "public claims about outcomes"]
+    },
+    {
+      "id": "onchain-fees",
+      "name": "On-chain protocol fees and royalties",
+      "flow": "Fees accrue to a protocol, contract or creator royalty on-chain.",
+      "unitMarginFormula": "fee rate * volume - gas and ops",
+      "costDrivers": ["security audits", "liquidity", "compliance"],
+      "estateFit": ["agenticincome (education only)", "GenInvestor (information, not advice)"],
+      "risks": ["regulation", "smart-contract risk", "speculation dominates"],
+      "humanGates": ["any wallet action", "any token or financial product (out of scope without counsel)"]
+    },
+    {
+      "id": "domain-portfolio",
+      "name": "Domain portfolio",
+      "flow": "Domains developed into sites, leased, or sold.",
+      "unitMarginFormula": "sale or lease price - acquisition and renewal",
+      "costDrivers": ["renewals", "development"],
+      "estateFit": ["domain-intelligence", "starlight-domains"],
+      "risks": ["renewal drag on idle names"],
+      "humanGates": ["spend", "DNS"]
+    }
+  ]
+}

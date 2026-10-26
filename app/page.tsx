@@ -4,9 +4,10 @@ import { AgentWorkflowProof } from '@/components/AgentWorkflowProof'
 import { verifiedEconomicsPrograms, verifiedRangeLabel } from '@/lib/affiliate'
 import incomeModels from '@/data/income-models.json'
 import catalog from '@/products/catalog.json'
+import { catalogRefusal, type CatalogProduct } from '@/lib/polar'
 
 export const metadata: Metadata = {
-  title: 'Agentic Income — Canonical Agent-as-a-Service Revenue Engine',
+  title: 'Agent-as-a-Service implementation and digital products',
   description:
     'The canonical revenue operating system for Agent-as-a-Service delivery: productized implementation, digital products, and open-core proof. Clear scope, inspectable deliverables, and human-gated authority — zero income promises.',
   alternates: { canonical: '/' },
@@ -23,14 +24,7 @@ const MCP_TOOLS = [
   { name: 'get_playbook', desc: 'The free starter kit and dated knowledge-track summaries.' },
 ]
 
-type Product = {
-  id: string
-  name: string
-  price_cents: number
-  interval: string | null
-  status: string
-  delivery: { path: string }
-}
+type Product = CatalogProduct
 
 function priceLabel(p: Product): string {
   if (p.price_cents === 0) return 'Free'
@@ -179,7 +173,7 @@ export default function Home() {
       {/* SECTION 5 — the doctrine */}
       <section className="section-band manifesto-band">
         <p className="manifesto-line">Agents build. <span className="mline-emerald">Humans hold the gate.</span></p>
-        <p className="manifesto-line">Every claim dated, costed, sourced.</p>
+        <p className="manifesto-line">Partner rates dated and sourced.</p>
         <p className="manifesto-line">We sell machinery and education — <span className="mline-cyan">never outcomes.</span></p>
       </section>
 
@@ -190,26 +184,34 @@ export default function Home() {
           <h2 className="display-h2">The catalog renders from reality.</h2>
           <p className="mt-3 max-w-xl text-[color:var(--color-muted)]">
             Status strings come straight from the product catalog. Nothing says buy until checkout
-            actually exists; today the free starter kit is the only live path.
+            actually exists; today the free starter kit is the only live path. Paid prices and
+            offer links appear only on products the catalog marks for sale.
           </p>
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => (
-            <div key={product.id} className={`price-card motion-reveal ${product.price_cents === 0 ? '' : 'is-commercial'}`}>
-              <div className={`price-tag ${product.price_cents === 0 ? 'free' : ''}`}>{priceLabel(product)}</div>
-              <h3 className="font-display text-lg font-bold">{product.name}</h3>
-              <div className="price-state">{product.status}</div>
-              {product.price_cents === 0 ? (
-                <Link href="/delivery/starter-kit" className="cta-secondary mt-2 !min-h-0 !px-4 !py-2 text-sm">
-                  Open the starter kit
-                </Link>
-              ) : (
-                <Link href="/offers" className="mt-2 text-sm font-semibold text-muted underline decoration-[color:var(--color-border)] underline-offset-2 hover:text-ink">
-                  Read the offer
-                </Link>
-              )}
-            </div>
-          ))}
+          {products.map((product) => {
+            const isFree = product.price_cents === 0
+            // Same gate lib/polar.ts applies to checkout: no price or offer link on a product that cannot be sold.
+            const isForSale = !isFree && catalogRefusal(product) === null
+            return (
+              <div key={product.id} className={`price-card motion-reveal ${isFree ? '' : 'is-commercial'}`}>
+                {isFree || isForSale ? (
+                  <div className={`price-tag ${isFree ? 'free' : ''}`}>{priceLabel(product)}</div>
+                ) : null}
+                <h3 className="font-display text-lg font-bold">{product.name}</h3>
+                <div className="price-state">{product.status}</div>
+                {isFree ? (
+                  <Link href="/delivery/starter-kit" className="cta-secondary mt-2 !min-h-0 !px-4 !py-2 text-sm">
+                    Open the starter kit
+                  </Link>
+                ) : isForSale ? (
+                  <Link href="/offers" className="mt-2 text-sm font-semibold text-muted underline decoration-[color:var(--color-border)] underline-offset-2 hover:text-ink">
+                    Read the offer
+                  </Link>
+                ) : null}
+              </div>
+            )
+          })}
         </div>
         <p className="motion-reveal mt-6 max-w-3xl font-mono text-[0.7rem] leading-relaxed text-[color:var(--color-muted)]">
           NO INCOME PROMISES — we sell machinery and education, never outcomes. Some research links

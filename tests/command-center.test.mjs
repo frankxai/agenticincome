@@ -4,21 +4,32 @@ import test from 'node:test'
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
 
-test('command center page enforces single-tenant operator portal boundary', () => {
+test('command center page presents illustrative preview workspace', () => {
   const page = read('app/command/page.tsx')
-  const desk = read('components/IncomeCommandDesk.tsx')
   const operate = read('app/operate/page.tsx')
 
-  assert.match(page, /Single-Tenant Income Command Center/)
-  assert.match(page, /Frank Riemer and operating agents/)
+  assert.match(page, /title: 'Income workspace · Illustrative preview'/)
+  assert.match(
+    page,
+    /No authenticated account, live agents, revenue, or approval telemetry is connected/
+  )
   assert.match(page, /href="\/operate"/)
 
-  assert.match(desk, /Frank Riemer \(Sole Tenant\)/)
-  assert.match(desk, /Single-Tenant Operator Boundary Active/)
-  assert.match(desk, /Polar\.sh/)
-  assert.match(desk, /Zero arbitrary code execution/)
-
   assert.match(operate, /href="\/command"/)
+})
+
+// PR #73 removed these claims because no account, runtime or validation source backs them.
+test('command center desk labels unconnected state and keeps removed live claims out', () => {
+  const page = read('app/command/page.tsx')
+  const desk = read('components/IncomeCommandDesk.tsx')
+
+  assert.match(desk, /Illustrative interface · no connected telemetry/)
+  assert.match(desk, /Account not connected/)
+  assert.match(desk, /no pass result is\s+claimed/)
+
+  for (const code of [page, desk]) {
+    assert.doesNotMatch(code, /Single-Tenant|Sole Tenant|Operator Boundary Active/)
+  }
 })
 
 test('command center components expose zero secrets and zero custody violations', () => {

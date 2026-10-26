@@ -4,7 +4,7 @@
  */
 
 /** Internal only: served on preview and local builds, 404 in production until Frank decides otherwise. */
-export function atlasEnabled(env: { VERCEL_ENV?: string }): boolean {
+export function atlasEnabled(env: Record<string, string | undefined>): boolean {
   return env.VERCEL_ENV !== 'production'
 }
 

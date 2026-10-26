@@ -7,6 +7,7 @@ const nextConfig = {
   outputFileTracingIncludes: {
     '/api/mcp/[transport]': ['./knowledge/*.md', './public/downloads/*.md'],
     '/api/mcp': ['./knowledge/*.md', './public/downloads/*.md'],
+    '/atlas': ['./vault/atlas.html'],
   },
 }
 

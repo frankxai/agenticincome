@@ -40,13 +40,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .byline { font: 12px/1.5 var(--mono); color: var(--muted) }
 .counts { display: flex; flex-wrap: wrap; gap: 28px; padding-top: 8px; border-top: 1px solid var(--line) }
 .counts div { display: grid; gap: 2px }
-.counts b { font: 600 1.6rem/1 var(--mono) }
+.counts b { font: 600 1.6rem/1 var(--mono); font-variant-numeric: tabular-nums }
 .decision { border-top: 1px solid var(--line); padding-top: 20px; display: grid; gap: 8px }
 .decision .eyebrow { color: var(--impl) }
 .decision strong { font-family: var(--display); font-size: 1.35rem; font-weight: 700 }
 .chips { display: flex; flex-wrap: wrap; gap: 8px }
 .chip { font: 500 12px/1 var(--mono); padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); cursor: pointer }
+.chip:hover { border-color: var(--muted) }
 .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink) }
+button, input, select, a { touch-action: manipulation }
 .scroll { overflow-x: auto }
 svg text { fill: var(--ink); font-family: var(--mono); font-size: 11px }
 svg .sub { fill: var(--muted) }
@@ -203,14 +205,11 @@ const V = JSON.parse(document.getElementById('vault').textContent);
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const host = (u) => { try { return new URL(u).hostname.replace(/^www\./, '') } catch { return '' } };
-const usd = (n) => {
-  const a = Math.abs(n);
-  if (a >= 1e12) return '$' + (n / 1e12).toFixed(2) + 'T';
-  if (a >= 1e9) return '$' + (n / 1e9).toFixed(1) + 'B';
-  if (a >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
-  if (a >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
-  return '$' + n.toFixed(n < 1 ? 4 : 2);
-};
+const USD_COMPACT = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 2 });
+const USD_CENTS = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const USD_SUBCENT = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 4, maximumFractionDigits: 4 });
+// Unit prices below a dollar need four places (a token or a facilitator fee); totals read better compact.
+const usd = (n) => Math.abs(n) >= 1e3 ? USD_COMPACT.format(n) : Math.abs(n) < 1 ? USD_SUBCENT.format(n) : USD_CENTS.format(n);
 const econ = V.economies?.rows ?? [];
 const supply = V.supply?.rows ?? [];
 const macro = V.macro?.facts ?? [];
@@ -365,7 +364,7 @@ function drawCalc() {
   el.innerHTML = `<div class="calc"><div style="display:grid;gap:14px">
     <label for="scSel">Scenario<select id="scSel">${sc.map((s, i) => `<option value="${i}">${esc(s.title)}</option>`).join('')}</select></label>
     <p id="scNote" class="muted" style="font-size:13px"></p>
-    <label for="price">Our price per unit (USD) <span class="hyp">hypothesis</span><input id="price" type="number" min="0.01" step="0.01"></label>
+    <label for="price">Our price per unit (USD) <span class="hyp">hypothesis</span><input id="price" name="price" type="number" inputmode="decimal" autocomplete="off" min="0.01" step="0.01"></label>
     <input id="priceRange" type="range" min="0.01" step="0.01" aria-label="Price slider">
     </div><div style="display:grid;gap:12px"><div><span class="eyebrow">Gross margin</span><div class="margin-big" id="mBig"></div></div><div class="waterfall" id="wf"></div></div></div>`;
   const sel = $('scSel'), price = $('price'), range = $('priceRange');

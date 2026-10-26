@@ -61,6 +61,8 @@ test('the MCP handler initializes and lists tools on the overridden SDK', async 
   const list = await rpc('tools/list', {}, 2)
   assert.equal(list.status, 200)
   assert.deepEqual(list.message.result.tools.map((t) => t.name), ['echo'])
+  // Agents see the zod schema as JSON Schema; an empty schema would make every tool unusable.
+  assert.equal(list.message.result.tools[0].inputSchema.properties.value.type, 'string')
 })
 
 test('a tool call round-trips through the handler', async () => {

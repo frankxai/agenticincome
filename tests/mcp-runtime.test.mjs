@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import test, { after } from 'node:test'
+import test from 'node:test'
 import { createMcpHandler } from 'mcp-handler'
 import { z } from 'zod'
 
@@ -18,10 +18,8 @@ const handler = createMcpHandler(
 )
 
 // mcp-handler starts a module-level cleanup setInterval it never unrefs, so this file's
-// process would never go idle. Exit once the tests have reported; process.exit() keeps
-// the exit code the runner set, so a failure still fails.
-after(() => setImmediate(() => process.exit()))
-
+// process would never go idle. `pnpm test` runs with --test-force-exit, which ends the run
+// once the tests have reported and still exits non-zero when an assertion fails.
 async function rpc(method, params, id) {
   const res = await handler(new Request('http://localhost/api/mcp', {
     method: 'POST',

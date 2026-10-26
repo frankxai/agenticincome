@@ -91,7 +91,8 @@
       "unit": "chains",
       "asOf": "2026-10-25",
       "sourceUrl": "https://api.llama.fi/v2/chains",
-      "method": "API call GET https://api.llama.fi/v2/chains via WebFetch. Counted twice by the fetch model (a hand tally, then an enumerated name list 1..421), not by a script, because the shell was blocked; re-counted by script (array length) at 2026-10-25T17:06:01.773Z"
+      "method": "API call GET https://api.llama.fi/v2/chains via WebFetch. Counted twice by the fetch model (a hand tally, then an enumerated name list 1..421), not by a script, because the shell was blocked; re-counted by script (array length) at 2026-10-25T17:06:01.773Z",
+      "live": true
     },
     {
       "id": "defillama-total-tvl",
@@ -101,7 +102,8 @@
       "unit": "USD",
       "asOf": "2026-10-25 (unix 1792886400)",
       "sourceUrl": "https://api.llama.fi/v2/historicalChainTvl",
-      "method": "API call GET https://api.llama.fi/v2/historicalChainTvl, last array element. The previous day (1792800000) was 89,627,407,049"
+      "method": "API call GET https://api.llama.fi/v2/historicalChainTvl, last array element. The previous day (1792800000) was 89,627,407,049",
+      "live": true
     },
     {
       "id": "defillama-stablecoin-supply",
@@ -111,7 +113,8 @@
       "unit": "USD",
       "asOf": "2026-10-25 (unix 1792886400)",
       "sourceUrl": "https://stablecoins.llama.fi/stablecoincharts/all",
-      "method": "API call GET https://stablecoins.llama.fi/stablecoincharts/all, last element, totalCirculatingUSD.peggedUSD. defillama.com/stablecoins returned 403"
+      "method": "API call GET https://stablecoins.llama.fi/stablecoincharts/all, last element, totalCirculatingUSD.peggedUSD. defillama.com/stablecoins returned 403",
+      "live": true
     },
     {
       "id": "defillama-fees-total-30d",
@@ -121,7 +124,8 @@
       "unit": "USD (30d)",
       "asOf": "2026-10-25",
       "sourceUrl": "https://api.llama.fi/overview/fees?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true",
-      "method": "API call to the endpoint shown. Top-level total30d, total1y and change_30dover30d fields"
+      "method": "API call to the endpoint shown. Top-level total30d, total1y and change_30dover30d fields",
+      "live": true
     },
     {
       "id": "x402-what",
@@ -221,7 +225,8 @@
       "unit": "models",
       "asOf": "2026-10-25",
       "sourceUrl": "https://huggingface.co/models",
-      "method": "page read (WebFetch) of the 'Models N' counter"
+      "method": "page read (WebFetch) of the 'Models N' counter",
+      "live": true
     },
     {
       "id": "huggingface-datasets",
@@ -231,7 +236,8 @@
       "unit": "datasets",
       "asOf": "2026-10-25",
       "sourceUrl": "https://huggingface.co/datasets",
-      "method": "page read (WebFetch) of the 'Datasets N' counter"
+      "method": "page read (WebFetch) of the 'Datasets N' counter",
+      "live": true
     }
   ],
   "topChainsSource": "https://api.llama.fi/v2/chains",

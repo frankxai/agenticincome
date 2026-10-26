@@ -22,7 +22,43 @@ export function loadVault(root = ROOT) {
     supply: read('supply-chain.json'),
     macro: read('macro.json'),
     margins: read('margins.json'),
+    partners: read('partners.json'),
+    playbooks: read('playbooks.json'),
+    verification: read('verification.json'),
+    programs: read(join('..', 'data', 'programs.json')),
   };
+}
+
+function validatePartners(v, errors) {
+  if (!v.partners) return new Set();
+  const programs = new Map((v.programs?.programs ?? []).map((p) => [p.tool, p]));
+  const tools = new Set();
+  for (const r of v.partners.rows) {
+    tools.add(r.tool);
+    const p = programs.get(r.tool);
+    if (!p) { errors.push(`partners ${r.tool}: not in data/programs.json`); continue; }
+    if (!p.hasProgram || ['dead-end', 'closed'].includes(p.status)) errors.push(`partners ${r.tool}: program is ${p.status}`);
+    if (!String(p.commission ?? '').includes(r.rateText)) errors.push(`partners ${r.tool}: "${r.rateText}" not in registry commission text`);
+    if (typeof r.rate === 'number' && `${Math.round(r.rate * 100)}%` !== r.rateText) errors.push(`partners ${r.tool}: rate ${r.rate} disagrees with ${r.rateText}`);
+  }
+  return tools;
+}
+
+function validatePlaybooks(v, ids, errors) {
+  if (!v.playbooks) return;
+  const stages = new Set(v.playbooks.stages);
+  for (const pb of v.playbooks.playbooks) {
+    const at = `playbook ${pb.property}`;
+    if (!ids.props.has(pb.property)) errors.push(`${at}: unknown property`);
+    for (const s of pb.streams) {
+      if (!ids.models.has(s.model)) errors.push(`${at}: unknown model ${s.model}`);
+      if (!stages.has(s.stage)) errors.push(`${at}: bad stage ${s.stage}`);
+    }
+    for (const s of pb.shops) if (!ids.economies.has(s)) errors.push(`${at}: unknown shop ${s}`);
+    for (const p of pb.partners) if (!ids.partners.has(p)) errors.push(`${at}: unknown partner ${p}`);
+    for (const a of pb.articles) for (const r of a.rows) if (!ids.anyRow.has(r)) errors.push(`${at}: article "${a.title}" cites unknown row ${r}`);
+    if (pb.nextExperiment && !ids.experiments.has(pb.nextExperiment)) errors.push(`${at}: unknown experiment ${pb.nextExperiment}`);
+  }
 }
 
 const isHttps = (u) => typeof u === 'string' && /^https:\/\//.test(u);
@@ -75,7 +111,7 @@ export function validate(v) {
     }
   }
 
-  uniqueIds(v.experiments.experiments, 'experiments', errors);
+  const experimentIds = uniqueIds(v.experiments.experiments, 'experiments', errors);
   const statuses = new Set(v.experiments.statuses);
   for (const e of v.experiments.experiments) {
     for (const f of ['title', 'hypothesis', 'metric', 'killRule', 'duration']) {
@@ -149,6 +185,13 @@ export function validate(v) {
       }
     }
   }
+
+  const partnerTools = validatePartners(v, errors);
+  validatePlaybooks(v, {
+    props: propIds, models: modelIds, experiments: experimentIds, partners: partnerTools,
+    economies: new Set(economyById.keys()),
+    anyRow: new Set([...economyById.keys(), ...supplyById.keys(), ...(v.macro?.facts ?? []).map((f) => f.id)]),
+  }, errors);
 
   return errors;
 }

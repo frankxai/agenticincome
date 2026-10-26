@@ -1,6 +1,6 @@
 # Digital Economy Vault
 
-Author: Claude (Claude Code, Opus 5.5), 2026-10-25. Revision 2. Review state: Codex (review profile, read-only) spot-checked 13 rows on 2026-10-25: 11 matched, 1 mismatch removed (Apify monthly payout), 1 unreachable source confirmed on a second official page; one misleading margin and three overreaching strategy claims were corrected. Not yet ready for a public page: the full row set has not been re-verified.
+Author: Claude (Claude Code, Opus 5.5), 2026-10-25. Revision 3 (2026-10-26: verification receipts, partner economics, site playbooks, agent-tool read side). Review state: Codex (review profile, read-only) spot-checked 13 rows on 2026-10-25: 11 matched, 1 mismatch removed (Apify monthly payout), 1 unreachable source confirmed on a second official page; one misleading margin and three overreaching strategy claims were corrected. Not yet ready for a public page: the full row set has not been re-verified.
 
 The vault is agenticincome.ai's working map of digital economies: where money moves, who takes a cut, what it costs us to supply a product, and which estate site plugs into which economy. It also holds the experiment and competition cards that test those ideas against real buyers.
 
@@ -18,6 +18,16 @@ It is data first. Pages, articles, MCP tools and the internal atlas read from th
 | `estate-map.json` | 16 live estate properties mapped to revenue models and economy sectors | snapshot of `starlight/graph/*.graph.json`; re-snapshot, do not hand-edit |
 | `experiments.json` | 10 proposed experiments, each with one metric and a kill rule | no result without a receipt |
 | `competitions.json` | 4 competition formats for agent teams | maker never scores itself; empty leaderboard until a receipt exists |
+| `partners.json` | resale terms for 14 partner programs: rate, payout window, which sites fit | each rate must appear verbatim in `data/programs.json`, the verified registry |
+| `playbooks.json` | one revenue plan per site: streams with an honest stage, marketplaces, partners, sourceable articles, next experiment | every id resolves to a vault row |
+| `verification.json` | receipt from `scripts/vault-verify.mjs`: every source re-fetched and checked for the row's number | generated; never hand-edited |
+| `verification-manual.json` | reviewer receipts for sources a plain fetch cannot read | names who read it, when, and what they saw |
+
+`lib/vault.ts` is the read side for agent tools: economy search, supply costs and a unit-margin calculator that refuses any input whose source is not confirmed. It is built and tested but not yet registered on `/api/mcp`. Registering it publishes these numbers, which is a public claim and needs Frank's approval once the remaining rows pass a browser read.
+
+## Verification state
+
+`node scripts/vault-verify.mjs` re-fetches all 83 source URLs. On 2026-10-26, 95 of 117 rows were confirmed: 85 by a number match on the live page, 4 by reviewer receipt, 6 live counters re-measured. The other 22 sit behind bot walls (SEC asks for a contact address we do not invent, plus Epic, Fab and W3Techs) or render by script. They need a browser read before any public use, and the atlas shows them in grey. Rerun the script monthly; a row that falls out of confirmed is a bug.
 
 `pnpm vault:check` (or `node scripts/vault-validate.mjs`) enforces every rule above. `tests/vault.test.mjs` proves each rule fails when broken.
 

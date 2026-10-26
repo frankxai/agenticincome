@@ -1,0 +1,11 @@
+{
+  "$comment": "Reviewer receipts for sources a plain fetch cannot confirm. Each receipt names who read the source, when, and what they saw. Only verdict=match upgrades a row; anything else stays as the automated verdict.",
+  "receipts": [
+    { "id": "roblox-devex-fy2025", "by": "Codex (review profile, read-only)", "at": "2026-10-25", "verdict": "match", "note": "FY2025 10-K shows $1,503.106m" },
+    { "id": "shopify-gmv-2025", "by": "Codex (review profile, read-only)", "at": "2026-10-25", "verdict": "match", "note": "FY2025 10-K shows $378.4bn" },
+    { "id": "etsy-marketplace-gms-2025", "by": "Codex (review profile, read-only)", "at": "2026-10-25", "verdict": "match", "note": "FY2025 10-K shows $10,460.7m" },
+    { "id": "upwork-gsv-2025", "by": "Codex (review profile, read-only)", "at": "2026-10-25", "verdict": "match", "note": "FY2025 10-K shows $4,028.386m" },
+    { "id": "notion-marketplace-fee", "by": "Claude (Opus 5.5), page fetch", "at": "2026-10-26", "verdict": "match", "note": "Page reads 'Notion charges a 8% fee plus 40 cents per transaction'" },
+    { "id": "anthropic-sonnet-5-5-output", "by": "Codex (review profile, read-only)", "at": "2026-10-25", "verdict": "match", "note": "Pricing page timed out for the reviewer; the official Sonnet 5.5 model page confirms $10/MTok" }
+  ]
+}

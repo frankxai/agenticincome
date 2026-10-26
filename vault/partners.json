@@ -1,0 +1,21 @@
+{
+  "$comment": "Machine-readable resale terms for partner programs. The source of truth stays data/programs.json (verified commission text, source URL, date); this file only transcribes the rate and payout window so the atlas can compare them. The validator rejects a row whose rate or flat amount does not appear in that program's commission text. 'Per $100' figures are what one referred customer paying $100 a month would earn us across the window if they stayed the whole time; they are not forecasts.",
+  "updatedAt": "2026-10-26",
+  "programsFile": "data/programs.json",
+  "rows": [
+    { "tool": "Systeme.io", "rate": 0.60, "rateText": "60%", "windowMonths": null, "window": "lifetime", "basis": "every payment", "rateIsCeiling": false, "estateFit": ["agenticincome", "gencreator"] },
+    { "tool": "CapCut", "rate": 0.35, "rateText": "35%", "windowMonths": null, "window": "recurring, length not stated", "basis": "every payment", "rateIsCeiling": true, "estateFit": ["gencreator", "animelegends"] },
+    { "tool": "Higgsfield", "rate": 0.25, "rateText": "25%", "windowMonths": 12, "window": "12 months", "basis": "every payment", "rateIsCeiling": true, "estateFit": ["gencreator", "arcanea", "agenticincome"] },
+    { "tool": "ElevenLabs", "rate": 0.22, "rateText": "22%", "windowMonths": 12, "window": "first 12 months", "basis": "every payment", "rateIsCeiling": false, "estateFit": ["gencreator", "agenticincome", "frankx"] },
+    { "tool": "Writesonic", "rate": 0.20, "rateText": "20%", "windowMonths": 12, "window": "up to 12 months", "basis": "every payment", "rateIsCeiling": false, "estateFit": ["agenticincome"] },
+    { "tool": "Synthesia", "rate": 0.25, "rateText": "25%", "windowMonths": 12, "window": "12 months", "basis": "net payments, Starter and Creator plans", "rateIsCeiling": false, "estateFit": ["gencreator", "agenticincome"] },
+    { "tool": "Opus Clip", "rate": 0.25, "rateText": "25%", "windowMonths": 12, "window": "up to 12 months", "basis": "every payment", "rateIsCeiling": false, "estateFit": ["gencreator", "frankx"] },
+    { "tool": "Topaz Labs", "rate": 0.20, "rateText": "20%", "windowMonths": 12, "window": "up to 12 monthly payments", "basis": "monthly plans", "rateIsCeiling": false, "estateFit": ["gencreator", "arcanea"] },
+    { "tool": "Rytr", "rate": 0.30, "rateText": "30%", "windowMonths": 12, "window": "12 months", "basis": "every payment", "rateIsCeiling": false, "estateFit": ["agenticincome"] },
+    { "tool": "Pollo AI", "rate": 0.30, "rateText": "30%", "windowMonths": null, "window": "first purchases, renewals and upgrades; length not stated", "basis": "every payment", "rateIsCeiling": false, "estateFit": ["gencreator", "arcanea"] },
+    { "tool": "HeyGen", "rate": 0.35, "rateText": "35%", "windowMonths": 3, "window": "first 3 months", "basis": "Social Creator Program", "rateIsCeiling": false, "estateFit": ["gencreator"] },
+    { "tool": "Adobe Firefly", "rate": 0.85, "rateText": "85%", "windowMonths": 1, "window": "first month only", "basis": "first month's subscription", "rateIsCeiling": false, "estateFit": ["arcanea"] },
+    { "tool": "Jasper", "rate": 0.25, "rateText": "25%", "windowMonths": 12, "window": "first 12 months", "basis": "every payment", "rateIsCeiling": false, "estateFit": ["agenticincome"] },
+    { "tool": "Descript", "flatUsd": 25, "rateText": "$25", "windowMonths": null, "window": "one-time", "basis": "per new subscription", "rateIsCeiling": false, "estateFit": ["gencreator", "frankx"] }
+  ]
+}

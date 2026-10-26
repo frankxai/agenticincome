@@ -57,6 +57,21 @@ test('margin arithmetic reads prices, fees and take rate from sourced rows', () 
   assert.equal(Number(marginPct.toFixed(2)), 54.5);
 });
 
+test('a partner rate that the registry does not state is rejected', () => {
+  const v = loadVault();
+  v.partners.rows = [{ ...v.partners.rows.find((r) => r.tool === 'ElevenLabs'), rate: 0.4, rateText: '40%' }];
+  assert.ok(validate(v).some((e) => e.includes('"40%" not in registry')));
+});
+
+test('a playbook pointing at an unknown shop or article row is rejected', () => {
+  const v = loadVault();
+  v.playbooks.playbooks[0].shops = ['made-up-marketplace'];
+  v.playbooks.playbooks[0].articles = [{ title: 't', rows: ['made-up-row'] }];
+  const errors = validate(v);
+  assert.ok(errors.some((e) => e.includes('unknown shop made-up-marketplace')));
+  assert.ok(errors.some((e) => e.includes('unknown row made-up-row')));
+});
+
 test('non-zero spend without a spend gate is rejected', () => {
   const v = loadVault();
   v.experiments.experiments[0].spendBudgetUsd = 50;

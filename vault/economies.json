@@ -807,7 +807,8 @@
       "note": "Live count from the models listing. Hugging Face has no general paid model marketplace with a published seller revenue share, so this is a distribution and supply metric, not a payout economy.",
       "platform": "Hugging Face Hub",
       "takeRateFraction": null,
-      "takeRateBasis": null
+      "takeRateBasis": null,
+      "live": true
     },
     {
       "id": "aws-marketplace-listing-fee",

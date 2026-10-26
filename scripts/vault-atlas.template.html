@@ -54,7 +54,19 @@ svg .sub { fill: var(--muted) }
 .node.impl { stroke: var(--impl) } .node.money { stroke: var(--money) } .node.tech { stroke: var(--tech) }
 .flow { fill: none; stroke: var(--muted); stroke-width: 1.2; opacity: .55 }
 .flow.money { stroke: var(--money); opacity: .9 } .flow.impl { stroke: var(--impl); opacity: .9 }
-.bar { fill: var(--tech) } .bar.money { fill: var(--money) } .bar.impl { fill: var(--impl) }
+.bar { fill: var(--tech) } .bar.money { fill: var(--money) } .bar.impl { fill: var(--impl) } .bar.dim { fill: var(--muted); opacity: .45 }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; font: 12px var(--mono); color: var(--muted) }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px }
+.pill.ok { color: var(--impl) } .pill.no { color: var(--muted) }
+.stage { font: 500 11px/1 var(--mono); padding: 4px 7px; border-radius: 3px; border: 1px solid var(--line) }
+.stage.live { color: var(--impl); border-color: var(--impl) } .stage.gated { color: var(--money); border-color: var(--money) }
+.stage.building { color: var(--tech); border-color: var(--tech) } .stage.proposed { color: var(--ink) } .stage.hold { color: var(--muted) }
+.pb { display: grid; gap: 10px }
+.pb ul { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 6px; font-size: 13px }
+.pb li { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap }
+.pb .row { display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px }
+.vbar { display: flex; height: 10px; border-radius: 2px; overflow: hidden; background: var(--soft) }
+.vbar span { display: block; height: 100% }
 .grid { stroke: var(--line) }
 table { width: 100%; border-collapse: collapse; font-size: 13px }
 th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top }
@@ -94,6 +106,10 @@ footer { color: var(--muted); font-size: 12px; display: grid; gap: 6px }
     <p class="lede">A sourced map of marketplaces, AI supply costs and on-chain economies, the estate sites that sell into them, and the experiments that test each bet. Every number links to its source. Our own prices are marked as hypotheses.</p>
     <p class="byline">Built by Claude (Claude Code, Opus 5.5) from vault/*.json · <span id="built"></span> · spot-checked by Codex, 11 of 13 sampled rows matched; fixes applied</p>
     <div class="counts" id="counts"></div>
+    <div style="display:grid;gap:8px">
+      <div class="vbar" id="vbar" role="img" aria-label="Share of rows confirmed against their sources"></div>
+      <div class="legend" id="vlegend"></div>
+    </div>
   </section>
 
   <section class="section">
@@ -112,7 +128,7 @@ footer { color: var(--muted); font-size: 12px; display: grid; gap: 6px }
 
   <section class="section">
     <header><span class="eyebrow">Economies</span><h2>How big each market is</h2>
-      <p class="muted">Payouts or GMV as each platform reports it, on a log scale because the range spans several orders of magnitude. Metrics differ by platform (payouts vs GMV vs billings), so compare within a metric, not across.</p></header>
+      <p class="muted">Payouts or GMV as each platform reports it, on a log scale because the range spans several orders of magnitude. Metrics differ by platform (payouts vs GMV vs billings), so compare within a metric, not across. Amber bars are confirmed against their source; grey bars still need a browser read.</p></header>
     <div class="chips" id="sectorChips"></div>
     <div class="panel scroll" id="econChart"></div>
   </section>
@@ -134,6 +150,19 @@ footer { color: var(--muted); font-size: 12px; display: grid; gap: 6px }
     <header><span class="eyebrow">Margins</span><h2>Unit economics, recomputed live</h2>
       <p class="muted">Pick a scenario and move our price. Costs, fees and take rates come from the sourced rows above, never from the scenario.</p></header>
     <div class="panel" id="calc"></div>
+  </section>
+
+  <section class="section">
+    <header><span class="eyebrow">Resale partners</span><h2>What one referred customer is worth</h2>
+      <p class="muted">Commission earned from one customer paying $100 a month who stays for the whole payout window. Terms come from the verified partner registry (data/programs.json). Open-ended programs show their first year only. These are terms, not forecasts.</p></header>
+    <div class="panel scroll" id="partnerChart"></div>
+  </section>
+
+  <section class="section">
+    <header><span class="eyebrow">Playbooks</span><h2>One revenue plan per site</h2>
+      <p class="muted">What each site sells, where it lists, which partners fit, which articles the vault can already source, and the next experiment. Stages: live, gated (built, waiting on a human), building, proposed, hold.</p></header>
+    <div class="chips" id="stageChips"></div>
+    <div class="board" id="playbooks"></div>
   </section>
 
   <section class="section">
@@ -186,6 +215,9 @@ const econ = V.economies?.rows ?? [];
 const supply = V.supply?.rows ?? [];
 const macro = V.macro?.facts ?? [];
 const supplyById = new Map(supply.map((r) => [r.id, r]));
+const CONFIRMED = new Set(['number-found', 'reviewer-confirmed', 'live-counter']);
+const verdictById = new Map((V.verification?.results ?? []).map((r) => [r.id, r.verdict]));
+const isConfirmed = (id) => CONFIRMED.has(verdictById.get(id));
 const econById = new Map(econ.map((r) => [r.id, r]));
 const SVGNS = 'http://www.w3.org/2000/svg';
 
@@ -198,6 +230,20 @@ $('counts').innerHTML = [
   [V.estate.properties.length, 'estate sites mapped'],
   [V.experiments.experiments.length, 'experiments'],
 ].map(([n, l]) => `<div><b>${n}</b><span class="muted">${l}</span></div>`).join('');
+
+(function drawVerification() {
+  const res = V.verification?.results ?? [];
+  if (!res.length) return;
+  const groups = [
+    ['Confirmed on the live page', (r) => r.verdict === 'number-found', 'var(--impl)'],
+    ['Confirmed by a reviewer', (r) => r.verdict === 'reviewer-confirmed', 'var(--tech)'],
+    ['Live counter, re-measured', (r) => r.verdict === 'live-counter', 'var(--money)'],
+    ['Needs a browser read', (r) => !CONFIRMED.has(r.verdict), 'var(--line)'],
+  ].map(([label, f, color]) => [label, res.filter(f).length, color]);
+  $('vbar').innerHTML = groups.map(([, n, c]) => `<span style="width:${(n / res.length) * 100}%;background:${c}"></span>`).join('');
+  $('vlegend').innerHTML = groups.map(([l, n, c]) => `<span><i style="background:${c}"></i>${l}: ${n}</span>`).join('')
+    + `<span>checked ${esc((V.verification.checkedAt ?? '').slice(0, 10))}</span>`;
+})();
 
 function drawArch() {
   const svg = $('arch');
@@ -268,7 +314,7 @@ function drawEcon() {
   logBars(rows, $('econChart'), {
     label: (r) => `${r.name} · ${r.metric}`, value: (r) => r.value,
     text: (r) => `${r.valueText ?? usd(r.value)} ${r.period ? '(' + r.period + ')' : ''}`, link: (r) => r.sourceUrl,
-    cls: (r) => r.sourceType === 'secondary' ? 'bar' : 'bar money',
+    cls: (r) => isConfirmed(r.id) ? 'bar money' : 'bar dim',
   });
 }
 function chips(el, values, onPick) {
@@ -306,8 +352,8 @@ function drawTake() {
 let supplyCat = 'all';
 function drawSupply() {
   const rows = supply.filter((r) => supplyCat === 'all' || r.category === supplyCat);
-  $('supplyTable').innerHTML = rows.length ? `<table><thead><tr><th>Vendor</th><th>Item</th><th>Price</th><th>Terms</th><th>Source</th></tr></thead><tbody>${rows.map((r) =>
-    `<tr><td>${esc(r.vendor)}</td><td>${esc(r.item)}</td><td class="num">${esc(r.priceText)}</td><td class="muted">${esc(r.terms)}</td><td class="src"><a href="${esc(r.sourceUrl)}" target="_blank" rel="noopener">${esc(host(r.sourceUrl))}</a></td></tr>`).join('')}</tbody></table>`
+  $('supplyTable').innerHTML = rows.length ? `<table><thead><tr><th>Vendor</th><th>Item</th><th>Price</th><th>Terms</th><th>Checked</th><th>Source</th></tr></thead><tbody>${rows.map((r) =>
+    `<tr><td>${esc(r.vendor)}</td><td>${esc(r.item)}</td><td class="num">${esc(r.priceText)}</td><td class="muted">${esc(r.terms)}</td><td>${isConfirmed(r.id) ? '<span class="pill ok">confirmed</span>' : '<span class="pill no">needs read</span>'}</td><td class="src"><a href="${esc(r.sourceUrl)}" target="_blank" rel="noopener">${esc(host(r.sourceUrl))}</a></td></tr>`).join('')}</tbody></table>`
     : '<p class="empty">Not yet sourced.</p>';
 }
 chips($('supplyChips'), [...new Set(supply.map((r) => r.category))].sort(), (v) => { supplyCat = v; drawSupply() });
@@ -374,5 +420,50 @@ function drawMacro() {
   logBars(chains, $('chainChart'), { label: (c) => c.name, value: (c) => c.tvlUsd, text: (c) => usd(c.tvlUsd), link: () => V.macro.topChainsSource ?? 'https://defillama.com/chains', cls: 'bar' });
 }
 
-drawArch(); drawEcon(); drawTake(); drawSupply(); drawCalc(); drawMatrix(); drawBoard(); drawComps(); drawMacro();
+function partnerValue(r) {
+  if (typeof r.flatUsd === 'number') return { usd: r.flatUsd, basis: 'flat, once' };
+  const months = r.windowMonths ?? 12;
+  return { usd: r.rate * 100 * months, basis: r.windowMonths ? `${r.windowMonths} mo` : 'first year of an open-ended window' };
+}
+function drawPartners() {
+  const el = $('partnerChart');
+  const rows = (V.partners?.rows ?? []).map((r) => ({ ...r, ...partnerValue(r) })).sort((a, b) => b.usd - a.usd);
+  if (!rows.length) { el.innerHTML = '<p class="empty">No partner terms yet.</p>'; return }
+  const W = 1040, LW = 160, rowH = 28, top = 24, plotW = 520;
+  const max = Math.ceil(Math.max(...rows.map((r) => r.usd)) / 100) * 100;
+  const H = top + rows.length * rowH + 10;
+  let s = '';
+  for (let t = 0; t <= max; t += max / 4) {
+    const x = LW + (t / max) * plotW;
+    s += `<line class="grid" x1="${x}" x2="${x}" y1="${top - 6}" y2="${H - 6}"/><text x="${x}" y="${top - 10}" text-anchor="middle" class="sub">$${Math.round(t)}</text>`;
+  }
+  rows.forEach((r, i) => {
+    const y = top + i * rowH, w = Math.max(2, (r.usd / max) * plotW);
+    const terms = `${r.rateText}${r.rateIsCeiling ? ' (up to)' : ''} · ${r.window}`;
+    s += `<text x="${LW - 10}" y="${y + 16}" text-anchor="end">${esc(r.tool)}</text><rect class="bar ${r.windowMonths || r.flatUsd ? 'impl' : 'money'}" x="${LW}" y="${y + 6}" width="${w}" height="13" rx="2"/>`;
+    s += `<text x="${LW + w + 8}" y="${y + 16}" class="sub">$${Math.round(r.usd)} · ${esc(terms)}</text>`;
+  });
+  el.innerHTML = `<div class="legend" style="margin-bottom:8px"><span><i style="background:var(--impl)"></i>fixed window</span><span><i style="background:var(--money)"></i>open-ended, first year shown</span></div><svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="Commission per referred customer">${s}</svg>`;
+}
+
+let stageFilter = 'all';
+function drawPlaybooks() {
+  const pbs = V.playbooks?.playbooks ?? [];
+  const econName = (id) => { const e = econById.get(id); return e ? (e.platform ?? e.name) : id };
+  const expTitle = (id) => V.experiments.experiments.find((e) => e.id === id)?.title ?? id;
+  $('playbooks').innerHTML = pbs
+    .filter((pb) => stageFilter === 'all' || pb.streams.some((s) => s.stage === stageFilter))
+    .map((pb) => `<article class="card pb">
+      <span class="eyebrow">${esc(V.estate.properties.find((p) => p.id === pb.property)?.domain ?? pb.property)}</span>
+      <p style="font-size:13px">${esc(pb.role)}</p>
+      <ul>${pb.streams.map((s) => `<li><span class="stage ${esc(s.stage)}">${esc(s.stage)}</span><span>${esc(s.what)}</span></li>`).join('')}</ul>
+      ${pb.shops.length ? `<div class="row"><span class="muted">Lists on:</span>${pb.shops.map((id) => `<span class="pill">${esc(econName(id))}</span>`).join('')}</div>` : ''}
+      ${pb.partners.length ? `<div class="row"><span class="muted">Partners:</span>${pb.partners.map((t) => `<span class="pill">${esc(t)}</span>`).join('')}</div>` : ''}
+      ${pb.articles.length ? `<div class="row" style="display:grid;gap:4px"><span class="muted">Articles the vault can source:</span>${pb.articles.map((a) => `<span>${esc(a.title)} <span class="muted">(${a.rows.length} rows)</span></span>`).join('')}</div>` : ''}
+      <p class="kill">Next: ${pb.nextExperiment ? esc(expTitle(pb.nextExperiment)) : 'no experiment yet'}</p>
+    </article>`).join('');
+}
+chips($('stageChips'), V.playbooks?.stages ?? [], (v) => { stageFilter = v; drawPlaybooks() });
+
+drawArch(); drawEcon(); drawTake(); drawSupply(); drawCalc(); drawPartners(); drawPlaybooks(); drawMatrix(); drawBoard(); drawComps(); drawMacro();
 </script>

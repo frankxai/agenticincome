@@ -16,7 +16,9 @@ if (errors.length) {
   process.exit(1);
 }
 
-const payload = JSON.stringify(vault).replace(/</g, '\\u003c');
+// The registry is only needed to validate partner rows; the page reads partners.json.
+const { programs, ...pageData } = vault;
+const payload = JSON.stringify(pageData).replace(/</g, '\\u003c');
 const template = readFileSync(join(HERE, 'vault-atlas.template.html'), 'utf8');
 writeFileSync(OUT, template.replace('__VAULT_DATA__', payload));
 console.log(`vault-atlas: wrote ${OUT}`);

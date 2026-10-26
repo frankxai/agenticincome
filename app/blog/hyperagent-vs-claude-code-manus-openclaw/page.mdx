@@ -1,0 +1,119 @@
+import { baseOpenGraph } from '@/lib/open-graph'
+
+export const metadata = {
+  title: 'Hyperagent vs. Claude Code, Manus, and OpenClaw: Working Memory, Split Canvas, and Credit Economics (2026)',
+  description: 'An empirical engineering comparison of Hyperagent, Claude Code, Manus, and OpenClaw across working memory compaction survival, split-canvas artifact delivery, trajectory learning, MCP interoperability, and the $20–$10,000 credit ladder.',
+  alternates: { canonical: '/blog/hyperagent-vs-claude-code-manus-openclaw' },
+  openGraph: {
+    ...baseOpenGraph,
+    title: 'Hyperagent vs. Claude Code, Manus, and OpenClaw: Working Memory, Split Canvas, and Credit Economics (2026)',
+    description: 'An empirical engineering comparison of Hyperagent, Claude Code, Manus, and OpenClaw across working memory compaction survival, split-canvas artifact delivery, trajectory learning, MCP interoperability, and the $20–$10,000 credit ladder.',
+    url: '/blog/hyperagent-vs-claude-code-manus-openclaw',
+  },
+}
+
+<ArticleJsonLd
+  title="Hyperagent vs. Claude Code, Manus, and OpenClaw: Working Memory, Split Canvas, and Credit Economics (2026)"
+  description="An empirical engineering comparison of Hyperagent, Claude Code, Manus, and OpenClaw across working memory, artifact delivery, trajectory learning, interoperability, and credit economics."
+  slug="hyperagent-vs-claude-code-manus-openclaw"
+  date="2026-10-26"
+/>
+
+# Hyperagent vs. Claude Code, Manus, and OpenClaw: Working Memory, Split Canvas, and Credit Economics (2026)
+
+<AnswerBox>
+Pick **Claude Code** when the deliverable is a production software repository requiring isolated git worktrees, local test suites, and deterministic CI gates. Pick <AffiliateLink tool="Hyperagent" /> when the deliverable is a cloud-hosted client research packet, interactive webpage preview, or multi-step workflow that benefits from structured `Thread Context` compaction survival, a live `PublishWebpage` split canvas, and MCP tool exposure with human confirmation gates. Pick **OpenClaw** for self-hosted, messaging-native assistant persistence (`SOUL.md` / `MEMORY.md`), and **Manus** for general-purpose cloud browser tasks that do not require MCP server exposure.
+</AnswerBox>
+
+<AffiliateDisclosure />
+
+Choosing an agent runtime is an architectural decision about where state lives, how deliverables are inspected, and how compute is billed. Treating a cloud agent workbench like a local terminal agent—or expecting a browser sandbox to replace a version-controlled git worktree—creates silent context loss and surprise token bills.
+
+Below is the mechanism-by-mechanism comparison across five engineering dimensions: working memory under context compaction, artifact delivery, trajectory learning, migration and MCP interoperability, and monthly unit economics. (Notice that <AffiliateLink tool="Hyperagent" />, Claude Code, Manus, and OpenClaw currently render without affiliate links on this page: Anthropic publishes no consumer affiliate program, and Hyperagent's referral terms remain at `verify` in our [live catalog](/tools) until payout and credit rules are confirmed directly.)
+
+## Architectural comparison at a glance
+
+<ComparisonTable
+  caption="Four agent runtimes compared by state persistence, artifact surface, and billing model"
+  rows={[
+    { tool: 'Hyperagent', verdict: 'Best cloud workbench for split-canvas deliverables, 9-section Thread Context, and gated MCP exposure', price: '$20–$10,000/mo credit ladder (or BYOK via Vercel AI Gateway)', recurring: 'Verify at signup', pick: true },
+    { tool: 'Claude Code', verdict: 'Best local engineering runtime for git worktree isolation, test-driven diffs, and repo governance', price: 'Subscription or direct API token billing', recurring: 'No program' },
+    { tool: 'OpenClaw', verdict: 'Best self-hosted personal runtime for SOUL.md identity files and messaging-channel persistence', price: 'Open source + BYOK model API spend', recurring: 'No program' },
+    { tool: 'Manus', verdict: 'Cloud browser task runner for one-off research and file generation without local setup', price: 'Tiered monthly credit plans', recurring: 'No program' },
+  ]}
+/>
+
+## 1. Working memory and compaction survival
+
+Every long-running agent task eventually hits the context window ceiling. When an agent compacts its conversation history, unstructured chat logs lose file paths, rejected approaches, and edge-case constraints. The four platforms solve compaction survival through fundamentally different mechanisms:
+
+- **Hyperagent (`Thread Context` 9-section working memory):** Instead of relying on an unstructured summary when a thread compacts, Hyperagent maintains an explicit 9-section `Thread Context` document inside the workspace (`Goal`, `Current State`, `Key Decisions`, `Constraints`, `Active Files & Artifacts`, `Open Questions`, `Completed Steps`, `Next Steps`, and `References`). Because each section has a dedicated slot, compaction updates the structured state rather than overwriting constraints with recent tool output.
+- **Claude Code (`CLAUDE.md` + `AGENTS.md` + local filesystem):** State durability is anchored in the git repository itself. Instructions live in checked-in `CLAUDE.md` and `AGENTS.md` files, and task state survives across sessions only when written to disk (such as plan files, test suites, or git commits). If a constraint stays only in the chat transcript, auto-compaction can compress it away.
+- **OpenClaw (`SOUL.md` + `MEMORY.md`):** Designed for continuous personal assistant continuity rather than single-project codebases. Identity invariants live in `SOUL.md`, while long-term user preferences and episodic notes append to `MEMORY.md`. This works well for cross-week messaging continuity, but lacks per-task artifact indexing unless paired with a structured project folder.
+- **Manus (session-scoped scratchpad):** Maintains an internal task todo list during a cloud run, but provides limited schema control over what survives across separate threads once a task closes.
+
+## 2. Artifact delivery and preview surfaces
+
+How a buyer or reviewer inspects the output determines how fast you can verify quality before handoff.
+
+- **Hyperagent (tri-modal split canvas):** Combines three delivery primitives in a side-by-side workspace: `CreateDocument` for structured markdown reports, `PublishWebpage` for rendering a live interactive iframe preview directly beside the thread, and downloadable `.zip` source bundles. For scoping briefs, interactive calculators, or client-facing prototypes, reviewers can inspect the rendered webpage immediately without cloning a repository.
+- **Claude Code (git worktrees + local toolchain):** Operates directly on local filesystems and isolated git worktrees. It does not host an iframe canvas of its own; instead, it commits code that triggers your existing CI pipeline and deployment previews (such as Vercel Git integration). For production applications, repository-native delivery remains the gold standard.
+- **Manus and OpenClaw:** Manus outputs downloadable files and hosted sandbox previews for single runs, while OpenClaw delivers text responses, diffs, or file attachments back through its configured messaging or terminal channel.
+
+## 3. Trajectory learning and inline distillation
+
+When you correct an agent mid-task—for example, instructing it to use sentence-case headings or to fail closed on missing configuration—most runtimes forget that correction in the next session unless you manually edit a configuration file.
+
+- **Hyperagent (`Suggested learnings` inline distillation):** When a trajectory surfaces a reusable preference or correction, Hyperagent emits an inline `Suggested learnings` card inside the thread. A human operator reviews and approves the distilled rule with one click, promoting it into durable agent memory without hand-editing markdown files.
+- **Claude Code and OpenClaw (explicit file commits):** Learning is manual or skill-driven. In Claude Code, you must explicitly write the lesson into `CLAUDE.md` or a repository rule file and commit it to git. That extra friction prevents accidental memory pollution—every rule has a git blame—at the cost of requiring deliberate end-of-session hygiene.
+
+## 4. Migration paths and MCP interoperability
+
+Lock-in happens when an agent platform traps your prompts, memory files, and tool definitions inside a proprietary UI.
+
+- **Import from OpenClaw and Manus:** Hyperagent includes dedicated migration wizards (`Import from OpenClaw` and `Import from Manus`) that ingest existing `SOUL.md` / `MEMORY.md` bundles or task archives and map them into Hyperagent's structured workspace format.
+- **MCP server exposure with `executionMode: confirm`:** Beyond consuming external Model Context Protocol (MCP) tools, Hyperagent exposes its own threads and agents as an MCP server (`list_agents`, `create_thread`, `send_message`, `get_thread`, `list_pending_approvals`, `resolve_approval`). Crucially, mutating or external actions support `executionMode: confirm`, pausing execution in a pending-approval state until a human resolves the gate. This aligns directly with the human-gate requirements enforced in the [Income Graph workbench](/workbench).
+
+## 5. Credit ladder economics vs. direct API routing
+
+Cloud agent platforms typically monetize through pre-committed monthly credit tiers, while local harnesses bill raw token consumption via your own API keys (or an aggregator such as Vercel AI Gateway).
+
+Production cloud workbenches use a **9-tier progressive credit commitment ladder**, where higher monthly commitments unlock bonus platform credits:
+
+| Monthly commitment (USD) | Effective credits | Bonus credits | Bonus rate | Effective cost per $1 credit |
+|---|---|---|---|---|
+| $20 / mo | $20 | +$0 | 0% | $1.0000 |
+| $50 / mo | $55 | +$5 | +10% | $0.9091 |
+| $100 / mo | $115 | +$15 | +15% | $0.8696 |
+| $200 / mo | $240 | +$40 | +20% | $0.8333 |
+| $500 / mo | $625 | +$125 | +25% | $0.8000 |
+| $1,000 / mo | $1,300 | +$300 | +30% | $0.7692 |
+| $2,000 / mo | $2,700 | +$700 | +35% | $0.7407 |
+| $5,000 / mo | $7,000 | +$2,000 | +40% | $0.7143 |
+| $10,000 / mo | $14,500 | +$4,500 | +45% | $0.6897 |
+
+To translate abstract credit balances into real work, map your expected monthly usage across three outcome-anchored complexity bands (now codified in `lib/income-graph/economics.ts`):
+
+1. **Quick task ($1–$5 credit band, $3 midpoint):** Research a topic, draft an email, summarize a document, or generate an image.
+2. **Deep work ($5–$45 credit band, $25 midpoint):** Produce a full competitor report, build a landing page on the split canvas, run a multi-step data pipeline, or create a video asset.
+3. **Run your business ($50–$200+/day credit band, $125/day midpoint):** Always-on agents handling operations, marketing preparation, outreach staging, monitoring, and recurring workflows.
+
+### The CFO rule on credit ladders vs. BYOK
+
+A progressive credit bonus (up to +45% at the $10,000/mo tier, reducing effective credit cost to ~$0.69 on the dollar) only saves money **if your monthly utilization consistently consumes the committed balance**. If your workload is spiky—such as running two deep-work sprints one month and none the next—unspent monthly credits expire or sit idle, erasing the nominal bonus percentage.
+
+For variable workloads or strict cost-floor control, routing BYOK API keys through **Vercel AI Gateway** (or running Claude Code against direct provider billing) ensures you pay strictly for tokens consumed, with zero commitment breakage.
+
+## Modeling your workload before committing
+
+Before locking in a monthly agent budget or quoting a client delivery, run the numbers through our deterministic verification tools:
+
+- Use the [Income Graph workbench](/workbench) to validate your system's monthly cost floor, founder hours, break-even unit count, and human approval gates (`A04`) before taking an offer to market.
+- Review our scoped [implementation offers and blueprints](/offers) to see how we structure fixed-scope agent deliveries with explicit cost floors, repository provenance, and zero revenue hype.
+
+<FaqSection items={[
+  { q: 'Does Hyperagent replace Claude Code for software engineering?', a: 'No. Claude Code runs locally against your git worktrees, executes native test suites, and integrates directly with repository hooks. Hyperagent complements local coding harnesses as a cloud workbench for research synthesis, split-canvas web previews (PublishWebpage), and MCP-orchestrated workflows that non-terminal collaborators can inspect.' },
+  { q: 'How does the 9-section Thread Context help with long tasks?', a: 'When a standard chat thread hits its token limit, automatic summarization often drops constraints or file paths. Hyperagent separates Goal, Current State, Key Decisions, Constraints, Active Files, Open Questions, Completed Steps, Next Steps, and References into distinct sections so compaction updates state predictably.' },
+  { q: 'When does the progressive credit ladder beat BYOK API keys?', a: 'Only when your steady-state monthly job volume reliably consumes the tier commitment. At $200/mo ($240 effective credits, +20% bonus), full utilization lowers unit credit cost to $0.8333. If you use less than 83% of the tier in a billing cycle, pay-as-you-go BYOK via Vercel AI Gateway is cheaper.' },
+  { q: 'Why is there no affiliate link for Hyperagent in this comparison?', a: 'Because our catalog fails closed. Until a program’s exact commission rate, recurring window, and payout terms are verified directly and an active referral URL is recorded in data/programs.json, getLink("Hyperagent") returns null and renders plain text.' },
+]} />

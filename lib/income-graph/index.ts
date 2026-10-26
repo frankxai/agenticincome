@@ -10,7 +10,21 @@
 
 import { runAdversarialChecks } from './adversarial.ts'
 import { draftIncomeGraph, type IncomeGraphDraft, type UnsupportedClaim } from './draft.ts'
-import { checkEconomics, computeEconomics, type Economics } from './economics.ts'
+import {
+  AGENT_JOB_TIERS,
+  CREDIT_BONUS_LADDER,
+  checkEconomics,
+  computeEconomics,
+  estimateMonthlyAgentWorkload,
+  evaluateCreditLadderSelection,
+  type AgentJobTier,
+  type AgentJobTierId,
+  type CreditLadderEvaluation,
+  type CreditLadderTier,
+  type Economics,
+  type MonthlyAgentWorkloadEstimate,
+  type MonthlyAgentWorkloadInput,
+} from './economics.ts'
 import { exportTasks, projectToIncomeSystem, tasksToMarkdown, type InstallableTask } from './export.ts'
 import { migrateGraph } from './migrate.ts'
 import { analyzeSettlement, hasActivatedFiatOffer, type SettlementVerdict } from './settlement.ts'
@@ -165,8 +179,12 @@ function emptyReport(findings: Finding[]): WorkbenchReport {
 }
 
 export {
+  AGENT_JOB_TIERS,
+  CREDIT_BONUS_LADDER,
   computeEconomics,
   draftIncomeGraph,
+  estimateMonthlyAgentWorkload,
+  evaluateCreditLadderSelection,
   exportTasks,
   hasActivatedFiatOffer,
   migrateGraph,
@@ -176,4 +194,16 @@ export {
   validateStructure,
 }
 export * from './model.ts'
-export type { Economics, IncomeGraphDraft, InstallableTask, SettlementVerdict, UnsupportedClaim }
+export type {
+  AgentJobTier,
+  AgentJobTierId,
+  CreditLadderEvaluation,
+  CreditLadderTier,
+  Economics,
+  IncomeGraphDraft,
+  InstallableTask,
+  MonthlyAgentWorkloadEstimate,
+  MonthlyAgentWorkloadInput,
+  SettlementVerdict,
+  UnsupportedClaim,
+}

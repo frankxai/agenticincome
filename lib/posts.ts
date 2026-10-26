@@ -15,6 +15,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: 'hyperagent-vs-claude-code-manus-openclaw',
+    title: 'Hyperagent vs. Claude Code, Manus, and OpenClaw: Working Memory, Split Canvas, and Credit Economics (2026)',
+    dek: 'An empirical engineering breakdown across five architectural dimensions: 9-section Thread Context survival, PublishWebpage split canvas delivery, inline trajectory distillation, MCP interoperability, and the $20–$10,000 progressive credit bonus ladder.',
+    query: 'hyperagent vs claude code manus openclaw',
+    date: '2026-10-26',
+    cluster: 'coding',
+    tools: ['Hyperagent', 'Claude Code', 'Manus', 'OpenClaw'],
+    featured: true,
+  },
+  {
     slug: 'two-day-sprint-dissected',
     title: 'The Two-Day Implementation Sprint, Dissected',
     dek: 'The full anatomy of an agent-team delivery — the five fulfillment patterns, the honest cost table (human hours + agent spend), and what clients actually receive.',

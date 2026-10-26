@@ -148,3 +148,256 @@ export function checkEconomics(graph: IncomeGraph): Finding[] {
 
   return out
 }
+
+export type CreditLadderTier = {
+  monthlyPriceUsd: number
+  effectiveCreditsUsd: number
+  bonusCreditsUsd: number
+  bonusPercent: number
+  effectiveCostPerCreditUsd: number
+}
+
+/**
+ * The 9-tier progressive credit commitment schedule observed in production
+ * cloud agent workbenches (e.g. Hyperagent $20–$10,000 monthly commitment ladder).
+ * Models compute purchasing power only — never a revenue projection.
+ */
+export const CREDIT_BONUS_LADDER: readonly CreditLadderTier[] = [
+  { monthlyPriceUsd: 20, effectiveCreditsUsd: 20, bonusCreditsUsd: 0, bonusPercent: 0, effectiveCostPerCreditUsd: 1 },
+  { monthlyPriceUsd: 50, effectiveCreditsUsd: 55, bonusCreditsUsd: 5, bonusPercent: 10, effectiveCostPerCreditUsd: 0.9091 },
+  { monthlyPriceUsd: 100, effectiveCreditsUsd: 115, bonusCreditsUsd: 15, bonusPercent: 15, effectiveCostPerCreditUsd: 0.8696 },
+  { monthlyPriceUsd: 200, effectiveCreditsUsd: 240, bonusCreditsUsd: 40, bonusPercent: 20, effectiveCostPerCreditUsd: 0.8333 },
+  { monthlyPriceUsd: 500, effectiveCreditsUsd: 625, bonusCreditsUsd: 125, bonusPercent: 25, effectiveCostPerCreditUsd: 0.8 },
+  { monthlyPriceUsd: 1000, effectiveCreditsUsd: 1300, bonusCreditsUsd: 300, bonusPercent: 30, effectiveCostPerCreditUsd: 0.7692 },
+  { monthlyPriceUsd: 2000, effectiveCreditsUsd: 2700, bonusCreditsUsd: 700, bonusPercent: 35, effectiveCostPerCreditUsd: 0.7407 },
+  { monthlyPriceUsd: 5000, effectiveCreditsUsd: 7000, bonusCreditsUsd: 2000, bonusPercent: 40, effectiveCostPerCreditUsd: 0.7143 },
+  { monthlyPriceUsd: 10000, effectiveCreditsUsd: 14500, bonusCreditsUsd: 4500, bonusPercent: 45, effectiveCostPerCreditUsd: 0.6897 },
+] as const
+
+export type AgentJobTierId = 'quick-task' | 'deep-work' | 'run-your-business'
+
+export type AgentJobTier = {
+  id: AgentJobTierId
+  label: string
+  unit: 'job' | 'day'
+  lowCreditsUsd: number
+  midpointCreditsUsd: number
+  highCreditsUsd: number
+  creditBandLabel: string
+  examples: readonly string[]
+}
+
+/**
+ * Outcome-anchored job complexity bands that translate abstract credit balances
+ * into concrete operator workloads.
+ */
+export const AGENT_JOB_TIERS: readonly AgentJobTier[] = [
+  {
+    id: 'quick-task',
+    label: 'Quick task',
+    unit: 'job',
+    lowCreditsUsd: 1,
+    midpointCreditsUsd: 3,
+    highCreditsUsd: 5,
+    creditBandLabel: '$1–$5',
+    examples: ['research a topic', 'draft an email', 'summarize a doc', 'generate an image'],
+  },
+  {
+    id: 'deep-work',
+    label: 'Deep work',
+    unit: 'job',
+    lowCreditsUsd: 5,
+    midpointCreditsUsd: 25,
+    highCreditsUsd: 45,
+    creditBandLabel: '$5–$45',
+    examples: ['full competitor report', 'build a landing page', 'multi-step data pipeline', 'create a video'],
+  },
+  {
+    id: 'run-your-business',
+    label: 'Run your business',
+    unit: 'day',
+    lowCreditsUsd: 50,
+    midpointCreditsUsd: 125,
+    highCreditsUsd: 200,
+    creditBandLabel: '$50–$200+/day',
+    examples: ['always-on agents handling ops, marketing, outreach, monitoring & workflows'],
+  },
+] as const
+
+export type CreditLadderEvaluation = {
+  requestedMonthlyPriceUsd: number
+  exactTierMatch: boolean
+  selectedTier: CreditLadderTier
+  monthlyPriceUsd: number
+  effectiveCreditsUsd: number
+  bonusCreditsUsd: number
+  bonusPercent: number
+  effectiveDiscountPercent: number
+  estimatedCapacityByTier: {
+    'quick-task': { minJobs: number; midpointJobs: number; maxJobs: number }
+    'deep-work': { minJobs: number; midpointJobs: number; maxJobs: number }
+    'run-your-business': { minDays: number; midpointDays: number; maxDays: number }
+  }
+  assumptions: string[]
+}
+
+export function evaluateCreditLadderSelection(monthlyPriceUsd: number): CreditLadderEvaluation {
+  const sanitized = Number.isFinite(monthlyPriceUsd) ? Math.max(0, monthlyPriceUsd) : 0
+  const exact = CREDIT_BONUS_LADDER.find((t) => t.monthlyPriceUsd === sanitized)
+  const selectedTier =
+    exact ??
+    CREDIT_BONUS_LADDER.find((t) => t.monthlyPriceUsd >= sanitized) ??
+    CREDIT_BONUS_LADDER[CREDIT_BONUS_LADDER.length - 1]
+
+  const effectiveDiscountPercent =
+    Math.round((1 - selectedTier.monthlyPriceUsd / selectedTier.effectiveCreditsUsd) * 10000) / 100
+
+  const quick = AGENT_JOB_TIERS[0]
+  const deep = AGENT_JOB_TIERS[1]
+  const business = AGENT_JOB_TIERS[2]
+  const credits = selectedTier.effectiveCreditsUsd
+
+  const assumptions = [
+    `Selected tier commits $${selectedTier.monthlyPriceUsd}/mo for $${selectedTier.effectiveCreditsUsd} in effective platform credits (+${selectedTier.bonusPercent}% bonus).`,
+    'Job capacity ranges divide effective credits by the high, midpoint, and low credit bands for each complexity tier.',
+    'Unused monthly commitment credits may expire at billing cycle close depending on platform terms; bonus credits reduce unit compute cost only when utilization stays high.',
+    'Credit capacity measures agent compute and tool execution budget, never customer demand or revenue.',
+  ]
+
+  if (!exact) {
+    assumptions.unshift(
+      `Requested $${sanitized}/mo does not match an exact commitment step; snapped to the $${selectedTier.monthlyPriceUsd}/mo ladder tier.`,
+    )
+  }
+
+  return {
+    requestedMonthlyPriceUsd: sanitized,
+    exactTierMatch: Boolean(exact),
+    selectedTier,
+    monthlyPriceUsd: selectedTier.monthlyPriceUsd,
+    effectiveCreditsUsd: selectedTier.effectiveCreditsUsd,
+    bonusCreditsUsd: selectedTier.bonusCreditsUsd,
+    bonusPercent: selectedTier.bonusPercent,
+    effectiveDiscountPercent,
+    estimatedCapacityByTier: {
+      'quick-task': {
+        minJobs: Math.floor(credits / quick.highCreditsUsd),
+        midpointJobs: Math.floor(credits / quick.midpointCreditsUsd),
+        maxJobs: Math.floor(credits / quick.lowCreditsUsd),
+      },
+      'deep-work': {
+        minJobs: Math.floor(credits / deep.highCreditsUsd),
+        midpointJobs: Math.floor(credits / deep.midpointCreditsUsd),
+        maxJobs: Math.floor(credits / deep.lowCreditsUsd),
+      },
+      'run-your-business': {
+        minDays: Math.floor(credits / business.highCreditsUsd),
+        midpointDays: Math.floor(credits / business.midpointCreditsUsd),
+        maxDays: Math.floor(credits / business.lowCreditsUsd),
+      },
+    },
+    assumptions,
+  }
+}
+
+export type MonthlyAgentWorkloadInput = {
+  quickTasksPerMonth: number
+  deepWorkPerMonth: number
+  businessDaysPerMonth: number
+}
+
+export type MonthlyAgentWorkloadEstimate = {
+  jobs: MonthlyAgentWorkloadInput
+  lowCreditsUsd: number
+  midpointCreditsUsd: number
+  highCreditsUsd: number
+  breakdown: {
+    'quick-task': { count: number; lowCreditsUsd: number; midpointCreditsUsd: number; highCreditsUsd: number }
+    'deep-work': { count: number; lowCreditsUsd: number; midpointCreditsUsd: number; highCreditsUsd: number }
+    'run-your-business': { count: number; lowCreditsUsd: number; midpointCreditsUsd: number; highCreditsUsd: number }
+  }
+  recommendedTier: CreditLadderTier
+  highDemandTier: CreditLadderTier
+  unutilizedMidpointCreditsUsd: number
+  exceedsSingleLadderMax: boolean
+  assumptions: string[]
+}
+
+export function estimateMonthlyAgentWorkload(
+  jobs: MonthlyAgentWorkloadInput,
+): MonthlyAgentWorkloadEstimate {
+  const quickCount = Number.isFinite(jobs?.quickTasksPerMonth) ? Math.max(0, Math.floor(jobs.quickTasksPerMonth)) : 0
+  const deepCount = Number.isFinite(jobs?.deepWorkPerMonth) ? Math.max(0, Math.floor(jobs.deepWorkPerMonth)) : 0
+  const businessDays = Number.isFinite(jobs?.businessDaysPerMonth) ? Math.max(0, Math.floor(jobs.businessDaysPerMonth)) : 0
+
+  const [quickTier, deepTier, businessTier] = AGENT_JOB_TIERS
+
+  const quickBreakdown = {
+    count: quickCount,
+    lowCreditsUsd: quickCount * quickTier.lowCreditsUsd,
+    midpointCreditsUsd: quickCount * quickTier.midpointCreditsUsd,
+    highCreditsUsd: quickCount * quickTier.highCreditsUsd,
+  }
+  const deepBreakdown = {
+    count: deepCount,
+    lowCreditsUsd: deepCount * deepTier.lowCreditsUsd,
+    midpointCreditsUsd: deepCount * deepTier.midpointCreditsUsd,
+    highCreditsUsd: deepCount * deepTier.highCreditsUsd,
+  }
+  const businessBreakdown = {
+    count: businessDays,
+    lowCreditsUsd: businessDays * businessTier.lowCreditsUsd,
+    midpointCreditsUsd: businessDays * businessTier.midpointCreditsUsd,
+    highCreditsUsd: businessDays * businessTier.highCreditsUsd,
+  }
+
+  const lowCreditsUsd = quickBreakdown.lowCreditsUsd + deepBreakdown.lowCreditsUsd + businessBreakdown.lowCreditsUsd
+  const midpointCreditsUsd =
+    quickBreakdown.midpointCreditsUsd + deepBreakdown.midpointCreditsUsd + businessBreakdown.midpointCreditsUsd
+  const highCreditsUsd =
+    quickBreakdown.highCreditsUsd + deepBreakdown.highCreditsUsd + businessBreakdown.highCreditsUsd
+
+  const topTier = CREDIT_BONUS_LADDER[CREDIT_BONUS_LADDER.length - 1]
+  const recommendedTier =
+    CREDIT_BONUS_LADDER.find((t) => t.effectiveCreditsUsd >= midpointCreditsUsd) ?? topTier
+  const highDemandTier =
+    CREDIT_BONUS_LADDER.find((t) => t.effectiveCreditsUsd >= highCreditsUsd) ?? topTier
+
+  const exceedsSingleLadderMax = midpointCreditsUsd > topTier.effectiveCreditsUsd
+  const unutilizedMidpointCreditsUsd = Math.max(0, recommendedTier.effectiveCreditsUsd - midpointCreditsUsd)
+
+  const assumptions = [
+    `Quick tasks (${quickCount}/mo) are modeled at $${quickTier.lowCreditsUsd} low / $${quickTier.midpointCreditsUsd} midpoint / $${quickTier.highCreditsUsd} high credits per job.`,
+    `Deep work deliverables (${deepCount}/mo) are modeled at $${deepTier.lowCreditsUsd} low / $${deepTier.midpointCreditsUsd} midpoint / $${deepTier.highCreditsUsd} high credits per job.`,
+    `Always-on business days (${businessDays}/mo) are modeled at $${businessTier.lowCreditsUsd} low / $${businessTier.midpointCreditsUsd} midpoint / $${businessTier.highCreditsUsd} high credits per active day.`,
+    `Recommended tier ($${recommendedTier.monthlyPriceUsd}/mo -> $${recommendedTier.effectiveCreditsUsd} effective credits) is the lowest commitment step covering the $${midpointCreditsUsd} midpoint monthly credit demand.`,
+    'This estimate models tool and compute expenditure only; it makes no claim or forecast about client acquisition or revenue.',
+  ]
+
+  if (exceedsSingleLadderMax) {
+    assumptions.push(
+      `Midpoint credit demand ($${midpointCreditsUsd}/mo) exceeds the largest single commitment tier ($${topTier.effectiveCreditsUsd} effective credits on the $${topTier.monthlyPriceUsd}/mo plan); additional top-ups or direct BYOK API routing are required.`,
+    )
+  }
+
+  return {
+    jobs: {
+      quickTasksPerMonth: quickCount,
+      deepWorkPerMonth: deepCount,
+      businessDaysPerMonth: businessDays,
+    },
+    lowCreditsUsd,
+    midpointCreditsUsd,
+    highCreditsUsd,
+    breakdown: {
+      'quick-task': quickBreakdown,
+      'deep-work': deepBreakdown,
+      'run-your-business': businessBreakdown,
+    },
+    recommendedTier,
+    highDemandTier,
+    unutilizedMidpointCreditsUsd,
+    exceedsSingleLadderMax,
+    assumptions,
+  }
+}

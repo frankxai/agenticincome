@@ -1,0 +1,53 @@
+name: org-mirror
+
+# Keeps Agentic-Income/agenticincome a read-only mirror of this repo's main
+# (federation ruling A, 2026-10-18: frankxai is canonical for deployed repos).
+# Fast-forward only: if the mirror ever diverges the push fails instead of overwriting it.
+# Needs repository secret ORG_MIRROR_TOKEN: a fine-grained token with Contents: read and write
+# on Agentic-Income/agenticincome only. Until it exists the job records a skip and passes.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: org-mirror
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    # The mirror receives this file too; it must never push to itself.
+    if: github.repository == 'frankxai/agenticincome'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check for the mirror token
+        id: gate
+        env:
+          TOKEN: ${{ secrets.ORG_MIRROR_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "ORG_MIRROR_TOKEN is not set; mirror sync skipped." >> "$GITHUB_STEP_SUMMARY"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout full history
+        if: steps.gate.outputs.ready == 'true'
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Fast-forward the org mirror
+        if: steps.gate.outputs.ready == 'true'
+        env:
+          TOKEN: ${{ secrets.ORG_MIRROR_TOKEN }}
+        run: |
+          git push "https://x-access-token:${TOKEN}@github.com/Agentic-Income/agenticincome.git" "HEAD:refs/heads/main"
+          echo "Mirrored ${GITHUB_SHA} to Agentic-Income/agenticincome." >> "$GITHUB_STEP_SUMMARY"

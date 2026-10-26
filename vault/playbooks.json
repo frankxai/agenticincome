@@ -1,0 +1,189 @@
+{
+  "$comment": "One revenue playbook per estate site. Every id is cross-checked by the validator: streams.model -> revenue-models.json, shops -> economies.json, partners -> partners.json, articles.rows -> any vault row, nextExperiment -> experiments.json. Stage is honest: live = running today and evidenced in this repo (revenue still unmeasured here), gated = built but waiting on a human gate, building, proposed, hold = deliberately not now.",
+  "updatedAt": "2026-10-26",
+  "stages": ["live", "gated", "building", "proposed", "hold"],
+  "playbooks": [
+    {
+      "property": "agenticincome",
+      "role": "The map. Sourced economy intelligence and partner economics, readable by people and queryable by agents.",
+      "streams": [
+        { "model": "affiliate-recurring", "stage": "live", "what": "disclosed partner links through go.agenticincome.ai" },
+        { "model": "data-products", "stage": "proposed", "what": "monthly economy brief from the vault (Private Intel)" },
+        { "model": "digital-product-mor", "stage": "gated", "what": "Blueprint and packs in products/catalog.json; purchasable only once Polar env is configured (lib/polar.ts); prices and activation stay human-gated" },
+        { "model": "pay-per-call", "stage": "hold", "what": "paid MCP lookups; waits on exp-001 showing agents use the free tools" }
+      ],
+      "shops": ["apify-store-cumulative-payout", "rapidapi-marketplace-fee", "aws-marketplace-listing-fee"],
+      "partners": ["Systeme.io", "Higgsfield", "ElevenLabs", "Writesonic", "Rytr", "Synthesia"],
+      "articles": [
+        { "title": "How the App Store economy pays developers", "rows": ["apple-app-store-digital-2025", "google-play-service-fee"] },
+        { "title": "What a marketplace take rate buys you", "rows": ["fiverr-take-rate-2025", "upwork-gsv-2025", "gumroad-discover-fee"] },
+        { "title": "Agent payment rails in plain words", "rows": ["x402-what", "acp-stripe-openai", "ap2-google", "coinbase-x402-facilitator"] },
+        { "title": "Why reselling tokens is a thin business", "rows": ["openrouter-credit-fee", "vercel-ai-gateway-markup", "anthropic-sonnet-5-5-output"] }
+      ],
+      "nextExperiment": "exp-001-mcp-vs-page-affiliate"
+    },
+    {
+      "property": "go-agenticincome",
+      "role": "The redirect point for partner links. Click counting is not evidenced in this repo yet; exp-001 adds it.",
+      "streams": [{ "model": "affiliate-recurring", "stage": "live", "what": "catalog-driven redirects with disclosure" }],
+      "shops": [],
+      "partners": ["Systeme.io", "Higgsfield", "ElevenLabs"],
+      "articles": [],
+      "nextExperiment": "exp-001-mcp-vs-page-affiliate"
+    },
+    {
+      "property": "agenticpassiveincome",
+      "role": "Automation-first sibling. Tests whether agents will pay other agents.",
+      "streams": [
+        { "model": "affiliate-recurring", "stage": "building", "what": "comparison content with disclosed links; running state is not evidenced from this repo" },
+        { "model": "pay-per-call", "stage": "proposed", "what": "one premium lookup over an agent payment rail" }
+      ],
+      "shops": ["rapidapi-marketplace-fee"],
+      "partners": ["CapCut", "Opus Clip", "Pollo AI"],
+      "articles": [{ "title": "What 75 million x402 transactions do and do not tell you", "rows": ["x402-30d-transactions", "coinbase-x402-facilitator"] }],
+      "nextExperiment": "exp-005-pay-per-call-endpoint"
+    },
+    {
+      "property": "disruptivepassiveincome",
+      "role": "Public evidence ledger. No checkout by design; it earns trust that the other sites spend.",
+      "streams": [{ "model": "data-products", "stage": "building", "what": "sourced experiments, risks and outcomes, free" }],
+      "shops": [],
+      "partners": [],
+      "articles": [{ "title": "The creator economy, measured", "rows": ["goldman-creator-economy-2027", "patreon-cumulative-payouts", "youtube-partner-payouts-4yr"] }],
+      "nextExperiment": null
+    },
+    {
+      "property": "gencreator",
+      "role": "Creator packs where creators already shop. The estate's best fit for outside marketplaces.",
+      "streams": [
+        { "model": "byok-tooling", "stage": "building", "what": "skill packs that run on the creator's own agent and key" },
+        { "model": "marketplace-listing", "stage": "proposed", "what": "packs on a plugin marketplace, templates on template stores" },
+        { "model": "affiliate-recurring", "stage": "proposed", "what": "tool recommendations inside packs, disclosed" }
+      ],
+      "shops": ["framer-creator-payouts-2025", "notion-marketplace-fee", "gumroad-discover-fee", "webflow-template-fee", "creative-market-shop-owner-earnings"],
+      "partners": ["CapCut", "Higgsfield", "ElevenLabs", "Opus Clip", "Descript", "Synthesia"],
+      "articles": [{ "title": "Where template sellers actually get paid", "rows": ["framer-creator-payouts-2025", "notion-marketplace-fee", "webflow-template-fee", "envato-contributor-earnings"] }],
+      "nextExperiment": "exp-003-plugin-marketplace-vs-own-checkout"
+    },
+    {
+      "property": "gencreator-community",
+      "role": "Where pack buyers learn together.",
+      "streams": [{ "model": "education-cohort", "stage": "proposed", "what": "cohort or membership once packs have buyers" }],
+      "shops": ["patreon-cumulative-payouts", "whop-cumulative-payouts"],
+      "partners": [],
+      "articles": [],
+      "nextExperiment": null
+    },
+    {
+      "property": "arcanea",
+      "role": "Creative platform. Sells creations priced per outcome; inference is a cost line, never the product.",
+      "streams": [
+        { "model": "subscription-saas", "stage": "building", "what": "creation plans; margin set by the image and video rows" },
+        { "model": "games", "stage": "proposed", "what": "micro-games set in canon" },
+        { "model": "royalties-licensing", "stage": "hold", "what": "IP licensing after canon and audience exist" }
+      ],
+      "shops": ["steam-revenue-share", "epic-games-store-revenue-share", "roblox-devex-fy2025", "fortnite-creator-payouts-2024", "fab-revenue-share", "unity-asset-store-share"],
+      "partners": ["Higgsfield", "Topaz Labs", "Pollo AI"],
+      "articles": [{ "title": "How game platforms split the money", "rows": ["steam-revenue-share", "epic-games-store-revenue-share", "roblox-devex-fy2025", "fortnite-creator-payouts-2024"] }],
+      "nextExperiment": "exp-006-byok-vs-bundled-credits"
+    },
+    {
+      "property": "arcanea-dev",
+      "role": "Developer portal. Tools and APIs for builders on the Arcanea world.",
+      "streams": [
+        { "model": "byok-tooling", "stage": "proposed", "what": "SDKs and MCP tools that run on the developer's key" },
+        { "model": "usage-api-resale", "stage": "hold", "what": "metered API; token-resale-markup shows why not yet" }
+      ],
+      "shops": ["rapidapi-marketplace-fee", "apify-store-cumulative-payout"],
+      "partners": [],
+      "articles": [],
+      "nextExperiment": null
+    },
+    {
+      "property": "arcanea-academy",
+      "role": "World Proof Lab: learning by building in the canon.",
+      "streams": [{ "model": "education-cohort", "stage": "proposed", "what": "paid labs after a free proof run" }],
+      "shops": [],
+      "partners": [],
+      "articles": [],
+      "nextExperiment": "exp-008-micro-game"
+    },
+    {
+      "property": "animelegends",
+      "role": "Media and IP satellite. Audience first, then games and licensing.",
+      "streams": [
+        { "model": "ads-sponsorship", "stage": "proposed", "what": "video channel revenue once the audience exists" },
+        { "model": "games", "stage": "hold", "what": "after arcanea's micro-game result" }
+      ],
+      "shops": ["youtube-partner-payouts-4yr", "roblox-devex-fy2025"],
+      "partners": ["CapCut", "Opus Clip"],
+      "articles": [],
+      "nextExperiment": null
+    },
+    {
+      "property": "frankx",
+      "role": "The demand engine. Readers, books and music that send people to every other site.",
+      "streams": [
+        { "model": "digital-product-mor", "stage": "building", "what": "books and creator products" },
+        { "model": "royalties-licensing", "stage": "building", "what": "Arcanea Records releases" },
+        { "model": "ads-sponsorship", "stage": "hold", "what": "newsletter sponsorship after list size is measured" },
+        { "model": "affiliate-recurring", "stage": "proposed", "what": "tools Frank uses, disclosed" }
+      ],
+      "shops": ["amazon-kdp-kindle-plus-monthly", "spotify-royalties-2025", "bandcamp-cumulative-payouts", "distrokid-pricing", "substack-paid-subscriptions"],
+      "partners": ["ElevenLabs", "Descript", "Opus Clip"],
+      "articles": [{ "title": "What a stream pays versus a direct sale", "rows": ["spotify-royalties-2025", "bandcamp-past-year", "distrokid-pricing"] }],
+      "nextExperiment": "exp-007-music-direct-vs-streaming"
+    },
+    {
+      "property": "realityarchitect",
+      "role": "Creator method: a public method and a paid vault.",
+      "streams": [
+        { "model": "education-cohort", "stage": "proposed", "what": "paid vault membership" },
+        { "model": "digital-product-mor", "stage": "proposed", "what": "method workbooks" }
+      ],
+      "shops": ["patreon-cumulative-payouts", "substack-paid-subscriptions"],
+      "partners": [],
+      "articles": [],
+      "nextExperiment": null
+    },
+    {
+      "property": "aiarchitectacademy",
+      "role": "Cohort course, waitlist first.",
+      "streams": [{ "model": "education-cohort", "stage": "building", "what": "waitlist-first surface; the site is pending cutover per the properties graph; no checkout until a gate PASS" }],
+      "shops": [],
+      "partners": [],
+      "articles": [],
+      "nextExperiment": null
+    },
+    {
+      "property": "starlightintelligence-org",
+      "role": "The substrate's public face: memory, orchestration and acceptance checks for agent teams.",
+      "streams": [
+        { "model": "byok-tooling", "stage": "building", "what": "open tooling that runs on the buyer's agents" },
+        { "model": "subscription-saas", "stage": "proposed", "what": "hosted acceptance checks" }
+      ],
+      "shops": ["aws-marketplace-listing-fee"],
+      "partners": [],
+      "articles": [],
+      "nextExperiment": null
+    },
+    {
+      "property": "vibeclubs",
+      "role": "Cohort and community surface.",
+      "streams": [{ "model": "education-cohort", "stage": "proposed", "what": "host packs and cohorts" }],
+      "shops": [],
+      "partners": [],
+      "articles": [],
+      "nextExperiment": null
+    },
+    {
+      "property": "starlight-domains",
+      "role": "Domain intelligence and the domain portfolio.",
+      "streams": [{ "model": "domain-portfolio", "stage": "hold", "what": "develop, lease or sell idle names; spend is Frank's call" }],
+      "shops": [],
+      "partners": [],
+      "articles": [{ "title": "How many websites and domains exist", "rows": ["netcraft-sites-jul-2026", "verisign-dnib-q2-2026", "w3techs-wordpress-share"] }],
+      "nextExperiment": null
+    }
+  ]
+}

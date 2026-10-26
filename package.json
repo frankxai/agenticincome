@@ -13,6 +13,7 @@
     "test": "node --test --test-force-exit tests/*.test.mjs",
     "sync:catalog": "node scripts/sync-catalog.mjs",
     "audit:affiliate": "node scripts/audit-affiliate.mjs",
+    "vault:check": "node scripts/vault-validate.mjs",
     "type-check": "tsc --noEmit",
     "links:check:static": "node scripts/check-internal-links.mjs",
     "verify:public": "node scripts/verify-public-surface.mjs",
@@ -28,7 +29,7 @@
     "next": "16.4.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "zod": "^4.6.7"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@mdx-js/loader": "^3.1.0",

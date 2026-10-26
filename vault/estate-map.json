@@ -1,0 +1,403 @@
+{
+  "$comment": "Estate properties mapped to revenue models (revenue-models.json ids) and economy sectors. Site rows snapshotted from starlight/graph/properties.graph.json and product stages from starlight/graph/products.graph.json on 2026-10-25; re-snapshot rather than hand-editing statuses. Properties whose role is [OPEN] are left out until Frank assigns them.",
+  "snapshotAt": "2026-10-25",
+  "sources": [
+    "starlight/graph/properties.graph.json",
+    "starlight/graph/products.graph.json"
+  ],
+  "properties": [
+    {
+      "id": "frankx",
+      "domain": "frankx.ai",
+      "brand": "FrankX",
+      "tier": "tier-1",
+      "siteStatus": "live",
+      "revenueModels": [
+        "digital-product-mor",
+        "ads-sponsorship",
+        "royalties-licensing",
+        "byok-tooling",
+        "education-cohort"
+      ],
+      "economySectors": [
+        "creator",
+        "music",
+        "digital-goods"
+      ],
+      "thesis": "Demand engine: articles, books, music. Sends readers to every other brand.",
+      "products": [
+        {
+          "id": "creative-ai-toolkit",
+          "stage": "building"
+        },
+        {
+          "id": "creation-chronicles",
+          "stage": "building"
+        },
+        {
+          "id": "ai-architect-academy",
+          "stage": "concept"
+        }
+      ],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "arcanea",
+      "domain": "arcanea.ai",
+      "brand": "Arcanea",
+      "tier": "tier-1",
+      "siteStatus": "live",
+      "revenueModels": [
+        "subscription-saas",
+        "usage-api-resale",
+        "own-marketplace",
+        "games",
+        "royalties-licensing"
+      ],
+      "economySectors": [
+        "games",
+        "creator",
+        "music",
+        "ai-models"
+      ],
+      "thesis": "Creative platform. Inference is the main cost line, so price per creation, not per token.",
+      "products": [
+        {
+          "id": "arcanea-mcp",
+          "stage": "gated"
+        },
+        {
+          "id": "arcanea-subscription",
+          "stage": "building"
+        },
+        {
+          "id": "books-arcanea-legends",
+          "stage": "building"
+        },
+        {
+          "id": "akamoto-prophecies",
+          "stage": "concept"
+        },
+        {
+          "id": "arcanea-academy-world-proof-lab",
+          "stage": "concept"
+        }
+      ],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "gencreator",
+      "domain": "gencreator.ai",
+      "brand": "GenCreator",
+      "tier": "tier-1",
+      "siteStatus": "live",
+      "revenueModels": [
+        "byok-tooling",
+        "marketplace-listing",
+        "digital-product-mor",
+        "education-cohort"
+      ],
+      "economySectors": [
+        "templates",
+        "ai-agents",
+        "digital-goods"
+      ],
+      "thesis": "Creator packs. Best fit for external marketplaces (plugins, templates), where buyer volume already is.",
+      "products": [
+        {
+          "id": "gencreator-studio",
+          "stage": "building"
+        },
+        {
+          "id": "gencreator-templates",
+          "stage": "building"
+        },
+        {
+          "id": "gencreator-community-cohort",
+          "stage": "concept"
+        }
+      ],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "realityarchitect",
+      "domain": "realityarchitect.ai",
+      "brand": "RealityArchitect",
+      "tier": "tier-2",
+      "siteStatus": "live",
+      "revenueModels": [
+        "education-cohort",
+        "digital-product-mor"
+      ],
+      "economySectors": [
+        "creator"
+      ],
+      "thesis": "Public method plus paid vault.",
+      "products": [
+        {
+          "id": "realityarchitect-vault",
+          "stage": "concept"
+        }
+      ],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "agenticincome",
+      "domain": "agenticincome.ai",
+      "brand": "Income",
+      "tier": "tier-2",
+      "siteStatus": "live",
+      "revenueModels": [
+        "affiliate-recurring",
+        "data-products",
+        "pay-per-call",
+        "digital-product-mor",
+        "agent-as-a-service"
+      ],
+      "economySectors": [
+        "ai-agents",
+        "api",
+        "b2b-software"
+      ],
+      "thesis": "Home of this vault. Sells the map: sourced partner economics and economy intelligence, queryable over MCP.",
+      "products": [
+        {
+          "id": "agentic-income",
+          "stage": "concept"
+        },
+        {
+          "id": "agentic-passive-income-toolkit",
+          "stage": "concept"
+        }
+      ],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "animelegends",
+      "domain": "animelegends.ai",
+      "brand": "Anime Legends",
+      "tier": "tier-2",
+      "siteStatus": "live",
+      "revenueModels": [
+        "ads-sponsorship",
+        "games",
+        "royalties-licensing"
+      ],
+      "economySectors": [
+        "games",
+        "creator"
+      ],
+      "thesis": "Media and IP satellite.",
+      "products": [],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "starlightintelligence-org",
+      "domain": "starlightintelligence.org",
+      "brand": "Starlight",
+      "tier": "tier-2",
+      "siteStatus": "live",
+      "revenueModels": [
+        "byok-tooling",
+        "subscription-saas"
+      ],
+      "economySectors": [
+        "ai-agents",
+        "b2b-software"
+      ],
+      "thesis": "Substrate face: memory, orchestration, acceptance engine.",
+      "products": [
+        {
+          "id": "visual-creation-loop",
+          "stage": "building"
+        },
+        {
+          "id": "portfolio-architecture-audit",
+          "stage": "concept"
+        },
+        {
+          "id": "starlight-you-personal-os-kit",
+          "stage": "building"
+        },
+        {
+          "id": "starlight-academy-operator-lab",
+          "stage": "concept"
+        },
+        {
+          "id": "starlight-technology-build-sheets",
+          "stage": "building"
+        },
+        {
+          "id": "claude-skills-eval-pack",
+          "stage": "concept"
+        },
+        {
+          "id": "starlight-human-roster",
+          "stage": "concept"
+        },
+        {
+          "id": "starlight-knowledge-tree",
+          "stage": "building"
+        },
+        {
+          "id": "starlight-kernel",
+          "stage": "building"
+        }
+      ],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "go-agenticincome",
+      "domain": "go.agenticincome.ai",
+      "brand": "Income",
+      "tier": "tier-3",
+      "siteStatus": "live",
+      "revenueModels": [
+        "affiliate-recurring"
+      ],
+      "economySectors": [
+        "ai-agents"
+      ],
+      "thesis": "Disclosed link router; the one measured attribution point for affiliate clicks.",
+      "products": [],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "agenticpassiveincome",
+      "domain": "agenticpassiveincome.com",
+      "brand": "Income",
+      "tier": "tier-3",
+      "siteStatus": "live",
+      "revenueModels": [
+        "affiliate-recurring",
+        "pay-per-call"
+      ],
+      "economySectors": [
+        "ai-agents",
+        "api"
+      ],
+      "thesis": "Automation-first sibling with its own MCP server.",
+      "products": [],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "vibeclubs",
+      "domain": "vibeclubs.ai",
+      "brand": "Tooling",
+      "tier": "tier-3",
+      "siteStatus": "live",
+      "revenueModels": [
+        "education-cohort"
+      ],
+      "economySectors": [
+        "creator"
+      ],
+      "thesis": "Cohort surface.",
+      "products": [
+        {
+          "id": "vibeclubs-host-pack",
+          "stage": "concept"
+        }
+      ],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "arcanea-dev",
+      "domain": "arcanea.dev",
+      "brand": "Arcanea",
+      "tier": "tier-3",
+      "siteStatus": "live",
+      "revenueModels": [
+        "byok-tooling",
+        "usage-api-resale"
+      ],
+      "economySectors": [
+        "api",
+        "ai-agents"
+      ],
+      "thesis": "Developer platform portal.",
+      "products": [],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "arcanea-academy",
+      "domain": "arcanea.academy",
+      "brand": "Arcanea",
+      "tier": "tier-3",
+      "siteStatus": "live",
+      "revenueModels": [
+        "education-cohort"
+      ],
+      "economySectors": [
+        "creator"
+      ],
+      "thesis": "World Proof Lab.",
+      "products": [],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "starlight-domains",
+      "domain": "starlight.domains",
+      "brand": "Starlight",
+      "tier": "tier-3",
+      "siteStatus": "live",
+      "revenueModels": [
+        "domain-portfolio"
+      ],
+      "economySectors": [
+        "commerce"
+      ],
+      "thesis": "Domain intelligence.",
+      "products": [],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "gencreator-community",
+      "domain": "gencreator.community",
+      "brand": "GenCreator",
+      "tier": "tier-2",
+      "siteStatus": "live",
+      "revenueModels": [
+        "education-cohort"
+      ],
+      "economySectors": [
+        "creator"
+      ],
+      "thesis": "Community surface.",
+      "products": [],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "aiarchitectacademy",
+      "domain": "aiarchitectacademy.com",
+      "brand": "FrankX",
+      "tier": "tier-2",
+      "siteStatus": "pending-cutover",
+      "revenueModels": [
+        "education-cohort"
+      ],
+      "economySectors": [
+        "b2b-software"
+      ],
+      "thesis": "Waitlist-first cohort course.",
+      "products": [],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    },
+    {
+      "id": "disruptivepassiveincome",
+      "domain": "disruptivepassiveincome.com",
+      "brand": "Income",
+      "tier": "tier-3",
+      "siteStatus": "pending-cutover",
+      "revenueModels": [
+        "data-products"
+      ],
+      "economySectors": [
+        "creator"
+      ],
+      "thesis": "Public evidence ledger; no checkout by design.",
+      "products": [],
+      "measuredRevenue": "[OPEN] not measured in this vault; the revenue ledger and MoR dashboards are the source of truth"
+    }
+  ]
+}

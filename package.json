@@ -34,15 +34,15 @@
   "devDependencies": {
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
-    "@next/mdx": "^16.0.0",
-    "@tailwindcss/postcss": "^4.1.0",
+    "@next/mdx": "^16.4.2",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/mdx": "^2.0.13",
-    "@types/node": "^26.6.4",
+    "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "^16.3.5",
-    "tailwindcss": "^4.1.0",
+    "eslint-config-next": "^16.4.2",
+    "tailwindcss": "^4.3.3",
     "typescript": "^5.7.0"
   }
 }

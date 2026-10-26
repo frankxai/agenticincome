@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
-    "test": "node --test tests/*.test.mjs",
+    "test": "node --test --test-force-exit tests/*.test.mjs",
     "sync:catalog": "node scripts/sync-catalog.mjs",
     "audit:affiliate": "node scripts/audit-affiliate.mjs",
     "vault:check": "node scripts/vault-validate.mjs",
@@ -29,7 +29,7 @@
     "next": "16.4.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "zod": "^4.6.6"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@mdx-js/loader": "^3.1.0",

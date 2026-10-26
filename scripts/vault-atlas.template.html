@@ -1,0 +1,469 @@
+<title>Economy Atlas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single build-room column; each section pairs a quiet lede with one dense mechanism surface. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --line: #d9dde7; --ink: #0c0f17; --muted: #5a6178;
+  --impl: #047857; --tech: #0e7490; --money: #b45309; --warn: #b91c1c; --soft: #eef1f5;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Geist Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #05060a; --surface: #0a0c14; --line: #1a1f2e; --ink: #f1f3f9; --muted: #8a90a8;
+  --impl: #10b981; --tech: #06b6d4; --money: #f59e0b; --warn: #f87171; --soft: #10131d; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #05060a; --surface: #0a0c14; --line: #1a1f2e; --ink: #f1f3f9; --muted: #8a90a8;
+  --impl: #10b981; --tech: #06b6d4; --money: #f59e0b; --warn: #f87171; --soft: #10131d; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 15px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 1120px; margin: 0 auto; padding-block: 40px 80px; display: grid; gap: 64px }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.01em }
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.05; font-weight: 700 }
+h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700 }
+h3 { font-size: 1.05rem; font-weight: 500 }
+p { margin: 0; max-width: 68ch }
+a { color: var(--tech) }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--tech); outline-offset: 2px }
+.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+.lede { color: var(--muted); font-size: 1.05rem }
+.section { display: grid; gap: 20px }
+.section > header { display: grid; gap: 8px }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px; min-width: 0 }
+.mono, .num { font-family: var(--mono); font-variant-numeric: tabular-nums }
+.muted { color: var(--muted) }
+.hero { display: grid; gap: 20px }
+.byline { font: 12px/1.5 var(--mono); color: var(--muted) }
+.counts { display: flex; flex-wrap: wrap; gap: 28px; padding-top: 8px; border-top: 1px solid var(--line) }
+.counts div { display: grid; gap: 2px }
+.counts b { font: 600 1.6rem/1 var(--mono) }
+.decision { border-top: 1px solid var(--line); padding-top: 20px; display: grid; gap: 8px }
+.decision .eyebrow { color: var(--impl) }
+.decision strong { font-family: var(--display); font-size: 1.35rem; font-weight: 700 }
+.chips { display: flex; flex-wrap: wrap; gap: 8px }
+.chip { font: 500 12px/1 var(--mono); padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); cursor: pointer }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink) }
+.scroll { overflow-x: auto }
+svg text { fill: var(--ink); font-family: var(--mono); font-size: 11px }
+svg .sub { fill: var(--muted) }
+.node { fill: var(--surface); stroke: var(--line) }
+.node.impl { stroke: var(--impl) } .node.money { stroke: var(--money) } .node.tech { stroke: var(--tech) }
+.flow { fill: none; stroke: var(--muted); stroke-width: 1.2; opacity: .55 }
+.flow.money { stroke: var(--money); opacity: .9 } .flow.impl { stroke: var(--impl); opacity: .9 }
+.bar { fill: var(--tech) } .bar.money { fill: var(--money) } .bar.impl { fill: var(--impl) } .bar.dim { fill: var(--muted); opacity: .45 }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; font: 12px var(--mono); color: var(--muted) }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px }
+.pill.ok { color: var(--impl) } .pill.no { color: var(--muted) }
+.stage { font: 500 11px/1 var(--mono); padding: 4px 7px; border-radius: 3px; border: 1px solid var(--line) }
+.stage.live { color: var(--impl); border-color: var(--impl) } .stage.gated { color: var(--money); border-color: var(--money) }
+.stage.building { color: var(--tech); border-color: var(--tech) } .stage.proposed { color: var(--ink) } .stage.hold { color: var(--muted) }
+.pb { display: grid; gap: 10px }
+.pb ul { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 6px; font-size: 13px }
+.pb li { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap }
+.pb .row { display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px }
+.vbar { display: flex; height: 10px; border-radius: 2px; overflow: hidden; background: var(--soft) }
+.vbar span { display: block; height: 100% }
+.grid { stroke: var(--line) }
+table { width: 100%; border-collapse: collapse; font-size: 13px }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top }
+th { font: 500 11px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.empty { color: var(--muted); font-style: italic }
+.calc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 20px }
+.calc label { display: grid; gap: 6px; font-size: 13px; color: var(--muted) }
+.calc select, .calc input[type=number] { font: 14px var(--mono); padding: 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: var(--ink); width: 100% }
+.calc input[type=range] { width: 100% }
+.waterfall { display: grid; gap: 6px }
+.wrow { display: grid; grid-template-columns: minmax(0, 1fr) 90px; gap: 10px; align-items: center; font-size: 13px }
+.wbar { height: 8px; border-radius: 2px; background: var(--warn); opacity: .8 }
+.wbar.keep { background: var(--impl); opacity: 1 }
+.margin-big { font: 700 2.4rem/1 var(--mono) }
+.hyp { font: 500 11px/1 var(--mono); color: var(--money); border: 1px solid var(--money); padding: 3px 6px; border-radius: 3px }
+.matrix td.on { background: color-mix(in srgb, var(--impl) 22%, transparent); text-align: center; font-family: var(--mono) }
+.matrix td.off { text-align: center; color: var(--line) }
+.matrix th.rot { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; padding: 8px 4px }
+.board { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px }
+.card { border: 1px solid var(--line); border-radius: 6px; padding: 14px; display: grid; gap: 8px; background: var(--surface); min-width: 0 }
+.card .meta { display: flex; flex-wrap: wrap; gap: 6px }
+.pill { font: 500 11px/1 var(--mono); padding: 4px 7px; border-radius: 3px; background: var(--soft); color: var(--muted) }
+.pill.gate { color: var(--money) } .pill.free { color: var(--impl) }
+.kill { font-size: 12px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 8px }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px }
+.facts { display: grid; gap: 10px }
+.fact { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px; font-size: 13px }
+.src { font-size: 11px; font-family: var(--mono) }
+footer { color: var(--muted); font-size: 12px; display: grid; gap: 6px }
+@media (max-width: 720px) { .calc { grid-template-columns: 1fr } }
+</style>
+
+<main>
+  <section class="hero">
+    <span class="eyebrow">agenticincome.ai · internal · digital economy vault</span>
+    <h1>Where digital money moves, and where we plug in</h1>
+    <p class="lede">A sourced map of marketplaces, AI supply costs and on-chain economies, the estate sites that sell into them, and the experiments that test each bet. Every number links to its source. Our own prices are marked as hypotheses.</p>
+    <p class="byline">Built by Claude (Claude Code, Opus 5.5) from vault/*.json · <span id="built"></span> · spot-checked by Codex, 11 of 13 sampled rows matched; fixes applied</p>
+    <div class="counts" id="counts"></div>
+    <div style="display:grid;gap:8px">
+      <div class="vbar" id="vbar" role="img" aria-label="Share of rows confirmed against their sources"></div>
+      <div class="legend" id="vlegend"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="decision">
+      <span class="eyebrow">The decision</span>
+      <strong>Sell the map, not the commodity.</strong>
+      <p>Tokens, GPUs and generations are price-transparent. Vendors publish list prices and routers sell the same tokens for a 0 to 5.5% fee, so a buyer can see a markup and route around it. The estate sells what sits on top: sourced knowledge, BYOK skills and templates, and creations priced per outcome. Marketplace listings are tested against own checkout before we commit, because the take rate is the price of distribution.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <header><span class="eyebrow">Architecture</span><h2>How money and data flow through the estate</h2>
+      <p class="muted">Amber lines carry money, emerald lines carry product, grey lines carry data. The vault loop at the bottom is what makes the system learn: experiments write receipts, receipts update the vault, the vault feeds every surface.</p></header>
+    <div class="panel scroll"><svg id="arch" viewBox="0 0 1080 520" width="1080" role="img" aria-label="Architecture diagram of money, product and data flows"></svg></div>
+  </section>
+
+  <section class="section">
+    <header><span class="eyebrow">Economies</span><h2>How big each market is</h2>
+      <p class="muted">Payouts or GMV as each platform reports it, on a log scale because the range spans several orders of magnitude. Metrics differ by platform (payouts vs GMV vs billings), so compare within a metric, not across. Amber bars are confirmed against their source; grey bars still need a browser read.</p></header>
+    <div class="chips" id="sectorChips"></div>
+    <div class="panel scroll" id="econChart"></div>
+  </section>
+
+  <section class="section">
+    <header><span class="eyebrow">Take rates</span><h2>What each marketplace keeps</h2>
+      <p class="muted">The price of distribution. A listing at a 30% take rate still beats own checkout if it brings buyers we would not reach.</p></header>
+    <div class="panel scroll" id="takeChart"></div>
+  </section>
+
+  <section class="section">
+    <header><span class="eyebrow">Supply chain</span><h2>What it costs us to supply a product</h2>
+      <p class="muted">List prices from vendor pages. These are the inputs to every margin below.</p></header>
+    <div class="chips" id="supplyChips"></div>
+    <div class="panel scroll" id="supplyTable"></div>
+  </section>
+
+  <section class="section">
+    <header><span class="eyebrow">Margins</span><h2>Unit economics, recomputed live</h2>
+      <p class="muted">Pick a scenario and move our price. Costs, fees and take rates come from the sourced rows above, never from the scenario.</p></header>
+    <div class="panel" id="calc"></div>
+  </section>
+
+  <section class="section">
+    <header><span class="eyebrow">Resale partners</span><h2>What one referred customer is worth</h2>
+      <p class="muted">Commission earned from one customer paying $100 a month who stays for the whole payout window. Terms come from the verified partner registry (data/programs.json). Open-ended programs show their first year only. These are terms, not forecasts.</p></header>
+    <div class="panel scroll" id="partnerChart"></div>
+  </section>
+
+  <section class="section">
+    <header><span class="eyebrow">Playbooks</span><h2>One revenue plan per site</h2>
+      <p class="muted">What each site sells, where it lists, which partners fit, which articles the vault can already source, and the next experiment. Stages: live, gated (built, waiting on a human), building, proposed, hold.</p></header>
+    <div class="chips" id="stageChips"></div>
+    <div class="board" id="playbooks"></div>
+  </section>
+
+  <section class="section">
+    <header><span class="eyebrow">Estate</span><h2>Which site plugs into which revenue model</h2>
+      <p class="muted">Snapshot of the live properties graph. Measured revenue stays [OPEN] here; the ledger and MoR dashboards hold it.</p></header>
+    <div class="panel scroll" id="matrix"></div>
+  </section>
+
+  <section class="section">
+    <header><span class="eyebrow">Experiments</span><h2>Bets, each with one metric and a kill rule</h2>
+      <p class="muted">Amber pills are human gates. No result appears until a receipt exists.</p></header>
+    <div class="board" id="board"></div>
+  </section>
+
+  <section class="section">
+    <header><span class="eyebrow">Competitions</span><h2>How agent teams compete</h2>
+      <p class="muted">Different harnesses, same brief, a third harness verifies. The leaderboard fills only from receipts.</p></header>
+    <div class="two" id="comps"></div>
+  </section>
+
+  <section class="section">
+    <header><span class="eyebrow">The wider map</span><h2>Websites, chains and agent payment rails</h2></header>
+    <div class="two">
+      <div class="panel"><h3>Facts</h3><div class="facts" id="macroFacts"></div></div>
+      <div class="panel scroll"><h3>Top chains by TVL</h3><div id="chainChart"></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Source files: vault/revenue-models.json, economies.json, supply-chain.json, macro.json, margins.json, estate-map.json, experiments.json, competitions.json.</span>
+    <span>Rebuild: node scripts/vault-atlas.mjs. Validate: pnpm vault:check.</span>
+  </footer>
+</main>
+
+<script id="vault" type="application/json">__VAULT_DATA__</script>
+<script>
+const V = JSON.parse(document.getElementById('vault').textContent);
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const host = (u) => { try { return new URL(u).hostname.replace(/^www\./, '') } catch { return '' } };
+const usd = (n) => {
+  const a = Math.abs(n);
+  if (a >= 1e12) return '$' + (n / 1e12).toFixed(2) + 'T';
+  if (a >= 1e9) return '$' + (n / 1e9).toFixed(1) + 'B';
+  if (a >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+  if (a >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+  return '$' + n.toFixed(n < 1 ? 4 : 2);
+};
+const econ = V.economies?.rows ?? [];
+const supply = V.supply?.rows ?? [];
+const macro = V.macro?.facts ?? [];
+const supplyById = new Map(supply.map((r) => [r.id, r]));
+const CONFIRMED = new Set(['number-found', 'reviewer-confirmed']);
+const verdictById = new Map((V.verification?.results ?? []).map((r) => [r.id, r.verdict]));
+const isConfirmed = (id) => CONFIRMED.has(verdictById.get(id));
+const econById = new Map(econ.map((r) => [r.id, r]));
+const SVGNS = 'http://www.w3.org/2000/svg';
+
+$('built').textContent = 'vault updated ' + (V.experiments?.updatedAt ?? '');
+$('counts').innerHTML = [
+  [new Set(econ.map((r) => r.platform ?? r.name)).size, 'platforms sourced'],
+  [supply.length, 'supply prices'],
+  [macro.length, 'macro facts'],
+  [V.models.models.length, 'revenue models'],
+  [V.estate.properties.length, 'estate sites mapped'],
+  [V.experiments.experiments.length, 'experiments'],
+].map(([n, l]) => `<div><b>${n}</b><span class="muted">${l}</span></div>`).join('');
+
+(function drawVerification() {
+  const res = V.verification?.results ?? [];
+  if (!res.length) return;
+  const groups = [
+    ['Confirmed on the live page', (r) => r.verdict === 'number-found', 'var(--impl)'],
+    ['Confirmed by a reviewer', (r) => r.verdict === 'reviewer-confirmed', 'var(--tech)'],
+    ['Live counter, value has drifted', (r) => r.verdict === 'live-counter', 'var(--money)'],
+    ['Needs a browser read', (r) => !CONFIRMED.has(r.verdict) && r.verdict !== 'live-counter', 'var(--line)'],
+  ].map(([label, f, color]) => [label, res.filter(f).length, color]);
+  $('vbar').innerHTML = groups.map(([, n, c]) => `<span style="width:${(n / res.length) * 100}%;background:${c}"></span>`).join('');
+  $('vlegend').innerHTML = groups.map(([l, n, c]) => `<span><i style="background:${c}"></i>${l}: ${n}</span>`).join('')
+    + `<span>checked ${esc((V.verification.checkedAt ?? '').slice(0, 10))}</span>`;
+})();
+
+function drawArch() {
+  const svg = $('arch');
+  const cols = [
+    { x: 20, title: 'Where money is', items: [['Marketplaces', 'apps, games, templates', 'money'], ['Creator platforms', 'subs, payouts, royalties', 'money'], ['AI tool partners', 'recurring affiliate', 'money'], ['Agent payment rails', 'pay per call', 'money']] },
+    { x: 290, title: 'What we source', items: [['Inference', 'BYOK first', 'tech'], ['Media generation', 'image, video, voice, music', 'tech'], ['Memory and data', 'vector, cache, registries', 'tech'], ['Payments and MoR', 'fees per sale', 'tech']] },
+    { x: 560, title: 'Estate surfaces', items: [['agenticincome', 'map, MCP, brief', 'impl'], ['gencreator', 'packs, templates', 'impl'], ['arcanea', 'creations, games', 'impl'], ['frankx', 'audience, books, music', 'impl']] },
+    { x: 830, title: 'Who pays', items: [['Builders', 'read, then buy', 'money'], ['Creators', 'per outcome', 'money'], ['Agents', 'query, then pay', 'money'], ['Partners', 'commission', 'money']] },
+  ];
+  const W = 230, H = 62, Y0 = 50, GAP = 18;
+  let out = '';
+  const centers = cols.map((c) => c.items.map((_, i) => ({ x: c.x, y: Y0 + i * (H + GAP) })));
+  const path = (a, b, cls) => {
+    const x1 = a.x + W, y1 = a.y + H / 2, x2 = b.x, y2 = b.y + H / 2, mx = (x1 + x2) / 2;
+    return `<path class="flow ${cls}" d="M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}"/>`;
+  };
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) if ((i + j) % 2 === 0 || i === j) out += path(centers[1][i], centers[2][j], 'impl');
+  [[0, 0], [1, 3], [2, 1], [3, 0]].forEach(([i, j]) => { out += path(centers[2][j], centers[3][i], 'money') });
+  [[0, 1], [1, 3], [2, 0], [3, 2]].forEach(([i, j]) => { out += path(centers[0][i], centers[1][j], '') });
+  cols.forEach((c, ci) => {
+    out += `<text x="${c.x}" y="30" class="sub">${esc(c.title.toUpperCase())}</text>`;
+    c.items.forEach(([t, s, k], i) => {
+      const { x, y } = centers[ci][i];
+      out += `<rect class="node ${k}" x="${x}" y="${y}" width="${W}" height="${H}" rx="5"/>`;
+      out += `<text x="${x + 14}" y="${y + 26}" style="font-size:13px">${esc(t)}</text><text x="${x + 14}" y="${y + 45}" class="sub">${esc(s)}</text>`;
+    });
+  });
+  const ly = 400;
+  const loop = [['Vault', 'sourced rows', 20], ['Surfaces', 'articles, MCP, brief', 290], ['Experiments', 'one metric, kill rule', 560], ['Receipts', 'ledger, analytics, MoR', 830]];
+  loop.forEach(([t, s, x], i) => {
+    out += `<rect class="node impl" x="${x}" y="${ly}" width="${W}" height="${H}" rx="5"/><text x="${x + 14}" y="${ly + 26}" style="font-size:13px">${t}</text><text x="${x + 14}" y="${ly + 45}" class="sub">${s}</text>`;
+    if (i < 3) out += `<path class="flow impl" d="M${x + W},${ly + H / 2} L${loop[i + 1][2]},${ly + H / 2}" marker-end="url(#ah)"/>`;
+  });
+  out += `<path class="flow impl" d="M${830 + W / 2},${ly + H} C${830 + W / 2},${ly + H + 40} ${20 + W / 2},${ly + H + 40} ${20 + W / 2},${ly + H}" marker-end="url(#ah)"/>`;
+  out += `<text x="540" y="${ly + H + 50}" text-anchor="middle" class="sub">verified by a different harness before it updates the vault</text>`;
+  out += `<text x="20" y="${ly - 22}" class="sub">THE LEARNING LOOP</text>`;
+  svg.innerHTML = `<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" style="color:var(--impl)"/></marker></defs>` + out;
+}
+
+function logBars(rows, el, { label, value, text, cls = 'bar', link }) {
+  if (!rows.length) { el.innerHTML = '<p class="empty">Not yet sourced.</p>'; return }
+  const W = 1040, LW = 300, RW = 130, rowH = 26, top = 24;
+  const vals = rows.map(value);
+  const lo = Math.pow(10, Math.floor(Math.log10(Math.min(...vals))));
+  const hi = Math.pow(10, Math.ceil(Math.log10(Math.max(...vals))));
+  const plotW = W - LW - RW;
+  const sx = (v) => ((Math.log10(v) - Math.log10(lo)) / (Math.log10(hi) - Math.log10(lo))) * plotW;
+  const H = top + rows.length * rowH + 10;
+  let s = '';
+  for (let t = lo; t <= hi; t *= 10) {
+    const x = LW + sx(t);
+    s += `<line class="grid" x1="${x}" x2="${x}" y1="${top - 6}" y2="${H - 6}"/><text x="${x}" y="${top - 10}" text-anchor="middle" class="sub">${usd(t)}</text>`;
+  }
+  rows.forEach((r, i) => {
+    const y = top + i * rowH, w = Math.max(2, sx(value(r)));
+    s += `<text x="${LW - 10}" y="${y + 15}" text-anchor="end">${esc(label(r))}</text>`;
+    s += `<rect class="${typeof cls === 'function' ? cls(r) : cls}" x="${LW}" y="${y + 5}" width="${w}" height="13" rx="2"/>`;
+    s += `<a href="${esc(link(r))}" target="_blank" rel="noopener"><text x="${LW + w + 8}" y="${y + 15}" class="sub">${esc(text(r))}</text></a>`;
+  });
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="Bar chart">${s}</svg>`;
+}
+
+const sectors = [...new Set(econ.map((r) => r.sector))].sort();
+let activeSector = 'all';
+function drawEcon() {
+  const rows = econ.filter((r) => typeof r.value === 'number' && /^USD/.test(r.unit ?? '') && r.value > 0 && (activeSector === 'all' || r.sector === activeSector))
+    .sort((a, b) => b.value - a.value);
+  logBars(rows, $('econChart'), {
+    label: (r) => `${r.name} · ${r.metric}`, value: (r) => r.value,
+    text: (r) => `${r.valueText ?? usd(r.value)} ${r.period ? '(' + r.period + ')' : ''}`, link: (r) => r.sourceUrl,
+    cls: (r) => isConfirmed(r.id) ? 'bar money' : 'bar dim',
+  });
+}
+function chips(el, values, onPick) {
+  el.innerHTML = ['all', ...values].map((v) => `<button class="chip" type="button" data-v="${esc(v)}" aria-pressed="${v === 'all'}">${esc(v)}</button>`).join('');
+  el.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    onPick(b.dataset.v);
+  });
+}
+chips($('sectorChips'), sectors, (v) => { activeSector = v; drawEcon() });
+
+function drawTake() {
+  const rows = econ.filter((r) => typeof r.takeRateFraction === 'number')
+    .reduce((acc, r) => (acc.some((x) => x.platform === r.platform) ? acc : [...acc, r]), [])
+    .sort((a, b) => b.takeRateFraction - a.takeRateFraction);
+  const el = $('takeChart');
+  if (!rows.length) { el.innerHTML = '<p class="empty">Not yet sourced.</p>'; return }
+  const W = 1040, LW = 240, rowH = 26, top = 24, plotW = 560;
+  const max = Math.max(0.5, ...rows.map((r) => r.takeRateFraction));
+  const H = top + rows.length * rowH + 10;
+  let s = '';
+  for (let t = 0; t <= max + 1e-9; t += 0.1) {
+    const x = LW + (t / max) * plotW;
+    s += `<line class="grid" x1="${x}" x2="${x}" y1="${top - 6}" y2="${H - 6}"/><text x="${x}" y="${top - 10}" text-anchor="middle" class="sub">${Math.round(t * 100)}%</text>`;
+  }
+  rows.forEach((r, i) => {
+    const y = top + i * rowH, w = Math.max(2, (r.takeRateFraction / max) * plotW);
+    s += `<text x="${LW - 10}" y="${y + 15}" text-anchor="end">${esc(r.platform ?? r.name)}</text><rect class="bar impl" x="${LW}" y="${y + 5}" width="${w}" height="13" rx="2"/>`;
+    s += `<a href="${esc(r.sourceUrl)}" target="_blank" rel="noopener"><text x="${LW + w + 8}" y="${y + 15}" class="sub">${esc(r.takeRate)}</text></a>`;
+  });
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="Take rate by marketplace">${s}</svg>`;
+}
+
+let supplyCat = 'all';
+function drawSupply() {
+  const rows = supply.filter((r) => supplyCat === 'all' || r.category === supplyCat);
+  $('supplyTable').innerHTML = rows.length ? `<table><thead><tr><th>Vendor</th><th>Item</th><th>Price</th><th>Terms</th><th>Checked</th><th>Source</th></tr></thead><tbody>${rows.map((r) =>
+    `<tr><td>${esc(r.vendor)}</td><td>${esc(r.item)}</td><td class="num">${esc(r.priceText)}</td><td class="muted">${esc(r.terms)}</td><td>${isConfirmed(r.id) ? '<span class="pill ok">confirmed</span>' : '<span class="pill no">needs read</span>'}</td><td class="src"><a href="${esc(r.sourceUrl)}" target="_blank" rel="noopener">${esc(host(r.sourceUrl))}</a></td></tr>`).join('')}</tbody></table>`
+    : '<p class="empty">Not yet sourced.</p>';
+}
+chips($('supplyChips'), [...new Set(supply.map((r) => r.category))].sort(), (v) => { supplyCat = v; drawSupply() });
+
+function drawCalc() {
+  const sc = V.margins?.scenarios ?? [];
+  const el = $('calc');
+  if (!sc.length) { el.innerHTML = '<p class="empty">No margin scenarios yet.</p>'; return }
+  el.innerHTML = `<div class="calc"><div style="display:grid;gap:14px">
+    <label for="scSel">Scenario<select id="scSel">${sc.map((s, i) => `<option value="${i}">${esc(s.title)}</option>`).join('')}</select></label>
+    <p id="scNote" class="muted" style="font-size:13px"></p>
+    <label for="price">Our price per unit (USD) <span class="hyp">hypothesis</span><input id="price" type="number" min="0.01" step="0.01"></label>
+    <input id="priceRange" type="range" min="0.01" step="0.01" aria-label="Price slider">
+    </div><div style="display:grid;gap:12px"><div><span class="eyebrow">Gross margin</span><div class="margin-big" id="mBig"></div></div><div class="waterfall" id="wf"></div></div></div>`;
+  const sel = $('scSel'), price = $('price'), range = $('priceRange');
+  const render = () => {
+    const s = sc[Number(sel.value)], p = Number(price.value) || s.priceUsd;
+    const lines = [];
+    for (const l of s.costLines ?? []) { const src = supplyById.get(l.supplyId); lines.push([`${src.vendor}: ${src.item} × ${l.quantity}`, l.quantity * src.price]) }
+    for (const f of s.feeLines ?? []) { const src = supplyById.get(f.supplyId); lines.push([`${src.vendor} fee`, p * (src.rate ?? 0) + (src.fixedUsd ?? 0)]) }
+    if (s.takeRateFrom) { const e = econById.get(s.takeRateFrom); lines.push([`${e.platform ?? e.name} take rate`, p * e.takeRateFraction]) }
+    const cost = lines.reduce((a, [, v]) => a + v, 0), keep = p - cost, m = (keep / p) * 100;
+    $('mBig').textContent = m.toFixed(1) + '%';
+    $('mBig').style.color = m < 0 ? 'var(--warn)' : m < 50 ? 'var(--money)' : 'var(--impl)';
+    $('wf').innerHTML = [...lines.map(([t, v]) => [t, v, false]), ['We keep', keep, true]].map(([t, v, k]) =>
+      `<div class="wrow"><div style="display:grid;gap:4px"><span>${esc(t)}</span><div class="wbar ${k ? 'keep' : ''}" style="width:${Math.max(0, Math.min(100, (Math.abs(v) / p) * 100))}%"></div></div><span class="num" style="text-align:right">${usd(v)}</span></div>`).join('');
+    $('scNote').textContent = s.note ?? '';
+  };
+  const load = () => { const s = sc[Number(sel.value)]; price.value = s.priceUsd; range.max = s.priceUsd * 3; range.value = s.priceUsd; render() };
+  sel.addEventListener('change', load);
+  price.addEventListener('input', () => { range.value = price.value; render() });
+  range.addEventListener('input', () => { price.value = range.value; render() });
+  load();
+}
+
+function drawMatrix() {
+  const models = V.models.models;
+  const props = V.estate.properties;
+  $('matrix').innerHTML = `<table class="matrix"><thead><tr><th>Site</th>${models.map((m) => `<th class="rot">${esc(m.name)}</th>`).join('')}</tr></thead><tbody>${props.map((p) =>
+    `<tr><td><span class="mono">${esc(p.domain)}</span><br><span class="muted" style="font-size:12px">${esc(p.thesis)}</span></td>${models.map((m) => p.revenueModels.includes(m.id) ? '<td class="on">●</td>' : '<td class="off">·</td>').join('')}</tr>`).join('')}</tbody></table>`;
+}
+
+function drawBoard() {
+  $('board').innerHTML = V.experiments.experiments.map((e) => `<article class="card">
+    <span class="eyebrow">${esc(e.property)} · ${esc(e.status)}</span><h3>${esc(e.title)}</h3>
+    <p style="font-size:13px">${esc(e.hypothesis)}</p>
+    <div class="meta"><span class="pill">${esc(e.revenueModel)}</span><span class="pill">${esc(e.duration)}</span>${(e.humanGates ?? []).length ? e.humanGates.map((g) => `<span class="pill gate">${esc(g)}</span>`).join('') : '<span class="pill free">no human gate</span>'}</div>
+    <p style="font-size:12px"><span class="muted">Metric:</span> ${esc(e.metric)}</p>
+    <p class="kill">Kill rule: ${esc(e.killRule)}</p></article>`).join('');
+}
+
+function drawComps() {
+  const c = V.competitions;
+  $('comps').innerHTML = c.formats.map((f) => `<div class="panel" style="display:grid;gap:8px"><h3>${esc(f.name)}</h3><p style="font-size:13px">${esc(f.brief)}</p>
+    <p style="font-size:12px" class="muted">Verifier: ${esc(f.verifier)}</p>
+    <ul style="margin:0;padding-left:18px;font-size:12px">${Object.entries(f.scoring).map(([k, v]) => `<li><b>${esc(k)}</b>: ${esc(v)}</li>`).join('')}</ul></div>`).join('')
+    + `<div class="panel"><h3>Leaderboard</h3><p class="empty">${c.leaderboard.length ? '' : 'Empty until the first round has a receipt.'}</p></div>`;
+}
+
+function drawMacro() {
+  $('macroFacts').innerHTML = macro.length ? macro.map((f) => `<div class="fact"><span>${esc(f.claim)}</span><a class="src" href="${esc(f.sourceUrl)}" target="_blank" rel="noopener">${esc(host(f.sourceUrl))} · ${esc(f.asOf)}</a></div>`).join('')
+    : '<p class="empty">Not yet sourced.</p>';
+  const chains = (V.macro?.topChainsByTvl ?? []).filter((c) => c.tvlUsd > 0);
+  logBars(chains, $('chainChart'), { label: (c) => c.name, value: (c) => c.tvlUsd, text: (c) => usd(c.tvlUsd), link: () => V.macro.topChainsSource ?? 'https://defillama.com/chains', cls: 'bar' });
+}
+
+function partnerValue(r) {
+  if (typeof r.flatUsd === 'number') return { usd: r.flatUsd, basis: 'flat, once' };
+  const months = r.windowMonths ?? 12;
+  return { usd: r.rate * 100 * months, basis: r.windowMonths ? `${r.windowMonths} mo` : 'first year of an open-ended window' };
+}
+function drawPartners() {
+  const el = $('partnerChart');
+  const rows = (V.partners?.rows ?? []).map((r) => ({ ...r, ...partnerValue(r) })).sort((a, b) => b.usd - a.usd);
+  if (!rows.length) { el.innerHTML = '<p class="empty">No partner terms yet.</p>'; return }
+  const W = 1040, LW = 160, rowH = 28, top = 24, plotW = 520;
+  const max = Math.ceil(Math.max(...rows.map((r) => r.usd)) / 100) * 100;
+  const H = top + rows.length * rowH + 10;
+  let s = '';
+  for (let t = 0; t <= max; t += max / 4) {
+    const x = LW + (t / max) * plotW;
+    s += `<line class="grid" x1="${x}" x2="${x}" y1="${top - 6}" y2="${H - 6}"/><text x="${x}" y="${top - 10}" text-anchor="middle" class="sub">$${Math.round(t)}</text>`;
+  }
+  rows.forEach((r, i) => {
+    const y = top + i * rowH, w = Math.max(2, (r.usd / max) * plotW);
+    const terms = `${r.rateText}${r.rateIsCeiling ? ' (up to)' : ''} · ${r.window}${r.exceptions ? ' · ' + r.exceptions : ''}`;
+    s += `<text x="${LW - 10}" y="${y + 16}" text-anchor="end">${esc(r.tool)}</text><rect class="bar ${r.windowMonths || r.flatUsd ? 'impl' : 'money'}" x="${LW}" y="${y + 6}" width="${w}" height="13" rx="2"/>`;
+    s += `<text x="${LW + w + 8}" y="${y + 16}" class="sub">$${Math.round(r.usd)} · ${esc(terms)}</text>`;
+  });
+  el.innerHTML = `<div class="legend" style="margin-bottom:8px"><span><i style="background:var(--impl)"></i>fixed window</span><span><i style="background:var(--money)"></i>open-ended, first year shown</span></div><svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="Commission per referred customer">${s}</svg>`;
+}
+
+let stageFilter = 'all';
+function drawPlaybooks() {
+  const pbs = V.playbooks?.playbooks ?? [];
+  const econName = (id) => { const e = econById.get(id); return e ? (e.platform ?? e.name) : id };
+  const expTitle = (id) => V.experiments.experiments.find((e) => e.id === id)?.title ?? id;
+  $('playbooks').innerHTML = pbs
+    .filter((pb) => stageFilter === 'all' || pb.streams.some((s) => s.stage === stageFilter))
+    .map((pb) => `<article class="card pb">
+      <span class="eyebrow">${esc(V.estate.properties.find((p) => p.id === pb.property)?.domain ?? pb.property)}</span>
+      <p style="font-size:13px">${esc(pb.role)}</p>
+      <ul>${pb.streams.map((s) => `<li><span class="stage ${esc(s.stage)}">${esc(s.stage)}</span><span>${esc(s.what)}</span></li>`).join('')}</ul>
+      ${pb.shops.length ? `<div class="row"><span class="muted">Lists on:</span>${pb.shops.map((id) => `<span class="pill">${esc(econName(id))}</span>`).join('')}</div>` : ''}
+      ${pb.partners.length ? `<div class="row"><span class="muted">Partners:</span>${pb.partners.map((t) => `<span class="pill">${esc(t)}</span>`).join('')}</div>` : ''}
+      ${pb.articles.length ? `<div class="row" style="display:grid;gap:4px"><span class="muted">Articles the vault can source:</span>${pb.articles.map((a) => `<span>${esc(a.title)} <span class="muted">(${a.rows.length} rows)</span></span>`).join('')}</div>` : ''}
+      <p class="kill">Next: ${pb.nextExperiment ? esc(expTitle(pb.nextExperiment)) : 'no experiment yet'}</p>
+    </article>`).join('');
+}
+chips($('stageChips'), V.playbooks?.stages ?? [], (v) => { stageFilter = v; drawPlaybooks() });
+
+drawArch(); drawEcon(); drawTake(); drawSupply(); drawCalc(); drawPartners(); drawPlaybooks(); drawMatrix(); drawBoard(); drawComps(); drawMacro();
+</script>

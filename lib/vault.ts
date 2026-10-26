@@ -41,6 +41,8 @@ export type SupplyRow = Sourced & {
   priceText: string
   rate?: number
   fixedUsd?: number
+  /** Set on partner payouts to us; such a row is income, never a selling fee. */
+  commissionRate?: number
   retrievedAt: string
 }
 
@@ -50,8 +52,10 @@ export type VaultData = {
   verification: { checkedAt: string; results: { id: string; verdict: VerificationVerdict }[] }
 }
 
-/** Verdicts that mean a person or a page fetch saw the value on its source. */
-export const CONFIRMED: ReadonlySet<VerificationVerdict> = new Set(['number-found', 'reviewer-confirmed', 'live-counter'])
+/** Verdicts that mean a person or a page fetch saw the value on its own source. Live counters drift, so they are excluded. */
+export const CONFIRMED: ReadonlySet<VerificationVerdict> = new Set(['number-found', 'reviewer-confirmed'])
+
+const positive = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n) && n > 0
 
 function verdicts(v: VaultData): Map<string, VerificationVerdict> {
   return new Map(v.verification.results.map((r) => [r.id, r.verdict]))
@@ -93,7 +97,7 @@ export type MarginResult =
 
 /** Unit margin from sourced rows. Refuses unknown, unpriced or unconfirmed inputs instead of guessing. */
 export function unitMargin(v: VaultData, input: MarginInput): MarginResult {
-  if (!(input.priceUsd > 0)) return { ok: false, refused: ['priceUsd must be greater than 0'] }
+  if (!positive(input.priceUsd)) return { ok: false, refused: ['priceUsd must be a finite number greater than 0'] }
   const map = verdicts(v)
   const supply = new Map(v.supply.rows.map((r) => [r.id, r]))
   const econ = new Map(v.economies.rows.map((r) => [r.id, r]))
@@ -103,13 +107,16 @@ export function unitMargin(v: VaultData, input: MarginInput): MarginResult {
 
   for (const c of input.costLines) {
     const row = supply.get(c.supplyId)
-    if (!row || row.priceKind !== 'unit' || typeof row.price !== 'number') refused.push(`${c.supplyId}: no unit price`)
+    if (!positive(c.quantity)) refused.push(`${c.supplyId}: quantity must be a finite number greater than 0`)
+    else if (!row || row.priceKind !== 'unit' || typeof row.price !== 'number') refused.push(`${c.supplyId}: no unit price`)
     else if (!confirmed(row.id)) refused.push(`${c.supplyId}: source not confirmed`)
     else lines.push({ label: `${row.vendor}: ${row.item} x ${c.quantity}`, usd: c.quantity * row.price, sourceUrl: row.sourceUrl })
   }
   for (const id of input.feeSupplyIds ?? []) {
     const row = supply.get(id)
-    if (!row || row.priceKind !== 'rate') refused.push(`${id}: not a fee row`)
+    const hasTerms = row && (typeof row.rate === 'number' || typeof row.fixedUsd === 'number')
+    if (!row || row.priceKind !== 'rate' || typeof row.commissionRate === 'number') refused.push(`${id}: not a selling fee row`)
+    else if (!hasTerms) refused.push(`${id}: fee terms not machine-readable (no rate or fixed fee)`)
     else if (!confirmed(row.id)) refused.push(`${id}: source not confirmed`)
     else lines.push({ label: `${row.vendor} fee`, usd: input.priceUsd * (row.rate ?? 0) + (row.fixedUsd ?? 0), sourceUrl: row.sourceUrl })
   }

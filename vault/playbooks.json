@@ -1,5 +1,5 @@
 {
-  "$comment": "One revenue playbook per estate site. Every id is cross-checked by the validator: streams.model -> revenue-models.json, shops -> economies.json, partners -> partners.json, articles.rows -> any vault row, nextExperiment -> experiments.json. Stage is honest: live = running today (revenue still unmeasured here), gated = built but waiting on a human gate, building, proposed, hold = deliberately not now.",
+  "$comment": "One revenue playbook per estate site. Every id is cross-checked by the validator: streams.model -> revenue-models.json, shops -> economies.json, partners -> partners.json, articles.rows -> any vault row, nextExperiment -> experiments.json. Stage is honest: live = running today and evidenced in this repo (revenue still unmeasured here), gated = built but waiting on a human gate, building, proposed, hold = deliberately not now.",
   "updatedAt": "2026-10-26",
   "stages": ["live", "gated", "building", "proposed", "hold"],
   "playbooks": [
@@ -9,7 +9,7 @@
       "streams": [
         { "model": "affiliate-recurring", "stage": "live", "what": "disclosed partner links through go.agenticincome.ai" },
         { "model": "data-products", "stage": "proposed", "what": "monthly economy brief from the vault (Private Intel)" },
-        { "model": "digital-product-mor", "stage": "gated", "what": "Blueprint and packs in the Polar catalog; checkout off until Frank flips it" },
+        { "model": "digital-product-mor", "stage": "gated", "what": "Blueprint and packs in products/catalog.json; purchasable only once Polar env is configured (lib/polar.ts); prices and activation stay human-gated" },
         { "model": "pay-per-call", "stage": "hold", "what": "paid MCP lookups; waits on exp-001 showing agents use the free tools" }
       ],
       "shops": ["apify-store-cumulative-payout", "rapidapi-marketplace-fee", "aws-marketplace-listing-fee"],
@@ -24,7 +24,7 @@
     },
     {
       "property": "go-agenticincome",
-      "role": "The attribution point. Every partner click is counted here, so every revenue claim starts here.",
+      "role": "The redirect point for partner links. Click counting is not evidenced in this repo yet; exp-001 adds it.",
       "streams": [{ "model": "affiliate-recurring", "stage": "live", "what": "catalog-driven redirects with disclosure" }],
       "shops": [],
       "partners": ["Systeme.io", "Higgsfield", "ElevenLabs"],
@@ -35,7 +35,7 @@
       "property": "agenticpassiveincome",
       "role": "Automation-first sibling. Tests whether agents will pay other agents.",
       "streams": [
-        { "model": "affiliate-recurring", "stage": "live", "what": "comparison content with disclosed links" },
+        { "model": "affiliate-recurring", "stage": "building", "what": "comparison content with disclosed links; running state is not evidenced from this repo" },
         { "model": "pay-per-call", "stage": "proposed", "what": "one premium lookup over an agent payment rail" }
       ],
       "shops": ["rapidapi-marketplace-fee"],
@@ -61,7 +61,7 @@
         { "model": "affiliate-recurring", "stage": "proposed", "what": "tool recommendations inside packs, disclosed" }
       ],
       "shops": ["framer-creator-payouts-2025", "notion-marketplace-fee", "gumroad-discover-fee", "webflow-template-fee", "creative-market-shop-owner-earnings"],
-      "partners": ["CapCut", "Higgsfield", "ElevenLabs", "Opus Clip", "HeyGen", "Descript", "Synthesia"],
+      "partners": ["CapCut", "Higgsfield", "ElevenLabs", "Opus Clip", "Descript", "Synthesia"],
       "articles": [{ "title": "Where template sellers actually get paid", "rows": ["framer-creator-payouts-2025", "notion-marketplace-fee", "webflow-template-fee", "envato-contributor-earnings"] }],
       "nextExperiment": "exp-003-plugin-marketplace-vs-own-checkout"
     },
@@ -83,7 +83,7 @@
         { "model": "royalties-licensing", "stage": "hold", "what": "IP licensing after canon and audience exist" }
       ],
       "shops": ["steam-revenue-share", "epic-games-store-revenue-share", "roblox-devex-fy2025", "fortnite-creator-payouts-2024", "fab-revenue-share", "unity-asset-store-share"],
-      "partners": ["Higgsfield", "Topaz Labs", "Pollo AI", "Adobe Firefly"],
+      "partners": ["Higgsfield", "Topaz Labs", "Pollo AI"],
       "articles": [{ "title": "How game platforms split the money", "rows": ["steam-revenue-share", "epic-games-store-revenue-share", "roblox-devex-fy2025", "fortnite-creator-payouts-2024"] }],
       "nextExperiment": "exp-006-byok-vs-bundled-credits"
     },
@@ -149,7 +149,7 @@
     {
       "property": "aiarchitectacademy",
       "role": "Cohort course, waitlist first.",
-      "streams": [{ "model": "education-cohort", "stage": "gated", "what": "waitlist live; no checkout until a gate PASS" }],
+      "streams": [{ "model": "education-cohort", "stage": "building", "what": "waitlist-first surface; the site is pending cutover per the properties graph; no checkout until a gate PASS" }],
       "shops": [],
       "partners": [],
       "articles": [],

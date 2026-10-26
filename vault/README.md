@@ -18,7 +18,7 @@ It is data first. Pages, articles, MCP tools and the internal atlas read from th
 | `estate-map.json` | 16 live estate properties mapped to revenue models and economy sectors | snapshot of `starlight/graph/*.graph.json`; re-snapshot, do not hand-edit |
 | `experiments.json` | 10 proposed experiments, each with one metric and a kill rule | no result without a receipt |
 | `competitions.json` | 4 competition formats for agent teams | maker never scores itself; empty leaderboard until a receipt exists |
-| `partners.json` | resale terms for 14 partner programs: rate, payout window, which sites fit | each rate must appear verbatim in `data/programs.json`, the verified registry |
+| `partners.json` | resale terms for 11 active partner programs: rate, payout window, exceptions, which sites fit | each rate must appear verbatim in `data/programs.json`, the verified registry |
 | `playbooks.json` | one revenue plan per site: streams with an honest stage, marketplaces, partners, sourceable articles, next experiment | every id resolves to a vault row |
 | `verification.json` | receipt from `scripts/vault-verify.mjs`: every source re-fetched and checked for the row's number | generated; never hand-edited |
 | `verification-manual.json` | reviewer receipts for sources a plain fetch cannot read | names who read it, when, and what they saw |
@@ -27,7 +27,9 @@ It is data first. Pages, articles, MCP tools and the internal atlas read from th
 
 ## Verification state
 
-`node scripts/vault-verify.mjs` re-fetches all 83 source URLs. On 2026-10-26, 95 of 117 rows were confirmed: 85 by a number match on the live page, 4 by reviewer receipt, 6 live counters re-measured. The other 22 sit behind bot walls (SEC asks for a contact address we do not invent, plus Epic, Fab and W3Techs) or render by script. They need a browser read before any public use, and the atlas shows them in grey. Rerun the script monthly; a row that falls out of confirmed is a bug.
+`node scripts/vault-verify.mjs` re-fetches all 83 source URLs. A row is confirmed only when every number it states appears on its own source page, or when a recorded reviewer read that same URL and named the metric. Live counters (model counts, TVL, stablecoin supply) drift daily and never count as confirmed.
+
+On 2026-10-26, after a second Codex review tightened those rules, 85 of 117 rows were confirmed: 84 by page match and 1 by reviewer receipt. 7 are live counters. The other 25 sit behind bot walls (SEC asks for a contact address we do not invent, plus Epic, Fab and W3Techs), render by script, or state no checkable number. They need a browser read before any public use, and the atlas shows them in grey. Rerun the script monthly; a row that falls out of confirmed is a bug.
 
 `pnpm vault:check` (or `node scripts/vault-validate.mjs`) enforces every rule above. `tests/vault.test.mjs` proves each rule fails when broken.
 

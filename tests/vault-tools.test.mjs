@@ -33,13 +33,31 @@ test('a fee row cannot be used as a unit cost, and unknown ids are refused', () 
 })
 
 test('an input whose source is not confirmed is refused', () => {
-  const unconfirmed = vault.verification.results.find((x) => x.file === 'supply-chain' && !['number-found', 'reviewer-confirmed', 'live-counter'].includes(x.verdict))
+  const unconfirmed = vault.verification.results.find((x) => x.file === 'supply-chain' && !['number-found', 'reviewer-confirmed'].includes(x.verdict)
+    && vault.supply.rows.some((s) => s.id === x.id && (s.priceKind === 'unit' ? typeof s.price === 'number' : typeof s.rate === 'number' || typeof s.fixedUsd === 'number')))
   const row = vault.supply.rows.find((s) => s.id === unconfirmed.id)
   const input = row.priceKind === 'rate'
     ? { priceUsd: 10, costLines: [], feeSupplyIds: [row.id] }
     : { priceUsd: 10, costLines: [{ supplyId: row.id, quantity: 1 }] }
   const r = unitMargin(vault, input)
   assert.equal(r.ok, false)
+})
+
+test('a fee row without machine-readable terms is refused, not treated as free (Codex finding)', () => {
+  const r = unitMargin(vault, { priceUsd: 100, costLines: [], feeSupplyIds: ['stripe-eea-card'] })
+  assert.equal(r.ok, false)
+})
+
+test('an affiliate commission row is refused as a selling fee', () => {
+  const r = unitMargin(vault, { priceUsd: 100, costLines: [], feeSupplyIds: ['elevenlabs-affiliate'] })
+  assert.equal(r.ok, false)
+})
+
+test('negative, zero and non-finite quantities are refused (Codex finding)', () => {
+  for (const quantity of [-1, 0, Number.NaN, Number.POSITIVE_INFINITY]) {
+    const r = unitMargin(vault, { priceUsd: 100, costLines: [{ supplyId: 'anthropic-sonnet-5-5-output', quantity }] })
+    assert.equal(r.ok, false, `quantity ${quantity}`)
+  }
 })
 
 test('supply filter by category returns only that category', () => {

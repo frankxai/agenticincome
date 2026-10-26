@@ -1,14 +1,14 @@
 {
-  "$comment": "Receipt from scripts/vault-verify.mjs. number-found = a number from the row appears on the fetched page; reviewer-confirmed = a plain fetch could not confirm it but a recorded reviewer read the source (verification-manual.json); live-counter = the source is a live counter that changes daily, so it is re-measured, not matched; number-missing = page loaded but no row number found (stale, rendered by script, or worded differently); unreachable = blocked, timed out or gone for a plain fetch, which says nothing about the value; no-number = the row states no number to check.",
-  "checkedAt": "2026-10-26T00:41:45.370Z",
+  "$comment": "Receipt from scripts/vault-verify.mjs. number-found = every number the row states appears on the fetched page; reviewer-confirmed = a plain fetch could not confirm it but a recorded reviewer read the same URL and named the metric (verification-manual.json); live-counter = a daily-changing counter whose committed value no longer matches the source, not counted as confirmed; number-missing = page loaded but no row number found (stale, rendered by script, or worded differently); unreachable = blocked, timed out or gone for a plain fetch, which says nothing about the value; no-number = the row states no number to check.",
+  "checkedAt": "2026-10-26T01:12:15.690Z",
   "urlCount": 83,
   "summary": {
-    "number-found": 85,
-    "reviewer-confirmed": 4,
-    "unreachable": 15,
-    "number-missing": 3,
+    "number-found": 84,
+    "unreachable": 16,
+    "number-missing": 5,
     "no-number": 4,
-    "live-counter": 6
+    "live-counter": 7,
+    "reviewer-confirmed": 1
   },
   "results": [
     {
@@ -18,9 +18,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$1.4",
-        "1.4"
+        "$1.4"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -30,9 +30,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$149",
-        "149"
+        "$149"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -43,11 +43,11 @@
       "automated": "number-found",
       "found": [
         "15%",
-        "15",
         "$1",
         "30%",
-        "30"
+        "15%"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -60,11 +60,10 @@
         "30",
         "25",
         "$10",
-        "10",
         "20",
-        "$50",
-        "50"
+        "$50"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -74,12 +73,15 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
-      "verdict": "reviewer-confirmed",
+      "missing": [],
+      "verdict": "unreachable",
       "reviewer": {
         "by": "Codex (review profile, read-only)",
         "at": "2026-10-25",
-        "verdict": "match",
-        "note": "FY2025 10-K shows $1,503.106m"
+        "verdict": "numeric-sighting",
+        "url": "https://www.sec.gov/Archives/edgar/data/1315098/000131509826000024/rblx-20251231.htm",
+        "metric": null,
+        "note": "FY2025 10-K shows $1,503.106m; the reviewer did not record which line item"
       }
     },
     {
@@ -89,6 +91,7 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
+      "missing": [],
       "verdict": "unreachable"
     },
     {
@@ -98,6 +101,7 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
+      "missing": [],
       "verdict": "unreachable"
     },
     {
@@ -107,6 +111,7 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
+      "missing": [],
       "verdict": "unreachable"
     },
     {
@@ -116,6 +121,7 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
+      "missing": [],
       "verdict": "unreachable"
     },
     {
@@ -125,6 +131,7 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
+      "missing": [],
       "verdict": "unreachable"
     },
     {
@@ -134,6 +141,7 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
+      "missing": [],
       "verdict": "unreachable"
     },
     {
@@ -143,12 +151,15 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
-      "verdict": "reviewer-confirmed",
+      "missing": [],
+      "verdict": "unreachable",
       "reviewer": {
         "by": "Codex (review profile, read-only)",
         "at": "2026-10-25",
-        "verdict": "match",
-        "note": "FY2025 10-K shows $378.4bn"
+        "verdict": "numeric-sighting",
+        "url": "https://www.sec.gov/Archives/edgar/data/1594805/000159480526000007/shop-20251231.htm",
+        "metric": null,
+        "note": "FY2025 10-K shows $378.4bn; line item not recorded"
       }
     },
     {
@@ -158,6 +169,7 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
+      "missing": [],
       "verdict": "unreachable"
     },
     {
@@ -167,9 +179,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$1.3",
-        "1.3"
+        "$1.3"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -179,6 +191,7 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
+      "missing": [],
       "verdict": "unreachable"
     },
     {
@@ -188,12 +201,15 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
-      "verdict": "reviewer-confirmed",
+      "missing": [],
+      "verdict": "unreachable",
       "reviewer": {
         "by": "Codex (review profile, read-only)",
         "at": "2026-10-25",
-        "verdict": "match",
-        "note": "FY2025 10-K shows $10,460.7m"
+        "verdict": "numeric-sighting",
+        "url": "https://www.sec.gov/Archives/edgar/data/1370637/000137063726000019/etsy-20251231.htm",
+        "metric": null,
+        "note": "FY2025 10-K shows $10,460.7m; line item not recorded"
       }
     },
     {
@@ -203,9 +219,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$69.3",
-        "69.3"
+        "$69.3"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -215,9 +231,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$1.4",
-        "1.4"
+        "$1.4"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -227,6 +243,7 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
+      "missing": [],
       "verdict": "unreachable"
     },
     {
@@ -237,12 +254,10 @@
       "automated": "number-found",
       "found": [
         "10%",
-        "10",
         "$0.50",
-        "0.50",
-        "30%",
-        "30"
+        "30%"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -252,6 +267,9 @@
       "status": 200,
       "automated": "number-missing",
       "found": [],
+      "missing": [
+        "$2"
+      ],
       "verdict": "number-missing"
     },
     {
@@ -262,9 +280,9 @@
       "automated": "number-found",
       "found": [
         "$10",
-        "10",
         "2013"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -274,6 +292,7 @@
       "status": 200,
       "automated": "no-number",
       "found": [],
+      "missing": [],
       "verdict": "no-number"
     },
     {
@@ -283,9 +302,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$100",
-        "100"
+        "$100"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -295,9 +314,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$11",
-        "11"
+        "$11"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -307,9 +326,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$70",
-        "70"
+        "$70"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -319,9 +338,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$1.82",
-        "1.82"
+        "$1.82"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -331,9 +350,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$225",
-        "225"
+        "$225"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -344,9 +363,9 @@
       "automated": "number-found",
       "found": [
         "23.99",
-        "100%",
-        "100"
+        "100%"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -356,6 +375,7 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
+      "missing": [],
       "verdict": "unreachable"
     },
     {
@@ -365,12 +385,15 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
-      "verdict": "reviewer-confirmed",
+      "missing": [],
+      "verdict": "unreachable",
       "reviewer": {
         "by": "Codex (review profile, read-only)",
         "at": "2026-10-25",
-        "verdict": "match",
-        "note": "FY2025 10-K shows $4,028.386m"
+        "verdict": "numeric-sighting",
+        "url": "https://www.sec.gov/Archives/edgar/data/1627475/000162747526000012/upwk-20251231.htm",
+        "metric": null,
+        "note": "FY2025 10-K shows $4,028.386m; line item not recorded"
       }
     },
     {
@@ -380,6 +403,9 @@
       "status": 200,
       "automated": "number-missing",
       "found": [],
+      "missing": [
+        "3,186,261"
+      ],
       "verdict": "live-counter"
     },
     {
@@ -391,6 +417,7 @@
       "found": [
         "3%"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -402,6 +429,7 @@
       "found": [
         "$4"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -411,9 +439,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "25%",
-        "25"
+        "25%"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -421,15 +449,20 @@
       "id": "notion-marketplace-fee",
       "url": "https://www.notion.com/help/selling-on-marketplace",
       "status": 200,
-      "automated": "number-found",
+      "automated": "number-missing",
       "found": [
         "8%"
       ],
-      "verdict": "number-found",
+      "missing": [
+        "$0.40"
+      ],
+      "verdict": "reviewer-confirmed",
       "reviewer": {
         "by": "Claude (Opus 5.5), page fetch",
         "at": "2026-10-26",
         "verdict": "match",
+        "url": "https://www.notion.com/help/selling-on-marketplace",
+        "metric": "transaction fee",
         "note": "Page reads 'Notion charges a 8% fee plus 40 cents per transaction'"
       }
     },
@@ -441,9 +474,9 @@
       "automated": "number-found",
       "found": [
         "$6.5",
-        "6.5",
         "2025"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -453,6 +486,7 @@
       "status": "error",
       "automated": "unreachable",
       "found": [],
+      "missing": [],
       "verdict": "unreachable"
     },
     {
@@ -464,6 +498,7 @@
       "found": [
         "70"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -473,9 +508,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "30%",
-        "30"
+        "30%"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -485,9 +520,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$10",
-        "10"
+        "$10"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -497,9 +532,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$50",
-        "50"
+        "$50"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -511,6 +546,7 @@
       "found": [
         "$4"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -520,9 +556,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$20",
-        "20"
+        "$20"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -534,6 +570,7 @@
       "found": [
         "$2"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -543,15 +580,17 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$10",
-        "10"
+        "$10"
       ],
+      "missing": [],
       "verdict": "number-found",
       "reviewer": {
         "by": "Codex (review profile, read-only)",
         "at": "2026-10-25",
         "verdict": "match",
-        "note": "Pricing page timed out for the reviewer; the official Sonnet 5.5 model page confirms $10/MTok"
+        "url": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+        "metric": "output price per MTok",
+        "note": "Read on the model page, not the row's pricing-page sourceUrl, so it does not upgrade the row"
       }
     },
     {
@@ -561,9 +600,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$0.10",
-        "0.10"
+        "$0.10"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -573,9 +612,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$0.50",
-        "0.50"
+        "$0.50"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -586,10 +625,9 @@
       "automated": "number-found",
       "found": [
         "$10.00",
-        "10.00",
-        "$1.00",
-        "1.00"
+        "$1.00"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -599,9 +637,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$50.00",
-        "50.00"
+        "$50.00"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -612,12 +650,10 @@
       "automated": "number-found",
       "found": [
         "$2.00",
-        "2.00",
         "$0.10",
-        "0.10",
-        "$10.00",
-        "10.00"
+        "$10.00"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -628,10 +664,9 @@
       "automated": "number-found",
       "found": [
         "$0.10",
-        "0.10",
-        "$0.01",
-        "0.01"
+        "$0.01"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -641,9 +676,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$0.50",
-        "0.50"
+        "$0.50"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -654,12 +689,12 @@
       "automated": "number-found",
       "found": [
         "$2.00",
-        "2.00",
         "30",
         "2026",
         "$4.00",
-        "4.00"
+        "2026"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -670,12 +705,12 @@
       "automated": "number-found",
       "found": [
         "$10.00",
-        "10.00",
         "30",
         "2026",
         "$20.00",
-        "20.00"
+        "2026"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -686,11 +721,11 @@
       "automated": "number-found",
       "found": [
         "$2.00",
-        "2.00",
         "200",
         "$4.00",
-        "4.00"
+        "200"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -701,13 +736,12 @@
       "automated": "number-found",
       "found": [
         "$0.75",
-        "0.75",
         "31",
         "2026",
         "$1.50",
-        "1.50",
         "2027"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -718,13 +752,12 @@
       "automated": "number-found",
       "found": [
         "$3.75",
-        "3.75",
         "31",
         "2026",
         "$7.50",
-        "7.50",
         "2027"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -735,9 +768,9 @@
       "automated": "number-found",
       "found": [
         "5.5%",
-        "5.5",
         "8%"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -748,9 +781,9 @@
       "automated": "number-found",
       "found": [
         "$25,000",
-        "25,000",
         "5%"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -760,6 +793,7 @@
       "status": 200,
       "automated": "no-number",
       "found": [],
+      "missing": [],
       "verdict": "no-number"
     },
     {
@@ -770,12 +804,10 @@
       "automated": "number-found",
       "found": [
         "$0.30",
-        "0.30",
         "$0.006",
-        "0.006",
-        "$1.20",
-        "1.20"
+        "$1.20"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -786,10 +818,9 @@
       "automated": "number-found",
       "found": [
         "$0.15",
-        "0.15",
-        "$0.60",
-        "0.60"
+        "$0.60"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -800,10 +831,10 @@
       "automated": "number-found",
       "found": [
         "$0.003",
-        "0.003",
         "333.33",
         "$1"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -814,10 +845,10 @@
       "automated": "number-found",
       "found": [
         "$0.14",
-        "0.14",
         "7.14",
         "$1"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -827,9 +858,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$0.025",
-        "0.025"
+        "$0.025"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -840,9 +871,9 @@
       "automated": "number-found",
       "found": [
         "12",
-        "$0.01",
-        "0.01"
+        "$0.01"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -853,10 +884,9 @@
       "automated": "number-found",
       "found": [
         "$0.04",
-        "0.04",
-        "$0.08",
-        "0.08"
+        "$0.08"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -869,14 +899,11 @@
         "$0",
         "$6",
         "$22",
-        "22",
         "$99",
-        "99",
         "$299",
-        "299",
-        "$990",
-        "990"
+        "$990"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -890,6 +917,7 @@
         "2,500",
         "20"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -901,6 +929,7 @@
       "found": [
         "3.99"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -910,9 +939,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$3.29",
-        "3.29"
+        "$3.29"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -922,9 +951,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$3.99",
-        "3.99"
+        "$3.99"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -935,10 +964,9 @@
       "automated": "number-found",
       "found": [
         "$4.50",
-        "4.50",
-        "$2.49",
-        "2.49"
+        "$2.49"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -948,9 +976,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$50",
-        "50"
+        "$50"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -960,9 +988,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "$16",
-        "16"
+        "$16"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -974,6 +1002,7 @@
       "found": [
         "25"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -984,9 +1013,9 @@
       "automated": "number-found",
       "found": [
         "$0.2",
-        "0.2",
         "100"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -996,8 +1025,10 @@
       "status": 200,
       "automated": "number-found",
       "found": [
+        "2.9%",
         "30"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1005,26 +1036,26 @@
       "id": "stripe-eea-card",
       "url": "https://stripe.com/pricing",
       "status": 200,
-      "automated": "number-found",
+      "automated": "number-missing",
       "found": [
-        "1,5%",
-        "1,5",
-        "15",
+        "15"
+      ],
+      "missing": [
         "0,25"
       ],
-      "verdict": "number-found"
+      "verdict": "number-missing"
     },
     {
       "file": "supply-chain",
       "id": "stripe-managed-payments",
       "url": "https://stripe.com/pricing",
       "status": 200,
-      "automated": "number-found",
-      "found": [
-        "3,5%",
-        "3,5"
+      "automated": "number-missing",
+      "found": [],
+      "missing": [
+        "3,5%"
       ],
-      "verdict": "number-found"
+      "verdict": "number-missing"
     },
     {
       "file": "supply-chain",
@@ -1036,6 +1067,7 @@
         "5%",
         "50"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1048,6 +1080,7 @@
         "5%",
         "50"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1060,6 +1093,7 @@
         "5%",
         "50"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1070,10 +1104,9 @@
       "automated": "number-found",
       "found": [
         "10%",
-        "10",
-        "$0.50",
-        "0.50"
+        "$0.50"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1084,10 +1117,9 @@
       "automated": "number-found",
       "found": [
         "2.7%",
-        "2.7",
-        "$0.30",
-        "0.30"
+        "$0.30"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1097,6 +1129,9 @@
       "status": 200,
       "automated": "number-missing",
       "found": [],
+      "missing": [
+        "12.25"
+      ],
       "verdict": "number-missing"
     },
     {
@@ -1107,9 +1142,9 @@
       "automated": "number-found",
       "found": [
         "1,000",
-        "$0.001",
-        "0.001"
+        "$0.001"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1122,6 +1157,7 @@
         "0.50",
         "0.01"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1132,10 +1168,9 @@
       "automated": "number-found",
       "found": [
         "100%",
-        "100",
-        "$1,000,000",
-        "1,000,000"
+        "$1,000,000"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1145,9 +1180,9 @@
       "status": 200,
       "automated": "number-found",
       "found": [
-        "20%",
-        "20"
+        "20%"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1159,6 +1194,7 @@
       "found": [
         "3%"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1169,9 +1205,9 @@
       "automated": "number-found",
       "found": [
         "22%",
-        "22",
         "12"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1181,6 +1217,7 @@
       "status": 200,
       "automated": "no-number",
       "found": [],
+      "missing": [],
       "verdict": "no-number"
     },
     {
@@ -1195,6 +1232,7 @@
         "305,348,459",
         "14,772,048"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1206,6 +1244,7 @@
       "found": [
         "2026"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1218,6 +1257,7 @@
         "401.6",
         "2026"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1227,34 +1267,46 @@
       "status": 403,
       "automated": "unreachable",
       "found": [],
+      "missing": [],
       "verdict": "unreachable"
     },
     {
       "file": "macro",
       "id": "w3techs-wordpress-share",
       "url": "https://w3techs.com/technologies/overview/content_management",
-      "status": "error",
-      "automated": "unreachable",
-      "found": [],
-      "verdict": "unreachable"
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "39.6%",
+        "58.3%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
     },
     {
       "file": "macro",
       "id": "w3techs-shopify-share",
       "url": "https://w3techs.com/technologies/overview/content_management",
-      "status": "error",
-      "automated": "unreachable",
-      "found": [],
-      "verdict": "unreachable"
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "5.3%",
+        "7.9%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
     },
     {
       "file": "macro",
       "id": "w3techs-no-cms",
       "url": "https://w3techs.com/technologies/overview/content_management",
-      "status": "error",
-      "automated": "unreachable",
-      "found": [],
-      "verdict": "unreachable"
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "32.1%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
     },
     {
       "file": "macro",
@@ -1265,6 +1317,7 @@
       "found": [
         "175"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1274,7 +1327,10 @@
       "status": 200,
       "automated": "number-missing",
       "found": [],
-      "verdict": "number-missing"
+      "missing": [
+        "421"
+      ],
+      "verdict": "live-counter"
     },
     {
       "file": "macro",
@@ -1283,6 +1339,9 @@
       "status": 200,
       "automated": "number-missing",
       "found": [],
+      "missing": [
+        "$88,834,030,174"
+      ],
       "verdict": "live-counter"
     },
     {
@@ -1292,6 +1351,10 @@
       "status": 200,
       "automated": "number-missing",
       "found": [],
+      "missing": [
+        "$302,616,607,151.24",
+        "$836,842,250.78"
+      ],
       "verdict": "live-counter"
     },
     {
@@ -1299,9 +1362,16 @@
       "id": "defillama-fees-total-30d",
       "url": "https://api.llama.fi/overview/fees?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true",
       "status": 200,
-      "automated": "number-found",
+      "automated": "number-missing",
       "found": [
+        "30",
+        "30",
         "30"
+      ],
+      "missing": [
+        "$2,321,715,312",
+        "$23,660,789,302",
+        "14.02%"
       ],
       "verdict": "live-counter"
     },
@@ -1312,8 +1382,10 @@
       "status": 200,
       "automated": "number-found",
       "found": [
+        "402",
         "402"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1326,11 +1398,11 @@
         "402",
         "75.41",
         "$24.24",
-        "24.24",
         "94.06",
         "22",
         "30"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1340,6 +1412,7 @@
       "status": 200,
       "automated": "no-number",
       "found": [],
+      "missing": [],
       "verdict": "no-number"
     },
     {
@@ -1351,6 +1424,7 @@
       "found": [
         "60"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1362,6 +1436,7 @@
       "found": [
         "9421"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1369,12 +1444,15 @@
       "id": "mastercard-agent-pay",
       "url": "https://newsroom.mastercard.com/news/press/2025/april/mastercard-unveils-agent-pay-pioneering-agentic-payments-technology-to-power-commerce-in-the-age-of-ai",
       "status": 200,
-      "automated": "number-found",
+      "automated": "number-missing",
       "found": [
         "2025",
         "29"
       ],
-      "verdict": "number-found"
+      "missing": [
+        "04"
+      ],
+      "verdict": "number-missing"
     },
     {
       "file": "macro",
@@ -1384,15 +1462,13 @@
       "automated": "number-found",
       "found": [
         "$480",
-        "480",
         "2027",
         "$250",
-        "250",
         "50",
         "4%",
-        "$100",
-        "100"
+        "$100"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1403,18 +1479,14 @@
       "automated": "number-found",
       "found": [
         "$213.9",
-        "213.9",
         "2026",
         "6.1%",
-        "6.1",
         "$121.1",
-        "121.1",
         "$46.9",
-        "46.9",
         "$45.9",
-        "45.9",
         "3.7"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1425,13 +1497,9 @@
       "automated": "number-found",
       "found": [
         "$47",
-        "47",
-        "2026",
-        "$65",
-        "65",
-        "$965",
-        "965"
+        "2026"
       ],
+      "missing": [],
       "verdict": "number-found"
     },
     {
@@ -1441,6 +1509,9 @@
       "status": 200,
       "automated": "number-missing",
       "found": [],
+      "missing": [
+        "3,186,261"
+      ],
       "verdict": "live-counter"
     },
     {
@@ -1450,6 +1521,9 @@
       "status": 200,
       "automated": "number-missing",
       "found": [],
+      "missing": [
+        "1,105,509"
+      ],
       "verdict": "live-counter"
     }
   ]

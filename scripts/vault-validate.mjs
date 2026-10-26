@@ -37,7 +37,7 @@ function validatePartners(v, errors) {
     tools.add(r.tool);
     const p = programs.get(r.tool);
     if (!p) { errors.push(`partners ${r.tool}: not in data/programs.json`); continue; }
-    if (!p.hasProgram || ['dead-end', 'closed'].includes(p.status)) errors.push(`partners ${r.tool}: program is ${p.status}`);
+    if (!p.hasProgram || p.status !== 'active') errors.push(`partners ${r.tool}: registry status is ${p.status}, not active`);
     if (!String(p.commission ?? '').includes(r.rateText)) errors.push(`partners ${r.tool}: "${r.rateText}" not in registry commission text`);
     if (typeof r.rate === 'number' && `${Math.round(r.rate * 100)}%` !== r.rateText) errors.push(`partners ${r.tool}: rate ${r.rate} disagrees with ${r.rateText}`);
   }
@@ -162,6 +162,10 @@ export function validate(v) {
       let resolvable = true;
       for (const line of s.costLines ?? []) {
         const src = supplyById.get(line.supplyId);
+        if (!(Number.isFinite(line.quantity) && line.quantity > 0)) {
+          errors.push(`margin ${s.id}: cost line ${line.supplyId} quantity must be a finite number greater than 0`);
+          resolvable = false;
+        }
         if (!src || typeof src.price !== 'number' || src.priceKind === 'rate') {
           errors.push(`margin ${s.id}: cost line ${line.supplyId} has no numeric sourced price`);
           resolvable = false;
@@ -169,7 +173,7 @@ export function validate(v) {
       }
       for (const fee of s.feeLines ?? []) {
         const src = supplyById.get(fee.supplyId);
-        if (!src || (typeof src.rate !== 'number' && typeof src.fixedUsd !== 'number')) {
+        if (!src || typeof src.commissionRate === 'number' || (typeof src.rate !== 'number' && typeof src.fixedUsd !== 'number')) {
           errors.push(`margin ${s.id}: fee line ${fee.supplyId} has no sourced rate or fixed fee`);
           resolvable = false;
         }

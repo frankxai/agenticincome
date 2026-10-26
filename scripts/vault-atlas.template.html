@@ -215,7 +215,7 @@ const econ = V.economies?.rows ?? [];
 const supply = V.supply?.rows ?? [];
 const macro = V.macro?.facts ?? [];
 const supplyById = new Map(supply.map((r) => [r.id, r]));
-const CONFIRMED = new Set(['number-found', 'reviewer-confirmed', 'live-counter']);
+const CONFIRMED = new Set(['number-found', 'reviewer-confirmed']);
 const verdictById = new Map((V.verification?.results ?? []).map((r) => [r.id, r.verdict]));
 const isConfirmed = (id) => CONFIRMED.has(verdictById.get(id));
 const econById = new Map(econ.map((r) => [r.id, r]));
@@ -237,8 +237,8 @@ $('counts').innerHTML = [
   const groups = [
     ['Confirmed on the live page', (r) => r.verdict === 'number-found', 'var(--impl)'],
     ['Confirmed by a reviewer', (r) => r.verdict === 'reviewer-confirmed', 'var(--tech)'],
-    ['Live counter, re-measured', (r) => r.verdict === 'live-counter', 'var(--money)'],
-    ['Needs a browser read', (r) => !CONFIRMED.has(r.verdict), 'var(--line)'],
+    ['Live counter, value has drifted', (r) => r.verdict === 'live-counter', 'var(--money)'],
+    ['Needs a browser read', (r) => !CONFIRMED.has(r.verdict) && r.verdict !== 'live-counter', 'var(--line)'],
   ].map(([label, f, color]) => [label, res.filter(f).length, color]);
   $('vbar').innerHTML = groups.map(([, n, c]) => `<span style="width:${(n / res.length) * 100}%;background:${c}"></span>`).join('');
   $('vlegend').innerHTML = groups.map(([l, n, c]) => `<span><i style="background:${c}"></i>${l}: ${n}</span>`).join('')
@@ -439,7 +439,7 @@ function drawPartners() {
   }
   rows.forEach((r, i) => {
     const y = top + i * rowH, w = Math.max(2, (r.usd / max) * plotW);
-    const terms = `${r.rateText}${r.rateIsCeiling ? ' (up to)' : ''} · ${r.window}`;
+    const terms = `${r.rateText}${r.rateIsCeiling ? ' (up to)' : ''} · ${r.window}${r.exceptions ? ' · ' + r.exceptions : ''}`;
     s += `<text x="${LW - 10}" y="${y + 16}" text-anchor="end">${esc(r.tool)}</text><rect class="bar ${r.windowMonths || r.flatUsd ? 'impl' : 'money'}" x="${LW}" y="${y + 6}" width="${w}" height="13" rx="2"/>`;
     s += `<text x="${LW + w + 8}" y="${y + 16}" class="sub">$${Math.round(r.usd)} · ${esc(terms)}</text>`;
   });

@@ -12,22 +12,24 @@ const TIMEOUT_MS = 25_000;
 const CONCURRENCY = 4;
 const UA = 'AgenticIncomeVaultVerify/1.0 (+https://github.com/frankxai/agenticincome)';
 
-// Pull the load-bearing numbers out of a human value string: "$1,503.1 million" -> ["$1,503.1", "1,503.1", "1503.1", ...].
+// Pull the load-bearing numbers out of a human value string. Each number becomes one group of
+// spellings: "$1,503.1 million" -> [["$1,503.1", "1,503.1", "$1503.1", "1503.1"]].
 // A bare single digit is too common to prove anything, so it only counts with a "$" or "%" attached.
-export function numberTokens(text) {
-  const tokens = new Set();
+export function numberGroups(text) {
+  const groups = [];
   for (const m of String(text ?? '').matchAll(/(\$\s?)?(\d[\d,]*(?:\.\d+)?)(\s?%)?/g)) {
     const [, dollar, num, pct] = m;
     const bare = num.replace(/,$/, '');
-    const variants = [bare, bare.replace(/,/g, '')];
     const isBareDigit = /^\d$/.test(bare);
-    for (const n of new Set(variants)) {
-      if (dollar) tokens.add('$' + n);
-      if (pct) tokens.add(n + '%');
-      if (!isBareDigit) tokens.add(n);
+    const spellings = new Set();
+    for (const n of new Set([bare, bare.replace(/,/g, '')])) {
+      if (dollar) spellings.add('$' + n);
+      if (pct) spellings.add(n + '%');
+      if (!isBareDigit) spellings.add(n);
     }
+    if (spellings.size) groups.push([...spellings]);
   }
-  return [...tokens];
+  return groups;
 }
 
 const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -44,16 +46,24 @@ export function pageText(html) {
     .replace(/\s+/g, ' ');
 }
 
-export function matchRow(tokens, text) {
-  const found = tokens.filter((t) => tokenRegex(t).test(text));
-  return { found, verdict: tokens.length === 0 ? 'no-number' : found.length ? 'number-found' : 'number-missing' };
+// Every number the row states must appear; one matching number out of several proves nothing.
+export function matchRow(groups, text) {
+  if (!groups.length) return { found: [], missing: [], verdict: 'no-number' };
+  const found = [], missing = [];
+  for (const g of groups) {
+    const hit = g.find((t) => tokenRegex(t).test(text));
+    if (hit) found.push(hit); else missing.push(g[0]);
+  }
+  return { found, missing, verdict: missing.length ? 'number-missing' : 'number-found' };
 }
 
 async function fetchText(url) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   try {
-    const res = await fetch(url, { headers: { 'user-agent': UA, accept: 'text/html,application/json;q=0.9,*/*;q=0.8' }, signal: ctrl.signal, redirect: 'follow' });
+    // Without a language some sites localize prices ("0,2 USD"), which no row spells that way.
+    const headers = { 'user-agent': UA, accept: 'text/html,application/json;q=0.9,*/*;q=0.8', 'accept-language': 'en-US,en;q=0.9' };
+    const res = await fetch(url, { headers, signal: ctrl.signal, redirect: 'follow' });
     const body = res.ok ? await res.text() : '';
     return { status: res.status, text: res.ok ? pageText(body) : '' };
   } catch (e) {
@@ -77,10 +87,12 @@ function reviewerReceipts() {
   return existsSync(p) ? new Map(JSON.parse(readFileSync(p, 'utf8')).receipts.map((r) => [r.id, r])) : new Map();
 }
 
-export function finalVerdict(auto, receipt, live) {
-  if (live) return 'live-counter';
+// A receipt upgrades a row only when the reviewer read the row's own URL and recorded the metric.
+// Live counters drift daily, so they are reported as such and never count as confirmed.
+export function finalVerdict(auto, receipt, live, url) {
   if (auto === 'number-found') return 'number-found';
-  if (receipt?.verdict === 'match') return 'reviewer-confirmed';
+  if (receipt?.verdict === 'match' && receipt.url === url && receipt.metric) return 'reviewer-confirmed';
+  if (live) return 'live-counter';
   return auto;
 }
 
@@ -101,17 +113,17 @@ async function main() {
     const page = pages.get(r.url);
     const auto = page.status !== 200
       ? { status: page.status, verdict: 'unreachable', found: [] }
-      : { status: 200, ...matchRow(numberTokens(r.text), page.text) };
+      : { status: 200, ...matchRow(numberGroups(r.text), page.text) };
     const receipt = receipts.get(r.id);
     return {
-      file: r.file, id: r.id, url: r.url, status: auto.status, automated: auto.verdict, found: auto.found,
-      verdict: finalVerdict(auto.verdict, receipt, r.live),
-      ...(receipt ? { reviewer: { by: receipt.by, at: receipt.at, verdict: receipt.verdict, note: receipt.note } } : {}),
+      file: r.file, id: r.id, url: r.url, status: auto.status, automated: auto.verdict, found: auto.found, missing: auto.missing ?? [],
+      verdict: finalVerdict(auto.verdict, receipt, r.live, r.url),
+      ...(receipt ? { reviewer: { by: receipt.by, at: receipt.at, verdict: receipt.verdict, url: receipt.url, metric: receipt.metric, note: receipt.note } } : {}),
     };
   });
   const summary = results.reduce((acc, r) => ({ ...acc, [r.verdict]: (acc[r.verdict] ?? 0) + 1 }), {});
   writeFileSync(OUT, JSON.stringify({
-    $comment: 'Receipt from scripts/vault-verify.mjs. number-found = a number from the row appears on the fetched page; reviewer-confirmed = a plain fetch could not confirm it but a recorded reviewer read the source (verification-manual.json); live-counter = the source is a live counter that changes daily, so it is re-measured, not matched; number-missing = page loaded but no row number found (stale, rendered by script, or worded differently); unreachable = blocked, timed out or gone for a plain fetch, which says nothing about the value; no-number = the row states no number to check.',
+    $comment: 'Receipt from scripts/vault-verify.mjs. number-found = every number the row states appears on the fetched page; reviewer-confirmed = a plain fetch could not confirm it but a recorded reviewer read the same URL and named the metric (verification-manual.json); live-counter = a daily-changing counter whose committed value no longer matches the source, not counted as confirmed; number-missing = page loaded but no row number found (stale, rendered by script, or worded differently); unreachable = blocked, timed out or gone for a plain fetch, which says nothing about the value; no-number = the row states no number to check.',
     checkedAt, urlCount: urls.length, summary, results,
   }, null, 2));
   console.log(`vault-verify: ${results.length} rows over ${urls.length} urls`, summary);

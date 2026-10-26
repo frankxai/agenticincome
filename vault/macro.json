@@ -210,7 +210,7 @@
     {
       "id": "anthropic-run-rate-may-2026",
       "domain": "ai",
-      "claim": "Anthropic stated its run-rate revenue crossed $47B in May 2026, in its Series H announcement ($65B raised at a $965B post-money valuation). Earlier official figures: $14B at the Series G, over $30B in April 2026",
+      "claim": "Anthropic stated its run-rate revenue crossed $47 billion in May 2026, in its Series H announcement.",
       "value": 47000000000,
       "unit": "USD annualized run-rate",
       "asOf": "2026-05-28",

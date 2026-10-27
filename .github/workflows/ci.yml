@@ -28,8 +28,9 @@ on:
       - 'docs/RELEASE-FOUNDATION-*.md'
 
 concurrency:
-  group: agenticincome-ci-${{ github.workflow }}-${{ github.ref }}
-  # A newer PR push supersedes the running build; every push to main still gets its own build.
+  # PR runs share one group per PR, so a newer push supersedes the running build. Every
+  # other run gets its own group: a shared group would let a newer push replace a queued one.
+  group: agenticincome-ci-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.run_id }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:

@@ -24,7 +24,8 @@ concurrency:
 
 jobs:
   surface-guard:
-    runs-on: ubuntu-latest
+    # gh, git and a node script: the 1-vCPU runner (gh, git and node preinstalled) is enough for a 3-minute job.
+    runs-on: ubuntu-slim
     timeout-minutes: 3
     permissions:
       contents: read

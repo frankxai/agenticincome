@@ -19,6 +19,8 @@ name: Web excellence
 # scope.
 on:
   pull_request:
+    # ready_for_review: drafts skip the lint below, so marking a PR ready must lint it without another push.
+    types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - '**/*.tsx'
       - '**/*.jsx'
@@ -41,7 +43,9 @@ concurrency:
 jobs:
   guidelines:
     name: Web Interface Guidelines (mechanical)
-    runs-on: ${{ vars.CI_RUNNER == 'railway' && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-latest' }}
+    if: github.event.pull_request.draft == false
+    # A node script and a python smoke test: the 1-vCPU runner is enough (15-minute job cap; the lint takes seconds).
+    runs-on: ubuntu-slim
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4

@@ -34,12 +34,14 @@ permissions:
 
 concurrency:
   group: agenticincome-release-contract-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # A newer PR push supersedes the running check; pushes to main are never cancelled.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   validate:
     name: Validate product release ledger
-    runs-on: ${{ vars.CI_RUNNER == 'railway' && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-latest' }}
+    # Two node scripts, no dependency install: the 1-vCPU runner is enough.
+    runs-on: ubuntu-slim
     timeout-minutes: 5
     steps:
       - name: Check out repository

@@ -14,6 +14,8 @@ on:
       - 'docs/releases/**'
       - 'docs/RELEASE-FOUNDATION-*.md'
   pull_request:
+    # ready_for_review: drafts skip the build below, so marking a PR ready must build it without another push.
+    types: [opened, synchronize, reopened, ready_for_review]
     paths-ignore:
       - '.github/release.yml'
       - '.github/scripts/release-*'
@@ -27,11 +29,16 @@ on:
 
 concurrency:
   group: agenticincome-ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # A newer PR push supersedes the running build; every push to main still gets its own build.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
-    runs-on: ${{ vars.CI_RUNNER == 'railway' && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-latest' }}
+    # Drafts do not build. A skipped job reports success, so merge automation must not treat a skipped `build` as green.
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    # Dormant Railway switch: only this private repository (not a fork, the org mirror or a fork PR) opts in, and only
+    # when the repository variable CI_RUNNER is 'railway'. Otherwise the hosted runner is used, as before.
+    runs-on: ${{ vars.CI_RUNNER == 'railway' && github.repository_id == '1262748116' && github.event.repository.private == true && github.event.repository.fork == false && (github.event_name == 'push' || github.event_name == 'pull_request' && github.event.pull_request.head.repo.id == github.event.repository.id) && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-latest' }}
     timeout-minutes: 15
     permissions:
       contents: read

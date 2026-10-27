@@ -7,7 +7,8 @@ on:
 
 jobs:
   audit:
-    runs-on: ${{ vars.CI_RUNNER == 'railway' && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-latest' }}
+    # A shell loop over knowledge/*.md: the 1-vCPU runner is enough (15-minute job cap; the audit takes seconds).
+    runs-on: ubuntu-slim
     timeout-minutes: 20
     permissions:
       contents: read

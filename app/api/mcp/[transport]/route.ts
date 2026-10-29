@@ -7,6 +7,7 @@ import programsData from '@/data/programs.json'
 import { site } from '@/lib/site'
 import { fitCheck, AUTOMATION_POINTER } from '@/lib/fit-check'
 import { programSlug, type Program } from '@/lib/affiliate'
+import { withSource } from '@/lib/link-source'
 import { catalogRefusal, isPolarConfigured, type CatalogProduct } from '@/lib/polar'
 import catalog from '@/products/catalog.json'
 import referenceGraph from '@/data/income-graph-request-to-quote.json'
@@ -68,7 +69,7 @@ function publicProgram(p: Program) {
     commission: p.commission ?? null,
     cookieDays: p.cookieDays ?? null,
     status: p.status ?? 'active',
-    ...(p.status === 'active' && p.ourLink ? { ourLink: p.ourLink } : {}),
+    ...(p.status === 'active' && p.ourLink ? { ourLink: withSource(p.ourLink, 'mcp') } : {}),
   }
 }
 

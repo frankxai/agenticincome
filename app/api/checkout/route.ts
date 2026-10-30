@@ -12,14 +12,16 @@ import {
   catalogRefusal,
   createCheckoutSession,
   findCatalogProduct,
+  isCheckoutLive,
   isPolarConfigured,
 } from '@/lib/polar'
 import { appendTrackingParams } from '@/lib/tracking'
 
 /**
  * GET — the static checkout-link path. Reads a per-offer `*_CHECKOUT_URL` env
- * var via lib/offers.ts and redirects, falling back to the offer's
- * request-access section when the link is not configured. Unchanged.
+ * var via lib/offers.ts (catalog-gated) and redirects. When only the Polar API
+ * path is live it redirects to the offer page, which renders the buy button;
+ * otherwise it falls back to the offer's waitlist (request-access) section.
  *
  * POST — the Polar API path (lib/polar.ts). Creates a real checkout session
  * for a catalog product id. products/catalog.json is the server-side authority
@@ -64,6 +66,21 @@ export async function GET(req: Request) {
       path: url.pathname,
       href: target.toString(),
       state: 'provider_checkout',
+      ts: new Date().toISOString(),
+    })
+    return NextResponse.redirect(target, 302)
+  }
+
+  // Polar API path live but no static link: the offer page carries the real
+  // buy button, so send the buyer there instead of to the waitlist.
+  if (isCheckoutLive(offer.slug)) {
+    const target = appendTrackingParams(new URL(`/offers/${offer.slug}`, req.url), url.searchParams)
+    await forwardAnalyticsEvent({
+      event: 'checkout_redirect',
+      offer: offer.slug,
+      path: url.pathname,
+      href: `${target.pathname}${target.search}`,
+      state: 'provider_session_available',
       ts: new Date().toISOString(),
     })
     return NextResponse.redirect(target, 302)

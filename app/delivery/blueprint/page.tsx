@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { EmailCapture } from '@/components/EmailCapture'
 import { TrackOnView } from '@/components/TrackOnView'
+import { isCheckoutLive } from '@/lib/polar'
 
 export const metadata: Metadata = {
   title: 'Blueprint Delivery',
@@ -17,6 +18,8 @@ const installSteps = [
 ]
 
 export default function BlueprintDelivery() {
+  const checkoutLive = isCheckoutLive('blueprint')
+
   return (
     <div className="py-16">
       <TrackOnView event="delivery_view" payload={{ offer: 'blueprint', source: 'delivery-page' }} />
@@ -40,7 +43,9 @@ export default function BlueprintDelivery() {
         <aside className="rounded-2xl border border-border bg-surface/80 p-5">
           <div className="text-sm font-semibold text-gold">Launch state</div>
           <p className="mt-3 text-sm leading-6 text-muted">
-            Secure checkout must be connected before this product is sold publicly. Until then, the public CTA routes to request-access.
+            {checkoutLive
+              ? 'Checkout is live through Polar.sh, the merchant of record. Your Polar receipt email carries the download and license key, and is your proof of purchase.'
+              : 'Secure checkout must be connected before this product is sold publicly. Until then, the public CTA routes to request-access.'}
           </p>
         </aside>
       </section>
@@ -62,15 +67,17 @@ export default function BlueprintDelivery() {
         </div>
       </section>
 
-      <section className="section-band">
-        <EmailCapture
-          headline="Request Blueprint access"
-          sub="Get the launch notification and the current first-loop checklist while checkout is being connected."
-          source="delivery-blueprint"
-          buttonLabel="Request access"
-          successMessage="Request received. You are on the Blueprint access list."
-        />
-      </section>
+      {checkoutLive ? null : (
+        <section className="section-band">
+          <EmailCapture
+            headline="Request Blueprint access"
+            sub="Get the launch notification and the current first-loop checklist while checkout is being connected."
+            source="delivery-blueprint"
+            buttonLabel="Request access"
+            successMessage="Request received. You are on the Blueprint access list."
+          />
+        </section>
+      )}
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { checkoutPath, checkoutUrl, offers } from '@/lib/offers'
 import { CheckoutLink } from '@/components/CheckoutLink'
+import { PolarCheckoutButton } from '@/components/PolarCheckoutButton'
 import { isCheckoutLive } from '@/lib/polar'
 
 export const metadata: Metadata = {
@@ -82,14 +83,25 @@ export default function Offers() {
                   </ul>
                 </div>
                 <div className="grid gap-3">
-                  <CheckoutLink
-                    href={checkoutPath(offer)}
-                    className="cta text-center"
-                    offer={offer.slug}
-                    source="offers-index"
-                  >
-                    {offer.cta}
-                  </CheckoutLink>
+                  {polarLive ? (
+                    <PolarCheckoutButton
+                      productId={offer.slug}
+                      source="offers-index"
+                      gatedHref="/trust"
+                      gatedCta="Support and refunds"
+                      buyLabel={offer.checkout.buyLabel ?? offer.cta}
+                      className="cta text-center"
+                    />
+                  ) : (
+                    <CheckoutLink
+                      href={checkoutPath(offer)}
+                      className="cta text-center"
+                      offer={offer.slug}
+                      source="offers-index"
+                    >
+                      {offer.cta}
+                    </CheckoutLink>
+                  )}
                   <Link href={`/offers/${offer.slug}`} className="cta-secondary text-center">
                     Inspect product
                   </Link>

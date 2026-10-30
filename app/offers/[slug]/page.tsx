@@ -68,8 +68,8 @@ export default async function OfferDetail({ params }: OfferPageProps) {
               <PolarCheckoutButton
                 productId={offer.slug}
                 source="offer-detail"
-                gatedHref={`/offers/${offer.slug}#request-access`}
-                gatedCta={offer.cta}
+                gatedHref="/trust"
+                gatedCta="Support and refunds"
                 buyLabel={offer.checkout.buyLabel ?? offer.cta}
               />
             ) : (
@@ -105,16 +105,16 @@ export default async function OfferDetail({ params }: OfferPageProps) {
                 ? 'Checkout is live. Polar.sh is the merchant of record and handles VAT and sales tax.'
               : liveCheckout
                 ? 'Live checkout URL is configured.'
-                : 'Request access — checkout opens when provider link is connected.'}
+                : 'Waitlist — checkout is not open for this product yet.'}
           </p>
           <div className="mt-5 rounded-xl border border-border bg-bg/60 p-4 text-xs leading-6 text-muted">
             {isFree
               ? 'Internal free delivery route is live.'
               : isScoped
                 ? 'No payment is taken here. The intake route records interest only when the configured service is available.'
-              : liveCheckout
+              : polarCheckoutLive || liveCheckout
                 ? 'Secure payment provider checkout is connected.'
-                : 'Checkout is not yet live. Request access to be notified when it opens.'}
+                : 'No payment is taken here yet. Join the waitlist below to hear when checkout opens.'}
           </div>
           <Link href="/trust" className="mt-4 inline-flex text-xs font-semibold text-accent">
             Trust, support, and refunds
@@ -196,7 +196,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
         </div>
       </section>
 
-      {!isFree && !liveCheckout ? (
+      {!isFree && !liveCheckout && !polarCheckoutLive ? (
         <section id="request-access" className="section-band">
           <EmailCapture
             headline={`Request ${offer.shortTitle} access`}

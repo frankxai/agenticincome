@@ -73,7 +73,7 @@ There are two checkout paths in `app/api/checkout/route.ts`. Both are wired, bot
 | Mechanism | Redirects to a checkout link you copy out of the Polar dashboard | Calls the Polar checkouts API and creates a session per click |
 | Config | `AGENTIC_INCOME_*_CHECKOUT_URL` via `lib/offers.ts` (`checkout.envKey`) | `POLAR_ACCESS_TOKEN` + `POLAR_PRODUCT_ID_*` via `lib/polar.ts` |
 | Gate | Env var present and https | Catalog `status` **and** env, both required |
-| Success URL | Baked into the Polar product | Built per product from the catalog's `delivery.path` |
+| Success URL | Baked into the Polar product | `/checkout/success?product=<id>&checkout_id={CHECKOUT_ID}` — verified with Polar server-side, then hands off to the catalog's `delivery.path` |
 | Attribution | Appends `utm_*`/`ref` to the outgoing URL | Fires `checkout_click` / `checkout_redirect` events |
 | Missing config | Honest request-access fallback | 503 + machine-readable `reason` |
 
@@ -89,14 +89,15 @@ Names and purpose are also documented in `.env.example`.
 
 | Env var | Value |
 |---|---|
-| `POLAR_ACCESS_TOKEN` | Organization Access Token (Polar → Settings → Developers). Server-side only — never `NEXT_PUBLIC_`. |
+| `POLAR_ACCESS_TOKEN` | Organization Access Token (Polar → Settings → Developers) with scopes `checkouts:write` and `checkouts:read`. Server-side only — never `NEXT_PUBLIC_`. |
+| `POLAR_SERVER` | Optional. `sandbox` routes all calls to `sandbox-api.polar.sh` for a test purchase with test cards (needs a sandbox token and sandbox product ids). Unset = production. |
 | `POLAR_PRODUCT_ID_BLUEPRINT` | Polar product id for `blueprint` |
 | `POLAR_PRODUCT_ID_PRIVATE_INTEL` | Polar product id for `private-intel` |
 | `POLAR_PRODUCT_ID_AGENT_TEAM_PRO` | Leave unset until the payload exists (§4) |
 | `POLAR_PRODUCT_ID_CLAIMS_GUARD_PACK` | Leave unset until the pack zip is uploaded (§2, cross-repo packs) |
 | `POLAR_PRODUCT_ID_ABOS_PACK_BUNDLE` | Leave unset until the bundle zip is uploaded (§2, cross-repo packs) |
 | `POLAR_PRODUCT_ID_VIBE_OS_PACK` | Leave unset until the pack zip is uploaded (§2, cross-repo packs) |
-| `POLAR_SUCCESS_URL` | Site origin, e.g. `https://agenticincome.ai`. The per-product path comes from the catalog's `delivery.path`. |
+| `POLAR_SUCCESS_URL` | Site origin, e.g. `https://agenticincome.ai`. Buyers return to `/checkout/success`, which confirms the checkout with Polar (`GET /v1/checkouts/{id}`) and links the catalog's `delivery.path` desk. |
 
 **Path A (legacy static links):**
 
@@ -112,6 +113,8 @@ No CSP change is needed: checkout is a top-level navigation to Polar, not an emb
 
 ### 5.2 Code touches (exact files)
 
+> **Done 2026-10-30:** `lib/offers.ts` has offer entries for every priced catalog SKU (agent-team-pro and the three packs included), each with a `/offers/<id>` page and a `/delivery/<id>` desk, and the success page at `/checkout/success` verifies the checkout with Polar. Items 4–6 below remain optional follow-ups.
+
 1. **`lib/offers.ts`** — add an `agent-team-pro` offer entry (copy the `blueprint` entry shape) with:
    - `slug: 'agent-team-pro'`, `price: '$129'`, `checkout: { provider: 'external', envKey: 'AGENTIC_INCOME_AGENT_TEAM_PRO_CHECKOUT_URL', fallback: 'request-access' }`, `deliveryPath: '/delivery/agent-team-pro'`.
    - `refundPolicy` fields: the 30-day no-questions text (§7) is already live on `blueprint` and `private-intel` (updated 2026-07-11); give `agent-team-pro` the same text when its entry is created.
@@ -123,8 +126,8 @@ No CSP change is needed: checkout is a top-level navigation to Polar, not an emb
 
 ### 5.3 Delivery pages
 
-- Existing: `/delivery/blueprint`, `/delivery/private-intel`, `/delivery/starter-kit` (in `app/delivery/`).
-- Create: `/delivery/agent-team-pro`.
+- Bespoke: `/delivery/blueprint`, `/delivery/private-intel`, `/delivery/starter-kit` (in `app/delivery/`).
+- Generic, rendered from `lib/offers.ts` + the catalog by `app/delivery/[slug]/page.tsx`: `/delivery/agent-team-pro`, `/delivery/claims-guard-pack`, `/delivery/abos-pack-bundle`, `/delivery/vibe-os-pack`. Each shows a waitlist until its checkout is live.
 - Each paid delivery page should state: what was purchased, the file list, the license line, the 30-day refund line, and the support boundary.
 
 ### 5.4 Flip the catalog status gate (Path B only — do this last)

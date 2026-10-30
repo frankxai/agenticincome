@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { EmailCapture } from '@/components/EmailCapture'
 import { TrackOnView } from '@/components/TrackOnView'
+import { isCheckoutLive } from '@/lib/polar'
 
 export const metadata: Metadata = {
   title: 'Private Intel Delivery',
@@ -17,6 +18,8 @@ const memberSteps = [
 ]
 
 export default function PrivateIntelDelivery() {
+  const checkoutLive = isCheckoutLive('private-intel')
+
   return (
     <div className="py-16">
       <TrackOnView event="delivery_view" payload={{ offer: 'private-intel', source: 'delivery-page' }} />
@@ -40,7 +43,9 @@ export default function PrivateIntelDelivery() {
         <aside className="rounded-2xl border border-border bg-surface/80 p-5">
           <div className="text-sm font-semibold text-gold">Launch state</div>
           <p className="mt-3 text-sm leading-6 text-muted">
-            Recurring checkout must be connected before this membership is sold publicly. Until then, the public CTA routes to request-access.
+            {checkoutLive
+              ? 'Membership checkout is live through Polar.sh, the merchant of record. Your Polar receipt email is your proof of membership; manage or cancel it from the Polar customer portal.'
+              : 'Recurring checkout must be connected before this membership is sold publicly. Until then, the public CTA routes to request-access.'}
           </p>
         </aside>
       </section>
@@ -62,15 +67,17 @@ export default function PrivateIntelDelivery() {
         </div>
       </section>
 
-      <section className="section-band">
-        <EmailCapture
-          headline="Request Private Intel access"
-          sub="Get the membership launch notification and the current first-loop checklist while checkout is being connected."
-          source="delivery-private-intel"
-          buttonLabel="Request access"
-          successMessage="Request received. You are on the Private Intel access list."
-        />
-      </section>
+      {checkoutLive ? null : (
+        <section className="section-band">
+          <EmailCapture
+            headline="Request Private Intel access"
+            sub="Get the membership launch notification and the current first-loop checklist while checkout is being connected."
+            source="delivery-private-intel"
+            buttonLabel="Request access"
+            successMessage="Request received. You are on the Private Intel access list."
+          />
+        </section>
+      )}
     </div>
   )
 }

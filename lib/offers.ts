@@ -209,7 +209,7 @@ export const offers: Offer[] = [
     summary: 'Advanced agent definitions, fulfillment workflows, and operating loops that extend the free pack into a production system.',
     promise: 'The premium delivery crew built from the same machinery that runs this business, with 12 months of updates. Machinery is promised, outcomes are not.',
     cta: 'Join the Agent Team Pro waitlist',
-    audience: 'Operators already running the free pack who want the full fulfillment crew instead of assembling it role by role.',
+    audience: 'Founders already running the free pack who want the full fulfillment crew instead of assembling it role by role.',
     firstWin: 'Run one delivery workflow end to end with defined agent roles and a human approval step before anything reaches a customer.',
     deliverables: [
       'Advanced agent definitions',
@@ -250,7 +250,7 @@ export const offers: Offer[] = [
     summary: 'A pre-publish gate that audits business copy through five checks and returns pass, warn, or fail with specific corrections.',
     promise: 'Run copy through regulated-claim, citation, brand-voice, AI-slop, and structure gates before it ships.',
     cta: 'Join the Claims Guard waitlist',
-    audience: 'Founders and operators publishing sales or marketing copy who want a repeatable check before anything goes live.',
+    audience: 'Founders and small teams publishing sales or marketing copy who want a repeatable check before anything goes live.',
     firstWin: 'Audit one page of live copy and fix every fail the gate returns.',
     deliverables: [
       'Claims Guard skill file',
@@ -299,14 +299,14 @@ export const offers: Offer[] = [
       'Pack registry and install guide',
     ],
     outcomes: [
-      'File-based business memory an AI harness can read',
+      'File-based business memory your AI assistant can read',
       'A design.md and taste.md authoring workflow',
       'A founder-sized weekly operating loop',
       'A pre-publish copy gate',
     ],
     proof: [
       'The source is MIT-licensed and public in frankxai/agentic-business-os; you can use it free from GitHub.',
-      'Skill files, not software: they direct an AI harness. No app, no account.',
+      'Skill files, not software: they guide the AI assistant you already use. No app, no account.',
       'No business-outcome claims.',
     ],
     support: 'Packaging and install questions only.',

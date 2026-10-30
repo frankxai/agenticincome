@@ -331,6 +331,13 @@ test('readiness is full-launch ready once sale SKUs, capture, and analytics are 
   assert.equal(readiness.configuredRequired, readiness.requiredTotal)
 })
 
+test('new offer copy keeps internal language off the public site (AGENTS.md)', () => {
+  const internal = /\b(harness|operators?|queue|swarm|internal tier|environment|coordination)\b/i
+  for (const id of ['agent-team-pro', 'claims-guard-pack', 'abos-pack-bundle', 'vibe-os-pack']) {
+    assert.doesNotMatch(JSON.stringify(getOffer(id)), internal, id)
+  }
+})
+
 test('every offer slug is unique', () => {
   const slugs = offers.map((offer) => offer.slug)
   assert.equal(new Set(slugs).size, slugs.length)

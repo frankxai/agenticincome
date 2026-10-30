@@ -44,7 +44,7 @@ export default function PrivateIntelDelivery() {
           <div className="text-sm font-semibold text-gold">Launch state</div>
           <p className="mt-3 text-sm leading-6 text-muted">
             {checkoutLive
-              ? 'Membership checkout is live through Polar.sh, the merchant of record. Your Polar receipt email is your proof of membership; manage or cancel it from the Polar customer portal.'
+              ? 'Membership checkout is open through Polar.sh, the merchant of record. Polar sends the receipt to the email used at checkout; manage or cancel the membership from the Polar customer portal.'
               : 'Recurring checkout must be connected before this membership is sold publicly. Until then, the public CTA routes to request-access.'}
           </p>
         </aside>

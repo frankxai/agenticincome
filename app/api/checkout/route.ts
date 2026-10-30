@@ -10,6 +10,7 @@ import {
 } from '@/lib/api-security'
 import {
   catalogRefusal,
+  checkoutRelease,
   createCheckoutSession,
   findCatalogProduct,
   isCheckoutLive,
@@ -109,6 +110,8 @@ export async function GET(req: Request) {
  *   400 free_product             — priced at zero; delivered on-site, not sold
  *   503 checkout_gated           — catalog status is not a purchasable state
  *   503 checkout_unconfigured    — catalog permits it, Polar env is not set
+ *   503 checkout_unreleased      — configured, but CHECKOUT_RELEASE does not
+ *                                  approve the Polar server in use
  *   502 checkout_upstream_failed — Polar refused or answered unusably
  *
  * No path returns a fabricated session, price, or availability.
@@ -158,7 +161,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, reason: 'unknown_product' }, { status: 404 })
   }
 
-  const refusal = catalogRefusal(product) ?? (isPolarConfigured(product.id) ? null : 'checkout_unconfigured')
+  const refusal =
+    catalogRefusal(product) ??
+    (!isPolarConfigured(product.id)
+      ? 'checkout_unconfigured'
+      : checkoutRelease() === 'closed'
+        ? 'checkout_unreleased'
+        : null)
   if (refusal) {
     await forwardAnalyticsEvent({
       event: 'checkout_fallback_request',

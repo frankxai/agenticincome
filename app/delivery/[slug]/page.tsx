@@ -56,7 +56,7 @@ export default async function GenericDelivery({ params }: DeliveryPageProps) {
           <div className="kicker">{offer.shortTitle} delivery</div>
           <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink">{product.name}</h1>
           <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">
-            This is the post-checkout handoff route for {product.name}. Polar.sh, the merchant of record, delivers the files and receipt by email.
+            This is the post-checkout handoff route for {product.name}. Polar.sh, the merchant of record, handles the receipt and file delivery.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link href={`/offers/${slug}`} className="cta">
@@ -72,7 +72,7 @@ export default async function GenericDelivery({ params }: DeliveryPageProps) {
           <div className="text-sm font-semibold text-gold">Launch state</div>
           <p className="mt-3 text-sm leading-6 text-muted">
             {checkoutLive
-              ? 'Checkout is live. Your Polar receipt email carries the download and is your proof of purchase.'
+              ? 'Checkout is open. Polar sends the receipt and download access to the email used at checkout; keep that email as proof of purchase.'
               : 'Checkout is not open for this product yet, so nothing has been sold. Join the waitlist below to hear when it opens.'}
           </p>
         </aside>

@@ -22,46 +22,56 @@ function firstParam(value: string | string[] | undefined) {
 
 /**
  * Polar returns buyers here with `checkout_id` (see successUrl in lib/polar.ts).
- * The page reports only what Polar confirms server-side. The `product` query
- * parameter is a hint used for links when Polar cannot be reached; it never
- * decides what the page says was paid for.
+ * The page reports only Polar's own checkout state, worded conservatively: it
+ * never asserts that money did or did not move, nor that an email or download
+ * arrived. Only a checkout Polar reports as completed links the delivery desk.
+ * The `product` query parameter is an unverified hint: it can only link back
+ * to the public product page, never decide what was paid for.
  */
 export default async function CheckoutSuccess({ searchParams }: SuccessPageProps) {
   const params = await searchParams
   const verification = await verifyCheckout(firstParam(params.checkout_id))
-  const hinted = findCatalogProduct(firstParam(params.product) ?? '')
-  const product = verification.product ?? (verification.state === 'unverifiable' ? hinted : undefined) ?? null
+  const verified = verification.product
+  const hinted = findCatalogProduct(firstParam(params.product) ?? '') ?? null
+  const productForLinks = verified ?? hinted
 
   const copy = {
     paid: {
-      kicker: 'Payment confirmed',
-      title: product ? `${product.name} is confirmed.` : 'Your order is confirmed.',
-      body: 'Polar.sh, the merchant of record, has emailed your receipt with the download and any license key. That email is your proof of purchase.',
+      kicker: 'Checkout complete',
+      title: verified ? `${verified.name}: checkout complete.` : 'Checkout complete.',
+      body: 'Polar.sh, the merchant of record, reports this checkout as completed. Polar sends the receipt, and the download or license key where the product includes one, to the email used at checkout. If nothing has arrived within a few minutes, check your spam folder or the Polar customer portal, which lists orders by email address.',
     },
     processing: {
       kicker: 'Payment processing',
-      title: 'Your payment is clearing.',
-      body: 'Polar.sh has your order and is confirming the payment. Your receipt and download arrive by email as soon as it clears. No action is needed.',
+      title: 'Polar is still processing this payment.',
+      body: 'The checkout was submitted and Polar has not finished processing the payment. Polar emails a receipt once it completes. Please do not start a second checkout in the meantime.',
     },
-    not_paid: {
+    open: {
+      kicker: 'Checkout open',
+      title: 'This checkout is not complete yet.',
+      body: 'Polar has not recorded a completed payment for this checkout. If you just paid, wait a minute and reload this page before trying again, so you are not charged twice.',
+    },
+    not_completed: {
       kicker: 'Checkout not completed',
-      title: 'No payment was taken.',
-      body: 'This checkout was not completed or has expired. Nothing was charged. You can start a new checkout from the product page.',
+      title: 'Polar did not complete this checkout.',
+      body: 'Polar reports this checkout as expired or failed. If your bank shows a pending charge anyway, look for a Polar receipt email or check the Polar customer portal before starting a new checkout.',
     },
     unverifiable: {
       kicker: 'Checkout',
       title: 'This checkout could not be confirmed here.',
-      body: 'If you completed a payment, Polar.sh has emailed your receipt with the download, and that email is your proof of purchase. If no email arrives within a few minutes, check your spam folder; the Polar customer portal lists every order placed with your email address.',
+      body: 'This page could not check the order with Polar. If you completed a payment, Polar sends the receipt to the email used at checkout, and the Polar customer portal lists orders by email address. Check there before starting a new checkout.',
     },
   }[verification.state]
 
-  const showDelivery = product && verification.state !== 'not_paid'
+  // Delivery desks hold no paid files (Polar delivers those), but the link is
+  // still reserved for a checkout Polar itself reports as completed.
+  const deliveryPath = verification.state === 'paid' && verified ? verified.delivery.path : null
 
   return (
     <div className="py-16">
       <TrackOnView
         event="delivery_view"
-        payload={{ offer: product?.id ?? 'unknown', source: `checkout-success-${verification.state}` }}
+        payload={{ offer: verified?.id ?? 'unknown', source: `checkout-success-${verification.state}` }}
       />
       <section className="grid gap-8 lg:grid-cols-[1fr_22rem] lg:items-start">
         <div>
@@ -69,13 +79,13 @@ export default async function CheckoutSuccess({ searchParams }: SuccessPageProps
           <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink">{copy.title}</h1>
           <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">{copy.body}</p>
           <div className="mt-7 flex flex-wrap gap-3">
-            {showDelivery ? (
-              <Link href={product.delivery.path} className="cta">
+            {deliveryPath ? (
+              <Link href={deliveryPath} className="cta">
                 Open the delivery desk
               </Link>
             ) : (
-              <Link href={product ? `/offers/${product.id}` : '/offers'} className="cta">
-                {product ? 'Back to the product' : 'Browse offers'}
+              <Link href={productForLinks ? `/offers/${productForLinks.id}` : '/offers'} className="cta">
+                {productForLinks ? 'Back to the product' : 'Browse offers'}
               </Link>
             )}
             <Link href="/trust" className="cta-secondary">

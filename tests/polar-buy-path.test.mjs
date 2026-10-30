@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import { afterEach, beforeEach, test } from 'node:test'
 import './support/alias.mjs'
 
@@ -21,6 +22,7 @@ const { GET, POST } = await import('../app/api/checkout/route.ts')
 // No request ever leaves the process.
 
 const ENV_KEYS = [
+  'CHECKOUT_RELEASE',
   'POLAR_ACCESS_TOKEN',
   'POLAR_SERVER',
   'POLAR_SUCCESS_URL',
@@ -67,10 +69,17 @@ afterEach(() => {
   globalThis.fetch = realFetch
 })
 
-function configureBlueprint() {
+// Credentials only. Nothing here approves a release.
+function credentialsOnly() {
   process.env.POLAR_ACCESS_TOKEN = 'polar_oat_test_not_a_real_token'
   process.env.POLAR_PRODUCT_ID_BLUEPRINT = BLUEPRINT_POLAR_ID
   process.env.POLAR_SUCCESS_URL = 'https://agenticincome.ai'
+}
+
+// Credentials plus the explicit live approval.
+function configureBlueprint() {
+  credentialsOnly()
+  process.env.CHECKOUT_RELEASE = 'live'
 }
 
 function configureEverything() {
@@ -141,7 +150,7 @@ test('checkoutReadiness names the exact missing env vars for a for-sale SKU', ()
   assert.deepEqual(checkoutReadiness('blueprint'), {
     productId: 'blueprint',
     state: 'checkout_unconfigured',
-    missingEnv: ['POLAR_ACCESS_TOKEN', 'POLAR_PRODUCT_ID_BLUEPRINT', 'POLAR_SUCCESS_URL'],
+    missingEnv: ['POLAR_ACCESS_TOKEN', 'POLAR_PRODUCT_ID_BLUEPRINT', 'POLAR_SUCCESS_URL', 'CHECKOUT_RELEASE'],
   })
   // A catalog-gated SKU is blocked by the catalog, not by env.
   assert.deepEqual(checkoutReadiness('private-intel').missingEnv, [])
@@ -158,6 +167,62 @@ test('GET /api/checkout sends an unconfigured SKU to its waitlist section', asyn
   assert.equal(location.searchParams.get('utm_source'), 'test')
 })
 
+// --- release gate: credentials alone never open checkout ------------------
+
+test('production credentials without CHECKOUT_RELEASE refuse on both paths', async () => {
+  credentialsOnly()
+  process.env.AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL = 'https://buy.polar.sh/static-blueprint'
+
+  assert.equal(isCheckoutLive('blueprint'), false)
+  assert.deepEqual(checkoutReadiness('blueprint'), {
+    productId: 'blueprint',
+    state: 'checkout_unreleased',
+    missingEnv: ['CHECKOUT_RELEASE'],
+  })
+  const response = await postCheckout('blueprint')
+  assert.equal(response.status, 503)
+  assert.equal((await response.json()).reason, 'checkout_unreleased')
+  assert.equal(await createCheckoutSession('blueprint'), null)
+
+  // Static path: the pasted link is ignored and GET falls back to the waitlist.
+  assert.equal(checkoutUrl(getOffer('blueprint')), null)
+  const redirect = await GET(new Request('https://agenticincome.ai/api/checkout?offer=blueprint'))
+  assert.equal(new URL(redirect.headers.get('location')).hash, '#request-access')
+
+  assert.equal(getLaunchReadiness().items.find((item) => item.id === 'blueprint_checkout').configured, false)
+  assert.equal(calls.length, 0, 'nothing reaches Polar without a release')
+})
+
+test('sandbox and live are separate approvals that must match POLAR_SERVER', async () => {
+  credentialsOnly()
+  for (const [release, server, open] of [
+    ['sandbox', undefined, false], // sandbox approval never opens production
+    ['live', 'sandbox', false], // live approval never runs against sandbox
+    ['LIVE ', undefined, true],
+    ['sandbox', 'sandbox', true],
+    ['yes', undefined, false],
+    ['true', undefined, false],
+    ['', undefined, false],
+  ]) {
+    process.env.CHECKOUT_RELEASE = release
+    if (server) process.env.POLAR_SERVER = server
+    else delete process.env.POLAR_SERVER
+    assert.equal(isCheckoutLive('blueprint'), open, `${release}/${server}`)
+  }
+})
+
+test('a sandbox release opens the API path against sandbox only; static links stay closed', async () => {
+  credentialsOnly()
+  process.env.POLAR_SERVER = 'sandbox'
+  process.env.CHECKOUT_RELEASE = 'sandbox'
+  process.env.AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL = 'https://buy.polar.sh/static-blueprint'
+  polarReply = () => Response.json({ url: 'https://sandbox.polar.sh/checkout/polar_c_x' })
+
+  assert.equal(await createCheckoutSession('blueprint'), 'https://sandbox.polar.sh/checkout/polar_c_x')
+  assert.equal(calls[0].url, 'https://sandbox-api.polar.sh/v1/checkouts/')
+  assert.equal(checkoutUrl(getOffer('blueprint')), null, 'static links are live-only')
+})
+
 // --- catalog gate holds even when every env var is set ---------------------
 
 test('catalog-gated SKUs stay closed on both paths even with every env var set', async () => {
@@ -169,6 +234,9 @@ test('catalog-gated SKUs stay closed on both paths even with every env var set',
     assert.equal((await response.json()).reason, 'checkout_gated', id)
     // A static link pasted into env must not bypass the catalog either.
     assert.equal(checkoutUrl(getOffer(id)), null, id)
+    const redirect = await GET(new Request(`https://agenticincome.ai/api/checkout?offer=${id}`))
+    const location = new URL(redirect.headers.get('location'))
+    assert.equal(`${location.pathname}${location.hash}`, `/offers/${id}#request-access`, id)
   }
   assert.equal(calls.length, 0)
 })
@@ -206,25 +274,17 @@ test('a configured for-sale SKU creates a Polar session with the right request',
   )
 })
 
-test('POLAR_SERVER=sandbox routes the session to the sandbox API', async () => {
-  configureBlueprint()
-  process.env.POLAR_SERVER = 'sandbox'
-  polarReply = () => Response.json({ url: 'https://sandbox.polar.sh/checkout/polar_c_x' })
-  assert.equal(await createCheckoutSession('blueprint'), 'https://sandbox.polar.sh/checkout/polar_c_x')
-  assert.equal(calls[0].url, 'https://sandbox-api.polar.sh/v1/checkouts/')
-})
-
-test('success_url is omitted, not guessed, when POLAR_SUCCESS_URL is unset or not https', async () => {
+test('POLAR_SUCCESS_URL is required: missing or non-https refuses instead of guessing', async () => {
   configureBlueprint()
   delete process.env.POLAR_SUCCESS_URL
-  polarReply = () => Response.json({ url: POLAR_CHECKOUT_URL })
-  await createCheckoutSession('blueprint')
-  assert.equal('success_url' in JSON.parse(calls[0].init.body), false)
+  assert.equal(isCheckoutLive('blueprint'), false)
+  assert.equal(await createCheckoutSession('blueprint'), null)
+  assert.deepEqual(checkoutReadiness('blueprint').missingEnv, ['POLAR_SUCCESS_URL'])
 
   process.env.POLAR_SUCCESS_URL = 'http://agenticincome.ai'
   assert.equal(successUrl(catalog.products.find((p) => p.id === 'blueprint')), null)
-  // Still live: Polar falls back to its own confirmation page.
-  assert.equal(checkoutReadiness('blueprint').state, 'live')
+  assert.equal(isCheckoutLive('blueprint'), false)
+  assert.equal(calls.length, 0)
 })
 
 test('Polar failures degrade to 502 and never return a fabricated URL', async () => {
@@ -264,9 +324,9 @@ test('verifyCheckout reports only what Polar confirms', async () => {
   const cases = [
     ['succeeded', 'paid', 'blueprint'],
     ['confirmed', 'processing', 'blueprint'],
-    ['open', 'not_paid', null],
-    ['expired', 'not_paid', null],
-    ['failed', 'not_paid', null],
+    ['open', 'open', null],
+    ['expired', 'not_completed', null],
+    ['failed', 'not_completed', null],
     ['something_new', 'unverifiable', null],
   ]
   for (const [status, state, productId] of cases) {
@@ -336,6 +396,13 @@ test('new offer copy keeps internal language off the public site (AGENTS.md)', (
   for (const id of ['agent-team-pro', 'claims-guard-pack', 'abos-pack-bundle', 'vibe-os-pack']) {
     assert.doesNotMatch(JSON.stringify(getOffer(id)), internal, id)
   }
+})
+
+test('success page asserts no settlement, email, or download facts and gates the desk on paid', () => {
+  const page = readFileSync(new URL('../app/checkout/success/page.tsx', import.meta.url), 'utf8')
+  assert.doesNotMatch(page, /No payment was taken|Nothing was charged|has emailed|is confirmed\./i)
+  assert.match(page, /verification\.state === 'paid' && verified \? verified\.delivery\.path : null/)
+  assert.doesNotMatch(page, /hinted[^\n]*delivery/, 'the URL hint must never reach the delivery desk link')
 })
 
 test('every offer slug is unique', () => {

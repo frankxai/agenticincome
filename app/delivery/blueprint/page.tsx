@@ -44,7 +44,7 @@ export default function BlueprintDelivery() {
           <div className="text-sm font-semibold text-gold">Launch state</div>
           <p className="mt-3 text-sm leading-6 text-muted">
             {checkoutLive
-              ? 'Checkout is live through Polar.sh, the merchant of record. Your Polar receipt email carries the download and license key, and is your proof of purchase.'
+              ? 'Checkout is open through Polar.sh, the merchant of record. Polar sends the receipt and download access to the email used at checkout; keep that email as proof of purchase.'
               : 'Secure checkout must be connected before this product is sold publicly. Until then, the public CTA routes to request-access.'}
           </p>
         </aside>

@@ -8,12 +8,15 @@ import catalog from '../products/catalog.json' with { type: 'json' }
  * lib/offers.ts (`checkoutUrl`) applies the same catalog gate, so a configured
  * link or token never overrides the catalog's sale state.
  *
- * Fail-closed by construction. Three independent gates must all pass:
+ * Fail-closed by construction. Every gate must pass:
  *
  *   1. the catalog entry's `status` must start with "for sale" (see
  *      `_checkoutGate` in products/catalog.json),
- *   2. the product must be mapped to a POLAR_PRODUCT_ID_* env var, and
- *   3. that env var and POLAR_ACCESS_TOKEN must both be set.
+ *   2. the product must be mapped to a POLAR_PRODUCT_ID_* env var,
+ *   3. that env var, POLAR_ACCESS_TOKEN, and an https POLAR_SUCCESS_URL must
+ *      all be set, and
+ *   4. CHECKOUT_RELEASE must explicitly approve the Polar server in use
+ *      (see checkoutRelease below). Credentials alone never open checkout.
  *
  * With none of the env set and today's catalog, every entry point refuses and
  * every surface renders the honest waitlist state.
@@ -75,6 +78,7 @@ export type CheckoutRefusal =
   | 'free_product'
   | 'checkout_gated'
   | 'checkout_unconfigured'
+  | 'checkout_unreleased'
 
 const PRODUCTS = catalog.products as readonly CatalogProduct[]
 
@@ -115,10 +119,34 @@ function polarToken(): string | null {
  * purchase can run with test cards. Anything else, including unset, is
  * production — there is no free-form base URL to misconfigure.
  */
+function polarServer(): 'sandbox' | 'production' {
+  return process.env.POLAR_SERVER?.trim().toLowerCase() === 'sandbox' ? 'sandbox' : 'production'
+}
+
 function polarApiBase(): string {
-  return process.env.POLAR_SERVER?.trim().toLowerCase() === 'sandbox'
-    ? POLAR_API_BASES.sandbox
-    : POLAR_API_BASES.production
+  return POLAR_API_BASES[polarServer()]
+}
+
+/**
+ * The explicit release switch, set by a human after the evidence for that
+ * stage exists. Sandbox and live are separate approvals:
+ *
+ *   CHECKOUT_RELEASE=sandbox  opens checkout only while POLAR_SERVER=sandbox
+ *                             (test cards, no real money).
+ *   CHECKOUT_RELEASE=live     opens checkout only against production Polar,
+ *                             after a sandbox purchase and delivery are
+ *                             evidenced (ops/POLAR-SETUP.md §6).
+ *   unset, anything else, or a value that does not match POLAR_SERVER
+ *                             -> closed.
+ *
+ * It gates both checkout paths: the API session path here, and the static
+ * link path in lib/offers.ts, which only ever opens on `live`.
+ */
+export function checkoutRelease(): 'closed' | 'sandbox' | 'live' {
+  const release = process.env.CHECKOUT_RELEASE?.trim().toLowerCase()
+  if (release === 'sandbox' && polarServer() === 'sandbox') return 'sandbox'
+  if (release === 'live' && polarServer() === 'production') return 'live'
+  return 'closed'
 }
 
 /**
@@ -127,17 +155,18 @@ function polarApiBase(): string {
  * configured product must never enable checkout for an unconfigured one.
  */
 export function isPolarConfigured(catalogId: string): boolean {
-  return Boolean(polarToken()) && Boolean(polarProductId(catalogId))
+  return Boolean(polarToken()) && Boolean(polarProductId(catalogId)) && Boolean(successBase())
 }
 
 /**
- * True only when the catalog permits the sale AND Polar is configured for it.
- * Public surfaces render from this: false means show the waitlist state.
+ * True only when the catalog permits the sale, Polar is configured for it,
+ * AND the release switch approves the server in use. Public surfaces render
+ * from this: false means show the waitlist state.
  */
 export function isCheckoutLive(catalogId: string): boolean {
   const product = findCatalogProduct(catalogId)
   if (!product || catalogRefusal(product)) return false
-  return isPolarConfigured(catalogId)
+  return isPolarConfigured(catalogId) && checkoutRelease() !== 'closed'
 }
 
 export type CheckoutReadiness = {
@@ -164,12 +193,14 @@ export function checkoutReadiness(catalogId: string): CheckoutReadiness {
   if (!polarToken()) missingEnv.push('POLAR_ACCESS_TOKEN')
   if (!polarProductId(catalogId)) missingEnv.push(PRODUCT_ID_ENV_KEYS[catalogId])
   if (!successBase()) missingEnv.push('POLAR_SUCCESS_URL')
-  // POLAR_SUCCESS_URL is not a hard gate (Polar falls back to its own
-  // confirmation page), so a product with only that missing is still live.
-  const hardMissing = missingEnv.filter((name) => name !== 'POLAR_SUCCESS_URL')
+  if (checkoutRelease() === 'closed') missingEnv.push('CHECKOUT_RELEASE')
   return {
     productId: catalogId,
-    state: hardMissing.length ? 'checkout_unconfigured' : 'live',
+    state: missingEnv.length === 0
+      ? 'live'
+      : missingEnv.every((name) => name === 'CHECKOUT_RELEASE')
+        ? 'checkout_unreleased'
+        : 'checkout_unconfigured',
     missingEnv,
   }
 }
@@ -215,9 +246,9 @@ export async function createCheckoutSession(catalogId: string): Promise<string |
 
   const token = polarToken()
   const productId = polarProductId(catalogId)
-  if (!token || !productId) return null
-
   const success = successUrl(product)
+  if (!token || !productId || !success) return null
+  if (checkoutRelease() === 'closed') return null
 
   const response = await fetch(`${polarApiBase()}/checkouts/`, {
     method: 'POST',
@@ -232,7 +263,7 @@ export async function createCheckoutSession(catalogId: string): Promise<string |
     body: JSON.stringify({
       products: [productId],
       metadata: { catalog_id: product.id },
-      ...(success ? { success_url: success } : {}),
+      success_url: success,
     }),
     signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
   }).catch(() => null)
@@ -251,17 +282,22 @@ export async function createCheckoutSession(catalogId: string): Promise<string |
 }
 
 /**
- * What the success page may say about a returning buyer's checkout.
+ * What Polar reports about a returning buyer's checkout. These are Polar's
+ * checkout states, not settlement facts: the success page words each one
+ * conservatively and never asserts whether money moved.
  *
- *   paid          — Polar reports `succeeded`; the order exists.
- *   processing    — Polar reports `confirmed`; payment is still clearing.
- *   not_paid      — `open`, `expired`, or `failed`; no payment was taken.
- *   unverifiable  — no id, malformed id, no token, Polar unreachable, or an
- *                   answer we cannot read. The page then claims nothing.
+ *   paid           — `succeeded`: Polar reports the checkout as completed.
+ *   processing     — `confirmed`: the buyer submitted payment; Polar is
+ *                    still processing it.
+ *   open           — `open`: not completed yet; payment may still be in
+ *                    progress or retried.
+ *   not_completed  — `expired` or `failed`: Polar did not complete it.
+ *   unverifiable   — no id, malformed id, no token, Polar unreachable, or an
+ *                    answer we cannot read. The page then claims nothing.
  */
 export type CheckoutVerification =
   | { state: 'paid' | 'processing'; product: CatalogProduct | null }
-  | { state: 'not_paid' | 'unverifiable'; product: null }
+  | { state: 'open' | 'not_completed' | 'unverifiable'; product: null }
 
 /** Polar checkout ids are UUIDs; anything else never reaches the API. */
 const CHECKOUT_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
@@ -307,9 +343,10 @@ export async function verifyCheckout(checkoutId: string | null | undefined): Pro
     case 'confirmed':
       return { state: 'processing', product: catalogProductForPolarId(session.product_id) }
     case 'open':
+      return { state: 'open', product: null }
     case 'expired':
     case 'failed':
-      return { state: 'not_paid', product: null }
+      return { state: 'not_completed', product: null }
     default:
       return unverifiable
   }

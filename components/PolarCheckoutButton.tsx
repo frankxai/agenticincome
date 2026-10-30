@@ -14,7 +14,7 @@ import { trackClientEvent } from '@/lib/client-analytics'
  *
  * Second gate: if the API still refuses on click (env pulled, catalog flipped
  * back, Polar down), this says plainly that checkout could not be opened and
- * that nothing was charged, offers a retry, and links `gatedHref` (support).
+ * that no payment was started (no checkout page was reached), offers a retry, and links `gatedHref` (support).
  * It never asserts availability the server did not confirm, and never invents
  * urgency while waiting.
  */
@@ -68,7 +68,7 @@ export function PolarCheckoutButton({
           </Link>
         </div>
         <p className="mt-2 text-xs leading-6 text-muted">
-          Checkout could not be opened just now. Nothing was charged.
+          Checkout could not be opened just now, so no payment was started.
         </p>
       </div>
     )

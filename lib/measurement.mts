@@ -1,5 +1,5 @@
 /**
- * Read-only measurement projection for #75/#76. This validates supplied aggregate
+ * Explicit-ESM read-only measurement projection for #75/#76. This validates supplied aggregate
  * receipts; it does not authenticate them, persist money, or authorize callers.
  * Never expose founder-private inputs through the public MCP catalog.
  */

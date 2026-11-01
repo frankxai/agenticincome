@@ -4,7 +4,7 @@ import { readFileSync, mkdtempSync, writeFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { spawnSync } from 'node:child_process'
-import { compileMeasurements } from '../lib/measurement.ts'
+import { compileMeasurements } from '../lib/measurement.mts'
 
 const fixture = JSON.parse(readFileSync(new URL('../data/measurement/synthetic-empty.json', import.meta.url)))
 const clone = () => structuredClone(fixture)

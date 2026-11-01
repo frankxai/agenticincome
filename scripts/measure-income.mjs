@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { readFileSync, statSync } from 'node:fs'
-import { compileMeasurements } from '../lib/measurement.ts'
+import { compileMeasurements } from '../lib/measurement.mts'
 
 try {
   if (process.argv.length !== 3) throw new Error('Usage: node scripts/measure-income.mjs INPUT.json')

@@ -93,7 +93,7 @@ These are proposed packaging layers, not six newly admitted launches. No prices 
 
 Use contribution per accepted outcome, not revenue alone:
 
-contribution = collected - refunds - payment fees - inference/API - delivery - support - acquisition allocation - valued human time.
+contribution = earned_sales_excluding_tax_and_pass_throughs - attributable_refunds - payment fees - inference/API - delivery - support - acquisition allocation - valued human time.
 
 Track product-period currency, eligible and accepted counts, p50/p95 delivery latency, failure/retry rate, support minutes, time-to-first-accepted-result, cohort retention and channel concentration. Do not label recurring income passive until measured maintenance and intervention stay within a stated budget for mature periods.
 
@@ -110,3 +110,21 @@ Not all ChatGPT, other-AI or CLI histories are available through a universal con
 Use one bounded research scheduler. It reads current due items, source revisions and daily call receipts; new observations are append-only with deterministic identity, and Notion updates use Product ID. Never issue migrations or overwrite unrelated human edits from scheduled research. Public projection requires a separately reviewed field allowlist and customer authorization. Existing n8n can transport provider events later; do not add a competing cron or another commerce ledger.
 
 Initial verification: twelve products, fifteen source fingerprints, twenty-five observations, ninety-six dimension entries (eighty-four unknown), two attributed funnel edges and five unmeasured goals. Real rejection probes passed for duplicate identity, unknown numeric score, fractional minor-unit money, invalid rate, anonymous read and authenticated read. Security advisor comparison preserves the two existing unrelated warnings; seven new informational RLS-without-policy notices correspond to the deliberately server-only tables. No new warning was introduced by this schema.
+
+
+## Portable review catalog (2 November)
+
+`lib/observatory.mjs` projects an explicit field allowlist from an authorized private snapshot. `scripts/query-observatory.mjs` makes the same catalog available to local CLI/agent workflows without a new server or credentials:
+
+```sh
+node scripts/query-observatory.mjs data/observatory/seed-2026-11-01.json --layer 'API and MCP'
+node scripts/query-observatory.mjs data/observatory/seed-2026-11-01.json --model 'One-time' --format csv
+node scripts/query-observatory.mjs /path/to/authorized-snapshot.json --search 'workflow'
+node --test tests/observatory.test.mjs
+```
+
+All outputs are `private_review`, publication unapproved. JSON includes dates, source fingerprints, per-dimension scored/tested coverage and attributed signals. CSV preserves unknowns as blanks and guards spreadsheet formula injection. Filters intersect; empty results remain empty. Per-product source lineage follows the same filtered population. Latest assessment revision wins without double-counting; ambiguous timestamp ties fail, preserving PostgreSQL microsecond precision. No overall quality score or normalized verified revenue is invented.
+
+Private goals, customer records, research priorities, source retrieval IDs, free-text internal notes, first-party receipts and their financial observations are excluded. This is preparation for a customer edition, not permission to publish a third-party dataset. It neither retrieves from Supabase nor authenticates a tenant: obtain a scoped authorized input before running. The CLI reads at most two MiB and never echoes private parse errors or paths. Fifteen focused tests cover the real seed, privacy sentinels, source linkage, archived rows, filter scope, revision handling, money, CSV injection and bounded CLI behavior.
+
+Operating definitions are aligned with PR110: contribution uses earned sales, not collected cash; the acceptance denominator includes failed eligible attempts; support is normalized to workspace-month equivalents. The November1 seed is historical evidence with these definition corrections, not a claim of fresh commercial observations.

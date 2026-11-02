@@ -72,7 +72,7 @@ const siteJsonLd = {
       name: site.name,
       url: site.url,
       description: site.description,
-      founder: { '@id': 'https://www.frankx.ai/frank-riemer#person' },
+      founder: { '@id': 'https://www.frankx.ai/#frank-riemer' },
     },
     {
       '@type': 'WebSite',
@@ -85,7 +85,7 @@ const siteJsonLd = {
     },
     {
       '@type': 'Person',
-      '@id': 'https://www.frankx.ai/frank-riemer#person',
+      '@id': 'https://www.frankx.ai/#frank-riemer',
       name: site.author,
       url: 'https://www.frankx.ai/frank-riemer',
       jobTitle: 'AI Architect',

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" fill="none" role="img" aria-label="Audit -> Architect -> Implement -> Verify">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" fill="none" role="img" aria-label="Audit -&gt; Architect -&gt; Implement -&gt; Verify">
   <defs>
     <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
       <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#1A1F2E" stroke-width="0.75" stroke-opacity="0.55"/>
@@ -20,7 +20,7 @@
   <text x="572" y="28" text-anchor="middle" fill="#8A90A8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10">SCOPE FIRST</text>
 
   <!-- Title Strip -->
-  <text x="28" y="82" fill="#F1F3F9" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="19" font-weight="600">Audit -> Architect -> Implement -> Verify</text>
+  <text x="28" y="82" fill="#F1F3F9" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="19" font-weight="600">Audit -&gt; Architect -&gt; Implement -&gt; Verify</text>
   <text x="28" y="102" fill="#8A90A8" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="12">Git-backed revenue workflow built on an isolated branch with Vercel preview</text>
 
   <!-- Schematic Body -->
@@ -53,5 +53,5 @@
   <!-- Bottom Receipt Footer -->
   <line x1="0" y1="316" x2="640" y2="316" stroke="#1A1F2E" stroke-width="1"/>
   <text x="24" y="341" fill="#8A90A8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5">NO PAYMENT ON-SITE · WRITTEN ACCEPTANCE GATES FIRST</text>
-  <text x="616" y="341" text-anchor="end" fill="#10B981" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5">BUYER OWNS REPO & CODE</text>
+  <text x="616" y="341" text-anchor="end" fill="#10B981" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5">BUYER OWNS REPO &amp; CODE</text>
 </svg>

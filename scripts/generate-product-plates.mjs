@@ -10,8 +10,17 @@ import path from 'node:path'
 const outDir = path.join(process.cwd(), 'public', 'images', 'products')
 fs.mkdirSync(outDir, { recursive: true })
 
+function esc(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+}
+
 function frame({ badge, code, title, subtitle, footerLeft, footerRight, body }) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" fill="none" role="img" aria-label="${title}">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" fill="none" role="img" aria-label="${esc(title)}">
   <defs>
     <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
       <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#1A1F2E" stroke-width="0.75" stroke-opacity="0.55"/>
@@ -28,21 +37,21 @@ function frame({ badge, code, title, subtitle, footerLeft, footerRight, body }) 
   <!-- Top Telemetry Header -->
   <line x1="0" y1="48" x2="640" y2="48" stroke="#1A1F2E" stroke-width="1"/>
   <circle cx="24" cy="24" r="4" fill="#10B981"/>
-  <text x="36" y="28" fill="#F1F3F9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="600">${badge}</text>
+  <text x="36" y="28" fill="#F1F3F9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="600">${esc(badge)}</text>
   <rect x="524" y="13" width="96" height="22" rx="11" fill="#101522" stroke="#1A1F2E"/>
-  <text x="572" y="28" text-anchor="middle" fill="#8A90A8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10">${code}</text>
+  <text x="572" y="28" text-anchor="middle" fill="#8A90A8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10">${esc(code)}</text>
 
   <!-- Title Strip -->
-  <text x="28" y="82" fill="#F1F3F9" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="19" font-weight="600">${title}</text>
-  <text x="28" y="102" fill="#8A90A8" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="12">${subtitle}</text>
+  <text x="28" y="82" fill="#F1F3F9" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="19" font-weight="600">${esc(title)}</text>
+  <text x="28" y="102" fill="#8A90A8" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="12">${esc(subtitle)}</text>
 
   <!-- Schematic Body -->
   ${body}
 
   <!-- Bottom Receipt Footer -->
   <line x1="0" y1="316" x2="640" y2="316" stroke="#1A1F2E" stroke-width="1"/>
-  <text x="24" y="341" fill="#8A90A8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5">${footerLeft}</text>
-  <text x="616" y="341" text-anchor="end" fill="#10B981" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5">${footerRight}</text>
+  <text x="24" y="341" fill="#8A90A8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5">${esc(footerLeft)}</text>
+  <text x="616" y="341" text-anchor="end" fill="#10B981" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5">${esc(footerRight)}</text>
 </svg>
 `
 }

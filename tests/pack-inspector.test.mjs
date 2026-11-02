@@ -22,7 +22,13 @@ test('every offer in lib/offers.ts has a matching PACK_MANIFESTS entry and valid
     assert.ok(existsSync(platePath), `SVG plate missing on disk: ${platePath}`)
     const svg = readFileSync(platePath, 'utf8')
     assert.ok(svg.startsWith('<svg'), `plate-${slug}.svg must start with <svg`)
+    assert.ok(svg.trimEnd().endsWith('</svg>'), `plate-${slug}.svg must close </svg>`)
     assert.ok(svg.includes('viewBox="0 0 640 360"'), `plate-${slug}.svg must use 640x360 16:9 viewBox`)
+    assert.equal(
+      /&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[0-9a-fA-F]+);)/.test(svg),
+      false,
+      `plate-${slug}.svg contains an unescaped XML ampersand (&)`,
+    )
   }
 })
 

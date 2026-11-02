@@ -6,6 +6,7 @@ import { checkoutPath, checkoutUrl, offers, type OfferStage } from '@/lib/offers
 import { PACK_MANIFESTS } from '@/lib/pack-manifests'
 import { CheckoutLink } from '@/components/CheckoutLink'
 import { OperatorFitCheck } from '@/components/OperatorFitCheck'
+import { PolarCheckoutButton } from '@/components/PolarCheckoutButton'
 import { isCheckoutLive } from '@/lib/polar'
 
 export const metadata: Metadata = {
@@ -128,7 +129,7 @@ export default function Offers() {
                               width={640}
                               height={360}
                               unoptimized
-                              className="aspect-video h-auto w-full transition-transform duration-150 group-hover:scale-[1.015]"
+                              className="aspect-video h-auto w-full transition-transform duration-150 motion-reduce:transition-none group-hover:scale-[1.015] motion-reduce:group-hover:scale-100"
                             />
                           </Link>
                         ) : null}
@@ -156,14 +157,25 @@ export default function Offers() {
                         </div>
 
                         <div className="grid gap-3">
-                          <CheckoutLink
-                            href={checkoutPath(offer)}
-                            className="cta text-center"
-                            offer={offer.slug}
-                            source="offers-index"
-                          >
-                            {offer.cta}
-                          </CheckoutLink>
+                          {polarLive ? (
+                            <PolarCheckoutButton
+                              productId={offer.slug}
+                              source="offers-index"
+                              gatedHref={checkoutPath(offer)}
+                              gatedCta={offer.cta}
+                              buyLabel={offer.checkout.buyLabel ?? offer.cta}
+                              className="cta text-center"
+                            />
+                          ) : (
+                            <CheckoutLink
+                              href={checkoutPath(offer)}
+                              className="cta text-center"
+                              offer={offer.slug}
+                              source="offers-index"
+                            >
+                              {offer.cta}
+                            </CheckoutLink>
+                          )}
                           <Link href={`/offers/${offer.slug}#inspect-files`} className="cta-secondary text-center">
                             Inspect files
                           </Link>

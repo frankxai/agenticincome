@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { fitCheck } from '@/lib/fit-check'
+import { trackClientEvent } from '@/lib/client-analytics'
 import { EmailCapture } from '@/components/EmailCapture'
 
 type StepOption = {
@@ -149,8 +150,29 @@ export function OperatorFitCheck() {
 
   function selectOption(stepId: string, optionId: string) {
     const next = { ...answers, [stepId]: optionId }
+    const nextStep = stepIndex + 1
     setAnswers(next)
-    setStepIndex((prev) => prev + 1)
+    setStepIndex(nextStep)
+    if (nextStep >= STEPS.length) {
+      const rec = computeRecommendation(next)
+      trackClientEvent('fit_check_completed', {
+        offer: rec.matchedOfferSlug,
+        source: 'operator-fit-check',
+        state: `${next.stack ?? 'unknown'}-${next.budget ?? '0'}usd`,
+      })
+    }
+  }
+
+  function handleStepKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (isComplete || !currentStep) return
+    if (e.metaKey || e.ctrlKey || e.altKey) return
+    const target = e.target as HTMLElement | null
+    if (target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName)) return
+    const matched = currentStep.options.find((opt) => opt.keycap === e.key)
+    if (matched) {
+      e.preventDefault()
+      selectOption(currentStep.id, matched.id)
+    }
   }
 
   function resetQuiz() {
@@ -205,7 +227,7 @@ export function OperatorFitCheck() {
         {STEPS.map((s, idx) => (
           <div
             key={s.id}
-            className={`h-1.5 rounded-full transition-colors duration-150 ${
+            className={`h-1.5 rounded-full transition-colors duration-150 motion-reduce:transition-none ${
               idx < stepIndex || isComplete
                 ? 'bg-accent'
                 : idx === stepIndex
@@ -217,8 +239,13 @@ export function OperatorFitCheck() {
       </div>
 
       {!isComplete && currentStep ? (
-        <div className="mt-6">
-          <h3 className="text-lg font-semibold text-ink">{currentStep.question}</h3>
+        <div className="mt-6" onKeyDown={handleStepKeyDown}>
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 className="text-lg font-semibold text-ink">{currentStep.question}</h3>
+            <span className="font-mono text-[11px] text-muted">
+              Press 1-{currentStep.options.length} or click
+            </span>
+          </div>
           <p className="mt-1 text-sm text-muted">{currentStep.helper}</p>
 
           <div className="mt-5 grid gap-3">
@@ -228,8 +255,9 @@ export function OperatorFitCheck() {
                 <button
                   key={opt.id}
                   type="button"
+                  aria-keyshortcuts={opt.keycap}
                   onClick={() => selectOption(currentStep.id, opt.id)}
-                  className={`flex min-h-[60px] w-full items-start gap-3.5 rounded-xl border p-4 text-left transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+                  className={`flex min-h-[60px] w-full items-start gap-3.5 rounded-xl border p-4 text-left transition-colors duration-150 motion-reduce:transition-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                     selected
                       ? 'border-accent bg-accent/10'
                       : 'border-border bg-bg/60 hover:border-accent/60 hover:bg-bg/90'

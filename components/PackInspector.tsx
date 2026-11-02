@@ -67,7 +67,7 @@ export function PackInspector({ manifest }: { manifest: PackManifest }) {
           <button
             type="button"
             onClick={handleCopyTree}
-            className="min-h-[44px] rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-xs text-ink transition-colors duration-150 hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="min-h-[44px] rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-xs text-ink transition-colors duration-150 motion-reduce:transition-none hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             {copied ? 'Tree copied' : 'Copy file tree'}
           </button>
@@ -93,7 +93,7 @@ export function PackInspector({ manifest }: { manifest: PackManifest }) {
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActiveIndex(idx)}
                 onKeyDown={(e) => handleKeyDown(e, idx)}
-                className={`min-h-[44px] shrink-0 rounded-xl border px-3.5 py-2.5 text-left transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:w-full ${
+                className={`min-h-[44px] shrink-0 rounded-xl border px-3.5 py-2.5 text-left transition-colors duration-150 motion-reduce:transition-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:w-full ${
                   selected
                     ? 'border-accent/70 bg-accent/10 text-ink'
                     : 'border-transparent bg-transparent text-muted hover:border-border hover:bg-surface/60 hover:text-ink'

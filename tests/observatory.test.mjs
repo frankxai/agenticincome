@@ -59,6 +59,8 @@ test('fractional minor-unit money and ambiguous currency codes are rejected', ()
 test('unknown scores cannot become zero or full evidence coverage', () => {
   const data = fresh(); data.assessments.find(a => a.state === 'unknown').score = 0
   assert.throws(() => projectCatalog(data))
+  const privateSource = fresh(); privateSource.assessments.find(a => a.state === 'unknown').source_id = 'private-reference'
+  assert.throws(() => projectCatalog(privateSource))
 })
 test('latest assessment revision wins without double-counting weight', () => {
   const data = fresh(), row = data.assessments[0]

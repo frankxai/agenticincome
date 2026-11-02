@@ -36,6 +36,17 @@ test('provider receipts and private financial observations never enter review ex
   const out = JSON.stringify(projectCatalog(data))
   assert.ok(!out.includes('secret-receipt') && !out.includes('private-money'))
 })
+test('unknown assessments with valid private receipt lineage export safely in both formats', () => {
+  const data = fresh()
+  data.sources.push({ ...data.sources[0], source_id: 'PRIVATE-RECEIPT-ID', source_class: 'first_party_receipt' })
+  const assessment = data.assessments.find(a => a.state === 'unknown')
+  assessment.source_id = 'PRIVATE-RECEIPT-ID'
+  const result = projectCatalog(data)
+  assert.equal(result.matched_products, 12)
+  assert.ok(!JSON.stringify(result).includes('PRIVATE-RECEIPT-ID'))
+  assert.ok(result.products.every(p => p.sources.every(Boolean)))
+  assert.ok(catalogCsv(result).includes('private_review'))
+})
 test('layer, model and search intersect and preserve only matching source lineage', () => {
   const result = projectCatalog(fresh(), { layer: 'API and MCP', model: 'Usage', search: 'web content' })
   assert.equal(result.matched_products, 1)

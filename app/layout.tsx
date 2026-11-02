@@ -75,7 +75,6 @@ const siteJsonLd = {
       founder: { '@id': 'https://www.frankx.ai/frank-riemer#person' },
       sameAs: [
         'https://www.frankx.ai',
-        'https://github.com/frankxai/agenticincome',
         ...site.network.map((item) => item.url),
       ],
     },

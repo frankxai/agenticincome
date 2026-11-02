@@ -73,10 +73,6 @@ const siteJsonLd = {
       url: site.url,
       description: site.description,
       founder: { '@id': 'https://www.frankx.ai/frank-riemer#person' },
-      sameAs: [
-        'https://www.frankx.ai',
-        ...site.network.map((item) => item.url),
-      ],
     },
     {
       '@type': 'WebSite',

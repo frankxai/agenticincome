@@ -1,28 +1,28 @@
 import { baseOpenGraph } from '@/lib/open-graph'
 
 export const metadata = {
-  title: 'How to Build a Personal AI Center of Excellence from About $79/mo',
-  description: 'A personal AI Center of Excellence: one tool for each of six capabilities, from about $79 a month.',
+  title: 'How to Build a Personal AI Center of Excellence',
+  description: 'A personal AI Center of Excellence: one tool for each of six capabilities, with each price checked against the vendor pricing page.',
   alternates: { canonical: '/blog/personal-ai-coe-under-100' },
   openGraph: {
     ...baseOpenGraph,
-    title: 'How to Build a Personal AI Center of Excellence from About $79/mo',
-    description: 'A personal AI Center of Excellence: one tool for each of six capabilities, from about $79 a month.',
+    title: 'How to Build a Personal AI Center of Excellence',
+    description: 'A personal AI Center of Excellence: one tool for each of six capabilities, with each price checked against the vendor pricing page.',
     url: '/blog/personal-ai-coe-under-100',
   },
 }
 
 <ArticleJsonLd
-  title="How to Build a Personal AI Center of Excellence from About $79/mo"
-  description="A personal AI Center of Excellence: one tool for each of six capabilities, from about $79/mo."
+  title="How to Build a Personal AI Center of Excellence"
+  description="A personal AI Center of Excellence: one tool for each of six capabilities, with each price checked against the vendor pricing page."
   slug="personal-ai-coe-under-100"
   date="2026-06-08"
 />
 
-# How to Build a Personal AI Center of Excellence from About $79/mo
+# How to Build a Personal AI Center of Excellence
 
 <AnswerBox>
-A "personal AI Center of Excellence" is one tool for each of the six capabilities an enterprise AI Center of Excellence covers — **reasoning, creation, automation, knowledge, distribution, and measurement** — run for yourself from **about $79/mo**. The core: one frontier LLM subscription (~$20), one coding agent (~$20), <AffiliateLink tool="ElevenLabs" /> for voice, <AffiliateLink tool="CapCut" /> for video, <AffiliateLink tool="Systeme.io" /> for the audience/funnel, and <AffiliateLink tool="Higgsfield" /> for visuals. Everything else is free or open source.
+A "personal AI Center of Excellence" is one tool for each of the six capabilities an enterprise AI Center of Excellence covers — **reasoning, creation, automation, knowledge, distribution, and measurement** — run for yourself. The core: one frontier LLM subscription ($20/mo for Claude Pro or ChatGPT Plus, billed monthly), one coding agent (Claude Code is included in Claude Pro), <AffiliateLink tool="ElevenLabs" /> for voice, <AffiliateLink tool="CapCut" /> for video, <AffiliateLink tool="Systeme.io" /> for the audience/funnel, and <AffiliateLink tool="Higgsfield" /> for visuals. Everything else is free or open source. Prices are as of October 2026; the table links each one to its vendor pricing page.
 </AnswerBox>
 
 <AffiliateDisclosure />
@@ -32,20 +32,20 @@ Enterprises organize AI work around a central team, an AI Center of Excellence, 
 ## The six pillars and what fills them
 
 <ComparisonTable
-  caption="A personal AI CoE — one tool per capability, about $79–116/mo total"
+  caption="A personal AI CoE — one tool per capability. Prices as of October 2026; each price links to the vendor pricing page."
   rows={[
-    { tool: 'Frontier LLM', verdict: 'Reasoning — your thinking partner', price: '~$20/mo', recurring: 'Yes', pick: true },
-    { tool: 'Coding agent', verdict: 'Automation — build the systems', price: '~$20/mo', recurring: 'Yes' },
-    { tool: 'ElevenLabs', verdict: 'Creation (voice) — turn text into audio', price: '$5–22/mo', recurring: '12-mo' },
-    { tool: 'Higgsfield', verdict: 'Creation (visual) — motion + b-roll', price: 'From $17/mo', recurring: '12-mo' },
-    { tool: 'Systeme.io', verdict: 'Distribution — list, funnel, payments', price: 'Free–$27/mo', recurring: 'Lifetime' },
-    { tool: 'CapCut', verdict: 'Creation (video) — edit + caption', price: 'Free–$10/mo', recurring: 'Yes' },
+    { tool: 'Frontier LLM', verdict: 'Reasoning — your thinking partner', price: 'Claude Pro $20/mo billed monthly', priceUrl: 'https://claude.com/pricing', recurring: 'Yes', pick: true },
+    { tool: 'Coding agent', verdict: 'Automation — build the systems', price: 'Claude Code is included in Claude Pro', priceUrl: 'https://claude.com/pricing', recurring: 'Yes' },
+    { tool: 'ElevenLabs', verdict: 'Creation (voice) — turn text into audio', price: 'Starter $6/mo; Creator $22/mo', priceUrl: 'https://elevenlabs.io/pricing', recurring: '12-mo' },
+    { tool: 'Higgsfield', verdict: 'Creation (visual) — motion + b-roll', price: 'Starter $19/mo', priceUrl: 'https://higgsfield.ai/pricing', recurring: '12-mo' },
+    { tool: 'Systeme.io', verdict: 'Distribution — list, funnel, payments', price: 'Free plan; see paid plans', priceUrl: 'https://systeme.io/pricing', recurring: 'Lifetime' },
+    { tool: 'CapCut', verdict: 'Creation (video) — edit + caption', price: 'Free; Pro $19.99/mo', priceUrl: 'https://www.capcut.com/pricing', recurring: 'Yes' },
   ]}
 />
 
 ## Pillar by pillar
 
-**1. Reasoning** — one frontier LLM subscription. This is your analyst, editor, and strategist. Don't pay for three; pick one and go deep.
+**1. Reasoning** — one frontier LLM subscription. This is your analyst, editor, and strategist. Don't pay for three; pick one and go deep. Claude Pro and ChatGPT Plus are each $20/mo billed monthly (as of October 2026; see [Claude pricing](https://claude.com/pricing) and [ChatGPT pricing](https://chatgpt.com/pricing)).
 
 **2. Automation** — a coding agent (Claude Code, Cursor, or similar). This is the pillar most people skip and the one that actually compounds: it builds the scripts, sites, and pipelines that take over repetitive work. The whole [agentic-income network](/) is built this way.
 
@@ -57,22 +57,12 @@ Enterprises organize AI work around a central team, an AI Center of Excellence, 
 
 **6. Measurement** — free analytics (your platform's native dashboards + a weekly review). You don't need a paid tool here yet; you need the habit.
 
-## The math
+## Why this post has no total
 
-| Pillar | Tool | Monthly |
-|---|---|---|
-| Reasoning | Frontier LLM | $20 |
-| Automation | Coding agent | $20 |
-| Voice | ElevenLabs | $22 |
-| Visual | Higgsfield | $17 |
-| Distribution | Systeme.io | $0–27 |
-| Video / Measurement | CapCut / native | $0–10 |
-| **Total** | | **~$79–116/mo** |
-
-On the free tiers of Systeme.io and CapCut the stack costs about $79/mo, and the top price in every range brings it to about $116/mo. Either way it covers the same six capabilities an enterprise AI Center of Excellence is organized around.
+The table gives each vendor's own published price, with the plan name and billing period, as of October 2026. This post adds no total: a total depends on the plan you pick, whether you pay monthly or annually, and whether you stay on the free plans of CapCut and Systeme.io. Add up only the rows you will use, from the linked pricing pages on the day you buy.
 
 <FaqSection items={[
-  { q: 'What is a personal AI Center of Excellence?', a: 'A personal version of the enterprise AI CoE model: one tool for each of six capabilities — reasoning, automation, creation, knowledge, distribution, and measurement — run for yourself instead of a company, from about $79/mo.' },
+  { q: 'What is a personal AI Center of Excellence?', a: 'A personal version of the enterprise AI CoE model: one tool for each of six capabilities — reasoning, automation, creation, knowledge, distribution, and measurement — run for yourself instead of a company.' },
   { q: 'Do I need all six pillars on day one?', a: 'No. Start with reasoning (one LLM) and automation (a coding agent). Add creation and distribution as you start publishing. Measurement is a habit, not a purchase.' },
   { q: 'Why one tool per pillar instead of the best of each?', a: 'Focus compounds; tool-sprawl doesn\'t. One LLM you know deeply beats three you use shallowly. Depth per pillar is the whole point of the CoE model.' },
   { q: 'Can this stack earn affiliate commission?', a: 'ElevenLabs, Higgsfield, Systeme.io, and CapCut each list an affiliate program; the catalog on the Tools page shows terms and verification dates. Whether a recommendation earns anything depends on traffic and reader fit, and no result is promised. Recommend a tool only when it stands without the payout.' },

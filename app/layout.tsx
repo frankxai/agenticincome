@@ -63,10 +63,52 @@ export const metadata: Metadata = {
   },
 }
 
+const siteJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${site.url}/#organization`,
+      name: site.name,
+      url: site.url,
+      description: site.description,
+      founder: { '@id': 'https://www.frankx.ai/frank-riemer#person' },
+      sameAs: [
+        'https://www.frankx.ai',
+        'https://github.com/frankxai/agenticincome',
+        ...site.network.map((item) => item.url),
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      description: site.description,
+      publisher: { '@id': `${site.url}/#organization` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://www.frankx.ai/frank-riemer#person',
+      name: site.author,
+      url: 'https://www.frankx.ai/frank-riemer',
+      jobTitle: 'AI Architect',
+      sameAs: ['https://www.frankx.ai', 'https://github.com/frankxai'],
+    },
+  ],
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(siteJsonLd).replace(/</g, '\\u003c'),
+          }}
+        />
         <a href="#main-content" className="skip-link">Skip to content</a>
         <Nav />
         <MotionRuntime />

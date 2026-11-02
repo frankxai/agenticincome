@@ -1,0 +1,1530 @@
+{
+  "$comment": "Receipt from scripts/vault-verify.mjs. number-found = every number the row states appears on the fetched page; reviewer-confirmed = a plain fetch could not confirm it but a recorded reviewer read the same URL and named the metric (verification-manual.json); live-counter = a daily-changing counter whose committed value no longer matches the source, not counted as confirmed; number-missing = page loaded but no row number found (stale, rendered by script, or worded differently); unreachable = blocked, timed out or gone for a plain fetch, which says nothing about the value; no-number = the row states no number to check.",
+  "checkedAt": "2026-10-26T01:12:15.690Z",
+  "urlCount": 83,
+  "summary": {
+    "number-found": 84,
+    "unreachable": 16,
+    "number-missing": 5,
+    "no-number": 4,
+    "live-counter": 7,
+    "reviewer-confirmed": 1
+  },
+  "results": [
+    {
+      "file": "economies",
+      "id": "apple-app-store-billings-2025",
+      "url": "https://www.apple.com/newsroom/2026/06/app-store-ecosystem-reaches-1-point-4-trillion-usd-as-developers-thrive-globally/",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$1.4"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "apple-app-store-digital-2025",
+      "url": "https://www.apple.com/newsroom/2026/06/app-store-ecosystem-reaches-1-point-4-trillion-usd-as-developers-thrive-globally/",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$149"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "google-play-service-fee",
+      "url": "https://support.google.com/googleplay/android-developer/answer/112622?hl=en",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "15%",
+        "$1",
+        "30%",
+        "15%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "steam-revenue-share",
+      "url": "https://techcrunch.com/?p=1753729",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "30",
+        "25",
+        "$10",
+        "20",
+        "$50"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "roblox-devex-fy2025",
+      "url": "https://www.sec.gov/Archives/edgar/data/1315098/000131509826000024/rblx-20251231.htm",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable",
+      "reviewer": {
+        "by": "Codex (review profile, read-only)",
+        "at": "2026-10-25",
+        "verdict": "numeric-sighting",
+        "url": "https://www.sec.gov/Archives/edgar/data/1315098/000131509826000024/rblx-20251231.htm",
+        "metric": null,
+        "note": "FY2025 10-K shows $1,503.106m; the reviewer did not record which line item"
+      }
+    },
+    {
+      "file": "economies",
+      "id": "roblox-devex-fy2024",
+      "url": "https://www.sec.gov/Archives/edgar/data/1315098/000131509826000024/rblx-20251231.htm",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable"
+    },
+    {
+      "file": "economies",
+      "id": "roblox-bookings-fy2025",
+      "url": "https://www.sec.gov/Archives/edgar/data/1315098/000131509826000024/rblx-20251231.htm",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable"
+    },
+    {
+      "file": "economies",
+      "id": "fortnite-creator-payouts-2024",
+      "url": "https://www.fortnite.com/news/fortnite-ecosystem-2024-year-in-review-celebrating-creators-and-looking-ahead",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable"
+    },
+    {
+      "file": "economies",
+      "id": "fortnite-creator-payouts-cumulative",
+      "url": "https://www.unrealengine.com/news/state-of-unreal-2026-top-news-from-the-show",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable"
+    },
+    {
+      "file": "economies",
+      "id": "epic-games-store-revenue-share",
+      "url": "https://store.epicgames.com/en-US/news/epic-games-store-updates-revenue-share-keep-100-of-the-first-1m-per-product-per-year",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable"
+    },
+    {
+      "file": "economies",
+      "id": "fab-revenue-share",
+      "url": "https://www.fab.com/o/become-a-publisher",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable"
+    },
+    {
+      "file": "economies",
+      "id": "shopify-gmv-2025",
+      "url": "https://www.sec.gov/Archives/edgar/data/1594805/000159480526000007/shop-20251231.htm",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable",
+      "reviewer": {
+        "by": "Codex (review profile, read-only)",
+        "at": "2026-10-25",
+        "verdict": "numeric-sighting",
+        "url": "https://www.sec.gov/Archives/edgar/data/1594805/000159480526000007/shop-20251231.htm",
+        "metric": null,
+        "note": "FY2025 10-K shows $378.4bn; line item not recorded"
+      }
+    },
+    {
+      "file": "economies",
+      "id": "shopify-gmv-2024",
+      "url": "https://www.sec.gov/Archives/edgar/data/1594805/000159480526000007/shop-20251231.htm",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable"
+    },
+    {
+      "file": "economies",
+      "id": "shopify-app-ecosystem-earnings-2025",
+      "url": "https://www.shopify.com/news/a-world-with-more-builders",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$1.3"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "etsy-consolidated-gms-2025",
+      "url": "https://www.sec.gov/Archives/edgar/data/1370637/000137063726000019/etsy-20251231.htm",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable"
+    },
+    {
+      "file": "economies",
+      "id": "etsy-marketplace-gms-2025",
+      "url": "https://www.sec.gov/Archives/edgar/data/1370637/000137063726000019/etsy-20251231.htm",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable",
+      "reviewer": {
+        "by": "Codex (review profile, read-only)",
+        "at": "2026-10-25",
+        "verdict": "numeric-sighting",
+        "url": "https://www.sec.gov/Archives/edgar/data/1370637/000137063726000019/etsy-20251231.htm",
+        "metric": null,
+        "note": "FY2025 10-K shows $10,460.7m; line item not recorded"
+      }
+    },
+    {
+      "file": "economies",
+      "id": "amazon-kdp-kindle-plus-monthly",
+      "url": "https://kdp.amazon.com/en_US/earn",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$69.3"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "envato-contributor-earnings",
+      "url": "https://elements.envato.com/about",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$1.4"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "creative-market-shop-owner-earnings",
+      "url": "https://www.accessnewswire.com/newsroom/en/computers-technology-and-internet/creative-market-adds-5-000-new-independent-creator-shops-881575",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable"
+    },
+    {
+      "file": "economies",
+      "id": "gumroad-fee",
+      "url": "https://gumroad.com/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "10%",
+        "$0.50",
+        "30%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "whop-cumulative-payouts",
+      "url": "https://whop.com/blog/getting-paid-on-whop/",
+      "status": 200,
+      "automated": "number-missing",
+      "found": [],
+      "missing": [
+        "$2"
+      ],
+      "verdict": "number-missing"
+    },
+    {
+      "file": "economies",
+      "id": "patreon-cumulative-payouts",
+      "url": "https://www.patreon.com/about",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$10",
+        "2013"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "substack-paid-subscriptions",
+      "url": "https://post.substack.com/p/5-million",
+      "status": 200,
+      "automated": "no-number",
+      "found": [],
+      "missing": [],
+      "verdict": "no-number"
+    },
+    {
+      "file": "economies",
+      "id": "youtube-partner-payouts-4yr",
+      "url": "https://blog.youtube/inside-youtube/the-future-of-youtube-2026/",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$100"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "spotify-royalties-2025",
+      "url": "https://newsroom.spotify.com/2026-01-28/2025-music-industry-payouts-whats-next-for-artists/",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$11"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "spotify-royalties-cumulative",
+      "url": "https://loudandclear.byspotify.com/payouts/",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$70"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "bandcamp-cumulative-payouts",
+      "url": "https://bandcamp.com/about",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$1.82"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "bandcamp-past-year",
+      "url": "https://bandcamp.com/about",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$225"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "distrokid-pricing",
+      "url": "https://distrokid.com/pricing/",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "23.99",
+        "100%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "fiverr-take-rate-2025",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001762301/000117891326000858/zk2634486.htm",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable"
+    },
+    {
+      "file": "economies",
+      "id": "upwork-gsv-2025",
+      "url": "https://www.sec.gov/Archives/edgar/data/1627475/000162747526000012/upwk-20251231.htm",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable",
+      "reviewer": {
+        "by": "Codex (review profile, read-only)",
+        "at": "2026-10-25",
+        "verdict": "numeric-sighting",
+        "url": "https://www.sec.gov/Archives/edgar/data/1627475/000162747526000012/upwk-20251231.htm",
+        "metric": null,
+        "note": "FY2025 10-K shows $4,028.386m; line item not recorded"
+      }
+    },
+    {
+      "file": "economies",
+      "id": "huggingface-public-models",
+      "url": "https://huggingface.co/models",
+      "status": 200,
+      "automated": "number-missing",
+      "found": [],
+      "missing": [
+        "3,186,261"
+      ],
+      "verdict": "live-counter"
+    },
+    {
+      "file": "economies",
+      "id": "aws-marketplace-listing-fee",
+      "url": "https://docs.aws.amazon.com/marketplace/latest/userguide/listing-fees.html",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "3%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "apify-store-cumulative-payout",
+      "url": "https://natlawreview.com/press-releases/apify-bets-1m-independent-developers-building-ais-missing-tools",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$4"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "rapidapi-marketplace-fee",
+      "url": "https://docs.rapidapi.com/docs/payouts-and-finance",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "25%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "notion-marketplace-fee",
+      "url": "https://www.notion.com/help/selling-on-marketplace",
+      "status": 200,
+      "automated": "number-missing",
+      "found": [
+        "8%"
+      ],
+      "missing": [
+        "$0.40"
+      ],
+      "verdict": "reviewer-confirmed",
+      "reviewer": {
+        "by": "Claude (Opus 5.5), page fetch",
+        "at": "2026-10-26",
+        "verdict": "match",
+        "url": "https://www.notion.com/help/selling-on-marketplace",
+        "metric": "transaction fee",
+        "note": "Page reads 'Notion charges a 8% fee plus 40 cents per transaction'"
+      }
+    },
+    {
+      "file": "economies",
+      "id": "framer-creator-payouts-2025",
+      "url": "https://framer.com/creator",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$6.5",
+        "2025"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "webflow-template-fee",
+      "url": "https://webflow.com/updates/template-creator-enhancements",
+      "status": "error",
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable"
+    },
+    {
+      "file": "economies",
+      "id": "unity-asset-store-share",
+      "url": "https://unity.com/legal/provider",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "70"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "economies",
+      "id": "gumroad-discover-fee",
+      "url": "https://gumroad.com/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "30%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "anthropic-fable-5-1-input",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$10"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "anthropic-fable-5-1-output",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$50"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "anthropic-opus-5-5-input",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$4"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "anthropic-opus-5-5-output",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$20"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "anthropic-sonnet-5-5-input",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$2"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "anthropic-sonnet-5-5-output",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$10"
+      ],
+      "missing": [],
+      "verdict": "number-found",
+      "reviewer": {
+        "by": "Codex (review profile, read-only)",
+        "at": "2026-10-25",
+        "verdict": "match",
+        "url": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+        "metric": "output price per MTok",
+        "note": "Read on the model page, not the row's pricing-page sourceUrl, so it does not upgrade the row"
+      }
+    },
+    {
+      "file": "supply-chain",
+      "id": "anthropic-haiku-5-5-input",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$0.10"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "anthropic-haiku-5-5-output",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$0.50"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "openai-gpt-6-astra-input",
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$10.00",
+        "$1.00"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "openai-gpt-6-astra-output",
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$50.00"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "openai-gpt-6-1-sol-input",
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$2.00",
+        "$0.10",
+        "$10.00"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "openai-gpt-6-luna-input",
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$0.10",
+        "$0.01"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "openai-gpt-6-luna-output",
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$0.50"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "google-gemini-4-argon-input",
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$2.00",
+        "30",
+        "2026",
+        "$4.00",
+        "2026"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "google-gemini-4-argon-output",
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$10.00",
+        "30",
+        "2026",
+        "$20.00",
+        "2026"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "google-gemini-3-1-pro-input",
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$2.00",
+        "200",
+        "$4.00",
+        "200"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "google-gemini-3-8-flash-input",
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$0.75",
+        "31",
+        "2026",
+        "$1.50",
+        "2027"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "google-gemini-3-8-flash-output",
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$3.75",
+        "31",
+        "2026",
+        "$7.50",
+        "2027"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "openrouter-credit-fee",
+      "url": "https://openrouter.ai/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "5.5%",
+        "8%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "openrouter-byok-fee",
+      "url": "https://openrouter.ai/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$25,000",
+        "5%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "vercel-ai-gateway-markup",
+      "url": "https://vercel.com/docs/ai-gateway/pricing",
+      "status": 200,
+      "automated": "no-number",
+      "found": [],
+      "missing": [],
+      "verdict": "no-number"
+    },
+    {
+      "file": "supply-chain",
+      "id": "together-deepseek-v4-1-flash",
+      "url": "https://www.together.ai/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$0.30",
+        "$0.006",
+        "$1.20"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "groq-gpt-oss-120b",
+      "url": "https://console.groq.com/docs/models",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$0.15",
+        "$0.60"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "fal-flux-schnell",
+      "url": "https://fal.ai/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$0.003",
+        "333.33",
+        "$1"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "fal-kling-v3-pro-video",
+      "url": "https://fal.ai/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$0.14",
+        "7.14",
+        "$1"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "replicate-flux-dev",
+      "url": "https://replicate.com/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$0.025"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "runway-api-gen4-5",
+      "url": "https://docs.dev.runwayml.com/guides/pricing/",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "12",
+        "$0.01"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "elevenlabs-api-tts-flash",
+      "url": "https://elevenlabs.io/pricing/api",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$0.04",
+        "$0.08"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "elevenlabs-plans",
+      "url": "https://elevenlabs.io/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$0",
+        "$6",
+        "$22",
+        "$99",
+        "$299",
+        "$990"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "suno-pro-plan",
+      "url": "https://suno.com/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$8",
+        "2,500",
+        "20"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "runpod-h100-sxm",
+      "url": "https://www.runpod.io/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "3.99"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "lambda-h100-pcie-1x",
+      "url": "https://lambda.ai/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$3.29"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "together-h100-cluster",
+      "url": "https://www.together.ai/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$3.99"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "fal-h100",
+      "url": "https://fal.ai/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$4.50",
+        "$2.49"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "pinecone-standard",
+      "url": "https://www.pinecone.io/pricing/",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$50"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "turbopuffer-launch",
+      "url": "https://turbopuffer.com/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$16"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "supabase-pro",
+      "url": "https://supabase.com/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "25"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "upstash-redis-payg",
+      "url": "https://upstash.com/pricing/redis",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$0.2",
+        "100"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "stripe-us-card",
+      "url": "https://stripe.com/us/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "2.9%",
+        "30"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "stripe-eea-card",
+      "url": "https://stripe.com/pricing",
+      "status": 200,
+      "automated": "number-missing",
+      "found": [
+        "15"
+      ],
+      "missing": [
+        "0,25"
+      ],
+      "verdict": "number-missing"
+    },
+    {
+      "file": "supply-chain",
+      "id": "stripe-managed-payments",
+      "url": "https://stripe.com/pricing",
+      "status": 200,
+      "automated": "number-missing",
+      "found": [],
+      "missing": [
+        "3,5%"
+      ],
+      "verdict": "number-missing"
+    },
+    {
+      "file": "supply-chain",
+      "id": "polar-starter-fee",
+      "url": "https://polar.sh/resources/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "5%",
+        "50"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "lemonsqueezy-fee",
+      "url": "https://www.lemonsqueezy.com/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "5%",
+        "50"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "paddle-fee",
+      "url": "https://www.paddle.com/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "5%",
+        "50"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "gumroad-direct-fee",
+      "url": "https://gumroad.com/pricing",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "10%",
+        "$0.50"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "whop-processing",
+      "url": "https://docs.whop.com/fees",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "2.7%",
+        "$0.30"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "printful-bella-canvas-3001",
+      "url": "https://www.printful.com/custom/mens/t-shirts/unisex-staple-t-shirt-bella-canvas-3001",
+      "status": 200,
+      "automated": "number-missing",
+      "found": [],
+      "missing": [
+        "12.25"
+      ],
+      "verdict": "number-missing"
+    },
+    {
+      "file": "supply-chain",
+      "id": "coinbase-x402-facilitator",
+      "url": "https://docs.cdp.coinbase.com/x402/seller/facilitator",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "1,000",
+        "$0.001"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "stripe-machine-payments",
+      "url": "https://docs.stripe.com/payments/machine",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "0.50",
+        "0.01"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "shopify-app-store-rev-share",
+      "url": "https://shopify.dev/docs/apps/launch/distribution/revenue-share",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "100%",
+        "$1,000,000"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "apify-store-commission",
+      "url": "https://docs.apify.com/platform/actors/publishing/monetize",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "20%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "aws-marketplace-saas-fee",
+      "url": "https://docs.aws.amazon.com/marketplace/latest/userguide/listing-fees.html",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "3%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "elevenlabs-affiliate",
+      "url": "https://elevenlabs.io/affiliates",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "22%",
+        "12"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "supply-chain",
+      "id": "openrouter-provider-program",
+      "url": "https://openrouter.ai/docs/use-cases/for-providers",
+      "status": 200,
+      "automated": "no-number",
+      "found": [],
+      "missing": [],
+      "verdict": "no-number"
+    },
+    {
+      "file": "macro",
+      "id": "netcraft-sites-jul-2026",
+      "url": "https://www.netcraft.com/blog/july-2026-web-server-survey",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "2026",
+        "1,494,915,628",
+        "305,348,459",
+        "14,772,048"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "netcraft-domains-jul-2026",
+      "url": "https://www.netcraft.com/blog/july-2026-web-server-survey",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "2026"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "verisign-dnib-q2-2026",
+      "url": "https://blog.verisign.com/domain-names/q2-2026-domain-name-industry-brief-quarterly-report/",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "401.6",
+        "2026"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "verisign-com-q2-2026",
+      "url": "https://investor.verisign.com/news-releases/news-release-details/dnibcom-reports-internet-has-4016-million-domain-name",
+      "status": 403,
+      "automated": "unreachable",
+      "found": [],
+      "missing": [],
+      "verdict": "unreachable"
+    },
+    {
+      "file": "macro",
+      "id": "w3techs-wordpress-share",
+      "url": "https://w3techs.com/technologies/overview/content_management",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "39.6%",
+        "58.3%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "w3techs-shopify-share",
+      "url": "https://w3techs.com/technologies/overview/content_management",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "5.3%",
+        "7.9%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "w3techs-no-cms",
+      "url": "https://w3techs.com/technologies/overview/content_management",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "32.1%"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "shopify-merchant-count",
+      "url": "https://investors.shopify.com/",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "175"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "defillama-chain-count",
+      "url": "https://api.llama.fi/v2/chains",
+      "status": 200,
+      "automated": "number-missing",
+      "found": [],
+      "missing": [
+        "421"
+      ],
+      "verdict": "live-counter"
+    },
+    {
+      "file": "macro",
+      "id": "defillama-total-tvl",
+      "url": "https://api.llama.fi/v2/historicalChainTvl",
+      "status": 200,
+      "automated": "number-missing",
+      "found": [],
+      "missing": [
+        "$88,834,030,174"
+      ],
+      "verdict": "live-counter"
+    },
+    {
+      "file": "macro",
+      "id": "defillama-stablecoin-supply",
+      "url": "https://stablecoins.llama.fi/stablecoincharts/all",
+      "status": 200,
+      "automated": "number-missing",
+      "found": [],
+      "missing": [
+        "$302,616,607,151.24",
+        "$836,842,250.78"
+      ],
+      "verdict": "live-counter"
+    },
+    {
+      "file": "macro",
+      "id": "defillama-fees-total-30d",
+      "url": "https://api.llama.fi/overview/fees?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true",
+      "status": 200,
+      "automated": "number-missing",
+      "found": [
+        "30",
+        "30",
+        "30"
+      ],
+      "missing": [
+        "$2,321,715,312",
+        "$23,660,789,302",
+        "14.02%"
+      ],
+      "verdict": "live-counter"
+    },
+    {
+      "file": "macro",
+      "id": "x402-what",
+      "url": "https://www.x402.org/",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "402",
+        "402"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "x402-30d-transactions",
+      "url": "https://www.x402.org/",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "402",
+        "75.41",
+        "$24.24",
+        "94.06",
+        "22",
+        "30"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "acp-stripe-openai",
+      "url": "https://stripe.com/newsroom/news/stripe-openai-instant-checkout",
+      "status": 200,
+      "automated": "no-number",
+      "found": [],
+      "missing": [],
+      "verdict": "no-number"
+    },
+    {
+      "file": "macro",
+      "id": "ap2-google",
+      "url": "https://cloud.google.com/blog/products/ai-machine-learning/announcing-agents-to-payments-ap2-protocol",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "60"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "visa-trusted-agent-protocol",
+      "url": "https://developer.visa.com/capabilities/trusted-agent-protocol/overview",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "9421"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "mastercard-agent-pay",
+      "url": "https://newsroom.mastercard.com/news/press/2025/april/mastercard-unveils-agent-pay-pioneering-agentic-payments-technology-to-power-commerce-in-the-age-of-ai",
+      "status": 200,
+      "automated": "number-missing",
+      "found": [
+        "2025",
+        "29"
+      ],
+      "missing": [
+        "04"
+      ],
+      "verdict": "number-missing"
+    },
+    {
+      "file": "macro",
+      "id": "goldman-creator-economy-2027",
+      "url": "https://www.goldmansachs.com/insights/articles/the-creator-economy-could-approach-half-a-trillion-dollars-by-2027",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$480",
+        "2027",
+        "$250",
+        "50",
+        "4%",
+        "$100"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "newzoo-games-2026",
+      "url": "https://www.medianews4u.com/global-games-market-to-reach-213-9-billion-as-player-base-hits-3-7-billion-newzoo-report/",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$213.9",
+        "2026",
+        "6.1%",
+        "$121.1",
+        "$46.9",
+        "$45.9",
+        "3.7"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "anthropic-run-rate-may-2026",
+      "url": "https://www.anthropic.com/news/series-h",
+      "status": 200,
+      "automated": "number-found",
+      "found": [
+        "$47",
+        "2026"
+      ],
+      "missing": [],
+      "verdict": "number-found"
+    },
+    {
+      "file": "macro",
+      "id": "huggingface-models",
+      "url": "https://huggingface.co/models",
+      "status": 200,
+      "automated": "number-missing",
+      "found": [],
+      "missing": [
+        "3,186,261"
+      ],
+      "verdict": "live-counter"
+    },
+    {
+      "file": "macro",
+      "id": "huggingface-datasets",
+      "url": "https://huggingface.co/datasets",
+      "status": 200,
+      "automated": "number-missing",
+      "found": [],
+      "missing": [
+        "1,105,509"
+      ],
+      "verdict": "live-counter"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$comment": "Competition formats. Agent teams (different harnesses) compete on the same brief; a verifier from a third harness scores, maker never scores itself. The leaderboard is empty until an entry has a receipt. Scoring rubrics are fixed before the round starts and are not edited mid-round.",
+  "updatedAt": "2026-10-25",
+  "formats": [
+    {
+      "id": "economy-scout",
+      "name": "Economy scout race",
+      "brief": "Map one digital economy into vault rows: size metric, take rate, seller count, sellable types, each with a primary source.",
+      "entrants": "two harnesses (e.g. Claude, Codex) working the same economy in separate branches",
+      "scoring": {
+        "sourceAccuracy": "verifier re-opens every sourceUrl and checks the value; one wrong number costs more than one missing row (wrong = -3, verified = +1, missing = 0)",
+        "coverage": "+1 per verified field beyond the minimum",
+        "freshness": "+1 if the period is the latest the source publishes"
+      },
+      "verifier": "a third harness, read-only, runs scripts/vault-validate.mjs then spot-checks sources",
+      "prize": "the winning rows merge into economies.json"
+    },
+    {
+      "id": "offer-duel",
+      "name": "Offer duel",
+      "brief": "Two teams each build a waitlist page for the same product with the shared demand-capture package.",
+      "entrants": "two agent teams, one write lane each",
+      "scoring": {
+        "conversion": "waitlist signups per 100 visitors over a fixed window, traffic split by the router",
+        "honesty": "claims audit: any unsourced number or invented proof disqualifies the entry"
+      },
+      "verifier": "different-provider reviewer plus router logs",
+      "humanGates": ["both pages pass public copy review before traffic is split"],
+      "prize": "winning page becomes the product page"
+    },
+    {
+      "id": "margin-challenge",
+      "name": "Margin challenge",
+      "brief": "Design the plan shape for a creation product (images, video, music) that keeps a stated gross margin at the vendor list prices in supply-chain.json.",
+      "entrants": "any harness",
+      "scoring": {
+        "math": "validator recomputes every margin from supply ids; mismatch disqualifies",
+        "buyerFit": "verifier, role-playing a buyer who declined, rates clarity of the plan"
+      },
+      "verifier": "different model family",
+      "prize": "plan proposal goes to Frank for a pricing decision (pricing stays human-gated)"
+    },
+    {
+      "id": "yc-benchmark",
+      "name": "YC benchmark",
+      "brief": "Pick one estate product and one comparable YC-backed company in the same market; compare on buyer job, price, distribution and proof. Name the dimension we must beat.",
+      "entrants": "exec-cmo and exec-ceo agents or any two harnesses",
+      "scoring": {
+        "evidence": "every competitor fact has a public source",
+        "decision": "ends in one build, kill or reposition recommendation"
+      },
+      "verifier": "founder-review agent",
+      "prize": "recommendation enters the next portfolio review"
+    }
+  ],
+  "leaderboard": []
+}

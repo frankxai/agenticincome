@@ -36,7 +36,7 @@ export default function Tools() {
           else in the catalog stays labeled unverified until it gets the same pass.
         </p>
         <div className="mt-4 overflow-hidden rounded-2xl border border-border bg-surface/80">
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Partner economics comparison">
             <table className="w-full min-w-[680px] text-sm">
               <thead>
                 <tr className="border-b border-border text-left text-muted">
@@ -62,7 +62,7 @@ export default function Tools() {
       </section>
 
       <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-surface/80">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="AI tools affiliate catalog">
           <table className="w-full min-w-[760px] text-sm">
             <thead>
               <tr className="border-b border-border text-left text-muted">

@@ -7,6 +7,8 @@ export type Row = {
   tool: string
   verdict: string
   price: string
+  /** The vendor's own pricing page. Rows that state a price link it, so a reader can check the figure. */
+  priceUrl?: string
   recurring?: string
   pick?: boolean
 }
@@ -56,7 +58,15 @@ export function ComparisonTable({ rows, caption }: { rows: Row[]; caption?: stri
                     {r.pick && <span className="ml-2 rounded bg-accent/20 px-1.5 py-0.5 text-[10px] font-bold uppercase text-accent">Top pick</span>}
                   </td>
                   <td className="px-4 py-3 text-muted">{r.verdict}</td>
-                  <td className="px-4 py-3 text-ink">{r.price}</td>
+                  <td className="px-4 py-3 text-ink">
+                    {r.priceUrl ? (
+                      <a href={r.priceUrl} target="_blank" rel="noopener" className="underline decoration-dotted underline-offset-4 hover:text-accent">
+                        {r.price}
+                      </a>
+                    ) : (
+                      r.price
+                    )}
+                  </td>
                   <td className="px-4 py-3 text-muted">{r.recurring ?? '—'}</td>
                   <td className="px-4 py-3">
                     {href ? (

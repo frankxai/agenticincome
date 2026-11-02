@@ -3,15 +3,16 @@ import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { payingPrograms } from '@/lib/affiliate'
 import { EmailCapture } from '@/components/EmailCapture'
+import { OperatorFitCheck } from '@/components/OperatorFitCheck'
 
 export const metadata: Metadata = {
   title: 'Start Here',
-  description: 'The 3-step path to building an income system with AI agents — what to build, in what order, and why it compounds.',
+  description: 'The 3-step path to building an income system with AI agents: what to build, in what order, and how to verify each loop.',
   alternates: { canonical: '/start' },
   openGraph: {
     ...baseOpenGraph,
     title: 'Start Here',
-    description: 'The 3-step path to building an income system with AI agents — what to build, in what order, and why it compounds.',
+    description: 'The 3-step path to building an income system with AI agents: what to build, in what order, and how to verify each loop.',
     url: '/start',
   },
 }
@@ -24,8 +25,8 @@ export default function Start() {
       <div className="kicker">Start here</div>
       <h1 className="mt-3 text-5xl font-semibold text-ink">Build the first revenue loop.</h1>
       <p className="mt-4 max-w-2xl text-lg text-muted">
-        You do not need a finished product to begin. Start with one question you can answer from experience,
-        document the tradeoffs, and give readers an honest next step they can choose to keep.
+        You do not need a finished product to begin. Start with one question you can answer from firsthand experience,
+        document the tradeoffs, and give readers an honest next step they can verify for themselves.
       </p>
 
       <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -43,7 +44,7 @@ export default function Start() {
 
       <ol className="mt-10 space-y-6">
         {[
-          { t: 'Pick one tool category you actually use', d: 'Voice, video, writing, coding — whatever you have real opinions about. Authentic beats broad. You can only recommend honestly what you\'ve touched.' },
+          { t: 'Pick one tool category you actually use', d: 'Voice, video, writing, or coding: choose a workflow where you have real firsthand opinions. You can only recommend honestly what you have tested.' },
           { t: 'Write the comparison in an inspectable shape', d: 'Lead with the answer, show the criteria, name the tradeoffs, date the evidence, and disclose any material incentive.' },
           { t: 'Offer a useful next step', d: 'Add a link only when it fits the recommendation. Offer an email or product path only when its delivery and data handling are clear.' },
         ].map((s, i) => (
@@ -57,8 +58,12 @@ export default function Start() {
         ))}
       </ol>
 
+      <div className="mt-12">
+        <OperatorFitCheck />
+      </div>
+
       <h2 className="mt-14 text-2xl font-bold text-ink">The recurring-payer shortlist</h2>
-      <p className="mt-2 max-w-2xl text-muted">The programs worth building around, ranked by fit and recurring potential. The point is not to chase payout; it is to route trust where it belongs.</p>
+      <p className="mt-2 max-w-2xl text-muted">The programs worth building around, ranked by fit and recurring potential. Route reader trust to tools that earn it first.</p>
       <div className="mt-6 overflow-hidden rounded-xl border border-border glass">
         <table className="w-full text-sm">
           <thead><tr className="text-left text-muted">

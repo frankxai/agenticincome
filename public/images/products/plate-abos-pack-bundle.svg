@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" fill="none" role="img" aria-label="Complete Agentic Business OS Skill Suite">
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#1A1F2E" stroke-width="0.75" stroke-opacity="0.55"/>
+    </pattern>
+    <linearGradient id="surfaceGrad" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A0C14"/>
+      <stop offset="100%" stop-color="#05060A"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="16" fill="url(#surfaceGrad)"/>
+  <rect x="0.5" y="0.5" width="639" height="359" rx="15.5" stroke="#1A1F2E"/>
+  <rect x="16" y="52" width="608" height="256" fill="url(#grid)" opacity="0.7"/>
+
+  <!-- Top Telemetry Header -->
+  <line x1="0" y1="48" x2="640" y2="48" stroke="#1A1F2E" stroke-width="1"/>
+  <circle cx="24" cy="24" r="4" fill="#10B981"/>
+  <text x="36" y="28" fill="#F1F3F9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="600">ABOS BUNDLE · 4 SKILL PACKS</text>
+  <rect x="524" y="13" width="96" height="22" rx="11" fill="#101522" stroke="#1A1F2E"/>
+  <text x="572" y="28" text-anchor="middle" fill="#8A90A8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10">BUNDLE · $99</text>
+
+  <!-- Title Strip -->
+  <text x="28" y="82" fill="#F1F3F9" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="19" font-weight="600">Complete Agentic Business OS Skill Suite</text>
+  <text x="28" y="102" fill="#8A90A8" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="12">Four coordinated local-harness skill folders + registry.json + install guide</text>
+
+  <!-- Schematic Body -->
+  
+      <rect x="28" y="128" width="284" height="68" rx="8" fill="#101522" stroke="#10B981" stroke-opacity="0.6"/>
+      <text x="44" y="151" fill="#10B981" font-family="ui-monospace, monospace" font-size="10">PACK 01 · CLAIMS GUARD</text>
+      <text x="44" y="173" fill="#F1F3F9" font-family="system-ui, sans-serif" font-size="13" font-weight="600">5-gate pre-publish copy &amp; disclosure check</text>
+
+      <rect x="328" y="128" width="284" height="68" rx="8" fill="#0A0C14" stroke="#1A1F2E"/>
+      <text x="344" y="151" fill="#06B6D4" font-family="ui-monospace, monospace" font-size="10">PACK 02 · BUSINESS INTELLIGENCE</text>
+      <text x="344" y="173" fill="#F1F3F9" font-family="system-ui, sans-serif" font-size="13" font-weight="600">File-based decision, spend &amp; offer memory</text>
+
+      <rect x="28" y="210" width="284" height="68" rx="8" fill="#0A0C14" stroke="#1A1F2E"/>
+      <text x="44" y="233" fill="#F59E0B" font-family="ui-monospace, monospace" font-size="10">PACK 03 · DESIGN CONTRACT</text>
+      <text x="44" y="255" fill="#F1F3F9" font-family="system-ui, sans-serif" font-size="13" font-weight="600">design.md + taste.md non-averaged locks</text>
+
+      <rect x="328" y="210" width="284" height="68" rx="8" fill="#0A0C14" stroke="#1A1F2E"/>
+      <text x="344" y="233" fill="#34D399" font-family="ui-monospace, monospace" font-size="10">PACK 04 · WEEKLY RHYTHM</text>
+      <text x="344" y="255" fill="#F1F3F9" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Founder Monday scope &amp; Friday receipt loop</text>
+    
+
+  <!-- Bottom Receipt Footer -->
+  <line x1="0" y1="316" x2="640" y2="316" stroke="#1A1F2E" stroke-width="1"/>
+  <text x="24" y="341" fill="#8A90A8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5">SOURCE: frankxai/agentic-business-os · MIT</text>
+  <text x="616" y="341" text-anchor="end" fill="#10B981" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5">4 PACKS · NO SAAS LOCK-IN</text>
+</svg>

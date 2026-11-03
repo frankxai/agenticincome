@@ -58,7 +58,7 @@ function frame({ badge, code, title, subtitle, footerLeft, footerRight, body }) 
 
 const plates = {
   'plate-starter-kit.svg': frame({
-    badge: 'STARTER KIT · L0 MAGNET',
+    badge: 'STARTER KIT · FREE SPRINT GUIDE',
     code: 'FREE · $0',
     title: 'First Revenue Loop Schematic',
     subtitle: '30-minute sequence from real tool experience to owned audience capture',

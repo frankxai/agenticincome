@@ -85,7 +85,7 @@ export const offers: Offer[] = [
     shortTitle: 'Vibe OS Pack',
     price: '$24',
     summary: 'Three Claude Code skills and four Python audio utilities for translating target focus or creative states into structured Suno prompts and local tone layers.',
-    promise: 'Install a versioned audio-prompt and tone-layering toolkit in under ten minutes, backed by MIT-licensed source.',
+    promise: 'Translate target focus or creative states into structured Suno prompts and local tone layers with an MIT-licensed toolkit.',
     cta: 'Request Vibe OS Pack access',
     audience: 'Creators, producers, and builders using Suno or local Python audio scripts who want repeatable prompt structure and acoustic layering.',
     firstWin: 'Run state_to_prompt.py for one focus or workout session and generate a structured Suno prompt with BPM, key, instrumentation, and vocal constraints.',

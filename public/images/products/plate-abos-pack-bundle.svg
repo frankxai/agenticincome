@@ -21,7 +21,7 @@
 
   <!-- Title Strip -->
   <text x="28" y="82" fill="#F1F3F9" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="19" font-weight="600">Complete Agentic Business OS Skill Suite</text>
-  <text x="28" y="102" fill="#8A90A8" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="12">Four local CLI skill folders + registry.json + install guide</text>
+  <text x="28" y="102" fill="#8A90A8" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="12">Four coordinated local-harness skill folders + registry.json + install guide</text>
 
   <!-- Schematic Body -->
   

@@ -281,7 +281,7 @@ export const PACK_MANIFESTS: Record<string, PackManifest> = {
           'Use when: You have 8+ focused hours per week and need first revenue within 30 days.',
           '',
           '## Fixed-Scope Sprint Contract Checklist',
-          '- Exact repository / workflow input state:',
+          '- Exact repository and workflow input state:',
           '- Non-goals (what this sprint refuses to touch):',
           '- Verification gate before handoff:',
           '- Written stop conditions & handover bundle:',

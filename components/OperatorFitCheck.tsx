@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { fitCheck } from '@/lib/fit-check'
 import { trackClientEvent } from '@/lib/client-analytics'
@@ -24,9 +24,9 @@ const STEPS: {
     question: 'How many focused hours per week can you put into building?',
     helper: 'Used by the deterministic fit-check selector to filter unrealistic maintenance loads.',
     options: [
-      { id: '4', keycap: '1', label: 'Under 8 hours / week', detail: 'Evenings or one weekend block alongside a full-time role.' },
-      { id: '10', keycap: '2', label: '8 to 14 hours / week', detail: 'Two to three dedicated build sessions every week.' },
-      { id: '20', keycap: '3', label: '15+ hours / week', detail: 'Primary operator focus with room for client or product sprints.' },
+      { id: '4', keycap: '1', label: 'Under 8 hours per week', detail: 'Evenings or one weekend block alongside a full-time role.' },
+      { id: '10', keycap: '2', label: '8 to 14 hours per week', detail: 'Two to three dedicated build sessions every week.' },
+      { id: '20', keycap: '3', label: '15+ hours per week', detail: 'Primary operator focus with room for client or product sprints.' },
     ],
   },
   {
@@ -144,11 +144,20 @@ export function OperatorFitCheck() {
   const [stepIndex, setStepIndex] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string>>({})
   const [copiedPlan, setCopiedPlan] = useState(false)
+  const firstOptionRef = useRef<HTMLButtonElement | null>(null)
+  const hasInteractedRef = useRef(false)
 
   const isComplete = stepIndex >= STEPS.length
   const currentStep = STEPS[stepIndex]
 
+  useEffect(() => {
+    if (hasInteractedRef.current && !isComplete) {
+      firstOptionRef.current?.focus()
+    }
+  }, [stepIndex, isComplete])
+
   function selectOption(stepId: string, optionId: string) {
+    hasInteractedRef.current = true
     const next = { ...answers, [stepId]: optionId }
     const nextStep = stepIndex + 1
     setAnswers(next)
@@ -249,11 +258,12 @@ export function OperatorFitCheck() {
           <p className="mt-1 text-sm text-muted">{currentStep.helper}</p>
 
           <div className="mt-5 grid gap-3">
-            {currentStep.options.map((opt) => {
+            {currentStep.options.map((opt, optIdx) => {
               const selected = answers[currentStep.id] === opt.id
               return (
                 <button
                   key={opt.id}
+                  ref={optIdx === 0 ? firstOptionRef : undefined}
                   type="button"
                   aria-keyshortcuts={opt.keycap}
                   onClick={() => selectOption(currentStep.id, opt.id)}

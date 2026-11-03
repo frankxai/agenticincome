@@ -207,7 +207,7 @@ const plates = {
     badge: 'ABOS BUNDLE · 4 SKILL PACKS',
     code: 'BUNDLE · $99',
     title: 'Complete Agentic Business OS Skill Suite',
-    subtitle: 'Four coordinated local-harness skill folders + registry.json + install guide',
+    subtitle: 'Four local skill folders + registry.json + install guide',
     footerLeft: 'SOURCE: frankxai/agentic-business-os · MIT',
     footerRight: '4 PACKS · NO SAAS LOCK-IN',
     body: `
@@ -230,7 +230,7 @@ const plates = {
   }),
 
   'plate-agent-team-pro.svg': frame({
-    badge: 'AGENT TEAM PRO · HARNESS CREW',
+    badge: 'AGENT TEAM PRO · ROLE WORKFLOW',
     code: 'STAGED · $129',
     title: 'Maker + Independent Verifier Loop Topology',
     subtitle: 'Role constitutions, worktree isolation, budget caps, and human money gates',
@@ -281,7 +281,7 @@ const plates = {
       <line x1="28" y1="164" x2="612" y2="164" stroke="#1A1F2E"/>
       <text x="46" y="151" fill="#8A90A8" font-family="ui-monospace, monospace" font-size="10">SECTION</text>
       <text x="230" y="151" fill="#8A90A8" font-family="ui-monospace, monospace" font-size="10">VERIFIED SIGNAL</text>
-      <text x="488" y="151" fill="#8A90A8" font-family="ui-monospace, monospace" font-size="10">OPERATOR MOVE</text>
+      <text x="488" y="151" fill="#8A90A8" font-family="ui-monospace, monospace" font-size="10">NEXT ACTION</text>
 
       <text x="46" y="190" fill="#F1F3F9" font-family="ui-monospace, monospace" font-size="11">01 · Term Drift</text>
       <text x="230" y="190" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11.5">Commission &amp; cookie-window diffs</text>

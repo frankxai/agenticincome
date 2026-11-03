@@ -57,6 +57,11 @@ test('every offer in lib/offers.ts has a disk-verified PACK_MANIFESTS entry and 
       false,
       `plate-${slug}.svg contains an unescaped XML ampersand (&)`,
     )
+    assert.doesNotMatch(
+      svg,
+      /\b(queue|swarm|harness|operator|internal tier|environment|coordinated|coordination)\b/i,
+      `plate-${slug}.svg must not expose prohibited internal vocabulary`,
+    )
   }
 
   const blueprintCatalog = catalog.products.find((p) => p.id === 'blueprint')

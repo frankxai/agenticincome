@@ -29,7 +29,7 @@
       <line x1="28" y1="164" x2="612" y2="164" stroke="#1A1F2E"/>
       <text x="46" y="151" fill="#8A90A8" font-family="ui-monospace, monospace" font-size="10">SECTION</text>
       <text x="230" y="151" fill="#8A90A8" font-family="ui-monospace, monospace" font-size="10">VERIFIED SIGNAL</text>
-      <text x="488" y="151" fill="#8A90A8" font-family="ui-monospace, monospace" font-size="10">OPERATOR MOVE</text>
+      <text x="488" y="151" fill="#8A90A8" font-family="ui-monospace, monospace" font-size="10">NEXT ACTION</text>
 
       <text x="46" y="190" fill="#F1F3F9" font-family="ui-monospace, monospace" font-size="11">01 · Term Drift</text>
       <text x="230" y="190" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11.5">Commission &amp; cookie-window diffs</text>

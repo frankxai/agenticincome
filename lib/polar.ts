@@ -1,4 +1,5 @@
 import catalog from '@/products/catalog.json'
+import { polarRuntimeConfiguration, validPolarCheckoutUrl } from '@/lib/commerce/polar-environment'
 import { commerceKillSwitchActive, commerceProvider } from '@/lib/commerce/config'
 
 /**
@@ -22,7 +23,6 @@ import { commerceKillSwitchActive, commerceProvider } from '@/lib/commerce/confi
  * every surface renders the honest "not connected" state it renders now.
  */
 
-const POLAR_CHECKOUT_ENDPOINT = 'https://api.polar.sh/v1/checkouts/'
 const REQUEST_TIMEOUT_MS = 10_000
 
 /**
@@ -85,19 +85,14 @@ export function catalogRefusal(product: CatalogProduct): CheckoutRefusal | null 
   return null
 }
 
-function polarProductId(catalogId: string): string | null {
+function polarRuntime(catalogId: string) {
   const envKey = PRODUCT_ID_ENV_KEYS[catalogId]
-  if (!envKey) return null
-  return process.env[envKey]?.trim() || null
+  return envKey ? polarRuntimeConfiguration(process.env, envKey) : null
 }
 
-/**
- * True when this specific product could reach Polar right now: an access token
- * plus that product's own Polar product id. Per-product on purpose — one
- * configured product must never enable checkout for an unconfigured one.
- */
+/** The selected environment must have its own token and product mapping. */
 export function isPolarConfigured(catalogId: string): boolean {
-  return Boolean(process.env.POLAR_ACCESS_TOKEN?.trim()) && Boolean(polarProductId(catalogId))
+  return polarRuntime(catalogId) !== null
 }
 
 /**
@@ -149,22 +144,21 @@ export async function createCheckoutSession(catalogId: string): Promise<string |
   if (!product || catalogRefusal(product)) return null
   if (!polarSelected()) return null
 
-  const token = process.env.POLAR_ACCESS_TOKEN?.trim()
-  const productId = polarProductId(catalogId)
-  if (!token || !productId) return null
+  const runtime = polarRuntime(catalogId)
+  if (!runtime) return null
 
   const success = successUrl(product)
 
-  const response = await fetch(POLAR_CHECKOUT_ENDPOINT, {
+  const response = await fetch(runtime.checkoutEndpoint, {
     method: 'POST',
     headers: {
-      authorization: `Bearer ${token}`,
+      authorization: `Bearer ${runtime.accessToken}`,
       'content-type': 'application/json',
     },
     // `products` (array) is the current field; the older singular `product_id`
     // is deprecated. One id per session — this is a single-product checkout.
     body: JSON.stringify(
-      success ? { products: [productId], success_url: success } : { products: [productId] },
+      success ? { products: [runtime.productId], success_url: success } : { products: [runtime.productId] },
     ),
     signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
   }).catch(() => null)
@@ -172,12 +166,6 @@ export async function createCheckoutSession(catalogId: string): Promise<string |
   if (!response || !response.ok) return null
 
   const session = (await response.json().catch(() => null)) as { url?: unknown } | null
-  if (!session || typeof session.url !== 'string') return null
-
-  try {
-    const url = new URL(session.url)
-    return url.protocol === 'https:' ? url.toString() : null
-  } catch {
-    return null
-  }
+  return validPolarCheckoutUrl(session?.url, runtime.server)
 }
+

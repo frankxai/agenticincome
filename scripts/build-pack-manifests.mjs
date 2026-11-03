@@ -96,17 +96,18 @@ const intelFiles = [
 ]
 
 const sprintFiles = [
-  readDiskItem('products/FULFILLMENT_RUNBOOK.md', {
-    badge: 'Delivery runbook',
-    excerptLines: 24,
+  readDiskItem('products/implementation-sprint/PRODUCT.md', {
+    badge: 'Sprint scope spec',
+    excerptLines: 26,
   }),
 ]
 
 const manifests = {
   'starter-kit': {
     slug: 'starter-kit',
+    previewMode: 'deliverable-files',
     archiveName: 'agentic-income-starter-kit.md',
-    totalFilesLabel: `${starterFiles.length} in-repo files`,
+    totalFilesLabel: `${starterFiles.length} delivered files`,
     totalSizeLabel: formatSize(starterTotalBytes),
     licenseShort: 'Free personal business use',
     plateSvg: '/images/products/plate-starter-kit.svg',
@@ -118,8 +119,9 @@ const manifests = {
   },
   'vibe-os-pack': {
     slug: 'vibe-os-pack',
-    archiveName: 'vibe-os-pack.zip',
-    totalFilesLabel: '1 in-repo spec · MIT source in frankxai/vibe-os',
+    previewMode: 'product-specification',
+    archiveName: 'products/vibe-os-pack/PRODUCT.md',
+    totalFilesLabel: 'Product specification · MIT source in frankxai/vibe-os',
     totalSizeLabel: `${vibeFiles[0].sizeLabel} spec`,
     licenseShort: 'MIT source · Packaged edition',
     plateSvg: '/images/products/plate-vibe-os-pack.svg',
@@ -131,8 +133,9 @@ const manifests = {
   },
   'claims-guard-pack': {
     slug: 'claims-guard-pack',
-    archiveName: 'claims-guard-pack-v0.1.0.zip',
-    totalFilesLabel: '1 in-repo spec · MIT source in frankxai/agentic-business-os',
+    previewMode: 'product-specification',
+    archiveName: 'products/claims-guard-pack/PRODUCT.md',
+    totalFilesLabel: 'Product specification · MIT source in frankxai/agentic-business-os',
     totalSizeLabel: `${claimsFiles[0].sizeLabel} spec`,
     licenseShort: 'MIT source · Packaged edition',
     plateSvg: '/images/products/plate-claims-guard-pack.svg',
@@ -144,6 +147,7 @@ const manifests = {
   },
   blueprint: {
     slug: 'blueprint',
+    previewMode: 'deliverable-files',
     archiveName: 'income-architecture-blueprint-v2',
     totalFilesLabel: `${blueprintFiles.length} delivered Markdown files`,
     totalSizeLabel: formatSize(blueprintTotalBytes),
@@ -157,8 +161,9 @@ const manifests = {
   },
   'abos-pack-bundle': {
     slug: 'abos-pack-bundle',
-    archiveName: 'abos-pack-bundle-v0.1.0.zip',
-    totalFilesLabel: '1 in-repo spec · 4 MIT packs in frankxai/agentic-business-os',
+    previewMode: 'product-specification',
+    archiveName: 'products/abos-pack-bundle/PRODUCT.md',
+    totalFilesLabel: 'Bundle specification · 4 MIT packs in frankxai/agentic-business-os',
     totalSizeLabel: `${abosFiles[0].sizeLabel} spec`,
     licenseShort: 'MIT source · Packaged bundle',
     plateSvg: '/images/products/plate-abos-pack-bundle.svg',
@@ -170,8 +175,9 @@ const manifests = {
   },
   'agent-team-pro': {
     slug: 'agent-team-pro',
-    archiveName: 'agent-team-pro-v1.zip',
-    totalFilesLabel: '1 roadmap spec · payload in assembly',
+    previewMode: 'product-specification',
+    archiveName: 'products/agent-team-pro/PRODUCT.md',
+    totalFilesLabel: 'Roadmap specification · payload in assembly',
     totalSizeLabel: `${teamFiles[0].sizeLabel} spec`,
     licenseShort: 'Personal license + 12 mo updates',
     plateSvg: '/images/products/plate-agent-team-pro.svg',
@@ -183,8 +189,9 @@ const manifests = {
   },
   'private-intel': {
     slug: 'private-intel',
-    archiveName: 'YYYY-MM-BRIEF.md',
-    totalFilesLabel: '1 sample brief on disk · monthly cadence',
+    previewMode: 'sample-issue',
+    archiveName: 'products/private-intel/2026-06-BRIEF.md',
+    totalFilesLabel: '1 sample brief · monthly cadence',
     totalSizeLabel: `${intelFiles[0].sizeLabel} sample`,
     licenseShort: 'Personal subscription · Cancel anytime',
     plateSvg: '/images/products/plate-private-intel.svg',
@@ -196,9 +203,10 @@ const manifests = {
   },
   'implementation-sprint': {
     slug: 'implementation-sprint',
-    archiveName: 'scoped-sprint-handoff/',
-    totalFilesLabel: '1 in-repo delivery runbook · scoped git handoff',
-    totalSizeLabel: `${sprintFiles[0].sizeLabel} runbook`,
+    previewMode: 'product-specification',
+    archiveName: 'products/implementation-sprint/PRODUCT.md',
+    totalFilesLabel: 'Sprint scope specification · git handoff checklist',
+    totalSizeLabel: `${sprintFiles[0].sizeLabel} spec`,
     licenseShort: 'Buyer owns 100% of repo & code',
     plateSvg: '/images/products/plate-implementation-sprint.svg',
     skipIf:
@@ -223,8 +231,11 @@ export type PackFileItem = {
   excerpt: string[]
 }
 
+export type PackPreviewMode = 'deliverable-files' | 'sample-issue' | 'product-specification'
+
 export type PackManifest = {
   slug: string
+  previewMode: PackPreviewMode
   archiveName: string
   totalFilesLabel: string
   totalSizeLabel: string

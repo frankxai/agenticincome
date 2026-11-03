@@ -139,7 +139,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
                   ? 'No payment is taken here. The intake route records interest only when the configured service is available.'
                 : anyLiveCheckout
                   ? 'Secure payment provider checkout is connected.'
-                  : 'Checkout is currently gated. Inspect the files below and request access to be notified when it opens.'}
+                  : 'Checkout is currently gated. Inspect the preview below and request access to be notified when it opens.'}
             </div>
             <Link href="/trust" className="mt-4 inline-flex text-xs font-semibold text-accent">
               Trust, support, and refunds
@@ -166,10 +166,26 @@ export default async function OfferDetail({ params }: OfferPageProps) {
       {manifest ? (
         <section id="inspect-files" className="section-band scroll-mt-24">
           <div className="section-heading motion-reveal">
-            <div className="kicker">Package inspection</div>
-            <h2>Inspect the files before you decide.</h2>
+            <div className="kicker">
+              {manifest.previewMode === 'deliverable-files'
+                ? 'Package inspection'
+                : manifest.previewMode === 'sample-issue'
+                  ? 'Sample briefing'
+                  : 'Product specification'}
+            </div>
+            <h2>
+              {manifest.previewMode === 'deliverable-files'
+                ? 'Inspect the delivered files before you decide.'
+                : manifest.previewMode === 'sample-issue'
+                  ? 'Inspect a sample brief before you decide.'
+                  : 'Inspect the scope specification before you decide.'}
+            </h2>
             <p>
-              Browse the archive manifest, read real file excerpts, and check the fit boundaries before requesting access or starting checkout.
+              {manifest.previewMode === 'deliverable-files'
+                ? 'Browse the delivered Markdown files, read verbatim excerpts, and check the fit boundaries before starting.'
+                : manifest.previewMode === 'sample-issue'
+                  ? 'Read a real sample monthly briefing and check the fit boundaries before requesting member access.'
+                  : 'Read the in-repository PRODUCT.md specification and check the fit boundaries before requesting access.'}
             </p>
           </div>
           <div className="mt-8">

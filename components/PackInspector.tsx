@@ -49,6 +49,19 @@ export function PackInspector({ manifest }: { manifest: PackManifest }) {
 
   if (!activeFile) return null
 
+  const copyLabel =
+    manifest.previewMode === 'deliverable-files'
+      ? copied
+        ? 'Tree copied'
+        : 'Copy file tree'
+      : manifest.previewMode === 'sample-issue'
+        ? copied
+          ? 'Sample ref copied'
+          : 'Copy sample reference'
+        : copied
+          ? 'Spec ref copied'
+          : 'Copy spec reference'
+
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-surface/90">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-bg/80 px-4 py-3 sm:px-5">
@@ -69,7 +82,7 @@ export function PackInspector({ manifest }: { manifest: PackManifest }) {
             onClick={handleCopyTree}
             className="min-h-[44px] rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-xs text-ink transition-colors duration-150 motion-reduce:transition-none hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
-            {copied ? 'Tree copied' : 'Copy file tree'}
+            {copyLabel}
           </button>
         </div>
       </div>

@@ -104,7 +104,7 @@ export const offers: Offer[] = [
     ],
     proof: [
       'Underlying source is MIT-licensed and public in frankxai/vibe-os.',
-      'Every script and skill path is inspectable in the file-tree workbench on this page.',
+      'The PRODUCT.md package specification and expected archive layout are inspectable on this page.',
       'Explicitly excludes medical or therapeutic claims; music generation uses your own Suno account.',
     ],
     support: 'Packaged-edition install guide and release errata. Music generation requires your own external Suno or audio account.',
@@ -234,7 +234,7 @@ export const offers: Offer[] = [
     proof: [
       'Underlying source is MIT-licensed and public in frankxai/agentic-business-os.',
       'Plain Markdown and JSON files with zero hidden runtime daemons.',
-      'Full archive tree and file excerpts are inspectable on this page prior to release.',
+      'The PRODUCT.md bundle specification and four-pack scope are inspectable on this page prior to release.',
     ],
     support: 'Versioned bundle documentation and MIT license terms. No done-for-you setup is included at this tier.',
     upgradePath: 'Step up to Implementation Sprint when you want a dedicated build branch and Vercel preview implemented with you.',

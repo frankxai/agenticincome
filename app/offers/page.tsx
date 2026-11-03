@@ -37,7 +37,7 @@ const STAGE_BANDS: {
     stage: 'pack',
     index: '02',
     title: 'Focused skill packs ($24 to $39)',
-    subtitle: 'Single-purpose packaged editions built from public MIT repositories. Inspect every file path before checkout opens.',
+    subtitle: 'Single-purpose packaged editions built from public MIT repositories. Inspect each product specification before checkout opens.',
   },
   {
     stage: 'system',
@@ -60,7 +60,7 @@ export default function Offers() {
         <div className="kicker">Digital packs and scoped systems</div>
         <h1 className="mt-3 text-5xl font-semibold text-ink">Choose the right depth.</h1>
         <p className="mt-4 text-xl leading-8 text-muted">
-          Start with the free 30-minute kit, run the 60-second fit check to match your weekly hours, or inspect every file inside our packaged kits and scoped sprint.
+          Start with the free 30-minute kit, run the 60-second fit check to match your weekly hours, or inspect the deliverables and scope specifications across every offer.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <a href="#fit-check" className="cta">
@@ -76,7 +76,7 @@ export default function Offers() {
         <div>
           <div className="text-sm font-semibold text-gold">Before you buy</div>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-            Free Starter Kit delivery is live on-site. Every paid pack exposes its exact file tree and real excerpts before purchase. Where Polar checkout is still gated, the button routes cleanly to an access waitlist rather than a dead cart.
+            Free Starter Kit delivery is live on-site, Blueprint exposes its four delivered Markdown kits, Private Intel previews a sample brief, and gated packs expose their PRODUCT.md scope specification before you request access.
           </p>
         </div>
         <Link href="/trust" className="cta-secondary">
@@ -177,7 +177,11 @@ export default function Offers() {
                             </CheckoutLink>
                           )}
                           <Link href={`/offers/${offer.slug}#inspect-files`} className="cta-secondary text-center">
-                            Inspect files
+                            {manifest?.previewMode === 'deliverable-files'
+                              ? 'Inspect files'
+                              : manifest?.previewMode === 'sample-issue'
+                                ? 'Inspect sample brief'
+                                : 'Inspect specification'}
                           </Link>
                           <div className="text-center font-mono text-[11px] leading-5 text-muted">
                             {isFree
@@ -186,7 +190,7 @@ export default function Offers() {
                                 ? 'No on-site payment · scope first'
                                 : checkoutReady
                                   ? 'Checkout connected'
-                                  : 'Waitlist · inspect files now'}
+                                  : 'Waitlist · inspect scope now'}
                           </div>
                         </div>
                       </div>
@@ -200,7 +204,7 @@ export default function Offers() {
       </div>
 
       <section className="mt-16 max-w-4xl border-t border-border pt-8 text-sm leading-6 text-muted">
-        Every offer follows one standard: concrete scope, inspectable file trees before checkout, honest access state, and zero unsupported income claims.
+        Every offer follows one standard: concrete scope, inspectable deliverables or product specifications before checkout, honest access state, and zero unsupported income claims.
         <div className="mt-3">
           <Link href="/start" className="text-accent">
             Return to the free playbook

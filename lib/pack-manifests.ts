@@ -12,8 +12,11 @@ export type PackFileItem = {
   excerpt: string[]
 }
 
+export type PackPreviewMode = 'deliverable-files' | 'sample-issue' | 'product-specification'
+
 export type PackManifest = {
   slug: string
+  previewMode: PackPreviewMode
   archiveName: string
   totalFilesLabel: string
   totalSizeLabel: string
@@ -27,8 +30,9 @@ export type PackManifest = {
 export const PACK_MANIFESTS: Record<string, PackManifest> = {
   "starter-kit": {
     "slug": "starter-kit",
+    "previewMode": "deliverable-files",
     "archiveName": "agentic-income-starter-kit.md",
-    "totalFilesLabel": "2 in-repo files",
+    "totalFilesLabel": "2 delivered files",
     "totalSizeLabel": "3.3 KB",
     "licenseShort": "Free personal business use",
     "plateSvg": "/images/products/plate-starter-kit.svg",
@@ -101,8 +105,9 @@ export const PACK_MANIFESTS: Record<string, PackManifest> = {
   },
   "vibe-os-pack": {
     "slug": "vibe-os-pack",
-    "archiveName": "vibe-os-pack.zip",
-    "totalFilesLabel": "1 in-repo spec · MIT source in frankxai/vibe-os",
+    "previewMode": "product-specification",
+    "archiveName": "products/vibe-os-pack/PRODUCT.md",
+    "totalFilesLabel": "Product specification · MIT source in frankxai/vibe-os",
     "totalSizeLabel": "1.6 KB spec",
     "licenseShort": "MIT source · Packaged edition",
     "plateSvg": "/images/products/plate-vibe-os-pack.svg",
@@ -146,8 +151,9 @@ export const PACK_MANIFESTS: Record<string, PackManifest> = {
   },
   "claims-guard-pack": {
     "slug": "claims-guard-pack",
-    "archiveName": "claims-guard-pack-v0.1.0.zip",
-    "totalFilesLabel": "1 in-repo spec · MIT source in frankxai/agentic-business-os",
+    "previewMode": "product-specification",
+    "archiveName": "products/claims-guard-pack/PRODUCT.md",
+    "totalFilesLabel": "Product specification · MIT source in frankxai/agentic-business-os",
     "totalSizeLabel": "1.9 KB spec",
     "licenseShort": "MIT source · Packaged edition",
     "plateSvg": "/images/products/plate-claims-guard-pack.svg",
@@ -194,6 +200,7 @@ export const PACK_MANIFESTS: Record<string, PackManifest> = {
   },
   "blueprint": {
     "slug": "blueprint",
+    "previewMode": "deliverable-files",
     "archiveName": "income-architecture-blueprint-v2",
     "totalFilesLabel": "4 delivered Markdown files",
     "totalSizeLabel": "40.7 KB",
@@ -338,8 +345,9 @@ export const PACK_MANIFESTS: Record<string, PackManifest> = {
   },
   "abos-pack-bundle": {
     "slug": "abos-pack-bundle",
-    "archiveName": "abos-pack-bundle-v0.1.0.zip",
-    "totalFilesLabel": "1 in-repo spec · 4 MIT packs in frankxai/agentic-business-os",
+    "previewMode": "product-specification",
+    "archiveName": "products/abos-pack-bundle/PRODUCT.md",
+    "totalFilesLabel": "Bundle specification · 4 MIT packs in frankxai/agentic-business-os",
     "totalSizeLabel": "1.5 KB spec",
     "licenseShort": "MIT source · Packaged bundle",
     "plateSvg": "/images/products/plate-abos-pack-bundle.svg",
@@ -380,8 +388,9 @@ export const PACK_MANIFESTS: Record<string, PackManifest> = {
   },
   "agent-team-pro": {
     "slug": "agent-team-pro",
-    "archiveName": "agent-team-pro-v1.zip",
-    "totalFilesLabel": "1 roadmap spec · payload in assembly",
+    "previewMode": "product-specification",
+    "archiveName": "products/agent-team-pro/PRODUCT.md",
+    "totalFilesLabel": "Roadmap specification · payload in assembly",
     "totalSizeLabel": "1.3 KB spec",
     "licenseShort": "Personal license + 12 mo updates",
     "plateSvg": "/images/products/plate-agent-team-pro.svg",
@@ -420,8 +429,9 @@ export const PACK_MANIFESTS: Record<string, PackManifest> = {
   },
   "private-intel": {
     "slug": "private-intel",
-    "archiveName": "YYYY-MM-BRIEF.md",
-    "totalFilesLabel": "1 sample brief on disk · monthly cadence",
+    "previewMode": "sample-issue",
+    "archiveName": "products/private-intel/2026-06-BRIEF.md",
+    "totalFilesLabel": "1 sample brief · monthly cadence",
     "totalSizeLabel": "1.6 KB sample",
     "licenseShort": "Personal subscription · Cancel anytime",
     "plateSvg": "/images/products/plate-private-intel.svg",
@@ -467,47 +477,50 @@ export const PACK_MANIFESTS: Record<string, PackManifest> = {
   },
   "implementation-sprint": {
     "slug": "implementation-sprint",
-    "archiveName": "scoped-sprint-handoff/",
-    "totalFilesLabel": "1 in-repo delivery runbook · scoped git handoff",
-    "totalSizeLabel": "5.2 KB runbook",
+    "previewMode": "product-specification",
+    "archiveName": "products/implementation-sprint/PRODUCT.md",
+    "totalFilesLabel": "Sprint scope specification · git handoff checklist",
+    "totalSizeLabel": "1.7 KB spec",
     "licenseShort": "Buyer owns 100% of repo & code",
     "plateSvg": "/images/products/plate-implementation-sprint.svg",
     "skipIf": "Skip this if you want an open-ended strategy deck without code, or if you have not yet identified a concrete workflow or audience to build around.",
     "buyIf": "Request a scoped plan when you have an active product or content workflow and want an isolated git branch, local quality gates, and a verified Vercel preview handed over cleanly.",
     "files": [
       {
-        "path": "products/FULFILLMENT_RUNBOOK.md",
-        "diskPath": "products/FULFILLMENT_RUNBOOK.md",
-        "bytes": 5322,
-        "sizeLabel": "5.2 KB",
+        "path": "products/implementation-sprint/PRODUCT.md",
+        "diskPath": "products/implementation-sprint/PRODUCT.md",
+        "bytes": 1782,
+        "sizeLabel": "1.7 KB",
         "kind": "markdown",
-        "badge": "Delivery runbook",
-        "totalLines": 99,
+        "badge": "Sprint scope spec",
+        "totalLines": 28,
         "excerpt": [
-          "# Agentic Income Fulfillment Runbook",
+          "# Revenue System Implementation Sprint — Scope Specification",
           "",
-          "## Purpose",
+          "## Engagement format",
           "",
-          "This runbook defines how each offer is delivered once the public site routes a buyer or subscriber into the product ladder.",
+          "- **Model:** Fixed-scope, milestone-gated implementation in your own repository",
+          "- **Access:** Scoped proposal first (`/offers/implementation-sprint#request-access`)",
+          "- **Ownership:** You retain 100% ownership of the repository, domain, analytics, and payment accounts",
           "",
-          "## Offer States",
+          "## Milestone structure",
           "",
-          "| Offer | Public CTA | Payment dependency | Delivery path | Current state |",
-          "|---|---|---|---|---|",
-          "| Starter Kit | `/api/checkout?offer=starter-kit` | none | `/delivery/starter-kit` | live |",
-          "| Blueprint | `/api/checkout?offer=blueprint` | `AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL` | `/delivery/blueprint` | payment-link pending |",
-          "| Private Intel | `/api/checkout?offer=private-intel` | `AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL` | `/delivery/private-intel` | payment-link pending |",
+          "1. **Workflow & economics brief (Days 1–2):** Document the customer job, commercial model, comparison or product surface, unit-economics assumptions, and explicit 30-day stop conditions.",
+          "2. **Design & copy contract (Days 3–4):** Author the page specification, pre-purchase inspection layout, inline FTC/EU disclosure placement, and claim-audit rules.",
+          "3. **Isolated git branch implementation (Days 5–8):** Build the offer or comparison route on a dedicated feature branch with responsive checks, accessibility focus targets, and automated tests.",
+          "4. **Preview review & handoff (Days 9–10):** Deliver a live preview URL, decision log, verification test command, and maintenance checklist so your team operates the surface independently.",
           "",
-          "## Payment Provider Setup",
+          "## Handoff deliverables checklist",
           "",
-          "1. Create the payment product in Stripe, Lemon Squeezy, Gumroad, or the chosen provider.",
-          "2. Set the public success redirect to the matching delivery path.",
-          "3. Set the cancel/back link to the matching offer page.",
-          "4. Add the provider URL to Vercel:",
-          "   - `AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL`",
-          "   - `AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL`",
-          "5. Redeploy or refresh environment variables.",
-          "6. Verify `/api/checkout?offer=...` redirects to the provider URL."
+          "- [ ] Written scope brief and unit-economics worksheet (`docs/sprint-scope.md`)",
+          "- [ ] Offer or comparison route committed on an isolated git branch",
+          "- [ ] Automated link, disclosure, and public-claim verification tests",
+          "- [ ] Live preview deployment URL verified on desktop and mobile viewports",
+          "- [ ] Residual-risk note and weekly maintenance checklist (`docs/handoff.md`)",
+          "",
+          "## Explicit boundaries",
+          "",
+          "- No revenue or traffic guarantees; every model uses transparent scenario math."
         ]
       }
     ]

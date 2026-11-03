@@ -30,8 +30,6 @@ type TrustRoute = {
   avoidIf: string
   rankingReason: string
   payoutModel?: string
-  lastVerified: string
-  nextReview: string
   criteria: Criteria
   alternatives: string[]
 }
@@ -50,8 +48,6 @@ const ROUTES: TrustRoute[] = [
     avoidIf: 'You need the cheapest possible voice stack and can accept lower realism.',
     rankingReason: 'ElevenLabs wins the voice slot on quality and creator fit; CapCut keeps editing accessible. The payout route follows the fit, not the other way around.',
     payoutModel: '22% / 12-month route in catalog',
-    lastVerified: '2026-06-12',
-    nextReview: '2026-07-12',
     criteria: { fit: 95, value: 82, quality: 94, maintainability: 88, risk: 18 },
     alternatives: ['CapCut for editing', 'Descript for transcript workflows', 'No-pay manual editing route'],
   },
@@ -68,8 +64,6 @@ const ROUTES: TrustRoute[] = [
     bestFor: 'Builders who need the best answer even when the winner pays nothing.',
     avoidIf: 'You want a recommendation filtered only by available affiliate programs.',
     rankingReason: 'Frontier tools like ChatGPT and Claude can win the answer while paying nothing. The desk still shows them when they are the best fit.',
-    lastVerified: '2026-06-12',
-    nextReview: '2026-07-12',
     criteria: { fit: 91, value: 86, quality: 92, maintainability: 84, risk: 22 },
     alternatives: ['Perplexity for research routing', 'OpenRouter for model access', 'Owned starter kit for operating loop'],
   },
@@ -87,8 +81,6 @@ const ROUTES: TrustRoute[] = [
     avoidIf: 'You only want a third-party software recommendation.',
     rankingReason: 'The owned offer is labeled separately because it is Agentic Income product inventory, not a third-party tool verdict.',
     payoutModel: 'Agentic Income product',
-    lastVerified: '2026-07-05',
-    nextReview: '2026-08-05',
     criteria: { fit: 88, value: 90, quality: 82, maintainability: 92, risk: 20 },
     alternatives: ['Read the free flywheel post', 'Inspect catalog first', 'Use the trust standard before buying'],
   },
@@ -106,8 +98,6 @@ const ROUTES: TrustRoute[] = [
     avoidIf: 'You need a route that is confirmed safe for primary promotion today.',
     rankingReason: 'The catalog lists Pika as a dead end: no official affiliate program was found on 2026-09-28, and the 30% recurring figure seen online belongs to a different company (pika.style). No paid route is offered.',
     payoutModel: 'No official program',
-    lastVerified: '2026-09-28',
-    nextReview: 'Immediate',
     criteria: { fit: 78, value: 74, quality: 82, maintainability: 58, risk: 64 },
     alternatives: ['Higgsfield for a verified creator route', 'Topaz for high-AOV upscaling', 'Pollo for aggregator coverage'],
   },
@@ -151,6 +141,16 @@ function isExternalHref(href: string) {
   return /^https?:\/\//.test(href)
 }
 
+/**
+ * The date the catalog row for this tool was last checked against the program's own page.
+ * Read from data/programs.json so the card cannot show a date the catalog does not hold.
+ * Owned offers have no catalog row, so they carry no date.
+ */
+function payoutCheckedOn(route: TrustRoute) {
+  const program = findProgram(route.tool)
+  return program?.commissionVerifiedAt ?? program?.verifiedAt ?? null
+}
+
 function formatProgramStatus(route: TrustRoute) {
   const program = findProgram(route.tool)
   if (!program) return route.routeStatus === 'owned' ? 'Owned product path' : 'No catalog payer'
@@ -161,18 +161,20 @@ export function TrustComparisonDesk() {
   const [activeId, setActiveId] = useState(ROUTES[0].id)
   const activeRoute = useMemo(() => ROUTES.find((route) => route.id === activeId) ?? ROUTES[0], [activeId])
   const activeHref = routeHref(activeRoute)
+  const checkedOn = payoutCheckedOn(activeRoute)
 
   useEffect(() => {
     trackClientEvent('disclosure_seen', { source: 'trust-comparison-desk', state: 'visible' })
   }, [])
 
   useEffect(() => {
+    if (!checkedOn) return
     trackClientEvent('last_verified_visible', {
       source: 'trust-comparison-desk',
       tool: activeRoute.tool,
-      state: activeRoute.lastVerified,
+      state: checkedOn,
     })
-  }, [activeRoute.lastVerified, activeRoute.tool])
+  }, [checkedOn, activeRoute.tool])
 
   function selectRoute(route: TrustRoute) {
     setActiveId(route.id)
@@ -194,7 +196,7 @@ export function TrustComparisonDesk() {
       trackClientEvent('stale_route_seen', {
         source: 'trust-comparison-desk',
         tool: route.tool,
-        state: route.lastVerified,
+        state: payoutCheckedOn(route) ?? route.routeStatus,
       })
     }
   }
@@ -279,8 +281,8 @@ export function TrustComparisonDesk() {
               <h3>AI tool route review</h3>
             </div>
             <div className="trust-freshness">
-              <span>Last verified</span>
-              <strong>{activeRoute.lastVerified}</strong>
+              <span>Payout checked</span>
+              <strong>{checkedOn ?? 'Owned offer'}</strong>
             </div>
           </div>
 
@@ -361,9 +363,8 @@ export function TrustComparisonDesk() {
 
               <div className="trust-action-row">
                 <div>
-                  <div className="panel-label">Next review</div>
-                  <p>{activeRoute.nextReview}</p>
-                  {activeRoute.payoutModel && <small>{activeRoute.payoutModel}</small>}
+                  <div className="panel-label">Payout model</div>
+                  <p>{activeRoute.payoutModel ?? 'No paid route'}</p>
                 </div>
                 {activeHref ? (
                   isExternalHref(activeHref) ? (

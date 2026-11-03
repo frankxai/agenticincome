@@ -8,7 +8,7 @@ Part of the Income Architecture Blueprint v2 · 2026-07-11 · [agenticincome.ai]
 
 ## Who this kit is for
 
-You have a skill a business already pays for — development, ops, content systems, data work, marketing plumbing — and you need revenue on a **days-to-weeks** clock, not months. Services are the only income model with day-scale latency to first cash. Agents compress your delivery cost 5–20×; this kit makes sure the compression lands in *your* margin, not your client's.
+You have a skill a business already pays for — development, ops, content systems, data work, marketing plumbing — and you need revenue on a **days-to-weeks** clock, not months. Services are the only income model with day-scale latency to first cash. Agents can cut the hours a delivery takes; this kit makes sure that saving lands in *your* margin, not your client's.
 
 **The one rule that decides everything:** price the outcome, not your hours. If you bill hourly, agent leverage cuts your invoice. If you price the outcome, agent leverage cuts your cost. Same work, opposite result.
 

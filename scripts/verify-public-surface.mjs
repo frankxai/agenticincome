@@ -16,6 +16,8 @@ const files = {
   footer: read('components/Footer.tsx'),
   headers: read('vercel.json'),
   css: read('app/globals.css'),
+  path: read('components/PathSection.tsx'),
+  'service-kit': read('products/blueprint/service-kit.md'),
 }
 
 const failures = []
@@ -49,6 +51,7 @@ requireText('subscribe', 'readBoundedJson(req)', 'intake body is bounded before 
 
 forbidText('start', 'what ranks and what AI search engines lift verbatim', 'unsupported ranking claim')
 forbidText('start', 'every reader is either income', 'dehumanizing outcome claim')
+for (const file of ['path', 'service-kit']) forbidText(file, '5–20×', 'unsourced performance multiple')
 
 requireText('privacy', "alternates: { canonical: '/privacy' }", 'privacy canonical metadata')
 requireText('notFound', 'robots: { index: false, follow: false }', '404 noindex metadata')

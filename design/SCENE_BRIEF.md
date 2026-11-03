@@ -35,3 +35,18 @@ notice names the absent account, activity, revenue, approval, and current-valida
 Example workflows carry explicit example labels and no relative timestamps. The inactive
 status marker is static; it does not imply a live heartbeat. Existing layout, visual tokens,
 and interaction structure are retained. No imagery, motion asset, or new dependency is added.
+
+## Offer inspection workbench and schematic plates — 2026-11-03
+
+Reference lock (`DESIGN.md`): Linear Changelog (`11d3e58a`) obsidian elevation, Supabase
+(`28aeb534`) emerald verification accent (`#10b981`), Convex (`d500b995`) code-pane containment,
+Cycle (`618b2107`) two-pane file preview, and Polaroid (`Flow 9471`) 4-step fit check.
+
+- **Static frame:** Eight `640x360` (`16:9`) vector schematic plates (`public/images/products/plate-*.svg`)
+  pair with a keyboard-accessible vertical/responsive `tablist` inspector (`PackInspector`)
+  and explicit `Good fit if` / `Skip this if` boundaries.
+- **Motion & reduced motion:** `150ms` border/color transitions and step progress updates collapse
+  to instant swaps under `prefers-reduced-motion: reduce` (`motion-reduce:transition-none`).
+- **Accessibility:** `44px` minimum touch targets, `2px` `#10b981` `:focus-visible` outlines,
+  `ArrowUp`/`ArrowDown`/`Home`/`End` tab navigation, and automatic focus advancement across
+  fit-check steps after user interaction.

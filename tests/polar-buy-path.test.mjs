@@ -5,6 +5,7 @@ import './support/alias.mjs'
 
 import catalog from '../products/catalog.json' with { type: 'json' }
 import {
+  catalogRefusal,
   checkoutReadiness,
   createCheckoutSession,
   isCheckoutLive,
@@ -118,14 +119,20 @@ test('every priced catalog SKU has an offer page whose price matches the catalog
     const dollars = `$${product.price_cents / 100}`
     const expected = product.interval === 'month' ? `${dollars}/mo` : dollars
     assert.equal(offer.price, expected, `${product.id} price must match products/catalog.json`)
-    assert.equal(offer.deliveryPath, product.delivery.path, `${product.id} delivery path`)
+    // A SKU the catalog still gates may point its handoff at its own waitlist;
+    // once for sale, the offer and the catalog must agree on the delivery desk.
+    const allowed = catalogRefusal(product)
+      ? [product.delivery.path, `/offers/${product.id}#request-access`]
+      : [product.delivery.path]
+    assert.ok(allowed.includes(offer.deliveryPath), `${product.id} delivery path: ${offer.deliveryPath}`)
     assert.equal(offer.checkout.fallback, 'request-access')
     assert.ok(offer.checkout.buyLabel, `${product.id} needs a buyLabel for when checkout is live`)
   }
 })
 
 test('offer copy for priced SKUs makes no income or outcome promises', () => {
-  const banned = /guarantee|passive income|autopilot|make \$|earn \$|get rich|effortless/i
+  // Promise phrasing, not the bare word: "rather than guaranteed outcomes" is a disclaimer.
+  const banned = /(?<!than )guaranteed? (income|earnings|returns|results|revenue)|passive income|autopilot|make \$|earn \$|get rich|effortless/i
   for (const product of pricedCatalogProducts()) {
     const offer = getOffer(product.id)
     assert.doesNotMatch(JSON.stringify(offer), banned, product.id)

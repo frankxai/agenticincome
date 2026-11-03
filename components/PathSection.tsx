@@ -4,7 +4,7 @@ const MODELS = [
   {
     stage: 'Model 1 · weeks 1–4',
     name: 'Services',
-    body: 'Sell one scoped outcome; an agent team compresses delivery 5–20×. Price the outcome — the compression surplus is yours, not your client’s.',
+    body: 'Sell one scoped outcome; an agent team carries much of the delivery. Price the outcome, so the hours agents save stay in your margin, not your client’s.',
     econ: [
       ['First dollar', 'days'],
       ['Coupling', 'still your hours'],

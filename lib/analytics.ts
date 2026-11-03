@@ -21,6 +21,7 @@ const EVENT_PROPERTIES = {
   stale_route_seen: ['path', 'source', 'tool', 'state', 'ts'],
   last_verified_visible: ['path', 'source', 'tool', 'state', 'ts'],
   trust_standard_clicked: ['path', 'href', 'source', 'ts'],
+  fit_check_completed: ['path', 'offer', 'source', 'state', 'ts'],
 } as const
 
 export type AnalyticsEventName = keyof typeof EVENT_PROPERTIES

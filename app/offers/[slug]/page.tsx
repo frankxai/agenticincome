@@ -1,11 +1,14 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { CheckoutLink } from '@/components/CheckoutLink'
 import { EmailCapture } from '@/components/EmailCapture'
+import { PackInspector } from '@/components/PackInspector'
 import { PolarCheckoutButton } from '@/components/PolarCheckoutButton'
 import { checkoutPath, checkoutUrl, getOffer, offers } from '@/lib/offers'
+import { PACK_MANIFESTS } from '@/lib/pack-manifests'
 import { isCheckoutLive } from '@/lib/polar'
 
 type OfferPageProps = {
@@ -43,11 +46,13 @@ export default async function OfferDetail({ params }: OfferPageProps) {
 
   if (!offer) notFound()
 
+  const manifest = PACK_MANIFESTS[offer.slug]
   const liveCheckout = checkoutUrl(offer)
   // Server-side truth: the Polar API path is live only when the catalog permits
   // the sale AND the Polar env is set for this product. False until then, which
   // keeps the existing request-access CTA exactly as it is.
   const polarCheckoutLive = isCheckoutLive(offer.slug)
+  const anyLiveCheckout = Boolean(liveCheckout || polarCheckoutLive)
   const isFree = offer.checkout.fallback === 'delivery'
   const isScoped = offer.accessMode === 'scope-first'
   const accessSteps = [
@@ -58,7 +63,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
 
   return (
     <div className="py-16">
-      <section className="grid gap-8 lg:grid-cols-[1fr_22rem] lg:items-start">
+      <section className="grid gap-8 lg:grid-cols-[1fr_24rem] lg:items-start">
         <div>
           <div className="kicker">{offer.tier}</div>
           <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink">{offer.title}</h1>
@@ -68,8 +73,8 @@ export default async function OfferDetail({ params }: OfferPageProps) {
               <PolarCheckoutButton
                 productId={offer.slug}
                 source="offer-detail"
-                gatedHref="/trust"
-                gatedCta="Support and refunds"
+                gatedHref={`/offers/${offer.slug}#request-access`}
+                gatedCta={offer.cta}
                 buyLabel={offer.checkout.buyLabel ?? offer.cta}
               />
             ) : (
@@ -82,6 +87,11 @@ export default async function OfferDetail({ params }: OfferPageProps) {
                 {offer.cta}
               </CheckoutLink>
             )}
+            {manifest ? (
+              <a href="#inspect-files" className="cta-secondary">
+                Inspect package files
+              </a>
+            ) : null}
             {isFree ? (
               <Link href={offer.deliveryPath} className="cta-secondary">
                 View delivery path
@@ -93,32 +103,48 @@ export default async function OfferDetail({ params }: OfferPageProps) {
           </div>
         </div>
 
-        <aside className="rounded-2xl border border-border bg-surface/80 p-5">
-          <div className="text-sm font-semibold text-gold">Access path</div>
-          <div className="mt-3 text-3xl font-semibold text-ink">{offer.price}</div>
-          <p className="mt-3 text-sm leading-6 text-muted">
-            {isFree
-              ? 'Delivered instantly on-site.'
-              : isScoped
-                ? 'Scope, acceptance checks, and commercial terms are agreed before implementation.'
-              : polarCheckoutLive
-                ? 'Checkout is live. Polar.sh is the merchant of record and handles VAT and sales tax.'
-              : liveCheckout
-                ? 'Live checkout URL is configured.'
-                : 'Waitlist — checkout is not open for this product yet.'}
-          </p>
-          <div className="mt-5 rounded-xl border border-border bg-bg/60 p-4 text-xs leading-6 text-muted">
-            {isFree
-              ? 'Internal free delivery route is live.'
-              : isScoped
-                ? 'No payment is taken here. The intake route records interest only when the configured service is available.'
-              : polarCheckoutLive || liveCheckout
-                ? 'Secure payment provider checkout is connected.'
-                : 'No payment is taken here yet. Join the waitlist below to hear when checkout opens.'}
+        <aside className="space-y-4">
+          {manifest ? (
+            <div className="overflow-hidden rounded-2xl border border-border bg-bg/90">
+              <Image
+                src={manifest.plateSvg}
+                alt={`${offer.title} schematic plate`}
+                width={640}
+                height={360}
+                unoptimized
+                priority
+                className="aspect-video h-auto w-full"
+              />
+            </div>
+          ) : null}
+
+          <div className="rounded-2xl border border-border bg-surface/80 p-5">
+            <div className="text-sm font-semibold text-gold">Access path</div>
+            <div className="mt-3 font-mono text-3xl font-semibold text-ink">{offer.price}</div>
+            <p className="mt-3 text-sm leading-6 text-muted">
+              {isFree
+                ? 'Delivered immediately on-site.'
+                : isScoped
+                  ? 'Scope, acceptance checks, and commercial terms are agreed before implementation.'
+                : polarCheckoutLive
+                  ? 'Checkout is live. Polar.sh is the merchant of record and handles VAT and sales tax.'
+                : liveCheckout
+                  ? 'Live checkout URL is configured.'
+                  : 'Request access: checkout opens when the provider link is connected.'}
+            </p>
+            <div className="mt-5 rounded-xl border border-border bg-bg/60 p-4 text-xs leading-6 text-muted">
+              {isFree
+                ? 'Internal free delivery route is live.'
+                : isScoped
+                  ? 'No payment is taken here. The intake route records interest only when the configured service is available.'
+                : anyLiveCheckout
+                  ? 'Secure payment provider checkout is connected.'
+                  : 'Checkout is currently gated. Inspect the preview below and request access to be notified when it opens.'}
+            </div>
+            <Link href="/trust" className="mt-4 inline-flex text-xs font-semibold text-accent">
+              Trust, support, and refunds
+            </Link>
           </div>
-          <Link href="/trust" className="mt-4 inline-flex text-xs font-semibold text-accent">
-            Trust, support, and refunds
-          </Link>
         </aside>
       </section>
 
@@ -136,6 +162,37 @@ export default async function OfferDetail({ params }: OfferPageProps) {
           ))}
         </div>
       </section>
+
+      {manifest ? (
+        <section id="inspect-files" className="section-band scroll-mt-24">
+          <div className="section-heading motion-reveal">
+            <div className="kicker">
+              {manifest.previewMode === 'deliverable-files'
+                ? 'Package inspection'
+                : manifest.previewMode === 'sample-issue'
+                  ? 'Sample briefing'
+                  : 'Product specification'}
+            </div>
+            <h2>
+              {manifest.previewMode === 'deliverable-files'
+                ? 'Inspect the delivered files before you decide.'
+                : manifest.previewMode === 'sample-issue'
+                  ? 'Inspect a sample brief before you decide.'
+                  : 'Inspect the scope specification before you decide.'}
+            </h2>
+            <p>
+              {manifest.previewMode === 'deliverable-files'
+                ? 'Browse the delivered Markdown files, read verbatim excerpts, and check the fit boundaries before starting.'
+                : manifest.previewMode === 'sample-issue'
+                  ? 'Read a real sample monthly briefing and check the fit boundaries before requesting member access.'
+                  : 'Read the in-repository PRODUCT.md specification and check the fit boundaries before requesting access.'}
+            </p>
+          </div>
+          <div className="mt-8">
+            <PackInspector manifest={manifest} />
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-band">
         <div className="grid gap-8 lg:grid-cols-2">
@@ -196,13 +253,15 @@ export default async function OfferDetail({ params }: OfferPageProps) {
         </div>
       </section>
 
-      {!isFree && !liveCheckout && !polarCheckoutLive ? (
-        <section id="request-access" className="section-band">
+      {!isFree && !liveCheckout ? (
+        <section id="request-access" className="section-band scroll-mt-24">
           <EmailCapture
-            headline={`Request ${offer.shortTitle} access`}
+            headline={polarCheckoutLive ? `Backup access request for ${offer.shortTitle}` : `Request ${offer.shortTitle} access`}
             sub={isScoped
               ? 'Share your email to request the current scoping path. If online intake is not connected, the page will say so before claiming receipt.'
-              : 'Get notified when the checkout opens and receive the current first-loop checklist immediately.'}
+              : polarCheckoutLive
+                ? 'Use the checkout button above for instant Polar delivery. If checkout fails or is unavailable in your browser, leave your email here as a fallback.'
+                : 'Get notified when checkout opens and receive updates on the first-loop checklist.'}
             source={`offer-${offer.slug}`}
             buttonLabel="Request access"
             successMessage="Request received. You are on the access list."

@@ -22,7 +22,7 @@ const PRODUCTS = [
     name: 'Private Intel',
     price: '$19/mo',
     state: 'Waitlist · monthly briefs',
-    body: 'Dated operator briefings tracking commission-rate diffs, partner-term changes, and researched comparison niches before quarterly public passes.',
+    body: 'Dated monthly briefings tracking commission-rate diffs, partner-term changes, and researched comparison niches before quarterly public passes.',
     href: '/offers/private-intel',
     cta: 'Inspect briefing',
   },

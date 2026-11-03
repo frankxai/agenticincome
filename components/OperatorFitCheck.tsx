@@ -26,7 +26,7 @@ const STEPS: {
     options: [
       { id: '4', keycap: '1', label: 'Under 8 hours per week', detail: 'Evenings or one weekend block alongside a full-time role.' },
       { id: '10', keycap: '2', label: '8 to 14 hours per week', detail: 'Two to three dedicated build sessions every week.' },
-      { id: '20', keycap: '3', label: '15+ hours per week', detail: 'Primary operator focus with room for client or product sprints.' },
+      { id: '20', keycap: '3', label: '15+ hours per week', detail: 'Full-time builder focus with room for client or product sprints.' },
     ],
   },
   {
@@ -43,7 +43,7 @@ const STEPS: {
     question: 'How do you build and verify artifacts today?',
     helper: 'Determines whether to match you with CLI skill packs, Markdown kits, or audio tools.',
     options: [
-      { id: 'code', keycap: '1', label: 'Terminal coding harness (Claude Code, Codex, OpenCode, Cursor)', detail: 'Comfortable running git branches, Node scripts, and Markdown skills.' },
+      { id: 'code', keycap: '1', label: 'Terminal coding tools (Claude Code, Codex, OpenCode, Cursor)', detail: 'Comfortable running git branches, Node scripts, and Markdown skills.' },
       { id: 'nocode', keycap: '2', label: 'Web chat + Markdown notes (Claude.ai, ChatGPT, Obsidian)', detail: 'Prefer plain-text playbooks, checklists, and prompt templates.' },
       { id: 'audio', keycap: '3', label: 'Creator media & AI music workflows (Suno, stems, video)', detail: 'Building sonic catalogs, focus tracks, or creator toolkits.' },
     ],
@@ -105,7 +105,7 @@ function computeRecommendation(answers: Record<string, string>): Recommendation 
     matchedOfferSlug = 'abos-pack-bundle'
     matchedOfferTitle = 'Agentic Business OS Pack Bundle'
     matchedOfferPrice = '$99'
-    matchedReason = 'Combines Claims Guard, Business Intelligence, Design Contract, and Weekly Rhythm for repo-native operators.'
+    matchedReason = 'Combines Claims Guard, Business Intelligence, Design Contract, and Weekly Rhythm for repo-native builders.'
   } else if (upfrontBudgetUsd >= 67) {
     matchedOfferSlug = 'blueprint'
     matchedOfferTitle = 'Income Architecture Blueprint'
@@ -166,7 +166,7 @@ export function OperatorFitCheck() {
       const rec = computeRecommendation(next)
       trackClientEvent('fit_check_completed', {
         offer: rec.matchedOfferSlug,
-        source: 'operator-fit-check',
+        source: 'starting-kit-fit-check',
         state: `${next.stack ?? 'unknown'}-${next.budget ?? '0'}usd`,
       })
     }
@@ -195,7 +195,7 @@ export function OperatorFitCheck() {
   async function copyChecklist() {
     if (!recommendation) return
     const md = [
-      `# Week-1 Operator Plan (${recommendation.modelLabel})`,
+      `# Week-1 Starting Plan (${recommendation.modelLabel})`,
       '',
       `Why this lane fits: ${recommendation.why}`,
       '',
@@ -211,14 +211,14 @@ export function OperatorFitCheck() {
   }
 
   return (
-    <section aria-label="60-second operator fit-check" className="rounded-2xl border border-border bg-surface/90 p-5 sm:p-7">
+    <section aria-label="60-second starting kit fit check" className="rounded-2xl border border-border bg-surface/90 p-5 sm:p-7">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
         <div>
           <div className="font-mono text-xs font-semibold text-accent">
-            {isComplete ? 'Diagnostic complete · deterministic fit-check' : `Operator fit-check · Step 0${stepIndex + 1} / 0${STEPS.length}`}
+            {isComplete ? 'Fit check complete · deterministic match' : `Starting-kit fit check · Step 0${stepIndex + 1} of 0${STEPS.length}`}
           </div>
           <h2 className="mt-1 text-2xl font-semibold text-ink">
-            {isComplete ? 'Your Week-1 build lane is ready.' : 'Match your hours and stack to the right starting kit'}
+            {isComplete ? 'Your Week-1 build lane is ready.' : 'Match your hours and workflow to the right starting kit'}
           </h2>
         </div>
         {stepIndex > 0 ? (
@@ -342,11 +342,11 @@ export function OperatorFitCheck() {
           </div>
 
           <EmailCapture
-            headline="Send this Week-1 checklist to your inbox"
-            sub="Optional: save your entry-lane checklist and get notified when gated packs open."
+            headline="Get launch updates when gated packs open"
+            sub="Use Copy Markdown plan above to keep your checklist locally. This form subscribes your email for general release updates only; it does not send or store your answers or checklist."
             source={`fit-check-${recommendation.matchedOfferSlug}`}
-            buttonLabel="Save my plan"
-            successMessage="Saved. Your first-loop plan and access request are logged."
+            buttonLabel="Get launch updates"
+            successMessage="Subscribed for release updates. Copy your Markdown plan above to keep a local copy."
           />
         </div>
       ) : null}

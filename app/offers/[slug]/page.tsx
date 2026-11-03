@@ -237,13 +237,15 @@ export default async function OfferDetail({ params }: OfferPageProps) {
         </div>
       </section>
 
-      {!isFree && !anyLiveCheckout ? (
+      {!isFree && !liveCheckout ? (
         <section id="request-access" className="section-band scroll-mt-24">
           <EmailCapture
-            headline={`Request ${offer.shortTitle} access`}
+            headline={polarCheckoutLive ? `Backup access request for ${offer.shortTitle}` : `Request ${offer.shortTitle} access`}
             sub={isScoped
               ? 'Share your email to request the current scoping path. If online intake is not connected, the page will say so before claiming receipt.'
-              : 'Get notified when checkout opens and receive the current first-loop checklist immediately.'}
+              : polarCheckoutLive
+                ? 'Use the checkout button above for instant Polar delivery. If checkout fails or is unavailable in your browser, leave your email here as a fallback.'
+                : 'Get notified when checkout opens and receive updates on the first-loop checklist.'}
             source={`offer-${offer.slug}`}
             buttonLabel="Request access"
             successMessage="Request received. You are on the access list."

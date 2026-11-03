@@ -49,7 +49,7 @@ const STAGE_BANDS: {
     stage: 'continuity',
     index: '04',
     title: 'Continuity and scoped delivery',
-    subtitle: 'Monthly partner-term diffs for active operators, or a scope-first implementation sprint in your own repo.',
+    subtitle: 'Monthly partner-term diffs for active publishers, or a scope-first implementation sprint in your own repo.',
   },
 ]
 

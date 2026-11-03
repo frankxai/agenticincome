@@ -7,10 +7,10 @@
 
 ## Planned Architecture Inside the Kit
 
-1. **`agents/` (5 Role Constitutions):** Coordinator, Maker, Independent Verifier, Research Scout, and Editorial Gatekeeper profiles with strict write-lane boundaries.
+1. **`agents/` (5 Role Profiles):** Planner, Builder, Independent Reviewer, Research Scout, and Editorial Reviewer profiles with strict write-scope boundaries.
 2. **`loops/` (4 `.loop/` Contract Templates):** Complete `LOOP.md`, `GATE.md`, `WORKER.md`, and `VERIFIER.md` definitions with iteration caps, no-progress stops, and SHA-256 run receipts.
-3. **`workflows/` (Cross-Harness Isolation):** Git worktree orchestration, file-path lane claiming (`lane.mjs` pattern), and zero-secret MCP stdio sidecar templates.
-4. **`evals/` (Regression Gates):** Deterministic Node test harnesses for link integrity, voice hygiene, stale-date detection, and fail-closed checkout verification.
+3. **`workflows/` (Branch Isolation):** Git worktree isolation, file-path scope locking, and zero-secret MCP stdio bridge templates.
+4. **`evals/` (Regression Gates):** Deterministic Node test suites for link integrity, voice hygiene, stale-date detection, and fail-closed checkout verification.
 
 ## Who Should Skip This
 

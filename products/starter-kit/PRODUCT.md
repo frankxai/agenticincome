@@ -3,7 +3,7 @@
 - **Product ID:** `starter-kit`
 - **Price:** Free (`$0`, delivered immediately on-site)
 - **Delivery Path:** `/delivery/starter-kit` + `/downloads/agentic-income-starter-kit.md`
-- **License:** Free for personal operator use. Share the canonical link rather than redistributing modified copies.
+- **License:** Free for personal business use. Share the canonical link rather than redistributing modified copies.
 
 ## What You Build in 30 Minutes
 

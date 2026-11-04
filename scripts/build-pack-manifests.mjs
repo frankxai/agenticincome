@@ -34,13 +34,23 @@ const catalog = JSON.parse(readFileSync(path.join(root, 'products/catalog.json')
 const blueprintCatalog = catalog.products.find((p) => p.id === 'blueprint')
 const blueprintBadges = {
   'products/blueprint/00-README.md': 'Entry guide',
-  'products/blueprint/service-kit.md': 'Kit 01 · Services',
-  'products/blueprint/product-kit.md': 'Kit 02 · Products',
-  'products/blueprint/system-kit.md': 'Kit 03 · Systems',
+  'products/blueprint/operating-desk-architecture.md': 'Desk & cadence',
+  'products/blueprint/coding-tool-comparison-matrix.md': 'Tool matrix & MDX',
+  'products/blueprint/recurring-payer-catalog.csv': 'Verified payer CSV',
+  'products/blueprint/offer-and-waitlist-ladder.md': 'Offer ladder & schema',
+  'products/blueprint/polar-fulfillment-checklist.md': 'Polar gate checklist',
+  'products/blueprint/MANIFEST.json': 'SHA-256 manifest',
+}
+
+function inferKind(diskPath) {
+  if (diskPath.endsWith('.csv')) return 'csv'
+  if (diskPath.endsWith('.json')) return 'json'
+  return 'markdown'
 }
 
 const blueprintFiles = blueprintCatalog.delivery.files.map((diskPath) =>
   readDiskItem(diskPath, {
+    kind: inferKind(diskPath),
     badge: blueprintBadges[diskPath] || 'Delivered file',
     excerptLines: 22,
   })
@@ -148,15 +158,15 @@ const manifests = {
   blueprint: {
     slug: 'blueprint',
     previewMode: 'deliverable-files',
-    archiveName: 'income-architecture-blueprint-v2',
-    totalFilesLabel: `${blueprintFiles.length} delivered Markdown files`,
+    archiveName: 'agentic-income-operating-desk-v3',
+    totalFilesLabel: `${blueprintFiles.length} delivered files`,
     totalSizeLabel: formatSize(blueprintTotalBytes),
     licenseShort: 'Personal commercial license',
     plateSvg: '/images/products/plate-blueprint.svg',
     skipIf:
-      'Skip this if you want video lectures, a chat community, private consulting, or guaranteed earnings predictions. Every number inside is a labeled scenario with named assumptions.',
+      'Skip this if you want video lectures, a chat community, private consulting, or guaranteed earnings predictions. Every financial table inside is a labeled scenario with named assumptions.',
     buyIf:
-      'Pick this when you are ready to turn one skill, comparison workflow, or digital pack into a structured business plan with fulfillment runbooks and kill-by-date criteria.',
+      'Pick this when you want the complete 7-file operating desk: git workspace and cadence, dated coding-tool comparison matrix, 12-row recurring-payer CSV, 4-stage offer ladder, and fail-closed Polar.sh checklist.',
     files: blueprintFiles,
   },
   'abos-pack-bundle': {
@@ -225,7 +235,7 @@ export type PackFileItem = {
   diskPath: string
   bytes: number
   sizeLabel: string
-  kind: 'markdown' | 'skill' | 'json' | 'script'
+  kind: 'markdown' | 'skill' | 'json' | 'script' | 'csv'
   badge: string
   totalLines: number
   excerpt: string[]

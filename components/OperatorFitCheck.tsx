@@ -55,7 +55,7 @@ const STEPS: {
     options: [
       { id: '0', keycap: '1', label: 'Free Starter Kit ($0)', detail: 'Give me the 30-minute first-loop checklist on-site right now.' },
       { id: '39', keycap: '2', label: 'Focused single pack ($24 to $39)', detail: 'One targeted skill pack (Claims Guard or Vibe OS).' },
-      { id: '67', keycap: '3', label: 'Complete operating desk ($67 to $99)', detail: 'Full 3-model Blueprint or 4-pack Business OS bundle.' },
+      { id: '67', keycap: '3', label: 'Complete operating desk ($67 to $99)', detail: 'Full 7-file Operating Desk Blueprint or 4-pack Business OS bundle.' },
     ],
   },
 ]
@@ -108,9 +108,9 @@ function computeRecommendation(answers: Record<string, string>): Recommendation 
     matchedReason = 'Combines Claims Guard, Business Intelligence, Design Contract, and Weekly Rhythm for repo-native builders.'
   } else if (upfrontBudgetUsd >= 67) {
     matchedOfferSlug = 'blueprint'
-    matchedOfferTitle = 'Income Architecture Blueprint'
+    matchedOfferTitle = 'Agentic Income Blueprint'
     matchedOfferPrice = '$67'
-    matchedReason = 'Gives you the full planning template, scenario math, and kill-criterion sheet for your entry model.'
+    matchedReason = 'Gives you the 7-file operating desk: comparison matrix, verified recurring-payer CSV, 4-stage offer ladder, Polar checklist, and 30-day kill criteria.'
   }
 
   const weekOneArtifact =

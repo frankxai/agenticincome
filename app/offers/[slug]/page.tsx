@@ -182,7 +182,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
             </h2>
             <p>
               {manifest.previewMode === 'deliverable-files'
-                ? 'Browse the delivered Markdown files, read verbatim excerpts, and check the fit boundaries before starting.'
+                ? 'Browse the delivered package files (Markdown, CSV, and JSON), read verbatim excerpts, and check the fit boundaries before starting.'
                 : manifest.previewMode === 'sample-issue'
                   ? 'Read a real sample monthly briefing and check the fit boundaries before requesting member access.'
                   : 'Read the in-repository PRODUCT.md specification and check the fit boundaries before requesting access.'}

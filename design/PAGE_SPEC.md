@@ -70,3 +70,17 @@ and `public/images/products/plate-*.svg`.
    availability (`lib/polar.ts`). Non-free offers without a legacy static checkout URL retain
    `#request-access` on `/offers/[slug]` so `PolarCheckoutButton` and `/api/checkout` GET
    fallbacks always resolve to a reachable form.
+
+## Blueprint preview boundary, Codex, 4 November 2026
+
+Author: Codex (OpenAI). Revision: 1. Source: Vercel finding
+`01M6J55D5BAMAXNA2W773AVTB1` at `e427da72ce2a3ca28777ca87658c29fab12692ef`.
+Review state: source regression verified; preview and release checks pending.
+
+The public CSV excerpt uses a separate, explicitly chosen header and two real
+records from the delivered file. Its badge says `2-row CSV sample`. File sizes,
+line counts and the seven-file package continue to describe the complete paid
+delivery. A short protected file needs an explicit partial sample; generation
+fails before replacing the last safe manifest when a whole file would be exposed.
+Complete public Starter Kit samples remain allowed. This limits preview data;
+it supplies no buyer authorization or repository access control.

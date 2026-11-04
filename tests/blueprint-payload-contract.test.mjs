@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
-import { existsSync, readFileSync, statSync } from 'node:fs'
+import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { spawnSync } from 'node:child_process'
+import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import test from 'node:test'
@@ -229,5 +231,65 @@ test('blueprint deliverables, offer copy, and catalog reject banned claims and p
   const blueprintCatalogJson = JSON.stringify(blueprintCatalog)
   for (const { re, reason } of bannedPatterns) {
     assert.doesNotMatch(blueprintCatalogJson, re, `products/catalog.json (blueprint) triggered banned claim check: ${reason}`)
+  }
+})
+
+
+test('public Blueprint excerpts contain only the authored CSV sample and partial protected files', () => {
+  const manifest = loadPackManifests().blueprint
+  const csv = manifest.files.find((file) => file.diskPath.endsWith('recurring-payer-catalog.csv'))
+  assert.ok(csv)
+  const sample = read('products/blueprint/previews/recurring-payer-catalog.sample.csv').trimEnd().split('\n')
+  assert.equal(sample.length, 3, 'public CSV sample has its header and exactly two chosen records')
+  assert.deepEqual(csv.excerpt, sample)
+  assert.equal(csv.badge, '2-row CSV sample')
+  const paidRows = read(csv.diskPath).trimEnd().split('\n')
+  const publicPayload = JSON.stringify(manifest)
+  for (const row of paidRows.slice(1)) {
+    if (!sample.includes(row)) {
+      const encodedRow = JSON.stringify(row).slice(1, -1)
+      assert.equal(publicPayload.includes(encodedRow), false, 'non-sample paid records must not reach the client manifest')
+    }
+  }
+  for (const file of manifest.files) {
+    const source = read(file.diskPath).replace(/\r\n/g, '\n').trimEnd().split('\n')
+    assert.ok(file.excerpt.length < source.length, `protected file was exposed in full: ${file.diskPath}`)
+  }
+})
+
+test('manifest generation retains the authored sample, refuses future complete protected previews and permits public files', () => {
+  const tempBase = path.resolve(os.tmpdir())
+  const temp = mkdtempSync(path.join(tempBase, 'blueprint-preview-boundary-'))
+  assert.equal(path.dirname(temp), tempBase)
+  try {
+    for (const rel of ['products', 'public/downloads', 'scripts/build-pack-manifests.mjs', 'lib']) {
+      cpSync(path.join(root, rel), path.join(temp, rel), { recursive: true })
+    }
+    const run = () => spawnSync(process.execPath, ['scripts/build-pack-manifests.mjs'], { cwd: temp, encoding: 'utf8' })
+    const original = readFileSync(path.join(temp, 'lib/pack-manifests.ts'), 'utf8')
+    const generated = run()
+    assert.equal(generated.status, 0, generated.stderr)
+    assert.equal(readFileSync(path.join(temp, 'lib/pack-manifests.ts'), 'utf8'), original, 'generator must have zero drift')
+    writeFileSync(path.join(temp, 'products/blueprint/operating-desk-architecture.md'), '# Short paid deliverable\nPrivate detail\n')
+    const shortProtected = run()
+    assert.notEqual(shortProtected.status, 0)
+    assert.match(shortProtected.stderr, /Protected deliverable needs an explicit partial sample/)
+    assert.equal(readFileSync(path.join(temp, 'lib/pack-manifests.ts'), 'utf8'), original, 'failed generation must retain the previous safe manifest')
+    writeFileSync(path.join(temp, 'products/blueprint/operating-desk-architecture.md'), '# Short paid deliverable\nPrivate detail\n' + '\n'.repeat(30))
+    const paddedProtected = run()
+    assert.notEqual(paddedProtected.status, 0)
+    assert.match(paddedProtected.stderr, /Protected deliverable would be exposed in full/)
+    cpSync(path.join(root, 'products/blueprint/operating-desk-architecture.md'), path.join(temp, 'products/blueprint/operating-desk-architecture.md'))
+    writeFileSync(path.join(temp, 'public/downloads/agentic-income-starter-kit.md'), '# Intentionally public starter\nComplete free sample\n')
+    const publicFile = run()
+    assert.equal(publicFile.status, 0, publicFile.stderr)
+    assert.ok(readFileSync(path.join(temp, 'lib/pack-manifests.ts'), 'utf8').includes('Complete free sample'))
+    cpSync(path.join(root, 'products/blueprint/recurring-payer-catalog.csv'), path.join(temp, 'products/blueprint/previews/recurring-payer-catalog.sample.csv'))
+    const completeSample = run()
+    assert.notEqual(completeSample.status, 0)
+    assert.match(completeSample.stderr, /Public sample must be shorter than protected deliverable/)
+  } finally {
+    assert.equal(path.dirname(path.resolve(temp)), tempBase)
+    rmSync(temp, { recursive: true, force: true })
   }
 })

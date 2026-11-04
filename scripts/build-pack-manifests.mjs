@@ -10,13 +10,30 @@ function formatSize(bytes) {
   return `${(bytes / 1024).toFixed(1)} KB`
 }
 
-function readDiskItem(diskPath, { displayPath = diskPath, kind = 'markdown', badge, excerptLines = 20 }) {
+function readDiskItem(diskPath, { displayPath = diskPath, kind = 'markdown', badge, excerptLines = 20, protectedDeliverable = false, previewPath }) {
   const abs = path.join(root, diskPath)
   const bytes = statSync(abs).size
   const raw = readFileSync(abs, 'utf8')
   const lines = raw.replace(/\r\n/g, '\n').split('\n')
   if (lines.length > 1 && lines[lines.length - 1] === '') {
     lines.pop()
+  }
+  let excerpt
+  if (previewPath) {
+    const sample = readFileSync(path.join(root, previewPath), 'utf8')
+      .replace(/\r\n/g, '\n').trimEnd().split('\n')
+    if (protectedDeliverable && sample.length >= lines.length) {
+      throw new Error(`Public sample must be shorter than protected deliverable: ${diskPath}`)
+    }
+    excerpt = sample
+  } else {
+    if (protectedDeliverable && lines.length <= excerptLines) {
+      throw new Error(`Protected deliverable needs an explicit partial sample: ${diskPath}`)
+    }
+    excerpt = lines.slice(0, Math.min(excerptLines, lines.length))
+  }
+  if (protectedDeliverable && excerpt.join('\n').trimEnd() === raw.replace(/\r\n/g, '\n').trimEnd()) {
+    throw new Error(`Protected deliverable would be exposed in full: ${diskPath}`)
   }
   return {
     path: displayPath,
@@ -26,7 +43,7 @@ function readDiskItem(diskPath, { displayPath = diskPath, kind = 'markdown', bad
     kind,
     badge,
     totalLines: lines.length,
-    excerpt: lines.slice(0, Math.min(excerptLines, lines.length)),
+    excerpt,
   }
 }
 
@@ -36,7 +53,7 @@ const blueprintBadges = {
   'products/blueprint/00-README.md': 'Entry guide',
   'products/blueprint/operating-desk-architecture.md': 'Desk & cadence',
   'products/blueprint/coding-tool-comparison-matrix.md': 'Tool matrix & MDX',
-  'products/blueprint/recurring-payer-catalog.csv': 'Verified payer CSV',
+  'products/blueprint/recurring-payer-catalog.csv': '2-row CSV sample',
   'products/blueprint/offer-and-waitlist-ladder.md': 'Offer ladder & schema',
   'products/blueprint/polar-fulfillment-checklist.md': 'Polar gate checklist',
   'products/blueprint/MANIFEST.json': 'SHA-256 manifest',
@@ -53,6 +70,10 @@ const blueprintFiles = blueprintCatalog.delivery.files.map((diskPath) =>
     kind: inferKind(diskPath),
     badge: blueprintBadges[diskPath] || 'Delivered file',
     excerptLines: 22,
+    protectedDeliverable: true,
+    previewPath: diskPath === 'products/blueprint/recurring-payer-catalog.csv'
+      ? 'products/blueprint/previews/recurring-payer-catalog.sample.csv'
+      : undefined,
   })
 )
 const blueprintTotalBytes = blueprintFiles.reduce((sum, f) => sum + f.bytes, 0)

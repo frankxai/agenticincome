@@ -50,3 +50,15 @@ Cycle (`618b2107`) two-pane file preview, and Polaroid (`Flow 9471`) 4-step fit 
 - **Accessibility:** `44px` minimum touch targets, `2px` `#10b981` `:focus-visible` outlines,
   `ArrowUp`/`ArrowDown`/`Home`/`End` tab navigation, and automatic focus advancement across
   fit-check steps after user interaction.
+
+## Blueprint preview data repair, Codex, 4 November 2026
+
+Author: Codex (OpenAI). Revision: 1. Source: the Blueprint preview-disclosure
+finding at `e427da72ce2a3ca28777ca87658c29fab12692ef`.
+Review state: source/data checks passed; no new visual inspection claimed.
+
+The existing file inspector receives an explicitly labelled two-row CSV sample.
+Its paid-file metadata stays accurate. This repair changes serialized preview
+content and the sample badge. The existing layout, controls, motion and reduced
+motion behavior remain in use. The separate sample prevents short paid files
+from becoming complete public excerpts as the catalog evolves.

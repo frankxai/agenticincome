@@ -10,13 +10,14 @@ function formatSize(bytes) {
   return `${(bytes / 1024).toFixed(1)} KB`
 }
 
-function readDiskItem(diskPath, { displayPath = diskPath, kind = 'markdown', badge, excerptLines = 20, protectedDeliverable = false, previewPath, previewRecords }) {
+function readDiskItem(diskPath, { displayPath = diskPath, kind = 'markdown', badge, excerptLines = 20, protectedDeliverable = true, previewPath, previewRecords }) {
   const abs = path.join(root, diskPath)
   const bytes = statSync(abs).size
   const raw = readFileSync(abs, 'utf8')
   const normalized = raw.replace(/\r\n/g, '\n')
   const content = normalized.trimEnd()
   const contentLines = content ? content.split('\n') : []
+  const meaningfulContent = contentLines.map((line) => line.trim()).filter(Boolean)
   const lines = normalized.split('\n')
   if (lines.length > 1 && lines[lines.length - 1] === '') {
     lines.pop()
@@ -35,18 +36,22 @@ function readDiskItem(diskPath, { displayPath = diskPath, kind = 'markdown', bad
     )) {
       throw new Error(`Protected CSV preview must contain its header and exactly ${previewRecords} leading records: ${diskPath}`)
     }
+    if (protectedDeliverable && sample.some((line, index) => line !== lines[index])) {
+      throw new Error(`Protected preview must be a leading source sample: ${diskPath}`)
+    }
     excerpt = sample
   } else {
-    if (protectedDeliverable && contentLines.length <= excerptLines) {
+    if (protectedDeliverable && meaningfulContent.length <= excerptLines) {
       throw new Error(`Protected deliverable needs an explicit partial sample: ${diskPath}`)
     }
     excerpt = lines.slice(0, Math.min(excerptLines, lines.length))
   }
   if (protectedDeliverable) {
-    if (excerpt.length > Math.floor(contentLines.length / 2)) {
+    const meaningfulExcerpt = excerpt.map((line) => line.trim()).filter(Boolean)
+    if (meaningfulExcerpt.length > Math.floor(meaningfulContent.length / 2)) {
       throw new Error(`Protected preview exceeds half the source lines: ${diskPath}`)
     }
-    if (Buffer.byteLength(excerpt.join('\n').trimEnd(), 'utf8') > Math.floor(Buffer.byteLength(content, 'utf8') / 2)) {
+    if (Buffer.byteLength(meaningfulExcerpt.join('\n'), 'utf8') > Math.floor(Buffer.byteLength(meaningfulContent.join('\n'), 'utf8') / 2)) {
       throw new Error(`Protected preview exceeds half the source bytes: ${diskPath}`)
     }
   }
@@ -64,11 +69,12 @@ function readDiskItem(diskPath, { displayPath = diskPath, kind = 'markdown', bad
 
 const catalog = JSON.parse(readFileSync(path.join(root, 'products/catalog.json'), 'utf8'))
 const blueprintCatalog = catalog.products.find((p) => p.id === 'blueprint')
+const blueprintPreviewRecords = 2
 const blueprintBadges = {
   'products/blueprint/00-README.md': 'Entry guide',
   'products/blueprint/operating-desk-architecture.md': 'Desk & cadence',
   'products/blueprint/coding-tool-comparison-matrix.md': 'Tool matrix & MDX',
-  'products/blueprint/recurring-payer-catalog.csv': '2-row CSV sample',
+  'products/blueprint/recurring-payer-catalog.csv': `${blueprintPreviewRecords}-row CSV sample`,
   'products/blueprint/offer-and-waitlist-ladder.md': 'Offer ladder & schema',
   'products/blueprint/polar-fulfillment-checklist.md': 'Polar gate checklist',
   'products/blueprint/MANIFEST.json': 'SHA-256 manifest',
@@ -89,18 +95,20 @@ const blueprintFiles = blueprintCatalog.delivery.files.map((diskPath) =>
     previewPath: diskPath === 'products/blueprint/recurring-payer-catalog.csv'
       ? 'products/blueprint/previews/recurring-payer-catalog.sample.csv'
       : undefined,
-    previewRecords: diskPath === 'products/blueprint/recurring-payer-catalog.csv' ? 2 : undefined,
+    previewRecords: diskPath === 'products/blueprint/recurring-payer-catalog.csv' ? blueprintPreviewRecords : undefined,
   })
 )
 const blueprintTotalBytes = blueprintFiles.reduce((sum, f) => sum + f.bytes, 0)
 
 const starterFiles = [
   readDiskItem('public/downloads/agentic-income-starter-kit.md', {
+    protectedDeliverable: false,
     displayPath: 'downloads/agentic-income-starter-kit.md',
     badge: 'Live download',
     excerptLines: 22,
   }),
   readDiskItem('products/starter-kit/PRODUCT.md', {
+    protectedDeliverable: false,
     badge: 'Package spec',
     excerptLines: 18,
   }),
@@ -109,6 +117,7 @@ const starterTotalBytes = starterFiles.reduce((sum, f) => sum + f.bytes, 0)
 
 const vibeFiles = [
   readDiskItem('products/vibe-os-pack/PRODUCT.md', {
+    protectedDeliverable: false,
     badge: 'Package spec',
     excerptLines: 22,
   }),
@@ -116,6 +125,7 @@ const vibeFiles = [
 
 const claimsFiles = [
   readDiskItem('products/claims-guard-pack/PRODUCT.md', {
+    protectedDeliverable: false,
     badge: 'Package spec',
     excerptLines: 25,
   }),
@@ -123,6 +133,7 @@ const claimsFiles = [
 
 const abosFiles = [
   readDiskItem('products/abos-pack-bundle/PRODUCT.md', {
+    protectedDeliverable: false,
     badge: 'Bundle spec',
     excerptLines: 19,
   }),
@@ -130,6 +141,7 @@ const abosFiles = [
 
 const teamFiles = [
   readDiskItem('products/agent-team-pro/PRODUCT.md', {
+    protectedDeliverable: false,
     badge: 'Roadmap spec',
     excerptLines: 17,
   }),
@@ -137,6 +149,7 @@ const teamFiles = [
 
 const intelFiles = [
   readDiskItem('products/private-intel/2026-06-BRIEF.md', {
+    protectedDeliverable: false,
     badge: 'Sample brief',
     excerptLines: 24,
   }),
@@ -144,6 +157,7 @@ const intelFiles = [
 
 const sprintFiles = [
   readDiskItem('products/implementation-sprint/PRODUCT.md', {
+    protectedDeliverable: false,
     badge: 'Sprint scope spec',
     excerptLines: 26,
   }),

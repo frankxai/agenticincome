@@ -96,3 +96,16 @@ the first two records, keeping the inspector's line numbers accurate. Empty,
 short, whitespace-padded, near-complete and byte-heavy excerpts fail before
 the safe manifest is replaced. The existing sample and paid delivery stay the
 same. Complete public Starter Kit excerpts remain allowed.
+
+### Fail-closed preview defaults, Codex, 4 November 2026, revision 3
+
+Source: independent Claude review of `5bf2299`, findings N1, N2, N3 and N5.
+Review state: new source and exact-revision verification pending.
+
+Line and byte limits ignore interior blank lines and surrounding whitespace.
+New file reads are protected by default; existing public specifications and the
+sample issue are explicitly public. Every authored protected sample must be a
+contiguous prefix of its source, so the inspector's line numbers remain true.
+The CSV badge and its record limit share one value. Current public excerpts,
+paid delivery files and product classifications stay the same. These limits
+prevent accidental overexposure; they do not provide buyer access control.

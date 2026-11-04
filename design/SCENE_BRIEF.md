@@ -74,3 +74,13 @@ near-complete paid content through and was rejected. This refinement keeps
 the current public excerpt, inspector composition, controls and motion intact.
 Vercel Authentication prevented inspection of the prior preview; the login
 page is not evidence that the offer page renders correctly.
+
+### Default protection refinement, Codex, 4 November 2026, revision 3
+
+Author: Codex (OpenAI). Source: Claude review of `5bf2299`, N1/N2/N3/N5.
+Review state: code/data refinement; rendered inspection remains pending.
+
+The selected direction keeps the public sample and composition intact while
+requiring explicit public classification for future file reads. Counting padded
+whitespace and relying on each future caller to opt into protection were
+rejected. No new asset, interaction, typography or motion is introduced.

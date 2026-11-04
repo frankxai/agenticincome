@@ -320,6 +320,11 @@ test('protected preview limits reject near-complete, byte-heavy, empty and misle
     }
     rejected(document, '', /Protected deliverable needs an explicit partial sample/)
     rejected(document, Array.from({ length: 23 }, (_, i) => `Paid detail ${i}`).join('\n'), /Protected preview exceeds half the source lines/)
+    rejected(document, [
+      ...Array.from({ length: 22 }, (_, i) => `Paid detail ${i}`),
+      ...Array.from({ length: 30 }, () => ' '.repeat(200)),
+      '.',
+    ].join('\n'), /Protected preview exceeds half the source lines/)
     rejected(document, ['界'.repeat(3000), ...Array.from({ length: 70 }, (_, i) => `x${i}`)].join('\n'), /Protected preview exceeds half the source bytes/)
     rejected(sample, paid.slice(1).join('\n'), /Protected CSV preview must contain its header and exactly 2 leading records/)
     rejected(sample, [paid[0], paid[2], paid[1]].join('\n'), /Protected CSV preview must contain its header and exactly 2 leading records/)
@@ -336,6 +341,49 @@ test('protected preview limits reject near-complete, byte-heavy, empty and misle
     const marker = 'export const PACK_MANIFESTS: Record<string, PackManifest> = '
     const manifest = JSON.parse(generated.split(marker)[1].split('\n\nexport function getPackManifest')[0])
     assert.deepEqual(manifest.blueprint.files.find((f) => f.kind === 'csv').excerpt, paid.slice(0, 3))
+  } finally {
+    assert.equal(path.dirname(path.resolve(temp)), tempBase)
+    rmSync(temp, { recursive: true, force: true })
+  }
+})
+
+test('future file reads default to protection and all protected authored samples preserve source line positions', () => {
+  const tempBase = path.resolve(os.tmpdir())
+  const temp = mkdtempSync(path.join(tempBase, 'blueprint-preview-defaults-'))
+  assert.equal(path.dirname(temp), tempBase)
+  try {
+    for (const rel of ['products', 'public/downloads', 'scripts/build-pack-manifests.mjs', 'lib']) {
+      cpSync(path.join(root, rel), path.join(temp, rel), { recursive: true })
+    }
+    const generator = path.join(temp, 'scripts/build-pack-manifests.mjs')
+    const source = readFileSync(generator, 'utf8')
+    const output = path.join(temp, 'lib/pack-manifests.ts')
+    const safe = readFileSync(output, 'utf8')
+    const marker = 'const blueprintFiles ='
+    assert.equal(source.split(marker).length, 2)
+    // Simulate a future caller using the generator without a classification flag.
+    const call = (line) => {
+      writeFileSync(generator, source.replace(marker, `${line}\n${marker}`))
+      return spawnSync(process.execPath, ['scripts/build-pack-manifests.mjs'], { cwd: temp, encoding: 'utf8' })
+    }
+    writeFileSync(path.join(temp, 'products/blueprint/future-private.md'), '# Future paid payload\nFull private content\n')
+    const unclassified = call("readDiskItem('products/blueprint/future-private.md', {})")
+    assert.notEqual(unclassified.status, 0)
+    assert.match(unclassified.stderr, /Protected deliverable needs an explicit partial sample/)
+    assert.equal(readFileSync(output, 'utf8'), safe)
+    const lines = read('products/blueprint/operating-desk-architecture.md').replace(/\r\n/g, '\n').split('\n')
+    const sample = path.join(temp, 'products/blueprint/previews/future.sample.md')
+    writeFileSync(sample, [lines[0], lines[2], lines[1]].join('\n'))
+    const misleading = call("readDiskItem('products/blueprint/operating-desk-architecture.md', { previewPath: 'products/blueprint/previews/future.sample.md' })")
+    assert.notEqual(misleading.status, 0)
+    assert.match(misleading.stderr, /Protected preview must be a leading source sample/)
+    assert.equal(readFileSync(output, 'utf8'), safe)
+    writeFileSync(sample, lines.slice(0, 3).join('\n'))
+    const genuine = call("readDiskItem('products/blueprint/operating-desk-architecture.md', { previewPath: 'products/blueprint/previews/future.sample.md' })")
+    assert.equal(genuine.status, 0, genuine.stderr)
+    assert.equal(readFileSync(output, 'utf8'), safe)
+    const publicRead = call("readDiskItem('products/blueprint/future-private.md', { protectedDeliverable: false })")
+    assert.equal(publicRead.status, 0, publicRead.stderr)
   } finally {
     assert.equal(path.dirname(path.resolve(temp)), tempBase)
     rmSync(temp, { recursive: true, force: true })

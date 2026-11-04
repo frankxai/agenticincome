@@ -2,11 +2,11 @@
   "blueprint_preview_boundary": {
     "author": "Codex (OpenAI)",
     "created_at": "2026-11-04",
-    "revision": 2,
-    "source_revision": "a7e1958fcc6e9ab37896a8d4d4947677d0a83eb5",
+    "revision": 3,
+    "source_revision": "5bf2299dc616acbe6567396f4afeb83c78add82d",
     "source_finding": "Vercel 01M6J55D5BAMAXNA2W773AVTB1: full paid CSV in public preview",
     "scope": "Serialized preview content and sample badge; existing inspector composition and behavior retained.",
-    "direction": "Protected previews are capped at half the meaningful source lines and normalized UTF-8 bytes; CSV samples must be the header and exactly two leading records.",
+    "direction": "Protected by default, explicit public samples/specifications, whitespace-independent content caps and contiguous source samples; one CSV count sets both badge and prefix length.",
     "alternative_rejected": "Complete-file equality and raw line counts allow near-complete, byte-heavy or whitespace-padded protected previews. These fail before replacing the last safe manifest.",
     "artifacts": [
       "scripts/build-pack-manifests.mjs",
@@ -16,42 +16,32 @@
     ],
     "checks": [
       {
-        "name": "preview-data-boundary",
+        "name": "preview-regressions",
         "status": "pass",
-        "evidence": "Native Windows Node 24.22.1: 9 Blueprint/PackInspector tests pass with zero failures/skips. Before the refinement, 7 passed and 2 failed. Negative cases cover empty/short/padded files, 22 of 23 lines, a dominant multibyte first line, all CSV data without its header, reordered/extra/missing-header samples, safe-output retention and CRLF source/sample normalization."
+        "evidence": "Native Windows Node24.22.1:10 Blueprint/PackInspector tests pass,0failures/skips. Before refinement8passed/2failed. Added interior-whitespace inflation, future unclassified short-file refusal, non-CSV reordered sample refusal, valid leading sample and explicit public opt-out controls. Each rejection retains safe output."
       },
       {
-        "name": "generator-and-paid-integrity",
+        "name": "payload-integrity",
         "status": "pass",
-        "evidence": "The generator produces exactly the existing public manifest. All seven paid deliverables, metadata, catalog and checksums are unchanged. The current public sample remains the same header plus first two paid records."
+        "evidence": "Generator output has zero canonical drift; all7paid deliverables, catalog, checksums, current public excerpts and their metadata are unchanged. No dependency, price or checkout change."
       },
       {
-        "name": "independent-review-feedback",
-        "status": "partial",
-        "evidence": "Actual independent Claude/Anthropic source review at a7e1958 returned WARN with no blockers. This refinement addresses A1-A6 and invalidates that receipt for the new head. The complete prior receipt is retained on PR124, comment6630794387. New exact-head provider review and CI remain pending."
-      },
-      {
-        "name": "previous-revision-release-checks",
-        "status": "pass",
-        "evidence": "At a7e1958, Linux CI41823794331 passed Install/Merge gate/Build, and Vercel Security Review passed. These results do not establish the new revision."
-      },
-      {
-        "name": "preview-inspection",
+        "name": "new-source-release-checks",
         "status": "pending",
-        "evidence": "The prior preview was READY at the exact prior head but protected by Vercel Authentication. The retrieved login page does not establish offer rendering, payload behavior or visual acceptance. No authentication setting or bypass was changed."
+        "evidence": "Exact new-head provider review, CI/build and Vercel Security Review are pending. Previous head5bf2299 passed CI41833633931 and actual Anthropic WARN/no blockers; those results do not verify this new revision."
       },
       {
-        "name": "broader-Windows-base-comparison",
-        "status": "partial",
-        "evidence": "Prior candidate195 passed/3 failed versus frozen base193 passed/the same3 failed. Existing MCP dependency-loading and Windows CLI path failures remain separate; no new broad Windows suite pass is claimed."
+        "name": "preview-visual",
+        "status": "pending",
+        "evidence": "Vercel Authentication prevents the prior unauthenticated fetch. Native vercel curl can generate a project bypass secret, so it was not used. No share link, bypass secret or auth setting was changed; no rendered inspection is claimed."
       }
     ],
     "decision": "draft-review",
     "known_risks": [
-      "Limiting the public excerpt supplies no buyer authorization or repository access control.",
-      "The original Antigravity branch and paid delivery files remain unchanged; this is a separate proposed security fix.",
-      "Production promotion, checkout activation and money operations remain human-gated.",
-      "Private Intel is labelled sample-issue by the manifest, but its paid/public classification still needs a product decision. Inspected Blueprint delivery page imports no paid files; no buyer authorization audit is implied."
+      "Ratio caps prevent accidental overexposure; they are not buyer access control or a guarantee of secrecy.",
+      "Existing explicit public specifications and Private Intel sample classification are retained. Future public exceptions require deliberate classification.",
+      "Multiline CSV sample semantics and earlier Windows autocrlf/LF-test behavior remain separate limits.",
+      "Protected preview has no rendered/visual pass. Production, checkout, price/auth changes stay human-gated."
     ],
     "revision_history": [
       {

@@ -239,11 +239,12 @@ test('public Blueprint excerpts contain only the authored CSV sample and partial
   const manifest = loadPackManifests().blueprint
   const csv = manifest.files.find((file) => file.diskPath.endsWith('recurring-payer-catalog.csv'))
   assert.ok(csv)
-  const sample = read('products/blueprint/previews/recurring-payer-catalog.sample.csv').trimEnd().split('\n')
+  const sample = read('products/blueprint/previews/recurring-payer-catalog.sample.csv').replace(/\r\n/g, '\n').trimEnd().split('\n')
   assert.equal(sample.length, 3, 'public CSV sample has its header and exactly two chosen records')
   assert.deepEqual(csv.excerpt, sample)
   assert.equal(csv.badge, '2-row CSV sample')
-  const paidRows = read(csv.diskPath).trimEnd().split('\n')
+  const paidRows = read(csv.diskPath).replace(/\r\n/g, '\n').trimEnd().split('\n')
+  assert.deepEqual(sample, paidRows.slice(0, 3), 'line numbers describe a leading contiguous sample')
   const publicPayload = JSON.stringify(manifest)
   for (const row of paidRows.slice(1)) {
     if (!sample.includes(row)) {
@@ -253,7 +254,8 @@ test('public Blueprint excerpts contain only the authored CSV sample and partial
   }
   for (const file of manifest.files) {
     const source = read(file.diskPath).replace(/\r\n/g, '\n').trimEnd().split('\n')
-    assert.ok(file.excerpt.length < source.length, `protected file was exposed in full: ${file.diskPath}`)
+    assert.ok(file.excerpt.length <= Math.floor(source.length / 2), `protected preview exceeds half the source lines: ${file.diskPath}`)
+    assert.ok(Buffer.byteLength(file.excerpt.join('\n'), 'utf8') <= Math.floor(Buffer.byteLength(source.join('\n'), 'utf8') / 2), `protected preview exceeds half the source bytes: ${file.diskPath}`)
   }
 })
 
@@ -278,7 +280,7 @@ test('manifest generation retains the authored sample, refuses future complete p
     writeFileSync(path.join(temp, 'products/blueprint/operating-desk-architecture.md'), '# Short paid deliverable\nPrivate detail\n' + '\n'.repeat(30))
     const paddedProtected = run()
     assert.notEqual(paddedProtected.status, 0)
-    assert.match(paddedProtected.stderr, /Protected deliverable would be exposed in full/)
+    assert.match(paddedProtected.stderr, /Protected deliverable needs an explicit partial sample/)
     cpSync(path.join(root, 'products/blueprint/operating-desk-architecture.md'), path.join(temp, 'products/blueprint/operating-desk-architecture.md'))
     writeFileSync(path.join(temp, 'public/downloads/agentic-income-starter-kit.md'), '# Intentionally public starter\nComplete free sample\n')
     const publicFile = run()
@@ -288,6 +290,52 @@ test('manifest generation retains the authored sample, refuses future complete p
     const completeSample = run()
     assert.notEqual(completeSample.status, 0)
     assert.match(completeSample.stderr, /Public sample must be shorter than protected deliverable/)
+  } finally {
+    assert.equal(path.dirname(path.resolve(temp)), tempBase)
+    rmSync(temp, { recursive: true, force: true })
+  }
+})
+
+test('protected preview limits reject near-complete, byte-heavy, empty and misleading samples without replacing safe output', () => {
+  const tempBase = path.resolve(os.tmpdir())
+  const temp = mkdtempSync(path.join(tempBase, 'blueprint-preview-limits-'))
+  assert.equal(path.dirname(temp), tempBase)
+  try {
+    for (const rel of ['products', 'public/downloads', 'scripts/build-pack-manifests.mjs', 'lib']) {
+      cpSync(path.join(root, rel), path.join(temp, rel), { recursive: true })
+    }
+    const run = () => spawnSync(process.execPath, ['scripts/build-pack-manifests.mjs'], { cwd: temp, encoding: 'utf8' })
+    const output = path.join(temp, 'lib/pack-manifests.ts')
+    const original = readFileSync(output, 'utf8')
+    const document = 'products/blueprint/operating-desk-architecture.md'
+    const sample = 'products/blueprint/previews/recurring-payer-catalog.sample.csv'
+    const paid = read('products/blueprint/recurring-payer-catalog.csv').replace(/\r\n/g, '\n').trimEnd().split('\n')
+    const rejected = (rel, text, reason) => {
+      writeFileSync(path.join(temp, rel), text)
+      const result = run()
+      assert.notEqual(result.status, 0, reason)
+      assert.match(result.stderr, reason)
+      assert.equal(readFileSync(output, 'utf8'), original, 'failed generation retains the complete last safe manifest')
+      cpSync(path.join(root, rel), path.join(temp, rel))
+    }
+    rejected(document, '', /Protected deliverable needs an explicit partial sample/)
+    rejected(document, Array.from({ length: 23 }, (_, i) => `Paid detail ${i}`).join('\n'), /Protected preview exceeds half the source lines/)
+    rejected(document, ['界'.repeat(3000), ...Array.from({ length: 70 }, (_, i) => `x${i}`)].join('\n'), /Protected preview exceeds half the source bytes/)
+    rejected(sample, paid.slice(1).join('\n'), /Protected CSV preview must contain its header and exactly 2 leading records/)
+    rejected(sample, [paid[0], paid[2], paid[1]].join('\n'), /Protected CSV preview must contain its header and exactly 2 leading records/)
+    rejected(sample, paid.slice(0, 4).join('\n'), /Protected CSV preview must contain its header and exactly 2 leading records/)
+    rejected(sample, ['', ...paid.slice(1, 3)].join('\n'), /Protected CSV preview must contain its header and exactly 2 leading records/)
+    // Normalized source and sample must regenerate the same serialized payload.
+    for (const rel of [sample, 'products/blueprint/recurring-payer-catalog.csv']) {
+      writeFileSync(path.join(temp, rel), read(rel).replace(/\r\n/g, '\n').replace(/\n/g, '\r\n'))
+    }
+    const crlf = run()
+    assert.equal(crlf.status, 0, crlf.stderr)
+    // File byte metadata legitimately changes with CRLF; the public excerpt does not.
+    const generated = readFileSync(output, 'utf8')
+    const marker = 'export const PACK_MANIFESTS: Record<string, PackManifest> = '
+    const manifest = JSON.parse(generated.split(marker)[1].split('\n\nexport function getPackManifest')[0])
+    assert.deepEqual(manifest.blueprint.files.find((f) => f.kind === 'csv').excerpt, paid.slice(0, 3))
   } finally {
     assert.equal(path.dirname(path.resolve(temp)), tempBase)
     rmSync(temp, { recursive: true, force: true })

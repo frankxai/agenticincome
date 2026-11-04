@@ -84,3 +84,15 @@ delivery. A short protected file needs an explicit partial sample; generation
 fails before replacing the last safe manifest when a whole file would be exposed.
 Complete public Starter Kit samples remain allowed. This limits preview data;
 it supplies no buyer authorization or repository access control.
+
+### Preview guard refinement, Codex, 4 November 2026, revision 2
+
+Source: independent Claude review of `a7e1958`, findings A1 to A6.
+Review state: implementation and new exact-revision checks pending.
+
+Protected excerpts must fit within half the meaningful source lines and half
+the normalized UTF-8 bytes. The CSV sample must match the header and exactly
+the first two records, keeping the inspector's line numbers accurate. Empty,
+short, whitespace-padded, near-complete and byte-heavy excerpts fail before
+the safe manifest is replaced. The existing sample and paid delivery stay the
+same. Complete public Starter Kit excerpts remain allowed.

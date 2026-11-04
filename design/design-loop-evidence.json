@@ -2,12 +2,12 @@
   "blueprint_preview_boundary": {
     "author": "Codex (OpenAI)",
     "created_at": "2026-11-04",
-    "revision": 1,
-    "source_revision": "e427da72ce2a3ca28777ca87658c29fab12692ef",
+    "revision": 2,
+    "source_revision": "a7e1958fcc6e9ab37896a8d4d4947677d0a83eb5",
     "source_finding": "Vercel 01M6J55D5BAMAXNA2W773AVTB1: full paid CSV in public preview",
     "scope": "Serialized preview content and sample badge; existing inspector composition and behavior retained.",
-    "direction": "An explicitly chosen two-row CSV sample plus a fail-closed generator guard.",
-    "alternative_rejected": "Generic fixed-line truncation can expose future short protected deliverables in full.",
+    "direction": "Protected previews are capped at half the meaningful source lines and normalized UTF-8 bytes; CSV samples must be the header and exactly two leading records.",
+    "alternative_rejected": "Complete-file equality and raw line counts allow near-complete, byte-heavy or whitespace-padded protected previews. These fail before replacing the last safe manifest.",
     "artifacts": [
       "scripts/build-pack-manifests.mjs",
       "lib/pack-manifests.ts",
@@ -18,34 +18,91 @@
       {
         "name": "preview-data-boundary",
         "status": "pass",
-        "evidence": "Native Windows Node 24.22.1: 8 Blueprint/PackInspector tests pass, zero failures/skips. The private pre-repair source passed 4 existing checks and failed both new boundary regressions."
+        "evidence": "Native Windows Node 24.22.1: 9 Blueprint/PackInspector tests pass with zero failures/skips. Before the refinement, 7 passed and 2 failed. Negative cases cover empty/short/padded files, 22 of 23 lines, a dominant multibyte first line, all CSV data without its header, reordered/extra/missing-header samples, safe-output retention and CRLF source/sample normalization."
       },
       {
         "name": "generator-and-paid-integrity",
         "status": "pass",
-        "evidence": "Repeated generation has zero drift. All seven paid deliverables retain their original bytes and checksums. Complete free samples remain allowed; short, empty and padded protected files fail closed."
+        "evidence": "The generator produces exactly the existing public manifest. All seven paid deliverables, metadata, catalog and checksums are unchanged. The current public sample remains the same header plus first two paid records."
       },
       {
-        "name": "separate-functional-review",
+        "name": "independent-review-feedback",
+        "status": "partial",
+        "evidence": "Actual independent Claude/Anthropic source review at a7e1958 returned WARN with no blockers. This refinement addresses A1-A6 and invalidates that receipt for the new head. The complete prior receipt is retained on PR124, comment6630794387. New exact-head provider review and CI remain pending."
+      },
+      {
+        "name": "previous-revision-release-checks",
         "status": "pass",
-        "evidence": "Hosted session cecbb066-3785-4554-ad53-5179e2d5c70d independently passed 6 Blueprint and 2 PackInspector tests on Linux Node 22.23.4. Unknown underlying provider; no qualifying provider receipt. Actual review and patch identity limits are recorded on PR #121."
+        "evidence": "At a7e1958, Linux CI41823794331 passed Install/Merge gate/Build, and Vercel Security Review passed. These results do not establish the new revision."
       },
       {
-        "name": "new-revision-release-checks",
+        "name": "preview-inspection",
         "status": "pending",
-        "evidence": "Frozen type/build, preview screenshots, Vercel security rescan and independent-provider review have not passed for this new branch. Historical green entries in this file do not establish those results."
+        "evidence": "The prior preview was READY at the exact prior head but protected by Vercel Authentication. The retrieved login page does not establish offer rendering, payload behavior or visual acceptance. No authentication setting or bypass was changed."
       },
       {
         "name": "broader-Windows-base-comparison",
         "status": "partial",
-        "evidence": "Candidate 195 passed/3 failed; frozen base 193 passed/3 failed. Same existing MCP dependency-loading and Windows CLI path failures. Focused new boundary tests pass; no full-suite pass claimed."
+        "evidence": "Prior candidate195 passed/3 failed versus frozen base193 passed/the same3 failed. Existing MCP dependency-loading and Windows CLI path failures remain separate; no new broad Windows suite pass is claimed."
       }
     ],
     "decision": "draft-review",
     "known_risks": [
       "Limiting the public excerpt supplies no buyer authorization or repository access control.",
       "The original Antigravity branch and paid delivery files remain unchanged; this is a separate proposed security fix.",
-      "Production promotion, checkout activation and money operations remain human-gated."
+      "Production promotion, checkout activation and money operations remain human-gated.",
+      "Private Intel is labelled sample-issue by the manifest, but its paid/public classification still needs a product decision. Inspected Blueprint delivery page imports no paid files; no buyer authorization audit is implied."
+    ],
+    "revision_history": [
+      {
+        "author": "Codex (OpenAI)",
+        "created_at": "2026-11-04",
+        "revision": 1,
+        "source_revision": "e427da72ce2a3ca28777ca87658c29fab12692ef",
+        "source_finding": "Vercel 01M6J55D5BAMAXNA2W773AVTB1: full paid CSV in public preview",
+        "scope": "Serialized preview content and sample badge; existing inspector composition and behavior retained.",
+        "direction": "An explicitly chosen two-row CSV sample plus a fail-closed generator guard.",
+        "alternative_rejected": "Generic fixed-line truncation can expose future short protected deliverables in full.",
+        "artifacts": [
+          "scripts/build-pack-manifests.mjs",
+          "lib/pack-manifests.ts",
+          "products/blueprint/previews/recurring-payer-catalog.sample.csv",
+          "tests/blueprint-payload-contract.test.mjs"
+        ],
+        "checks": [
+          {
+            "name": "preview-data-boundary",
+            "status": "pass",
+            "evidence": "Native Windows Node 24.22.1: 8 Blueprint/PackInspector tests pass, zero failures/skips. The private pre-repair source passed 4 existing checks and failed both new boundary regressions."
+          },
+          {
+            "name": "generator-and-paid-integrity",
+            "status": "pass",
+            "evidence": "Repeated generation has zero drift. All seven paid deliverables retain their original bytes and checksums. Complete free samples remain allowed; short, empty and padded protected files fail closed."
+          },
+          {
+            "name": "separate-functional-review",
+            "status": "pass",
+            "evidence": "Hosted session cecbb066-3785-4554-ad53-5179e2d5c70d independently passed 6 Blueprint and 2 PackInspector tests on Linux Node 22.23.4. Unknown underlying provider; no qualifying provider receipt. Actual review and patch identity limits are recorded on PR #121."
+          },
+          {
+            "name": "new-revision-release-checks",
+            "status": "pending",
+            "evidence": "Frozen type/build, preview screenshots, Vercel security rescan and independent-provider review have not passed for this new branch. Historical green entries in this file do not establish those results."
+          },
+          {
+            "name": "broader-Windows-base-comparison",
+            "status": "partial",
+            "evidence": "Candidate 195 passed/3 failed; frozen base 193 passed/3 failed. Same existing MCP dependency-loading and Windows CLI path failures. Focused new boundary tests pass; no full-suite pass claimed."
+          }
+        ],
+        "decision": "draft-review",
+        "known_risks": [
+          "Limiting the public excerpt supplies no buyer authorization or repository access control.",
+          "The original Antigravity branch and paid delivery files remain unchanged; this is a separate proposed security fix.",
+          "Production promotion, checkout activation and money operations remain human-gated."
+        ]
+      }
     ]
   },
   "version": "2026-07-10",
@@ -147,12 +204,7 @@
       "evidence": "The workflow links executable source, states the human publish gate, and disclaims customer/revenue proof. Unwired intake records subscribe_unwired, unsupported ranking/income claims are removed, and privacy/404/security contracts are regression-tested."
     }
   ],
-  "score": {
-    "total": 28,
-    "max": 30,
-    "notes": "First read 5, brand fit 4, craft 4, accessibility/responsive/reduced motion 5, factual/provenance integrity 5, intended-surface usefulness 5."
-  },
-  "decision": "ship",
+  "decision": "draft-review",
   "known_risks": [
     "Online intake, paid checkout, and analytics forwarding remain environment-dependent and must not be described as live without runtime evidence.",
     "The 195px reflow keeps the mobile navigation as an intentionally horizontal internal scroller while the document itself has no horizontal overflow.",
@@ -270,5 +322,15 @@
       }
     ],
     "decision": "ship"
+  },
+  "historical_release_decision": {
+    "source_version": "2026-07-10",
+    "decision": "ship",
+    "score": {
+      "total": 28,
+      "max": 30,
+      "notes": "First read 5, brand fit 4, craft 4, accessibility/responsive/reduced motion 5, factual/provenance integrity 5, intended-surface usefulness 5."
+    },
+    "scope": "Preserved historical assessment of the earlier surface; it does not approve the current Blueprint security revision."
   }
 }

@@ -10,11 +10,14 @@ function formatSize(bytes) {
   return `${(bytes / 1024).toFixed(1)} KB`
 }
 
-function readDiskItem(diskPath, { displayPath = diskPath, kind = 'markdown', badge, excerptLines = 20, protectedDeliverable = false, previewPath }) {
+function readDiskItem(diskPath, { displayPath = diskPath, kind = 'markdown', badge, excerptLines = 20, protectedDeliverable = false, previewPath, previewRecords }) {
   const abs = path.join(root, diskPath)
   const bytes = statSync(abs).size
   const raw = readFileSync(abs, 'utf8')
-  const lines = raw.replace(/\r\n/g, '\n').split('\n')
+  const normalized = raw.replace(/\r\n/g, '\n')
+  const content = normalized.trimEnd()
+  const contentLines = content ? content.split('\n') : []
+  const lines = normalized.split('\n')
   if (lines.length > 1 && lines[lines.length - 1] === '') {
     lines.pop()
   }
@@ -25,15 +28,27 @@ function readDiskItem(diskPath, { displayPath = diskPath, kind = 'markdown', bad
     if (protectedDeliverable && sample.length >= lines.length) {
       throw new Error(`Public sample must be shorter than protected deliverable: ${diskPath}`)
     }
+    if (protectedDeliverable && kind === 'csv' && (
+      !Number.isSafeInteger(previewRecords) || previewRecords < 1 ||
+      sample.length !== previewRecords + 1 ||
+      sample.some((line, index) => line !== lines[index])
+    )) {
+      throw new Error(`Protected CSV preview must contain its header and exactly ${previewRecords} leading records: ${diskPath}`)
+    }
     excerpt = sample
   } else {
-    if (protectedDeliverable && lines.length <= excerptLines) {
+    if (protectedDeliverable && contentLines.length <= excerptLines) {
       throw new Error(`Protected deliverable needs an explicit partial sample: ${diskPath}`)
     }
     excerpt = lines.slice(0, Math.min(excerptLines, lines.length))
   }
-  if (protectedDeliverable && excerpt.join('\n').trimEnd() === raw.replace(/\r\n/g, '\n').trimEnd()) {
-    throw new Error(`Protected deliverable would be exposed in full: ${diskPath}`)
+  if (protectedDeliverable) {
+    if (excerpt.length > Math.floor(contentLines.length / 2)) {
+      throw new Error(`Protected preview exceeds half the source lines: ${diskPath}`)
+    }
+    if (Buffer.byteLength(excerpt.join('\n').trimEnd(), 'utf8') > Math.floor(Buffer.byteLength(content, 'utf8') / 2)) {
+      throw new Error(`Protected preview exceeds half the source bytes: ${diskPath}`)
+    }
   }
   return {
     path: displayPath,
@@ -74,6 +89,7 @@ const blueprintFiles = blueprintCatalog.delivery.files.map((diskPath) =>
     previewPath: diskPath === 'products/blueprint/recurring-payer-catalog.csv'
       ? 'products/blueprint/previews/recurring-payer-catalog.sample.csv'
       : undefined,
+    previewRecords: diskPath === 'products/blueprint/recurring-payer-catalog.csv' ? 2 : undefined,
   })
 )
 const blueprintTotalBytes = blueprintFiles.reduce((sum, f) => sum + f.bytes, 0)

@@ -62,3 +62,15 @@ Its paid-file metadata stays accurate. This repair changes serialized preview
 content and the sample badge. The existing layout, controls, motion and reduced
 motion behavior remain in use. The separate sample prevents short paid files
 from becoming complete public excerpts as the catalog evolves.
+
+### Preview guard refinement, Codex, 4 November 2026, revision 2
+
+Source: independent Claude review of `a7e1958`, findings A1 to A6.
+Review state: no new rendered inspection claimed.
+
+The selected direction adds fail-closed line, byte and leading-record limits
+to the generator. The alternative of testing only complete-file equality lets
+near-complete paid content through and was rejected. This refinement keeps
+the current public excerpt, inspector composition, controls and motion intact.
+Vercel Authentication prevented inspection of the prior preview; the login
+page is not evidence that the offer page renders correctly.

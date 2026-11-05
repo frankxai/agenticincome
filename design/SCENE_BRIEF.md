@@ -50,3 +50,37 @@ Cycle (`618b2107`) two-pane file preview, and Polaroid (`Flow 9471`) 4-step fit 
 - **Accessibility:** `44px` minimum touch targets, `2px` `#10b981` `:focus-visible` outlines,
   `ArrowUp`/`ArrowDown`/`Home`/`End` tab navigation, and automatic focus advancement across
   fit-check steps after user interaction.
+
+## Blueprint preview data repair, Codex, 4 November 2026
+
+Author: Codex (OpenAI). Revision: 1. Source: the Blueprint preview-disclosure
+finding at `e427da72ce2a3ca28777ca87658c29fab12692ef`.
+Review state: source/data checks passed; no new visual inspection claimed.
+
+The existing file inspector receives an explicitly labelled two-row CSV sample.
+Its paid-file metadata stays accurate. This repair changes serialized preview
+content and the sample badge. The existing layout, controls, motion and reduced
+motion behavior remain in use. The separate sample prevents short paid files
+from becoming complete public excerpts as the catalog evolves.
+
+### Preview guard refinement, Codex, 4 November 2026, revision 2
+
+Source: independent Claude review of `a7e1958`, findings A1 to A6.
+Review state: no new rendered inspection claimed.
+
+The selected direction adds fail-closed line, byte and leading-record limits
+to the generator. The alternative of testing only complete-file equality lets
+near-complete paid content through and was rejected. This refinement keeps
+the current public excerpt, inspector composition, controls and motion intact.
+Vercel Authentication prevented inspection of the prior preview; the login
+page is not evidence that the offer page renders correctly.
+
+### Default protection refinement, Codex, 4 November 2026, revision 3
+
+Author: Codex (OpenAI). Source: Claude review of `5bf2299`, N1/N2/N3/N5.
+Review state: code/data refinement; rendered inspection remains pending.
+
+The selected direction keeps the public sample and composition intact while
+requiring explicit public classification for future file reads. Counting padded
+whitespace and relying on each future caller to opt into protection were
+rejected. No new asset, interaction, typography or motion is introduced.

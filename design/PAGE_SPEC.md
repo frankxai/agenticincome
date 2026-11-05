@@ -70,3 +70,42 @@ and `public/images/products/plate-*.svg`.
    availability (`lib/polar.ts`). Non-free offers without a legacy static checkout URL retain
    `#request-access` on `/offers/[slug]` so `PolarCheckoutButton` and `/api/checkout` GET
    fallbacks always resolve to a reachable form.
+
+## Blueprint preview boundary, Codex, 4 November 2026
+
+Author: Codex (OpenAI). Revision: 1. Source: Vercel finding
+`01M6J55D5BAMAXNA2W773AVTB1` at `e427da72ce2a3ca28777ca87658c29fab12692ef`.
+Review state: source regression verified; preview and release checks pending.
+
+The public CSV excerpt uses a separate, explicitly chosen header and two real
+records from the delivered file. Its badge says `2-row CSV sample`. File sizes,
+line counts and the seven-file package continue to describe the complete paid
+delivery. A short protected file needs an explicit partial sample; generation
+fails before replacing the last safe manifest when a whole file would be exposed.
+Complete public Starter Kit samples remain allowed. This limits preview data;
+it supplies no buyer authorization or repository access control.
+
+### Preview guard refinement, Codex, 4 November 2026, revision 2
+
+Source: independent Claude review of `a7e1958`, findings A1 to A6.
+Review state: implementation and new exact-revision checks pending.
+
+Protected excerpts must fit within half the meaningful source lines and half
+the normalized UTF-8 bytes. The CSV sample must match the header and exactly
+the first two records, keeping the inspector's line numbers accurate. Empty,
+short, whitespace-padded, near-complete and byte-heavy excerpts fail before
+the safe manifest is replaced. The existing sample and paid delivery stay the
+same. Complete public Starter Kit excerpts remain allowed.
+
+### Fail-closed preview defaults, Codex, 4 November 2026, revision 3
+
+Source: independent Claude review of `5bf2299`, findings N1, N2, N3 and N5.
+Review state: new source and exact-revision verification pending.
+
+Line and byte limits ignore interior blank lines and surrounding whitespace.
+New file reads are protected by default; existing public specifications and the
+sample issue are explicitly public. Every authored protected sample must be a
+contiguous prefix of its source, so the inspector's line numbers remain true.
+The CSV badge and its record limit share one value. Current public excerpts,
+paid delivery files and product classifications stay the same. These limits
+prevent accidental overexposure; they do not provide buyer access control.

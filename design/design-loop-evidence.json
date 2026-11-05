@@ -1,4 +1,100 @@
 {
+  "blueprint_preview_boundary": {
+    "author": "Codex (OpenAI)",
+    "created_at": "2026-11-04",
+    "revision": 3,
+    "source_revision": "5bf2299dc616acbe6567396f4afeb83c78add82d",
+    "source_finding": "Vercel 01M6J55D5BAMAXNA2W773AVTB1: full paid CSV in public preview",
+    "scope": "Serialized preview content and sample badge; existing inspector composition and behavior retained.",
+    "direction": "Protected by default, explicit public samples/specifications, whitespace-independent content caps and contiguous source samples; one CSV count sets both badge and prefix length.",
+    "alternative_rejected": "Complete-file equality and raw line counts allow near-complete, byte-heavy or whitespace-padded protected previews. These fail before replacing the last safe manifest.",
+    "artifacts": [
+      "scripts/build-pack-manifests.mjs",
+      "lib/pack-manifests.ts",
+      "products/blueprint/previews/recurring-payer-catalog.sample.csv",
+      "tests/blueprint-payload-contract.test.mjs"
+    ],
+    "checks": [
+      {
+        "name": "preview-regressions",
+        "status": "pass",
+        "evidence": "Native Windows Node24.22.1:10 Blueprint/PackInspector tests pass,0failures/skips. Before refinement8passed/2failed. Added interior-whitespace inflation, future unclassified short-file refusal, non-CSV reordered sample refusal, valid leading sample and explicit public opt-out controls. Each rejection retains safe output."
+      },
+      {
+        "name": "payload-integrity",
+        "status": "pass",
+        "evidence": "Generator output has zero canonical drift; all7paid deliverables, catalog, checksums, current public excerpts and their metadata are unchanged. No dependency, price or checkout change."
+      },
+      {
+        "name": "new-source-release-checks",
+        "status": "pending",
+        "evidence": "Exact new-head provider review, CI/build and Vercel Security Review are pending. Previous head5bf2299 passed CI41833633931 and actual Anthropic WARN/no blockers; those results do not verify this new revision."
+      },
+      {
+        "name": "preview-visual",
+        "status": "pending",
+        "evidence": "Vercel Authentication prevents the prior unauthenticated fetch. Native vercel curl can generate a project bypass secret, so it was not used. No share link, bypass secret or auth setting was changed; no rendered inspection is claimed."
+      }
+    ],
+    "decision": "draft-review",
+    "known_risks": [
+      "Ratio caps prevent accidental overexposure; they are not buyer access control or a guarantee of secrecy.",
+      "Existing explicit public specifications and Private Intel sample classification are retained. Future public exceptions require deliberate classification.",
+      "Multiline CSV sample semantics and earlier Windows autocrlf/LF-test behavior remain separate limits.",
+      "Protected preview has no rendered/visual pass. Production, checkout, price/auth changes stay human-gated."
+    ],
+    "revision_history": [
+      {
+        "author": "Codex (OpenAI)",
+        "created_at": "2026-11-04",
+        "revision": 1,
+        "source_revision": "e427da72ce2a3ca28777ca87658c29fab12692ef",
+        "source_finding": "Vercel 01M6J55D5BAMAXNA2W773AVTB1: full paid CSV in public preview",
+        "scope": "Serialized preview content and sample badge; existing inspector composition and behavior retained.",
+        "direction": "An explicitly chosen two-row CSV sample plus a fail-closed generator guard.",
+        "alternative_rejected": "Generic fixed-line truncation can expose future short protected deliverables in full.",
+        "artifacts": [
+          "scripts/build-pack-manifests.mjs",
+          "lib/pack-manifests.ts",
+          "products/blueprint/previews/recurring-payer-catalog.sample.csv",
+          "tests/blueprint-payload-contract.test.mjs"
+        ],
+        "checks": [
+          {
+            "name": "preview-data-boundary",
+            "status": "pass",
+            "evidence": "Native Windows Node 24.22.1: 8 Blueprint/PackInspector tests pass, zero failures/skips. The private pre-repair source passed 4 existing checks and failed both new boundary regressions."
+          },
+          {
+            "name": "generator-and-paid-integrity",
+            "status": "pass",
+            "evidence": "Repeated generation has zero drift. All seven paid deliverables retain their original bytes and checksums. Complete free samples remain allowed; short, empty and padded protected files fail closed."
+          },
+          {
+            "name": "separate-functional-review",
+            "status": "pass",
+            "evidence": "Hosted session cecbb066-3785-4554-ad53-5179e2d5c70d independently passed 6 Blueprint and 2 PackInspector tests on Linux Node 22.23.4. Unknown underlying provider; no qualifying provider receipt. Actual review and patch identity limits are recorded on PR #121."
+          },
+          {
+            "name": "new-revision-release-checks",
+            "status": "pending",
+            "evidence": "Frozen type/build, preview screenshots, Vercel security rescan and independent-provider review have not passed for this new branch. Historical green entries in this file do not establish those results."
+          },
+          {
+            "name": "broader-Windows-base-comparison",
+            "status": "partial",
+            "evidence": "Candidate 195 passed/3 failed; frozen base 193 passed/3 failed. Same existing MCP dependency-loading and Windows CLI path failures. Focused new boundary tests pass; no full-suite pass claimed."
+          }
+        ],
+        "decision": "draft-review",
+        "known_risks": [
+          "Limiting the public excerpt supplies no buyer authorization or repository access control.",
+          "The original Antigravity branch and paid delivery files remain unchanged; this is a separate proposed security fix.",
+          "Production promotion, checkout activation and money operations remain human-gated."
+        ]
+      }
+    ]
+  },
   "version": "2026-07-10",
   "task": "Reposition and implement AgenticIncome as the canonical revenue engine with scoped Agent-as-a-Service, digital products, open-source proof, and reader-first research.",
   "surface": "AgenticIncome homepage, offer system, navigation, metadata, and production governance",
@@ -36,7 +132,7 @@
       "Internal operating language",
       "Decorative 3D or generated hero filler"
     ],
-    "signature": "A coded four-stage implementation model—Audit, Architect, Implement, Verify—backed by links to real public systems.",
+    "signature": "A coded four-stage implementation model\u2014Audit, Architect, Implement, Verify\u2014backed by links to real public systems.",
     "system": [
       "Tier C coded product proof as the primary hero asset",
       "Obsidian, emerald, cyan, and amber FrankX tokens",
@@ -98,12 +194,7 @@
       "evidence": "The workflow links executable source, states the human publish gate, and disclaims customer/revenue proof. Unwired intake records subscribe_unwired, unsupported ranking/income claims are removed, and privacy/404/security contracts are regression-tested."
     }
   ],
-  "score": {
-    "total": 28,
-    "max": 30,
-    "notes": "First read 5, brand fit 4, craft 4, accessibility/responsive/reduced motion 5, factual/provenance integrity 5, intended-surface usefulness 5."
-  },
-  "decision": "ship",
+  "decision": "draft-review",
   "known_risks": [
     "Online intake, paid checkout, and analytics forwarding remain environment-dependent and must not be described as live without runtime evidence.",
     "The 195px reflow keeps the mobile navigation as an intentionally horizontal internal scroller while the document itself has no horizontal overflow.",
@@ -221,5 +312,15 @@
       }
     ],
     "decision": "ship"
+  },
+  "historical_release_decision": {
+    "source_version": "2026-07-10",
+    "decision": "ship",
+    "score": {
+      "total": 28,
+      "max": 30,
+      "notes": "First read 5, brand fit 4, craft 4, accessibility/responsive/reduced motion 5, factual/provenance integrity 5, intended-surface usefulness 5."
+    },
+    "scope": "Preserved historical assessment of the earlier surface; it does not approve the current Blueprint security revision."
   }
 }

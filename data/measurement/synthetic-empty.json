@@ -1,0 +1,65 @@
+{
+  "schema_version": "IncomeMeasurement.v1",
+  "as_of": "2026-11-01T18:00:00Z",
+  "scope": {
+    "brand_id": "synthetic-brand",
+    "product_id": "synthetic-product",
+    "workspace_id": "synthetic-workspace"
+  },
+  "period": {
+    "start": "2026-10-01T00:00:00Z",
+    "end": "2026-11-01T00:00:00Z"
+  },
+  "definitions": [
+    {
+      "id": "paid_activations",
+      "label": "Independent paid activations",
+      "unit": "count",
+      "direction": "at_least",
+      "target": 3,
+      "due": "2026-11-08",
+      "definition": "Distinct non-founder customers with a provider-confirmed payment and an accepted first artifact in the cohort; refunds and test purchases excluded."
+    },
+    {
+      "id": "repeat_customers_7d",
+      "label": "Customers repeating within 7 days",
+      "unit": "count",
+      "direction": "at_least",
+      "target": 2,
+      "due": "2026-11-15",
+      "definition": "Distinct activated customers who complete a second accepted task within 7 days; only mature cohorts enter the denominator."
+    },
+    {
+      "id": "net_contribution_minor",
+      "label": "Contribution after direct costs and valued time",
+      "unit": "minor",
+      "direction": "above",
+      "target": 0,
+      "currency": "EUR",
+      "due": "2026-11-30",
+      "definition": "Earned sales excluding tax/pass-throughs, minus attributable refunds, payment/channel/FX/acquisition/compute/tool/fulfillment/support and valued owner time. No mixed-currency total."
+    },
+    {
+      "id": "accepted_outcome_rate",
+      "label": "Accepted outcome rate",
+      "unit": "ratio",
+      "direction": "at_least",
+      "target": 0.9,
+      "due": "2026-11-08",
+      "minimum_denominator": 20,
+      "definition": "Accepted eligible task runs divided by all eligible task runs in the fixed evaluation cohort, with repeated trials separately identified."
+    },
+    {
+      "id": "support_minutes_per_workspace",
+      "label": "Support minutes per active workspace-month",
+      "unit": "minutes",
+      "direction": "at_most",
+      "target": 8,
+      "due": "2026-11-30",
+      "definition": "All customer-support minutes divided by active workspace-month equivalents, excluding separately sold delivery time."
+    }
+  ],
+  "sources": [],
+  "observations": []
+}
+

@@ -8,7 +8,7 @@ const TRACKING_PARAM_NAMES = new Set([
   'msclkid',
 ])
 
-function isTrackingParam(name: string) {
+export function isTrackingParam(name: string) {
   return name.startsWith('utm_') || TRACKING_PARAM_NAMES.has(name)
 }
 

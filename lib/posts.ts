@@ -26,8 +26,8 @@ export const posts: Post[] = [
   },
   {
     slug: 'best-ai-tools-faceless-youtube',
-    title: 'Best AI Tools for a Faceless YouTube Channel (Full Stack Under $60/mo)',
-    dek: 'The exact AI stack to run a faceless channel — script, voice, video, edit, clip — for the price of one streaming subscription.',
+    title: 'Best AI Tools for a Faceless YouTube Channel',
+    dek: 'An AI stack for a faceless channel: script, voice, video, edit and clip, with each price checked against the vendor pricing page.',
     query: 'best ai tools faceless youtube',
     date: '2026-06-08',
     cluster: 'creator',
@@ -46,8 +46,8 @@ export const posts: Post[] = [
   },
   {
     slug: 'personal-ai-coe-under-100',
-    title: 'How to Build a Personal AI Center of Excellence from About $79/mo',
-    dek: 'A personal AI Center of Excellence: one tool for each of six capabilities, from about $79 a month.',
+    title: 'How to Build a Personal AI Center of Excellence',
+    dek: 'A personal AI Center of Excellence: one tool for each of six capabilities, with each price checked against the vendor pricing page.',
     query: 'personal ai stack under 100',
     date: '2026-06-08',
     cluster: 'income',

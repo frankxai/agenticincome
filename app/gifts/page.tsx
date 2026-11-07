@@ -70,9 +70,9 @@ const gifts: Gift[] = [
   {
     id: 'plugin-kernel',
     name: 'The MIT open-core plugin kernel',
-    promise: 'One source compiled for five harnesses.',
+    promise: 'One source compiled for five agent runtimes.',
     detail:
-      'The kernel is MIT licensed. The paid tiers add the harness projections and the eval receipts that say which skills fire on the right request. That is what MIT source cannot carry, and it is the only honest reason to charge for a public kernel. Installability is being verified harness by harness; until that is measured, treat it as a promise rather than a fact.',
+      'The kernel is MIT licensed. The paid tiers add the runtime projections and the eval receipts that say which skills fire on the right request. That is what MIT source cannot carry, and it is the only honest reason to charge for a public kernel. Installability is being verified one runtime at a time; until that is measured, treat it as a promise rather than a fact.',
     href: '/offers',
     cta: 'Compare the tiers',
     state: 'building',
@@ -85,7 +85,7 @@ function GiftCard({ gift }: { gift: Gift }) {
     <article
       className={
         building
-          ? 'flex flex-col justify-between border border-dashed border-border p-6 opacity-70'
+          ? 'flex flex-col justify-between border border-dashed border-border bg-transparent p-6'
           : 'flex flex-col justify-between border border-border p-6'
       }
     >
@@ -115,8 +115,8 @@ export default function GiftsPage() {
           Three free assets you can use now, and two still being built.
         </h1>
         <p className="mt-5 text-xl leading-8 text-muted">
-          Each one is a slice of a paid product, written to be useful on its own. Three are finished. Two
-          are not, and they say so rather than wearing a badge.
+          Three of these are finished and usable on their own. Two are not finished, they are marked
+          &ldquo;not yet available&rdquo;, and the card says exactly what is missing.
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
           <Link href="/offers" className="cta">
@@ -142,8 +142,8 @@ export default function GiftsPage() {
           the same thinking with the parts that took longest to build still attached.
         </p>
         <p className="mt-4 text-base leading-7 text-muted">
-          Two of the five are marked as unfinished because they are. A gift layer that oversells is a
-          second sales page, and this estate already has enough of those.
+          Two of the five are marked as unfinished because they are, and the card says what is missing
+          rather than leaving you to find out after the click.
         </p>
       </section>
     </div>

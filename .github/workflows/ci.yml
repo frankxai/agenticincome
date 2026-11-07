@@ -29,20 +29,26 @@ concurrency:
   group: agenticincome-ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   build:
-    runs-on: ${{ vars.CI_RUNNER == 'railway' && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-latest' }}
+    # A fork or mirrored repository must never route PR code to our private runner.
+    runs-on: ${{ vars.CI_RUNNER == 'railway' && github.repository_id == '1262748116' && github.event.repository.private && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository) && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-latest' }}
     timeout-minutes: 15
     permissions:
       contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
         with:
-          version: 11.5.0
+          run_install: false
 
       - name: Setup Node
         uses: actions/setup-node@v6
@@ -56,5 +62,20 @@ jobs:
       - name: Merge gate
         run: pnpm run merge:gate
 
-      - name: Build
-        run: pnpm build
+  dependency-audit:
+    name: Dependency audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6
+        with:
+          run_install: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+      # Reads the committed lockfile; no install scripts, credentials or reports.
+      # Registry errors and high/critical advisories fail the check.
+      - run: pnpm audit --audit-level high

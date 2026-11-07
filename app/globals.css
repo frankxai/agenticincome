@@ -131,7 +131,7 @@ body::before {
   color: var(--color-accent);
   font-size: 0.75rem;
   font-weight: 800;
-  letter-spacing: 0;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -403,7 +403,7 @@ body::before {
   color: var(--color-gold);
   font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -625,7 +625,7 @@ body::before {
   fill: var(--color-muted);
   font-size: 17px;
   font-weight: 700;
-  letter-spacing: 0;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -998,7 +998,7 @@ body::before {
   color: var(--color-gold);
   font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -1088,7 +1088,7 @@ body::before {
 .transformation-action span {
   font-size: 0.75rem;
   font-weight: 800;
-  letter-spacing: 0;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 

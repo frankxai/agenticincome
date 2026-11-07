@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" fill="none" role="img" aria-label="Dated Payer-Term Drift &amp; Watchlist Brief">
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#1A1F2E" stroke-width="0.75" stroke-opacity="0.55"/>
+    </pattern>
+    <linearGradient id="surfaceGrad" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A0C14"/>
+      <stop offset="100%" stop-color="#05060A"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="16" fill="url(#surfaceGrad)"/>
+  <rect x="0.5" y="0.5" width="639" height="359" rx="15.5" stroke="#1A1F2E"/>
+  <rect x="16" y="52" width="608" height="256" fill="url(#grid)" opacity="0.7"/>
+
+  <!-- Top Telemetry Header -->
+  <line x1="0" y1="48" x2="640" y2="48" stroke="#1A1F2E" stroke-width="1"/>
+  <circle cx="24" cy="24" r="4" fill="#10B981"/>
+  <text x="36" y="28" fill="#F1F3F9" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="600">PRIVATE INTEL · MONTHLY DOSSIER</text>
+  <rect x="524" y="13" width="96" height="22" rx="11" fill="#101522" stroke="#1A1F2E"/>
+  <text x="572" y="28" text-anchor="middle" fill="#8A90A8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10">SUB · $19/MO</text>
+
+  <!-- Title Strip -->
+  <text x="28" y="82" fill="#F1F3F9" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="19" font-weight="600">Dated Payer-Term Drift &amp; Watchlist Brief</text>
+  <text x="28" y="102" fill="#8A90A8" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="12">Monthly catalog diffs, program rule changes, and priority comparison opportunities</text>
+
+  <!-- Schematic Body -->
+  
+      <rect x="28" y="130" width="584" height="150" rx="10" fill="#0A0C14" stroke="#1A1F2E"/>
+      <line x1="28" y1="164" x2="612" y2="164" stroke="#1A1F2E"/>
+      <text x="46" y="151" fill="#8A90A8" font-family="ui-monospace, monospace" font-size="10">SECTION</text>
+      <text x="230" y="151" fill="#8A90A8" font-family="ui-monospace, monospace" font-size="10">VERIFIED SIGNAL</text>
+      <text x="488" y="151" fill="#8A90A8" font-family="ui-monospace, monospace" font-size="10">NEXT ACTION</text>
+
+      <text x="46" y="190" fill="#F1F3F9" font-family="ui-monospace, monospace" font-size="11">01 · Term Drift</text>
+      <text x="230" y="190" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11.5">Commission &amp; cookie-window diffs</text>
+      <text x="488" y="190" fill="#10B981" font-family="ui-monospace, monospace" font-size="10.5">Update /tools rows</text>
+
+      <line x1="46" y1="204" x2="594" y2="204" stroke="#1A1F2E" stroke-opacity="0.7"/>
+      <text x="46" y="226" fill="#F1F3F9" font-family="ui-monospace, monospace" font-size="11">02 · Watchlist</text>
+      <text x="230" y="226" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11.5">High-switching-pain categories</text>
+      <text x="488" y="226" fill="#34D399" font-family="ui-monospace, monospace" font-size="10.5">Ship comparison</text>
+
+      <line x1="46" y1="240" x2="594" y2="240" stroke="#1A1F2E" stroke-opacity="0.7"/>
+      <text x="46" y="262" fill="#F1F3F9" font-family="ui-monospace, monospace" font-size="11">03 · Audit Notes</text>
+      <text x="230" y="262" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11.5">Programs failing trust check</text>
+      <text x="488" y="262" fill="#F59E0B" font-family="ui-monospace, monospace" font-size="10.5">Route non-affiliate</text>
+    
+
+  <!-- Bottom Receipt Footer -->
+  <line x1="0" y1="316" x2="640" y2="316" stroke="#1A1F2E" stroke-width="1"/>
+  <text x="24" y="341" fill="#8A90A8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5">FORMAT: YYYY-MM-BRIEF.md + MEMBER Q&amp;A WINDOW</text>
+  <text x="616" y="341" text-anchor="end" fill="#10B981" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5">CANCEL ANYTIME · 1ST MO REFUND</text>
+</svg>

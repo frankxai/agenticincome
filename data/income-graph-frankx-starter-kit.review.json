@@ -1,0 +1,156 @@
+{
+  "schema": "IncomeGraph.v1.1",
+  "migratedFrom": null,
+  "valid": true,
+  "activation": "ready-to-test",
+  "economicEvent": null,
+  "findings": [
+    {
+      "code": "E02",
+      "severity": "warning",
+      "path": "/nodes",
+      "message": "no money cost is recorded",
+      "remedy": "Model tokens, hosting, merchant fees, and tooling. A zero-cost agent system is unusual enough to need saying why."
+    }
+  ],
+  "counts": {
+    "errors": 0,
+    "warnings": 1
+  },
+  "economics": {
+    "currency": "EUR",
+    "monthlyCostFloor": 0,
+    "oneOffCost": 0,
+    "founderHoursPerMonth": 8,
+    "observedRevenue": 0,
+    "observedUnits": 0,
+    "offerPrices": [
+      {
+        "offerId": "offer-frankx-starter-kit",
+        "amount": 97,
+        "unit": "starter kit"
+      },
+      {
+        "offerId": "offer-six-primitives-pack-adjacent",
+        "amount": 7,
+        "unit": "pack"
+      }
+    ],
+    "breakEvenUnitsPerMonth": 0,
+    "observedRevenuePerFounderHour": null,
+    "notes": [
+      "No attested revenue yet. This system has costs and a hypothesis, not an income."
+    ]
+  },
+  "settlements": [
+    {
+      "offerId": "offer-frankx-starter-kit",
+      "label": "frankx.ai Starter Kit (founder-zero lead offer)",
+      "rail": "fiat-account",
+      "admitted": true,
+      "because": "Nothing in this offer needs a chain. Payment clears in a merchant account."
+    },
+    {
+      "offerId": "offer-six-primitives-pack-adjacent",
+      "label": "Six Primitives Pack (adjacent low ticket \u2014 not lead)",
+      "rail": "fiat-account",
+      "admitted": true,
+      "because": "Nothing in this offer needs a chain. Payment clears in a merchant account."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "workflow-kit-fulfillment.assemble",
+      "title": "Assemble kit contents from existing frankx primitives (no new price/checkout edits)",
+      "actor": "agent",
+      "cadence": "per request",
+      "gate": null,
+      "source": "workflow:workflow-kit-fulfillment"
+    },
+    {
+      "id": "workflow-kit-fulfillment.honesty-pass",
+      "title": "Strip unsourced claims; mark provenance on every priced statement",
+      "actor": "agent",
+      "cadence": "per request",
+      "gate": null,
+      "source": "workflow:workflow-kit-fulfillment"
+    },
+    {
+      "id": "workflow-kit-fulfillment.human-review",
+      "title": "Frank reviews kit payload and sales copy",
+      "actor": "human",
+      "cadence": "per request",
+      "gate": null,
+      "source": "workflow:workflow-kit-fulfillment"
+    },
+    {
+      "id": "workflow-kit-fulfillment.publish-offer",
+      "title": "Publish or update the purchasable offer (Whop/checkout)",
+      "actor": "human",
+      "cadence": "per request",
+      "gate": "Frank release before Starter Kit publish-offer or fulfill \u2014 approver: Frank Riemer",
+      "source": "workflow:workflow-kit-fulfillment"
+    },
+    {
+      "id": "workflow-kit-fulfillment.fulfill",
+      "title": "Deliver kit assets to a paying customer",
+      "actor": "agent",
+      "cadence": "per request",
+      "gate": "Frank release before Starter Kit publish-offer or fulfill \u2014 approver: Frank Riemer",
+      "source": "workflow:workflow-kit-fulfillment"
+    },
+    {
+      "id": "workflow-pack-fulfillment.assemble-pack",
+      "title": "Assemble Six Primitives Pack files from existing primitives",
+      "actor": "agent",
+      "cadence": "per request",
+      "gate": null,
+      "source": "workflow:workflow-pack-fulfillment"
+    },
+    {
+      "id": "workflow-pack-fulfillment.publish-pack",
+      "title": "Publish or update the purchasable pack offer",
+      "actor": "human",
+      "cadence": "per request",
+      "gate": "Frank release before Pack publish-pack or deliver-pack \u2014 approver: Frank Riemer",
+      "source": "workflow:workflow-pack-fulfillment"
+    },
+    {
+      "id": "workflow-pack-fulfillment.deliver-pack",
+      "title": "Deliver pack assets to a paying customer",
+      "actor": "agent",
+      "cadence": "per request",
+      "gate": "Frank release before Pack publish-pack or deliver-pack \u2014 approver: Frank Riemer",
+      "source": "workflow:workflow-pack-fulfillment"
+    },
+    {
+      "id": "maintenance.maintenance-offer-honesty",
+      "title": "Monthly honesty pass on kit claims and prices",
+      "actor": "human",
+      "cadence": "every 30 days",
+      "gate": null,
+      "source": "maintenance:maintenance-offer-honesty"
+    },
+    {
+      "id": "review.kill-no-paid-kit",
+      "title": "Kill review: No paid Starter Kit after first ten completed purchase attempts \u2014 Zero paid Starter Kits after ten completed purchase attempts",
+      "actor": "human",
+      "cadence": "once, by 2026-12-15",
+      "gate": null,
+      "source": "kill-criterion:kill-no-paid-kit"
+    },
+    {
+      "id": "experiment.experiment-first-ten-kits",
+      "title": "First ten Starter Kit purchase attempts \u2014 decide by: Zero paid kits after ten completed attempts sends the thesis back to problem-tool-sprawl.",
+      "actor": "human",
+      "cadence": "once",
+      "gate": null,
+      "source": "experiment:experiment-first-ten-kits"
+    }
+  ],
+  "nextDecisions": [
+    "Run the first real market test. Until someone pays or qualifies, this is a hypothesis with costs.",
+    "Break-even is 0 units a month at the lowest listed price. Decide whether that many is plausible from one channel.",
+    "This costs 8 founder hours a month. Decide what you are giving up for them."
+  ]
+}

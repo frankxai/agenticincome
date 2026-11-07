@@ -1,0 +1,865 @@
+{
+  "apiVersion": "agenticincome.ai/v1.1",
+  "kind": "IncomeGraph",
+  "metadata": {
+    "id": "frankx-starter-kit",
+    "name": "frankx.ai Starter Kit \u2014 founder-zero case",
+    "version": "0.1.2",
+    "updatedAt": "2026-11-07",
+    "principal": "Frank Riemer",
+    "thesis": "Solo AI builders who are overwhelmed by tool sprawl will buy a frankx.ai Starter Kit that packages inspectable architecture primitives into a first paid door, before any retainer."
+  },
+  "nodes": [
+    {
+      "id": "problem-tool-sprawl",
+      "type": "Problem",
+      "label": "Solo builders juggle too many AI tools without a coherent first paid door",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-03",
+        "date": "2026-11-03",
+        "method": "founder interview / shared memory (solo developer overwhelmed by Codex, Claude Code, Antigravity, Grok Build, GitHub, local CLI, cloud agents)"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Five discovery calls. If fewer than three name tool sprawl or missing first offer as the blocker in their own words, retire this problem.",
+      "data": {
+        "demandClaim": "Operators will pay for a bounded starter kit rather than assemble the stack alone."
+      },
+      "notes": "demandClaim unsupported by paid Evidence as of 2026-11-07; see evidence-gap-no-paid-starter."
+    },
+    {
+      "id": "customer-solo-ai-builder",
+      "type": "Customer",
+      "label": "Solo AI architect / founder shipping with agents",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-03",
+        "date": "2026-11-03",
+        "method": "founder self-segment for founder-zero case"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Ten conversations. If the buyer cannot name a next irreversible step the kit should unblock, the segment is wrong.",
+      "data": {
+        "demandClaim": "This buyer will purchase a low-ticket kit before a retainer."
+      },
+      "notes": "No paid customers recorded in this graph. Demand is founder-stated."
+    },
+    {
+      "id": "evidence-founder-pricing-intent",
+      "type": "Evidence",
+      "label": "Founder-stated Starter Kit / Pack pricing intention (not a payment)",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-10-27",
+        "date": "2026-10-27",
+        "method": "shared memory / Queen relay of Frank decisions on frankx Whop store and kit pricing"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Replace with a payment Evidence node the moment a real Whop/checkout invoice exists. Stated price is not paid price.",
+      "data": {
+        "finding": "On 2026-10-27 Frank's operating memory records intent for a frankx.ai \u20ac7 Six Primitives Pack and a \u20ac97 Starter Kit (Whop store direction). This is interview/memory provenance only. Live https://www.frankx.ai/templates (fetched 2026-11-07) lists Starter Kits / launch-list language and other USD product prices; it does not, by itself, prove \u20ac7/\u20ac97 checkout is live.",
+        "kind": "interview",
+        "n": 1
+      }
+    },
+    {
+      "id": "evidence-gap-no-paid-starter",
+      "type": "Evidence",
+      "label": "Evidence gap: zero attested paid Starter Kit customers",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07",
+        "method": "founder-zero honesty pass \u2014 no payment artifact in scope"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Invalidated when a payment Evidence node with kind=payment and a verifiable invoice/ref is added and attested.",
+      "data": {
+        "finding": "No revenue, no paid customer count, and no checkout transaction is claimed in this founder-zero graph.",
+        "kind": "document",
+        "n": 0
+      }
+    },
+    {
+      "id": "evidence-live-templates-surface",
+      "type": "Evidence",
+      "label": "Live frankx.ai templates surface mentions Starter Kits",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "https://www.frankx.ai/templates",
+        "date": "2026-11-07",
+        "method": "HTTP fetch of live page (measured 200)"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Re-fetch quarterly. If Starter Kits copy disappears or contradicts the offer, drop or rewrite the Offer node.",
+      "data": {
+        "finding": "Page title/hero copy includes 'Starter Kits & Blueprints' / 'Sovereign Business Starter Kits & Templates' and lists items such as 'Agentic Micro-SaaS Starter Kit' with launch-list framing. This evidences a public starter-kit surface, not paid conversion.",
+        "kind": "listing",
+        "n": 1
+      }
+    },
+    {
+      "id": "offer-frankx-starter-kit",
+      "type": "Offer",
+      "label": "frankx.ai Starter Kit (founder-zero lead offer)",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-10-27",
+        "date": "2026-10-27",
+        "method": "founder pricing intention \u2014 not a live checkout edit"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "A buyer completes checkout and opens the kit without a custom fulfillment thread. Until then, treat price as intention only.",
+      "data": {
+        "price": {
+          "currency": "EUR",
+          "amount": 97,
+          "unit": "starter kit"
+        },
+        "demandClaim": "\u20ac97 is approvable as a first paid door before any retainer.",
+        "settlement": {
+          "rail": "fiat-account"
+        }
+      },
+      "notes": "Price provenance = interview/memory 2026-10-27. Related \u20ac7 Six Primitives Pack is adjacent, not this Offer. No checkout/price page was edited in this stream."
+    },
+    {
+      "id": "offer-six-primitives-pack-adjacent",
+      "type": "Offer",
+      "label": "Six Primitives Pack (adjacent low ticket \u2014 not lead)",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-10-27",
+        "date": "2026-10-27",
+        "method": "founder pricing intention"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Exists as a separate SKU with its own fulfillment checklist; do not count Pack buyers as Starter Kit proof.",
+      "data": {
+        "price": {
+          "currency": "EUR",
+          "amount": 7,
+          "unit": "pack"
+        },
+        "demandClaim": "A \u20ac7 pack can capture browsers who will not yet buy the Starter Kit.",
+        "settlement": {
+          "rail": "fiat-account"
+        }
+      },
+      "notes": "Included for honesty about the 2026-10-27 kit ladder. Lead offer for this founder-zero case remains the Starter Kit."
+    },
+    {
+      "id": "channel-frankx-site",
+      "type": "Channel",
+      "label": "frankx.ai site + Whop store direction",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "https://www.frankx.ai/",
+        "date": "2026-11-07",
+        "method": "live site fetch + 2026-10-27 Whop-store memory"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Channel works when a stranger can reach a purchasable Starter Kit without a private DM. Today: surface exists; paid door not attested.",
+      "data": {}
+    },
+    {
+      "id": "channel-circle-community",
+      "type": "Channel",
+      "label": "Circle community hub (launch)",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-03",
+        "date": "2026-11-03",
+        "method": "founder decision: Circle is central community hub for the launch"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Members can find the Starter Kit offer from Circle without a founder DM.",
+      "data": {}
+    },
+    {
+      "id": "workflow-kit-fulfillment",
+      "type": "Workflow",
+      "label": "Starter Kit assemble \u2192 review \u2192 publish \u2192 fulfill",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07",
+        "method": "founder-zero operating draft for platform coordination"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "One dry-run fulfillment with a HumanGate release recorded before any customer delivery.",
+      "data": {
+        "steps": [
+          {
+            "id": "assemble",
+            "action": "Assemble kit contents from existing frankx primitives (no new price/checkout edits)",
+            "irreversible": false,
+            "actor": "agent"
+          },
+          {
+            "id": "honesty-pass",
+            "action": "Strip unsourced claims; mark provenance on every priced statement",
+            "irreversible": false,
+            "actor": "agent"
+          },
+          {
+            "id": "human-review",
+            "action": "Frank reviews kit payload and sales copy",
+            "irreversible": false,
+            "actor": "human"
+          },
+          {
+            "id": "publish-offer",
+            "action": "Publish or update the purchasable offer (Whop/checkout)",
+            "irreversible": true,
+            "actor": "human"
+          },
+          {
+            "id": "fulfill",
+            "action": "Deliver kit assets to a paying customer",
+            "irreversible": true,
+            "actor": "agent"
+          }
+        ]
+      }
+    },
+    {
+      "id": "workflow-pack-fulfillment",
+      "type": "Workflow",
+      "label": "Six Primitives Pack assemble \u2192 gate \u2192 deliver",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-10-27",
+        "date": "2026-10-27",
+        "method": "adjacent SKU fulfillment stub for honesty of the kit ladder"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "One dry-run delivery with HumanGate before any customer send.",
+      "data": {
+        "steps": [
+          {
+            "id": "assemble-pack",
+            "action": "Assemble Six Primitives Pack files from existing primitives",
+            "irreversible": false,
+            "actor": "agent"
+          },
+          {
+            "id": "publish-pack",
+            "action": "Publish or update the purchasable pack offer",
+            "irreversible": true,
+            "actor": "human"
+          },
+          {
+            "id": "deliver-pack",
+            "action": "Deliver pack assets to a paying customer",
+            "irreversible": true,
+            "actor": "agent"
+          }
+        ]
+      }
+    },
+    {
+      "id": "role-kit-assembler",
+      "type": "AgentRole",
+      "label": "Kit assembler / honesty editor",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07",
+        "method": "authority policy for founder-zero automation"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Weekly log: no price, checkout, DNS, secret, or delete actions by this role.",
+      "data": {
+        "allowedActions": [
+          "assemble-kit-draft",
+          "honesty-edit",
+          "draft-income-graph",
+          "open-draft-pr"
+        ],
+        "deniedActions": [
+          "change-dns",
+          "change-price",
+          "delete-resources",
+          "deploy-production",
+          "edit-checkout",
+          "increase-budget",
+          "rotate-secrets",
+          "sign-contract",
+          "transfer-funds"
+        ]
+      }
+    },
+    {
+      "id": "human-frank",
+      "type": "Human",
+      "label": "Frank Riemer",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "https://www.frankx.ai/about",
+        "date": "2026-11-07",
+        "method": "named principal"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Reachable within a working day; release log shows Frank, not an agent, clearing HumanGates.",
+      "data": {
+        "role": "founder"
+      }
+    },
+    {
+      "id": "gate-publish-and-fulfill",
+      "type": "HumanGate",
+      "label": "Frank release before Starter Kit publish-offer or fulfill",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07",
+        "method": "irreversible-step policy"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Every publish-offer and fulfill step has a timestamped Frank approval before execution.",
+      "data": {
+        "gatedStepIds": [
+          "publish-offer",
+          "fulfill"
+        ],
+        "approver": "Frank Riemer"
+      }
+    },
+    {
+      "id": "gate-pack-publish-and-deliver",
+      "type": "HumanGate",
+      "label": "Frank release before Pack publish-pack or deliver-pack",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07",
+        "method": "irreversible-step policy for adjacent pack SKU"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Every publish-pack and deliver-pack step has a timestamped Frank approval before execution.",
+      "data": {
+        "gatedStepIds": [
+          "publish-pack",
+          "deliver-pack"
+        ],
+        "approver": "Frank Riemer"
+      }
+    },
+    {
+      "id": "asset-starter-kit-payload",
+      "type": "Asset",
+      "label": "Starter Kit payload (primitives, prompts, inspectable architecture)",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "https://www.frankx.ai/templates",
+        "date": "2026-11-07",
+        "method": "public starter-kit surface; payload still founder-gated"
+      },
+      "version": "0.1.0",
+      "visibility": "buyer",
+      "evaluation": "A stranger can open the delivered files and run the first recipe without a DM to Frank.",
+      "data": {}
+    },
+    {
+      "id": "cost-fulfillment-stack",
+      "type": "Cost",
+      "label": "Hosting, Whop/store fees, and agent draft time (unmetered estimate pending invoices)",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07",
+        "method": "honest gap \u2014 no invoice attached in this graph"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Time the next ten human-review + publish-offer gates. If median founder minutes exceed the monthly budget, lower automation thresholds or raise the kill date. Replace any future EUR amount with provider invoices only.",
+      "data": {
+        "borneByBuyer": false,
+        "founderMinutesPerMonth": 480
+      },
+      "notes": "founderMinutesPerMonth=480 is an estimate for gate review/release (not measured invoice). No EUR amount invented; E02 money-cost warning may remain until invoices exist."
+    },
+    {
+      "id": "experiment-first-ten-kits",
+      "type": "Experiment",
+      "label": "First ten Starter Kit purchase attempts",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07",
+        "method": "planned market test for founder-zero"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Complete when ten strangers reach a buy/no-buy decision, not when ten ads are sent.",
+      "data": {
+        "hypothesis": "At least one of ten completed purchase attempts converts at the intended Starter Kit price without custom fulfillment.",
+        "decisionRule": "Zero paid kits after ten completed attempts sends the thesis back to problem-tool-sprawl."
+      }
+    },
+    {
+      "id": "risk-price-not-live",
+      "type": "Risk",
+      "label": "Stated \u20ac97/\u20ac7 prices are not yet attested as live checkout",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "https://www.frankx.ai/templates",
+        "date": "2026-11-07",
+        "method": "live fetch vs interview memory mismatch risk"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Risk closes when a listing Evidence node shows the live price equal to the Offer, or Offers are updated to match live.",
+      "data": {}
+    },
+    {
+      "id": "maintenance-offer-honesty",
+      "type": "Maintenance",
+      "label": "Monthly honesty pass on kit claims and prices",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07",
+        "method": "operating cadence"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Cadence met or Offer visibility drops to private until fixed.",
+      "data": {
+        "cadenceDays": 30
+      }
+    },
+    {
+      "id": "kill-no-paid-kit",
+      "type": "KillCriterion",
+      "label": "No paid Starter Kit after first ten completed purchase attempts",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07",
+        "method": "pre-committed exit"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Checked on reviewBy against paid invoices only. Interest and replies do not count.",
+      "data": {
+        "threshold": "Zero paid Starter Kits after ten completed purchase attempts",
+        "reviewBy": "2026-12-15"
+      }
+    },
+    {
+      "id": "receipt-starter-kit-draft",
+      "type": "Receipt",
+      "label": "Draft shared-receipt citation for founder-zero graph",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "docs/reality-architecture/schemas/shared-receipt.v0.schema.json",
+        "date": "2026-11-07",
+        "method": "platform eight-hour stream1+2 linkage"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Becomes meaningful when it attests a payment, experiment result, or maintained asset with a content hash \u2014 not while only pointing at an Evidence gap.",
+      "data": {
+        "sharedReceiptRef": "shared-rcpt-frankx-starter-kit-draft-2026-11-07",
+        "verdict": "draft"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-customer-problem",
+      "type": "suffers",
+      "from": "customer-solo-ai-builder",
+      "to": "problem-tool-sprawl",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-03",
+        "date": "2026-11-03"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Drop if discovery names a different bottleneck."
+    },
+    {
+      "id": "e-offer-customer",
+      "type": "serves",
+      "from": "offer-frankx-starter-kit",
+      "to": "customer-solo-ai-builder",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-10-27",
+        "date": "2026-10-27"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Buyer completes kit without custom thread."
+    },
+    {
+      "id": "e-pack-customer",
+      "type": "serves",
+      "from": "offer-six-primitives-pack-adjacent",
+      "to": "customer-solo-ai-builder",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-10-27",
+        "date": "2026-10-27"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Pack buyers are not counted as Starter Kit proof."
+    },
+    {
+      "id": "e-ev-founder-offer",
+      "type": "evidences",
+      "from": "evidence-founder-pricing-intent",
+      "to": "offer-frankx-starter-kit",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-10-27",
+        "date": "2026-10-27"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Supersede with payment Evidence."
+    },
+    {
+      "id": "e-ev-founder-pack",
+      "type": "evidences",
+      "from": "evidence-founder-pricing-intent",
+      "to": "offer-six-primitives-pack-adjacent",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-10-27",
+        "date": "2026-10-27"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Supersede with payment Evidence."
+    },
+    {
+      "id": "e-ev-founder-customer",
+      "type": "evidences",
+      "from": "evidence-founder-pricing-intent",
+      "to": "customer-solo-ai-builder",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-10-27",
+        "date": "2026-10-27"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Stated intention only."
+    },
+    {
+      "id": "e-ev-gap-offer",
+      "type": "evidences",
+      "from": "evidence-gap-no-paid-starter",
+      "to": "offer-frankx-starter-kit",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Remove when payment Evidence exists."
+    },
+    {
+      "id": "e-ev-gap-problem",
+      "type": "evidences",
+      "from": "evidence-gap-no-paid-starter",
+      "to": "problem-tool-sprawl",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Honesty marker for unsupported demand."
+    },
+    {
+      "id": "e-ev-live-channel",
+      "type": "evidences",
+      "from": "evidence-live-templates-surface",
+      "to": "channel-frankx-site",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "https://www.frankx.ai/templates",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Re-fetch quarterly."
+    },
+    {
+      "id": "e-ev-live-asset",
+      "type": "evidences",
+      "from": "evidence-live-templates-surface",
+      "to": "asset-starter-kit-payload",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "https://www.frankx.ai/templates",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Surface mention \u2260 delivered payload."
+    },
+    {
+      "id": "e-channel-site-customer",
+      "type": "reaches",
+      "from": "channel-frankx-site",
+      "to": "customer-solo-ai-builder",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "https://www.frankx.ai/",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Stranger reaches purchasable kit."
+    },
+    {
+      "id": "e-channel-circle-customer",
+      "type": "reaches",
+      "from": "channel-circle-community",
+      "to": "customer-solo-ai-builder",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-03",
+        "date": "2026-11-03"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Circle members find the offer without DM."
+    },
+    {
+      "id": "e-workflow-offer",
+      "type": "fulfills",
+      "from": "workflow-kit-fulfillment",
+      "to": "offer-frankx-starter-kit",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Dry-run with gate recorded."
+    },
+    {
+      "id": "e-role-workflow",
+      "type": "performs",
+      "from": "role-kit-assembler",
+      "to": "workflow-kit-fulfillment",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Weekly deniedActions audit."
+    },
+    {
+      "id": "e-gate-workflow",
+      "type": "gates",
+      "from": "gate-publish-and-fulfill",
+      "to": "workflow-kit-fulfillment",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Timestamped Frank release on irreversible steps."
+    },
+    {
+      "id": "e-workflow-asset",
+      "type": "produces",
+      "from": "workflow-kit-fulfillment",
+      "to": "asset-starter-kit-payload",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "buyer",
+      "evaluation": "Payload changes only through maintenance."
+    },
+    {
+      "id": "e-workflow-cost",
+      "type": "incurs",
+      "from": "workflow-kit-fulfillment",
+      "to": "cost-fulfillment-stack",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Attach invoices."
+    },
+    {
+      "id": "e-experiment-offer",
+      "type": "tests",
+      "from": "experiment-first-ten-kits",
+      "to": "offer-frankx-starter-kit",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Ten completed attempts."
+    },
+    {
+      "id": "e-risk-offer",
+      "type": "threatens",
+      "from": "risk-price-not-live",
+      "to": "offer-frankx-starter-kit",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "https://www.frankx.ai/templates",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Close when live price attested."
+    },
+    {
+      "id": "e-maint-asset",
+      "type": "maintains",
+      "from": "maintenance-offer-honesty",
+      "to": "asset-starter-kit-payload",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Monthly honesty pass."
+    },
+    {
+      "id": "e-kill-offer",
+      "type": "retires",
+      "from": "kill-no-paid-kit",
+      "to": "offer-frankx-starter-kit",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Paid invoices only."
+    },
+    {
+      "id": "e-receipt-attests-gap",
+      "type": "attests",
+      "from": "receipt-starter-kit-draft",
+      "to": "evidence-gap-no-paid-starter",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "docs/reality-architecture/schemas/shared-receipt.v0.schema.json",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Draft attestation of the honesty gap."
+    },
+    {
+      "id": "e-receipt-attests-maint",
+      "type": "attests",
+      "from": "receipt-starter-kit-draft",
+      "to": "maintenance-offer-honesty",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "docs/reality-architecture/schemas/shared-receipt.v0.schema.json",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Links receipt contract to maintenance cadence."
+    },
+    {
+      "id": "e-pack-workflow-offer",
+      "type": "fulfills",
+      "from": "workflow-pack-fulfillment",
+      "to": "offer-six-primitives-pack-adjacent",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-10-27",
+        "date": "2026-10-27"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Dry-run with gate recorded."
+    },
+    {
+      "id": "e-role-pack-workflow",
+      "type": "performs",
+      "from": "role-kit-assembler",
+      "to": "workflow-pack-fulfillment",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Weekly deniedActions audit."
+    },
+    {
+      "id": "e-gate-pack-workflow",
+      "type": "gates",
+      "from": "gate-pack-publish-and-deliver",
+      "to": "workflow-pack-fulfillment",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "public",
+      "evaluation": "Timestamped Frank release on irreversible pack steps."
+    },
+    {
+      "id": "e-pack-workflow-cost",
+      "type": "incurs",
+      "from": "workflow-pack-fulfillment",
+      "to": "cost-fulfillment-stack",
+      "owner": "Frank Riemer",
+      "provenance": {
+        "source": "interview:Frank Riemer 2026-11-07",
+        "date": "2026-11-07"
+      },
+      "version": "0.1.0",
+      "visibility": "private",
+      "evaluation": "Attach invoices."
+    }
+  ]
+}

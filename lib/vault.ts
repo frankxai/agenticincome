@@ -2,9 +2,6 @@
  * Read-side of the digital economy vault for agent tools. Pure: callers pass the
  * vault data in, so the MCP route, the atlas build and the node tests all agree.
  * Nothing here forecasts revenue. Margins are arithmetic over sourced list prices.
- *
- * Not yet registered on /api/mcp: publishing these rows is a public claim, which
- * needs Frank's approval after the remaining rows pass verification.
  */
 
 export type VerificationVerdict =

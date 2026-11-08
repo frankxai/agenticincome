@@ -16,7 +16,10 @@
     "review_income_graph",
     "draft_income_graph",
     "draft_income_system_manifest",
-    "export_income_system_tasks"
+    "export_income_system_tasks",
+    "search_digital_economies",
+    "list_supply_costs",
+    "calculate_unit_margin"
   ],
   "docs": "https://www.agenticincome.ai/mcp"
 }

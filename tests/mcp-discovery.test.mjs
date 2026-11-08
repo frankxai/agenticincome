@@ -9,8 +9,15 @@ const routeSource = read('app/api/mcp/[transport]/route.ts')
 const registeredTools = [...routeSource.matchAll(/registerTool\(\s*'([a-z_]+)'/g)].map((m) => m[1])
 
 test('.well-known/mcp.json matches the registered MCP tools exactly', () => {
-  assert.equal(registeredTools.length, 13, 'expected exactly 13 registered tools')
+  assert.equal(registeredTools.length, 16, 'expected exactly 16 registered tools')
   assert.deepEqual([...wellKnown.tools].sort(), [...registeredTools].sort())
+})
+
+test('economy vault MCP tools default confirmedOnly to true on the public endpoint', () => {
+  assert.ok(registeredTools.includes('search_digital_economies'))
+  assert.ok(registeredTools.includes('list_supply_costs'))
+  assert.ok(registeredTools.includes('calculate_unit_margin'))
+  assert.match(routeSource, /const effectiveConfirmedOnly = confirmedOnly \?\? true/)
 })
 
 test('discovery metadata points at the real endpoint and docs', () => {

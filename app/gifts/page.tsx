@@ -32,7 +32,7 @@ const gifts: Gift[] = [
     name: 'A revenue loop model with its assumptions',
     promise: 'The arithmetic, labelled as assumptions, and the stopping rule.',
     detail:
-      'A $67 digital product modelled end to end. Every figure is an assumption, not a result: 300 visits, 2.5% to checkout, 70% completion, 5% refunds, 4% plus $0.40 merchant fee, 12 hours to build. Change any input and the output moves. The model assumes a working merchant account; without one the loop earns nothing, which is the most common real blocker and the one this estate is currently stuck on. Includes the 30-day kill criterion.',
+      'A $67 digital product modelled end to end. Every figure is an assumption, not a result: 300 visits, 2.5% to checkout, 70% completion, 5% refunds, 5% plus $0.50 merchant fee, 12 hours to build. Change any input and the output moves. The model assumes a working merchant account; without one the loop earns nothing, which is the most common real blocker and the one this estate is currently stuck on. Includes the 30-day kill criterion.',
     href: '/offers/blueprint',
     cta: 'Read the blueprint offer',
     state: 'ready',

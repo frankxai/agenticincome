@@ -13,11 +13,11 @@ This 1-page packet defines the exact repository state, Vercel environment variab
 - **Current state on `main`:** Already flipped.
   - `id`: `"blueprint"`
   - `price_cents`: `6700` (`$67.00` one-time)
-  - `status`: `"for sale — checkout opens once Polar env is configured"` (starts with `"for sale"`, so `catalogRefusal(product)` in `lib/polar.ts` returns `null`).
+  - `status`: `"for sale — private delivery via Polar"` (starts with `"for sale"`, so `catalogRefusal(product)` in `lib/polar.ts` returns `null`).
   - `delivery.path`: `"/delivery/blueprint"`
 - **Deliverable file reconciliation (PR #121):**
-  - On `main`, `products/blueprint/` contains **7 Markdown files** (`00-README.md`, `service-kit.md`, `product-kit.md`, `system-kit.md`, `execution-roadmap-30-60-90.md`, `case-study-flywheel.md`, `kill-criteria-and-guardrails.md`), whereas `products/catalog.json` on `main` lists only 4 files.
-  - **Action before live activation:** Merge PR `#121` (`fix/blueprint-v3-deliverables-reconciliation`) so `products/catalog.json`, `lib/offers.ts`, `lib/pack-manifests.ts`, and `/delivery/blueprint` all declare the exact 7-file package contract.
+  - On `main`, `products/blueprint/` contains **5 Markdown files** (`00-README.md`, `AGENTIC_INCOME_BLUEPRINT.md`, `service-kit.md`, `product-kit.md`, `system-kit.md`), whereas `products/catalog.json` on `main` lists only **4** of them (`00-README.md`, `service-kit.md`, `product-kit.md`, `system-kit.md`). `AGENTIC_INCOME_BLUEPRINT.md` ships in the repo but is not declared in the catalog.
+  - **Action before live activation:** Merge PR `#121` (`fix/blueprint-v3-deliverables-reconciliation`), which adds `execution-roadmap-30-60-90.md`, `case-study-flywheel.md`, and `kill-criteria-and-guardrails.md` and reconciles `products/catalog.json`, `lib/offers.ts`, `lib/pack-manifests.ts`, and `/delivery/blueprint` to the exact 7-file package contract.
 
 ### B. Environment Gate (`lib/polar.ts` + Vercel Production Env)
 `lib/polar.ts` fails closed until three environment variables exist in Vercel (`agenticincome` project, Production environment):
@@ -33,12 +33,13 @@ This 1-page packet defines the exact repository state, Vercel environment variab
 
 ---
 
-## 2. Unit Economics (`vault/margins.json`)
+## 2. Unit Economics
 
-- **Scenario ID:** `blueprint-polar` (`vault/margins.json`)
+- **Committed scenario:** none yet models the Blueprint. The nearest committed scenario in `vault/margins.json` is `gencreator-byok-pack-polar` (`$29` hypothesis price, `93.3%` gross margin). The arithmetic below is a standalone calculation at the `$67` catalog price and is not stored as a vault scenario.
 - **Price hypothesis:** `$67.00` (`priceIsHypothesis: true`)
-- **Selling fee (`polar-starter-fee`):** `4% + $0.40` domestic transaction fee (`$2.68 + $0.40 = $3.08`, sourced from `https://polar.sh/resources/pricing`, retrieved `2026-10-25`)
-- **Net kept before international/payout surcharges:** `$63.92` (`95.4%` gross margin; `95.9%` in `vault/margins.json` baseline)
+- **Selling fee (`polar-starter-fee`):** `5% + $0.50` per transaction on the free Starter tier (source `https://polar.sh/resources/pricing`, retrieved `2026-10-25`; consistent with `ops/POLAR-SETUP.md`). At `$67.00`: `$3.35 + $0.50 = $3.85`.
+- **Net kept before international/payout surcharges:** `$63.15` (`94.3%` gross margin)
+- **Not modelled above:** `+1.5%` on non-US cards (relevant for an EU-based seller), `$15` per dispute, and Stripe payout pass-through (`$2/month` active payouts, `0.25% + $0.25` per payout, `0.25-1%` cross-border FX).
 - **Variable AI inference COGS:** `$0.00` (static Markdown operating kits)
 
 ---

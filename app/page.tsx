@@ -26,6 +26,9 @@ const MCP_TOOLS = [
 
 type Product = CatalogProduct
 
+// Only these products have a waitlist today (lib/offers.ts, components/ProductLadder.tsx); the rest are simply not on sale yet.
+const WAITLIST_PRODUCT_IDS = new Set(['agent-team-pro', 'private-intel'])
+
 function priceLabel(p: Product): string {
   if (p.price_cents === 0) return 'Free'
   const dollars = `$${(p.price_cents / 100).toFixed(0)}`
@@ -183,7 +186,7 @@ export default function Home() {
           <div className="kicker text-[color:var(--color-gold)]">Products · labeled honestly</div>
           <h2 className="display-h2">The catalog renders from reality.</h2>
           <p className="mt-3 max-w-xl text-[color:var(--color-muted)]">
-            Status strings come straight from the product catalog. Nothing says buy until checkout
+            Availability follows the product catalog. Nothing says buy until checkout
             actually exists; today the free starter kit is the only live path. Paid prices and
             offer links appear only on products the catalog marks for sale.
           </p>
@@ -199,7 +202,13 @@ export default function Home() {
                   <div className={`price-tag ${isFree ? 'free' : ''}`}>{priceLabel(product)}</div>
                 ) : null}
                 <h3 className="font-display text-lg font-bold">{product.name}</h3>
-                <div className="price-state">{product.status}</div>
+                <div className="price-state">
+                  {isFree || isForSale
+                    ? product.status
+                    : WAITLIST_PRODUCT_IDS.has(product.id)
+                      ? 'Waitlist · not yet on sale'
+                      : 'Not yet on sale'}
+                </div>
                 {isFree ? (
                   <Link href="/delivery/starter-kit" className="cta-secondary mt-2 !min-h-0 !px-4 !py-2 text-sm">
                     Open the starter kit
@@ -208,7 +217,11 @@ export default function Home() {
                   <Link href="/offers" className="mt-2 text-sm font-semibold text-muted underline decoration-[color:var(--color-border)] underline-offset-2 hover:text-ink">
                     Read the offer
                   </Link>
-                ) : null}
+                ) : (
+                  <Link href={`/offers/${product.id}`} className="mt-2 text-sm font-semibold text-muted underline decoration-[color:var(--color-border)] underline-offset-2 hover:text-ink">
+                    Inspect scope
+                  </Link>
+                )}
               </div>
             )
           })}

@@ -1,3 +1,5 @@
+import { catalogRefusal, checkoutRelease, findCatalogProduct } from './polar.ts'
+
 export type OfferStage = 'entry' | 'pack' | 'system' | 'continuity'
 
 export type Offer = {
@@ -389,8 +391,17 @@ export function checkoutPath(offer: Offer): string {
   return `/api/checkout?offer=${offer.slug}`
 }
 
+/**
+ * The static checkout link for an offer, or null. Static links point at live
+ * Polar checkout, so they open only on CHECKOUT_RELEASE=live (lib/polar.ts),
+ * and an offer backed by a catalog product also needs the catalog to permit
+ * the sale. A link pasted into the environment cannot open checkout alone.
+ */
 export function checkoutUrl(offer: Offer): string | null {
   if (!offer.checkout.envKey) return null
+  if (checkoutRelease() !== 'live') return null
+  const product = findCatalogProduct(offer.slug)
+  if (product && catalogRefusal(product)) return null
   const value = process.env[offer.checkout.envKey]
   if (!value) return null
 

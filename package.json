@@ -23,10 +23,10 @@
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
-    "@vercel/speed-insights": "^2.0.0",
-    "gsap": "^3.15.0",
-    "mcp-handler": "^1.1.0",
-    "next": "16.4.3",
+    "@vercel/speed-insights": "^2.1.0",
+    "gsap": "^3.15.1",
+    "mcp-handler": "^2.3.1",
+    "next": "16.4.5",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "zod": "^4.6.7"
@@ -34,15 +34,15 @@
   "devDependencies": {
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
-    "@next/mdx": "^16.4.3",
-    "@tailwindcss/postcss": "^4.3.3",
+    "@next/mdx": "^16.4.5",
+    "@tailwindcss/postcss": "^4.3.4",
     "@types/mdx": "^2.0.13",
-    "@types/node": "^26.6.5",
+    "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "^16.4.3",
-    "tailwindcss": "^4.3.3",
+    "eslint-config-next": "^16.4.5",
+    "tailwindcss": "^4.3.4",
     "typescript": "^6.0.3"
   }
 }

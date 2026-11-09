@@ -1,4 +1,5 @@
 import catalog from '@/data/programs.json'
+import { withSource, type LinkSource } from '@/lib/link-source'
 
 export type Program = {
   tool: string
@@ -36,10 +37,11 @@ export function findProgram(tool: string): Program | undefined {
 /**
  * The affiliate link for a tool, or null when we haven't joined the program.
  * Null is the honest default — callers render plain text, never a dead link.
+ * Site pages are the default source; the MCP server passes 'mcp'.
  */
-export function getLink(tool: string): string | null {
+export function getLink(tool: string, src: LinkSource = 'page'): string | null {
   const p = findProgram(tool)
-  return p?.ourLink ?? null
+  return p?.ourLink ? withSource(p.ourLink, src) : null
 }
 
 /** Slug for MCP + registry lookups: "Systeme.io" → "systeme-io". */

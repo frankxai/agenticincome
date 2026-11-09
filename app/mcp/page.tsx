@@ -80,6 +80,21 @@ const TOOLS = [
     args: '{ graph }',
     returns: 'Installable operating tasks: workflow steps with their human gates, maintenance cadences, kill-review dates, experiment decisions.',
   },
+  {
+    name: 'search_digital_economies',
+    args: '{ sector?, query?, confirmedOnly? }',
+    returns: 'Sourced platform and marketplace rows from the Economy Vault (GMV, developer payouts, take rates, source URLs, verification verdicts). Defaults to confirmedOnly: true.',
+  },
+  {
+    name: 'list_supply_costs',
+    args: '{ category?, confirmedOnly? }',
+    returns: 'Sourced unit costs and transaction fee rows from the Economy Vault supply chain (inference tokens, audio, image, video, merchant-of-record fees, payment rails). Defaults to confirmedOnly: true.',
+  },
+  {
+    name: 'calculate_unit_margin',
+    args: '{ priceUsd, costLines?, feeSupplyIds?, takeRateFrom? }',
+    returns: 'Deterministic unit gross margin over confirmed Economy Vault supply-chain and marketplace take-rate rows for a hypothesis selling price. Refuses unconfirmed or unpriced inputs.',
+  },
 ]
 
 const DESKTOP_CONFIG = `{

@@ -439,6 +439,8 @@ const handler = createMcpHandler(
   {
     serverInfo: { name: 'agentic-income', version: '1.0.0' },
     verboseLogs: false,
+    // Old config had disableSse: true; this also rejects 2.x subscription streams.
+    maxSubscriptions: 0,
   },
 )
 

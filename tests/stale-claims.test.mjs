@@ -72,3 +72,18 @@ test('priced blog comparison rows link a vendor pricing page and carry an as-of 
   }
   assert.ok(pricedTables > 0, 'expected at least one priced comparison table')
 })
+
+// The homepage once led with outcome language that CLAUDE.md forbids: capability over
+// income, never promised revenue or autopilot results. Keep these phrases off it.
+test('homepage carries no outcome or autopilot language', () => {
+  const source = read('app/page.tsx')
+  const banned = [
+    'Engineered revenue',
+    'canonical revenue operating system',
+    'Recurring beats one-time',
+    'run without you',
+  ]
+  for (const phrase of banned) {
+    assert.ok(!source.toLowerCase().includes(phrase.toLowerCase()), `app/page.tsx still contains "${phrase}"`)
+  }
+})

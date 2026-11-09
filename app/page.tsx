@@ -218,7 +218,7 @@ export default function Home() {
                     Read the offer
                   </Link>
                 ) : (
-                  <Link href={`/offers/${product.id}`} className="mt-2 text-sm font-semibold text-muted underline decoration-[color:var(--color-border)] underline-offset-2 hover:text-ink">
+                  <Link href={`/offers/${product.id}`} aria-label={`Inspect scope of ${product.name}`} className="mt-2 text-sm font-semibold text-muted underline decoration-[color:var(--color-border)] underline-offset-2 hover:text-ink">
                     Inspect scope
                   </Link>
                 )}

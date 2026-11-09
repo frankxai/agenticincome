@@ -3,8 +3,7 @@ import test from 'node:test'
 import { createMcpHandler } from 'mcp-handler'
 import { z } from 'zod'
 
-// mcp-handler 1.1.0 pins its SDK peer to 1.26.0; pnpm-workspace.yaml overrides the SDK
-// to a patched 1.x. This proves the handler still serves tools on the overridden SDK.
+// This proves mcp-handler 2.x still serves tools on the locked MCP SDK.
 const handler = createMcpHandler(
   (server) => {
     server.registerTool(
@@ -13,8 +12,8 @@ const handler = createMcpHandler(
       async ({ value }) => ({ content: [{ type: 'text', text: value }] }),
     )
   },
-  { serverInfo: { name: 'runtime-check', version: '1.0.0' } },
-  { basePath: '/api', maxDuration: 10, verboseLogs: false, disableSse: true },
+  // mcp-handler 2.x: (initializeServer, options). Routing/time limits belong to the host.
+  { serverInfo: { name: 'runtime-check', version: '1.0.0' }, verboseLogs: false, maxSubscriptions: 0 },
 )
 
 // mcp-handler starts a module-level cleanup setInterval it never unrefs, so this file's

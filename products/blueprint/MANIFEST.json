@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0.0",
+  "productId": "blueprint",
+  "archiveName": "agentic-income-operating-desk-v3",
+  "title": "Agentic Income Operating Desk Blueprint",
+  "version": "3.0.0",
+  "releasedAt": "2026-11-03",
+  "priceCents": 6700,
+  "currency": "USD",
+  "merchantOfRecord": "polar.sh",
+  "refundPolicy": "30-day no-questions refund via Polar.sh receipt reply",
+  "license": "Personal commercial license for buyer-owned business repositories and workflows; no resale or public redistribution.",
+  "companionPublicRepo": "https://github.com/frankxai/agentic-income-skills",
+  "manifestSelfNote": "MANIFEST.json records SHA-256 digests for all 6 peer deliverables in this archive.",
+  "files": [
+    {
+      "path": "products/blueprint/00-README.md",
+      "filename": "00-README.md",
+      "format": "markdown",
+      "role": "60-minute install sequence, SHA-256 verification snippet, and license boundaries",
+      "bytes": 5602,
+      "lines": 75,
+      "sha256": "a6997ccadb94d49c92b7244e5f2ecd186617a0cefcaa4ca6cf7f94034e02b60f"
+    },
+    {
+      "path": "products/blueprint/operating-desk-architecture.md",
+      "filename": "operating-desk-architecture.md",
+      "format": "markdown",
+      "role": "Repository workspace layout, daily/weekly cadence, labeled scenario math, and 30-day / 90-day kill criteria",
+      "bytes": 11938,
+      "lines": 177,
+      "sha256": "fd88b26356cef53d284b0c6db6c3f022838010030225b59a6390feb9d6673082"
+    },
+    {
+      "path": "products/blueprint/coding-tool-comparison-matrix.md",
+      "filename": "coding-tool-comparison-matrix.md",
+      "format": "markdown",
+      "role": "Primary-sourced matrix across Claude Code, OpenAI Codex, Gemini CLI, and Cursor plus reusable comparison template",
+      "bytes": 11739,
+      "lines": 143,
+      "sha256": "571edb28ea04638c6463d350db0b31ec70acffb07bb2236e25a5e9fe465974c7"
+    },
+    {
+      "path": "products/blueprint/recurring-payer-catalog.csv",
+      "filename": "recurring-payer-catalog.csv",
+      "format": "csv",
+      "role": "12-row verified partner ledger with commission terms, cookie windows, primary source URLs, and non-affiliate alternatives",
+      "bytes": 4073,
+      "lines": 13,
+      "sha256": "7f43b4ae863ae78eac768217dd49786456a5256fca407b7a1546cdc07c4e0882"
+    },
+    {
+      "path": "products/blueprint/offer-and-waitlist-ladder.md",
+      "filename": "offer-and-waitlist-ladder.md",
+      "format": "markdown",
+      "role": "4-stage offer and waitlist ladder from $0 starter to $19-$149 self-serve packs with TypeScript/JSON schema",
+      "bytes": 7017,
+      "lines": 108,
+      "sha256": "543ef325ca6863ebc1f45996055f65aa27deed5408426ed68e1b91eb83f77aa9"
+    },
+    {
+      "path": "products/blueprint/polar-fulfillment-checklist.md",
+      "filename": "polar-fulfillment-checklist.md",
+      "format": "markdown",
+      "role": "Self-serve Polar.sh merchant-of-record setup, 3-gate fail-closed checkout pattern, and 12-point live card rehearsal",
+      "bytes": 8388,
+      "lines": 87,
+      "sha256": "4b17faba412be000ca97923d3438ad267cb65c2ffa0551ecdcec075b6c1ea860"
+    }
+  ]
+}

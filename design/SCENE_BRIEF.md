@@ -36,6 +36,32 @@ Example workflows carry explicit example labels and no relative timestamps. The 
 status marker is static; it does not imply a live heartbeat. Existing layout, visual tokens,
 and interaction structure are retained. No imagery, motion asset, or new dependency is added.
 
+## Evidence Observatory Private Review Dashboard — 2026-11-02
+
+### Creative Thesis
+
+"Evidence before rankings." Visual proof of research rigor through calm density, honest unknowns, and strict boundaries.
+
+### Static Frame
+
+Obsidian technical luxury foundation: `#05060a` deep void background, `#0a0c14` surface cards, `#293044` borders, `#f1f3f9` typography.
+- Implementation accent: `#10b981` (emerald) for the intelligence eyebrow and `:focus-visible` interactive highlights.
+- Commercial & triage warning: `#fbbf24` (amber) for private-review banners and research-required badges.
+- Technical secondary & interactive links: `#5eead4` (cyan) for source anchors and disclosure triggers.
+- Native `<meter>` indicators clearly communicating coverage proportions without extraneous chart libraries.
+
+### Signature Motion
+
+Purely functional, zero-distraction interaction. Client-side filtering applies immediately via vanilla DOM manipulation with zero layout flicker or external script load. Detail expansions use browser-native disclosure animations.
+
+### Reduced Motion
+
+Inherently compliant: 100% static layout with all states fully accessible at rest. No keyframe animations, ambient parallax, or forced transitions.
+
+### Source & Security Decision
+
+Self-contained static HTML compilation generated directly from authorized JSON catalog snapshots. Zero external assets, fonts, tracking pixels, or remote scripts. Enforced with a SHA-256 hash-pinned CSP script and `default-src 'none'`.
+
 ## Offer inspection workbench and schematic plates — 2026-11-03
 
 Reference lock (`DESIGN.md`): Linear Changelog (`11d3e58a`) obsidian elevation, Supabase
@@ -50,3 +76,37 @@ Cycle (`618b2107`) two-pane file preview, and Polaroid (`Flow 9471`) 4-step fit 
 - **Accessibility:** `44px` minimum touch targets, `2px` `#10b981` `:focus-visible` outlines,
   `ArrowUp`/`ArrowDown`/`Home`/`End` tab navigation, and automatic focus advancement across
   fit-check steps after user interaction.
+
+## Blueprint preview data repair, Codex, 4 November 2026
+
+Author: Codex (OpenAI). Revision: 1. Source: the Blueprint preview-disclosure
+finding at `e427da72ce2a3ca28777ca87658c29fab12692ef`.
+Review state: source/data checks passed; no new visual inspection claimed.
+
+The existing file inspector receives an explicitly labelled two-row CSV sample.
+Its paid-file metadata stays accurate. This repair changes serialized preview
+content and the sample badge. The existing layout, controls, motion and reduced
+motion behavior remain in use. The separate sample prevents short paid files
+from becoming complete public excerpts as the catalog evolves.
+
+### Preview guard refinement, Codex, 4 November 2026, revision 2
+
+Source: independent Claude review of `a7e1958`, findings A1 to A6.
+Review state: no new rendered inspection claimed.
+
+The selected direction adds fail-closed line, byte and leading-record limits
+to the generator. The alternative of testing only complete-file equality lets
+near-complete paid content through and was rejected. This refinement keeps
+the current public excerpt, inspector composition, controls and motion intact.
+Vercel Authentication prevented inspection of the prior preview; the login
+page is not evidence that the offer page renders correctly.
+
+### Default protection refinement, Codex, 4 November 2026, revision 3
+
+Author: Codex (OpenAI). Source: Claude review of `5bf2299`, N1/N2/N3/N5.
+Review state: code/data refinement; rendered inspection remains pending.
+
+The selected direction keeps the public sample and composition intact while
+requiring explicit public classification for future file reads. Counting padded
+whitespace and relying on each future caller to opt into protection were
+rejected. No new asset, interaction, typography or motion is introduced.

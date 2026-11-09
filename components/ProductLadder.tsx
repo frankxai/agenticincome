@@ -11,10 +11,10 @@ const PRODUCTS = [
     cta: 'Start free',
   },
   {
-    name: 'Income Architecture Blueprint',
+    name: 'Agentic Income Blueprint',
     price: '$67',
-    state: 'Inspectable file tree · Polar ready',
-    body: 'Three complete business-plan kits across services, products, and comparison systems with scenario math, fulfillment runbooks, and 30-day kill criteria.',
+    state: '7-file operating desk · Polar ready',
+    body: 'Complete 7-file operating desk: workspace and cadence, dated coding-tool comparison matrix, 12-row recurring-payer CSV, 4-stage offer ladder, and Polar.sh gate checklist.',
     href: '/offers/blueprint',
     cta: 'Inspect Blueprint',
   },

@@ -98,36 +98,36 @@ const plates = {
   }),
 
   'plate-blueprint.svg': frame({
-    badge: 'BLUEPRINT V2 · CORE ARCHITECTURE',
+    badge: 'BLUEPRINT V3 · OPERATING DESK',
     code: 'ONE-TIME · $67',
-    title: 'Three Business-Plan Kits + Kill Criteria',
-    subtitle: 'Worked fictional scenarios, fulfillment runbooks, and launch checklists',
-    footerLeft: 'FILES: 00-README · service-kit · product-kit · system-kit',
+    title: '7-File Operating Desk + SHA-256 Manifest',
+    subtitle: 'Comparison matrix, verified payer CSV, offer ladder, Polar gate, and kill criteria',
+    footerLeft: 'FILES: 00-README + 5 DESK GUIDES/CSV + MANIFEST.json',
     footerRight: '30-DAY REFUND · POLAR MoR',
     body: `
       <rect x="28" y="128" width="182" height="154" rx="10" fill="#0A0C14" stroke="#1A1F2E"/>
-      <text x="44" y="152" fill="#06B6D4" font-family="ui-monospace, monospace" font-size="10">KIT 01 · SERVICES</text>
-      <text x="44" y="173" fill="#F1F3F9" font-family="system-ui, sans-serif" font-size="13.5" font-weight="600">service-kit.md</text>
-      <text x="44" y="195" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">8+ hrs/wk entry lane</text>
-      <text x="44" y="213" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">Scoped audit &amp; sprint</text>
-      <text x="44" y="231" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">Acceptance check sheet</text>
-      <text x="44" y="262" fill="#34D399" font-family="ui-monospace, monospace" font-size="10">Fastest to first client</text>
+      <text x="44" y="152" fill="#06B6D4" font-family="ui-monospace, monospace" font-size="10">01 · DESK &amp; CADENCE</text>
+      <text x="44" y="173" fill="#F1F3F9" font-family="system-ui, sans-serif" font-size="13.5" font-weight="600">operating-desk.md</text>
+      <text x="44" y="195" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">Git workspace layout</text>
+      <text x="44" y="213" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">45m daily + Fri review</text>
+      <text x="44" y="231" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">30d &amp; 90d stop rules</text>
+      <text x="44" y="262" fill="#34D399" font-family="ui-monospace, monospace" font-size="10">00-README + MANIFEST</text>
 
       <rect x="229" y="128" width="182" height="154" rx="10" fill="#101522" stroke="#10B981" stroke-opacity="0.7"/>
-      <text x="245" y="152" fill="#10B981" font-family="ui-monospace, monospace" font-size="10">KIT 02 · PRODUCTS</text>
-      <text x="245" y="173" fill="#F1F3F9" font-family="system-ui, sans-serif" font-size="13.5" font-weight="600">product-kit.md</text>
-      <text x="245" y="195" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">Packaged judgment</text>
-      <text x="245" y="213" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">Scenario unit economics</text>
-      <text x="245" y="231" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">Kill-criterion by date</text>
-      <text x="245" y="262" fill="#10B981" font-family="ui-monospace, monospace" font-size="10">Self-serve digital desk</text>
+      <text x="245" y="152" fill="#10B981" font-family="ui-monospace, monospace" font-size="10">02 · MATRIX &amp; CSV</text>
+      <text x="245" y="173" fill="#F1F3F9" font-family="system-ui, sans-serif" font-size="13.5" font-weight="600">comparison + payer.csv</text>
+      <text x="245" y="195" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">4 coding tools scored</text>
+      <text x="245" y="213" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">12 verified payer rows</text>
+      <text x="245" y="231" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">FTC/EU disclosure MDX</text>
+      <text x="245" y="262" fill="#10B981" font-family="ui-monospace, monospace" font-size="10">Non-affiliate slot first</text>
 
       <rect x="430" y="128" width="182" height="154" rx="10" fill="#0A0C14" stroke="#1A1F2E"/>
-      <text x="446" y="152" fill="#F59E0B" font-family="ui-monospace, monospace" font-size="10">KIT 03 · SYSTEMS</text>
-      <text x="446" y="173" fill="#F1F3F9" font-family="system-ui, sans-serif" font-size="13.5" font-weight="600">system-kit.md</text>
-      <text x="446" y="195" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">Operated catalog assets</text>
-      <text x="446" y="213" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">Agent role runbooks</text>
-      <text x="446" y="231" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">Maintenance floor math</text>
-      <text x="446" y="262" fill="#F59E0B" font-family="ui-monospace, monospace" font-size="10">Compounding directory</text>
+      <text x="446" y="152" fill="#F59E0B" font-family="ui-monospace, monospace" font-size="10">03 · LADDER &amp; POLAR</text>
+      <text x="446" y="173" fill="#F1F3F9" font-family="system-ui, sans-serif" font-size="13.5" font-weight="600">ladder + polar-gate.md</text>
+      <text x="446" y="195" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">4-stage TS/JSON schema</text>
+      <text x="446" y="213" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">3-gate fail-closed sale</text>
+      <text x="446" y="231" fill="#8A90A8" font-family="system-ui, sans-serif" font-size="11">12-pt live card check</text>
+      <text x="446" y="262" fill="#F59E0B" font-family="ui-monospace, monospace" font-size="10">Self-serve MoR ready</text>
     `,
   }),
 

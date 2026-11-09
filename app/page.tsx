@@ -26,6 +26,9 @@ const MCP_TOOLS = [
 
 type Product = CatalogProduct
 
+// Only these products have a waitlist today (lib/offers.ts, components/ProductLadder.tsx); the rest are simply not on sale yet.
+const WAITLIST_PRODUCT_IDS = new Set(['agent-team-pro', 'private-intel'])
+
 function priceLabel(p: Product): string {
   if (p.price_cents === 0) return 'Free'
   const dollars = `$${(p.price_cents / 100).toFixed(0)}`
@@ -200,7 +203,11 @@ export default function Home() {
                 ) : null}
                 <h3 className="font-display text-lg font-bold">{product.name}</h3>
                 <div className="price-state">
-                  {isFree || isForSale ? product.status : 'Waitlist · not yet on sale'}
+                  {isFree || isForSale
+                    ? product.status
+                    : WAITLIST_PRODUCT_IDS.has(product.id)
+                      ? 'Waitlist · not yet on sale'
+                      : 'Not yet on sale'}
                 </div>
                 {isFree ? (
                   <Link href="/delivery/starter-kit" className="cta-secondary mt-2 !min-h-0 !px-4 !py-2 text-sm">

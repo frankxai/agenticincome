@@ -43,7 +43,7 @@ const STAGE_BANDS: {
     stage: 'system',
     index: '03',
     title: 'Operating systems and crews ($67 to $129)',
-    subtitle: 'Complete business-plan kits, 4-pack governance bundles, and multi-agent verification workflows.',
+    subtitle: 'Complete 7-file operating desks, 4-pack governance bundles, and multi-agent verification workflows.',
   },
   {
     stage: 'continuity',
@@ -76,7 +76,7 @@ export default function Offers() {
         <div>
           <div className="text-sm font-semibold text-gold">Before you buy</div>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-            Free Starter Kit delivery is live on-site, Blueprint exposes its four delivered Markdown kits, Private Intel previews a sample brief, and gated packs expose their PRODUCT.md scope specification before you request access.
+            Free Starter Kit delivery is live on-site, Blueprint exposes all seven delivered operating-desk files, Private Intel previews a sample brief, and gated packs expose their PRODUCT.md scope specification before you request access.
           </p>
         </div>
         <Link href="/trust" className="cta-secondary">

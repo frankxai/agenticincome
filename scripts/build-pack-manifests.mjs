@@ -10,13 +10,50 @@ function formatSize(bytes) {
   return `${(bytes / 1024).toFixed(1)} KB`
 }
 
-function readDiskItem(diskPath, { displayPath = diskPath, kind = 'markdown', badge, excerptLines = 20 }) {
+function readDiskItem(diskPath, { displayPath = diskPath, kind = 'markdown', badge, excerptLines = 20, protectedDeliverable = true, previewPath, previewRecords }) {
   const abs = path.join(root, diskPath)
   const bytes = statSync(abs).size
   const raw = readFileSync(abs, 'utf8')
-  const lines = raw.replace(/\r\n/g, '\n').split('\n')
+  const normalized = raw.replace(/\r\n/g, '\n')
+  const content = normalized.trimEnd()
+  const contentLines = content ? content.split('\n') : []
+  const meaningfulContent = contentLines.map((line) => line.trim()).filter(Boolean)
+  const lines = normalized.split('\n')
   if (lines.length > 1 && lines[lines.length - 1] === '') {
     lines.pop()
+  }
+  let excerpt
+  if (previewPath) {
+    const sample = readFileSync(path.join(root, previewPath), 'utf8')
+      .replace(/\r\n/g, '\n').trimEnd().split('\n')
+    if (protectedDeliverable && sample.length >= lines.length) {
+      throw new Error(`Public sample must be shorter than protected deliverable: ${diskPath}`)
+    }
+    if (protectedDeliverable && kind === 'csv' && (
+      !Number.isSafeInteger(previewRecords) || previewRecords < 1 ||
+      sample.length !== previewRecords + 1 ||
+      sample.some((line, index) => line !== lines[index])
+    )) {
+      throw new Error(`Protected CSV preview must contain its header and exactly ${previewRecords} leading records: ${diskPath}`)
+    }
+    if (protectedDeliverable && sample.some((line, index) => line !== lines[index])) {
+      throw new Error(`Protected preview must be a leading source sample: ${diskPath}`)
+    }
+    excerpt = sample
+  } else {
+    if (protectedDeliverable && meaningfulContent.length <= excerptLines) {
+      throw new Error(`Protected deliverable needs an explicit partial sample: ${diskPath}`)
+    }
+    excerpt = lines.slice(0, Math.min(excerptLines, lines.length))
+  }
+  if (protectedDeliverable) {
+    const meaningfulExcerpt = excerpt.map((line) => line.trim()).filter(Boolean)
+    if (meaningfulExcerpt.length > Math.floor(meaningfulContent.length / 2)) {
+      throw new Error(`Protected preview exceeds half the source lines: ${diskPath}`)
+    }
+    if (Buffer.byteLength(meaningfulExcerpt.join('\n'), 'utf8') > Math.floor(Buffer.byteLength(meaningfulContent.join('\n'), 'utf8') / 2)) {
+      throw new Error(`Protected preview exceeds half the source bytes: ${diskPath}`)
+    }
   }
   return {
     path: displayPath,
@@ -26,34 +63,52 @@ function readDiskItem(diskPath, { displayPath = diskPath, kind = 'markdown', bad
     kind,
     badge,
     totalLines: lines.length,
-    excerpt: lines.slice(0, Math.min(excerptLines, lines.length)),
+    excerpt,
   }
 }
 
 const catalog = JSON.parse(readFileSync(path.join(root, 'products/catalog.json'), 'utf8'))
 const blueprintCatalog = catalog.products.find((p) => p.id === 'blueprint')
+const blueprintPreviewRecords = 2
 const blueprintBadges = {
   'products/blueprint/00-README.md': 'Entry guide',
-  'products/blueprint/service-kit.md': 'Kit 01 · Services',
-  'products/blueprint/product-kit.md': 'Kit 02 · Products',
-  'products/blueprint/system-kit.md': 'Kit 03 · Systems',
+  'products/blueprint/operating-desk-architecture.md': 'Desk & cadence',
+  'products/blueprint/coding-tool-comparison-matrix.md': 'Tool matrix & MDX',
+  'products/blueprint/recurring-payer-catalog.csv': `${blueprintPreviewRecords}-row CSV sample`,
+  'products/blueprint/offer-and-waitlist-ladder.md': 'Offer ladder & schema',
+  'products/blueprint/polar-fulfillment-checklist.md': 'Polar gate checklist',
+  'products/blueprint/MANIFEST.json': 'SHA-256 manifest',
+}
+
+function inferKind(diskPath) {
+  if (diskPath.endsWith('.csv')) return 'csv'
+  if (diskPath.endsWith('.json')) return 'json'
+  return 'markdown'
 }
 
 const blueprintFiles = blueprintCatalog.delivery.files.map((diskPath) =>
   readDiskItem(diskPath, {
+    kind: inferKind(diskPath),
     badge: blueprintBadges[diskPath] || 'Delivered file',
     excerptLines: 22,
+    protectedDeliverable: true,
+    previewPath: diskPath === 'products/blueprint/recurring-payer-catalog.csv'
+      ? 'products/blueprint/previews/recurring-payer-catalog.sample.csv'
+      : undefined,
+    previewRecords: diskPath === 'products/blueprint/recurring-payer-catalog.csv' ? blueprintPreviewRecords : undefined,
   })
 )
 const blueprintTotalBytes = blueprintFiles.reduce((sum, f) => sum + f.bytes, 0)
 
 const starterFiles = [
   readDiskItem('public/downloads/agentic-income-starter-kit.md', {
+    protectedDeliverable: false,
     displayPath: 'downloads/agentic-income-starter-kit.md',
     badge: 'Live download',
     excerptLines: 22,
   }),
   readDiskItem('products/starter-kit/PRODUCT.md', {
+    protectedDeliverable: false,
     badge: 'Package spec',
     excerptLines: 18,
   }),
@@ -62,6 +117,7 @@ const starterTotalBytes = starterFiles.reduce((sum, f) => sum + f.bytes, 0)
 
 const vibeFiles = [
   readDiskItem('products/vibe-os-pack/PRODUCT.md', {
+    protectedDeliverable: false,
     badge: 'Package spec',
     excerptLines: 22,
   }),
@@ -69,6 +125,7 @@ const vibeFiles = [
 
 const claimsFiles = [
   readDiskItem('products/claims-guard-pack/PRODUCT.md', {
+    protectedDeliverable: false,
     badge: 'Package spec',
     excerptLines: 25,
   }),
@@ -76,6 +133,7 @@ const claimsFiles = [
 
 const abosFiles = [
   readDiskItem('products/abos-pack-bundle/PRODUCT.md', {
+    protectedDeliverable: false,
     badge: 'Bundle spec',
     excerptLines: 19,
   }),
@@ -83,6 +141,7 @@ const abosFiles = [
 
 const teamFiles = [
   readDiskItem('products/agent-team-pro/PRODUCT.md', {
+    protectedDeliverable: false,
     badge: 'Roadmap spec',
     excerptLines: 17,
   }),
@@ -90,6 +149,7 @@ const teamFiles = [
 
 const intelFiles = [
   readDiskItem('products/private-intel/2026-06-BRIEF.md', {
+    protectedDeliverable: false,
     badge: 'Sample brief',
     excerptLines: 24,
   }),
@@ -97,6 +157,7 @@ const intelFiles = [
 
 const sprintFiles = [
   readDiskItem('products/implementation-sprint/PRODUCT.md', {
+    protectedDeliverable: false,
     badge: 'Sprint scope spec',
     excerptLines: 26,
   }),
@@ -148,15 +209,15 @@ const manifests = {
   blueprint: {
     slug: 'blueprint',
     previewMode: 'deliverable-files',
-    archiveName: 'income-architecture-blueprint-v2',
-    totalFilesLabel: `${blueprintFiles.length} delivered Markdown files`,
+    archiveName: 'agentic-income-operating-desk-v3',
+    totalFilesLabel: `${blueprintFiles.length} delivered files`,
     totalSizeLabel: formatSize(blueprintTotalBytes),
     licenseShort: 'Personal commercial license',
     plateSvg: '/images/products/plate-blueprint.svg',
     skipIf:
-      'Skip this if you want video lectures, a chat community, private consulting, or guaranteed earnings predictions. Every number inside is a labeled scenario with named assumptions.',
+      'Skip this if you want video lectures, a chat community, private consulting, or guaranteed earnings predictions. Every financial table inside is a labeled scenario with named assumptions.',
     buyIf:
-      'Pick this when you are ready to turn one skill, comparison workflow, or digital pack into a structured business plan with fulfillment runbooks and kill-by-date criteria.',
+      'Pick this when you want the complete 7-file operating desk: git workspace and cadence, dated coding-tool comparison matrix, 12-row recurring-payer CSV, 4-stage offer ladder, and fail-closed Polar.sh checklist.',
     files: blueprintFiles,
   },
   'abos-pack-bundle': {
@@ -225,7 +286,7 @@ export type PackFileItem = {
   diskPath: string
   bytes: number
   sizeLabel: string
-  kind: 'markdown' | 'skill' | 'json' | 'script'
+  kind: 'markdown' | 'skill' | 'json' | 'script' | 'csv'
   badge: string
   totalLines: number
   excerpt: string[]

@@ -1,0 +1,64 @@
+---
+title: "What a Marketplace Take Rate Buys You"
+dek: "Comparing direct checkout fees against marketplace discovery fees across Gumroad, Notion Marketplace, and RapidAPI Hub using verified 2026 terms."
+query: "marketplace take rate comparison"
+cluster: "marketplaces"
+rows:
+  - "gumroad-fee"
+  - "gumroad-direct-fee"
+  - "gumroad-discover-fee"
+  - "notion-marketplace-fee"
+  - "rapidapi-marketplace-fee"
+---
+
+# What a Marketplace Take Rate Buys You
+
+Every digital product builder faces the same distribution question: should you sell solely through a direct checkout link where you bring every visitor yourself, or list inside a marketplace that takes a larger cut of the sale? A take rate is not a single thing. Depending on the platform, the percentage you give up pays for merchant-of-record tax handling, payment processing, refund holding, or organic buyer discovery inside an existing catalog.
+
+To see what those percentages actually buy, we compare the verified fee schedules of Gumroad, Notion Marketplace, and RapidAPI Hub from the Economy Vault, and run the exact unit-margin math on a hypothesis price.
+
+## Gumroad Splits Payment Processing From Discovery
+
+Gumroad makes the boundary between payment infrastructure and buyer discovery explicit by charging two completely different rates on the same product. According to [Gumroad's official pricing page for 2026 (retrieved 2026-10-25)](https://gumroad.com/pricing):
+
+- When a customer buys through your own direct link or profile, Gumroad charges [10% + $0.50 per direct sale (2026, retrieved 2026-10-25)](https://gumroad.com/pricing), before external credit card processing or PayPal fees when applicable.
+- When a new customer finds and buys your product through the Gumroad Discover marketplace recommendation engine, Gumroad charges a flat [30% on Discover marketplace sales (2026, retrieved 2026-10-25)](https://gumroad.com/pricing), which includes payment processing.
+
+That spread isolates the price of customer acquisition inside Gumroad's ecosystem. On a direct sale, the [10% + $0.50 fee (2026, retrieved 2026-10-25)](https://gumroad.com/pricing) pays for hosted checkout, file delivery, license keys, and merchant-of-record sales tax remittance. You supply the traffic. On a Discover sale, the gap between the direct rate and the [30% Discover marketplace fee (2026, retrieved 2026-10-25)](https://gumroad.com/pricing) is a pure performance fee that you pay only when Gumroad's internal search and recommendation surfaces bring you a buyer.
+
+## How Direct vs. Discover Changes Unit Margin on a $29 Hypothesis
+
+The Economy Vault tracks two committed unit-margin scenarios in `vault/margins.json` for a Bring Your Own Key (BYOK) creator skill pack where the buyer runs the prompts and tools on their own API key, keeping per-sale inference cost at zero. Using our committed hypothesis price of $29 (`priceIsHypothesis: true`):
+
+- In scenario `gencreator-byok-pack-gumroad`, selling the $29 hypothesis pack via a direct link under Gumroad's [10% + $0.50 per direct sale fee (2026, retrieved 2026-10-25)](https://gumroad.com/pricing) costs $3.40 in platform fees ($2.90 percentage fee plus the [$0.50 fixed fee, 2026, retrieved 2026-10-25](https://gumroad.com/pricing)). You keep $25.60 per sale, which works out to an 88.3% gross margin on the $29 hypothesis price.
+- In scenario `gencreator-byok-pack-gumroad-discover`, selling that same $29 hypothesis pack through Gumroad Discover at the [30% Discover marketplace fee (2026, retrieved 2026-10-25)](https://gumroad.com/pricing) costs $8.70 in platform fees. You keep $20.30 per sale, reducing the gross margin on the $29 hypothesis price from 88.3% to 70%.
+
+That 18.3 percentage-point difference in gross margin on a $29 hypothesis price ($5.30 per unit) is the exact dollar cost of letting the marketplace find the customer. Because a BYOK digital download has no per-unit inference cost, a 70% gross margin on incremental buyers you would not have reached on your own remains positive on unit one, whereas paying [30% on Discover marketplace sales (2026, retrieved 2026-10-25)](https://gumroad.com/pricing) for traffic you already owned through your newsletter or documentation would be an unnecessary tax.
+
+## Notion Marketplace Trades Lower Fees for Ecosystem Fit
+
+When your product is built natively for a single host application, the host workspace often runs its own template store. According to [Notion's official Selling on Marketplace documentation for 2026 (retrieved 2026-10-25, reviewer-confirmed 2026-10-26)](https://www.notion.com/help/selling-on-marketplace):
+
+- Notion charges a transaction fee of [8% + $0.40 per transaction on paid templates sold through Notion Marketplace (2026, retrieved 2026-10-25, reviewer-confirmed 2026-10-26)](https://www.notion.com/help/selling-on-marketplace).
+- For payouts in currencies other than US dollars, Stripe adds a [1% currency conversion fee (2026, retrieved 2026-10-25, reviewer-confirmed 2026-10-26)](https://www.notion.com/help/selling-on-marketplace).
+- Notion holds marketplace earnings for a [14-day period before payout to cover potential buyer refunds (2026, retrieved 2026-10-25, reviewer-confirmed 2026-10-26)](https://www.notion.com/help/selling-on-marketplace).
+
+Compared with Gumroad's [10% + $0.50 direct sale fee and 30% Discover fee (2026, retrieved 2026-10-25)](https://gumroad.com/pricing), Notion's [8% + $0.40 per transaction rate (2026, retrieved 2026-10-25, reviewer-confirmed 2026-10-26)](https://www.notion.com/help/selling-on-marketplace) is lower than a standalone Gumroad direct link while also placing the template inside Notion's native template gallery and workspace duplication flow. What you give up in exchange is format portability: a Notion Marketplace listing can only deliver a Notion template into a buyer's Notion workspace, and payouts wait for the [14-day refund hold window (2026, retrieved 2026-10-25, reviewer-confirmed 2026-10-26)](https://www.notion.com/help/selling-on-marketplace).
+
+## RapidAPI Hub Prices Metered API Distribution at 25%
+
+For developers and agent builders selling machine-callable APIs rather than static downloads or workspace templates, the marketplace provides API key provisioning, quota enforcement, subscription tiering, and developer billing. According to [RapidAPI's official Payouts and Finance documentation (retrieved 2026-10-25)](https://docs.rapidapi.com/docs/payouts-and-finance):
+
+- RapidAPI collects a [25% marketplace fee on all payments processed through the RapidAPI Hub starting 15 November 2025 (retrieved 2026-10-25)](https://docs.rapidapi.com/docs/payouts-and-finance).
+- Prior to [15 November 2025, RapidAPI's marketplace fee was 20% (retrieved 2026-10-25)](https://docs.rapidapi.com/docs/payouts-and-finance).
+- Any applicable PayPal payout fees are deducted in addition to the [25% RapidAPI Hub marketplace fee (from 2025-11-15, retrieved 2026-10-25)](https://docs.rapidapi.com/docs/payouts-and-finance).
+
+Unlike a static template or a BYOK prompt pack where unit delivery cost is near zero, an API listed on RapidAPI Hub incurs server compute, database reads, or upstream model costs every time a customer calls your endpoint. When the marketplace takes [25% of gross API billings (from 2025-11-15, retrieved 2026-10-25)](https://docs.rapidapi.com/docs/payouts-and-finance) off the top, your remaining 75% share must cover all infrastructure and upstream supplier costs.
+
+## How to Choose Your Distribution Rail
+
+The verified fee schedules across these three platforms point to three practical rules for product architecture:
+
+1. Separate your owned-audience checkout from discovery marketplaces. If a reader is already on your site or email list, sending them through a [30% discovery rail like Gumroad Discover (2026, retrieved 2026-10-25)](https://gumroad.com/pricing) forfeits margin that belongs to your own distribution. Use direct links at [10% + $0.50 on Gumroad (2026, retrieved 2026-10-25)](https://gumroad.com/pricing) or a dedicated merchant-of-record checkout for traffic you bring yourself, and treat marketplace discovery as an incremental channel.
+2. Match the store to the artifact's native container. When the product is a workspace system, listing inside [Notion Marketplace at 8% + $0.40 per transaction (2026, retrieved 2026-10-25, reviewer-confirmed 2026-10-26)](https://www.notion.com/help/selling-on-marketplace) pairs one-click installation with a lower fee than general-purpose creator storefronts, provided you account for the [14-day payout hold and 1% non-USD conversion fee (2026, retrieved 2026-10-25, reviewer-confirmed 2026-10-26)](https://www.notion.com/help/selling-on-marketplace).
+3. Keep high-COGS inference out of high-take-rate API hubs unless priced for it. Under RapidAPI Hub's [25% marketplace fee effective 15 November 2025 (retrieved 2026-10-25)](https://docs.rapidapi.com/docs/payouts-and-finance), endpoints that wrap expensive upstream models need strict rate limits and per-call pricing that leaves a healthy buffer after the [25% platform cut (from 2025-11-15, retrieved 2026-10-25)](https://docs.rapidapi.com/docs/payouts-and-finance).

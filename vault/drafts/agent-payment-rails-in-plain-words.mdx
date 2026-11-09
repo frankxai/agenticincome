@@ -1,0 +1,68 @@
+---
+title: "Agent Payment Rails in Plain Words"
+dek: "How x402, Google's Agent Payments Protocol (AP2), and Visa's Trusted Agent Protocol solve different parts of machine-to-machine commerce."
+query: "what is x402 agent payments"
+cluster: "agent-rails"
+rows:
+  - "x402-what"
+  - "x402-30d-transactions"
+  - "coinbase-x402-facilitator"
+  - "ap2-google"
+  - "visa-trusted-agent-protocol"
+---
+
+# Agent Payment Rails in Plain Words
+
+When a software agent needs to buy an API call, fetch a paid dataset, or complete a checkout on behalf of a human, standard web checkout breaks down. Traditional checkout flows assume a human is sitting at a browser typing card details, passing a visual bot check, and clicking a confirm button. Over the past year, payment networks, cloud providers, and crypto infrastructure teams have published open protocols designed for software agents.
+
+Although people lump these announcements together as agent payment rails, the verified specifications in the Economy Vault show that they solve three separate problems: machine-to-machine HTTP micropayments, delegated authorization mandates, and cryptographic agent identity at the merchant firewall.
+
+## x402 Turns HTTP 402 Into a Machine Payment Handshake
+
+When the original HTTP specification was drafted decades ago, it reserved status code [402 Payment Required (as of 2026-10-25)](https://www.x402.org/) for future digital cash systems that did not yet exist. According to the [official x402 protocol specification published by Coinbase (as of 2026-10-25)](https://www.x402.org/), x402 activates [HTTP 402 Payment Required (as of 2026-10-25)](https://www.x402.org/) so that a client and an HTTP server can negotiate and settle a payment inside normal HTTP headers without accounts, sessions, or human checkout forms.
+
+The mechanical flow is direct:
+
+1. An agent sends a standard HTTP request to a protected endpoint.
+2. If payment is required, the server responds with status [402 Payment Required (as of 2026-10-25)](https://www.x402.org/) along with machine-readable payment terms specifying the price, accepted asset, and destination address.
+3. The client attaches a signed payment payload in the retry request header, the server verifies and settles the payment, and the HTTP response returns the requested data.
+
+What does adoption look like in published numbers? On its public landing page, [x402.org reports a 30-day snapshot of 75.41M transactions, $24.24M in payment volume, 94.06K buyers, and 22K sellers (as of 2026-08-25, the page's own last-updated timestamp)](https://www.x402.org/). Dividing that [$24.24M volume across 75.41M transactions in the 30-day window (as of 2026-08-25)](https://www.x402.org/) averages roughly thirty-two cents per transaction, illustrating that the rail is primarily used for high-frequency, low-dollar API and data calls rather than large retail shopping carts. Because the [2026-08-25 figures on x402.org](https://www.x402.org/) represent a single [30-day window snapshot (as of 2026-08-25)](https://www.x402.org/), builders should treat them as a point-in-time measurement rather than a guaranteed daily run rate.
+
+## What It Costs a Seller to Clear x402 Payments
+
+A protocol only works for micropayments if the settlement fee does not swallow the transaction price. According to [Coinbase Developer Platform's x402 Facilitator documentation for 2026 (retrieved 2026-10-25)](https://docs.cdp.coinbase.com/x402/seller/facilitator):
+
+- Payment verification through the Coinbase CDP x402 Facilitator is always free, and the first [1,000 onchain Facilitator transactions each month are free (2026, retrieved 2026-10-25)](https://docs.cdp.coinbase.com/x402/seller/facilitator).
+- Beyond the monthly free tier, Coinbase charges [$0.001 per onchain transaction settled through the Facilitator (2026, retrieved 2026-10-25)](https://docs.cdp.coinbase.com/x402/seller/facilitator).
+- The Facilitator supports batch settlement across Base, Polygon, Arbitrum, Monad, World, and Solana as documented in the [Coinbase CDP x402 Facilitator guide (2026, retrieved 2026-10-25)](https://docs.cdp.coinbase.com/x402/seller/facilitator).
+
+At [$0.001 per onchain transaction after the first 1,000 monthly transactions (2026, retrieved 2026-10-25)](https://docs.cdp.coinbase.com/x402/seller/facilitator), a seller lacks the fixed thirty-to-fifty-cent per-charge floor typical of traditional card processors. That fee structure makes it mathematically possible to price an individual MCP tool lookup or structured data query at a few cents without losing money on payment settlement.
+
+## Google's AP2 Proves What the Human Authorized the Agent to Buy
+
+Settling a payment is only half the problem when an agent shops for a human. If an agent buys a flight or orders supplies, the merchant and the payment provider need cryptographic proof that the user actually authorized that specific purchase and price cap.
+
+On [16 September 2025, Google Cloud announced the Agent Payments Protocol, or AP2 (as of 2025-09-16)](https://cloud.google.com/blog/products/ai-machine-learning/announcing-agents-to-payments-ap2-protocol), an open protocol designed to extend the Agent2Agent (A2A) protocol and the Model Context Protocol (MCP). According to [Google Cloud's AP2 announcement (as of 2025-09-16)](https://cloud.google.com/blog/products/ai-machine-learning/announcing-agents-to-payments-ap2-protocol):
+
+- AP2 launched in collaboration with [60+ partner organizations across payments, commerce, and technology (as of 2025-09-16)](https://cloud.google.com/blog/products/ai-machine-learning/announcing-agents-to-payments-ap2-protocol).
+- Rather than replacing existing payment networks, AP2 introduces cryptographically signed Verifiable Credential mandates broken into three auditable steps: an Intent mandate, a Cart mandate, and a Payment mandate, as described in the [16 September 2025 AP2 release (as of 2025-09-16)](https://cloud.google.com/blog/products/ai-machine-learning/announcing-agents-to-payments-ap2-protocol).
+
+In plain words, AP2 is an authorization chain. When a human gives an agent a task, the Intent mandate records the rules and spending boundaries; when the agent assembles the order, the Cart mandate locks the exact items and total; and the Payment mandate passes verifiable proof of consent to the payment rail, whether that underlying rail is a credit card, a bank transfer, or a stablecoin.
+
+## Visa's Trusted Agent Protocol Lets Merchants Distinguish Agents From Bots
+
+Even when an agent holds valid payment credentials and a user mandate, most merchant storefronts sit behind web application firewalls and bot-mitigation systems that block automated traffic on sight. If a merchant cannot tell a legitimate shopping agent from a credential-stuffing script or a scraper, the agent gets blocked before reaching checkout.
+
+According to [Visa Developer's Trusted Agent Protocol overview (as of October 2025, 2025-10)](https://developer.visa.com/capabilities/trusted-agent-protocol/overview), Visa created the Trusted Agent Protocol as part of Visa Intelligent Commerce to solve merchant-side agent recognition:
+
+- The protocol uses standard HTTP Message Signatures defined in [RFC 9421 (as of 2025-10)](https://developer.visa.com/capabilities/trusted-agent-protocol/overview) so that an approved AI agent can cryptographically sign its outbound HTTP requests to a merchant.
+- By verifying the [RFC 9421 HTTP Message Signature (as of 2025-10)](https://developer.visa.com/capabilities/trusted-agent-protocol/overview), the merchant can confirm that the request comes from a recognized agent acting with consumer intent and carrying valid payment data, rather than an anonymous bot.
+
+## How the Three Protocols Fit Together for Builders
+
+Instead of viewing these standards as competing coins in a winner-take-all race, map each protocol to the layer of the stack it actually governs:
+
+1. Use [x402 over HTTP 402 Payment Required (as of 2026-10-25)](https://www.x402.org/) with the [Coinbase CDP x402 Facilitator ($0.001 per onchain transaction after 1,000 free per month, 2026, retrieved 2026-10-25)](https://docs.cdp.coinbase.com/x402/seller/facilitator) when you are selling metered API responses, MCP tool calls, or machine-readable research payloads directly to other software agents and want sub-cent settlement overhead.
+2. Watch [Google's AP2 Verifiable Credential mandates (launched 2025-09-16 with 60+ partners)](https://cloud.google.com/blog/products/ai-machine-learning/announcing-agents-to-payments-ap2-protocol) when building multi-step agent workflows that spend a human owner's budget and require an inspectable audit trail of Intent, Cart, and Payment consent.
+3. Expect card-present ecommerce merchants to require cryptographic request signing such as [Visa's Trusted Agent Protocol built on RFC 9421 (as of 2025-10)](https://developer.visa.com/capabilities/trusted-agent-protocol/overview) before allowing autonomous browser or HTTP agents through their checkout firewalls.

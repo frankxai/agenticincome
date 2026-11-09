@@ -4,7 +4,9 @@ name: org-mirror
 # (federation ruling A, 2026-10-18: frankxai is canonical for deployed repos).
 # Fast-forward only: if the mirror ever diverges the push fails instead of overwriting it.
 # Needs repository secret ORG_MIRROR_TOKEN: a fine-grained token with Contents: read and write
-# on Agentic-Income/agenticincome only. Until it exists the job records a skip and passes.
+# and Workflows: read and write on Agentic-Income/agenticincome only. Workflows is required
+# because GitHub rejects a push that adds or changes .github/workflows/* without it, and this
+# file is one of them. Until the secret exists the job records a skip and passes.
 
 on:
   push:

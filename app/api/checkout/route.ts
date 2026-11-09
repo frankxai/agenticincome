@@ -10,16 +10,19 @@ import {
 } from '@/lib/api-security'
 import {
   catalogRefusal,
+  checkoutRelease,
   createCheckoutSession,
   findCatalogProduct,
+  isCheckoutLive,
   isPolarConfigured,
 } from '@/lib/polar'
 import { appendTrackingParams } from '@/lib/tracking'
 
 /**
  * GET — the static checkout-link path. Reads a per-offer `*_CHECKOUT_URL` env
- * var via lib/offers.ts and redirects, falling back to the offer's
- * request-access section when the link is not configured. Unchanged.
+ * var via lib/offers.ts (catalog-gated) and redirects. When only the Polar API
+ * path is live it redirects to the offer page, which renders the buy button;
+ * otherwise it falls back to the offer's waitlist (request-access) section.
  *
  * POST — the Polar API path (lib/polar.ts). Creates a real checkout session
  * for a catalog product id. products/catalog.json is the server-side authority
@@ -69,6 +72,21 @@ export async function GET(req: Request) {
     return NextResponse.redirect(target, 302)
   }
 
+  // Polar API path live but no static link: the offer page carries the real
+  // buy button, so send the buyer there instead of to the waitlist.
+  if (isCheckoutLive(offer.slug)) {
+    const target = appendTrackingParams(new URL(`/offers/${offer.slug}`, req.url), url.searchParams)
+    await forwardAnalyticsEvent({
+      event: 'checkout_redirect',
+      offer: offer.slug,
+      path: url.pathname,
+      href: `${target.pathname}${target.search}`,
+      state: 'provider_session_available',
+      ts: new Date().toISOString(),
+    })
+    return NextResponse.redirect(target, 302)
+  }
+
   const fallback = appendTrackingParams(new URL(`/offers/${offer.slug}`, req.url), url.searchParams)
   fallback.hash = 'request-access'
 
@@ -92,6 +110,8 @@ export async function GET(req: Request) {
  *   400 free_product             — priced at zero; delivered on-site, not sold
  *   503 checkout_gated           — catalog status is not a purchasable state
  *   503 checkout_unconfigured    — catalog permits it, Polar env is not set
+ *   503 checkout_unreleased      — configured, but CHECKOUT_RELEASE does not
+ *                                  approve the Polar server in use
  *   502 checkout_upstream_failed — Polar refused or answered unusably
  *
  * No path returns a fabricated session, price, or availability.
@@ -141,7 +161,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, reason: 'unknown_product' }, { status: 404 })
   }
 
-  const refusal = catalogRefusal(product) ?? (isPolarConfigured(product.id) ? null : 'checkout_unconfigured')
+  const refusal =
+    catalogRefusal(product) ??
+    (!isPolarConfigured(product.id)
+      ? 'checkout_unconfigured'
+      : checkoutRelease() === 'closed'
+        ? 'checkout_unreleased'
+        : null)
   if (refusal) {
     await forwardAnalyticsEvent({
       event: 'checkout_fallback_request',

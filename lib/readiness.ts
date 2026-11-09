@@ -1,3 +1,6 @@
+import { checkoutUrl, getOffer } from './offers.ts'
+import { catalogRefusal, isCheckoutLive, pricedCatalogProducts } from './polar.ts'
+
 type ReadinessItem = {
   id: string
   label: string
@@ -24,35 +27,43 @@ function hasEmailEnv(name: string) {
   return Boolean(value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
 }
 
+/**
+ * One checkout item per priced catalog SKU. A SKU counts as configured when
+ * either checkout path can actually take a buyer to Polar (both paths apply
+ * the catalog gate). It is required for full launch only when the catalog
+ * says it is for sale: a SKU the catalog still gates is reported, not
+ * required, so readiness measures "everything we sell can be bought".
+ */
+function checkoutItems(): ReadinessItem[] {
+  return pricedCatalogProducts().map((product) => {
+    const offer = getOffer(product.id)
+    const staticLink = offer ? checkoutUrl(offer) : null
+    const configured = isCheckoutLive(product.id) || Boolean(staticLink)
+    const forSale = catalogRefusal(product) === null
+
+    return {
+      id: `${product.id.replace(/-/g, '_')}_checkout`,
+      label: `${product.name} checkout`,
+      category: 'checkout',
+      configured,
+      requiredForFullLaunch: forSale,
+      detail: configured
+        ? 'Buyers can reach secure Polar checkout from the product page.'
+        : forSale
+          ? 'On sale, but the payment provider is not connected. The product page shows a waitlist.'
+          : 'Not on sale yet. The product page shows a waitlist.',
+    }
+  })
+}
+
 export function getLaunchReadiness() {
-  const blueprintCheckout = hasSecureUrlEnv('AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL')
-  const privateIntelCheckout = hasSecureUrlEnv('AGENTIC_INCOME_PRIVATE_INTEL_CHECKOUT_URL')
   const subscribeWebhook = hasSecureUrlEnv('SUBSCRIBE_WEBHOOK_URL')
   const conciergeEmail = hasEmailEnv('ACCESS_REQUEST_EMAIL')
   const analyticsWebhook = hasSecureUrlEnv('ANALYTICS_WEBHOOK_URL')
   const captureConfigured = subscribeWebhook || conciergeEmail
 
   const items: ReadinessItem[] = [
-    {
-      id: 'blueprint_checkout',
-      label: 'Blueprint checkout',
-      category: 'checkout',
-      configured: blueprintCheckout,
-      requiredForFullLaunch: true,
-      detail: blueprintCheckout
-        ? 'Paid Blueprint clicks can leave the site for secure checkout.'
-        : 'Blueprint clicks fall back to request-access.',
-    },
-    {
-      id: 'private_intel_checkout',
-      label: 'Private Intel checkout',
-      category: 'checkout',
-      configured: privateIntelCheckout,
-      requiredForFullLaunch: true,
-      detail: privateIntelCheckout
-        ? 'Membership clicks can leave the site for recurring checkout.'
-        : 'Membership clicks fall back to request-access.',
-    },
+    ...checkoutItems(),
     {
       id: 'owned_capture',
       label: 'Owned-audience capture',
@@ -90,7 +101,7 @@ export function getLaunchReadiness() {
   const fullLaunchReady = configuredRequired.length === required.length
 
   return {
-    version: '2026-06-26',
+    version: '2026-10-30',
     checkedAt: new Date().toISOString(),
     fullLaunchReady,
     configuredRequired: configuredRequired.length,

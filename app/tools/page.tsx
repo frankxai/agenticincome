@@ -3,6 +3,7 @@ import { baseOpenGraph } from '@/lib/open-graph'
 import { payingPrograms, verifiedEconomicsPrograms, verifiedRangeLabel } from '@/lib/affiliate'
 import Link from 'next/link'
 import { TrackedLink } from '@/components/TrackedLink'
+import { withSource } from '@/lib/link-source'
 
 export const metadata: Metadata = {
   title: 'AI Tools Catalog',
@@ -85,7 +86,7 @@ export default function Tools() {
                   <td className="px-5 py-4">
                     {program.ourLink ? (
                       <TrackedLink
-                        href={program.ourLink}
+                        href={withSource(program.ourLink, 'page')}
                         target="_blank"
                         rel="sponsored nofollow noopener"
                         className="inline-flex min-h-8 items-center rounded-lg bg-accent px-4 py-1.5 text-xs font-semibold text-bg"

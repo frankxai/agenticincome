@@ -12,6 +12,12 @@ name: estate-guard
 on:
   pull_request:
   push:
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE*.md'
+      - 'LICENSE'
     branches: [main]
   schedule:
     - cron: "41 6 * * 1" # Mondays 06:41 UTC

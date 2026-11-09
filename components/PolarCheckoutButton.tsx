@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { trackClientEvent } from '@/lib/client-analytics'
-import catalog from '@/products/catalog.json'
 
 /**
  * Buy control for the Polar API checkout path (POST /api/checkout).
@@ -14,18 +13,11 @@ import catalog from '@/products/catalog.json'
  * and no purchase copy at all — not even in the serialized payload.
  *
  * Second gate: if the API still refuses on click (env pulled, catalog flipped
- * back, Polar down), this falls back to that same request-access link and
- * states plainly that checkout is not connected. It never asserts availability
- * the server did not confirm, and never invents urgency while waiting.
+ * back, Polar down), this says plainly that checkout could not be opened and
+ * that no payment was started (no checkout page was reached), offers a retry, and links `gatedHref` (support).
+ * It never asserts availability the server did not confirm, and never invents
+ * urgency while waiting.
  */
-
-type CatalogEntry = { id: string; status: string }
-
-const PRODUCTS = catalog.products as readonly CatalogEntry[]
-
-function statusOf(productId: string) {
-  return PRODUCTS.find((product) => product.id === productId)?.status ?? ''
-}
 
 export function PolarCheckoutButton({
   productId,
@@ -44,14 +36,39 @@ export function PolarCheckoutButton({
 }) {
   const [state, setState] = useState<'idle' | 'loading' | 'refused'>('idle')
 
+  async function startCheckout() {
+    setState('loading')
+    trackClientEvent('checkout_click', { offer: productId, source })
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ productId }),
+      })
+      const data = await response.json().catch(() => null)
+      if (response.ok && data?.ok && typeof data.url === 'string') {
+        window.location.assign(data.url)
+        return
+      }
+    } catch {
+      // fall through to the honest refusal below
+    }
+    setState('refused')
+  }
+
   if (state === 'refused') {
     return (
-      <div>
-        <Link href={gatedHref} className={className}>
-          {gatedCta}
-        </Link>
+      <div role="status">
+        <div className="flex flex-wrap gap-3">
+          <button type="button" className={className} onClick={startCheckout}>
+            Try checkout again
+          </button>
+          <Link href={gatedHref} className="cta-secondary">
+            {gatedCta}
+          </Link>
+        </div>
         <p className="mt-2 text-xs leading-6 text-muted">
-          Checkout is not connected for this product. Current state: {statusOf(productId)}.
+          Checkout could not be opened just now, so no payment was started.
         </p>
       </div>
     )
@@ -62,27 +79,9 @@ export function PolarCheckoutButton({
       type="button"
       className={className}
       disabled={state === 'loading'}
-      onClick={async () => {
-        setState('loading')
-        trackClientEvent('checkout_click', { offer: productId, source })
-        try {
-          const response = await fetch('/api/checkout', {
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ productId }),
-          })
-          const data = await response.json().catch(() => null)
-          if (response.ok && data?.ok && typeof data.url === 'string') {
-            window.location.assign(data.url)
-            return
-          }
-        } catch {
-          // fall through to the honest refusal below
-        }
-        setState('refused')
-      }}
+      onClick={startCheckout}
     >
-      {state === 'loading' ? 'Opening checkout' : buyLabel}
+      {state === 'loading' ? 'Opening checkout…' : buyLabel}
     </button>
   )
 }

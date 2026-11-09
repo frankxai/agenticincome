@@ -79,3 +79,23 @@ The dashboard enforces the core thesis: "Evidence before rankings." It is an int
 - Mobile responsive layout reflowing the metrics grid from 4 to 2 columns below 650px.
 - Dedicated print stylesheet hiding search and expanding details for archival reporting.
 
+## Offer ladder, file-tree inspection, and starting-kit fit check — 2026-11-03
+
+Surface: `/offers`, `/offers/[slug]`, `/start`, `components/PackInspector.tsx`,
+`components/OperatorFitCheck.tsx`, `components/ProductLadder.tsx`, `lib/pack-manifests.ts`,
+and `public/images/products/plate-*.svg`.
+
+1. **Inspect-before-you-buy workbench (`PackInspector`):** Every offer route renders file
+   excerpts, byte sizes, and line counts generated deterministically by
+   `scripts/build-pack-manifests.mjs` from verified repository files (`products/catalog.json`
+   deliverables, `public/downloads/agentic-income-starter-kit.md`, `products/*/PRODUCT.md`,
+   and `products/FULFILLMENT_RUNBOOK.md`). No fictional file sizes or synthetic excerpts are
+   displayed.
+2. **Starting-kit fit check (`OperatorFitCheck`):** Four-question customer-facing diagnostic
+   on `/start` and `/offers` computing a deterministic Week-1 checklist locally (`lib/fit-check.ts`)
+   with a one-click `Copy Markdown plan` action. Optional email capture is disclosed as a
+   general release-updates subscription that does not send or store diagnostic answers.
+3. **Fail-closed checkout and fallback anchor:** `products/catalog.json` governs Polar
+   availability (`lib/polar.ts`). Non-free offers without a legacy static checkout URL retain
+   `#request-access` on `/offers/[slug]` so `PolarCheckoutButton` and `/api/checkout` GET
+   fallbacks always resolve to a reachable form.

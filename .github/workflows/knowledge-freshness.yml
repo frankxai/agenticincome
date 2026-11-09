@@ -5,6 +5,10 @@ on:
     - cron: '0 9 1 * *' # monthly, 1st, 09:00 UTC
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   audit:
     runs-on: ${{ vars.CI_RUNNER == 'railway' && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-latest' }}

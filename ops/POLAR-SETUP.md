@@ -73,13 +73,13 @@ There are two checkout paths in `app/api/checkout/route.ts`. Both are wired, bot
 | Mechanism | Redirects to a checkout link you copy out of the Polar dashboard | Calls the Polar checkouts API and creates a session per click |
 | Config | `AGENTIC_INCOME_*_CHECKOUT_URL` via `lib/offers.ts` (`checkout.envKey`) | `POLAR_ACCESS_TOKEN` + `POLAR_PRODUCT_ID_*` via `lib/polar.ts` |
 | Gate | Env var present and https | Catalog `status` **and** env, both required |
-| Success URL | Baked into the Polar product | Built per product from the catalog's `delivery.path` |
+| Success URL | Baked into the Polar product | `/checkout/success?product=<id>&checkout_id={CHECKOUT_ID}` — verified with Polar server-side, then hands off to the catalog's `delivery.path` |
 | Attribution | Appends `utm_*`/`ref` to the outgoing URL | Fires `checkout_click` / `checkout_redirect` events |
 | Missing config | Honest request-access fallback | 503 + machine-readable `reason` |
 
 Path B is preferred: the success URL follows the catalog instead of a link you copied months ago, and refusals are explicit rather than a silent redirect. Path A stays because the offer-page CTA still uses it whenever Path B is not live.
 
-**Path B's second gate is the point.** Setting the env vars alone cannot open checkout — `products/catalog.json` `status` must also start with `for sale` (see `_checkoutGate` in that file, and §5.4). Setting the catalog alone cannot either. Checkout therefore cannot be opened as a side effect of an environment change or a merge.
+**The gates are the point.** Setting credentials alone cannot open checkout: `CHECKOUT_RELEASE` must explicitly approve the Polar server in use, and `products/catalog.json` `status` must also start with `for sale` (see `_checkoutGate` in that file, and §5.4). Setting the catalog alone cannot either. Checkout therefore cannot be opened as a side effect of an environment change or a merge.
 
 ### 5.1 Env vars (Vercel → Project → Settings → Environment Variables, Production)
 
@@ -89,14 +89,16 @@ Names and purpose are also documented in `.env.example`.
 
 | Env var | Value |
 |---|---|
-| `POLAR_ACCESS_TOKEN` | Organization Access Token (Polar → Settings → Developers). Server-side only — never `NEXT_PUBLIC_`. |
+| `POLAR_ACCESS_TOKEN` | Organization Access Token (Polar → Settings → Developers) with scopes `checkouts:write` and `checkouts:read`. Server-side only — never `NEXT_PUBLIC_`. |
+| `POLAR_SERVER` | Optional. `sandbox` routes all calls to `sandbox-api.polar.sh` for a test purchase with test cards (needs a sandbox token and sandbox product ids). Unset = production. |
+| `CHECKOUT_RELEASE` | **The release switch.** Unset = closed, whatever else is configured. `sandbox` opens checkout only while `POLAR_SERVER=sandbox`; `live` opens it only against production Polar. Set `live` only after the §6 sandbox purchase, receipt, and file access are evidenced. Static links (Path A) open only on `live`. |
 | `POLAR_PRODUCT_ID_BLUEPRINT` | Polar product id for `blueprint` |
 | `POLAR_PRODUCT_ID_PRIVATE_INTEL` | Polar product id for `private-intel` |
 | `POLAR_PRODUCT_ID_AGENT_TEAM_PRO` | Leave unset until the payload exists (§4) |
 | `POLAR_PRODUCT_ID_CLAIMS_GUARD_PACK` | Leave unset until the pack zip is uploaded (§2, cross-repo packs) |
 | `POLAR_PRODUCT_ID_ABOS_PACK_BUNDLE` | Leave unset until the bundle zip is uploaded (§2, cross-repo packs) |
 | `POLAR_PRODUCT_ID_VIBE_OS_PACK` | Leave unset until the pack zip is uploaded (§2, cross-repo packs) |
-| `POLAR_SUCCESS_URL` | Site origin, e.g. `https://agenticincome.ai`. The per-product path comes from the catalog's `delivery.path`. |
+| `POLAR_SUCCESS_URL` | **Required** (unset or non-https keeps checkout closed). Site origin, e.g. `https://agenticincome.ai`. Buyers return to `/checkout/success`, which confirms the checkout with Polar (`GET /v1/checkouts/{id}`) and links the catalog's `delivery.path` desk. |
 
 **Path A (legacy static links):**
 
@@ -112,6 +114,8 @@ No CSP change is needed: checkout is a top-level navigation to Polar, not an emb
 
 ### 5.2 Code touches (exact files)
 
+> **Done 2026-10-30:** `lib/offers.ts` has offer entries for every priced catalog SKU (agent-team-pro and the three packs included), each with a `/offers/<id>` page and a `/delivery/<id>` desk, and the success page at `/checkout/success` verifies the checkout with Polar. Items 4–6 below remain optional follow-ups.
+
 1. **`lib/offers.ts`** — add an `agent-team-pro` offer entry (copy the `blueprint` entry shape) with:
    - `slug: 'agent-team-pro'`, `price: '$129'`, `checkout: { provider: 'external', envKey: 'AGENTIC_INCOME_AGENT_TEAM_PRO_CHECKOUT_URL', fallback: 'request-access' }`, `deliveryPath: '/delivery/agent-team-pro'`.
    - `refundPolicy` fields: the 30-day no-questions text (§7) is already live on `blueprint` and `private-intel` (updated 2026-07-11); give `agent-team-pro` the same text when its entry is created.
@@ -123,8 +127,8 @@ No CSP change is needed: checkout is a top-level navigation to Polar, not an emb
 
 ### 5.3 Delivery pages
 
-- Existing: `/delivery/blueprint`, `/delivery/private-intel`, `/delivery/starter-kit` (in `app/delivery/`).
-- Create: `/delivery/agent-team-pro`.
+- Bespoke: `/delivery/blueprint`, `/delivery/private-intel`, `/delivery/starter-kit` (in `app/delivery/`).
+- Generic, rendered from `lib/offers.ts` + the catalog by `app/delivery/[slug]/page.tsx`: `/delivery/agent-team-pro`, `/delivery/claims-guard-pack`, `/delivery/abos-pack-bundle`, `/delivery/vibe-os-pack`. Each shows a waitlist until its checkout is live.
 - Each paid delivery page should state: what was purchased, the file list, the license line, the 30-day refund line, and the support boundary.
 
 ### 5.4 Flip the catalog status gate (Path B only — do this last)
@@ -148,9 +152,11 @@ Rules that stay in force:
 
 Once flipped and redeployed, `/offers/blueprint` renders a real buy button instead of "Reserve Blueprint access" (label from `checkout.buyLabel` in `lib/offers.ts`), and the access-path panel says checkout is live.
 
-**Rolling back:** unset `POLAR_ACCESS_TOKEN` and redeploy, or revert the status string. Either one independently returns every surface to the request-access state — neither leaves a page claiming a product is buyable when it is not.
+**Rolling back:** unset `CHECKOUT_RELEASE` (or `POLAR_ACCESS_TOKEN`) and redeploy, or revert the status string. Either one independently returns every surface to the request-access state — neither leaves a page claiming a product is buyable when it is not.
 
 ## 6. Test-purchase checklist (per paid product — do not skip)
+
+> **Release order (2026-10-30):** run this whole checklist with `POLAR_SERVER=sandbox` + `CHECKOUT_RELEASE=sandbox` on a Preview deployment first. Record the evidence (checkout id, receipt email screenshot, file downloaded from the Polar link, success-page state seen) on the release PR. Only then set `CHECKOUT_RELEASE=live` in Production. The success page reports Polar's checkout state only. It cannot see whether the receipt email was delivered or the download worked, so those two checks are manual and mandatory.
 
 > **Path B has never touched the live Polar API.** The request shape in `lib/polar.ts` (`POST https://api.polar.sh/v1/checkouts/` with `{ products: [id], success_url }`, reading `url` off the response) was written against Polar's documented current API — `products` as an array, since the singular `product_id` is deprecated — but outbound calls to `api.polar.sh` are blocked from the environment it was built in, so it has only been verified as far as "the gates open and the request is attempted." The first item below is therefore a genuine test, not a formality. If Polar answers unusably the route returns 502 `checkout_upstream_failed` and the button falls back to request-access, so a wrong field name degrades to the honest state rather than a broken checkout.
 
@@ -160,7 +166,8 @@ Once flipped and redeployed, `/offers/blueprint` renders a real buy button inste
 - [ ] Path B: `POST /api/checkout` with a still-gated id (e.g. `agent-team-pro`) returns 503 `checkout_gated`, and with `starter-kit` returns 400 `free_product`. Confirm before announcing — this is the guard that stops an unfinished product being sold.
 - [ ] Path A (if used): `/api/checkout?offer=<slug>` redirects to Polar (not the request-access fallback).
 - [ ] `utm_source=test&ref=qa` on the offer URL survives to the Polar checkout URL (attribution passthrough).
-- [ ] Complete purchase → redirected to the correct `/delivery/<slug>` page.
+- [ ] Complete purchase → redirected to `/checkout/success`, which shows "checkout complete" and links the correct `/delivery/<slug>` desk. Reload with a bogus `checkout_id` → "could not be confirmed", no delivery link.
+- [ ] Abandon a checkout → its success URL shows "not complete yet" (open) or "did not complete" (expired), with no delivery link.
 - [ ] Receipt email arrives from Polar; seller name is correct.
 - [ ] File download works; license key issued (where enabled).
 - [ ] VAT: test with a EU billing address once — invoice must show VAT handled by Polar as MoR.

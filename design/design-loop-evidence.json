@@ -210,5 +210,55 @@
       "Source freshness reflects retrieval age, not ground-truth verification.",
       "Verified revenue remains intentionally uncalculated (unknown) until upstream financial verification is attached."
     ]
+  },
+  "offer_inspection_and_fit_check": {
+    "version": "2026-11-03",
+    "scope": "Offer ladder (/offers, /offers/[slug]), starting-kit fit check (/start, /offers), deterministic disk-backed PackInspector manifests, and 8 vector schematic plates.",
+    "references": [
+      "Linear Changelog (11d3e58a-87d7-4a9a-bbf5-720f4fd3ffc6)",
+      "Supabase (28aeb534-7a32-43ce-a1ae-464fec697fd2)",
+      "Convex (d500b995-352a-4a4f-8016-cb00cdb6eb17)",
+      "Cycle Template Workbench (618b2107-26a0-40e1-9e7a-9f7689a441f5)",
+      "Polaroid Recommendation Quiz (Flow 9471)"
+    ],
+    "artifacts": [
+      "DESIGN.md",
+      "scripts/build-pack-manifests.mjs",
+      "lib/pack-manifests.ts",
+      "lib/offers.ts",
+      "components/PackInspector.tsx",
+      "components/OperatorFitCheck.tsx",
+      "components/ProductLadder.tsx",
+      "app/offers/page.tsx",
+      "app/offers/[slug]/page.tsx",
+      "app/start/page.tsx",
+      "public/images/products/plate-starter-kit.svg",
+      "public/images/products/plate-vibe-os-pack.svg",
+      "public/images/products/plate-claims-guard-pack.svg",
+      "public/images/products/plate-blueprint.svg",
+      "public/images/products/plate-abos-pack-bundle.svg",
+      "public/images/products/plate-agent-team-pro.svg",
+      "public/images/products/plate-private-intel.svg",
+      "public/images/products/plate-implementation-sprint.svg",
+      "tests/pack-inspector.test.mjs"
+    ],
+    "checks": [
+      {
+        "name": "disk-derived-manifests",
+        "status": "pass",
+        "evidence": "scripts/build-pack-manifests.mjs generates lib/pack-manifests.ts directly from verified repository files (catalog.json deliverables, public/downloads, products/*/PRODUCT.md, and products/FULFILLMENT_RUNBOOK.md), verified by tests/pack-inspector.test.mjs."
+      },
+      {
+        "name": "public-language-and-fulfillment-truth",
+        "status": "pass",
+        "evidence": "Customer-facing vocabulary replaces internal operator/harness terminology; fit-check email capture discloses general subscription behavior without claiming server-side checklist storage; #request-access fallback remains reachable when Polar checkout fails."
+      },
+      {
+        "name": "ci-and-preview-build",
+        "status": "pass",
+        "evidence": "GitHub Actions build, scan, Web Interface Guidelines, Surface Guard, and Vercel preview deployment verified on PR #117."
+      }
+    ],
+    "decision": "ship"
   }
 }

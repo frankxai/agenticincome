@@ -7,6 +7,7 @@ import programsData from '@/data/programs.json'
 import { site } from '@/lib/site'
 import { fitCheck, AUTOMATION_POINTER } from '@/lib/fit-check'
 import { programSlug, type Program } from '@/lib/affiliate'
+import { withSource } from '@/lib/link-source'
 import { catalogRefusal, isPolarConfigured, type CatalogProduct } from '@/lib/polar'
 import catalog from '@/products/catalog.json'
 import referenceGraph from '@/data/income-graph-request-to-quote.json'
@@ -25,8 +26,18 @@ import {
   type IncomeGraph,
 } from '@/lib/income-graph'
 import { incomeGraphSchema } from '@/lib/income-graph/zod'
+import { searchEconomies, supplyCosts, unitMargin, type VaultData } from '@/lib/vault'
+import economiesData from '@/vault/economies.json'
+import supplyData from '@/vault/supply-chain.json'
+import verificationData from '@/vault/verification.json'
 
 export const maxDuration = 60
+
+const VAULT: VaultData = {
+  economies: economiesData as VaultData['economies'],
+  supply: supplyData as VaultData['supply'],
+  verification: verificationData as VaultData['verification'],
+}
 
 const AFFILIATE_DISCLOSURE =
   'Links marked ourLink are affiliate links; Agentic Income may earn a commission.'
@@ -68,7 +79,7 @@ function publicProgram(p: Program) {
     commission: p.commission ?? null,
     cookieDays: p.cookieDays ?? null,
     status: p.status ?? 'active',
-    ...(p.status === 'active' && p.ourLink ? { ourLink: p.ourLink } : {}),
+    ...(p.status === 'active' && p.ourLink ? { ourLink: withSource(p.ourLink, 'mcp') } : {}),
   }
 }
 
@@ -329,16 +340,111 @@ const handler = createMcpHandler(
         return json({ tasks, markdown: tasksToMarkdown(typed, tasks) })
       },
     )
+
+    server.registerTool(
+      'search_digital_economies',
+      {
+        description:
+          'Query sourced platform and marketplace rows from the Economy Vault (GMV, developer payouts, take rates, source URLs, and verification verdicts). Defaults to confirmedOnly: true so only rows verified by source fetch or reviewer receipt are returned unless confirmedOnly is explicitly false.',
+        inputSchema: {
+          sector: z
+            .string()
+            .optional()
+            .describe('Optional sector filter (e.g. app-stores, games, creator, templates, freelance, ecommerce, developer-marketplaces).'),
+          query: z
+            .string()
+            .optional()
+            .describe('Optional substring search against platform name and metric.'),
+          confirmedOnly: z
+            .boolean()
+            .optional()
+            .describe('Defaults to true on the public endpoint. Set false to inspect unconfirmed rows alongside their verification verdict.'),
+        },
+      },
+      async ({ sector, query, confirmedOnly }) => {
+        const effectiveConfirmedOnly = confirmedOnly ?? true
+        const rows = searchEconomies(VAULT, { sector, query, confirmedOnly: effectiveConfirmedOnly })
+        return json({
+          checkedAt: VAULT.verification.checkedAt,
+          confirmedOnly: effectiveConfirmedOnly,
+          count: rows.length,
+          rows,
+        })
+      },
+    )
+
+    server.registerTool(
+      'list_supply_costs',
+      {
+        description:
+          'List sourced unit costs and transaction fee rows from the Economy Vault supply chain (inference tokens, audio, image, video, merchant-of-record fees, payment rails) with source URLs and verification verdicts. Defaults to confirmedOnly: true.',
+        inputSchema: {
+          category: z
+            .string()
+            .optional()
+            .describe('Optional category filter (e.g. llm, audio, image, video, payments, hosting, agent-payments).'),
+          confirmedOnly: z
+            .boolean()
+            .optional()
+            .describe('Defaults to true on the public endpoint. Set false to include unconfirmed rows with their verification verdict.'),
+        },
+      },
+      async ({ category, confirmedOnly }) => {
+        const effectiveConfirmedOnly = confirmedOnly ?? true
+        const rows = supplyCosts(VAULT, { category, confirmedOnly: effectiveConfirmedOnly })
+        return json({
+          checkedAt: VAULT.verification.checkedAt,
+          confirmedOnly: effectiveConfirmedOnly,
+          count: rows.length,
+          rows,
+        })
+      },
+    )
+
+    server.registerTool(
+      'calculate_unit_margin',
+      {
+        description:
+          'Compute unit gross margin from sourced Economy Vault supply-chain and marketplace take-rate rows for a hypothesis selling price (priceUsd). Refuses unknown, unpriced, or unconfirmed inputs instead of guessing. Never forecasts volume or revenue.',
+        inputSchema: {
+          priceUsd: z
+            .number()
+            .positive()
+            .describe('Hypothesis selling price in USD (must be > 0; treated as a price hypothesis, not a demand claim).'),
+          costLines: z
+            .array(
+              z.object({
+                supplyId: z.string().describe('Supply-chain unit-cost row id from list_supply_costs.'),
+                quantity: z.number().positive().describe('Units consumed per sale (must be > 0).'),
+              }),
+            )
+            .default([])
+            .describe('Unit cost lines consumed per sale.'),
+          feeSupplyIds: z
+            .array(z.string())
+            .optional()
+            .describe('Optional selling-fee row ids from list_supply_costs (e.g. polar-starter-fee, gumroad-direct-fee).'),
+          takeRateFrom: z
+            .string()
+            .optional()
+            .describe('Optional economy row id from search_digital_economies with a confirmed takeRateFraction.'),
+        },
+      },
+      async ({ priceUsd, costLines, feeSupplyIds, takeRateFrom }) => {
+        const result = unitMargin(VAULT, { priceUsd, costLines, feeSupplyIds, takeRateFrom })
+        return json({ priceIsHypothesis: true, ...result })
+      },
+    )
   },
   {
     serverInfo: { name: 'agentic-income', version: '1.0.0' },
-  },
-  {
-    basePath: '/api',
-    maxDuration: 60,
     verboseLogs: false,
-    disableSse: true,
+    // Old config had disableSse: true; this also rejects 2.x subscription streams.
+    maxSubscriptions: 0,
   },
 )
+
+// mcp-handler 2.x serves every request it receives and takes two arguments;
+// routing and the time limit (maxDuration, above) belong to the host framework.
 
 export { handler as GET, handler as POST }

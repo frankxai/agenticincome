@@ -62,3 +62,17 @@ Inherently compliant: 100% static layout with all states fully accessible at res
 
 Self-contained static HTML compilation generated directly from authorized JSON catalog snapshots. Zero external assets, fonts, tracking pixels, or remote scripts. Enforced with a SHA-256 hash-pinned CSP script and `default-src 'none'`.
 
+## Offer inspection workbench and schematic plates — 2026-11-03
+
+Reference lock (`DESIGN.md`): Linear Changelog (`11d3e58a`) obsidian elevation, Supabase
+(`28aeb534`) emerald verification accent (`#10b981`), Convex (`d500b995`) code-pane containment,
+Cycle (`618b2107`) two-pane file preview, and Polaroid (`Flow 9471`) 4-step fit check.
+
+- **Static frame:** Eight `640x360` (`16:9`) vector schematic plates (`public/images/products/plate-*.svg`)
+  pair with a keyboard-accessible vertical/responsive `tablist` inspector (`PackInspector`)
+  and explicit `Good fit if` / `Skip this if` boundaries.
+- **Motion & reduced motion:** `150ms` border/color transitions and step progress updates collapse
+  to instant swaps under `prefers-reduced-motion: reduce` (`motion-reduce:transition-none`).
+- **Accessibility:** `44px` minimum touch targets, `2px` `#10b981` `:focus-visible` outlines,
+  `ArrowUp`/`ArrowDown`/`Home`/`End` tab navigation, and automatic focus advancement across
+  fit-check steps after user interaction.

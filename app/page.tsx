@@ -9,7 +9,7 @@ import { catalogRefusal, type CatalogProduct } from '@/lib/polar'
 export const metadata: Metadata = {
   title: 'Agent-as-a-Service implementation and digital products',
   description:
-    'The canonical revenue operating system for Agent-as-a-Service delivery: productized implementation, digital products, and open-core proof. Clear scope, inspectable deliverables, and human-gated authority — zero income promises.',
+    'Agent implementation sprints and digital packs, scoped first. Clear scope, inspectable deliverables, and human-gated authority — no income promises.',
   alternates: { canonical: '/' },
   openGraph: { url: '/' },
 }
@@ -25,6 +25,9 @@ const MCP_TOOLS = [
 ]
 
 type Product = CatalogProduct
+
+// Only these products have a waitlist today (lib/offers.ts, components/ProductLadder.tsx); the rest are simply not on sale yet.
+const WAITLIST_PRODUCT_IDS = new Set(['agent-team-pro', 'private-intel'])
 
 function priceLabel(p: Product): string {
   if (p.price_cents === 0) return 'Free'
@@ -45,15 +48,15 @@ export default function Home() {
           <div>
             <div className="kicker">Agentic Income — Agent-as-a-Service Engine</div>
             <h1 className="assembly-title">
-              Agent-as-a-Service. <span>Engineered revenue.</span>
+              Scoped agent builds with <span>human approval gates</span>
             </h1>
             <p className="assembly-sub">
-              The canonical revenue operating system: productized implementation sprints, digital
-              products, and open-core reference systems. Scoped deliverables, inspectable code, and
-              human approval gates — zero outcome promises.
+              Productized implementation sprints, digital products and open reference systems.
+              Scoped deliverables, inspectable code and partner rates dated to their source. No
+              income promises.
             </p>
             <div className="assembly-actions">
-              <Link href="/offers" className="cta">View implementation scope</Link>
+              <Link href="/offers/implementation-sprint" className="cta">View the implementation sprint</Link>
               <Link href="/start" className="cta-secondary">Start free</Link>
             </div>
           </div>
@@ -110,7 +113,7 @@ export default function Home() {
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div className="section-heading motion-reveal">
             <div className="kicker text-[color:var(--color-gold)]">The partner economics board</div>
-            <h2 className="display-h2">Recurring beats one-time. We publish the rates.</h2>
+            <h2 className="display-h2">We publish the rates and when we checked them.</h2>
           </div>
           <Link href="/tools" className="cta-secondary">Full catalog</Link>
         </div>
@@ -183,7 +186,7 @@ export default function Home() {
           <div className="kicker text-[color:var(--color-gold)]">Products · labeled honestly</div>
           <h2 className="display-h2">The catalog renders from reality.</h2>
           <p className="mt-3 max-w-xl text-[color:var(--color-muted)]">
-            Status strings come straight from the product catalog. Nothing says buy until checkout
+            Availability follows the product catalog. Nothing says buy until checkout
             actually exists; today the free starter kit is the only live path. Paid prices and
             offer links appear only on products the catalog marks for sale.
           </p>
@@ -199,7 +202,13 @@ export default function Home() {
                   <div className={`price-tag ${isFree ? 'free' : ''}`}>{priceLabel(product)}</div>
                 ) : null}
                 <h3 className="font-display text-lg font-bold">{product.name}</h3>
-                <div className="price-state">{product.status}</div>
+                <div className="price-state">
+                  {isFree || isForSale
+                    ? product.status
+                    : WAITLIST_PRODUCT_IDS.has(product.id)
+                      ? 'Waitlist · not yet on sale'
+                      : 'Not yet on sale'}
+                </div>
                 {isFree ? (
                   <Link href="/delivery/starter-kit" className="cta-secondary mt-2 !min-h-0 !px-4 !py-2 text-sm">
                     Open the starter kit
@@ -208,7 +217,11 @@ export default function Home() {
                   <Link href="/offers" className="mt-2 text-sm font-semibold text-muted underline decoration-[color:var(--color-border)] underline-offset-2 hover:text-ink">
                     Read the offer
                   </Link>
-                ) : null}
+                ) : (
+                  <Link href={`/offers/${product.id}`} className="mt-2 text-sm font-semibold text-muted underline decoration-[color:var(--color-border)] underline-offset-2 hover:text-ink">
+                    Inspect scope
+                  </Link>
+                )}
               </div>
             )
           })}
@@ -223,7 +236,7 @@ export default function Home() {
       <section className="conversion-band motion-reveal">
         <div>
           <div className="kicker text-[color:var(--color-accent-2)]">The network</div>
-          <h2>Want systems that run without you?</h2>
+          <h2>Continue at agenticpassiveincome.com</h2>
           <p>
             That discipline lives at agenticpassiveincome.com — including its own MCP server your
             agent can query.

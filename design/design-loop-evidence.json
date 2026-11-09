@@ -172,6 +172,45 @@
       "Shared estate visual-warmup files referenced by Windows paths were not available in this connector-only checkout. Repo-local design contracts were read; visual verification remains pending."
     ]
   },
+  "observatory_health_dashboard": {
+    "version": "2026-11-02",
+    "scope": "Private review HTML dashboard for product intelligence evidence health, coverage audit, and conflict triage.",
+    "artifacts": [
+      "lib/observatory-health.mjs",
+      "scripts/query-observatory.mjs",
+      "docs/observatory/HEALTH.md"
+    ],
+    "changes": [
+      "Standalone zero-dependency HTML dashboard generation with hash-pinned CSP and escaped rendering.",
+      "Evidence metrics grid (products, sources, observations, coverage, stale evidence, ranking gate).",
+      "Client-side instant filter across product, layer, model, and evidence without remote calls.",
+      "Native meter tags for scored and tested coverage, and expandable gap analysis drawers.",
+      "Dedicated print styles and mobile responsive reflow below 650px."
+    ],
+    "checks": [
+      {
+        "name": "evidence-isolation",
+        "status": "pass",
+        "evidence": "projectCatalog strips private goals, tenant context, retrieval IDs, and unapproved receipts before rendering."
+      },
+      {
+        "name": "csp-and-markup-safety",
+        "status": "pass",
+        "evidence": "HTML uses default-src 'none', hash-pinned script sha256, escaped HTML tags, and form-action/base-uri 'none'."
+      },
+      {
+        "name": "test-suite",
+        "status": "pass",
+        "evidence": "node --test tests/observatory*.test.mjs passed with 25 tests verifying health calculation, date bounds, CLI exports, and escaping."
+      }
+    ],
+    "decision": "ship-private-review",
+    "known_risks": [
+      "Private review artifact only; not approved for public deployment or unauthenticated customer promotion.",
+      "Source freshness reflects retrieval age, not ground-truth verification.",
+      "Verified revenue remains intentionally uncalculated (unknown) until upstream financial verification is attached."
+    ]
+  },
   "offer_inspection_and_fit_check": {
     "version": "2026-11-03",
     "scope": "Offer ladder (/offers, /offers/[slug]), starting-kit fit check (/start, /offers), deterministic disk-backed PackInspector manifests, and 8 vector schematic plates.",

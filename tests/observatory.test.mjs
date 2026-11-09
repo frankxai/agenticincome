@@ -4,11 +4,12 @@ import { readFileSync, mkdtempSync, writeFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { spawnSync } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
 import { projectCatalog, catalogCsv } from '../lib/observatory.mjs'
 
 const fixture = JSON.parse(readFileSync(new URL('../data/observatory/seed-2026-11-01.json', import.meta.url)))
 const fresh = () => structuredClone(fixture)
-const cli = new URL('../scripts/query-observatory.mjs', import.meta.url)
+const cli = fileURLToPath(new URL('../scripts/query-observatory.mjs', import.meta.url))
 
 test('real research seed projects all twelve products with honest unknowns', () => {
   const result = projectCatalog(fresh())
@@ -103,22 +104,22 @@ test('CSV protects formula-like text, preserves null blanks and source URLs', ()
   assert.ok(!csv.includes('undefined') && !csv.includes('[object Object]'))
 })
 test('CLI JSON and CSV match the same filtered population', () => {
-  const path = new URL('../data/observatory/seed-2026-11-01.json', import.meta.url)
-  const json = spawnSync(process.execPath, [cli.pathname, path.pathname, '--layer', 'API and MCP'], { encoding: 'utf8' })
+  const path = fileURLToPath(new URL('../data/observatory/seed-2026-11-01.json', import.meta.url))
+  const json = spawnSync(process.execPath, [cli, path, '--layer', 'API and MCP'], { encoding: 'utf8' })
   assert.equal(json.status, 0); assert.equal(json.stderr, '')
   const parsed = JSON.parse(json.stdout); assert.equal(parsed.matched_products, 1)
-  const csv = spawnSync(process.execPath, [cli.pathname, path.pathname, '--layer', 'API and MCP', '--format', 'csv'], { encoding: 'utf8' })
+  const csv = spawnSync(process.execPath, [cli, path, '--layer', 'API and MCP', '--format', 'csv'], { encoding: 'utf8' })
   assert.equal(csv.status, 0); assert.equal(csv.stdout, catalogCsv(parsed))
 })
 test('CLI rejects duplicate flags and protects private parse errors', () => {
   const dir = mkdtempSync(join(tmpdir(), 'observatory-'))
   try {
     const path = join(dir, 'private.json'); writeFileSync(path, '{PRIVATE-INPUT-MUST-NOT-LEAK')
-    const parse = spawnSync(process.execPath, [cli.pathname, path], { encoding: 'utf8' })
+    const parse = spawnSync(process.execPath, [cli, path], { encoding: 'utf8' })
     assert.equal(parse.status, 1); assert.equal(parse.stdout, ''); assert.equal(parse.stderr, '{"error":"invalid_catalog_request"}\n')
-    const duplicate = spawnSync(process.execPath, [cli.pathname, path, '--format', 'json', '--format', 'csv'], { encoding: 'utf8' })
+    const duplicate = spawnSync(process.execPath, [cli, path, '--format', 'json', '--format', 'csv'], { encoding: 'utf8' })
     assert.equal(duplicate.status, 1)
     writeFileSync(path, 'x'.repeat(2 * 1024 * 1024 + 1))
-    const large = spawnSync(process.execPath, [cli.pathname, path], { encoding: 'utf8' }); assert.equal(large.status, 1)
+    const large = spawnSync(process.execPath, [cli, path], { encoding: 'utf8' }); assert.equal(large.status, 1)
   } finally { rmSync(dir, { recursive: true, force: true }) }
 })

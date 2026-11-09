@@ -49,3 +49,33 @@ checks as substitutes for connected evidence. The connected-activity view remain
 This repair changes text and example data in the existing composition. Authentication,
 telemetry, data adapters, commerce, and production release remain separate implementation
 work. Recheck desktop, mobile, keyboard, and reduced-motion output before promotion.
+
+## Evidence Observatory Private Review Dashboard — 2026-11-02
+
+Surface: Standalone HTML artifact generated via `scripts/query-observatory.mjs --format html` backed by `lib/observatory-health.mjs`.
+
+### Audience
+
+Internal research editors, systems architects, and review teams evaluating catalog evidence health, coverage completeness, and observation conflicts before any public ranking or commercial claims.
+
+### Purpose and Conversion
+
+The dashboard enforces the core thesis: "Evidence before rankings." It is an internal triage and audit tool, not a public promotion or customer portal. Outcome: pinpoint evidence freshness decay, missing core dimensions, and conflicting observations to prioritize research queue tasks.
+
+### Scene Structure
+
+1. **Header & Provenance**: Category eyebrow (`AGENTIC INCOME / PRODUCT INTELLIGENCE`), headline, snapshot timestamp, and audit timestamp with explicit unapproved publication notice.
+2. **Evidence Metrics Grid**: 8 responsive metric cards displaying products in scope, distinct linked sources, total observations, mean tested coverage, stale sources (> policy threshold), ranking gate eligibility count, mean scored coverage, and unverified revenue status ("Unknown").
+3. **Operational Policy Thresholds**: Clear callout of the 70% weighted coverage bar and mandatory tested outcome reliability, unit economics, and retention criteria.
+4. **Interactive Catalog Filter**: Live client-side search input filtering across product name, layer, model, and evidence with an active match counter.
+5. **Product Detail Cards**: Structured articles with layer badge, customer job, revenue model, revenue evidence level, native `<meter>` bars for scored and tested coverage, eligibility status badge, and an expandable `<details>` evidence drawer revealing unknown dimensions, linked sources with freshness tags, and signal counts.
+6. **Integrity & Security Footer**: Explicit boundary declaration documenting zero external connections, credentials, or tracking.
+
+### Design Contract & Accessibility
+
+- Standalone zero-dependency HTML with strict CSP (`default-src 'none'; script-src 'sha256-...'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'`).
+- Fully escaped dynamic text preventing HTML injection.
+- Keyboard accessible with distinct emerald `:focus-visible` outlines (`outline: 3px solid #10b981; outline-offset: 4px`).
+- Mobile responsive layout reflowing the metrics grid from 4 to 2 columns below 650px.
+- Dedicated print stylesheet hiding search and expanding details for archival reporting.
+

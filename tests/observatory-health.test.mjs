@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
+import { fileURLToPath } from 'node:url'
 import { auditObservatory, observatoryDashboard } from '../lib/observatory-health.mjs'
 const seed = JSON.parse(readFileSync(new URL('../data/observatory/seed-2026-11-01.json', import.meta.url)))
 const fresh = () => structuredClone(seed)
@@ -47,6 +48,20 @@ test('partial, reversed and future reporting periods fail', () => {
     assert.throws(() => auditObservatory(d))
   }
 })
+test('omitted period_start with invalid or future period_end fails validation', () => {
+  for (const end of ['2099-02-30', '2027-01-01', '2026-10-01']) {
+    const d = fresh()
+    delete d.observations[0].period_start
+    d.observations[0].period_end = end
+    assert.throws(() => auditObservatory(d))
+  }
+  for (const start of ['2026-10-01']) {
+    const d = fresh()
+    d.observations[0].period_start = start
+    delete d.observations[0].period_end
+    assert.throws(() => auditObservatory(d))
+  }
+})
 test('ranking requires critical tested dimensions and sufficient coverage, then blocks stale evidence', () => {
   const d = fresh(), id = d.products[0].product_id
   for (const a of d.assessments.filter(a => a.product_id === id)) Object.assign(a, { state: 'tested', score: 3, source_id: d.sources[0].source_id })
@@ -66,9 +81,9 @@ test('private input is excluded from both health and dashboard; markup is escape
   assert.ok(html.includes("default-src 'none'"))
 })
 test('CLI serves HTML and health and rejects ignored audit options', () => {
-  const cli = new URL('../scripts/query-observatory.mjs', import.meta.url)
-  const path = new URL('../data/observatory/seed-2026-11-01.json', import.meta.url).pathname
-  const run = (...args) => spawnSync(process.execPath, [cli.pathname, path, ...args], { encoding: 'utf8' })
+  const cli = fileURLToPath(new URL('../scripts/query-observatory.mjs', import.meta.url))
+  const path = fileURLToPath(new URL('../data/observatory/seed-2026-11-01.json', import.meta.url))
+  const run = (...args) => spawnSync(process.execPath, [cli, path, ...args], { encoding: 'utf8' })
   const r = run('--format', 'health', '--audit-at', at); assert.equal(r.status, 0); assert.equal(JSON.parse(r.stdout).metrics.products, 12)
   assert.ok(run('--format', 'html').stdout.startsWith('<!doctype html>'))
   const bad = run('--format', 'json', '--audit-at', at)

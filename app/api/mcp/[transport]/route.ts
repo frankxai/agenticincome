@@ -438,13 +438,11 @@ const handler = createMcpHandler(
   },
   {
     serverInfo: { name: 'agentic-income', version: '1.0.0' },
-  },
-  {
-    basePath: '/api',
-    maxDuration: 60,
     verboseLogs: false,
-    disableSse: true,
   },
 )
+
+// mcp-handler 2.x serves every request it receives and takes two arguments;
+// routing and the time limit (maxDuration, above) belong to the host framework.
 
 export { handler as GET, handler as POST }

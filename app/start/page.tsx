@@ -50,7 +50,7 @@ export default function Start() {
       </div>
 
       <h2 className="mt-14 text-2xl font-bold text-ink">The recurring-payer shortlist</h2>
-      <p className="mt-2 max-w-2xl text-muted">Commission terms from the partner data, with how long each one pays. Every link to these tools is compensated and disclosed, so name a non-affiliate alternative beside it.</p>
+      <p className="mt-2 max-w-2xl text-muted">Commission terms and recurring length for six programs, as listed in the partner data.</p>
       <div className="mt-6 overflow-hidden rounded-xl border border-border glass">
         <table className="w-full text-sm">
           <thead><tr className="text-left text-muted">

@@ -28,6 +28,17 @@ function navOffset(): number {
   return position === 'sticky' || position === 'fixed' ? Math.round(header.getBoundingClientRect().height) : 0
 }
 
+/**
+ * Tweens started later from scroll callbacks (step focus, idle states) are created outside the
+ * gsap.matchMedia recording scope, so mm.revert() does not undo them. This stops any still in
+ * flight and removes every inline style they left, returning the elements to the document layer.
+ */
+function release(targets: Element[], props = 'opacity,transform,translate,rotate,scale,transformOrigin') {
+  if (!targets.length) return
+  gsap.killTweensOf(targets)
+  gsap.set(targets, { clearProps: props })
+}
+
 /** One-shot idle state for a character plate. Never loops. */
 function playIdle(plate: Element | null | undefined) {
   if (!plate) return
@@ -75,6 +86,7 @@ export function mountScenes(root: HTMLElement): Cleanup {
       const { motion, desktop } = context.conditions as { motion: boolean; desktop: boolean }
       if (!motion) return
       const cleanups: Cleanup[] = []
+      let disposed = false
       const viewport = window.innerHeight
       root.style.setProperty('--cine-pin-top', `${navOffset()}px`)
       cleanups.push(() => root.style.removeProperty('--cine-pin-top'))
@@ -128,6 +140,22 @@ export function mountScenes(root: HTMLElement): Cleanup {
       const spinePin = spine?.querySelector<HTMLElement>('[data-cine="pin"]')
       const steps = spine ? Array.from(spine.querySelectorAll<HTMLElement>('[data-cine="step"]')) : []
       if (spine && spinePin && steps.length) {
+        cleanups.push(() => {
+          // Idle targets are SVG groups with no authored style or transform, so GSAP's attributes can simply be removed.
+          const idle = Array.from(spine.querySelectorAll('[data-idle]'))
+          const scrub = () => {
+            gsap.killTweensOf(idle)
+            idle.forEach((element) => {
+              element.removeAttribute('style')
+              element.removeAttribute('transform')
+              element.removeAttribute('data-svg-origin')
+            })
+          }
+          scrub()
+          // Again on the next frame: this cleanup runs before GSAP finishes reverting the context, and that
+          // revert can write an interrupted idle tween's start state back onto the element.
+          requestAnimationFrame(scrub)
+        })
         if (desktop) {
           const nodes = Array.from(spine.querySelectorAll<HTMLElement>('[data-cine="rail-node"]'))
           const progress = spine.querySelector<HTMLElement>('[data-cine="rail-progress"]')
@@ -135,6 +163,8 @@ export function mountScenes(root: HTMLElement): Cleanup {
           cleanups.push(() => {
             delete spine.dataset.pinned
             nodes.forEach((node) => node.classList.remove('is-active', 'is-done'))
+            release(steps)
+            if (progress) release([progress])
           })
           // Opacity only (not visibility): every step stays in the accessibility tree while one is in focus.
           gsap.set(steps.slice(1), { opacity: 0, y: 22 })
@@ -148,7 +178,7 @@ export function mountScenes(root: HTMLElement): Cleanup {
             })
           }
           const focus = (index: number) => {
-            if (index === active) return
+            if (disposed || index === active) return
             if (active >= 0) gsap.to(steps[active], { opacity: 0, y: index > active ? -18 : 18, duration: 0.28, ease: 'power2.in', overwrite: true })
             // Job: one concept at a time. The step that owns this part of the scroll takes the stage.
             gsap.fromTo(
@@ -204,6 +234,7 @@ export function mountScenes(root: HTMLElement): Cleanup {
         deckScene.dataset.pinned = 'true'
         cleanups.push(() => {
           delete deckScene.dataset.pinned
+          release(cards)
         })
         gsap.set(cards.slice(1), { y: () => viewport })
         // Job: comparison in sequence. Each route gets the full stage, then is filed under the next.
@@ -293,7 +324,11 @@ export function mountScenes(root: HTMLElement): Cleanup {
       ScrollTrigger.sort()
       ScrollTrigger.refresh()
 
-      return () => cleanups.forEach((cleanup) => cleanup())
+      // Runs when a condition stops matching and on unmount. Stale scroll callbacks must not start new tweens.
+      return () => {
+        disposed = true
+        cleanups.forEach((cleanup) => cleanup())
+      }
     },
   )
 

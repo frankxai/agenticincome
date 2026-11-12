@@ -38,6 +38,14 @@ Re-rendered everything after round 1.
 | 10 | Audit finding: new headings had no `text-wrap: balance`; code tokens could be machine-translated. | Web Interface Guidelines | `text-wrap: balance` on new headings; `translate="no"` on artifact panels, tool names and source lines. | Mechanical lint 0 errors, 0 warnings. |
 | 11 | Audit finding: one idle transform targeted a bare `<path>`. | Web Interface Guidelines, SVG transforms on a `<g>` | Wrapped in a `<g>`. | No visual change. |
 
+## Round 3, independent review
+
+Codex reviewed head `41c7bbf` and raised one finding. It was reproduced before it was fixed.
+
+| # | Defect | Lock line | Fix | Result |
+| --- | --- | --- | --- | --- |
+| 12 | After scrolling into the pinned build path, switching to reduced motion or resizing below 1024px left steps invisible in the static list (steps 1 and 3 in the reproduction, at opacity 0). The step tweens are started from a scroll callback, outside the `gsap.matchMedia` recording scope, so `mm.revert()` did not undo them. | Document layer complete under reduced motion; cleanup on unmount | The scene cleanup now stops those tweens and clears their inline styles for steps, spine progress, route cards and idle targets, and a disposed flag stops stale callbacks from starting new ones. | Reproduction script passes in both modes: all five steps at opacity 1 with no inline style, no pin spacer, no transformed idle element. Two idle targets can keep an identity transform attribute, which renders at rest. Re-enabling motion pins again. |
+
 ## Line by line against the lock
 
 | Lock line | Verdict | Evidence or gap |

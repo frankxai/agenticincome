@@ -655,7 +655,9 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
     },
     { rootMargin: '120px 0px' },
   )
-  const watched = [header, ...Array.from(root.querySelectorAll<HTMLElement>('[data-scene="opening"], [data-scene="build-path"], [data-scene="routes"], [data-scene="mcp"], [data-scene="catalog"], [data-scene="close"]'))]
+  // Only depth-bearing scenes gate rendering. The header is sticky, so observing it would report as visible on
+  // every scroll position and the frame loop would never pause when the reader leaves the scenes.
+  const watched = Array.from(root.querySelectorAll<HTMLElement>('[data-scene="opening"], [data-scene="build-path"], [data-scene="routes"], [data-scene="mcp"], [data-scene="catalog"], [data-scene="close"]'))
   watched.forEach((element) => {
     if (element) observer.observe(element)
   })

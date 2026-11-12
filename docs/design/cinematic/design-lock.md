@@ -67,3 +67,62 @@ Every number, rate, price, date and status is read from repository data files at
 | Board sweep | `.cine-rate i[data-cine="sweep"]`, rendered only when `commissionVerifiedAt` exists |
 | Inspectors | `.cine-inspector`, `.cine-rows[data-cine="inspector"]` |
 | Pin budget | `SPINE_PIN = 1.6` plus `DECK_PIN = 1.2` viewports, 2.8 total |
+
+## Depth layer, 2026-11-12
+
+Founder direction (Frank, 2026-11-12, after seeing wave 1): do more and better, improve all layers and fundamentals, use shader gradients, liquid glass, three.js. This outranks two older lines for the homepage only: "glass stacks" in the rejects above, and the `TASTE.md` cut on 3D (which already allowed 3D with a product metaphor, fallback, provenance and performance budget; all four are below). Every honesty rule still binds. Dependency approved by that direction: `three` (runtime) and `@types/three` (dev). Nothing else was added.
+
+Every effect has a job. An effect with no job is cut.
+
+### 1. Signal field (shader gradient)
+
+A fragment shader behind scene 1 (opening) and scene 6 (close). Slow domain-warped noise in the brand palette only: obsidian `#05060a` base, emerald `#10b981` and cyan `#06b6d4` as light inside the dark, and a trace of gold `#f59e0b` in the close, where the human gate is. It reads as light moving through smoke. No purple, no rainbow, no mesh gradient.
+
+Job: it is the signal the page keeps talking about. Flow speed and brightness follow scroll progress, and it brightens once, the first time the `fit_check` answer resolves. The light is held back on the text side of the opening so copy keeps its contrast.
+
+Deviation, stated plainly: the field is also drawn, confined to their own footprint, under the route deck and under the inspector lists. Glass with nothing behind it has nothing to bend, so those two surfaces needed it. It never sits behind body copy there: the deck is covered by its cards, and every inspector row except the one in focus is opaque.
+
+### 2. Artifact stage (three.js)
+
+The three flat CSS sheets behind the hero terminal become geometry: three thin slabs with bevelled edges, lit by one key light and one emerald rim (plus a low fill so unlit faces are not pure black). Each carries its real file name, read from the DOM label it replaces, and prints values read from that file (only fields this page already publishes; internal notes and link fields never reach the page). Scrolling through scene 1 fans the stack about the terminal's lower left corner and drifts the camera a few degrees; a mouse pointer parallaxes it slightly. The terminal stays real HTML on top.
+
+In scene 2 each of the five steps gets one lit instrument built from primitive geometry and two shared materials: lens, compass, wrench, check seal, key. It turns a quarter turn as its step takes focus.
+
+Founder decision needed: in the WebGL state the lit instrument stands inside the plate frame and the SVG character bust steps aside. The busts remain in every other state (no JavaScript, reduced motion, no WebGL, below 1024px). If the busts should stay beside the instruments, that is a layout change to the plate, not done here.
+
+### 3. Liquid glass
+
+Four surfaces only: the site nav, the terminal chrome, the route cards, and the inspector row in focus. Layered: tint, `backdrop-filter` blur and saturation as the base; an SVG `feDisplacementMap` refraction where the browser applies SVG filters inside `backdrop-filter` (Chromium, desktop width); a 1px specular rim; an inner highlight that follows a mouse pointer. Anywhere refraction is not supported the glass is frosted. No glass on body copy panels or tables. The terminal's bar is the clear part of the pane; its body is a dense tint so the tool call reads as before.
+
+### Fallbacks
+
+| State | What the reader gets |
+| --- | --- |
+| No JavaScript | Static CSS poster in the same palette, CSS sheets, SVG plates, frosted glass |
+| `prefers-reduced-motion: reduce` | Same as no JavaScript |
+| Below 1024px | Same, by measurement (see `depth-critique.md`) |
+| No WebGL2, software renderer, `saveData`, fewer than 4 logical cores | Same, with wave 1 motion |
+| Context lost | Poster and plates return; the layer resumes if the context is restored |
+
+### Engineering contract
+
+- One canvas, one WebGL context, one frame callback on GSAP's ticker (no second requestAnimationFrame loop). Paused by IntersectionObserver when no scene is on screen and on `visibilitychange`. Device pixel ratio capped at 1.5. Geometries, materials, textures, the render target and the renderer are disposed on unmount.
+- GSAP is the only scroll clock. ScrollTrigger callbacks inside `gsap.matchMedia` write progress into `components/motion/depth/state.ts`; the stage reads it. There is no scroll listener in the depth layer.
+- three is imported by named imports in `depth/stage.ts` only, which is its own lazy chunk, requested after first paint and only on a device that passes the gate.
+- The CSP in `vercel.json` is unchanged. No CDN, no external texture, no eval, no worker.
+
+### Rejects
+
+Purple or indigo, rainbow mesh, particle node clouds, floating orbs, fake dashboards, bloom that washes out text, anything that hides or delays content.
+
+### How the build maps to this addendum
+
+| Item | Where it lives |
+| --- | --- |
+| Capability gate, canvas creation, glass detection | `components/motion/depth/mount.ts` |
+| Renderer, field, slabs, instruments, lifecycle | `components/motion/depth/stage.ts` |
+| GLSL | `components/motion/depth/shaders.ts` |
+| Instrument geometry | `components/motion/depth/instruments.ts` |
+| Poster, glass, hand-off rules | `components/motion/depth/depth.css` |
+| Refraction filter | `components/motion/depth/GlassDefs.tsx` |
+| Scroll state | `components/motion/depth/state.ts`, written by `components/motion/scenes.ts` |

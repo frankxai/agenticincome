@@ -83,3 +83,19 @@ Direction: Frank, 2026-11-12. Contract: `docs/design/cinematic/design-lock.md`. 
 - Native scroll speed throughout. No snapping.
 - Step panels and route cards hold no links or controls, so nothing focusable is ever covered or faded. Faded steps use opacity, not visibility, and stay in the accessibility tree.
 
+
+## Depth layer, 2026-11-12
+
+Direction: Frank, 2026-11-12. Contract: `docs/design/cinematic/design-lock.md`, "Depth layer, 2026-11-12". Code: `components/motion/depth/`. The layer runs only at `(min-width: 1024px) and (prefers-reduced-motion: no-preference)` on a device with hardware WebGL2, at least 4 logical cores and no `saveData`. Everywhere else the page is the wave 1 page on a static poster.
+
+| Motion | Job | Trigger | Properties | Where |
+| --- | --- | --- | --- | --- |
+| Signal field flow | The signal the page talks about: light moving through smoke behind the stage | Continuous while a scene with the field is on screen; speed and brightness follow opening and close scroll progress | Shader uniforms | Desktop, WebGL |
+| Resolve pulse | Cause and effect: the answer landing is the signal | Once, the first time the `fit_check` answer finishes resolving | Shader uniform, 0.32s up, 1.5s down | Desktop, WebGL |
+| Slab fan | Depth: the three source files open like a hand of cards as the stage leaves | Opening scroll progress, eased | Object position, rotation | Desktop, WebGL |
+| Camera drift and pointer parallax | The stack is an object, not a picture | Opening scroll progress; mouse pointer position | Camera position, a few degrees | Desktop, WebGL |
+| Instrument quarter turn | The step that takes focus presents its instrument | Step focus change from the build path pin | Object rotation, scale | Desktop, WebGL |
+| Filed card fade | Glass cards would smear the card beneath through the one on top | Route deck pin, scrubbed | opacity of the filed card's contents | Desktop |
+| Glass highlight | The pane responds to the hand | Mouse pointer within 160px of a glass surface | CSS custom properties, opacity 240ms | Fine pointers |
+
+Budget: the layer's own scripting measured 0.7 to 1.3 ms per frame on the test machine (development build). GPU cost on real hardware was not measured; see `docs/design/cinematic/depth-critique.md`.

@@ -9,6 +9,7 @@ import incomeModels from '@/data/income-models.json'
 import catalog from '@/products/catalog.json'
 import { catalogRefusal, type CatalogProduct } from '@/lib/polar'
 import { PACK_MANIFESTS } from '@/lib/pack-manifests'
+import mcpManifest from '@/public/.well-known/mcp.json'
 import pkg from '@/package.json'
 
 export const metadata: Metadata = {
@@ -355,7 +356,7 @@ export default function Home() {
         <div className="cine-inspector mt-8" data-cine-reveal>
           <div className="cine-inspector-bar">
             <span>/api/mcp</span>
-            <span>{MCP_TOOLS.length} tools</span>
+            <span>{MCP_TOOLS.length} of {mcpManifest.tools.length} tools</span>
           </div>
           <ol className="cine-rows" data-cine="inspector">
             {MCP_TOOLS.map((tool, index) => (

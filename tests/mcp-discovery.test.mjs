@@ -31,6 +31,15 @@ test('the MCP server discloses affiliate links in registry responses', () => {
   assert.match(routeSource, /Links marked ourLink are affiliate links; Agentic Income may earn a commission\./)
 })
 
+test('homepage featured tools are real MCP tools, not invented names', () => {
+  const homepageSource = read('app/page.tsx')
+  const featured = [...homepageSource.matchAll(/\{ name: '([a-z_]+)', desc:/g)].map((m) => m[1])
+  assert.ok(featured.length >= 7, 'expected the homepage to feature at least seven tools')
+  for (const name of featured) {
+    assert.ok(wellKnown.tools.includes(name), `${name} is featured on the homepage but missing from .well-known/mcp.json`)
+  }
+})
+
 test('partner economics rows carry a verification date and source', () => {
   const programs = JSON.parse(read('data/programs.json')).programs
   const verified = programs.filter((p) => p.commissionVerifiedAt)

@@ -1,5 +1,7 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { mountDepth, mountGlass } from './depth/mount'
+import { depthState } from './depth/state'
 
 /**
  * The homepage motion layer. Loaded lazily by CinematicMotion after first paint.
@@ -12,6 +14,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
  * - Native scroll: no smooth-scroll library, no wheel listeners, no snapping.
  * - Only transform and opacity are animated.
  * - Total pinned distance: SPINE_PIN + DECK_PIN viewports.
+ * - The depth layer (components/motion/depth/) has no scroll listener. The ScrollTriggers here write scroll
+ *   progress into depthState, and the WebGL stage reads it on GSAP's ticker.
  */
 
 const SPINE_PIN = 1.6
@@ -81,15 +85,30 @@ export function mountScenes(root: HTMLElement): Cleanup {
     {
       motion: '(prefers-reduced-motion: no-preference)',
       desktop: '(min-width: 1024px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)',
+      // The WebGL layer and refraction: wide screens with motion allowed. Below this the page keeps its poster.
+      depth: '(min-width: 1024px) and (prefers-reduced-motion: no-preference)',
     },
     (context) => {
-      const { motion, desktop } = context.conditions as { motion: boolean; desktop: boolean }
+      const { motion, desktop, depth } = context.conditions as { motion: boolean; desktop: boolean; depth: boolean }
       if (!motion) return
       const cleanups: Cleanup[] = []
       let disposed = false
       const viewport = window.innerHeight
       root.style.setProperty('--cine-pin-top', `${navOffset()}px`)
       cleanups.push(() => root.style.removeProperty('--cine-pin-top'))
+
+      /* Depth layer. Glass highlight and refraction at once; the WebGL stage only where the device can carry it. */
+      depthState.opening = 0
+      depthState.close = 0
+      depthState.step = -1
+      depthState.pulse = 0
+      cleanups.push(mountGlass(root, depth))
+      if (depth) cleanups.push(mountDepth(root))
+      cleanups.push(() => {
+        gsap.killTweensOf(depthState)
+        depthState.pulse = 0
+        depthState.step = -1
+      })
 
       /* Scene 1. Opening stage: the terminal settles, then scroll types the tool call. */
       const opening = root.querySelector<HTMLElement>('[data-scene="opening"]')
@@ -122,7 +141,23 @@ export function mountScenes(root: HTMLElement): Cleanup {
           })
           typing.fromTo(chars, { opacity: GHOST }, { opacity: 1, duration: 0.02, stagger: 0.5 / Math.max(chars.length, 1) }, 0)
           typing.fromTo(lines, { opacity: GHOST, y: 6 }, { opacity: 1, y: 0, duration: 0.09, stagger: 0.085 }, 0.52)
+          // Job: the answer landing is the signal. The field behind the stage brightens once, the first time it resolves.
+          let resolved = false
+          typing.call(() => {
+            if (resolved || disposed) return
+            resolved = true
+            gsap.timeline().to(depthState, { pulse: 1, duration: 0.32, ease: 'power2.out' }).to(depthState, { pulse: 0, duration: 1.5, ease: 'power2.inOut' })
+          })
         }
+        // Job: the signal field's flow and brightness, the slab fan and the camera drift all follow this one progress value.
+        ScrollTrigger.create({
+          trigger: opening,
+          start: 'top top',
+          end: 'bottom top',
+          onUpdate: (self) => {
+            depthState.opening = self.progress
+          },
+        })
         if (desktop) {
           // Job: depth. The source sheets behind the terminal drift apart slightly as the stage leaves.
           find('[data-cine="sheet"]').forEach((sheet, index) => {
@@ -191,10 +226,12 @@ export function mountScenes(root: HTMLElement): Cleanup {
               playIdle(steps[index].querySelector('[data-cine="plate"]'))
             }
             active = index
+            depthState.step = index
             mark(index)
           }
           mark(0)
           active = 0
+          depthState.step = 0
           ScrollTrigger.create({
             trigger: spinePin,
             start: () => `top ${navOffset()}px`,
@@ -235,6 +272,7 @@ export function mountScenes(root: HTMLElement): Cleanup {
         cleanups.push(() => {
           delete deckScene.dataset.pinned
           release(cards)
+          release(cards.flatMap((card) => Array.from(card.children)), 'opacity')
         })
         gsap.set(cards.slice(1), { y: () => viewport })
         // Job: comparison in sequence. Each route gets the full stage, then is filed under the next.
@@ -260,6 +298,9 @@ export function mountScenes(root: HTMLElement): Cleanup {
             const behind = index - depth
             deck.to(under, { y: -16 * behind, scale: 1 - 0.035 * behind, duration: 0.8, transformOrigin: 'top center' }, at)
           })
+          // The cards are glass. A filed card's text would smear through the one on top, so it fades as it is
+          // covered; wave 1 hid it behind an opaque card, so nothing readable is lost.
+          deck.to(cards[index - 1].children, { opacity: 0, duration: 0.45 }, at + 0.3)
           deck.to({}, { duration: index === last ? 0.25 : 0.2 })
         })
       }
@@ -304,6 +345,19 @@ export function mountScenes(root: HTMLElement): Cleanup {
               if (!self.isActive) set(null)
             },
           })
+        })
+      }
+
+      /* Scene 6. Close: the signal field returns, with its trace of gold, as the last frame arrives. */
+      const closing = root.querySelector<HTMLElement>('[data-scene="close"]')
+      if (closing) {
+        ScrollTrigger.create({
+          trigger: closing,
+          start: 'top bottom',
+          end: 'bottom bottom',
+          onUpdate: (self) => {
+            depthState.close = self.progress
+          },
         })
       }
 

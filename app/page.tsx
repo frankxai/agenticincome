@@ -4,6 +4,8 @@ import { AgentWorkflowProof } from '@/components/AgentWorkflowProof'
 import { CharacterPlate, type CharacterKind } from '@/components/motion/CharacterPlate'
 import { CinematicMotion } from '@/components/motion/CinematicMotion'
 import '@/components/motion/cinematic.css'
+import '@/components/motion/depth/depth.css'
+import { GlassDefs } from '@/components/motion/depth/GlassDefs'
 import { verifiedEconomicsPrograms, verifiedRangeLabel } from '@/lib/affiliate'
 import incomeModels from '@/data/income-models.json'
 import catalog from '@/products/catalog.json'
@@ -58,6 +60,18 @@ function sourceHost(url: string): string | null {
   } catch {
     return null
   }
+}
+
+/**
+ * Lines for the slab that carries a data file's name: the fields this page already publishes from that file,
+ * printed as JSON. Decoration only. Internal notes and link fields in the files never pass through here.
+ */
+function fileHead(data: unknown, lines = 20): string {
+  return JSON.stringify(data, null, 2)
+    .split('\n')
+    .slice(0, lines)
+    .map((line) => (line.length > 68 ? `${line.slice(0, 67)}…` : line))
+    .join('\n')
 }
 
 function ChapterMark({ index, label }: { index: string; label: string }) {
@@ -135,8 +149,16 @@ export default function Home() {
   ]
   const stepCount = String(buildSteps.length).padStart(2, '0')
 
+  // What each slab behind the terminal prints: only values already shown elsewhere on this page.
+  const sheetModels = fileHead({ updatedAt: incomeModels.updatedAt, models: models.map((model) => ({ id: model.id, name: model.name })) })
+  const sheetPrograms = fileHead({
+    programs: verified.map((program) => ({ tool: program.tool, commission: program.commission, commissionVerifiedAt: program.commissionVerifiedAt })),
+  })
+  const sheetCatalog = fileHead({ updatedAt: catalog.updatedAt, products: products.map((product) => ({ id: product.id, name: product.name })) })
+
   return (
     <CinematicMotion>
+      <GlassDefs />
       {/* SCENE 1 — opening stage: the literal offer plus real MCP output, staged on its sources */}
       <section className="cine-opening" data-scene="opening">
         <div className="cine-bleed" aria-hidden="true" />
@@ -158,10 +180,11 @@ export default function Home() {
           </div>
 
           <div className="cine-object" data-cine="object">
-            {/* The files the endpoint answers from (app/api/mcp imports all three). Decoration; the terminal carries the content. */}
-            <div className="cine-sheet cine-sheet-3" data-cine="sheet" aria-hidden="true"><span>products/catalog.json</span></div>
-            <div className="cine-sheet cine-sheet-2" data-cine="sheet" aria-hidden="true"><span>data/programs.json</span></div>
-            <div className="cine-sheet cine-sheet-1" data-cine="sheet" aria-hidden="true"><span>data/income-models.json</span></div>
+            {/* The files the endpoint answers from (app/api/mcp imports all three). Decoration; the terminal carries the content.
+                These sheets are the fallback: when the WebGL layer is live they give way to lit slabs carrying the same names. */}
+            <div className="cine-sheet cine-sheet-3" data-cine="sheet" data-excerpt={sheetCatalog} aria-hidden="true"><span>products/catalog.json</span></div>
+            <div className="cine-sheet cine-sheet-2" data-cine="sheet" data-excerpt={sheetPrograms} aria-hidden="true"><span>data/programs.json</span></div>
+            <div className="cine-sheet cine-sheet-1" data-cine="sheet" data-excerpt={sheetModels} aria-hidden="true"><span>data/income-models.json</span></div>
             <div
               className="terminal"
               role="img"
@@ -448,6 +471,7 @@ export default function Home() {
 
       {/* SCENE 6 — close: one calm frame with the next-step actions and the network handoff */}
       <section className="cine-close" data-scene="close" aria-labelledby="close-title">
+        <div className="cine-bleed cine-bleed-close" aria-hidden="true" />
         <ChapterMark index="07" label="next step" />
         <div className="cine-close-actions" data-cine-reveal>
           <h2 id="close-title" className="kicker">Next step</h2>

@@ -18,7 +18,7 @@ const STROKE = 1.5
 function Frame({ index }: { index: string }) {
   return (
     <>
-      <rect x="0.5" y="0.5" width="239" height="239" rx="15.5" fill="var(--color-surface)" stroke="var(--color-border)" />
+      <rect className="cine-plate-fill" x="0.5" y="0.5" width="239" height="239" rx="15.5" fill="var(--color-surface)" stroke="var(--color-border)" />
       <path
         d="M48 36V240M80 36V240M112 36V240M144 36V240M176 36V240M208 36V240M0 68H240M0 100H240M0 132H240M0 164H240M0 196H240"
         stroke="var(--color-border)"
@@ -167,7 +167,10 @@ export function CharacterPlate({ kind, index }: { kind: CharacterKind; index: st
       focusable="false"
     >
       <Frame index={index} />
-      <Figure />
+      {/* When the WebGL layer is live, a lit instrument turns inside the frame and the figure steps aside (depth/depth.css). */}
+      <g className="cine-plate-figure">
+        <Figure />
+      </g>
     </svg>
   )
 }

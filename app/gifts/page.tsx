@@ -5,13 +5,13 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Free assets',
   description:
-    'The free layer: a revenue loop model with its assumptions, an audit of two production pages, three prompt patterns, and the MIT open-core plugin kernel.',
+    'The free layer: a revenue loop model with its assumptions, and what is still being built before the audit, prompt patterns and plugin kernel are published.',
   alternates: { canonical: '/gifts' },
   openGraph: {
     ...baseOpenGraph,
     title: 'Free assets',
     description:
-      'The free layer: a revenue loop model with its assumptions, an audit of two production pages, three prompt patterns, and the MIT open-core plugin kernel.',
+      'The free layer: a revenue loop model with its assumptions, and what is still being built before the audit, prompt patterns and plugin kernel are published.',
     url: '/gifts',
   },
 }
@@ -42,10 +42,10 @@ const gifts: Gift[] = [
     name: 'An audit of two production pages',
     promise: 'Seven unsourced claims, named, with the evidence that would fix each.',
     detail:
-      'An audit run on 2026-11-07 against two live pages: every numeric and superlative claim, the gate it fails, and what would make it true. Includes the twenty-minute method so you can run it on your own page without buying anything.',
+      'The audit is not published yet. When it is, it will name every numeric and superlative claim on two live pages, the gate it fails, and what would make it true. It will also include the twenty-minute method so you can run it on your own page without buying anything.',
     href: '/proof',
     cta: 'See how proof is handled',
-    state: 'ready',
+    state: 'building',
   },
   {
     id: 'business-pack',
@@ -62,10 +62,10 @@ const gifts: Gift[] = [
     name: 'Three prompt patterns',
     promise: 'Each stated with why it survives regeneration.',
     detail:
-      'The restraint line, the section contract, and one named instrument doing one thing. Written as patterns rather than examples, so you can apply them to a different genre. No audio is attached yet; the patterns are the claim, not a demonstration.',
+      'The restraint line, the section contract, and one named instrument doing one thing. The patterns are not published yet; they will be written as patterns rather than examples, so you can apply them to a different genre. No audio is attached.',
     href: '/offers/vibe-os-pack',
     cta: 'Inspect the Vibe OS pack',
-    state: 'ready',
+    state: 'building',
   },
   {
     id: 'plugin-kernel',
@@ -112,10 +112,10 @@ export default function GiftsPage() {
       <section className="max-w-4xl border-b border-border pb-14">
         <div className="kicker">Free before you pay</div>
         <h1 className="mt-3 max-w-4xl break-words text-4xl font-semibold leading-[1.04] text-ink sm:text-5xl">
-          Three free assets you can use now, and two still being built.
+          One free asset you can use now, and four still being built.
         </h1>
         <p className="mt-5 text-xl leading-8 text-muted">
-          Three of these are finished and usable on their own. Two are not finished, they are marked
+          One of these is finished and usable on its own. Four are not finished, they are marked
           &ldquo;not yet available&rdquo;, and the card says exactly what is missing.
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
@@ -142,7 +142,7 @@ export default function GiftsPage() {
           the same thinking with the parts that took longest to build still attached.
         </p>
         <p className="mt-4 text-base leading-7 text-muted">
-          Two of the five are marked as unfinished because they are, and the card says what is missing
+          Four of the five are marked as unfinished because they are, and the card says what is missing
           rather than leaving you to find out after the click.
         </p>
       </section>

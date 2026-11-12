@@ -8,7 +8,7 @@ import { site } from '@/lib/site'
 import { fitCheck, AUTOMATION_POINTER } from '@/lib/fit-check'
 import { programSlug, type Program } from '@/lib/affiliate'
 import { withSource } from '@/lib/link-source'
-import { catalogRefusal, isPolarConfigured, type CatalogProduct } from '@/lib/polar'
+import { isCheckoutLive, type CatalogProduct } from '@/lib/polar'
 import catalog from '@/products/catalog.json'
 import referenceGraph from '@/data/income-graph-request-to-quote.json'
 import {
@@ -168,8 +168,7 @@ const handler = createMcpHandler(
             name: product.name,
             price: priceLabel(product),
             status: product.status,
-            purchasable:
-              catalogRefusal(product) === null && isPolarConfigured(product.id),
+            purchasable: isCheckoutLive(product.id),
             url: `${site.url}${product.delivery.path}`,
           })),
         }),

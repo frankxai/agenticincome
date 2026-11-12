@@ -385,6 +385,9 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
   let lost = false
   let announced = false
   let visibleScenes = 0
+  let activity = 1
+  let lastScroll = window.scrollY
+  let pointerMoved = false
 
   const frame = (_time: number, deltaMs: number) => {
     const dt = Math.min(deltaMs, 50) / 1000
@@ -394,8 +397,15 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
     closeLevel += (state.close - closeLevel) * follow
     lookX += (pointerX - lookX) * follow
     lookY += (pointerY - lookY) * follow
+    // The field moves because the reader does. Scrolling or moving the mouse keeps it flowing; left alone it eases
+    // to a still frame within about three and a half seconds, so nothing on the page plays on its own past five.
+    const scrollNow = window.scrollY
+    if (scrollNow !== lastScroll || pointerMoved) activity = 1
+    else activity = Math.max(0, activity - dt / 3.5)
+    lastScroll = scrollNow
+    pointerMoved = false
     // Flow speed follows scroll progress and the one-shot pulse; time is integrated so a pause never jumps.
-    fieldTime += dt * (0.03 + 0.05 * state.opening + 0.05 * closeLevel + 0.22 * state.pulse)
+    fieldTime += dt * (activity * (0.03 + 0.05 * state.opening + 0.05 * closeLevel) + 0.22 * state.pulse)
 
     renderer.setRenderTarget(null)
     renderer.setScissorTest(false)
@@ -540,6 +550,7 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
     if (event.pointerType !== 'mouse') return
     pointerX = (event.clientX / Math.max(width, 1)) * 2 - 1
     pointerY = (event.clientY / Math.max(height, 1)) * 2 - 1
+    pointerMoved = true
   }
   const onContextLost = (event: Event) => {
     event.preventDefault()

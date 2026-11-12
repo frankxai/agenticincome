@@ -123,4 +123,18 @@ Context loss: forcing `WEBGL_lose_context` returned the page to the poster and t
 - The canvas is fixed to the viewport and repositions its views each frame from element rectangles. If the main thread falls behind during a fast scroll, slabs and instruments can trail the DOM by a frame. Not observed in stills; not testable here in motion.
 - Refraction is detected by `navigator.userAgentData` (Chromium only). Safari and Firefox get frosted glass. Neither was run.
 - `design/PAGE_SPEC.md`, `design/SCENE_BRIEF.md` and `design/design-loop-evidence.json` (named in `AGENTS.md`) were not updated; this file and the design lock addendum carry the evidence for this change.
-- The live Web Interface Guidelines audit (`web-design-guidelines` skill) and the `review-animations` skill were not run. The mechanical lint was: 5 UI files, 0 errors, 0 warnings.
+- The `review-animations` skill was not run. The mechanical lint was: 5 UI files, 0 errors, 0 warnings.
+
+## Round 3, Web Interface Guidelines audit
+
+The live rules were fetched from `vercel-labs/web-interface-guidelines` (`command.md`) on 2026-11-12 and read against `app/page.tsx`, `components/motion/scenes.ts`, `components/motion/CharacterPlate.tsx` and everything in `components/motion/depth/`. Three findings.
+
+| # | Finding | Rule | Outcome |
+| --- | --- | --- | --- |
+| 1 | `components/motion/depth/stage.ts`: the field flowed for as long as a scene was on screen, with no way to pause it short of the system reduced-motion setting. | Autoplay motion over 5 seconds alongside other content needs pause, stop or hide controls | Fixed. The flow now follows input: scrolling or moving the mouse keeps it going, and it eases to a still frame about 3.5 seconds after the last input. The one-shot pulse (1.8 seconds) is unchanged. Verified by type-check, lint, tests and build only; this machine declines the layer, so the settle was not seen in a frame. |
+| 2 | `components/motion/depth/mount.ts`: the pointer highlight read an element rectangle and wrote its style inside the same loop. | Batch DOM reads and writes | Fixed. All rectangles are read first, then styles are written. |
+| 3 | `components/motion/depth/stage.ts`: slabs and instrument views are sized from element rectangles each frame. | Flex or grid over JS measurement for layout | Waived. Nothing in the document is laid out by script; the measurements only place drawing inside the canvas, which has no layout of its own. |
+
+Everything else passed: the canvas, the filter definitions and both bleed layers are `aria-hidden`; no interactive element, focus style, form, image or copy was added; every new transition names its property and sits inside a `prefers-reduced-motion: no-preference` query; only opacity and transform are animated in the document; truncated excerpt lines end in a real ellipsis character.
+
+Captures added in this round, layer declined (the state this machine and any device without a suitable GPU gets): `home-375.png`, `home-768.png` in `docs/design/cinematic/screens/depth/`. Wave 1 captures at the same widths are `docs/design/cinematic/screens/home-375.png` and `home-768.png`.

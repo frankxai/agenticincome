@@ -90,7 +90,7 @@ Direction: Frank, 2026-11-12. Contract: `docs/design/cinematic/design-lock.md`, 
 
 | Motion | Job | Trigger | Properties | Where |
 | --- | --- | --- | --- | --- |
-| Signal field flow | The signal the page talks about: light moving through smoke behind the stage | Continuous while a scene with the field is on screen; speed and brightness follow opening and close scroll progress | Shader uniforms | Desktop, WebGL |
+| Signal field flow | The signal the page talks about: light moving through smoke behind the stage | While the reader scrolls or moves the mouse over a scene with the field; it eases to a still frame about 3.5 seconds after the last input. Speed and brightness follow opening and close scroll progress | Shader uniforms | Desktop, WebGL |
 | Resolve pulse | Cause and effect: the answer landing is the signal | Once, the first time the `fit_check` answer finishes resolving | Shader uniform, 0.32s up, 1.5s down | Desktop, WebGL |
 | Slab fan | Depth: the three source files open like a hand of cards as the stage leaves | Opening scroll progress, eased | Object position, rotation | Desktop, WebGL |
 | Camera drift and pointer parallax | The stack is an object, not a picture | Opening scroll progress; mouse pointer position | Camera position, a few degrees | Desktop, WebGL |

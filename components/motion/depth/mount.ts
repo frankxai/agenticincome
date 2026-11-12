@@ -123,8 +123,10 @@ export function mountGlass(root: HTMLElement, desktop: boolean): Cleanup {
       if (!dirty) return
       dirty = false
       const targets = [...fixed, ...Array.from(root.querySelectorAll<HTMLElement>('.cine-row.is-focus'))]
-      for (const element of targets) {
-        const rect = element.getBoundingClientRect()
+      // Read every rect first, then write, so a style write never forces the next read to recompute.
+      const rects = targets.map((element) => element.getBoundingClientRect())
+      for (const [index, element] of targets.entries()) {
+        const rect = rects[index]
         const near = x > rect.left - 160 && x < rect.right + 160 && y > rect.top - 160 && y < rect.bottom + 160
         if (near) {
           element.style.setProperty('--glass-x', `${Math.round(x - rect.left)}px`)

@@ -78,7 +78,7 @@ Every effect has a job. An effect with no job is cut.
 
 A fragment shader behind scene 1 (opening) and scene 6 (close). Slow domain-warped noise in the brand palette only: obsidian `#05060a` base, emerald `#10b981` and cyan `#06b6d4` as light inside the dark, and a trace of gold `#f59e0b` in the close, where the human gate is. It reads as light moving through smoke. No purple, no rainbow, no mesh gradient.
 
-Job: it is the signal the page keeps talking about. Flow speed and brightness follow scroll progress, and it brightens once, the first time the `fit_check` answer resolves. The light is held back on the text side of the opening so copy keeps its contrast.
+Job: it is the signal the page keeps talking about. Flow speed and brightness follow scroll progress, and it brightens once, the first time the `fit_check` answer resolves. It flows only while the reader scrolls or moves the mouse, and settles to a still frame about 3.5 seconds after the last input, so nothing plays on its own for longer than five seconds. The light is held back on the text side of the opening so copy keeps its contrast.
 
 Deviation, stated plainly: the field is also drawn, confined to their own footprint, under the route deck and under the inspector lists. Glass with nothing behind it has nothing to bend, so those two surfaces needed it. It never sits behind body copy there: the deck is covered by its cards, and every inspector row except the one in focus is opaque.
 

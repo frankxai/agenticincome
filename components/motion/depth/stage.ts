@@ -60,17 +60,31 @@ const SLAB_MARGIN = 240
 const SLAB_DEPTH = 8
 const SLAB_BEVEL = 2
 const DEG = Math.PI / 180
+const SIGNAL_SECONDS = 2.6
+
+type Box = [number, number, number, number]
+
+/** A box of text the light is held back under: the element, how far (0 to 1), and how far outside it the hold fades, css px. */
+type Hold = { element: HTMLElement | null; amount: number; soft: number; pad?: number; /** Corner radius, css px. */ round?: number; /** Extend the box to take in this element too. */ to?: HTMLElement | null }
 
 type Region = {
   /** Region in css px (left, top, right, bottom), or null when it should not be drawn. */
-  rect: () => [number, number, number, number] | null
-  feather: [number, number, number, number]
+  rect: () => Box | null
+  feather: Box
   level: () => number
   gold: number
   cover: number
-  /** [x where the text side ends, how far the light is held back on that side]. */
-  quiet: () => [number, number]
+  /** Up to four boxes of text. The field is strongest away from them and near black under them. */
+  holds: Hold[]
+  /** [x, y, radius, amount]: the light collects around this point. Radius 0 switches it off. */
+  gather?: () => Box
+  /** [x, y, radius, strength]: the one-shot wavefront. */
+  wave?: () => Box
+  /** [x0, x1, y, strength]: the thin gold edge. */
+  gate?: () => Box
 }
+
+const NO_BOX: Box = [0, 0, 0, 0]
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value))
 const ease = (value: number) => value * value * (3 - 2 * value)
@@ -118,6 +132,15 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
   const deck = root.querySelector<HTMLElement>('.cine-deck')
   const inspectors = Array.from(root.querySelectorAll<HTMLElement>('.cine-rows[data-cine="inspector"]'))
   const close = root.querySelector<HTMLElement>('[data-scene="close"]')
+  // Text that sits over the field. The light is held back under each of these.
+  const copy = opening?.querySelector<HTMLElement>('.cine-opening-grid > div:first-child') ?? null
+  const foot = opening?.querySelector<HTMLElement>('.cine-opening-foot') ?? null
+  const closeMark = close?.querySelector<HTMLElement>('.cine-mark') ?? null
+  const closeTitle = close?.querySelector<HTMLElement>('.cine-close-actions > h2') ?? null
+  const closeActions = close?.querySelector<HTMLElement>('.cine-close-actions .assembly-actions') ?? null
+  const closeSecond = closeActions?.querySelector<HTMLElement>('.cta-secondary') ?? null
+  // The first line of the fit_check answer. scenes.ts brings it from ghost text to full strength on scroll.
+  const answer = opening?.querySelector<HTMLElement>('[data-cine="resolve"]') ?? null
   const steps = Array.from(root.querySelectorAll<HTMLElement>('[data-cine="step"]'))
   const plates = steps.map((step) => step.querySelector<SVGElement>('[data-cine="plate"]'))
   // Nearest slab first. Each sheet carries its file name (the span) and lines read from that file (data-excerpt).
@@ -135,6 +158,13 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
   let pointerY = 0
   let lookX = 0
   let lookY = 0
+  // The one-shot signal: seconds since the answer resolved, or -1 when it is not running.
+  let signal = -1
+  let signalSpent = false
+  let answerWasGhost = false
+  let flare = 0
+  let waveRadius = 0
+  let waveLevel = 0
 
   /* ---- signal field: half-resolution noise pass, then a tinted composite per region ---- */
   const triangle = new BufferGeometry()
@@ -146,7 +176,7 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
     fragmentShader: FIELD_FRAGMENT,
     depthTest: false,
     depthWrite: false,
-    uniforms: { uResolution: { value: new Vector2(1, 1) }, uTime: { value: 0 }, uScroll: { value: 0 } },
+    uniforms: { uResolution: { value: new Vector2(1, 1) }, uTime: { value: 0 }, uScroll: { value: 0 }, uLook: { value: new Vector2() } },
   })
   const compositeMaterial = new ShaderMaterial({
     vertexShader: FULLSCREEN_VERTEX,
@@ -163,7 +193,13 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
       uLevel: { value: 0 },
       uGold: { value: 0 },
       uCover: { value: 1 },
-      uQuiet: { value: new Vector2(-1e5, 0) },
+      uHold: { value: [new Vector4(), new Vector4(), new Vector4(), new Vector4()] },
+      uHoldAmount: { value: new Vector4() },
+      uHoldSoft: { value: new Vector4(1, 1, 1, 1) },
+      uHoldRound: { value: new Vector4() },
+      uGather: { value: new Vector4() },
+      uWave: { value: new Vector4() },
+      uGate: { value: new Vector4() },
     },
   })
   const fieldScene = new Scene()
@@ -175,7 +211,6 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
   compositeMesh.frustumCulled = false
   compositeScene.add(compositeMesh)
 
-  const none: [number, number] = [-1e5, 0]
   const regions: Region[] = []
   if (opening) {
     regions.push({
@@ -185,11 +220,22 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
         const top = header ? Math.min(rect.top, header.getBoundingClientRect().top) : rect.top
         return [0, top, width, rect.bottom]
       },
-      feather: [0, 0, 0, 220],
-      level: () => intro * (0.78 + 0.3 * clamp01(state.opening * 1.5)) + state.pulse * 0.5,
+      feather: [0, 0, 0, 200],
+      level: () => intro * (0.9 + 0.2 * clamp01(state.opening * 1.5)) + flare * 0.75,
       gold: 0,
       cover: 1,
-      quiet: () => [terminal ? terminal.getBoundingClientRect().left : width * 0.5, 0.66],
+      // The light fills the stage around the terminal and stops short of everything that is read.
+      holds: [
+        { element: copy, amount: 0.97, soft: 170, pad: 28 },
+        { element: foot, amount: 0.93, soft: 56, pad: 10 },
+        { element: header, amount: 0.8, soft: 36 },
+        { element: terminal, amount: 0.42, soft: 60 },
+      ],
+      wave: () => {
+        if (!terminal || waveLevel <= 0) return NO_BOX
+        const rect = terminal.getBoundingClientRect()
+        return [(rect.left + rect.right) / 2, (rect.top + rect.bottom) / 2, waveRadius, waveLevel]
+      },
     })
   }
   if (deck) {
@@ -200,10 +246,10 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
         return [rect.left, rect.top, rect.right, rect.bottom]
       },
       feather: [36, 36, 36, 36],
-      level: () => intro * 1.25,
+      level: () => intro * 1.7,
       gold: 0.3,
       cover: 1,
-      quiet: () => none,
+      holds: [],
     })
   }
   for (const list of inspectors) {
@@ -215,10 +261,10 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
         return [rect.left + 1, rect.top + 1, rect.right - 1, rect.bottom - 1]
       },
       feather: [0, 0, 0, 0],
-      level: () => intro * 1.5,
+      level: () => intro * 0.2,
       gold: 0,
       cover: 1,
-      quiet: () => none,
+      holds: [],
     })
   }
   if (close) {
@@ -227,11 +273,33 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
         const rect = close.getBoundingClientRect()
         return [0, rect.top, width, rect.bottom + 48]
       },
-      feather: [0, 240, 0, 160],
-      level: () => intro * (0.42 + 0.3 * closeLevel),
+      feather: [0, 220, 0, 160],
+      level: () => intro * (0.5 + 0.6 * closeLevel),
       gold: 0.5,
       cover: 1,
-      quiet: () => none,
+      holds: [
+        { element: closeTitle, amount: 0.92, soft: 110, pad: 14 },
+        // The chapter mark's words only; its dotted rule runs the full width and needs no hold.
+        { element: closeMark?.firstElementChild as HTMLElement | null, to: closeMark?.lastElementChild as HTMLElement | null, amount: 0.9, soft: 90, pad: 8 },
+        { element: header, amount: 0.8, soft: 36 },
+        // The light comes right up to the two actions. The first is a solid fill; the second is a clear pill with
+        // white text, so the light stops just short of it.
+        { element: closeSecond, amount: 0.94, soft: 34, round: 27 },
+      ],
+      // The last frame: the field draws in around the two actions.
+      gather: () => {
+        if (!closeActions) return NO_BOX
+        const rect = closeActions.getBoundingClientRect()
+        return [(rect.left + rect.right) / 2, (rect.top + rect.bottom) / 2, Math.max(width * 0.36, 380), ease(clamp01(closeLevel * 1.15))]
+      },
+      // The one warm thing on the page's last frame: a thin gold edge under the row where the reader decides.
+      gate: () => {
+        const row = closeActions?.parentElement
+        if (!closeActions || !row) return NO_BOX
+        const rect = closeActions.getBoundingClientRect()
+        const rowRect = row.getBoundingClientRect()
+        return [rowRect.left, rect.right, Math.round(rect.bottom + 20) + 0.5, 0.95 * ease(clamp01(closeLevel * 1.6 - 0.45))]
+      },
     })
   }
 
@@ -404,8 +472,34 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
     else activity = Math.max(0, activity - dt / 3.5)
     lastScroll = scrollNow
     pointerMoved = false
-    // Flow speed follows scroll progress and the one-shot pulse; time is integrated so a pause never jumps.
-    fieldTime += dt * (activity * (0.03 + 0.05 * state.opening + 0.05 * closeLevel) + 0.22 * state.pulse)
+    // The one-shot signal: once, the first time the fit_check answer resolves. It leaves as the first line of the
+    // answer reaches full strength, while the terminal is still whole on screen; state.pulse, which scenes.ts
+    // raises when the last line lands, is the fallback. From that edge this layer runs its own envelope:
+    // the field lifts and a ring of light leaves the terminal.
+    if (!signalSpent) {
+      const strength = answer && answer.style.opacity !== '' ? parseFloat(answer.style.opacity) : -1
+      if (strength >= 0 && strength < 0.9) answerWasGhost = true
+      if ((answerWasGhost && strength >= 0.99) || state.pulse > 0.02) {
+        signal = 0
+        signalSpent = true
+      }
+    }
+    if (signal >= 0) {
+      signal += dt
+      const k = signal / SIGNAL_SECONDS
+      if (k >= 1) {
+        signal = -1
+        flare = 0
+        waveLevel = 0
+      } else {
+        // Fast attack (0.25s), long release.
+        flare = Math.min(1, signal / 0.25) * (1 - ease(k))
+        waveRadius = 140 + (1 - Math.pow(1 - k, 2.2)) * Math.max(width, 1200) * 0.95
+        waveLevel = Math.min(1, signal / 0.18) * Math.pow(1 - k, 1.4)
+      }
+    }
+    // Flow speed follows scroll progress and the one-shot signal; time is integrated so a pause never jumps.
+    fieldTime += dt * (activity * (0.045 + 0.04 * state.opening + 0.04 * closeLevel) + 0.16 * flare)
 
     renderer.setRenderTarget(null)
     renderer.setScissorTest(false)
@@ -416,7 +510,8 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
     const drawn = regions.map((region) => region.rect()).map((rect) => (rect && rect[3] > 0 && rect[1] < height ? rect : null))
     if (drawn.some(Boolean)) {
       fieldMaterial.uniforms.uTime.value = fieldTime
-      fieldMaterial.uniforms.uScroll.value = window.scrollY * 0.35
+      fieldMaterial.uniforms.uScroll.value = scrollNow
+      fieldMaterial.uniforms.uLook.value.set(lookX, lookY)
       renderer.setRenderTarget(fieldTarget)
       renderer.render(fieldScene, flatCamera)
       renderer.setRenderTarget(null)
@@ -431,7 +526,26 @@ export function createStage(root: HTMLElement, canvas: HTMLCanvasElement, state:
         uniforms.uLevel.value = region.level()
         uniforms.uGold.value = region.gold
         uniforms.uCover.value = region.cover
-        uniforms.uQuiet.value.set(...region.quiet())
+        for (let slot = 0; slot < 4; slot++) {
+          const hold = region.holds[slot]
+          const box = hold?.element?.getBoundingClientRect()
+          const more = hold?.to?.getBoundingClientRect()
+          const pad = hold?.pad ?? 0
+          if (hold && box && box.width > 0) {
+            uniforms.uHold.value[slot].set(
+              Math.min(box.left, more?.left ?? box.left) - pad,
+              Math.min(box.top, more?.top ?? box.top) - pad,
+              Math.max(box.right, more?.right ?? box.right) + pad,
+              Math.max(box.bottom, more?.bottom ?? box.bottom) + pad,
+            )
+          }
+          uniforms.uHoldAmount.value.setComponent(slot, hold && box && box.width > 0 ? hold.amount : 0)
+          uniforms.uHoldSoft.value.setComponent(slot, hold?.soft ?? 1)
+          uniforms.uHoldRound.value.setComponent(slot, hold?.round ?? 0)
+        }
+        uniforms.uGather.value.set(...(region.gather?.() ?? NO_BOX))
+        uniforms.uWave.value.set(...(region.wave?.() ?? NO_BOX))
+        uniforms.uGate.value.set(...(region.gate?.() ?? NO_BOX))
         renderer.render(compositeScene, flatCamera)
       })
     }

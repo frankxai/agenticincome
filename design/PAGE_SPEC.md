@@ -138,3 +138,34 @@ contiguous prefix of its source, so the inspector's line numbers remain true.
 The CSV badge and its record limit share one value. Current public excerpts,
 paid delivery files and product classifications stay the same. These limits
 prevent accidental overexposure; they do not provide buyer access control.
+
+## Cinematic homepage scroll film, Claude, 12 November 2026
+
+Author: Claude (Anthropic). Direction: Frank, 2026-11-12. Contract: `docs/design/cinematic/design-lock.md`.
+Surface: `app/page.tsx` and `components/motion/`. Protected surface `homepage`, kind evolve.
+This entry supersedes the 2026-07-24 line "Existing composition, motion, responsive behavior, and visual tokens remain unchanged" for composition and motion. Tokens, audience, conversion and the public install contract are unchanged.
+
+### Scene order
+
+1. Opening stage: kicker, h1, sub, both actions, MCP terminal with the real `fit_check` answer.
+2. Build path: Audit, Architect, Implement, Verify, Human gate, each with one repository artifact read at build time. Then the existing `AgentWorkflowProof` run, moved up from after the MCP section so the method is followed directly by its worked example.
+3. Three delivery routes from `data/income-models.json`: summary, execution, timeframe, risk boundary.
+4. Partner economics board from `lib/affiliate.ts`, with a new Verified column: date and source host per row.
+5. MCP tools, doctrine lines, catalog with the same availability logic as before.
+6. Close: both primary actions repeated, then the network handoff.
+
+### Jobs
+
+- Positioning: h1, sub and kicker word for word, first in the document.
+- Proof: real MCP output, the build path artifacts, the unchanged workflow proof and its two source links.
+- Income truth: routes and partner terms read from the same data through the same functions; each now shows its source or verification date.
+- Next step: both hero actions unchanged and repeated in the close; every other link kept.
+
+### Data shown that was not shown before
+
+All read at build time, none authored: `incomeModels.updatedAt`, `catalog.updatedAt`, per-program `commissionVerifiedAt` and `commissionSourceUrl`, `package.json` scripts `audit:affiliate` and `merge:gate`, the first Starter Kit file row from `lib/pack-manifests.ts`, and counts derived from `catalogRefusal`.
+
+### Boundaries
+
+Repository paths are cited in mono and not linked: the application repository is not linked from `app/`, `components/` or `lib/`. Source links in the board go to each program's own terms page, never to a compensated link.
+

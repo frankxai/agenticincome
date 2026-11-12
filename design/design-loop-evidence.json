@@ -132,7 +132,7 @@
       "Internal operating language",
       "Decorative 3D or generated hero filler"
     ],
-    "signature": "A coded four-stage implementation model\u2014Audit, Architect, Implement, Verify\u2014backed by links to real public systems.",
+    "signature": "A coded four-stage implementation model—Audit, Architect, Implement, Verify—backed by links to real public systems.",
     "system": [
       "Tier C coded product proof as the primary hero asset",
       "Obsidian, emerald, cyan, and amber FrankX tokens",
@@ -361,5 +361,75 @@
       "notes": "First read 5, brand fit 4, craft 4, accessibility/responsive/reduced motion 5, factual/provenance integrity 5, intended-surface usefulness 5."
     },
     "scope": "Preserved historical assessment of the earlier surface; it does not approve the current Blueprint security revision."
+  },
+  "cinematic_home": {
+    "author": "Claude (Anthropic)",
+    "created_at": "2026-11-12",
+    "revision": 1,
+    "direction_source": "Frank, 2026-11-12: cinematic overhaul of the homepage. Design lock written by the coordinator from Refero research.",
+    "scope": "app/page.tsx and components/motion/. Protected surface homepage, kind evolve. No change to offers, checkout, catalog, data files, dependencies or workflows.",
+    "references": [
+      "Linear Changelog (11d3e58a-87d7-4a9a-bbf5-720f4fd3ffc6)",
+      "Supabase (28aeb534-7a32-43ce-a1ae-464fec697fd2)",
+      "Convex (d500b995-352a-4a4f-8016-cb00cdb6eb17)",
+      "Sui (ee433c07-9a31-4556-bbe2-f400586f92a9), structure only",
+      "Tapbots (889337e0-2d2c-4980-a9b5-2bca2cb5394d), principle only"
+    ],
+    "artifacts": [
+      "docs/design/cinematic/design-lock.md",
+      "docs/design/cinematic/self-critique.md",
+      "docs/design/cinematic/screens/",
+      "design/asset-manifest.json",
+      "design/MOTION.md",
+      "app/page.tsx",
+      "components/motion/CinematicMotion.tsx",
+      "components/motion/scenes.ts",
+      "components/motion/CharacterPlate.tsx",
+      "components/motion/cinematic.css"
+    ],
+    "checks": [
+      {
+        "name": "merge-gate-parts",
+        "status": "pass",
+        "evidence": "Local, Node 22.23.4, pnpm 11.5.0: type-check exit 0; lint exit 0 (0 warnings); test 240 pass, 0 fail, 0 skipped; links:check:static pass; verify:public pass; build exit 0; test:governance 41 pass, 0 fail."
+      },
+      {
+        "name": "rendered-inspection",
+        "status": "pass",
+        "evidence": "Playwright Chromium against the production build: full page at 390, 768, 1440; 1440 reduced motion; 1440 JavaScript disabled; seven 1440 mid-scroll frames. All twelve files opened and inspected. Stored in docs/design/cinematic/screens/."
+      },
+      {
+        "name": "static-parity",
+        "status": "pass",
+        "evidence": "Reduced-motion and no-JavaScript renders are the same 11095px document with every step, card, row and link at rest."
+      },
+      {
+        "name": "weight-and-shift",
+        "status": "pass",
+        "evidence": "Homepage script transfer on load plus full scroll, gzip level 9: 221603 bytes on main, 224068 on this branch (+2465). Cumulative layout shift over load plus full scroll measured 0.0000 on both."
+      },
+      {
+        "name": "guidelines",
+        "status": "pass",
+        "evidence": "Mechanical web-guidelines lint: 0 errors, 0 warnings on the changed UI files. Live Web Interface Guidelines reviewed by hand; findings and waivers in docs/design/cinematic/self-critique.md."
+      },
+      {
+        "name": "independent-review",
+        "status": "pending",
+        "evidence": "Exact-head review by another provider and the founder merge decision have not happened yet."
+      },
+      {
+        "name": "real-devices",
+        "status": "pending",
+        "evidence": "Chromium only. Safari, Firefox, touch devices and a screen reader pass were not run."
+      }
+    ],
+    "decision": "draft-review",
+    "known_risks": [
+      "Verified in headless Chromium only.",
+      "The inspector dims rows that are not on the reading line to 62 percent opacity on desktop; hover and keyboard focus restore them.",
+      "The opening terminal dims its unanswered text to 34 percent when the motion layer starts, a visible change shortly after first paint.",
+      "Five raster image slots are declared and empty; the SVG plates are what ships."
+    ]
   }
 }

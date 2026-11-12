@@ -29,20 +29,7 @@ export default function Start() {
         document the tradeoffs, and give readers an honest next step they can verify for themselves.
       </p>
 
-      <div className="mt-8 grid gap-4 md:grid-cols-3">
-        {[
-          ['Find the signal', 'Choose one tool category where people already compare, switch, and buy.'],
-          ['Protect the trust', 'Write the answer so the useful recommendation survives disclosure and payout pressure.'],
-          ['Capture the asset', 'Route the click, capture the email, and package the workflow into a product path.'],
-        ].map(([title, body]) => (
-          <div key={title} className="card motion-reveal">
-            <div className="text-sm font-semibold text-gold">{title}</div>
-            <p className="mt-3 text-sm leading-6 text-muted">{body}</p>
-          </div>
-        ))}
-      </div>
-
-      <ol className="mt-10 space-y-6">
+      <ol className="mt-8 space-y-6">
         {[
           { t: 'Pick one tool category you actually use', d: 'Voice, video, writing, or coding: choose a workflow where you have real firsthand opinions. You can only recommend honestly what you have tested.' },
           { t: 'Write the comparison in an inspectable shape', d: 'Lead with the answer, show the criteria, name the tradeoffs, date the evidence, and disclose any material incentive.' },
@@ -63,7 +50,7 @@ export default function Start() {
       </div>
 
       <h2 className="mt-14 text-2xl font-bold text-ink">The recurring-payer shortlist</h2>
-      <p className="mt-2 max-w-2xl text-muted">The programs worth building around, ranked by fit and recurring potential. Route reader trust to tools that earn it first.</p>
+      <p className="mt-2 max-w-2xl text-muted">Commission terms and recurring length for six programs, as listed in the partner data.</p>
       <div className="mt-6 overflow-hidden rounded-xl border border-border glass">
         <table className="w-full text-sm">
           <thead><tr className="text-left text-muted">

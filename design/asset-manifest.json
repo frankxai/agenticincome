@@ -1,0 +1,62 @@
+{
+  "$comment": "Raster image slots for the cinematic homepage (docs/design/cinematic/design-lock.md). Declared 2026-11-12. None of these images exists yet: every slot currently renders its fallback, an inline SVG plate from components/motion/CharacterPlate.tsx. A later local image-generation pass may fill a slot only with a provenance sidecar (generator, model, prompt, seed, date, operator, license) stored beside the file. No stock imagery.",
+  "updatedAt": "2026-11-12",
+  "surface": "homepage",
+  "slots": [
+    {
+      "id": "character-auditor",
+      "sceneRole": "Scene 2, build path, step 01 Audit. Character plate beside the audit artifact.",
+      "aspectRatio": "1:1",
+      "minPixels": "960x960",
+      "artDirection": "Schematic agent bust on an obsidian (#05060a) stage with a faint 32px grid: square head with a visor, panel shoulders, holding a magnifying lens. Thin pale line work, layered charcoal fills, one emerald (#10b981) glint on the lens and no other accent color. Flat, technical, no gradients, no glow, no text.",
+      "fallback": "components/motion/CharacterPlate.tsx kind=auditor",
+      "status": "awaiting-generation",
+      "file": null,
+      "provenance": null
+    },
+    {
+      "id": "character-architect",
+      "sceneRole": "Scene 2, build path, step 02 Architect. Character plate beside the route definition artifact.",
+      "aspectRatio": "1:1",
+      "minPixels": "960x960",
+      "artDirection": "Same agent bust and stage as character-auditor, holding a drafting compass that has just drawn one emerald (#10b981) arc. Thin pale line work, layered charcoal fills, no other accent color, no gradients, no glow, no text.",
+      "fallback": "components/motion/CharacterPlate.tsx kind=architect",
+      "status": "awaiting-generation",
+      "file": null,
+      "provenance": null
+    },
+    {
+      "id": "character-implementer",
+      "sceneRole": "Scene 2, build path, step 03 Implement. Character plate beside the manifest artifact.",
+      "aspectRatio": "1:1",
+      "minPixels": "960x960",
+      "artDirection": "Same agent bust and stage as character-auditor, holding an open-end wrench gripping one emerald (#10b981) hex nut. Thin pale line work, layered charcoal fills, no other accent color, no gradients, no glow, no text.",
+      "fallback": "components/motion/CharacterPlate.tsx kind=implementer",
+      "status": "awaiting-generation",
+      "file": null,
+      "provenance": null
+    },
+    {
+      "id": "character-verifier",
+      "sceneRole": "Scene 2, build path, step 04 Verify. Character plate beside the checks artifact.",
+      "aspectRatio": "1:1",
+      "minPixels": "960x960",
+      "artDirection": "Same agent bust and stage as character-auditor, holding a round seal with one emerald (#10b981) check mark. Thin pale line work, layered charcoal fills, no other accent color, no gradients, no glow, no text.",
+      "fallback": "components/motion/CharacterPlate.tsx kind=verifier",
+      "status": "awaiting-generation",
+      "file": null,
+      "provenance": null
+    },
+    {
+      "id": "character-human-gate",
+      "sceneRole": "Scene 2, build path, step 05 Human gate. Character plate beside the catalog status artifact.",
+      "aspectRatio": "1:1",
+      "minPixels": "960x960",
+      "artDirection": "A person, clearly not a machine: round head, soft shoulders, no visor, on the same obsidian stage and grid, holding one emerald (#10b981) key. Schematic and anonymous: no likeness of a real person, no photorealism. Thin pale line work, layered charcoal fills, no other accent color, no gradients, no glow, no text.",
+      "fallback": "components/motion/CharacterPlate.tsx kind=human",
+      "status": "awaiting-generation",
+      "file": null,
+      "provenance": null
+    }
+  ]
+}

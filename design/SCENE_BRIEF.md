@@ -110,3 +110,33 @@ The selected direction keeps the public sample and composition intact while
 requiring explicit public classification for future file reads. Counting padded
 whitespace and relying on each future caller to opt into protection were
 rejected. No new asset, interaction, typography or motion is introduced.
+
+## Cinematic homepage scroll film, Claude, 12 November 2026
+
+Author: Claude (Anthropic). Direction: Frank, 2026-11-12. Contract: `docs/design/cinematic/design-lock.md`.
+Review state: built and rendered locally; independent review and founder merge decision pending.
+
+### Creative thesis
+
+Same truth, staged in scenes. The page still argues scope, proof, honest numbers and the next step; the film gives each argument its own frame instead of one long scroll of equal-weight sections.
+
+### Static frame
+
+Obsidian stage, layered charcoal fills, dotted rules and 12px mono chapter markings. The opening object is the MCP terminal resting on three sheets named for the files its endpoint reads. The build path is a dotted spine with five character plates. Routes are three cards. Partner terms are a semantic table with a verification column. MCP tools and the catalog are inspector lists. The close is one row of actions above the network handoff.
+
+### Scenes
+
+1. Opening stage. 2. Build path spine, followed by the existing affiliate audit run as its worked example. 3. Delivery routes deck. 4. Partner economics board. 5. MCP tools inspector, the doctrine lines, catalog inspector. 6. Close.
+
+### Signature motion
+
+Audit, Architect, Implement, Verify, then the human gate, one step at a time on a pinned spine. Jobs for every motion are in `design/MOTION.md`.
+
+### Reduced motion and no JavaScript
+
+Identical document: all five steps listed, three route cards in a row, every table row and inspector row at full strength, terminal text fully legible. Captured in `docs/design/cinematic/screens/home-1440-reduced-motion.png` and `home-1440-no-js.png`.
+
+### Assets
+
+Five inline SVG character plates (`components/motion/CharacterPlate.tsx`). No raster image, video, WebGL or new dependency. Five raster slots are declared in `design/asset-manifest.json` for a later provenance-tracked pass.
+

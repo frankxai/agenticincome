@@ -1,0 +1,589 @@
+/*
+ * Cinematic homepage: scene layout for the document layer.
+ * Design lock: docs/design/cinematic/design-lock.md. Tokens come from app/globals.css.
+ *
+ * Everything here is the page at rest. No rule in this file hides content; the
+ * pre-animation states live in components/motion/scenes.ts inside gsap.matchMedia.
+ * Rules under [data-pinned] apply only after that script has opted a scene in.
+ * Hierarchy comes from fills and borders, never soft drop shadows.
+ */
+
+[data-cine-root] {
+  --cine-rule: color-mix(in oklab, var(--color-border) 78%, white 22%);
+  --cine-nav: 58px;
+}
+
+/* ---- recurring structure: 12px mono markings and dotted rules ---- */
+.cine-mark,
+.cine-opening-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--color-muted);
+}
+
+.cine-mark { margin-bottom: clamp(2rem, 5vh, 3.25rem); }
+.cine-mark span:first-child,
+.cine-opening-foot span:first-child { color: var(--color-ink); }
+
+.cine-mark::after,
+.cine-opening-foot i {
+  content: '';
+  flex: 1;
+  border-top: 1px dotted var(--cine-rule);
+}
+
+.section-band.cine-chapter {
+  border-bottom: 0;
+  padding: 5.5rem 0;
+}
+
+@media (min-width: 1024px) {
+  .section-band.cine-chapter { padding: clamp(8rem, 17vh, 13rem) 0; }
+}
+
+/* ---- scene 1: opening stage ---- */
+.cine-opening {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-content: center;
+  gap: clamp(2.5rem, 7vh, 4.5rem);
+  min-height: calc(100svh - var(--cine-nav));
+  padding: clamp(2.5rem, 7vh, 5rem) 0 clamp(1.5rem, 4vh, 2.5rem);
+}
+
+/* Edge-to-edge obsidian stage. One charcoal lift behind the staged object; no colour wash. */
+.cine-bleed {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: -1;
+  width: 100vw;
+  transform: translateX(-50%);
+  border-bottom: 1px dotted var(--cine-rule);
+  background:
+    radial-gradient(52rem 30rem at 70% 44%, var(--color-surface-2) 0%, transparent 68%),
+    var(--color-bg);
+}
+
+.cine-opening-grid {
+  display: grid;
+  align-items: center;
+  gap: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .cine-opening-grid { grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr); gap: 3.5rem; }
+}
+
+/* The staged object: the terminal on top of the three files its answers are read from. */
+.cine-object {
+  --cine-step: 10px;
+  position: relative;
+  padding: calc(var(--cine-step) * 3) calc(var(--cine-step) * 3) 0 0;
+}
+
+@media (min-width: 640px) {
+  .cine-object { --cine-step: 24px; }
+}
+
+.cine-sheet {
+  position: absolute;
+  inset: calc(var(--cine-step) * 3) calc(var(--cine-step) * 3) 0 0;
+  border: 1px solid var(--color-border);
+  border-radius: 0.9rem;
+  background: var(--color-surface);
+}
+
+.cine-sheet-1 { translate: var(--cine-step) calc(var(--cine-step) * -1); background: #0c0f19; border-color: var(--cine-rule); }
+.cine-sheet-2 { translate: calc(var(--cine-step) * 2) calc(var(--cine-step) * -2); background: #0a0c14; }
+.cine-sheet-3 { translate: calc(var(--cine-step) * 3) calc(var(--cine-step) * -3); background: #080a11; }
+
+.cine-sheet span {
+  position: absolute;
+  top: 0;
+  right: 0.9rem;
+  display: none;
+  height: var(--cine-step);
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+@media (min-width: 640px) {
+  .cine-sheet span { display: flex; }
+}
+
+.cine-object .terminal {
+  position: relative;
+  border-color: color-mix(in oklab, var(--color-border) 55%, white 20%);
+  background: #06080d;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.cine-object .terminal-body {
+  padding: 1rem 1rem 1.2rem;
+  font-size: 0.7rem;
+}
+
+@media (min-width: 640px) {
+  .cine-object .terminal-body { padding: 1.3rem 1.4rem 1.6rem; font-size: 0.77rem; }
+}
+
+/* ---- scene 2: the build path ---- */
+.cine-spine {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.cine-spine-head h2,
+.cine-step h3,
+.cine-route h3 { text-wrap: balance; }
+
+.cine-spine-head h2 { margin-top: 0.75rem; max-width: 22ch; font-size: clamp(1.8rem, 2.7vw, 2.35rem); }
+
+/* The technical spine: a vertical dotted line with numbered mono captions. */
+.cine-rail {
+  position: relative;
+  display: none;
+  gap: 1.35rem;
+  margin: 2.75rem 0 0;
+  padding: 0 0 0 1.9rem;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.cine-rail::before {
+  content: '';
+  position: absolute;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  left: 5px;
+  border-left: 1px dotted var(--cine-rule);
+}
+
+.cine-rail-progress {
+  position: absolute;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  left: 5px;
+  display: none;
+  width: 1px;
+  background: var(--color-accent);
+}
+
+.cine-rail-node {
+  position: relative;
+  display: flex;
+  gap: 0.75rem;
+  line-height: 1;
+}
+
+.cine-rail-node::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(-1.9rem + 1px);
+  width: 9px;
+  height: 9px;
+  translate: 0 -50%;
+  border: 1px solid var(--cine-rule);
+  border-radius: 2px;
+  background: var(--color-bg);
+}
+
+.cine-rail-node span { color: var(--color-muted); }
+.cine-rail-node.is-done::before { border-color: var(--color-accent); }
+.cine-rail-node.is-active { color: var(--color-ink); }
+.cine-rail-node.is-active::before { border-color: var(--color-accent); background: var(--color-accent); }
+
+.cine-steps {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cine-step {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: start;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: var(--color-surface);
+  padding: 1.1rem;
+}
+
+.cine-plate {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: #c9cedd;
+}
+
+.cine-step-count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.cine-step h3 {
+  margin-top: 0.5rem;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(1.45rem, 2.6vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+
+.cine-step p {
+  margin-top: 0.5rem;
+  max-width: 34ch;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+/* Outlined mini panel: one real repository artifact. Syntax colour stays inside it. */
+.cine-artifact {
+  margin-top: 1.1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.6rem;
+  background: #07090f;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.cine-artifact-path {
+  border-bottom: 1px dotted var(--cine-rule);
+  padding: 0.55rem 0.8rem;
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.cine-artifact dl { display: grid; gap: 0.6rem 1.25rem; margin: 0; padding: 0.7rem 0.8rem 0.8rem; }
+.cine-artifact dl > div { display: grid; gap: 0.1rem; }
+.cine-artifact dt { color: var(--color-muted); }
+.cine-artifact dd { margin: 0; color: var(--color-ink); overflow-wrap: anywhere; }
+
+@media (min-width: 640px) {
+  .cine-step { grid-template-columns: 9rem minmax(0, 1fr); gap: 1.5rem; padding: 1.5rem; }
+  .cine-artifact dl { grid-template-columns: max-content minmax(0, 1fr); }
+  .cine-artifact dl > div { display: contents; }
+}
+
+@media (min-width: 1024px) {
+  .cine-spine { grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.6fr); gap: 4rem; align-items: start; }
+  .cine-rail { display: grid; }
+  .cine-step { grid-template-columns: 11rem minmax(0, 1fr); }
+  /* At rest (reduced motion, no JS) the heading and spine stay beside the list while it is read. */
+  .cine-spine-head { position: sticky; top: 2.5rem; }
+}
+
+/* Pinned mode (opted in by scenes.ts on desktop with motion allowed): one step holds the stage. */
+/* Descendant, not child: ScrollTrigger wraps the pinned element in a .pin-spacer. */
+[data-pinned] .cine-pin {
+  display: grid;
+  align-content: center;
+  min-height: calc(100svh - var(--cine-pin-top, 0px));
+  padding: 1.5rem 0;
+}
+
+[data-pinned] .cine-spine { align-items: center; }
+[data-pinned] .cine-spine-head { position: static; }
+[data-pinned] .cine-rail-progress { display: block; }
+[data-pinned] .cine-steps { gap: 0; }
+
+[data-pinned] .cine-step {
+  grid-area: 1 / 1;
+  grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+  gap: 2.25rem;
+  align-items: center;
+  padding: 1.75rem;
+}
+
+@media (min-width: 1280px) {
+  [data-pinned] .cine-step { grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); gap: 2.75rem; padding: 2rem; }
+}
+
+/* ---- scene 3: delivery routes deck ---- */
+.cine-deck {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cine-route {
+  display: grid;
+  gap: 1.1rem;
+  align-content: start;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: var(--color-surface);
+  padding: 1.6rem;
+}
+
+.cine-route-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cine-route-count,
+.cine-route-source {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.cine-route h3 {
+  margin-top: 0.7rem;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.cine-route-main p {
+  margin-top: 0.7rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--color-muted);
+}
+
+.cine-route-fields {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  border-top: 1px dotted var(--cine-rule);
+  padding-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.7;
+}
+
+.cine-route-fields dt { color: var(--color-ink); font-weight: 600; }
+.cine-route-fields dd { margin: 0; color: var(--color-muted); }
+
+/* The commercial boundary signal: gold marks the risk boundary, nothing else on the card. */
+.cine-route-fields .is-boundary {
+  border: 1px solid color-mix(in oklab, var(--color-gold) 34%, var(--color-border));
+  border-radius: 0.6rem;
+  background: color-mix(in oklab, var(--color-gold) 6%, var(--color-surface));
+  padding: 0.7rem 0.8rem;
+}
+
+.cine-route-fields .is-boundary dt { color: var(--color-gold); }
+.cine-route-fields .is-boundary dd { color: var(--color-ink); }
+
+.cine-route-source {
+  border-top: 1px dotted var(--cine-rule);
+  padding-top: 0.8rem;
+}
+
+@media (min-width: 1024px) {
+  .cine-deck { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+[data-pinned] .cine-deck {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin-top: 3.25rem;
+}
+
+[data-pinned] .cine-route {
+  grid-area: 1 / 1;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  column-gap: 3rem;
+  align-content: center;
+  min-height: min(27rem, 52vh);
+  padding: 2.25rem 2.5rem;
+}
+
+[data-pinned] .cine-route h3 { font-size: clamp(1.7rem, 2.4vw, 2.2rem); }
+[data-pinned] .cine-route-main p { font-size: 1rem; }
+[data-pinned] .cine-route-fields { border-top: 0; padding-top: 0; font-size: 0.78rem; }
+[data-pinned] .cine-route-source { grid-column: 1 / -1; }
+
+/* ---- scene 4: partner economics board ---- */
+.cine-board {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: var(--color-surface);
+}
+
+.cine-board thead tr { border-bottom: 1px solid var(--color-border); }
+.cine-board tbody tr + tr { border-top: 1px dotted var(--cine-rule); }
+
+.cine-rate {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
+
+/* Emerald underline: present only on a commission cell whose row carries a verification date. */
+.cine-rate i {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: var(--color-accent);
+}
+
+.cine-verified {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.cine-verified time { display: block; color: var(--color-ink); }
+
+.cine-verified a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin: -0.6rem 0;
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 3px;
+}
+
+.cine-verified a:hover { color: var(--color-ink); text-decoration-color: var(--color-accent); }
+
+/* ---- scene 5: inspectors (MCP tools, catalog) ---- */
+.cine-inspector {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: var(--color-surface);
+}
+
+.cine-inspector-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.cine-inspector-bar span:first-child { color: var(--color-ink); }
+
+.cine-rows { margin: 0; padding: 0; list-style: none; }
+
+.cine-row {
+  position: relative;
+  display: grid;
+  gap: 0.35rem 1.25rem;
+  padding: 1.1rem 1.25rem;
+}
+
+.cine-row + .cine-row { border-top: 1px dotted var(--cine-rule); }
+
+.cine-row-index {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.cine-row-name { font-size: 0.82rem; font-weight: 600; color: var(--color-ink); overflow-wrap: anywhere; }
+.cine-row-desc { font-size: 0.875rem; line-height: 1.6; color: var(--color-muted); }
+.cine-row-product .price-state { margin-top: 0.35rem; line-height: 1.6; }
+.cine-row-product.is-commercial .cine-row-index { color: color-mix(in oklab, var(--color-gold) 70%, var(--color-muted)); }
+
+.cine-row-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 3px;
+}
+
+.cine-row-link:hover { color: var(--color-ink); }
+
+.cine-inspector-link {
+  display: flex;
+  min-height: 44px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  padding: 1rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.cine-inspector-link:hover { background: color-mix(in oklab, var(--color-surface-2) 88%, var(--color-accent) 12%); }
+
+@media (min-width: 768px) {
+  .cine-row { align-items: center; padding: 1rem 1.5rem; }
+  .cine-row-tool { grid-template-columns: 2rem minmax(0, 15rem) minmax(0, 1fr); }
+  .cine-row-product { grid-template-columns: 2rem minmax(0, 1fr) 5.5rem minmax(0, 12rem); }
+  .cine-row-action { justify-self: end; }
+  .cine-inspector-bar,
+  .cine-inspector-link { padding-inline: 1.5rem; }
+}
+
+/* Focus mode (desktop, motion allowed): the row on the reading line is lit; hover and keyboard focus always win. */
+.cine-rows.is-inspecting > .cine-row { opacity: 0.62; }
+
+.cine-rows.is-inspecting > .cine-row.is-focus,
+.cine-rows.is-inspecting > .cine-row:hover,
+.cine-rows.is-inspecting > .cine-row:focus-within {
+  opacity: 1;
+}
+
+.cine-rows.is-inspecting > .cine-row.is-focus { background: var(--color-surface-2); }
+.cine-rows.is-inspecting > .cine-row.is-focus .cine-row-index { color: var(--color-accent); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .cine-row { transition: opacity 180ms cubic-bezier(0, 0, 0.2, 1), background-color 180ms cubic-bezier(0, 0, 0.2, 1); }
+  .cine-inspector-link { transition: background-color 120ms ease; }
+}
+
+/* ---- doctrine ---- */
+.section-band.cine-doctrine { border-bottom: 0; }
+
+/* ---- scene 6: close ---- */
+.cine-close { padding: 5.5rem 0 1rem; }
+
+@media (min-width: 1024px) {
+  .cine-close { padding-top: clamp(8rem, 17vh, 13rem); }
+}
+
+.cine-close-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+}
+
+.cine-close-actions .assembly-actions { margin-top: 0; }
+.cine-close .conversion-band { margin-top: 2.5rem; }

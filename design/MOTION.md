@@ -90,8 +90,9 @@ Direction: Frank, 2026-11-12. Contract: `docs/design/cinematic/design-lock.md`, 
 
 | Motion | Job | Trigger | Properties | Where |
 | --- | --- | --- | --- | --- |
-| Signal field flow | The signal the page talks about: light moving through smoke behind the stage | While the reader scrolls or moves the mouse over a scene with the field; it eases to a still frame about 3.5 seconds after the last input. Speed and brightness follow opening and close scroll progress | Shader uniforms | Desktop, WebGL |
-| Resolve pulse | Cause and effect: the answer landing is the signal | Once, the first time the `fit_check` answer finishes resolving | Shader uniform, 0.32s up, 1.5s down | Desktop, WebGL |
+| Signal field flow | The signal the page talks about: light moving through the dark behind and around the stage, a near emerald layer and a far cyan layer at different speeds | While the reader scrolls or moves the mouse over a scene with the field; it eases to a still frame about 3.5 seconds after the last input. Speed and brightness follow opening and close scroll progress | Shader uniforms | Desktop, WebGL |
+| Resolve signal | Cause and effect: the answer landing is the signal. The field lifts and a ring of light leaves the terminal | Once per page load, the first time the first line of the `fit_check` answer reaches full strength (fallback: the last line) | Shader uniforms, 0.25s up, 2.6s in all | Desktop, WebGL |
+| Close gather | The last frame: the field draws in around the two actions and a thin gold edge appears under them | Close scene scroll progress | Shader uniforms | Desktop, WebGL |
 | Slab fan | Depth: the three source files open like a hand of cards as the stage leaves | Opening scroll progress, eased | Object position, rotation | Desktop, WebGL |
 | Camera drift and pointer parallax | The stack is an object, not a picture | Opening scroll progress; mouse pointer position | Camera position, a few degrees | Desktop, WebGL |
 | Instrument quarter turn | The step that takes focus presents its instrument | Step focus change from the build path pin | Object rotation, scale | Desktop, WebGL |

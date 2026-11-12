@@ -80,6 +80,12 @@ A fragment shader behind scene 1 (opening) and scene 6 (close). Slow domain-warp
 
 Job: it is the signal the page keeps talking about. Flow speed and brightness follow scroll progress, and it brightens once, the first time the `fit_check` answer resolves. It flows only while the reader scrolls or moves the mouse, and settles to a still frame about 3.5 seconds after the last input, so nothing plays on its own for longer than five seconds. The light is held back on the text side of the opening so copy keeps its contrast.
 
+Field presence, 2026-11-12 (coordinator review of the first frames: the field read as a rendering artifact, not as light). The field now has two layers: a far layer of broad, soft cyan masses and a near layer of long emerald ribbons with bright folds. They drift at different speeds (the near layer about three times as fast) and take scroll and the pointer at different rates, which is the depth. It fills the stage behind and around the terminal. It is strongest away from anything that is read and falls to near black under text: the stage holds the light back under the hero copy, the opening foot, the nav and the terminal, and in the close under the kicker, the chapter mark and the second action. Palette is unchanged: obsidian, emerald, cyan, gold only in the close.
+
+The one-shot signal: the first time the `fit_check` answer resolves, the field lifts for about 2.6 seconds and a ring of light leaves the terminal. It leaves as the first line of the answer reaches full strength, because at 1440 by 900 the last line lands with the terminal already mostly off the top of the screen; the last-line event from `scenes.ts` remains as the fallback trigger. Once per page load.
+
+The close is the last frame: as it arrives the field draws in around the two actions, and one thin gold edge runs under that row. Stated plainly: the close's copy does not name the human gate (the page names it in the headline and in the doctrine line "Humans hold the gate."), and copy is out of scope, so the gold edge sits under the row where the reader makes their own decision.
+
 Deviation, stated plainly: the field is also drawn, confined to their own footprint, under the route deck and under the inspector lists. Glass with nothing behind it has nothing to bend, so those two surfaces needed it. It never sits behind body copy there: the deck is covered by its cards, and every inspector row except the one in focus is opaque.
 
 ### 2. Artifact stage (three.js)
@@ -92,7 +98,7 @@ Founder decision needed: in the WebGL state the lit instrument stands inside the
 
 ### 3. Liquid glass
 
-Four surfaces only: the site nav, the terminal chrome, the route cards, and the inspector row in focus. Layered: tint, `backdrop-filter` blur and saturation as the base; an SVG `feDisplacementMap` refraction where the browser applies SVG filters inside `backdrop-filter` (Chromium, desktop width); a 1px specular rim; an inner highlight that follows a mouse pointer. Anywhere refraction is not supported the glass is frosted. No glass on body copy panels or tables. The terminal's bar is the clear part of the pane; its body is a dense tint so the tool call reads as before.
+Four surfaces only: the site nav, the terminal chrome, the route cards, and the inspector row in focus. Layered: tint, `backdrop-filter` blur and saturation as the base; an SVG `feDisplacementMap` refraction where the browser applies SVG filters inside `backdrop-filter` (Chromium, desktop width); a 1px specular rim; an inner highlight that follows a mouse pointer. Anywhere refraction is not supported the glass is frosted. No glass on body copy panels or tables. The terminal's bar is the clear part of the pane; its body is a dense tint so the tool call reads as before. Over the live field a route card is built the same way: a clear bevel about 15px wide with a bright specular rim, where the field behind bends and stays vivid, around a dense plate that carries every word. Without the live field the route card keeps its even frosted tint.
 
 ### Fallbacks
 

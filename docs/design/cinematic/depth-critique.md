@@ -138,3 +138,65 @@ The live rules were fetched from `vercel-labs/web-interface-guidelines` (`comman
 Everything else passed: the canvas, the filter definitions and both bleed layers are `aria-hidden`; no interactive element, focus style, form, image or copy was added; every new transition names its property and sits inside a `prefers-reduced-motion: no-preference` query; only opacity and transform are animated in the document; truncated excerpt lines end in a real ellipsis character.
 
 Captures added in this round, layer declined (the state this machine and any device without a suitable GPU gets): `home-375.png`, `home-768.png` in `docs/design/cinematic/screens/depth/`. Wave 1 captures at the same widths are `docs/design/cinematic/screens/home-375.png` and `home-768.png`.
+
+## Round 3, field presence
+
+Date: 2026-11-12. Coordinator review of the committed frames found three shortfalls: the signal field read as a rendering artifact, the close was generic with no visible gold, and the route card glass could not be told from the wave 1 flat card. Scope of this round: `components/motion/depth/**` and the design docs. No copy, dependency, CSP, offer, checkout, catalog or data change.
+
+### Method
+
+Same as rounds 1 and 2. Playwright Chromium against the production build (`next build`, `next start`), 1440 by 900, with the `Content-Security-Policy` value from `vercel.json` added to the document response. No CSP violation was logged; the only console errors are the two `/_vercel/` 404s. The machine has no GPU, so the harness hides the software renderer's name from the capability probe (one `getParameter` override in the test script) and the shipped code is drawn by SwiftShader. The pixels were seen. Motion was not: every frame took over 100 ms, so flow speed, the two layers moving against each other, the ring travelling and the gather were judged from stills only. Live frames are at device scale factor 2; the two full-page fallback frames are at 1 so they can be compared pixel for pixel with the earlier ones. The harness scrolls in steps with `window.scrollTo` and moves the mouse, so the field counts the reader as active. Every `field-` image was opened.
+
+### What changed
+
+| # | Before | Change | After |
+| --- | --- | --- | --- |
+| 1 | One noise layer, low level, held back across the whole left half. In `opening-1440-fanned.png` a faint smudge at the right edge. | Two layers in the shader: far, broad, soft, cyan, slow; near, long emerald ribbons with bright folds, about three times as fast, taking more of the scroll (0.62 against 0.25) and of the pointer. Level raised. The single left-side hold became up to four boxes read from the DOM each frame (hero copy, opening foot, nav, terminal), each with its own strength and falloff, so the light fills the stage behind and around the terminal and stops short of what is read. | `field-opening-1440-rest.png`, `field-opening-1440-fanned.png` |
+| 2 | Pulse: level plus 0.5 for 1.8 seconds, fired when the last answer line landed. At 1440 by 900 that is about 600px of scroll, with the terminal two thirds off the top of the screen. | The stage runs its own 2.6 second envelope: the field lifts (level plus 0.75, fast attack) and a ring of light leaves the terminal's centre. It fires when the first line of the answer reaches full strength (about 405px of scroll, terminal body still on screen), read from that line's inline opacity; the last-line event from `scenes.ts` stays as the fallback. Once per page load. | `field-opening-1440-resolve.png` |
+| 3 | Close: even field at low level; gold mixed into the noise at half weight and not visible. | The field gathers: a pool centred on the two actions (the rest of the region falls to a fifth), and the field's structure is sampled further out while the scene arrives, so it draws inward. Gold left the noise and became one line: 1.5px, warm, under the actions row, fading at both ends, with a faint glow beneath. Holds under the kicker, the chapter mark's words and the second action (a clear pill with white text). | `field-close-1440.png` |
+| 4 | Route card: even 72 percent tint, 1px rim at 13 percent white. | Live state only: the card is a clear pane (14 percent tint, 7px blur under the refraction filter) with a rim at 42 percent white on top and a soft inner highlight, around a dense plate (94 percent) inset 15px that carries all the text. Field under the deck raised from 1.25 to 1.7. | `field-routes-1440-deck.png` |
+| 5 | Inspector row in focus: 46 percent tint, pointer highlight 8.5 percent white. | Not asked for, forced by the brighter field: with the mouse over the focused row the description measured 3.84:1. Field under the inspectors lowered (1.5 to 0.2 of a brighter field), row tint raised to 56 percent, pointer highlight on that row lowered to 4.5 percent. | 4.93:1 worst case. No new frame; the inspector glass is no stronger than before. |
+
+Defects found and fixed inside this round, each seen in a render: the first pass was teal, not emerald (cyan weight cut, emerald raised); the close's holds showed as hard-edged black rectangles, one of them the full width of the page because the chapter mark's box includes its dotted rule (holds now take the words only, and the button hold is pill-shaped with a soft edge); the close's second action measured 2.23:1 with the pool directly under it (hold added, pool peak lowered).
+
+### Frame by frame
+
+| Frame | Before | Verdict |
+| --- | --- | --- |
+| `field-opening-1440-rest.png` | `opening-1440-rest.png` | The field is now plainly there: emerald light with diagonal structure across the right half of the stage, above, beside and below the terminal, dark under the copy. It reads as this brand. Weak points: the folds are soft, so as a still it is closer to an aurora than to light with edges; the far cyan layer shows only as a teal cast at the top right, and nobody could tell there are two layers from this frame. Depth depends on motion, which was not seen. |
+| `field-opening-1440-fanned.png` | `opening-1440-fanned.png` | Clear improvement on the smudge. The light now frames the fanned slabs. The right edge is a large, fairly even bright area and is the place a director would most likely call a gradient wash. The truncated slab text fragments from round 2 are still there. |
+| `field-opening-1440-resolve.png` | none | Noticeably brighter than the fanned frame, with streaks across the stage below the terminal: the moment registers. The ring cannot be picked out as a ring in the still; it reads as a general lift. At this scroll position the terminal's bar is already off the top of the screen, which is the wave 1 scroll mapping and outside this round's scope. |
+| `field-routes-1440-deck.png` | `routes-1440-deck.png` | The glass now reads at a glance: a bright bevel around a dark plate, text sharp. Honest limit: it reads as a lit edge more than as refraction. The bend is visible as an uneven, wavering band of light along the left and bottom edges, but there is nothing straight behind the card to compare it with. The top edge has no light in this frame because the field happens to be dark there. The frame is mid-slide, so the heading is partly faded by the wave 1 deck animation. |
+| `field-close-1440.png` | `close-1440.png` | Second attempt (the first had the hard rectangles). It is now a composed frame: light collects on the right around the two actions, the left stays dark, and the gold edge is the one warm thing on screen and is easy to see. It no longer looks like an even green band. Still open: the dark halo around the second action is visible as a halo; the left 40 percent of the frame is empty; and the gold edge does not sit beside words that name the human gate, because the close has none (see below). I would not call it generic now, but it is the frame I am least sure of. |
+| `field-home-1440-reduced-motion.png` | `home-1440-reduced-motion.png` | Unchanged. Same 11,095px document, no canvas. Pixel comparison with the earlier frame: 483 of 15.98 million pixels differ by more than 2 levels (largest 10), all in rows 352 to 387, the terminal bar. Likely the pointer highlight, since this harness leaves the mouse near the terminal; not verified. |
+| `field-home-1440-no-webgl.png`, `-top.png` | `home-1440-no-webgl.png`, `-top.png` | Unchanged. Same 12,857px document, no canvas. 563 pixels differ (rows 352 to 605, largest 58: the same bar pixels plus the blinking caret). |
+
+### Stated plainly
+
+- The brief says the gold enters "where the human gate is named". The close's copy does not name it. The page names it in the headline and in the doctrine line "Humans hold the gate.", neither of which is in the close, and copy is out of scope. The gold edge sits under the row where the reader takes their own decision. If it should sit by words, that needs a line of copy in the close: a founder call.
+- The signal now fires on the first answer line, not the last. That is a change of timing made inside `depth/stage.ts` because `scenes.ts` was out of scope. If the last line is the right moment, the scroll mapping in `scenes.ts` needs to keep the terminal on screen until then.
+- Refraction on the route cards is readable as glass, not provably as refraction. Making the bend itself obvious needs straight detail behind the card.
+- The field costs more per pixel than before: 26 noise lookups per half-resolution pixel against 20, plus a four-box loop in the composite. Not measured on a GPU; no frame-rate number is claimed. The gates are unchanged: one lazy chunk, one context, paused off screen, device pixel ratio capped at 1.5, settles 3.5 seconds after the last input.
+- The lazy WebGL chunk is 145,756 bytes gzip against 144,465 before (budget 190 KB). Scripts before first paint were not re-measured; nothing outside the lazy chunk and one stylesheet changed.
+- The `review-animations` skill and the live Web Interface Guidelines fetch were not re-run this round. The mechanical lint was: 0 errors, 0 warnings. No interactive element, focus style or copy changed; the new CSS adds no transition.
+
+### Contrast, measured
+
+Text colour against the brightest pixel anywhere behind that text, text hidden for the capture, production build, 1440 by 900. 2,184 text boxes over a series of captures: opening at rest (3), scrolling (3), 16 back to back through the signal, 8 after it, both inspectors every 90px, the route deck at 6 positions, the close at 5. The mouse was moving throughout, so pointer highlights are included.
+
+| Text | Round 2 | Now, worst case |
+| --- | --- | --- |
+| Headline | 17.12 | 17.82 |
+| Hero paragraph | 6.01 | 6.22 (during the signal) |
+| Hero kicker | 7.54 | 7.80 |
+| Opening foot | 6.19 | 6.29 (during the signal) |
+| Nav link | 4.73 | 5.91 |
+| Terminal output line | 5.86 | 5.90 |
+| Terminal bar label | 4.77 | 4.76 |
+| Route card text | 4.77 | 4.90 |
+| Inspector row in focus | 4.96 | 4.93 |
+| Close kicker | 5.89 | 7.83 |
+| Close chapter mark | 5.51 | 6.19 |
+| Close second action | not measured | 16.01 |
+
+Worst case overall: 4.76:1, the terminal bar label, the same surface and near enough the same figure as round 2 (the bar's own tint, not the field). Nothing sampled is below 4.5:1. The field moves, so this is a sample, not a proof of the floor for every frame; the terminal's ghost text is wave 1 behaviour and was not measured.

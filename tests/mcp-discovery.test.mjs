@@ -31,6 +31,14 @@ test('the MCP server discloses affiliate links in registry responses', () => {
   assert.match(routeSource, /Links marked ourLink are affiliate links; Agentic Income may earn a commission\./)
 })
 
+test('MCP product availability honors the checkout release gate', () => {
+  assert.match(
+    routeSource,
+    /purchasable:\s*isCheckoutLive\(product\.id\)/,
+    'list_products must use isCheckoutLive so credentials without CHECKOUT_RELEASE cannot report purchasable: true',
+  )
+})
+
 test('homepage featured tools are real MCP tools, not invented names', () => {
   const homepageSource = read('app/page.tsx')
   const featured = [...homepageSource.matchAll(/\{ name: '([a-z_]+)', desc:/g)].map((m) => m[1])

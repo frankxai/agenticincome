@@ -1,7 +1,7 @@
 // Resolves the `@/` path alias (tsconfig.json) for route handlers imported
 // under plain `node --test`, trying the extensions Next would.
 // Load it with `import './support/alias.mjs'` before importing app/ code.
-import { existsSync } from 'node:fs'
+import { readFileSync, statSync } from 'node:fs'
 import { pathToFileURL } from 'node:url'
 import path from 'node:path'
 
@@ -13,7 +13,7 @@ export async function resolve(specifier, context, nextResolve) {
     const base = path.join(ROOT, specifier.slice(2))
     for (const ext of EXTENSIONS) {
       const candidate = base + ext
-      if (existsSync(candidate) && !candidate.endsWith(path.sep)) {
+      if (statSync(candidate, { throwIfNoEntry: false })?.isFile()) {
         return nextResolve(pathToFileURL(candidate).href, context)
       }
     }
@@ -22,3 +22,13 @@ export async function resolve(specifier, context, nextResolve) {
   if (specifier === 'next/server') return nextResolve('next/server.js', context)
   return nextResolve(specifier, context)
 }
+
+// App code imports JSON the way Next permits (without an import attribute).
+// Plain Node ESM rejects that at load time, so read it here before validation.
+export async function load(url, context, nextLoad) {
+  if (url.endsWith('.json')) {
+    return { format: 'json', source: readFileSync(new URL(url), 'utf8'), shortCircuit: true }
+  }
+  return nextLoad(url, context)
+}
+

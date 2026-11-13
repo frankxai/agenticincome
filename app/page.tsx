@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { AgentWorkflowProof } from '@/components/AgentWorkflowProof'
+import { HomeWaitlist } from '@/components/HomeWaitlist'
 import { CharacterPlate, type CharacterKind } from '@/components/motion/CharacterPlate'
 import { CinematicMotion } from '@/components/motion/CinematicMotion'
 import '@/components/motion/cinematic.css'
@@ -264,6 +265,9 @@ export default function Home() {
       </section>
 
       <AgentWorkflowProof />
+
+      {/* Demand capture: one waitlist block after the proof, closed unless the store is configured */}
+      <HomeWaitlist />
 
       {/* SCENE 3 — the three service & delivery routes, a stacking deck */}
       <section className="section-band cine-chapter" data-scene="routes">

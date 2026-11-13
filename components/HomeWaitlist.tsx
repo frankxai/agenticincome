@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { WaitlistForm, type WaitlistCopy } from '@/lib/demand-capture/WaitlistForm'
 import type { WaitlistState } from '@/lib/demand-capture/types'
 
@@ -40,6 +40,33 @@ type Status =
  */
 export function HomeWaitlist() {
   const [status, setStatus] = useState<Status>({ kind: 'checking' })
+  const block = useRef<HTMLElement>(null)
+
+  // The form changes height (checking, closed, form, questions, confirmed). The delivery-route deck below is pinned
+  // from positions ScrollTrigger measured earlier, so a resize here refreshes them. The import is lazy and shares the
+  // gsap chunk the motion layer already loads; refresh is a no-op when no trigger exists.
+  useEffect(() => {
+    const el = block.current
+    if (!el || typeof ResizeObserver === 'undefined') return
+    let frame = 0
+    let last = el.offsetHeight
+    const observer = new ResizeObserver(() => {
+      const height = el.offsetHeight
+      if (height === last) return
+      last = height
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        import('gsap/ScrollTrigger')
+          .then(({ ScrollTrigger }) => ScrollTrigger.refresh())
+          .catch(() => {})
+      })
+    })
+    observer.observe(el)
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(frame)
+    }
+  }, [])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -56,7 +83,7 @@ export function HomeWaitlist() {
   }, [])
 
   return (
-    <section className="home-waitlist section-band" id="waitlist" aria-labelledby="waitlist-title" data-waitlist-state={status.kind}>
+    <section ref={block} className="home-waitlist section-band" id="waitlist" aria-labelledby="waitlist-title" data-waitlist-state={status.kind}>
       <div className="home-waitlist-inner">
         <div className="home-waitlist-copy">
           <p className="kicker">Waitlist</p>

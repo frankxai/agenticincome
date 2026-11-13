@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import registry from '@/data/waitlist-products.json'
-import { handleJoin, handleState, type ProductConfig } from '@/lib/demand-capture/handler'
-import { isKvConfigured } from '@/lib/demand-capture/store'
+import { handleJoin, handleState, isWaitlistOpen, type ProductConfig } from '@/lib/demand-capture/handler'
 import type { WaitlistState } from '@/lib/demand-capture/types'
 import {
   analyticsClientKey,
@@ -13,7 +12,7 @@ import {
 
 /**
  * The shared demand-capture waitlist (lib/demand-capture, PROVENANCE.md), one product: agentic-income.
- * Fails closed. With no KV pair the state endpoint answers open:false and a join answers 503; nothing is
+ * Fails closed. With no KV pair, or without waitlist.ownerConfirmed === true, the state endpoint answers open:false and a join answers 503; nothing is
  * ever reported as recorded unless the store confirmed it.
  */
 
@@ -87,11 +86,13 @@ export async function GET(req: Request) {
   const product = find(new URL(req.url).searchParams.get('productId'))
   if (!product) return NextResponse.json({ error: 'Unknown product' }, { status: 404, headers: NO_STORE })
 
-  if (!product.waitlist.enabled || !isKvConfigured()) {
+  // Closed until a store is configured AND waitlist.ownerConfirmed is true (Frank confirms list ownership).
+  if (!isWaitlistOpen(product)) {
     return NextResponse.json({ productId: product.id, open: false, reason: 'not_configured' }, { status: 200, headers: NO_STORE })
   }
   try {
     const { body } = await handleState(product)
+    if (!body.open) return NextResponse.json({ productId: product.id, open: false, reason: 'not_configured' }, { status: 200, headers: NO_STORE })
     return NextResponse.json(publicView(body), { status: 200, headers: NO_STORE })
   } catch (error) {
     console.error('waitlist: state failed', error instanceof Error ? error.message : 'unknown')

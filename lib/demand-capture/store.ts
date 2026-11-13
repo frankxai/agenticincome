@@ -126,6 +126,88 @@ export async function saveSignal(signal: DemandSignal): Promise<void> {
   await kv(['hset', key(signal.productId, 'signals'), signal.email, JSON.stringify(signal)])
 }
 
+/**
+ * Claim the position and create-or-merge the signal in ONE EVAL, so a join either records both or
+ * neither. Claiming first and writing second left a failed write holding a position and a count
+ * increment with no signal behind it. Everything that can fail (decoding the inputs) runs before the
+ * first write, and the same script serialises overlapping requests for one address, so each keeps
+ * its own answers instead of the later write replacing the earlier one.
+ *
+ *   KEYS[1] positions hash   KEYS[2] count   KEYS[3] signals hash
+ *   ARGV[1] email   ARGV[2] the new signal as JSON, without position (used only when none is stored)
+ *   ARGV[3] answers as JSON (only the fields supplied and valid)   ARGV[4] now
+ *
+ * Returns the stored record as JSON. A known address keeps its recorded position; with no new
+ * answers it is returned untouched and nothing is written. A stored signal that does not parse is
+ * replaced, as getSignal treats it as absent. A stored position that is not a number is replaced.
+ */
+export const JOIN_SCRIPT = [
+  'local fresh = cjson.decode(ARGV[2])',
+  'local answers = cjson.decode(ARGV[3])',
+  "local raw = redis.call('HGET', KEYS[3], ARGV[1])",
+  'local stored = nil',
+  'if raw then',
+  '  local ok, decoded = pcall(cjson.decode, raw)',
+  "  if ok and type(decoded) == 'table' then stored = decoded end",
+  'end',
+  "local position = tonumber(redis.call('HGET', KEYS[1], ARGV[1]))",
+  'local claimed = false',
+  'if not position then',
+  "  position = redis.call('INCR', KEYS[2])",
+  "  redis.call('HSET', KEYS[1], ARGV[1], position)",
+  '  claimed = true',
+  'end',
+  'if not stored then',
+  '  fresh.position = position',
+  '  local created = cjson.encode(fresh)',
+  "  redis.call('HSET', KEYS[3], ARGV[1], created)",
+  '  return created',
+  'end',
+  "local fields = {'name', 'role', 'pain', 'urgency', 'priceBand', 'alternative'}",
+  'local changed = false',
+  'for _, field in ipairs(fields) do',
+  '  if answers[field] ~= nil then',
+  '    stored[field] = answers[field]',
+  '    changed = true',
+  '  end',
+  'end',
+  'if not changed then return raw end',
+  'stored.position = position',
+  'stored.consent = true',
+  'stored.updatedAt = ARGV[4]',
+  'local merged = cjson.encode(stored)',
+  "redis.call('HSET', KEYS[3], ARGV[1], merged)",
+  'return merged',
+].join('\n')
+
+export async function joinSignal(
+  signal: Omit<DemandSignal, 'position'>,
+  answers: Record<string, string | undefined>,
+  now: string,
+): Promise<DemandSignal> {
+  const raw = await kv([
+    'eval',
+    JOIN_SCRIPT,
+    '3',
+    key(signal.productId, 'positions'),
+    key(signal.productId, 'count'),
+    key(signal.productId, 'signals'),
+    signal.email,
+    JSON.stringify(signal),
+    JSON.stringify(answers),
+    now,
+  ])
+  let saved: DemandSignal | null = null
+  try {
+    saved = JSON.parse(String(raw)) as DemandSignal
+  } catch {
+    saved = null
+  }
+  // A position is shown to the person who joined. If the store did not return one, say so.
+  if (!saved || !Number.isInteger(saved.position) || saved.position < 1) throw new Error('KV on EVAL: join returned no record')
+  return saved
+}
+
 export async function allSignals(productId: string): Promise<DemandSignal[]> {
   const raw = (await kv(['hgetall', key(productId, 'signals')])) as unknown[] | null
   if (!raw) return []
@@ -133,11 +215,15 @@ export async function allSignals(productId: string): Promise<DemandSignal[]> {
   return values.map((v) => JSON.parse(String(v)) as DemandSignal)
 }
 
-/** Non-fatal: a Resend outage must not cost us the signal we already stored. */
-export async function addToAudience(email: string, name: string | undefined, productId: string) {
+/**
+ * Non-fatal: a Resend outage must not cost us the signal we already stored, so this never throws.
+ * Returns false when a sync was attempted and failed (so the caller can report a partial success),
+ * true when it succeeded or none is configured.
+ */
+export async function addToAudience(email: string, name: string | undefined, productId: string): Promise<boolean> {
   const resendKey = process.env.RESEND_API_KEY
   const audience = audienceFor(productId)
-  if (!resendKey || !audience) return
+  if (!resendKey || !audience) return true
   try {
     const res = await fetch(`https://api.resend.com/audiences/${audience}/contacts`, {
       method: 'POST',
@@ -151,10 +237,13 @@ export async function addToAudience(email: string, name: string | undefined, pro
     })
     if (!res.ok) {
       console.error(`demand-capture: audience sync ${res.status} for ${productId}: ${await res.text()}`)
+      return false
     }
+    return true
   } catch (err) {
     // The signal is already in KV. Nothing reconciles this later, so the failure must be visible
     // in the logs or it is lost.
     console.error(`demand-capture: audience sync failed for ${productId}`, err)
+    return false
   }
 }

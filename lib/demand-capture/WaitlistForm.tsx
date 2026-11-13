@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { PAIN_PROMPT, PRICE_BANDS, PRICE_PROMPT, URGENCY, rolesFor } from './questions'
-import type { WaitlistState } from './types'
+import type { ClosedWaitlistState, WaitlistState } from './types'
 
 /**
  * Every visible string can be re-voiced per property; the questions, the
@@ -35,6 +35,7 @@ export type WaitlistCopy = {
   doneNoPosition: string
   doneText: string
   consent: string
+  closed: string
 }
 
 export const DEFAULT_COPY: WaitlistCopy = {
@@ -57,7 +58,18 @@ export const DEFAULT_COPY: WaitlistCopy = {
   done: 'Thank you. You are number {n}.',
   doneNoPosition: 'Thank you.',
   doneText: 'You will hear from us when {product} is ready, and not before.',
+  closed: 'The waitlist is not open yet, so nothing can be recorded here. Check back later.',
   consent: 'Email me about {product}. Your address and your answers stay with this list. Unsubscribe in any email.',
+}
+
+/** The page's own utm_* parameters, bounded, so a signup keeps the campaign that brought it. */
+function pageUtm(): Record<string, string> {
+  if (typeof window === 'undefined') return {}
+  const out: Record<string, string> = {}
+  for (const [k, v] of new URLSearchParams(window.location.search)) {
+    if (/^utm_[a-z0-9_]{1,32}$/i.test(k) && v && Object.keys(out).length < 8) out[k] = v.slice(0, 200)
+  }
+  return out
 }
 
 const fill = (template: string, vars: Record<string, string | number>) =>
@@ -68,7 +80,8 @@ type Props = {
   productName: string
   /** What they get that a later signup does not. Stated plainly or omitted, never implied. */
   foundingBenefit?: string
-  initialState?: WaitlistState
+  /** Pass handleState's response as is. A closed one renders a not-open message instead of the form. */
+  initialState?: WaitlistState | ClosedWaitlistState
   endpoint?: string
   /** Consumer surfaces should not say "company". */
   placeholder?: string
@@ -86,12 +99,29 @@ export function WaitlistForm({
 }: Props) {
   const copy = { ...DEFAULT_COPY, ...copyOverrides }
   const [step, setStep] = useState<'join' | 'refine' | 'done'>('join')
-  const [state, setState] = useState<WaitlistState | undefined>(initialState)
+  const closed = initialState !== undefined && 'open' in initialState && initialState.open === false
+  const openInitial = initialState && !closed ? (initialState as WaitlistState) : undefined
+  const [state, setState] = useState<WaitlistState | undefined>(openInitial)
   const [email, setEmail] = useState('')
+  // The address the join request actually carried. Later requests use it, not whatever the input
+  // holds now, so an edit made while the join was pending cannot split the answers onto a second address.
+  const [joinedEmail, setJoinedEmail] = useState('')
   const [consent, setConsent] = useState(false)
   const [answers, setAnswers] = useState<Record<string, string>>({})
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
+  // Each step replaces the last, which unmounts whatever had focus. Move focus to the new step's
+  // heading (tabIndex -1: focusable by script, not a tab stop) so keyboard and screen-reader users
+  // land on the new content instead of the top of the document. Not on first render.
+  const headingRef = useRef<HTMLParagraphElement>(null)
+  const firstRender = useRef(true)
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false
+      return
+    }
+    headingRef.current?.focus()
+  }, [step])
 
   async function post(payload: Record<string, unknown>) {
     setBusy(true)
@@ -100,7 +130,7 @@ export function WaitlistForm({
       const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productId, email, consent, ...payload }),
+        body: JSON.stringify({ productId, email: joinedEmail || email, consent: joinedEmail ? true : consent, utm: pageUtm(), ...payload }),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error ?? 'Something went wrong')
@@ -114,8 +144,19 @@ export function WaitlistForm({
     }
   }
 
-  const seats = state?.foundingSeatsLeft ?? initialState?.foundingSeatsLeft ?? null
-  const shownCount = state?.publicCount ?? initialState?.publicCount ?? null
+  // Once a response has arrived it is the truth, including a null ("unknown") from a partial join:
+  // never fall back to the pre-signup snapshot, which would advertise stale places.
+  const latest = state ?? openInitial
+  const seats = latest?.foundingSeatsLeft ?? null
+  const shownCount = latest?.publicCount ?? null
+
+  if (closed) {
+    return (
+      <p className="wl-note" role="status">
+        {copy.closed}
+      </p>
+    )
+  }
 
   if (step === 'join') {
     return (
@@ -124,13 +165,18 @@ export function WaitlistForm({
         onSubmit={async (event) => {
           event.preventDefault()
           const source = typeof window === 'undefined' ? '' : window.location.pathname
-          if (await post({ source })) setStep('refine')
+          const submitted = email
+          if (await post({ source })) {
+            setJoinedEmail(submitted)
+            setStep('refine')
+          }
         }}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <input
             type="email"
             required
+            readOnly={busy}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             placeholder={placeholder}
@@ -147,6 +193,7 @@ export function WaitlistForm({
             type="checkbox"
             required
             checked={consent}
+            disabled={busy}
             onChange={(event) => setConsent(event.target.checked)}
             className="wl-check mt-1"
           />
@@ -167,7 +214,7 @@ export function WaitlistForm({
     return (
       <div className="space-y-6">
         <div className="wl-panel">
-          <p className="wl-panel-title">
+          <p ref={headingRef} tabIndex={-1} className="wl-panel-title">
             {state?.position ? fill(copy.entered, { n: state.position }) : copy.enteredNoPosition}
           </p>
           {foundingBenefit && seats !== null && seats > 0 ? (
@@ -234,7 +281,9 @@ export function WaitlistForm({
 
   return (
     <div className="wl-panel">
-      <p className="wl-panel-title">{state?.position ? fill(copy.done, { n: state.position }) : copy.doneNoPosition}</p>
+      <p ref={headingRef} tabIndex={-1} className="wl-panel-title">
+        {state?.position ? fill(copy.done, { n: state.position }) : copy.doneNoPosition}
+      </p>
       <p className="wl-panel-text">{fill(copy.doneText, { product: productName })}</p>
     </div>
   )

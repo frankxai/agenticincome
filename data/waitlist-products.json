@@ -9,7 +9,8 @@
       "waitlist": {
         "enabled": true,
         "publicCountThreshold": 100,
-        "foundingCohort": 100
+        "foundingCohort": 100,
+        "ownerConfirmed": false
       }
     }
   ]

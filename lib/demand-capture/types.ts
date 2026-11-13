@@ -37,10 +37,21 @@ export interface DemandSignal {
   consent: true
 }
 
-export interface WaitlistState {
+/** What handleState returns while the list cannot take addresses (owner unconfirmed or no store). */
+export interface ClosedWaitlistState {
+  open: false
   productId: string
-  count: number
+}
+
+export interface WaitlistState {
+  /** Present as true on a state read from handleState; absent on a join response. */
+  open?: true
+  productId: string
+  /** null when the signal was recorded but the store could not be read back for a count. Never estimated. */
+  count: number | null
   position?: number
+  /** Set on a join that was recorded while a follow-up step failed. The address is stored. */
+  partial?: true
   /** Withheld below the product's publicCountThreshold. Never estimate it. */
   publicCount: number | null
   foundingCohort: number

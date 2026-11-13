@@ -1,8 +1,10 @@
 import './support/alias.mjs'
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import { afterEach, beforeEach, describe, test } from 'node:test'
 
 const { GET, POST } = await import('../app/api/waitlist/route.ts')
+const { default: registry } = await import('../data/waitlist-products.json', { with: { type: 'json' } })
 const { resetAnalyticsRateLimitForTests } = await import('../lib/api-security.ts')
 
 const ENV = ['KV_REST_API_URL', 'KV_REST_API_TOKEN', 'UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN', 'RESEND_API_KEY', 'RESEND_AUDIENCE_ID']
@@ -15,7 +17,9 @@ const EMAIL = 'visitor.private@example.com'
 let logged
 let kvCalls
 /** A minimal Upstash REST stand-in: one hash of positions, one counter. */
-function fakeKv({ count = 5, fail = false } = {}) {
+function fakeKv({ count = 5, fail = false, ownerConfirmed = true } = {}) {
+  // The committed row ships ownerConfirmed:false; a test opts in, and afterEach restores the committed value.
+  registry.products[0].waitlist.ownerConfirmed = ownerConfirmed
   process.env.KV_REST_API_URL = 'https://kv.test'
   process.env.KV_REST_API_TOKEN = 'token'
   const positions = new Map()
@@ -27,9 +31,10 @@ function fakeKv({ count = 5, fail = false } = {}) {
     const name = String(command[0]).toLowerCase()
     let result = null
     if (name === 'eval') {
-      const email = command[4]
+      // joinSignal: eval, script, 3, three keys, email, signal JSON, answers JSON, now
+      const email = command[6]
       if (!positions.has(email)) positions.set(email, ++counter)
-      result = positions.get(email)
+      result = JSON.stringify({ ...JSON.parse(command[7]), position: positions.get(email) })
     } else if (name === 'get') result = String(counter)
     else if (name === 'hset') result = 1
     return new Response(JSON.stringify({ result }), { status: 200 })
@@ -53,6 +58,7 @@ beforeEach(() => {
   console.error = (...args) => logged.push(args.map(String).join(' '))
 })
 afterEach(() => {
+  registry.products[0].waitlist.ownerConfirmed = false
   globalThis.fetch = realFetch
   console.error = realError
   for (const name of ENV) {
@@ -73,6 +79,19 @@ describe('GET /api/waitlist (state)', () => {
     const body = await res.json()
     assert.equal(body.open, false)
     assert.equal(body.reason, 'not_configured')
+    assert.deepEqual(kvCalls, [])
+  })
+
+  test('the committed row ships ownerConfirmed:false', () => {
+    assert.equal(JSON.parse(readFileSync(new URL('../data/waitlist-products.json', import.meta.url), 'utf8')).products[0].waitlist.ownerConfirmed, false)
+  })
+
+  test('a store alone does not open the list: ownerConfirmed false answers open:false', async () => {
+    fakeKv({ ownerConfirmed: false })
+    const body = await (await get()).json()
+    assert.equal(body.open, false)
+    assert.equal(body.publicCount, undefined)
+    assert.equal('count' in body, false)
     assert.deepEqual(kvCalls, [])
   })
 
@@ -136,8 +155,18 @@ describe('POST /api/waitlist (join)', () => {
     const body = await res.json()
     assert.equal(body.open, false)
     assert.equal(body.position, undefined)
-    assert.match(body.error, /could not confirm/)
+    assert.match(body.error, /not open yet/)
     assert.doesNotMatch(body.error, /nothing was saved/i)
+  })
+
+  test('store configured but ownerConfirmed false: 503, nothing stored, no position', async () => {
+    fakeKv({ ownerConfirmed: false })
+    const res = await post(valid)
+    assert.equal(res.status, 503)
+    const body = await res.json()
+    assert.equal(body.open, false)
+    assert.equal(body.position, undefined)
+    assert.deepEqual(kvCalls, [])
   })
 
   test('store failure is 503 and the address never reaches the response or the log', async () => {
@@ -159,7 +188,7 @@ describe('POST /api/waitlist (join)', () => {
     assert.equal(body.position, 6)
     assert.equal(body.publicCount, null)
     assert.equal('count' in body, false)
-    assert.ok(kvCalls.includes('hset'))
+    assert.ok(kvCalls.includes('eval'))
   })
 
   test('a repeat join returns the same position', async () => {

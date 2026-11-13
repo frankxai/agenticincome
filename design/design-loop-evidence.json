@@ -444,7 +444,8 @@
       "lib/demand-capture/PROVENANCE.md",
       "design/PAGE_SPEC.md",
       "design/SCENE_BRIEF.md",
-      "tests/waitlist-route.test.mjs"
+      "tests/waitlist-route.test.mjs",
+      "components/HomeWaitlist.tsx"
     ],
     "checks": [
       {
@@ -455,7 +456,12 @@
       {
         "name": "rendered-inspection",
         "status": "pass",
-        "evidence": "Playwright Chromium at 390x844 and 1440x900: closed (real, no KV), idle, error and confirmed (API calls mocked), nav default and WebGL disabled. Stored in docs/design/waitlist-glass/screens/."
+        "evidence": "Playwright Chromium at 390x844 and 1440x900: closed (real, no KV), idle, error and confirmed (API calls mocked), nav default and WebGL disabled. Stored in docs/design/waitlist-glass/screens/. Questions state at 1440x900 added in this revision (join request mocked)."
+      },
+      {
+        "name": "pinned-deck-after-waitlist-resize",
+        "status": "pass",
+        "evidence": "Playwright Chromium 1440x900, pnpm start, join mocked: deck fixed at top 0 inside its pin range (scrollY 5471) with the block at 414 px, and again (scrollY 6024) after joining with the block at 977 px (spacer top 5211 -> 5774). No control run without the ResizeObserver demonstrated the failure (sweep was noisy). Collapse and 768/375 not captured. Screens: deck-pinned-before-join / deck-pinned-after-join / waitlist-questions in docs/design/waitlist-glass/screens/."
       },
       {
         "name": "real-store-join",
@@ -470,7 +476,7 @@
       {
         "name": "independent-review",
         "status": "pending",
-        "evidence": "Codex review of 3423544 returned findings; head changes after fixes."
+        "evidence": "Codex review of 3423544 returned findings; later reviewed 6dc3124 with no findings. Head changed again with docs and screens only (this revision)."
       }
     ],
     "decision": "draft-review",

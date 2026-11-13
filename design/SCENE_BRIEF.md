@@ -149,11 +149,11 @@ A two-column band on the obsidian canvas, directly after the workflow proof: kic
 
 ### States
 
-Checking (one muted line), closed (a panel that says the list cannot record an address, no form), idle, error (gold-edged message, form kept), refine (three optional questions with Skip), confirmed (one panel plus the next step). Screens: `docs/design/waitlist-glass/screens/`.
+Checking (one muted line), closed (a panel that says the list cannot record an address, no form), idle, error (gold-edged message, form kept), questions (three optional questions with Skip; the block grows to about 977 px at 1440x900), confirmed (one panel plus the next step). Screens: `docs/design/waitlist-glass/screens/`.
 
 ### Motion
 
-None added. A 120ms opacity change on the button, off under reduced motion. No scroll motion, no reveal on the block's text.
+None added to the block itself. Its height changes (join to questions, skip or confirm back) re-measure the pinned delivery routes scene through `ScrollTrigger.refresh()`, called from a `ResizeObserver` in `HomeWaitlist` and skipped when the motion layer never created a trigger (mobile, reduced motion). A 120ms opacity change on the button, off under reduced motion. No scroll motion, no reveal on the block's text.
 
 ### Reduced motion and no JavaScript
 

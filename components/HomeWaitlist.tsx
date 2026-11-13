@@ -19,9 +19,19 @@ const COPY: Partial<WaitlistCopy> = {
   enteredNoPosition: 'You are on the list.',
 }
 
+/** The handler reads utm_* from the API request URL, so the landing page's campaign parameters ride along on it. */
+function waitlistEndpoint() {
+  const utm = new URLSearchParams()
+  for (const [key, value] of new URLSearchParams(window.location.search)) {
+    if (key.startsWith('utm_') && utm.size < 8) utm.set(key, value.slice(0, 100))
+  }
+  const query = utm.toString()
+  return query ? `/api/waitlist?${query}` : '/api/waitlist'
+}
+
 type Status =
   | { kind: 'checking' }
-  | { kind: 'open'; state: WaitlistState }
+  | { kind: 'open'; state: WaitlistState; endpoint: string }
   | { kind: 'closed' }
 
 /**
@@ -36,7 +46,7 @@ export function HomeWaitlist() {
     fetch(`/api/waitlist?productId=${PRODUCT_ID}`, { signal: controller.signal, cache: 'no-store' })
       .then((res) => (res.ok ? res.json() : Promise.reject(new Error(String(res.status)))))
       .then((data: WaitlistState & { open?: boolean }) => {
-        setStatus(data.open === true ? { kind: 'open', state: data } : { kind: 'closed' })
+        setStatus(data.open === true ? { kind: 'open', state: data, endpoint: waitlistEndpoint() } : { kind: 'closed' })
       })
       .catch((error: unknown) => {
         if (error instanceof DOMException && error.name === 'AbortError') return
@@ -67,6 +77,7 @@ export function HomeWaitlist() {
               productId={PRODUCT_ID}
               productName="Agentic Income"
               initialState={status.state}
+              endpoint={status.endpoint}
               placeholder="you@example.com"
               copy={COPY}
             />

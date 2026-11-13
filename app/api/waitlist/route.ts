@@ -21,7 +21,7 @@ const NO_STORE = { 'Cache-Control': 'no-store' }
 const products = registry.products as ProductConfig[]
 const find = (id: unknown) => products.find((product) => product.id === id)
 
-const UNAVAILABLE = 'The waitlist is not taking signups right now. Nothing was saved. Please try again later.'
+const UNAVAILABLE = 'We could not confirm your signup. Please try again later; if you try again, you will not be added twice.'
 
 /**
  * What the browser may see. handleJoin and handleState return the raw count and the founding-seat arithmetic;

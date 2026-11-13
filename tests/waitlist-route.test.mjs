@@ -136,7 +136,8 @@ describe('POST /api/waitlist (join)', () => {
     const body = await res.json()
     assert.equal(body.open, false)
     assert.equal(body.position, undefined)
-    assert.match(body.error, /Nothing was saved/)
+    assert.match(body.error, /could not confirm/)
+    assert.doesNotMatch(body.error, /nothing was saved/i)
   })
 
   test('store failure is 503 and the address never reaches the response or the log', async () => {

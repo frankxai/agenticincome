@@ -2204,3 +2204,32 @@ body::before {
   .cta, .cta-secondary { transition: none; }
   .cta:hover, .cta-secondary:hover { transform: none; }
 }
+
+/* ---- Waitlist (lib/demand-capture WaitlistForm + components/HomeWaitlist) ----
+   The shared form ships unstyled by design and takes the host page's tokens through the wl-* classes. */
+.home-waitlist-inner { display: grid; gap: 2rem; max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+@media (min-width: 900px) { .home-waitlist-inner { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: start; gap: 3.5rem; } }
+.home-waitlist-copy h2 { margin: 0.5rem 0 0.75rem; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600; line-height: 1.15; color: var(--color-ink); }
+.home-waitlist-copy p:not(.kicker) { color: var(--color-muted); line-height: 1.6; max-width: 34rem; }
+.home-waitlist-form { min-width: 0; border: 1px solid var(--color-border); border-radius: 1rem; background: var(--color-surface); padding: 1.5rem; }
+.wl-input { box-sizing: border-box; min-height: 2.75rem; width: 100%; border-radius: 0.5rem; border: 1px solid var(--color-border); background: var(--color-bg); padding: 0.6rem 0.9rem; color: var(--color-ink); font: inherit; }
+.wl-input::placeholder { color: var(--color-muted); }
+.wl-input:focus-visible, .wl-btn:focus-visible, .wl-chip:focus-visible, .wl-link:focus-visible, .wl-check:focus-visible { outline: 2px solid #10b981; outline-offset: 2px; }
+.wl-btn { min-height: 2.75rem; border-radius: 9999px; border: 0; background: var(--color-accent); padding: 0.6rem 1.5rem; font: inherit; font-weight: 700; color: var(--color-bg); cursor: pointer; white-space: nowrap; transition: opacity 120ms ease; }
+.wl-btn:hover { opacity: 0.92; }
+.wl-btn:disabled { opacity: 0.55; cursor: progress; }
+.wl-btn-quiet { background: transparent; border: 1px solid var(--color-border); color: var(--color-ink); }
+.wl-note { font-size: 0.85rem; line-height: 1.5; color: var(--color-muted); }
+.wl-check { width: 1.1rem; height: 1.1rem; accent-color: #10b981; flex: none; }
+.wl-label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--color-ink); }
+.wl-error { border: 1px solid color-mix(in oklab, var(--color-gold) 55%, var(--color-border)); border-radius: 0.5rem; padding: 0.6rem 0.8rem; font-size: 0.9rem; color: var(--color-ink); background: color-mix(in oklab, var(--color-gold) 8%, var(--color-surface)); }
+.wl-chip { min-height: 2.75rem; border-radius: 9999px; border: 1px solid var(--color-border); background: transparent; padding: 0.35rem 0.9rem; font: inherit; font-size: 0.85rem; color: var(--color-muted); cursor: pointer; }
+.wl-chip:hover { border-color: var(--color-accent); color: var(--color-ink); }
+.wl-chip-active { border-color: var(--color-accent); color: var(--color-ink); background: color-mix(in oklab, var(--color-accent) 14%, transparent); }
+.wl-panel { border: 1px solid var(--color-border); border-radius: 0.75rem; background: var(--color-surface-2); padding: 1rem 1.1rem; }
+.wl-panel-title { margin: 0; font-weight: 600; color: var(--color-ink); }
+.wl-panel-text { margin: 0.4rem 0 0; font-size: 0.9rem; line-height: 1.55; color: var(--color-muted); }
+.wl-link { display: inline-flex; min-height: 2.75rem; align-items: center; background: none; border: 0; padding: 0; font: inherit; color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.wl-next { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1rem; margin: 1.25rem 0 0; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+.wl-next .wl-label { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-muted); }
+@media (prefers-reduced-motion: reduce) { .wl-btn { transition: none; } }

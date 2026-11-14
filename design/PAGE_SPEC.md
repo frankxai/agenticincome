@@ -169,3 +169,14 @@ All read at build time, none authored: `incomeModels.updatedAt`, `catalog.update
 
 Repository paths are cited in mono and not linked: the application repository is not linked from `app/`, `components/` or `lib/`. Source links in the board go to each program's own terms page, never to a compensated link.
 
+
+## Homepage waitlist capture, Claude, 13 November 2026 (WEB-01b)
+
+Surface: `app/page.tsx`, protected surface `homepage`, kind evolve. One block, `components/HomeWaitlist.tsx` (`#waitlist`), placed directly after `AgentWorkflowProof`, before the delivery routes scene.
+
+- Job: let a reader ask for one email when new packs open. Product `agentic-income` from the estate registry (`data/waitlist-products.json`). Source of the form: `lib/demand-capture/` (PROVENANCE.md).
+- States: checking, closed, idle, error, confirmed. Closed is the default whenever the server cannot say the list is open (no KV pair, store failure, request failure); it shows no form. Confirmed is inline and carries one next step, the fit check at `/start`. Steps inside the form: email and consent, then three optional questions (the "questions" state, with Skip), then done. The block changes height between these states (about 414 px idle, 977 px with the questions open at 1440x900).
+- Scroll interaction: the delivery routes scene below is pinned by ScrollTrigger from measured positions. `HomeWaitlist` observes its own height with a `ResizeObserver` and calls `ScrollTrigger.refresh()` on the next frame when the height changed. Check: `docs/design/waitlist-glass/README.md` section "Pinned deck check".
+- Boundaries: no figure, count, countdown or founding benefit is shown; the public count appears only at or above the registry threshold. No outcome claim. Joining charges nothing and is not checkout. `/api/subscribe` and `EmailCapture` are untouched.
+- Keeps: positioning, proof, income truth and the next-step actions are unchanged; this block adds one more next step.
+- No change to the nav: `liquid-gl` was not added (167,480 B minified over the 150 KB budget; a `blob:` worker the CSP blocks). The existing CSS glass stays.

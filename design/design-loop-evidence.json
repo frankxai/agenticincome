@@ -431,5 +431,58 @@
       "The opening terminal dims its unanswered text to 34 percent when the motion layer starts, a visible change shortly after first paint.",
       "Five raster image slots are declared and empty; the SVG plates are what ships."
     ]
+  },
+  "waitlist_capture_home": {
+    "author": "Claude (Anthropic)",
+    "created_at": "2026-11-13",
+    "revision": 1,
+    "direction_source": "WEB-01b, frankxai/product-plans#66",
+    "scope": "app/page.tsx (one component), components/HomeWaitlist.tsx, app/api/waitlist/route.ts, lib/demand-capture/, data/waitlist-products.json, app/globals.css. Protected surface homepage, kind evolve. No change to pricing, checkout, env, offers or package.json.",
+    "artifacts": [
+      "docs/design/waitlist-glass/README.md",
+      "docs/design/waitlist-glass/screens/",
+      "lib/demand-capture/PROVENANCE.md",
+      "design/PAGE_SPEC.md",
+      "design/SCENE_BRIEF.md",
+      "tests/waitlist-route.test.mjs",
+      "components/HomeWaitlist.tsx"
+    ],
+    "checks": [
+      {
+        "name": "merge-gate-parts",
+        "status": "pass",
+        "evidence": "Local: lint exit 0; type-check exit 0; test 258 pass 0 fail; links:check:static pass; verify:public pass; build exit 0; test:governance 41 pass."
+      },
+      {
+        "name": "rendered-inspection",
+        "status": "pass",
+        "evidence": "Playwright Chromium at 390x844 and 1440x900: closed (real, no KV), idle, error and confirmed (API calls mocked), nav default and WebGL disabled. Stored in docs/design/waitlist-glass/screens/. Questions state at 1440x900 added in this revision (join request mocked)."
+      },
+      {
+        "name": "pinned-deck-after-waitlist-resize",
+        "status": "pass",
+        "evidence": "Playwright Chromium 1440x900, pnpm start, join mocked: deck fixed at top 0 inside its pin range (scrollY 5471) with the block at 414 px, and again (scrollY 6024) after joining with the block at 977 px (spacer top 5211 -> 5774). No control run without the ResizeObserver demonstrated the failure (sweep was noisy). Collapse and 768/375 not captured. Screens: deck-pinned-before-join / deck-pinned-after-join / waitlist-questions in docs/design/waitlist-glass/screens/."
+      },
+      {
+        "name": "real-store-join",
+        "status": "pending",
+        "evidence": "Only a fake store was used. No KV store is configured; a real join and the Resend sync are unverified."
+      },
+      {
+        "name": "lighthouse-axe-reduced-motion-768",
+        "status": "pending",
+        "evidence": "Not run."
+      },
+      {
+        "name": "independent-review",
+        "status": "pending",
+        "evidence": "Codex review of 3423544 returned findings; later reviewed 6dc3124 with no findings. Head changed again with docs and screens only (this revision)."
+      }
+    ],
+    "decision": "draft-review",
+    "known_risks": [
+      "Upstream handler claims the position before saving the signal; a failed save can leave the count one high (not fixable in the unchanged copy).",
+      "Verified in headless Chromium without a GPU."
+    ]
   }
 }

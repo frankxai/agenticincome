@@ -18,6 +18,13 @@ export async function resolve(specifier, context, nextResolve) {
       }
     }
   }
+  // Shared packages import siblings without an extension, as bundlers allow (lib/demand-capture/handler.ts).
+  if (specifier.startsWith('.') && !/\.[cm]?[jt]sx?$|\.json$/.test(specifier) && context.parentURL?.startsWith('file:')) {
+    const base = path.resolve(path.dirname(new URL(context.parentURL).pathname), specifier)
+    for (const ext of ['.ts', '.tsx', '/index.ts']) {
+      if (statSync(base + ext, { throwIfNoEntry: false })?.isFile()) return nextResolve(pathToFileURL(base + ext).href, context)
+    }
+  }
   // `next` ships no exports map, so ESM needs the file extension spelled out.
   if (specifier === 'next/server') return nextResolve('next/server.js', context)
   return nextResolve(specifier, context)

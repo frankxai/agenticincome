@@ -1,0 +1,17 @@
+{
+  "_provenance": "Single row copied from starlight-command graph/products.graph.json at origin/main a82575575f26f9c80df02a8b6ca3a6419a376aab (agentic-income). Only the fields the waitlist handler reads. The estate registry stays the source of truth; change the row there first.",
+  "products": [
+    {
+      "id": "agentic-income",
+      "name": "Agentic Income",
+      "surface": "agenticincome.ai",
+      "stage": "concept",
+      "waitlist": {
+        "enabled": true,
+        "publicCountThreshold": 100,
+        "foundingCohort": 100,
+        "ownerConfirmed": false
+      }
+    }
+  ]
+}

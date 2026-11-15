@@ -140,3 +140,25 @@ Identical document: all five steps listed, three route cards in a row, every tab
 
 Five inline SVG character plates (`components/motion/CharacterPlate.tsx`). No raster image, video, WebGL or new dependency. Five raster slots are declared in `design/asset-manifest.json` for a later provenance-tracked pass.
 
+
+## Homepage waitlist capture, Claude, 13 November 2026
+
+### Static frame
+
+A two-column band on the obsidian canvas, directly after the workflow proof: kicker, h2 and two plain sentences on the left; one surface-2 card on the right holding the form, then a dotted rule and a mono "next step" row with the fit-check link. Stacks to one column below 900px. Emerald only on the submit button, focus rings and the next-step link.
+
+### States
+
+Checking (one muted line), closed (a panel that says the list cannot record an address, no form), idle, error (gold-edged message, form kept), questions (three optional questions with Skip; the block grows to about 977 px at 1440x900), confirmed (one panel plus the next step). Screens: `docs/design/waitlist-glass/screens/`.
+
+### Motion
+
+None added to the block itself. Its height changes (join to questions, skip or confirm back) re-measure the pinned delivery routes scene through `ScrollTrigger.refresh()`, called from a `ResizeObserver` in `HomeWaitlist` and skipped when the motion layer never created a trigger (mobile, reduced motion). A 120ms opacity change on the button, off under reduced motion. No scroll motion, no reveal on the block's text.
+
+### Reduced motion and no JavaScript
+
+Same layout. Without JavaScript the block shows its copy, a note that the form needs JavaScript, and the next-step link.
+
+### Assets
+
+None. No image, no WebGL, no dependency.

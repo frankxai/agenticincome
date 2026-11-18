@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { test } from 'node:test'
-import { verifyHeader, webPath } from '../scripts/verify-header-identity.mjs'
+import { verifyHeader, verifyPublication, webPath } from '../scripts/verify-header-identity.mjs'
 const master = readFileSync(new URL('../public' + webPath, import.meta.url))
 const header = image => '<header><nav><a href="/">' + image + '</a></nav></header>'
 const img = '<img alt="Agentic Income" src="' + webPath + '"/>'
@@ -12,3 +12,13 @@ test('missing, replaced or ambiguous placement', () => {
   }
 })
 test('drift in bytes blocks the build', () => assert.throws(() => verifyHeader(header(img), Buffer.concat([master, Buffer.from(' ')]))))
+
+test('Vercel deployment pin preserves the exact path and refuses arbitrary queries', () => {
+  verifyHeader(header(img.replace(webPath,webPath+'?dpl=dpl_test123')),master)
+  for (const suffix of ['?image=other','?dpl=dpl_ok&src=other','?dpl=dpl_ok?src=other']) {
+    assert.throws(()=>verifyHeader(header(img.replace(webPath,webPath+suffix)),master))
+  }
+})
+test('public release refuses a disconnected authority or missing signed decision', async () => {
+  await assert.rejects(verifyPublication({}), /signed release decision/)
+})

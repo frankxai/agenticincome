@@ -44,6 +44,8 @@ export function verifyHeader(html, bytes) {
   const validSource = source === webPath || (source.startsWith(webPath+'?') &&
     /^dpl=dpl_[A-Za-z0-9]+$/.test(source.slice(webPath.length+1)))
   if (!image || !/^<img\s+[^<>]*\/?\s*>$/i.test(image) || !validSource ||
+      !/\sstyle="[^"]*\bmax-width:\s*none(?:;|")/i.test(image) ||
+      !/\swidth="280"/i.test(image) || !/\sheight="56"/i.test(image) ||
       /\s(?:srcset|hidden)\b/i.test(image) || !/\salt="[^"]+"/i.test(image)) {
     throw new Error('Built homepage header must use only the verified wordmark')
   }

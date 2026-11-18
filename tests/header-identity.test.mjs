@@ -4,10 +4,10 @@ import { test } from 'node:test'
 import { verifyHeader, verifyPublication, webPath } from '../scripts/verify-header-identity.mjs'
 const master = readFileSync(new URL('../public' + webPath, import.meta.url))
 const header = image => '<header><nav><a href="/">' + image + '</a></nav></header>'
-const img = '<img alt="Agentic Income" src="' + webPath + '"/>'
+const img = '<img width="280" height="56" style="max-width:none" alt="Agentic Income" src="' + webPath + '"/>'
 test('exact master in header', () => verifyHeader(header(img), master))
 test('missing, replaced or ambiguous placement', () => {
-  for (const candidate of ['', '<svg/>', img + '<svg/>', img.replace(webPath, '/other.svg'), img.replace('/>', ' srcset="/other.svg 2x"/>')]) {
+  for (const candidate of ['', '<svg/>', img + '<svg/>', img.replace('max-width:none','max-width:100%'), img.replace(webPath, '/other.svg'), img.replace('/>', ' srcset="/other.svg 2x"/>')]) {
     assert.throws(() => verifyHeader(header(candidate), master))
   }
 })

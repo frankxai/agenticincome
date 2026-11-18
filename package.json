@@ -7,7 +7,7 @@
   "scripts": {
     "test:governance": "node --test scripts/tests/governance-gates.test.mjs",
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/verify-header-identity.mjs",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "test": "node --test --test-force-exit tests/*.test.mjs",

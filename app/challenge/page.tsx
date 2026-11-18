@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
 import { challengeDays } from '@/lib/challenge'
-import { EmailCapture } from '@/components/EmailCapture'
 import { FaqSection } from '@/components/FaqSection'
 
 export const metadata: Metadata = {
@@ -121,21 +120,15 @@ export default function ChallengePage() {
         </div>
       </section>
 
-      <EmailCapture
-        headline="Get the 7-Day Challenge Brief"
-        sub="One honest, concrete build step a day, by email. No income claims — just the next real thing to do."
-        source="challenge"
-        buttonLabel="Start Day 1"
-        successMessage="You’re in. Day 1 — create the owned system — is on its way."
-      />
-
       <section className="section-band">
         <div className="section-heading motion-reveal">
-          <div className="kicker">Prefer to move now?</div>
+          <div className="kicker">Start Day 1 here</div>
           <h2 className="display-h2">Clone the public system today.</h2>
           <p>
-            The operating skill, schema, validator, scaffold, and Request-to-Quote reference system
-            are public. You can create the first owned Outcome Pack as soon as Node.js 20 is available.
+            The challenge is this page. It asks for no sign-up and sends no email: work through
+            the seven steps above at your own pace. The operating skill, schema, validator, scaffold,
+            and Request-to-Quote reference system are public. You can create the first owned Outcome
+            Pack as soon as Node.js 20 is available.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <a

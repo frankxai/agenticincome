@@ -37,3 +37,7 @@ For visual work, inspect desktop, mobile, and reduced-motion output and validate
 - Use Vercel native Git integration only.
 - Push one coherent branch and verify one preview deployment.
 - Never promote to production or mutate domains without explicit approval.
+
+## Frontier Experience Constitution
+
+Before product UI, branded media, editorial experiences or creative workflow work, load the [Frontier Experience Constitution](https://github.com/Starlight-Intelligence/starlight-design-intelligence/blob/e25fab4c5a0dac2ea8c7b91e9397972f5af4b454/portfolio/frontier-experience-constitution.md) and [candidate review](https://github.com/Starlight-Intelligence/starlight-design-intelligence/blob/e25fab4c5a0dac2ea8c7b91e9397972f5af4b454/evals/frontier-experience-review.md). Apply the owning product's design system, resolved identities and release checks. Record the real task, exact source revisions and candidate evidence before review.

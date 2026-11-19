@@ -162,3 +162,9 @@ Same layout. Without JavaScript the block shows its copy, a note that the form n
 ### Assets
 
 None. No image, no WebGL, no dependency.
+
+## Source to offer worksheet
+
+The left column is the working copy. The right column is the resulting document, led by the deliverable and buyer. The source ID precedes its exact excerpt. A proportional bar accompanies the price, cost and contribution figures. Zero-price margins are undefined. A loss is visible as a signed amount. The numbers and labels carry the same meaning without color.
+
+The worksheet uses the existing dark palette and Geist families. Emerald marks the active editing stage and main action. Source IDs use a subdued technical accent. Amber labels assumed economics. Motion is limited to short control feedback under the existing reduced-motion preference. At narrow widths, editing precedes the result and generation moves focus to the reviewed document. Screen reader status text describes import, export and validation outcomes.

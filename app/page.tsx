@@ -10,15 +10,16 @@ import { GlassDefs } from '@/components/motion/depth/GlassDefs'
 import { verifiedEconomicsPrograms, verifiedRangeLabel } from '@/lib/affiliate'
 import incomeModels from '@/data/income-models.json'
 import catalog from '@/products/catalog.json'
-import { catalogRefusal, type CatalogProduct } from '@/lib/polar'
+import { checkoutUrl, getOffer } from '@/lib/offers'
+import { catalogRefusal, checkoutRelease, isCheckoutLive, type CatalogProduct } from '@/lib/polar'
 import { PACK_MANIFESTS } from '@/lib/pack-manifests'
 import mcpManifest from '@/public/.well-known/mcp.json'
 import pkg from '@/package.json'
 
 export const metadata: Metadata = {
-  title: 'Agent-as-a-Service implementation and digital products',
+  title: 'Evidence-backed offers and scoped agent implementation',
   description:
-    'Agent implementation sprints and digital packs, scoped first. Clear scope, inspectable deliverables, and human-gated authority — no income promises.',
+    'Turn a customer observation into a costed offer and one market test. Keep the evidence and the editable brief, or scope an agent implementation.',
   alternates: { canonical: '/' },
   openGraph: { url: '/' },
 }
@@ -166,18 +167,17 @@ export default function Home() {
         <div className="cine-bleed" aria-hidden="true" />
         <div className="cine-opening-grid">
           <div>
-            <div className="kicker">Agentic Income — Agent-as-a-Service Engine</div>
+            <div className="kicker">Agentic Income</div>
             <h1 className="assembly-title">
-              Scoped agent builds with <span>human approval gates</span>
+              Turn customer evidence into <span>an offer you can test.</span>
             </h1>
             <p className="assembly-sub">
-              Productized implementation sprints, digital products and open reference systems.
-              Scoped deliverables, inspectable code and partner rates dated to their source. No
-              income promises.
+              Bring one customer note. Draft a priced offer, see what delivery would cost, and
+              take one experiment back to a buyer. Keep the source and the brief.
             </p>
             <div className="assembly-actions">
-              <Link href="/offers/implementation-sprint" className="cta">View the implementation sprint</Link>
-              <Link href="/start" className="cta-secondary">Start free</Link>
+              <Link href="/workbench/offer-brief" className="cta">Build an offer brief</Link>
+              <Link href="/offers/implementation-sprint" className="cta-secondary">Scope an implementation</Link>
             </div>
           </div>
 
@@ -412,12 +412,10 @@ export default function Home() {
       <section className="section-band cine-chapter" id="products" data-scene="catalog">
         <ChapterMark index="06" label="catalog" />
         <div className="section-heading" data-cine-reveal>
-          <div className="kicker text-[color:var(--color-gold)]">Products · labeled honestly</div>
-          <h2 className="display-h2">The catalog renders from reality.</h2>
+          <div className="kicker text-[color:var(--color-gold)]">Products</div>
+          <h2 className="display-h2">Choose a field guide or toolkit.</h2>
           <p className="mt-3 max-w-xl text-[color:var(--color-muted)]">
-            Availability follows the product catalog. Nothing says buy until checkout
-            actually exists; today the free starter kit is the only live path. Paid prices and
-            offer links appear only on products the catalog marks for sale.
+            Download the free starter kit or inspect a paid pack’s contents and checkout availability.
           </p>
         </div>
         <div className="cine-inspector mt-8" data-cine-reveal>
@@ -428,23 +426,27 @@ export default function Home() {
           <ol className="cine-rows" data-cine="inspector">
             {products.map((product, index) => {
               const isFree = product.price_cents === 0
-              // Same gate lib/polar.ts applies to checkout: no price or offer link on a product that cannot be sold.
-              const isForSale = !isFree && catalogRefusal(product) === null
+              const offer = getOffer(product.id)
+              const catalogAdmitsSale = catalogRefusal(product) === null
+              const checkoutAvailable = isCheckoutLive(product.id) || Boolean(offer && checkoutUrl(offer))
+              const accessLabel = isFree
+                ? 'Free download'
+                : checkoutAvailable
+                  ? checkoutRelease() === 'sandbox' ? 'Test checkout' : 'Checkout available'
+                  : catalogAdmitsSale || WAITLIST_PRODUCT_IDS.has(product.id)
+                    ? 'Preview · checkout closed'
+                    : 'Preview only'
               return (
                 <li key={product.id} className={`cine-row cine-row-product ${isFree ? '' : 'is-commercial'}`}>
                   <span className="cine-row-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                   <div>
                     <h3 className="font-display text-lg font-bold">{product.name}</h3>
                     <div className="price-state">
-                      {isFree || isForSale
-                        ? product.status
-                        : WAITLIST_PRODUCT_IDS.has(product.id)
-                          ? 'Waitlist · not yet on sale'
-                          : 'Not yet on sale'}
+                      {accessLabel}
                     </div>
                   </div>
                   <div className="cine-row-price">
-                    {isFree || isForSale ? (
+                    {isFree || catalogAdmitsSale ? (
                       <div className={`price-tag ${isFree ? 'free' : ''}`}>{priceLabel(product)}</div>
                     ) : null}
                   </div>
@@ -453,8 +455,8 @@ export default function Home() {
                       <Link href="/delivery/starter-kit" className="cta-secondary !px-4 !py-2 text-sm">
                         Open the starter kit
                       </Link>
-                    ) : isForSale ? (
-                      <Link href="/offers" className="cine-row-link">
+                    ) : checkoutAvailable ? (
+                      <Link href={`/offers/${product.id}`} className="cine-row-link">
                         Read the offer
                       </Link>
                     ) : (

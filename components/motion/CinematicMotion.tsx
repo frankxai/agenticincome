@@ -2,51 +2,44 @@
 
 import { useEffect, useRef } from 'react'
 
-/**
- * Wraps the homepage scenes and loads the motion layer after first paint.
- *
- * The document layer (children) is complete without this component doing
- * anything: with JavaScript off, or under prefers-reduced-motion: reduce, the
- * page is the same content at rest. The scenes module is imported lazily so it
- * never sits in the path of the first paint.
- */
+/** The server renders the complete film at rest. Wider screens can add scroll choreography. */
 export function CinematicMotion({ children }: { children: React.ReactNode }) {
   const root = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const element = root.current
     if (!element) return
-    let cancelled = false
+
+    const media = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)')
+    let active = true
+    let frame = 0
     let dispose: (() => void) | undefined
 
-    const start = () => {
-      import('./scenes')
-        .then(({ mountScenes }) => {
-          if (cancelled) return
-          dispose = mountScenes(element)
+    function refresh() {
+      cancelAnimationFrame(frame)
+      dispose?.()
+      dispose = undefined
+      if (!media.matches) return
+      frame = requestAnimationFrame(() => {
+        frame = requestAnimationFrame(() => {
+          void import('./scenes').then(({ mountScenes }) => {
+            if (active && media.matches && !dispose && element) dispose = mountScenes(element)
+          }).catch(() => {
+            // The static composition remains usable if the optional scene bundle fails.
+          })
         })
-        .catch(() => {
-          // The motion layer is optional. If it fails to load the page stays at rest.
-        })
+      })
     }
 
-    // Two frames: let the browser paint the document layer first.
-    let second = 0
-    const first = requestAnimationFrame(() => {
-      second = requestAnimationFrame(start)
-    })
-
+    refresh()
+    media.addEventListener('change', refresh)
     return () => {
-      cancelled = true
-      cancelAnimationFrame(first)
-      cancelAnimationFrame(second)
+      active = false
+      cancelAnimationFrame(frame)
+      media.removeEventListener('change', refresh)
       dispose?.()
     }
   }, [])
 
-  return (
-    <div ref={root} data-cine-root>
-      {children}
-    </div>
-  )
+  return <div ref={root} data-cine-root>{children}</div>
 }

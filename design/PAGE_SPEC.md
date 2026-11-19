@@ -180,3 +180,9 @@ Surface: `app/page.tsx`, protected surface `homepage`, kind evolve. One block, `
 - Boundaries: no figure, count, countdown or founding benefit is shown; the public count appears only at or above the registry threshold. No outcome claim. Joining charges nothing and is not checkout. `/api/subscribe` and `EmailCapture` are untouched.
 - Keeps: positioning, proof, income truth and the next-step actions are unchanged; this block adds one more next step.
 - No change to the nav: `liquid-gl` was not added (167,480 B minified over the 150 KB budget; a `blob:` worker the CSP blocks). The existing CSS glass stays.
+
+## Offer evidence brief, November 2026
+
+The customer is a founder or consultant deciding whether a buyer signal merits a paid offer test. The entry route is `/workbench/offer-brief`, linked from the homepage, workbench and challenge. The existing graph remains available for deeper review. The new page first exposes a clearly identified fictional brief, its literal source, unit assumptions and decision threshold.
+
+A three-section editor accepts one dated source, an untested offer and a bounded experiment. Editing marks the last generated version stale and disables both exports until recalculation. Markdown preserves the decision for discussion. JSON opens in the same editor and recomputes derived values. The optional connected-assistant handoff names exactly which pasted fields leave the browser and stays under the owner's control. Pricing, outreach and spending remain human decisions.

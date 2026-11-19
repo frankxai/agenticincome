@@ -5,7 +5,7 @@ import path from 'node:path'
 import { validateStructure, notAGraph, type IncomeGraph } from '../lib/income-graph/validate.ts'
 
 const REFERENCE = JSON.parse(
-  readFileSync(path.join(process.cwd(), 'data', 'income-graph-request-to-quote.json'), 'utf8'),
+  readFileSync(path.join(process.cwd(), 'tests', 'fixtures', 'request-to-quote-2026-09-02.synthetic.json'), 'utf8'),
 ) as IncomeGraph
 
 function clone(): IncomeGraph {

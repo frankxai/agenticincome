@@ -12,8 +12,11 @@ Discovery: https://www.agenticincome.ai/.well-known/mcp.json
 Docs: https://www.agenticincome.ai/mcp
 Connect (Claude Code): claude mcp add --transport http agentic-income https://www.agenticincome.ai/api/mcp
 
-Tools: list_income_models · get_income_model · search_partner_programs ·
-get_partner_program · list_products · fit_check · get_playbook
+For the current inventory use MCP tools/list or the discovery document above.
+Select the source_to_offer prompt to review an offer hypothesis with draft_income_graph,
+then call draft_offer_experiment to calculate contribution and export the sourced brief.
+A human supplies the price and variable cost assumptions and approves all external actions.
+Open the tool's JSON at /workbench/offer-brief to edit it or export Markdown.
 
 ## What this site is
 

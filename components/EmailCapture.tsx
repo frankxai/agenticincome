@@ -98,7 +98,7 @@ export function EmailCapture({
             <form className="mt-5 flex flex-col justify-center gap-3 sm:flex-row" onSubmit={submit}>
               {mode === 'webhook' && (
                 <input name="email" type="email" required placeholder="you@email.com" aria-label="Email address"
-                  autoComplete="email" className="min-w-0 flex-1 rounded-xl border border-border bg-bg px-5 py-3 text-sm outline-none focus:border-accent" />
+                  autoComplete="email" className="min-w-0 flex-1 rounded-xl border border-border bg-bg px-5 py-3 text-sm focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" />
               )}
               <button type="submit" className="rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-bg" disabled={status === 'loading'}>
                 {status === 'loading' ? 'Working…' : mode === 'manual_email' ? 'Prepare email request' : buttonLabel}

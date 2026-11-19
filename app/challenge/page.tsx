@@ -60,6 +60,9 @@ export default function ChallengePage() {
             <Link href="/pack" className="cta">
               Open the public system
             </Link>
+            <Link href="/workbench/offer-brief" className="cta-secondary">
+              Test an offer from one source
+            </Link>
             <Link href="/start" className="cta-secondary">
               Start with the free map
             </Link>

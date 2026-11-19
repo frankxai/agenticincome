@@ -17,7 +17,7 @@ import { classifyEvidenceSource, demandLanguage, hasExternalEffect } from '../li
 
 const TODAY = '2026-09-02'
 const REFERENCE = JSON.parse(
-  readFileSync(path.join(process.cwd(), 'data', 'income-graph-request-to-quote.json'), 'utf8'),
+  readFileSync(path.join(process.cwd(), 'tests', 'fixtures', 'request-to-quote-2026-09-02.synthetic.json'), 'utf8'),
 )
 
 const clone = () => JSON.parse(JSON.stringify(REFERENCE))

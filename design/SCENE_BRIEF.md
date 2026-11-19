@@ -162,3 +162,10 @@ Same layout. Without JavaScript the block shows its copy, a note that the form n
 ### Assets
 
 None. No image, no WebGL, no dependency.
+
+## Access request availability
+
+Reuse the existing compact card, readable status and single action. The paused
+state gives the reader immediate access to the free Starter Kit. Keep the action
+visible at phone widths and under reduced motion. The manual state opens a draft
+in the reader's email app.

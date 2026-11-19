@@ -1,4 +1,10 @@
 {
+  "intake_availability": {
+    "surface": "Shared access request panel",
+    "reference": "Existing delivery cards, HomeWaitlist closed state and DESIGN.md",
+    "acceptance": "Check availability before collecting an address. On closure offer the existing /delivery/starter-kit route.",
+    "test": "tests/intake-availability.test.mjs"
+  },
   "blueprint_preview_boundary": {
     "author": "Codex (OpenAI)",
     "created_at": "2026-11-04",

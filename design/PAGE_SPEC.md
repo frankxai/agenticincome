@@ -180,3 +180,10 @@ Surface: `app/page.tsx`, protected surface `homepage`, kind evolve. One block, `
 - Boundaries: no figure, count, countdown or founding benefit is shown; the public count appears only at or above the registry threshold. No outcome claim. Joining charges nothing and is not checkout. `/api/subscribe` and `EmailCapture` are untouched.
 - Keeps: positioning, proof, income truth and the next-step actions are unchanged; this block adds one more next step.
 - No change to the nav: `liquid-gl` was not added (167,480 B minified over the 150 KB budget; a `blob:` worker the CSP blocks). The existing CSS glass stays.
+
+## Access requests when intake is closed
+
+Across offer, start, challenge and delivery pages, the access panel checks its existing
+intake route before requesting an address. A closed destination links directly to
+the free Starter Kit. A configured mailbox offers a user-sent email draft. Only a
+configured webhook accepts an address inline.

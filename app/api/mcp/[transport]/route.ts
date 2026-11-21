@@ -10,7 +10,7 @@ import { programSlug, type Program } from '@/lib/affiliate'
 import { withSource } from '@/lib/link-source'
 import { isCheckoutLive, type CatalogProduct } from '@/lib/polar'
 import catalog from '@/products/catalog.json'
-import referenceGraph from '@/data/income-graph-request-to-quote.json'
+import { createReferenceIncomeGraph } from '@/lib/income-graph/reference'
 import {
   draftIncomeGraph,
   exportTasks,
@@ -269,9 +269,9 @@ const handler = createMcpHandler(
       'get_reference_income_graph',
       {
         description:
-          'A complete worked IncomeGraph for the request-to-quote desk. Use it as the shape to copy — it is a live thesis with no revenue yet, not a success story.',
+          'An illustrative request-to-quote IncomeGraph with an untested buyer hypothesis. Effort and the review window are example assumptions. Contains no customer or payment evidence.',
       },
-      async () => json(referenceGraph),
+      async () => json(createReferenceIncomeGraph(new Date().toISOString().slice(0, 10))),
     )
 
     server.registerTool(

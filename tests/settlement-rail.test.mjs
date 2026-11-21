@@ -8,7 +8,7 @@ import { settlementProbe } from '../lib/income-graph/settlement.ts'
 
 const TODAY = '2026-09-26'
 const REFERENCE = JSON.parse(
-  readFileSync(path.join(process.cwd(), 'data', 'income-graph-request-to-quote.json'), 'utf8'),
+  readFileSync(path.join(process.cwd(), 'tests', 'fixtures', 'request-to-quote-2026-09-02.synthetic.json'), 'utf8'),
 )
 
 function clone() {

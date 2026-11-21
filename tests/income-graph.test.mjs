@@ -10,10 +10,12 @@ import {
   tasksToMarkdown,
 } from '../lib/income-graph/index.ts'
 import { NODE_TYPES, EDGE_TYPES } from '../lib/income-graph/model.ts'
+import { createReferenceIncomeGraph } from '../lib/income-graph/reference.ts'
+import { incomeGraphSchema } from '../lib/income-graph/zod.ts'
 
 const TODAY = '2026-09-02'
 const REFERENCE = JSON.parse(
-  readFileSync(path.join(process.cwd(), 'data', 'income-graph-request-to-quote.json'), 'utf8'),
+  readFileSync(path.join(process.cwd(), 'tests', 'fixtures', 'request-to-quote-2026-09-02.synthetic.json'), 'utf8'),
 )
 
 function clone() {
@@ -28,7 +30,23 @@ function codes(report) {
   return report.findings.map((f) => f.code)
 }
 
-test('the reference graph passes every check with zero errors', () => {
+test('the public reference is a planning example with no evidence or activation', () => {
+  const today = '2026-11-19'
+  const graph = createReferenceIncomeGraph(today)
+  assert.equal(incomeGraphSchema.safeParse(graph).success, true)
+  assert.match(graph.metadata.name, /illustrative/i)
+  assert.equal(graph.metadata.updatedAt, today)
+  assert.ok([...graph.nodes, ...graph.edges].every(item => item.provenance.source === 'example:request-to-quote-desk'))
+  assert.ok(graph.nodes.every(item => !['Evidence', 'RevenueObservation', 'Receipt'].includes(item.type)))
+  const report = reviewIncomeGraph(graph, today)
+  assert.equal(report.activation, 'blocked')
+  assert.equal(report.economicEvent, null)
+  assert.ok(codes(report).includes('A02'))
+  assert.equal(projectToIncomeSystem(graph).manifest.proof.status, 'unproven')
+  assert.equal(REFERENCE.nodes.find(item => item.type === 'KillCriterion').data.reviewBy, '2026-11-15')
+})
+
+test('the synthetic historical fixture passes every check with zero errors at its original date', () => {
   const report = reviewIncomeGraph(REFERENCE, TODAY)
   assert.deepEqual(
     report.findings.filter((f) => f.severity === 'error'),
@@ -303,7 +321,7 @@ test('the projected manifest carries the four denied actions even if the graph f
 test('exported tasks preserve the gate on every gated step', () => {
   const tasks = exportTasks(REFERENCE)
   const deliver = tasks.find((t) => t.id === 'workflow-request-to-brief.deliver')
-  assert.match(deliver.gate, /approver: Frank Riemer/)
+  assert.ok(deliver.gate.includes(`approver: ${REFERENCE.metadata.principal}`))
   assert.equal(tasks.find((t) => t.id === 'workflow-request-to-brief.draft').gate, null)
   assert.ok(tasks.some((t) => t.id === 'review.kill-no-paid-brief'))
   assert.ok(tasks.some((t) => t.id === 'maintenance-template-review'.replace(/^/, 'maintenance.')))

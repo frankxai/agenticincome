@@ -63,7 +63,7 @@ const TOOLS = [
   {
     name: 'get_reference_income_graph',
     args: '—',
-    returns: 'The worked request-to-quote graph. A live thesis with costs and no revenue yet — the shape to copy, not a success story.',
+    returns: 'A fictional request-to-quote plan with assumed effort and a proposed review window. Customer demand is untested.',
   },
   {
     name: 'review_income_graph',

@@ -8,7 +8,7 @@ import { site } from '@/lib/site'
 import { fitCheck, AUTOMATION_POINTER } from '@/lib/fit-check'
 import { programSlug, type Program } from '@/lib/affiliate'
 import { withSource } from '@/lib/link-source'
-import { publicProductAvailability, type CatalogProduct } from '@/lib/polar'
+import { isCheckoutLive, type CatalogProduct } from '@/lib/polar'
 import catalog from '@/products/catalog.json'
 import { createReferenceIncomeGraph } from '@/lib/income-graph/reference'
 import {
@@ -163,13 +163,20 @@ const handler = createMcpHandler(
       },
       async () =>
         json({
-          products: (catalog.products as CatalogProduct[]).map((product) => ({
-            id: product.id,
-            name: product.name,
-            price: priceLabel(product),
-            ...publicProductAvailability(product),
-            url: `${site.url}${product.delivery.path}`,
-          })),
+          products: (catalog.products as CatalogProduct[]).map((product) => {
+            const listing = {
+              id: product.id,
+              name: product.name,
+              price: priceLabel(product),
+              purchasable: isCheckoutLive(product.id),
+              catalogStatus: product.status,
+              url: `${site.url}${product.delivery.path}`,
+            }
+            const status = listing.purchasable || product.price_cents === 0
+              ? product.status
+              : 'Checkout unavailable'
+            return { ...listing, status }
+          }),
         }),
     )
 

@@ -8,7 +8,7 @@ import { site } from '@/lib/site'
 import { fitCheck, AUTOMATION_POINTER } from '@/lib/fit-check'
 import { programSlug, type Program } from '@/lib/affiliate'
 import { withSource } from '@/lib/link-source'
-import { isCheckoutLive, type CatalogProduct } from '@/lib/polar'
+import { publicProductAvailability, type CatalogProduct } from '@/lib/polar'
 import catalog from '@/products/catalog.json'
 import { createReferenceIncomeGraph } from '@/lib/income-graph/reference'
 import {
@@ -159,7 +159,7 @@ const handler = createMcpHandler(
       'list_products',
       {
         description:
-          'The product catalog with honest availability. purchasable=false means checkout is not live yet.',
+          'Product availability through the Polar API checkout. Read status and purchasable for current availability. catalogStatus is editorial metadata. Free resources do not require checkout.',
       },
       async () =>
         json({
@@ -167,8 +167,7 @@ const handler = createMcpHandler(
             id: product.id,
             name: product.name,
             price: priceLabel(product),
-            status: product.status,
-            purchasable: isCheckoutLive(product.id),
+            ...publicProductAvailability(product),
             url: `${site.url}${product.delivery.path}`,
           })),
         }),

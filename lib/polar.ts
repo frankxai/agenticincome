@@ -169,6 +169,16 @@ export function isCheckoutLive(catalogId: string): boolean {
   return isPolarConfigured(catalogId) && checkoutRelease() !== 'closed'
 }
 
+/** Project the catalog's editorial state into the current Polar API checkout state for MCP. */
+export function publicProductAvailability(product: CatalogProduct) {
+  const purchasable = isCheckoutLive(product.id)
+  return {
+    status: purchasable || product.price_cents === 0 ? product.status : 'Checkout unavailable',
+    catalogStatus: product.status,
+    purchasable,
+  }
+}
+
 export type CheckoutReadiness = {
   productId: string
   state: 'live' | CheckoutRefusal

@@ -11,8 +11,8 @@ concurrency:
 
 jobs:
   audit:
-    runs-on: ${{ vars.CI_RUNNER == 'railway' && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-latest' }}
-    timeout-minutes: 20
+    runs-on: ${{ vars.CI_RUNNER == 'railway' && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-slim' }}
+    timeout-minutes: 5
     permissions:
       contents: read
     steps:

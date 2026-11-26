@@ -189,7 +189,15 @@ A three-section editor accepts one dated source, an untested offer and a bounded
 
 ## Access requests when intake is closed
 
-Across offer, start, challenge and delivery pages, the access panel checks its existing
+Across offer, start and delivery pages, the access panel checks its existing
 intake route before requesting an address. A closed destination links directly to
 the free Starter Kit. A configured mailbox offers a user-sent email draft. Only a
 configured webhook accepts an address inline.
+
+## Challenge sign-up truth repair, Claude, 18 November 2026
+
+Surface: `app/challenge/page.tsx`, not a protected surface. Copy and one removed control; no layout, token or motion change.
+
+- Finding: the page asked for an address under "One honest, concrete build step a day, by email" and confirmed with "Day 1 ... is on its way". No challenge email exists in this repository, and `/api/subscribe` keeps no address unless `SUBSCRIBE_WEBHOOK_URL` is set. Production reported `captureMode: "unwired"` on 18 November 2026.
+- Change: the `EmailCapture` block is removed from `/challenge`. The section below it now says the challenge is the page, with no sign-up and no email. The seven day cards and their links are unchanged.
+- Boundary: do not add an email field or a follow-up promise here until a sender and a store both exist. `tests/stale-claims.test.mjs` holds the check. `EmailCapture` and `/api/subscribe` on `/start`, `/offers/*` and `/delivery/*` are untouched.

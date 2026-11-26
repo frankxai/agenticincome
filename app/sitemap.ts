@@ -4,7 +4,7 @@ import { posts } from '@/lib/posts'
 import { offers } from '@/lib/offers'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ['', '/workbench', '/workbench/offer-brief', '/mcp', '/blog', '/tools', '/offers', '/trust', '/challenge', '/disclosure', '/design', '/start', '/privacy', '/build', '/operate', '/proof', '/pack', '/delivery/starter-kit', '/delivery/blueprint', '/delivery/private-intel'].map((path) => ({
+  const routes = ['', '/workbench', '/workbench/offer-brief', '/mcp', '/blog', '/tools', '/offers', '/trust', '/challenge', '/disclosure', '/design', '/start', '/privacy', '/build', '/operate', '/proof', '/pack'].map((path) => ({
     url: `${site.url}${path}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,

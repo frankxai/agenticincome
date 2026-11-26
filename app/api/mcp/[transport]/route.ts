@@ -221,18 +221,24 @@ const handler = createMcpHandler(
       'list_products',
       {
         description:
-          'The product catalog with honest availability. purchasable=false means checkout is not live yet.',
+          'Product availability through the Polar API checkout. Read status and purchasable for current availability. catalogStatus is editorial metadata. Free resources do not require checkout.',
       },
       async () =>
         json({
-          products: (catalog.products as CatalogProduct[]).map((product) => ({
-            id: product.id,
-            name: product.name,
-            price: priceLabel(product),
-            status: product.status,
-            purchasable: isCheckoutLive(product.id),
-            url: `${site.url}${product.delivery.path}`,
-          })),
+          products: (catalog.products as CatalogProduct[]).map((product) => {
+            const listing = {
+              id: product.id,
+              name: product.name,
+              price: priceLabel(product),
+              purchasable: isCheckoutLive(product.id),
+              catalogStatus: product.status,
+              url: `${site.url}${product.delivery.path}`,
+            }
+            const status = listing.purchasable || product.price_cents === 0
+              ? product.status
+              : 'Checkout unavailable'
+            return { ...listing, status }
+          }),
         }),
     )
 

@@ -24,7 +24,7 @@ jobs:
   mirror:
     # The mirror receives this file too; it must never push to itself.
     if: github.repository == 'frankxai/agenticincome'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     timeout-minutes: 5
     steps:
       - name: Check for the mirror token

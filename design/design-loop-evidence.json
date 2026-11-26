@@ -1,4 +1,29 @@
 {
+  "intake_availability": {
+    "surface": "Shared access request panel",
+    "reference": "Existing delivery cards, HomeWaitlist closed state and DESIGN.md",
+    "acceptance": "Check availability before collecting an address. On closure offer the existing /delivery/starter-kit route.",
+    "test": "tests/intake-availability.test.mjs"
+  },
+
+  "offer_evidence_brief": {
+    "date": "2026-11-19",
+    "route": "/workbench/offer-brief",
+    "decision": "Expose the source excerpt, unit contribution and test threshold in the first example. Use one local worksheet and optional connected-assistant handoff.",
+    "references": [
+      "DESIGN.md",
+      "TASTE.md",
+      "https://github.com/frankxai/agenticincome/issues/70",
+      "https://github.com/frankxai/agenticincome/pull/52"
+    ],
+    "coverage": [
+      "Dated user-supplied source and explicit hypothetical economics",
+      "Inactive exports while edits await recalculation",
+      "Markdown, editable JSON and owner-initiated MCP handoff",
+      "Stacked mobile, keyboard operation, native inputs and reduced-motion styling"
+    ],
+    "verification": "TypeScript, scoped lint, static internal links and public surface contract passed locally. Browser results and release checks are recorded against the pull request."
+  },
   "blueprint_preview_boundary": {
     "author": "Codex (OpenAI)",
     "created_at": "2026-11-04",

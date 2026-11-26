@@ -70,7 +70,13 @@ function configureBlueprint() {
 
 test('configured Polar credentials without CHECKOUT_RELEASE report purchasable: false', async () => {
   configureBlueprint()
-  const blueprint = (await listProducts()).find((product) => product.id === 'blueprint')
+  const products = await listProducts()
+  const blueprint = products.find((product) => product.id === 'blueprint')
+  const starter = products.find((product) => product.id === 'starter-kit')
+  assert.equal(blueprint.status, 'Checkout unavailable')
+  assert.match(blueprint.catalogStatus, /^for sale/i)
+  assert.equal(starter.purchasable, false)
+  assert.match(starter.status, /^free/i)
   assert.equal(blueprint.purchasable, false, 'credentials alone must never open checkout')
 })
 
@@ -80,4 +86,6 @@ test('a matching CHECKOUT_RELEASE opens purchasable for the configured product',
   process.env.CHECKOUT_RELEASE = 'live'
   const blueprint = (await listProducts()).find((product) => product.id === 'blueprint')
   assert.equal(blueprint.purchasable, true)
+  assert.equal(blueprint.status, blueprint.catalogStatus)
+  assert.match(blueprint.status, /^for sale/i)
 })

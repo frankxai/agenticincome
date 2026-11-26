@@ -1,9 +1,6 @@
 import assert from 'node:assert/strict'
 import { after, beforeEach, test } from 'node:test'
-import './support/alias.mjs'
-
-// Availability is decided at call time from env, so the route can be imported once.
-const { POST } = await import('../app/api/mcp/[transport]/route.ts')
+import { rpc } from './support/mcp-rpc.mjs'
 
 const ENV_KEYS = [
   'CHECKOUT_RELEASE',
@@ -27,31 +24,6 @@ after(() => {
   }
 })
 
-// mcp-handler answers over SSE and keeps the stream open; read the first data frame only.
-async function rpc(method, params, id) {
-  const res = await POST(new Request('http://localhost/api/mcp', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream' },
-    body: JSON.stringify({ jsonrpc: '2.0', id, method, params }),
-  }))
-  const type = res.headers.get('content-type') ?? ''
-  if (!type.includes('text/event-stream')) return res.json()
-  const reader = res.body.getReader()
-  const decoder = new TextDecoder()
-  let buffered = ''
-  try {
-    for (;;) {
-      const { value, done } = await reader.read()
-      if (done) throw new Error(`stream ended without a data frame: ${buffered}`)
-      buffered += decoder.decode(value, { stream: true })
-      const frame = buffered.split('\n').find((line) => line.startsWith('data:'))
-      if (frame) return JSON.parse(frame.slice(5))
-    }
-  } finally {
-    await reader.cancel()
-  }
-}
-
 async function listProducts() {
   await rpc('initialize', {
     protocolVersion: '2025-06-18',
@@ -70,7 +42,13 @@ function configureBlueprint() {
 
 test('configured Polar credentials without CHECKOUT_RELEASE report purchasable: false', async () => {
   configureBlueprint()
-  const blueprint = (await listProducts()).find((product) => product.id === 'blueprint')
+  const products = await listProducts()
+  const blueprint = products.find((product) => product.id === 'blueprint')
+  const starter = products.find((product) => product.id === 'starter-kit')
+  assert.equal(blueprint.status, 'Checkout unavailable')
+  assert.match(blueprint.catalogStatus, /^for sale/i)
+  assert.equal(starter.purchasable, false)
+  assert.match(starter.status, /^free/i)
   assert.equal(blueprint.purchasable, false, 'credentials alone must never open checkout')
 })
 
@@ -80,4 +58,6 @@ test('a matching CHECKOUT_RELEASE opens purchasable for the configured product',
   process.env.CHECKOUT_RELEASE = 'live'
   const blueprint = (await listProducts()).find((product) => product.id === 'blueprint')
   assert.equal(blueprint.purchasable, true)
+  assert.equal(blueprint.status, blueprint.catalogStatus)
+  assert.match(blueprint.status, /^for sale/i)
 })

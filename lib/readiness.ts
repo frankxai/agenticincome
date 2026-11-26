@@ -1,6 +1,8 @@
 import { checkoutUrl, getOffer } from './offers.ts'
 import { catalogRefusal, isCheckoutLive, pricedCatalogProducts } from './polar.ts'
 
+import { getSubscribeDestination } from './subscribe-security.ts'
+
 type ReadinessItem = {
   id: string
   label: string
@@ -20,11 +22,6 @@ function hasSecureUrlEnv(name: string) {
   } catch {
     return false
   }
-}
-
-function hasEmailEnv(name: string) {
-  const value = process.env[name]
-  return Boolean(value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
 }
 
 /**
@@ -57,10 +54,9 @@ function checkoutItems(): ReadinessItem[] {
 }
 
 export function getLaunchReadiness() {
-  const subscribeWebhook = hasSecureUrlEnv('SUBSCRIBE_WEBHOOK_URL')
-  const conciergeEmail = hasEmailEnv('ACCESS_REQUEST_EMAIL')
+  const { mode: captureMode } = getSubscribeDestination()
   const analyticsWebhook = hasSecureUrlEnv('ANALYTICS_WEBHOOK_URL')
-  const captureConfigured = subscribeWebhook || conciergeEmail
+  const captureConfigured = captureMode !== 'unwired'
 
   const items: ReadinessItem[] = [
     ...checkoutItems(),
@@ -70,11 +66,11 @@ export function getLaunchReadiness() {
       category: 'capture',
       configured: captureConfigured,
       requiredForFullLaunch: true,
-      detail: subscribeWebhook
+      detail: captureMode === 'webhook'
         ? 'Access requests forward to the configured owned-audience endpoint.'
-        : conciergeEmail
+        : captureMode === 'manual_email'
           ? 'Access requests can open a concierge email handoff.'
-          : 'Access requests return a request ID but are not routed to an operator.',
+          : 'Online intake is closed. Visitors can open the free Starter Kit.',
     },
     {
       id: 'analytics_forwarding',
@@ -106,7 +102,7 @@ export function getLaunchReadiness() {
     fullLaunchReady,
     configuredRequired: configuredRequired.length,
     requiredTotal: required.length,
-    captureMode: subscribeWebhook ? 'webhook' : conciergeEmail ? 'manual_email' : 'unwired',
+    captureMode,
     items,
   }
 }

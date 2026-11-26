@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { forwardAnalyticsEvent } from '@/lib/analytics'
-import { createSubscribeRequestId } from '@/lib/subscribe-security'
+import { createSubscribeRequestId, getSubscribeDestination } from '@/lib/subscribe-security'
 import {
   analyticsClientKey,
   consumeAnalyticsRateLimit,
@@ -10,12 +10,8 @@ import {
 } from '@/lib/api-security'
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const PUBLIC_EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-function conciergeMailto(source: string, requestId: string) {
-  const contact = process.env.ACCESS_REQUEST_EMAIL
-  if (!contact || !PUBLIC_EMAIL_PATTERN.test(contact)) return null
-
+function conciergeMailto(contact: string, source: string, requestId: string) {
   const subject = encodeURIComponent(`Agentic Income access request ${requestId}`)
   const body = encodeURIComponent(
     [
@@ -28,6 +24,12 @@ function conciergeMailto(source: string, requestId: string) {
   )
 
   return `mailto:${contact}?subject=${subject}&body=${body}`
+}
+
+export function GET() {
+  return NextResponse.json({ mode: getSubscribeDestination().mode }, {
+    headers: { 'Cache-Control': 'no-store' },
+  })
 }
 
 export async function POST(req: Request) {
@@ -64,15 +66,21 @@ export async function POST(req: Request) {
   const { email, source = 'agenticincome' } = payload
   const normalized = typeof email === 'string' ? email.trim().toLowerCase() : ''
 
-  if (!EMAIL_PATTERN.test(normalized)) {
+  const destination = getSubscribeDestination()
+  if (destination.mode === 'unwired') {
+    return NextResponse.json({ ok: false, mode: 'unwired', error: 'intake_closed' }, { status: 503 })
+  }
+
+  if (destination.mode === 'webhook' && !EMAIL_PATTERN.test(normalized)) {
     return NextResponse.json({ ok: false, error: 'invalid_email' }, { status: 400 })
   }
 
   const normalizedSource = typeof source === 'string' && source.trim() ? source.trim().slice(0, 80) : 'agenticincome'
   const requestId = createSubscribeRequestId()
-  const webhook = process.env.SUBSCRIBE_WEBHOOK_URL
-  if (webhook) {
-    const response = await fetch(webhook, {
+  if (destination.mode === 'webhook') {
+    const response = await fetch(destination.url, {
+      redirect: 'error',
+      signal: AbortSignal.timeout(8000),
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -84,13 +92,13 @@ export async function POST(req: Request) {
         requestId,
         tags: ['agentic-income', 'payer-brief'],
       }),
-    })
+    }).catch(() => null)
 
-    if (!response.ok) {
+    if (!response?.ok) {
       await forwardAnalyticsEvent({
         event: 'subscribe_error',
         source: normalizedSource,
-        state: String(response.status),
+        state: response ? String(response.status) : 'unavailable',
         requestId,
         ts: new Date().toISOString(),
       })
@@ -108,21 +116,14 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true, mode: 'webhook', requestId })
   }
 
-  const mailto = conciergeMailto(normalizedSource, requestId)
-  const mode = mailto ? 'manual_email' : 'unwired'
-
+  const mailto = conciergeMailto(destination.email, normalizedSource, requestId)
   await forwardAnalyticsEvent({
-    event: mode === 'unwired' ? 'subscribe_unwired' : 'subscribe_manual',
+    event: 'subscribe_manual',
     source: normalizedSource,
-    state: mode,
+    state: 'manual_email',
     requestId,
     ts: new Date().toISOString(),
   })
 
-  return NextResponse.json({
-    ok: true,
-    mode,
-    requestId,
-    mailto,
-  }, { status: 202 })
+  return NextResponse.json({ ok: true, mode: 'manual_email', requestId, mailto }, { status: 202 })
 }

@@ -180,3 +180,24 @@ Surface: `app/page.tsx`, protected surface `homepage`, kind evolve. One block, `
 - Boundaries: no figure, count, countdown or founding benefit is shown; the public count appears only at or above the registry threshold. No outcome claim. Joining charges nothing and is not checkout. `/api/subscribe` and `EmailCapture` are untouched.
 - Keeps: positioning, proof, income truth and the next-step actions are unchanged; this block adds one more next step.
 - No change to the nav: `liquid-gl` was not added (167,480 B minified over the 150 KB budget; a `blob:` worker the CSP blocks). The existing CSS glass stays.
+
+## Offer evidence brief, November 2026
+
+The customer is a founder or consultant deciding whether a buyer signal merits a paid offer test. The entry route is `/workbench/offer-brief`, linked from the homepage, workbench and challenge. The existing graph remains available for deeper review. The new page first exposes a clearly identified fictional brief, its literal source, unit assumptions and decision threshold.
+
+A three-section editor accepts one dated source, an untested offer and a bounded experiment. Editing marks the last generated version stale and disables both exports until recalculation. Markdown preserves the decision for discussion. JSON opens in the same editor and recomputes derived values. The optional connected-assistant handoff names exactly which pasted fields leave the browser and stays under the owner's control. Pricing, outreach and spending remain human decisions.
+
+## Access requests when intake is closed
+
+Across offer, start and delivery pages, the access panel checks its existing
+intake route before requesting an address. A closed destination links directly to
+the free Starter Kit. A configured mailbox offers a user-sent email draft. Only a
+configured webhook accepts an address inline.
+
+## Challenge sign-up truth repair, Claude, 18 November 2026
+
+Surface: `app/challenge/page.tsx`, not a protected surface. Copy and one removed control; no layout, token or motion change.
+
+- Finding: the page asked for an address under "One honest, concrete build step a day, by email" and confirmed with "Day 1 ... is on its way". No challenge email exists in this repository, and `/api/subscribe` keeps no address unless `SUBSCRIBE_WEBHOOK_URL` is set. Production reported `captureMode: "unwired"` on 18 November 2026.
+- Change: the `EmailCapture` block is removed from `/challenge`. The section below it now says the challenge is the page, with no sign-up and no email. The seven day cards and their links are unchanged.
+- Boundary: do not add an email field or a follow-up promise here until a sender and a store both exist. `tests/stale-claims.test.mjs` holds the check. `EmailCapture` and `/api/subscribe` on `/start`, `/offers/*` and `/delivery/*` are untouched.

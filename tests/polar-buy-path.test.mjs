@@ -281,6 +281,31 @@ test('a configured for-sale SKU creates a Polar session with the right request',
   )
 })
 
+test('provider redirects reach the buyer without sending checkout URLs to analytics', async () => {
+  configureBlueprint()
+  const telemetry = 'https://analytics.example.test/collect'
+  process.env.ANALYTICS_WEBHOOK_URL = telemetry
+  const hostedUrl = 'https://buy.polar.sh/checkout/polar_c_test_private'
+  polarReply = (url) => url === telemetry ? new Response(null, { status: 204 }) : Response.json({ url: hostedUrl })
+
+  const created = await postCheckout('blueprint')
+  assert.equal((await created.json()).url, hostedUrl)
+  assert.match(created.headers.get('cache-control'), /no-store/)
+
+  process.env.AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL = 'https://buy.polar.sh/static-blueprint'
+  const redirected = await GET(new Request('https://agenticincome.ai/api/checkout?offer=blueprint&ref=private-click'))
+  assert.equal(redirected.headers.get('location'), 'https://buy.polar.sh/static-blueprint?ref=private-click')
+
+  const events = calls.filter((call) => call.url === telemetry).map((call) => JSON.parse(call.init.body))
+  assert.equal(events.length, 2)
+  for (const event of events) {
+    assert.equal(event.event, 'checkout_redirect')
+    assert.equal(event.offer, 'blueprint')
+    assert.equal(event.state, 'provider_checkout')
+    assert.doesNotMatch(JSON.stringify(event), /polar\.sh|polar_c_test_private|private-click/)
+  }
+})
+
 test('POLAR_SUCCESS_URL is required: missing or non-https refuses instead of guessing', async () => {
   configureBlueprint()
   delete process.env.POLAR_SUCCESS_URL

@@ -1,0 +1,44 @@
+{
+  "brief": {
+    "version": "OfferBrief.v1",
+    "source": {
+      "id": "S1",
+      "title": "Synthetic producer interview",
+      "date": "2026-11-19",
+      "url": null,
+      "excerpt": "I copy the same approved shoot note into three different handover documents.",
+      "status": "user-supplied"
+    },
+    "hypothesis": {
+      "buyer": "Small video production teams",
+      "offer": "One editable crew handover assembled from a producer-approved shoot note.",
+      "sourceIds": [
+        "S1"
+      ],
+      "status": "untested"
+    },
+    "economics": {
+      "currency": "EUR",
+      "unitPrice": 49,
+      "unitCost": 12.5,
+      "contribution": 36.5,
+      "marginPercent": 74.5
+    },
+    "validation": {
+      "experiment": "Within seven days, show one sample handover to three independent producers and invite each to submit a redacted second note at the stated price.",
+      "successCriterion": "Proceed only if a producer asks for a paid second handover at EUR 49. Record the response before contacting more producers.",
+      "status": "planned"
+    },
+    "approval": {
+      "required": true,
+      "actions": [
+        "Contact buyers",
+        "Publish the offer",
+        "Commit to pricing",
+        "Spend money"
+      ]
+    }
+  },
+  "markdown": "# Offer evidence brief\n\nOfferBrief.v1\n\n## Source S1\n\n    Synthetic producer interview\n\nRecorded 2026-11-19. Supplied by the author.\n\n    I copy the same approved shoot note into three different handover documents.\n\n## Buyer hypothesis\n\n    Small video production teams\n\n## Offer hypothesis\n\n    One editable crew handover assembled from a producer-approved shoot note.\n\nS1 informed this hypothesis. Demand still needs a market test.\n\n## Economics per sale\n\n- Assumed price: EUR 49.00\n- Assumed variable cost: EUR 12.50\n- Contribution before fixed costs: EUR 36.50\n- Contribution margin: 74.5%\n\n## Planned experiment\n\n    Within seven days, show one sample handover to three independent producers and invite each to submit a redacted second note at the stated price.\n\n## Acceptance criterion\n\n    Proceed only if a producer asks for a paid second handover at EUR 49. Record the response before contacting more producers.\n\n## Owner approval\n\nA person approves outreach, publication, pricing commitments and spending.\n",
+  "sha256": "b37c81f545615527d7ee6b45c2da4453cfc81ca41aa824f3d07bab20e1555ccc"
+}

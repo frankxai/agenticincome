@@ -65,7 +65,6 @@ export async function GET(req: Request) {
       event: 'checkout_redirect',
       offer: offer.slug,
       path: url.pathname,
-      href: target.toString(),
       state: 'provider_checkout',
       ts: new Date().toISOString(),
     })
@@ -198,9 +197,11 @@ export async function POST(req: Request) {
   await forwardAnalyticsEvent({
     event: 'checkout_redirect',
     offer: product.id,
-    href: url,
     state: 'provider_checkout',
     ts: new Date().toISOString(),
   })
-  return NextResponse.json({ ok: true, productId: product.id, url })
+  return NextResponse.json(
+    { ok: true, productId: product.id, url },
+    { headers: { 'Cache-Control': 'private, no-store' } },
+  )
 }

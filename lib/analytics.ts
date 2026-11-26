@@ -21,6 +21,9 @@ const EVENT_PROPERTIES = {
   stale_route_seen: ['path', 'source', 'tool', 'state', 'ts'],
   last_verified_visible: ['path', 'source', 'tool', 'state', 'ts'],
   trust_standard_clicked: ['path', 'href', 'source', 'ts'],
+  offer_brief_generated: ['path', 'ts'],
+  offer_brief_exported: ['path', 'ts'],
+  offer_brief_error: ['path', 'ts'],
   fit_check_completed: ['path', 'offer', 'source', 'state', 'ts'],
 } as const
 
@@ -75,6 +78,9 @@ export function normalizeAnalyticsEvent(input: unknown): AnalyticsEvent | null {
     ) return null
     normalized[property] = value
   }
+
+  // Briefs often contain private source text. Only the canonical route may be recorded.
+  if (record.event.startsWith('offer_brief_') && normalized.path !== '/workbench/offer-brief') return null
 
   if (normalized.ts && Number.isNaN(Date.parse(normalized.ts))) return null
   return normalized

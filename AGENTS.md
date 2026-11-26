@@ -7,6 +7,10 @@
 - Supporting models: digital products, open-source distribution, and disclosed editorial/affiliate research.
 - Production promotion, domain changes, checkout activation, and customer promises remain human-gated.
 
+## Frontier Experience Constitution
+
+Before work on interfaces, editorial experiences, or brand and media assets, read the [Frontier Experience Constitution](https://github.com/Starlight-Intelligence/starlight-design-intelligence/blob/e25fab4c5a0dac2ea8c7b91e9397972f5af4b454/portfolio/frontier-experience-constitution.md) and record the revision in the handoff. Resolve the owning product, Figma, brand pack, and VIS authorities for the change. Hold generation and release of owned identity when its source or approval is unresolved. Apply the repository's existing checks and attach the workflow, responsive, provenance, and independent review evidence the constitution requires.
+
 ## Before Editing
 
 1. Read `DESIGN.md`, `TASTE.md`, `SYSTEM.md`, and `SKILL.md`.

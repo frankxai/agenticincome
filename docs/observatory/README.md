@@ -11,6 +11,7 @@ This is a private research dataset and rubric, not a customer ledger, a verified
 - Sources store canonical URL, publication time when known, observation time, retrieval receipt and content hash. Full third-party pages are excluded from this repository.
 - `schema.sql` records the additive DDL applied through Supabase migration `create_private_product_intelligence` on 2026-11-01. It is a historical migration, not a rerunnable setup command.
 - `verify.sql` contains seed verification and real permission/constraint rejection probes. Its exact seed-count assertions apply to setup, not the expanding catalog forever.
+- [Private access check](private-boundary.sql) can run against the current catalog throughout its lifetime. An empty result confirms the seven required tables exist, each research table has RLS, and browser roles have no schema, relation or column privileges.
 - `seed-2026-11-01.json` is a dated, paraphrased historical seed, not a live metrics feed.
 
 All seven tables have RLS enabled. Schema and table privileges are revoked from PUBLIC, anon and authenticated. Only the existing server service role has select/insert/update grants; no policy, security-definer function, public view, exposed schema configuration or customer access was added. Do not add a service key to client code. Server-side approved projections still need a scoped authorization contract before any customer endpoint ships.

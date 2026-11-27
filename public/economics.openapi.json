@@ -1,0 +1,43 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "Agentic Income public economics", "version": "1.0.0", "description": "Dated public marketplace and supply-cost evidence shared with the Agentic Income MCP. checkedAt describes the repository evidence snapshot." },
+  "servers": [{ "url": "https://www.agenticincome.ai" }],
+  "paths": {
+    "/api/v1/economics": {
+      "get": {
+        "operationId": "readEconomicEvidence",
+        "summary": "Read market evidence or supply costs with source URLs",
+        "parameters": [
+          { "name": "dataset", "in": "query", "required": true, "schema": { "type": "string", "enum": ["markets", "costs"] } },
+          { "name": "sector", "in": "query", "description": "Market sector. Applies only to markets.", "schema": { "type": "string", "minLength": 1, "maxLength": 120 } },
+          { "name": "query", "in": "query", "description": "Case-insensitive match on market name or metric. Applies only to markets.", "schema": { "type": "string", "minLength": 1, "maxLength": 120 } },
+          { "name": "category", "in": "query", "description": "Supply category. Applies only to costs.", "schema": { "type": "string", "minLength": 1, "maxLength": 120 } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Confirmed rows from the published evidence snapshot. A numeric sighting supports the recorded metric. Only marginTerms authorizes a marketplace deduction in the calculator.",
+            "content": { "application/json": { "schema": {
+              "type": "object", "required": ["checkedAt", "confirmedOnly", "count", "rows"],
+              "properties": {
+                "checkedAt": { "type": "string", "format": "date-time" },
+                "confirmedOnly": { "const": true },
+                "count": { "type": "integer", "minimum": 0 },
+                "rows": { "type": "array", "items": {
+                  "type": "object", "required": ["id", "sourceUrl", "retrievedAt", "verification"],
+                  "properties": {
+                    "id": { "type": "string" },
+                    "sourceUrl": { "type": "string", "format": "uri" },
+                    "retrievedAt": { "type": "string" },
+                    "verification": { "type": "object", "required": ["verdict", "confirmed", "checkedAt"],
+                      "properties": { "verdict": { "enum": ["number-found", "reviewer-confirmed"] }, "confirmed": { "const": true }, "checkedAt": { "type": "string", "format": "date-time" } } }
+                  }
+                } }
+              }
+            } } }
+          },
+          "400": { "description": "Missing dataset, unsupported or duplicated filter, or invalid filter value." }
+        }
+      }
+    }
+  }
+}

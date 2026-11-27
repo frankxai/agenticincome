@@ -175,3 +175,7 @@ Reuse the existing compact card, readable status and single action. The paused
 state gives the reader immediate access to the free Starter Kit. Keep the action
 visible at phone widths and under reduced motion. The manual state opens a draft
 in the reader's email app.
+
+## Quote-review pilot editorial layout
+
+Start with the decision and its sensitivity to four extra review hours. Present the buyer deliverable and itemized costs in reading order. Follow them with buyer payback, acceptance evidence and the downloadable brief. On narrow screens the cost lines keep their labels together with their amounts. The field note uses the existing editorial typography and introduces no animation. Native download links and the existing workbench support the same handoff with reduced motion.

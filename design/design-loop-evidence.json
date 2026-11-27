@@ -1,4 +1,24 @@
 {
+  "quote_review_field_note": {
+    "verified": "2026-11-27",
+    "route": "/blog/quote-review-pilot",
+    "constitution": "e25fab4c5a0dac2ea8c7b91e9397972f5af4b454",
+    "source": "lib/quote-review-case.ts",
+    "checks": [
+      {
+        "name": "desktop and mobile article handoff",
+        "result": "Local production build in Chromium at 1440x900 and 390x844. Mobile used prefers-reduced-motion. Both rendered one main heading without horizontal overflow, downloaded the actual brief and imported it into the workbench. The workbench confirmed recalculation from EUR 1500 revenue and EUR 1000 cost."
+      },
+      {
+        "name": "preview outputs",
+        "result": "The Git-backed preview returned HTTP 200 for HTML, JSON and Markdown. The JSON reported EUR 500 contribution at a 33.3% margin. Markdown reported EUR 375 per month of modeled capacity. All values are illustrative."
+      },
+      {
+        "name": "repository gate",
+        "result": "Lint, 286 tests, type checking, static link validation, public-surface verification and the production build passed on the editorial code."
+      }
+    ]
+  },
   "intake_availability": {
     "surface": "Shared access request panel",
     "reference": "Existing delivery cards, HomeWaitlist closed state and DESIGN.md",

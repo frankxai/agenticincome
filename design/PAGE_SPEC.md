@@ -201,3 +201,9 @@ Surface: `app/challenge/page.tsx`, not a protected surface. Copy and one removed
 - Finding: the page asked for an address under "One honest, concrete build step a day, by email" and confirmed with "Day 1 ... is on its way". No challenge email exists in this repository, and `/api/subscribe` keeps no address unless `SUBSCRIBE_WEBHOOK_URL` is set. Production reported `captureMode: "unwired"` on 18 November 2026.
 - Change: the `EmailCapture` block is removed from `/challenge`. The section below it now says the challenge is the page, with no sign-up and no email. The seven day cards and their links are unchanged.
 - Boundary: do not add an email field or a follow-up promise here until a sender and a store both exist. `tests/stale-claims.test.mjs` holds the check. `EmailCapture` and `/api/subscribe` on `/start`, `/offers/*` and `/delivery/*` are untouched.
+
+## Quote-review pilot field note
+
+A sales lead and finance owner arrive from the research index to decide whether a scoped quote-review pilot merits a real buyer test. The article names the sample and its modeled status before showing costs. The cost breakdown, four-hour rework scenario and buyer-capacity calculation give the reader one decision to inspect. Acceptance belongs to the finance owner.
+
+The page offers an editable JSON brief and a Markdown case. The existing offer workbench opens the JSON and recalculates its derived economics. One record supplies all three editions. The canonical page is `/blog/quote-review-pilot`.

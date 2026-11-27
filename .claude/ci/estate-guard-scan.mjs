@@ -134,7 +134,58 @@ function loadConfig(root, explicit) {
 
 // ------------------------------------------------------------------- rules
 // Every rule: { id, severity, title, fix }. Findings reference the id.
-const RELATIVE_HOOK_PATH = /(?:^|[\s"'=;&|(])(?:\.\/)?\.claude\/hooks\//;
+
+// Split a hook command into shell words with quotes removed. Unquoted
+// whitespace and ; & | < > separate words; parens and backticks stay inside the
+// word, so `$(pwd)/.claude/hooks/x` remains one word that starts with `$(`.
+function shellWords(cmd) {
+  const words = [];
+  let cur = '', inWord = false, quote = null;
+  for (let i = 0; i < cmd.length; i++) {
+    const c = cmd[i];
+    if (quote === "'") { if (c === "'") quote = null; else cur += c; continue; }
+    if (quote === '"') {
+      if (c === '"') quote = null;
+      else if (c === '\\' && i + 1 < cmd.length && '"\\$`'.includes(cmd[i + 1])) cur += cmd[++i];
+      else cur += c;
+      continue;
+    }
+    if (c === "'" || c === '"') { quote = c; inWord = true; continue; }
+    if (c === '\\' && i + 1 < cmd.length) { cur += cmd[++i]; inWord = true; continue; }
+    if (/[\s;&|<>]/.test(c)) { if (inWord) words.push(cur); cur = ''; inWord = false; continue; }
+    cur += c; inWord = true;
+  }
+  if (inWord) words.push(cur);
+  return words;
+}
+
+// A path start that does not depend on the working directory.
+const ANCHORED = /^(?:\$CLAUDE_PROJECT_DIR(?![\w])|\$\{CLAUDE_PROJECT_DIR\}|\$HOME(?![\w])|\$\{HOME\}|~\/|\/|[A-Za-z]:[\\/])/;
+// `.claude/hooks/` as its own path segments, after `//` and `/./` are collapsed.
+const HOOK_SEGMENT = /(?:^|[/=])\.claude\/hooks\//;
+
+/**
+ * True when the hook command references a `.claude/hooks/` path whose shell
+ * word (quotes removed) is not anchored at $CLAUDE_PROJECT_DIR,
+ * ${CLAUDE_PROJECT_DIR}, $HOME, ${HOME}, ~/, an absolute path or a drive
+ * letter. `./`, `../`, `$PWD`, `$(pwd)`, backtick-pwd and
+ * `${CLAUDE_PROJECT_DIR:-.}` are all relative to the working directory.
+ */
+export function isRelativeHookCommand(cmd) {
+  if (typeof cmd !== 'string' || !cmd) return false;
+  for (const word of shellWords(cmd)) {
+    let w = word;
+    for (let prev; prev !== w;) { prev = w; w = w.replace(/\/{2,}/g, '/').replace(/\/\.\//g, '/'); }
+    const m = HOOK_SEGMENT.exec(w);
+    if (!m) continue;
+    // The path starts after the last `=` before the match (--flag=path, VAR=path).
+    const head = w.slice(0, m.index + (m[0][0] === '=' ? 1 : 0));
+    const eq = head.lastIndexOf('=');
+    const pathStart = w.slice(eq + 1);
+    if (!ANCHORED.test(pathStart)) return true;
+  }
+  return false;
+}
 
 export const RULES = {
   WF001: { severity: 'high', title: 'pull_request_target checks out the PR head', fix: 'Check out base.sha for trusted code; if the PR tree is needed, check it out to a separate path with persist-credentials:false and never run its scripts or expose secrets after it.' },
@@ -356,9 +407,9 @@ export function scanRepo(root, opts = {}) {
       // a relative hook path breaks after any `cd` either way.
       if (d) for (const ev of Object.values(d.hooks || {})) for (const e of ev) for (const h of e.hooks || []) {
         const cmd = h.command || '';
-        // Only a path that starts at a token boundary is relative; "$HOME"/.claude/hooks,
-        // ~/.claude/hooks and /abs/.claude/hooks do not depend on the working directory.
-        if (RELATIVE_HOOK_PATH.test(cmd)) add('HK008', rel, 1, cmd);
+        // "$HOME"/.claude/hooks, ~/.claude/hooks and /abs/.claude/hooks do not depend
+        // on the working directory; every other start of the shell word does.
+        if (isRelativeHookCommand(cmd)) add('HK008', rel, 1, cmd);
       }
     }
     if (/(^|\/)\.claude\/hooks\/[^/]+\.(sh|py|js|mjs|cjs|ts|ps1)$/.test(rel) || /^hooks\/[^/]+\.(sh|py|js|mjs|cjs)$/.test(rel)) {

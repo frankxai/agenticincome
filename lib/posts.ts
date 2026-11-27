@@ -15,6 +15,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: 'best-recurring-ai-affiliate-programs-2027',
+    title: 'Best Recurring AI Affiliate Programs Entering 2027 (Verified Payouts)',
+    dek: 'Which AI tool affiliate programs actually pay recurring commissions entering 2027—and which frontier tools closed or never existed.',
+    query: 'best recurring ai affiliate programs 2027',
+    date: '2026-11-27',
+    cluster: 'income',
+    tools: ['ElevenLabs', 'Beehiiv', 'Kit', 'Skool', 'Synthesia', 'Make', 'n8n', 'Systeme.io'],
+    featured: true,
+  },
+  {
     slug: 'two-day-sprint-dissected',
     title: 'The Two-Day Implementation Sprint, Dissected',
     dek: 'The full anatomy of an agent-team delivery — the five fulfillment patterns, the honest cost table (human hours + agent spend), and what clients actually receive.',

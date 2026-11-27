@@ -34,6 +34,7 @@ Open the tool's JSON at /workbench/offer-brief to edit it or export Markdown.
   catalog, never enabled silently.
 
 Key pages: /mcp · /tools · /start · /offers · /trust · /disclosure
+Expanded discovery: https://www.agenticincome.ai/llms-full.txt
 
 ## Network
 

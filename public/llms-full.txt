@@ -1,0 +1,69 @@
+# Agentic Income — expanded discovery document
+
+> Earn with agents. Keep the judgment. The operating system for people who build income with AI agent teams: dated playbooks, verified partner economics, working code, and a live MCP server your agents can query directly.
+
+This file is the expanded companion to https://www.agenticincome.ai/llms.txt. The short file is an index; this file carries full section detail, tool boundaries, and disclosure rules so assistants and agents can cite accurate facts without overclaiming.
+
+Operator and author: Frank Riemer (https://www.frankx.ai).
+Site: https://www.agenticincome.ai
+
+## 1. Live MCP server and agent discovery
+
+- Streamable HTTP endpoint: https://www.agenticincome.ai/api/mcp (accepts POST; GET returns 405 by design)
+- Discovery manifest: https://www.agenticincome.ai/.well-known/mcp.json
+- Documentation: https://www.agenticincome.ai/mcp
+- Connect in Claude Code: `claude mcp add --transport http agentic-income https://www.agenticincome.ai/api/mcp`
+
+### Recommended agent workflow
+
+1. Query live inventory via MCP `tools/list` or `/.well-known/mcp.json`.
+2. Select the `source_to_offer` prompt to review an offer hypothesis with `draft_income_graph`.
+3. Call `draft_offer_experiment` to calculate contribution margin and export a sourced brief.
+4. Open the resulting JSON at https://www.agenticincome.ai/workbench/offer-brief to edit locally or export as Markdown.
+5. **Human gate**: A human supplies all price and variable cost assumptions and approves every external publication, enrollment, spend, or customer communication.
+
+## 2. The three operator income models
+
+Agentic Income organizes operator workflows into three explicit models, each documented with labor profiles, realistic ramp ranges, and known failure modes:
+
+- **Services** — Client delivery, technical architecture, and advisory work accelerated by inspectable agent workflows.
+- **Products** — Reusable digital kits, templates, code packs, and playbooks shipped with explicit verification receipts.
+- **Systems** — Repeatable content, distribution, and partner-referral loops operated with human review gates.
+
+We never guarantee or promise income. Every economic claim carries a primary source or verification date.
+
+## 3. Partner registry and affiliate disclosure
+
+- Some outbound recommendations use referral links routed via `go.agenticincome.ai`, where Agentic Income may earn a commission at no additional cost to the buyer.
+- Partner entries record commission rates, cookie windows, and verification dates.
+- Editorial rule: the honest recommendation wins even when no payout route exists.
+- Full policy: https://www.agenticincome.ai/disclosure
+
+## 4. Product status and boundaries
+
+- **Available now (free)**: The free Starter Kit and the public MCP tools listed in `/.well-known/mcp.json`.
+- **Gated paid catalog**: Paid items (Blueprint $67, Private Intel $19/mo, and pack editions) display their real gated status until live checkout is opened. Nothing is purchasable unless the live catalog explicitly marks it for sale.
+- Free MCP tools remain free; any future paid capability will be announced transparently on the catalog and never enabled silently.
+
+## 5. Key routes
+
+- Home: https://www.agenticincome.ai/
+- MCP guide: https://www.agenticincome.ai/mcp
+- Build: https://www.agenticincome.ai/build
+- Operate: https://www.agenticincome.ai/operate
+- Proof: https://www.agenticincome.ai/proof
+- Offers: https://www.agenticincome.ai/offers
+- Trust: https://www.agenticincome.ai/trust
+- Pack: https://www.agenticincome.ai/pack
+- Tools: https://www.agenticincome.ai/tools
+- Start: https://www.agenticincome.ai/start
+- Disclosure: https://www.agenticincome.ai/disclosure
+- Privacy: https://www.agenticincome.ai/privacy
+- Discovery index: https://www.agenticincome.ai/llms.txt
+- Sitemap: https://www.agenticincome.ai/sitemap.xml
+
+## 6. Network (distinct disciplines)
+
+- **Agentic Passive Income** (https://www.agenticpassiveincome.com) — Automation-first, inspectable loops with its own MCP endpoint at https://www.agenticpassiveincome.com/api/mcp
+- **Disruptive Passive Income** (https://disruptivepassiveincome.com) — Portfolio and compounding doctrine
+- **FrankX** (https://www.frankx.ai) — Creator and founder systems by Frank Riemer

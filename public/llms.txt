@@ -44,3 +44,10 @@ Sister sites, distinct disciplines:
 - disruptivepassiveincome.com — portfolio/compounding doctrine
 
 Site: https://www.agenticincome.ai · Author: Frank Riemer
+
+## Public economics API
+
+Read dated market observations at /api/v1/economics?dataset=markets and supply costs at
+/api/v1/economics?dataset=costs. Each row links to its source. The OpenAPI contract is
+https://www.agenticincome.ai/economics.openapi.json. The same evidence is available
+through search_digital_economies and list_supply_costs on the MCP server.

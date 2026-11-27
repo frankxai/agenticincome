@@ -8,6 +8,7 @@ const ENV_KEYS = [
   'POLAR_SERVER',
   'POLAR_SUCCESS_URL',
   'POLAR_PRODUCT_ID_BLUEPRINT',
+  'AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL',
 ]
 
 const saved = {}
@@ -49,6 +50,10 @@ test('configured Polar credentials without CHECKOUT_RELEASE report purchasable: 
   assert.match(blueprint.catalogStatus, /^for sale/i)
   assert.equal(starter.purchasable, false)
   assert.match(starter.status, /^free/i)
+  assert.equal(new URL(starter.url).pathname, '/delivery/starter-kit')
+  for (const product of products.filter(({ id }) => id !== 'starter-kit')) {
+    assert.equal(new URL(product.url).pathname, `/offers/${product.id}`)
+  }
   assert.equal(blueprint.purchasable, false, 'credentials alone must never open checkout')
 })
 
@@ -60,4 +65,14 @@ test('a matching CHECKOUT_RELEASE opens purchasable for the configured product',
   assert.equal(blueprint.purchasable, true)
   assert.equal(blueprint.status, blueprint.catalogStatus)
   assert.match(blueprint.status, /^for sale/i)
+})
+
+test('the MCP listing matches the buyer route when only static checkout is configured', async () => {
+  process.env.AGENTIC_INCOME_BLUEPRINT_CHECKOUT_URL = 'https://buy.polar.sh/polar_c_test123'
+  let blueprint = (await listProducts()).find((product) => product.id === 'blueprint')
+  assert.equal(blueprint.purchasable, false)
+  process.env.CHECKOUT_RELEASE = 'live'
+  blueprint = (await listProducts()).find((product) => product.id === 'blueprint')
+  assert.equal(blueprint.purchasable, true)
+  assert.equal(new URL(blueprint.url).pathname, '/offers/blueprint')
 })

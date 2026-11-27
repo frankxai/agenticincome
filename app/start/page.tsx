@@ -68,12 +68,14 @@ export default function Start() {
         </table>
       </div>
 
-      <div className="mt-10">
-        <Link href="/blog" className="font-medium text-accent hover:underline">See the comparisons in action</Link>
+      <div className="mt-10 flex flex-wrap items-center gap-y-2">
+        <Link href="/offers/blueprint" className="font-semibold text-accent hover:underline">Inspect the Blueprint ($67)</Link>
         <span className="mx-3 text-muted/40">·</span>
         <Link href="/delivery/starter-kit" className="font-medium text-accent hover:underline">Open the starter kit</Link>
         <span className="mx-3 text-muted/40">·</span>
         <Link href="/offers" className="font-medium text-accent hover:underline">Inspect the paid systems</Link>
+        <span className="mx-3 text-muted/40">·</span>
+        <Link href="/blog" className="font-medium text-accent hover:underline">See the comparisons in action</Link>
       </div>
 
       <EmailCapture headline="Want the build order as a checklist?" sub="Get the step-by-step path and top recurring shortlist. No noise." />

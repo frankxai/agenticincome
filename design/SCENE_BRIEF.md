@@ -183,3 +183,7 @@ A musician has their instrument in hand. The viewer has a proposed offer to test
 Keep the face and guitar readable where the opening art crops. Give the number fields, evidence and action links a quiet opaque surface. Mobile reading order should follow the proposition, action, model and handoff, with usable controls and room for longer labels. Model changes should be legible under reduced motion. Existing Agentic Income character plates retain their specialist meanings. The campaign stills introduce anonymous editorial subjects without assigning them to the Starlight cast.
 
 Exact prompts, derivative sizes and checksums belong to `design/asset-manifest.json`. Both commissions use the founder’s written direction. Neither used a reference image or founder likeness. VIS owns the cross-brand cast registry. Figma marks its [Starlight cast board](https://www.figma.com/design/m2wi20fAoCgFOKGXkJJGAm?node-id=17-103) as concept work.
+
+## Quote-review pilot editorial layout
+
+Start with the decision and its sensitivity to four extra review hours. Present the buyer deliverable and itemized costs in reading order. Follow them with buyer payback, acceptance evidence and the downloadable brief. On narrow screens the cost lines keep their labels together with their amounts. The field note uses the existing editorial typography and introduces no animation. Native download links and the existing workbench support the same handoff with reduced motion.

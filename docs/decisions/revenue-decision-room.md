@@ -32,6 +32,8 @@ A shared, authenticated multi-user deal room is a later build. The local workben
 | Circle member practice | Redacted case review, a weekly build session and a decision archive | Buyers volunteer a recurring use and a moderator owns delivery |
 | Metered research API | Licensed field-level evidence with timestamps, response schema, usage receipt and hard spend limit | Repeat callers value a particular result enough to pay for it |
 
+The Blueprint currently draws material from a public repository. Before taking payment, describe which files the buyer can already obtain, the license that applies, and what the paid edition adds. The simplest honest offer is reviewed packaging, a tested version, ongoing revisions or a service entitlement the team can actually deliver. Confirm at least one benefit beyond public source and prove the delivery path. A signed download URL protects the transaction route; it cannot make already published source exclusive.
+
 Suggested first cohort: founder-led B2B service teams already delivering proposals or quote reviews. Start with three design partners. A customer gets the full case before being asked for an email. For a conversation that yields a pilot, ask permission for an anonymized case only after the buyer sees the finished work. A partner can refer a qualified team under disclosed terms. Report retained contribution per referral after support, refunds and commission. The identity work earns attention; the sample model and buyer-owned handoff earn trust.
 
 ## Evidence and operating economics
@@ -82,6 +84,16 @@ Agentic Income owns actively delivered revenue. Agentic Passive Income evaluates
 Use the two newly commissioned salon images for editorial identity. Maintain the five existing Agentic Income role plates as workflow cues. Reuse the existing scene and motion implementation with mobile/reduced-motion fallbacks. Admit OSS through a small technical spike, a license/provenance check and a measured bundle or GPU budget. A shared interaction must improve comprehension or completion at the decision point.
 
 Measure the chain: case opened → case file retrieved → buyer edits and exports a valid brief → scope accepted → delivery accepted → payment settled → 30-day cost variance. Never infer paid revenue from a click. First decision after ten completed own-data briefs: identify the largest loss between export and a real buyer conversation. First decision after three paid pilots: reprice, standardize or retire the offer from observed contribution and founder time.
+
+## What to adopt from other repositories
+
+| Source | Narrow adoption | Evidence required |
+| --- | --- | --- |
+| [Existing affiliate agent skills](https://github.com/frankxai/affiliate-agent-skills) | Use the canonical program records and the existing vendored synchronization path. Keep availability separate from the seller’s actual enrollment. | Canonical JSON and the website/MCP return the same terms, attribution window and source date. |
+| [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk) | Keep the current HTTP handler. Use the upstream client to test initialization, discovery, tool input, typed output and failures across versions. | The same case returns identical decision inputs and contribution through REST, the workbench and MCP wherever they expose that calculation. |
+| [Three.js](https://github.com/mrdoob/three.js) | Reuse the installed renderer for one opt-in inspection of a glass instrument. Prototype transmission, roughness and a single environment reflection. | Same task works on a static poster. Measure GPU cost on a real mid-range phone before making the scene a default. Retain [the MIT notice](https://github.com/mrdoob/three.js/blob/dev/LICENSE). |
+| [Stripe one-time checkout sample](https://github.com/stripe-samples/checkout-one-time-payments) | Borrow the server-created session and signed event test pattern for a specific Stripe SKU when warranted. | Duplicate events grant one entitlement. Refund or revocation closes access under the declared policy. Use Polar’s native flow for the existing Blueprint. |
+| [x402](https://github.com/coinbase/x402) | Use the seller examples to price one read-only research result on a testnet. Set a fiat-denominated price, explicit network and retry key. | Verify the challenge, settlement, replay handling and usage receipt on the selected facilitator. Reconcile the net proceeds before enabling a paid network. |
 
 ## External references
 

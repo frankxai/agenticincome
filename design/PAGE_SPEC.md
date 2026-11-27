@@ -209,3 +209,9 @@ A founder or revenue lead brings one possible paid service. The home page leads 
 An offer with losses on every sale needs a different price or delivery method. The calculator should express this clearly without producing a negative or infinite break-even count. A zero fixed cost has a different meaning from a missing input. No financial input should enter analytics or a request URL. The opening illustration depicts a fictional performer. Real offer terms, fees and availability stay with their owning source.
 
 The founder's commissioning brief sets the visual direction. The owning [Agentic Income brand pack](https://github.com/Starlight-Intelligence/starlight-design-intelligence/blob/5fb0bdde1c4b4af871b1e1d35172b4030b1e7aa2/brand-packs/agentic-income/BRAND.md) defines the commercial voice, and the [Frontier constitution](https://github.com/Starlight-Intelligence/starlight-design-intelligence/blob/e25fab4c5a0dac2ea8c7b91e9397972f5af4b454/portfolio/frontier-experience-constitution.md) defines the review evidence. The old and new screens are recorded in `design/evidence/2026-11-27-revenue-desk/`.
+
+## Quote-review pilot field note
+
+A sales lead and finance owner arrive from the research index to decide whether a scoped quote-review pilot merits a real buyer test. The article names the sample and its modeled status before showing costs. The cost breakdown, four-hour rework scenario and buyer-capacity calculation give the reader one decision to inspect. Acceptance belongs to the finance owner.
+
+The page offers an editable JSON brief and a Markdown case. The existing offer workbench opens the JSON and recalculates its derived economics. One record supplies all three editions. The canonical page is `/blog/quote-review-pilot`.

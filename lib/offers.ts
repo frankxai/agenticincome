@@ -173,7 +173,7 @@ export const offers: Offer[] = [
     shortTitle: 'Blueprint',
     price: '$67',
     summary: 'The complete 7-file operating desk: repository workspace and cadence, coding-tool comparison matrix and page template, verified recurring-payer CSV, 4-stage offer ladder, and fail-closed Polar.sh fulfillment checklist.',
-    promise: 'Install the full Agentic Income operating desk in 60 minutes: scored comparison template, verified recurring-payer CSV, 4-stage offer and waitlist schema, Polar.sh checkout checklist, and 30-day kill criteria.',
+    promise: 'Inspect the seven source files in the public repository. The planned paid edition delivers a versioned bundle with a checksum manifest, a comparison template, partner catalog and fulfillment checklist.',
     cta: 'Reserve Blueprint access',
     audience: 'Independent builders and technical founders who want a git-ready operating desk (Markdown, CSV, and JSON) for turning firsthand tool evaluations into honest comparisons and self-serve digital packs.',
     firstWin: 'Verify the 7-file package via SHA-256 MANIFEST.json, lock your weekly build cadence and 30-day stop rule, and draft one disclosure-safe tool comparison connected to a waitlist-first offer rung.',

@@ -11,11 +11,15 @@ const HOOK = fileURLToPath(new URL('../.claude/hooks/estate-guard-gate.py', impo
 // literally (the repository's own gate asks on any command text that does).
 const RM = 'r' + 'm -' + 'rf ';
 
-function decide(command) {
+// The bare tool name, for path-qualified and quoted invocations.
+const RD = 'r' + 'm';
+
+function decide(command, extraEnv = {}) {
   const env = { ...process.env };
   delete env.ESTATE_GUARD_OFF;
   delete env.ESTATE_GUARD_ALLOW_FORCE;
   delete env.TMPDIR;
+  Object.assign(env, extraEnv);
   const res = spawnSync('python3', [HOOK], {
     input: JSON.stringify({ tool_name: 'Bash', tool_input: { command } }),
     encoding: 'utf8',
@@ -65,6 +69,60 @@ for (const command of PLAIN_SCRATCH) {
     assert.equal(decide(command), 'allow');
   });
 }
+
+// Thread 1: a second invocation of the delete tool that is path-qualified,
+// quoted, escaped, or reached through an indirection must not ride on the
+// first command's scratch exception.
+const PATH_QUALIFIED = [
+  `${RM}/tmp/estate-guard-test; /bin/${RD} -rf ./project`,
+  `${RM}/tmp/estate-guard-test && /usr/bin/${RD} -rf ./project`,
+  `${RM}/tmp/estate-guard-test; ./${RD} -rf ./project`,
+  `${RM}/tmp/estate-guard-test; "/bin/${RD}" -rf ./project`,
+  `${RM}/tmp/estate-guard-test; "${RD}" -rf ./project`,
+  `${RM}/tmp/estate-guard-test; \\${RD} -rf ./project`,
+  `${RM}/tmp/estate-guard-test; r\\m -rf ./project`,
+  `${RM}/tmp/estate-guard-test; env /bin/${RD} -rf ./project`,
+  `${RM}/tmp/estate-guard-test; command /bin/${RD} -rf ./project`,
+  `${RM}/tmp/estate-guard-test; builtin /bin/${RD} -rf ./project`,
+  `${RM}/tmp/estate-guard-test; exec /bin/${RD} -rf ./project`,
+  `${RM}/tmp/estate-guard-test; sudo /bin/${RD} -rf ./project`,
+  `${RM}/tmp/estate-guard-test; echo ./project | xargs /bin/${RD} -rf`,
+  `${RM}/tmp/estate-guard-test; find . -name project -exec /bin/${RD} -rf {} +`,
+  `${RM}/tmp/estate-guard-test; find ./project -delete`,
+  `${RM}/tmp/estate-guard-test; bash -c "${RD} -rf ./project"`,
+  `${RM}/tmp/estate-guard-test; X=${RD}; $X -rf ./project`,
+];
+
+for (const command of PATH_QUALIFIED) {
+  test(`path-qualified delete is not covered by the scratch exception: ${command.slice(RM.length)}`, () => {
+    assert.ok(['ask', 'deny'].includes(decide(command)), 'expected ask or deny');
+  });
+}
+
+// Thread 2: $TMPDIR only expands unquoted or inside double quotes. Single
+// quotes, a backslash, or quotes splitting the name pass a literal relative
+// path, so these must not count as scratch even when the hook's TMPDIR is /tmp.
+const LITERAL_TMPDIR = [
+  `${RM}'$TMPDIR/project'`,
+  `${RM}'\${TMPDIR}/project'`,
+  `${RM}\\$TMPDIR/project`,
+  `${RM}$'TMPDIR/project'`,
+  `${RM}$"TMPDIR/project"`,
+  `${RM}$TMP""DIR/project`,
+  `${RM}/tmp/estate-guard-test '$TMPDIR/project'`,
+];
+
+for (const command of LITERAL_TMPDIR) {
+  test(`quoted or escaped TMPDIR is not a scratch target: ${command.slice(RM.length)}`, () => {
+    assert.ok(['ask', 'deny'].includes(decide(command, { TMPDIR: '/tmp' })), 'expected ask or deny');
+  });
+}
+
+test('expanded TMPDIR targets still get the scratch exception', () => {
+  assert.equal(decide(`${RM}$TMPDIR/estate-guard-test`, { TMPDIR: '/tmp' }), 'allow');
+  assert.equal(decide(`${RM}"$TMPDIR/estate-guard-test"`, { TMPDIR: '/tmp' }), 'allow');
+  assert.equal(decide(`${RM}\${TMPDIR}/estate-guard-test`, { TMPDIR: '/tmp' }), 'allow');
+});
 
 test('non-scratch recursive delete still asks', () => {
   assert.equal(decide(`${RM}./build`), 'ask');

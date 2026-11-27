@@ -1,9 +1,12 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  DATADOG_RUM_INTAKE_SOURCES,
+  DATADOG_RUM_SCRIPT_ORIGIN,
   DATADOG_RUM_SITE,
   allowsRumMeasurement,
   datadogRumConfig,
+  datadogRumCspSources,
   isSensitiveRumPath,
   redactRumEvent,
   redactRumUrl,
@@ -83,4 +86,44 @@ test('redactRumEvent strips query/hash/referrer and redacts sensitive paths', ()
   assert.equal(redactRumUrl('https://www.agenticincome.ai/checkout/cs_test_123?sig=1'), 'https://www.agenticincome.ai/checkout/:token')
   assert.equal(scrubCredentialPaths('error on /api/auth/tok_999'), 'error on /api/auth/:token')
   assert.equal(redactRumEvent({ type: 'error', view: { url: 'https://www.agenticincome.ai/checkout/cs_test_123' } }), false)
+})
+
+test('redactRumEvent drops exact OAuth/checkout routes, percent-encoded paths, and query secrets in errors', () => {
+  assert.equal(isSensitiveRumPath('/checkout'), true)
+  assert.equal(isSensitiveRumPath('/auth/callback'), true)
+  assert.equal(isSensitiveRumPath('/%63heckout/cs_live_123'), true)
+  assert.equal(isSensitiveRumPath('/offers'), false)
+
+  const oauthError = {
+    type: 'error',
+    view: { url: 'https://www.agenticincome.ai/auth/callback?code=SECRET_CODE' },
+    error: { message: 'Failed at https://www.agenticincome.ai/auth/callback?code=SECRET_CODE' },
+  }
+  assert.equal(redactRumEvent(oauthError), false)
+
+  const standardError = {
+    type: 'error',
+    view: { url: 'https://www.agenticincome.ai/offers' },
+    error: {
+      message: 'Redirect failed at https://www.agenticincome.ai/checkout?session_id=cs_live_999',
+      stack: 'at go (https://www.agenticincome.ai/api/offers?token=SECRET_TOK&page=1)',
+    },
+  }
+  assert.equal(redactRumEvent(standardError), true)
+  assert.equal(standardError.error.message, 'Redirect failed at https://www.agenticincome.ai/checkout')
+  assert.equal(standardError.error.stack, 'at go (https://www.agenticincome.ai/api/offers?token=:redacted&page=1)')
+})
+
+test('datadogRumCspSources stays empty when unset and returns EU script/intake origins when set', () => {
+  assert.deepEqual(datadogRumCspSources({}), { scriptSrc: [], connectSrc: [] })
+  assert.deepEqual(
+    datadogRumCspSources({
+      NEXT_PUBLIC_DD_RUM_APPLICATION_ID: 'app-1',
+      NEXT_PUBLIC_DD_RUM_CLIENT_TOKEN: 'pub-1',
+    }),
+    {
+      scriptSrc: [DATADOG_RUM_SCRIPT_ORIGIN],
+      connectSrc: DATADOG_RUM_INTAKE_SOURCES,
+    },
+  )
 })

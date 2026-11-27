@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Validates vault/: cross-references, sourcing, and margin arithmetic.
 // Margins are recomputed from supply-chain rows so a hand-typed margin cannot drift from its inputs.
+import { reviewedMarginTerms } from '../lib/vault.ts';
 import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -90,7 +91,11 @@ export function computeMargin(s, supplyById, economyById = new Map()) {
     const src = supplyById.get(fee.supplyId);
     cost += s.priceUsd * (src.rate ?? 0) + (src.fixedUsd ?? 0);
   }
-  if (s.takeRateFrom) cost += s.priceUsd * economyById.get(s.takeRateFrom).takeRateFraction;
+  if (s.takeRateFrom) {
+    const terms = reviewedMarginTerms(economyById.get(s.takeRateFrom));
+    if (!terms) throw new RangeError('Marketplace transaction terms are missing.');
+    cost += s.priceUsd * terms.rate + terms.fixedUsd;
+  }
   const marginPct = ((s.priceUsd - cost) / s.priceUsd) * 100;
   return { costUsd: cost, marginPct };
 }
@@ -178,8 +183,8 @@ export function validate(v) {
           resolvable = false;
         }
       }
-      if (s.takeRateFrom && typeof economyById.get(s.takeRateFrom)?.takeRateFraction !== 'number') {
-        errors.push(`margin ${s.id}: takeRateFrom ${s.takeRateFrom} has no sourced takeRateFraction`);
+      if (s.takeRateFrom && !reviewedMarginTerms(economyById.get(s.takeRateFrom))) {
+        errors.push(`margin ${s.id}: takeRateFrom ${s.takeRateFrom} has no reviewed transaction terms`);
         resolvable = false;
       }
       if (!resolvable) continue;

@@ -63,3 +63,29 @@ test('negative, zero and non-finite quantities are refused (Codex finding)', () 
 test('supply filter by category returns only that category', () => {
   assert.ok(supplyCosts(vault, { category: 'payments' }).every((r) => r.category === 'payments'))
 })
+
+test('a verified sales volume cannot authorize a marketplace fee', () => {
+  const id = 'apple-app-store-digital-2025'
+  assert.ok(searchEconomies(vault, { confirmedOnly: true }).some((row) => row.id === id))
+  const result = unitMargin(vault, { priceUsd: 10, costLines: [], takeRateFrom: id })
+  assert.equal(result.ok, false)
+  assert.match(result.refused.join(), /transaction fee terms/)
+})
+
+test('marketplace fee includes the reviewed fixed charge and identifies the scenario', () => {
+  const direct = unitMargin(vault, { priceUsd: 10, costLines: [], takeRateFrom: 'gumroad-fee' })
+  assert.equal(direct.costUsd, 1.5)
+  assert.match(direct.lines[0].label, /Direct or profile sale/)
+  const discover = unitMargin(vault, { priceUsd: 10, costLines: [], takeRateFrom: 'gumroad-discover-fee' })
+  assert.equal(discover.costUsd, 3)
+})
+
+test('duplicate fees, overlapping merchant schedules and overflow cannot masquerade as margins', () => {
+  for (const fields of [
+    { feeSupplyIds: ['polar-starter-fee', 'polar-starter-fee'] },
+    { feeSupplyIds: ['gumroad-direct-fee'], takeRateFrom: 'gumroad-fee' },
+    { priceUsd: Number.MIN_VALUE, feeSupplyIds: ['polar-starter-fee'] },
+  ]) {
+    assert.equal(unitMargin(vault, { priceUsd: 10, costLines: [], ...fields }).ok, false)
+  }
+})

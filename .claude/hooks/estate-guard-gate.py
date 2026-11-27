@@ -24,7 +24,8 @@ outside the scratch roots. A $TMPDIR target counts only when the hook's own
 TMPDIR is set and resolves to a scratch root (the expanded path is then checked
 like a literal one) AND the command does not itself assign TMPDIR anywhere
 (inline prefix, export, declare, env, set, unset, ...); otherwise it asks. A command that
-also runs `ln`/`mount` gets no exception. Relative paths (`cd /tmp && rm -rf x`),
+also runs `ln`/`mount`, or contains a redirect with & or | (&>, &>>, >&, <&, >|),
+gets no exception; an rm's arguments end only at an unquoted separator. Relative paths (`cd /tmp && rm -rf x`),
 ~, $HOME, anything else, or a single non-scratch target in any rm still ASK.
 The root/home DENY runs first and is unchanged; every other ASK rule still fires
 even when the command also contains a scratch rm. Leading VAR=value prefixes
@@ -141,9 +142,14 @@ RECURSIVE_DELETE = "recursive delete"
 # lines, after xargs/env/\\, inside quotes). Over-matching only removes the
 # exception; under-matching would let a second, non-scratch rm through.
 RM_AT = re.compile(r"(?<![\w./-])rm(?=\s|$)", re.I)
-# Where one rm invocation's arguments end. Cutting early only makes shlex fail
-# or adds a non-scratch token, both of which fall back to ASK.
-RM_END = re.compile(r"[;&|\n)`]")
+# Where one rm invocation's arguments end: an UNQUOTED, unescaped separator,
+# exactly where bash ends the simple command (see _rm_args). A ')' or ';'
+# inside quotes or after a backslash is part of an argument, not an end.
+RM_END_CHARS = set(";&|\n)`")
+# Redirect operators that contain & or |. `&>` / `&>>` are redirects in bash,
+# not separators, so `rm -rf /tmp/x &>/dev/null /home/u` deletes /home/u too.
+# Any of these anywhere in the command removes the exception (fail closed).
+AMP_PIPE_REDIRECT = re.compile(r"&>|>&|<&|>\|")
 LITERAL_SCRATCH_ROOTS = ("/tmp/", "/var/tmp/", "/private/tmp/")
 ENV_SCRATCH_ROOTS = ("$TMPDIR/", "${TMPDIR}/")
 SAFE_REST = re.compile(r"[A-Za-z0-9._@%+=:,/*?-]+")
@@ -218,17 +224,48 @@ def is_scratch_target(target: str, tmpdir_reassigned: bool = False) -> bool:
     return _under_scratch(os.path.normpath(env_root + "/" + rest))
 
 
+def _rm_args(rest: str) -> str | None:
+    """The raw argument text of one rm invocation, up to where bash ends it.
+
+    Walks the text honouring single quotes, double quotes and backslash
+    escapes, and stops at the first unquoted separator in RM_END_CHARS. An
+    unquoted '(' (process substitution, extglob, subshell) returns None so the
+    caller gives no exception. An unterminated quote returns the whole rest,
+    which shlex then rejects.
+    """
+    quote = None
+    i = 0
+    while i < len(rest):
+        c = rest[i]
+        if quote == "'":
+            if c == "'":
+                quote = None
+        elif c == "\\":
+            i += 1  # the escaped character is literal (inside "..." too, close enough)
+        elif quote == '"':
+            if c == '"':
+                quote = None
+        elif c in "'\"":
+            quote = c
+        elif c in RM_END_CHARS:
+            return rest[:i]
+        elif c == "(":
+            return None
+        i += 1
+    return rest
+
+
 def rm_only_scratch(cmd: str) -> bool:
     """True only if every rm invocation in cmd deletes nothing but scratch targets."""
-    if "`" in cmd or "$(" in cmd or LINKERS.search(cmd):
+    if "`" in cmd or "$(" in cmd or LINKERS.search(cmd) or AMP_PIPE_REDIRECT.search(cmd):
         return False
     tmpdir_reassigned = bool(TMPDIR_WRITE.search(cmd))
     found = False
     for m in RM_AT.finditer(cmd):
         found = True
-        rest = cmd[m.end():]
-        end = RM_END.search(rest)
-        raw = rest[: end.start()] if end else rest
+        raw = _rm_args(cmd[m.end():])
+        if raw is None:
+            return False
         try:
             tokens = shlex.split(raw)
         except ValueError:

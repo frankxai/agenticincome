@@ -15,6 +15,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: 'quote-review-pilot',
+    title: 'Can a €1,500 quote-review pilot pay for itself?',
+    dek: 'Follow the supplier margin, buyer payback and acceptance test. Download the model and change the assumptions.',
+    query: 'AI quote review implementation pilot economics',
+    date: '2026-11-27',
+    cluster: 'income',
+    tools: [],
+    featured: true,
+  },
+  {
     slug: 'two-day-sprint-dissected',
     title: 'The Two-Day Implementation Sprint, Dissected',
     dek: 'The full anatomy of an agent-team delivery — the five fulfillment patterns, the honest cost table (human hours + agent spend), and what clients actually receive.',

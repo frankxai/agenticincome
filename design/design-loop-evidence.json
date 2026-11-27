@@ -5,7 +5,6 @@
     "acceptance": "Check availability before collecting an address. On closure offer the existing /delivery/starter-kit route.",
     "test": "tests/intake-availability.test.mjs"
   },
-
   "offer_evidence_brief": {
     "date": "2026-11-19",
     "route": "/workbench/offer-brief",
@@ -509,5 +508,221 @@
       "Upstream handler claims the position before saving the signal; a failed save can leave the count one high (not fixable in the unchanged copy).",
       "Verified in headless Chromium without a GPU."
     ]
+  },
+  "revenue_desk_20261127": {
+    "date": "2026-11-27",
+    "reviewedBy": "Codex design reviewer, separate from interface implementation",
+    "candidateRevision": "c27222163a32f9af1472a4ac068cff18f52a2b02",
+    "owners": {
+      "product": "frankxai/agenticincome",
+      "designKernel": "Starlight-Intelligence/starlight-design-intelligence@e25fab4c5a0dac2ea8c7b91e9397972f5af4b454",
+      "brandPack": "Starlight-Intelligence/starlight-design-intelligence@5fb0bdde1c4b4af871b1e1d35172b4030b1e7aa2:brand-packs/agentic-income",
+      "existingCastProjection": "Figma m2wi20fAoCgFOKGXkJJGAm / 17:103 (concepts)",
+      "castSourceStatus": "VIS governs cast identity. Two commissioned artwork files use original unnamed subjects. Full prompts, provenance and byte hashes are in design/asset-manifest.json."
+    },
+    "baseline": "Observed live www.agenticincome.ai home page on 27 November 2026 before this change. The former opening pairs the customer evidence headline with a simulated fit-check terminal. See before images.",
+    "candidate": "Editorial two-column studio on desktop. A musician and instrument lead into a directly editable offer model, then a source-based workbench and a downloadable brief.",
+    "screens": {
+      "before-desktop": {
+        "file": "design/evidence/2026-11-27-revenue-desk/before-desktop.webp",
+        "viewport": [
+          1440,
+          900
+        ]
+      },
+      "before-mobile": {
+        "file": "design/evidence/2026-11-27-revenue-desk/before-mobile.webp",
+        "viewport": [
+          390,
+          844
+        ]
+      },
+      "before-tablet": {
+        "file": "design/evidence/2026-11-27-revenue-desk/before-tablet.webp",
+        "viewport": [
+          768,
+          1024
+        ]
+      },
+      "candidate-desktop": {
+        "file": "design/evidence/2026-11-27-revenue-desk/candidate-desktop.webp",
+        "viewport": [
+          1440,
+          900
+        ]
+      },
+      "candidate-mobile": {
+        "file": "design/evidence/2026-11-27-revenue-desk/candidate-mobile.webp",
+        "viewport": [
+          390,
+          844
+        ]
+      },
+      "candidate-narrow": {
+        "file": "design/evidence/2026-11-27-revenue-desk/candidate-narrow.webp",
+        "viewport": [
+          320,
+          720
+        ]
+      },
+      "candidate-no-js": {
+        "file": "design/evidence/2026-11-27-revenue-desk/candidate-no-js.webp",
+        "viewport": [
+          1440,
+          900
+        ]
+      },
+      "candidate-reduced-motion": {
+        "file": "design/evidence/2026-11-27-revenue-desk/candidate-reduced-motion.webp",
+        "viewport": [
+          1440,
+          900
+        ]
+      },
+      "candidate-tablet": {
+        "file": "design/evidence/2026-11-27-revenue-desk/candidate-tablet.webp",
+        "viewport": [
+          768,
+          1024
+        ]
+      },
+      "model-desktop": {
+        "file": "design/evidence/2026-11-27-revenue-desk/model-desktop.webp",
+        "viewport": [
+          1440,
+          900
+        ]
+      },
+      "model-mobile": {
+        "file": "design/evidence/2026-11-27-revenue-desk/model-mobile.webp",
+        "viewport": [
+          390,
+          844
+        ]
+      },
+      "research-desktop": {
+        "file": "design/evidence/2026-11-27-revenue-desk/research-desktop.webp",
+        "viewport": [
+          1440,
+          900
+        ]
+      }
+    },
+    "primaryActionContrast": {
+      "foreground": "rgb(11, 39, 28)",
+      "background": "rgb(167, 237, 199)",
+      "ratio": 11.79,
+      "scope": "Primary workbench action; Chromium computed style"
+    },
+    "technicalContext": "Local production build, Chromium, headless Linux, default DPR 1, software rendering. Mobile and tablet are viewport emulations.",
+    "workflowEvidence": {
+      "exampleInputs": "EUR 250 price, EUR 80 variable cost and EUR 510 per month fixed cost. The model showed EUR 170, 68%, and 3 units. The fragment carried 250 and 80 into the draft. Generated JSON retained the same margin and currency; desktop also exported Markdown.",
+      "edgeCases": "EUR 120 revenue against EUR 125 variable cost showed a loss and unreachable break-even. Zero overhead yielded zero orders required. An empty price suppressed handoff and announced an error. Editing restored it.",
+      "scope": "Fictional source example in a local session. No account, charge or external customer data."
+    },
+    "browserCases": [
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "motion": "no-preference",
+        "javaScript": true,
+        "width": 1440,
+        "heroMotion": "desk-arrival",
+        "navMcpFullyVisible": true,
+        "narrowestPrimaryTargetHeight": 51.0,
+        "focusOutline": "solid",
+        "exportedJSONBytes": 1209,
+        "pageErrors": []
+      },
+      {
+        "viewport": [
+          390,
+          844
+        ],
+        "motion": "no-preference",
+        "javaScript": true,
+        "width": 390,
+        "heroMotion": "desk-arrival",
+        "navMcpFullyVisible": true,
+        "narrowestPrimaryTargetHeight": 51.0,
+        "focusOutline": "solid",
+        "exportedJSONBytes": 1209,
+        "pageErrors": []
+      },
+      {
+        "viewport": [
+          768,
+          1024
+        ],
+        "motion": "no-preference",
+        "javaScript": true,
+        "width": 768,
+        "heroMotion": "desk-arrival",
+        "navMcpFullyVisible": true,
+        "narrowestPrimaryTargetHeight": 51.0,
+        "focusOutline": "solid",
+        "exportedJSONBytes": 1209,
+        "pageErrors": []
+      },
+      {
+        "viewport": [
+          320,
+          720
+        ],
+        "motion": "no-preference",
+        "javaScript": true,
+        "width": 320,
+        "heroMotion": "desk-arrival",
+        "navMcpFullyVisible": true,
+        "narrowestPrimaryTargetHeight": 51.0,
+        "focusOutline": "solid",
+        "exportedJSONBytes": 1209,
+        "pageErrors": []
+      },
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "motion": "reduce",
+        "javaScript": true,
+        "width": 1440,
+        "heroMotion": "none",
+        "navMcpFullyVisible": true,
+        "narrowestPrimaryTargetHeight": 51.0,
+        "focusOutline": "solid",
+        "exportedJSONBytes": 1209,
+        "pageErrors": []
+      },
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "motion": "reduce",
+        "javaScript": false,
+        "width": 1440,
+        "heroMotion": "none",
+        "navMcpFullyVisible": true,
+        "narrowestPrimaryTargetHeight": 51.0,
+        "staticEconomics": [
+          "€120",
+          "66.7%",
+          "3"
+        ]
+      }
+    ],
+    "review": {
+      "firstRead": "The face, necklace and guitar remain recognizable in the wide and phone crops. The quiet dark region supports the serif price question, a single primary action and a secondary link into the model.",
+      "model": "Unit amounts and provisional status are legible without photography behind text. The input and output descriptions reflow on phones. The web team corrected a missing diagonal glyph in first-pass Chromium by drawing the indicator as a vector. At 320 pixels the final navigation label now fits after reducing gaps; the entire MCP link was measured inside the viewport.",
+      "motion": "A single arrival animation gently settles the photograph. Reduced motion leaves the static composition and workflow accessible.",
+      "limits": [
+        "Headless Chromium at these viewports. No physical iOS, Android, screen reader, or field performance assessment.",
+        "The review covers the changed homepage, model-to-brief flow and generated artwork. Checkout, private storage, and external identity release require their own evidence."
+      ]
+    },
+    "decision": "Candidate evidence only. Exact-PR release and independent approvals are tracked by the owning repository."
   }
 }

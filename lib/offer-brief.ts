@@ -56,6 +56,17 @@ function moneyInCents(value: number, label: string): number {
   return Math.round(value * 100)
 }
 
+export function offerUnitEconomics(currency: OfferBriefInput['currency'], unitPrice: number, unitCost: number) {
+  if (!OFFER_CURRENCIES.includes(currency)) throw new RangeError('Choose EUR, USD or GBP.')
+  const price = moneyInCents(unitPrice, 'Unit price')
+  const cost = moneyInCents(unitCost, 'Unit cost')
+  const contribution = price - cost
+  return {
+    currency, unitPrice: price / 100, unitCost: cost / 100, contribution: contribution / 100,
+    marginPercent: price ? Math.round(contribution / price * 1000) / 10 : null,
+  }
+}
+
 export function buildOfferBrief(input: OfferBriefInput, asOf = new Date().toISOString().slice(0, 10)) {
   const title = requiredText(input.sourceTitle, 'Source title', OFFER_TEXT_LIMITS.sourceTitle)
   const url = sourceLink(input.sourceUrl)
@@ -71,20 +82,11 @@ export function buildOfferBrief(input: OfferBriefInput, asOf = new Date().toISOS
   const offer = requiredText(input.offer, 'Offer', OFFER_TEXT_LIMITS.offer)
   const experiment = requiredText(input.experiment, 'Experiment', OFFER_TEXT_LIMITS.experiment)
   const successCriterion = requiredText(input.successCriterion, 'Success criterion', OFFER_TEXT_LIMITS.successCriterion)
-  if (!OFFER_CURRENCIES.includes(input.currency)) throw new RangeError('Choose EUR, USD or GBP.')
-
-  const price = moneyInCents(input.unitPrice, 'Unit price')
-  const cost = moneyInCents(input.unitCost, 'Unit cost')
-  const contribution = price - cost
   return {
     version: OFFER_BRIEF_VERSION,
     source: { id: 'S1' as const, title, date, url, excerpt, status: 'user-supplied' as const },
     hypothesis: { buyer, offer, sourceIds: ['S1'], status: 'untested' as const },
-    economics: {
-      currency: input.currency, unitPrice: price / 100, unitCost: cost / 100,
-      contribution: contribution / 100,
-      marginPercent: price ? Math.round(contribution / price * 1000) / 10 : null,
-    },
+    economics: offerUnitEconomics(input.currency, input.unitPrice, input.unitCost),
     validation: { experiment, successCriterion, status: 'planned' as const },
     approval: { required: true as const, actions: ['Contact buyers', 'Publish the offer', 'Commit to pricing', 'Spend money'] },
   }

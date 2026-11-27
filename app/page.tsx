@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { ArrowUpRight } from '@/components/ArrowUpRight'
+import Image from 'next/image'
+import { RevenueScenario } from '@/components/RevenueScenario'
+import './revenue-desk.css'
 import { AgentWorkflowProof } from '@/components/AgentWorkflowProof'
 import { HomeWaitlist } from '@/components/HomeWaitlist'
 import { CharacterPlate, type CharacterKind } from '@/components/motion/CharacterPlate'
@@ -17,11 +21,16 @@ import mcpManifest from '@/public/.well-known/mcp.json'
 import pkg from '@/package.json'
 
 export const metadata: Metadata = {
-  title: 'Evidence-backed offers and scoped agent implementation',
+  title: 'Agentic Income | The revenue desk for AI-enabled offers',
   description:
     'Turn a customer observation into a costed offer and one market test. Keep the evidence and the editable brief, or scope an agent implementation.',
   alternates: { canonical: '/' },
-  openGraph: { url: '/' },
+  openGraph: {
+    title: 'Agentic Income | The revenue desk for AI-enabled offers',
+    description: 'Price a workflow, model delivery costs and take a decision brief into your next buyer conversation.',
+    url: '/',
+    images: [{ url: '/brand/revenue-desk-guitarist.webp', width: 1536, height: 1024, alt: 'A porcelain and brass guitarist in an Amsterdam studio.' }],
+  },
 }
 
 const MCP_TOOLS = [
@@ -29,7 +38,7 @@ const MCP_TOOLS = [
   { name: 'get_income_model', desc: 'One route in full, including deliverables, scope, and next actions.' },
   { name: 'search_partner_programs', desc: 'The partner registry: rates, cookies, status, disclosed links.' },
   { name: 'get_partner_program', desc: 'Full record with commission note, source URL, verification date.' },
-  { name: 'list_products', desc: 'The catalog with real availability — purchasable is false until checkout is live.' },
+  { name: 'list_products', desc: 'The product catalogue, current purchase status and delivery routes.' },
   { name: 'fit_check', desc: 'Deterministic recommendation: which route fits your hours, budget, audience, skills.' },
   { name: 'get_playbook', desc: 'The free starter kit and dated knowledge-track summaries.' },
 ]
@@ -65,18 +74,6 @@ function sourceHost(url: string): string | null {
   }
 }
 
-/**
- * Lines for the slab that carries a data file's name: the fields this page already publishes from that file,
- * printed as JSON. Decoration only. Internal notes and link fields in the files never pass through here.
- */
-function fileHead(data: unknown, lines = 20): string {
-  return JSON.stringify(data, null, 2)
-    .split('\n')
-    .slice(0, lines)
-    .map((line) => (line.length > 68 ? `${line.slice(0, 67)}…` : line))
-    .join('\n')
-}
-
 function ChapterMark({ index, label }: { index: string; label: string }) {
   return (
     <div className="cine-mark" aria-hidden="true">
@@ -93,7 +90,11 @@ export default function Home() {
 
   // Every value in the build path is read from a repository file at build time.
   const paid = products.filter((product) => product.price_cents > 0)
-  const permitted = paid.filter((product) => catalogRefusal(product) === null)
+  const checkoutAvailable = (product: Product) => {
+    const offer = getOffer(product.id)
+    return isCheckoutLive(product.id) || Boolean(offer && checkoutUrl(offer))
+  }
+  const available = paid.filter(checkoutAvailable)
   const starterFile = PACK_MANIFESTS['starter-kit']?.files[0]
   const buildSteps: BuildStep[] = [
     {
@@ -141,81 +142,55 @@ export default function Home() {
     {
       kind: 'human',
       name: 'Human gate',
-      line: 'Checkout stays closed until a person changes the catalog status.',
+      line: 'Review the current purchase status before offering a paid pack.',
       path: 'products/catalog.json',
       rows: [
-        { label: 'catalog permits sale', value: permitted.length ? permitted.map((product) => product.name).join(' · ') : 'none' },
-        { label: 'catalog refuses checkout', value: `${paid.length - permitted.length} of ${paid.length} paid products` },
+        { label: checkoutRelease() === 'sandbox' ? 'test checkout' : 'checkout available', value: available.map(product => product.name).join(' · ') || 'none' },
+        { label: 'paid packs without checkout', value: `${paid.length - available.length} of ${paid.length}` },
         { label: 'updatedAt', value: catalog.updatedAt },
       ],
     },
   ]
   const stepCount = String(buildSteps.length).padStart(2, '0')
 
-  // What each slab behind the terminal prints: only values already shown elsewhere on this page.
-  const sheetModels = fileHead({ updatedAt: incomeModels.updatedAt, models: models.map((model) => ({ id: model.id, name: model.name })) })
-  const sheetPrograms = fileHead({
-    programs: verified.map((program) => ({ tool: program.tool, commission: program.commission, commissionVerifiedAt: program.commissionVerifiedAt })),
-  })
-  const sheetCatalog = fileHead({ updatedAt: catalog.updatedAt, products: products.map((product) => ({ id: product.id, name: product.name })) })
-
   return (
     <CinematicMotion>
       <GlassDefs />
-      {/* SCENE 1 — opening stage: the literal offer plus real MCP output, staged on its sources */}
-      <section className="cine-opening" data-scene="opening">
-        <div className="cine-bleed" aria-hidden="true" />
-        <div className="cine-opening-grid">
-          <div>
-            <div className="kicker">Agentic Income</div>
-            <h1 className="assembly-title">
-              Turn customer evidence into <span>an offer you can test.</span>
-            </h1>
-            <p className="assembly-sub">
-              Bring one customer note. Draft a priced offer, see what delivery would cost, and
-              take one experiment back to a buyer. Keep the source and the brief.
-            </p>
-            <div className="assembly-actions">
-              <Link href="/workbench/offer-brief" className="cta">Build an offer brief</Link>
-              <Link href="/offers/implementation-sprint" className="cta-secondary">Scope an implementation</Link>
-            </div>
-          </div>
-
-          <div className="cine-object" data-cine="object">
-            {/* The files the endpoint answers from (app/api/mcp imports all three). Decoration; the terminal carries the content.
-                These sheets are the fallback: when the WebGL layer is live they give way to lit slabs carrying the same names. */}
-            <div className="cine-sheet cine-sheet-3" data-cine="sheet" data-excerpt={sheetCatalog} aria-hidden="true"><span>products/catalog.json</span></div>
-            <div className="cine-sheet cine-sheet-2" data-cine="sheet" data-excerpt={sheetPrograms} aria-hidden="true"><span>data/programs.json</span></div>
-            <div className="cine-sheet cine-sheet-1" data-cine="sheet" data-excerpt={sheetModels} aria-hidden="true"><span>data/income-models.json</span></div>
-            <div
-              className="terminal"
-              role="img"
-              aria-label="Terminal: connecting the agentic-income MCP server with Claude Code and running the fit_check tool, which returns a services-model recommendation"
-            >
-              <div className="terminal-bar">
-                <i /><i /><i />
-                <span className="ml-2">shell — live endpoint /api/mcp</span>
-              </div>
-              <div className="terminal-body">
-                <div className="t-out"><span className="t-accent">$</span> <span className="text-ink">claude mcp add --transport http agentic-income \</span></div>
-                <div className="t-out">    https://www.agenticincome.ai/api/mcp</div>
-                <div className="t-cmd mt-3" data-cine="type">fit_check hours=10 budget=200 audience=no code=yes</div>
-                <div className="t-out" data-cine="resolve">{'{'} &quot;model&quot;: &quot;services&quot;,</div>
-                <div className="t-out" data-cine="resolve">  &quot;why&quot;: &quot;10 focused hours and working code</div>
-                <div className="t-out" data-cine="resolve">    skills price you into agent-assisted</div>
-                <div className="t-out" data-cine="resolve">    delivery work first.&quot;,</div>
-                <div className="t-out" data-cine="resolve">  &quot;read&quot;: &quot;/start&quot; {'}'}<span className="t-caret ml-2" /></div>
-              </div>
-            </div>
+      <section className="desk-cover" aria-labelledby="desk-title">
+        <div className="desk-cover-bleed">
+          <div className="desk-cover-art" aria-hidden="true">
+            <Image src="/brand/revenue-desk-guitarist.webp" alt="" fill preload sizes="(max-width: 700px) 100vw, 73vw" unoptimized />
           </div>
         </div>
-        <div className="cine-opening-foot" aria-hidden="true">
-          <span>01</span>
-          <span>opening</span>
-          <i />
-          <span>scroll to run the tool call</span>
+        <div className="desk-cover-copy">
+          <p className="desk-eyebrow"><span aria-hidden="true" /> The revenue desk</p>
+          <h1 id="desk-title">What is one<br /><em>sale worth?</em></h1>
+          <p className="desk-cover-lede">Price an AI-enabled offer against the work it takes to deliver. Take the evidence, the margin and a buyer test into your next conversation.</p>
+          <div className="desk-actions">
+            <Link href="/workbench/offer-brief" className="desk-primary">Open the workbench <ArrowUpRight /></Link>
+            <a href="#unit-economics" className="desk-text-action">Test the economics <span aria-hidden="true">↓</span></a>
+          </div>
         </div>
       </section>
+      <div className="desk-strip">
+        <p>Published by <a href="https://www.frankx.ai/frank-riemer">Frank Riemer</a></p>
+        <Link href="/blog">Research journal <ArrowUpRight /></Link>
+        <Link href="/mcp">Connect an agent <ArrowUpRight /></Link>
+      </div>
+
+      <RevenueScenario />
+
+      <article className="desk-feature" aria-labelledby="desk-feature-title">
+        <div className="desk-feature-art">
+          <Image src="/brand/revenue-desk-listening-room.webp" width={1536} height={1024} sizes="(max-width: 700px) 100vw, 52vw" unoptimized alt="Two mechanical musicians at a mahogany mixing desk beneath an orbital glass window." />
+        </div>
+        <div className="desk-feature-copy">
+          <p className="desk-eyebrow"><span aria-hidden="true" /> Field research</p>
+          <h2 id="desk-feature-title">Inside a quote-review pilot.</h2>
+          <p>Follow a worked example from a buyer’s request to a priced review. Inspect the assumptions and download the brief to run your own test.</p>
+          <Link className="desk-inline-link" href="/blog/quote-review-pilot">Read the field note <ArrowUpRight /></Link>
+        </div>
+      </article>
 
       {/* SCENE 2 — the build path: a technical spine, one step and one repository artifact at a time */}
       <section className="section-band cine-chapter" data-scene="build-path" aria-labelledby="build-path-title">
@@ -377,7 +352,7 @@ export default function Home() {
           <div className="kicker">What your agent gets</div>
           <h2 className="display-h2">This site is an MCP server.</h2>
           <p className="mt-3 max-w-xl text-[color:var(--color-muted)]">
-            Reading about agentic income is research. Querying it is leverage.
+            Connect your assistant to inspect offers, partner terms and the data behind a revenue model.
           </p>
         </div>
         <div className="cine-inspector mt-8" data-cine-reveal>
@@ -426,12 +401,11 @@ export default function Home() {
           <ol className="cine-rows" data-cine="inspector">
             {products.map((product, index) => {
               const isFree = product.price_cents === 0
-              const offer = getOffer(product.id)
               const catalogAdmitsSale = catalogRefusal(product) === null
-              const checkoutAvailable = isCheckoutLive(product.id) || Boolean(offer && checkoutUrl(offer))
+              const availableForPurchase = checkoutAvailable(product)
               const accessLabel = isFree
                 ? 'Free download'
-                : checkoutAvailable
+                : availableForPurchase
                   ? checkoutRelease() === 'sandbox' ? 'Test checkout' : 'Checkout available'
                   : catalogAdmitsSale || WAITLIST_PRODUCT_IDS.has(product.id)
                     ? 'Preview · checkout closed'
@@ -455,7 +429,7 @@ export default function Home() {
                       <Link href="/delivery/starter-kit" className="cta-secondary !px-4 !py-2 text-sm">
                         Open the starter kit
                       </Link>
-                    ) : checkoutAvailable ? (
+                    ) : availableForPurchase ? (
                       <Link href={`/offers/${product.id}`} className="cine-row-link">
                         Read the offer
                       </Link>

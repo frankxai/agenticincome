@@ -510,7 +510,14 @@
       "note": "No total creator earnings figure on the pricing page.",
       "platform": "Gumroad",
       "takeRateFraction": 0.1,
-      "takeRateBasis": "direct sales plus $0.50; Discover sales 30%"
+      "takeRateBasis": "direct sales plus $0.50; Discover sales 30%",
+      "marginTerms": {
+        "rate": 0.1,
+        "fixedUsd": 0.5,
+        "scope": "Direct or profile sale through Gumroad.",
+        "reviewedAt": "2026-11-27",
+        "sourceUrl": "https://gumroad.com/pricing"
+      }
     },
     {
       "id": "whop-cumulative-payouts",
@@ -834,7 +841,14 @@
       "note": "AWS publishes no current seller-payout total in the cited docs.",
       "platform": "AWS Marketplace",
       "takeRateFraction": 0.03,
-      "takeRateBasis": "SaaS public offers; server products 20%"
+      "takeRateBasis": "SaaS public offers; server products 20%",
+      "marginTerms": {
+        "rate": 0.03,
+        "fixedUsd": 0,
+        "scope": "Standard public SaaS offer, before any regional surcharge.",
+        "reviewedAt": "2026-11-27",
+        "sourceUrl": "https://docs.aws.amazon.com/marketplace/latest/userguide/listing-fees.html"
+      }
     },
     {
       "id": "apify-store-cumulative-payout",
@@ -878,7 +892,14 @@
       "note": "Does not apply to Enterprise Hub customers.",
       "platform": "RapidAPI Hub",
       "takeRateFraction": 0.25,
-      "takeRateBasis": "since 15 Nov 2025"
+      "takeRateBasis": "since 15 Nov 2025",
+      "marginTerms": {
+        "rate": 0.25,
+        "fixedUsd": 0,
+        "scope": "Public API Hub payment, before PayPal payout fees.",
+        "reviewedAt": "2026-11-27",
+        "sourceUrl": "https://docs.rapidapi.com/docs/payouts-and-finance"
+      }
     },
     {
       "id": "notion-marketplace-fee",
@@ -900,7 +921,14 @@
       "note": "Some localized versions of the help page still say 10% + $0.40; the English page says 8%.",
       "platform": "Notion Marketplace",
       "takeRateFraction": 0.08,
-      "takeRateBasis": "plus $0.40"
+      "takeRateBasis": "plus $0.40",
+      "marginTerms": {
+        "rate": 0.08,
+        "fixedUsd": 0.4,
+        "scope": "Template sale processed by Notion in USD, before any payout currency conversion.",
+        "reviewedAt": "2026-11-27",
+        "sourceUrl": "https://www.notion.com/help/selling-on-marketplace"
+      }
     },
     {
       "id": "framer-creator-payouts-2025",
@@ -949,7 +977,14 @@
       "note": "Webflow pages failed direct fetch (header overflow); rate read from the official update page's indexed text. Older sources citing 80% are outdated.",
       "platform": "Webflow Marketplace",
       "takeRateFraction": 0.05,
-      "takeRateBasis": null
+      "takeRateBasis": null,
+      "marginTerms": {
+        "rate": 0.05,
+        "fixedUsd": 0,
+        "scope": "Paid template sold through the Webflow Marketplace.",
+        "reviewedAt": "2026-11-27",
+        "sourceUrl": "https://webflow.com/updates/template-creator-enhancements"
+      }
     },
     {
       "id": "unity-asset-store-share",
@@ -977,7 +1012,14 @@
       "note": "Section 4.3 of the Asset Store Provider Agreement. No published total of provider earnings.",
       "platform": "Unity Asset Store",
       "takeRateFraction": 0.3,
-      "takeRateBasis": null
+      "takeRateBasis": null,
+      "marginTerms": {
+        "rate": 0.3,
+        "fixedUsd": 0,
+        "scope": "Asset Store sale, before refunds, transfer fees and applicable taxes.",
+        "reviewedAt": "2026-11-27",
+        "sourceUrl": "https://unity.com/legal/provider"
+      }
     },
     {
       "id": "gumroad-discover-fee",
@@ -1005,7 +1047,14 @@
       "note": "Same pricing page as gumroad-fee. Whether processing is included is not stated.",
       "platform": "Gumroad",
       "takeRateFraction": 0.3,
-      "takeRateBasis": "sales through the Discover marketplace"
+      "takeRateBasis": "sales through the Discover marketplace",
+      "marginTerms": {
+        "rate": 0.3,
+        "fixedUsd": 0,
+        "scope": "New customer buys via Gumroad Discover.",
+        "reviewedAt": "2026-11-27",
+        "sourceUrl": "https://gumroad.com/pricing"
+      }
     }
   ]
 }

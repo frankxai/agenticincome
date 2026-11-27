@@ -18,6 +18,13 @@ then call draft_offer_experiment to calculate contribution and export the source
 A human supplies the price and variable cost assumptions and approves all external actions.
 Open the tool's JSON at /workbench/offer-brief to edit it or export Markdown.
 
+## Worked research case
+
+Human-readable quote-review pilot: https://www.agenticincome.ai/blog/quote-review-pilot
+Editable OfferBrief.v1: https://www.agenticincome.ai/api/research/quote-review/brief.json
+Finance brief in Markdown: https://www.agenticincome.ai/api/research/quote-review/case.md
+All amounts in this example are illustrative. Replace assumptions and run draft_offer_experiment to evaluate your own case.
+
 ## What this site is
 
 - Three operator income models — services, products, systems — with honest
@@ -44,3 +51,10 @@ Sister sites, distinct disciplines:
 - disruptivepassiveincome.com — portfolio/compounding doctrine
 
 Site: https://www.agenticincome.ai · Author: Frank Riemer
+
+## Public economics API
+
+Read dated market observations at /api/v1/economics?dataset=markets and supply costs at
+/api/v1/economics?dataset=costs. Each row links to its source. The OpenAPI contract is
+https://www.agenticincome.ai/economics.openapi.json. The same evidence is available
+through search_digital_economies and list_supply_costs on the MCP server.

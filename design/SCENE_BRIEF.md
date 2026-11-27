@@ -175,3 +175,11 @@ Reuse the existing compact card, readable status and single action. The paused
 state gives the reader immediate access to the free Starter Kit. Keep the action
 visible at phone widths and under reduced motion. The manual state opens a draft
 in the reader's email app.
+
+## The studio · November 27, 2026
+
+A musician has their instrument in hand. The viewer has a proposed offer to test. The first frame pairs the two, giving the model a point of entry before the rest of the catalog. Platinum, black enamel, wool, mahogany and a small orbital-glass jewel catch a practical studio light. The second frame places collaborators across a mixing desk, listening before they decide. The black-hole detail belongs in the circular studio window. Screens, buttons, numbers and any financial claims use live HTML.
+
+Keep the face and guitar readable where the opening art crops. Give the number fields, evidence and action links a quiet opaque surface. Mobile reading order should follow the proposition, action, model and handoff, with usable controls and room for longer labels. Model changes should be legible under reduced motion. Existing Agentic Income character plates retain their specialist meanings. The campaign stills introduce anonymous editorial subjects without assigning them to the Starlight cast.
+
+Exact prompts, derivative sizes and checksums belong to `design/asset-manifest.json`. Both commissions use the founder’s written direction. Neither used a reference image or founder likeness. VIS owns the cross-brand cast registry. Figma marks its [Starlight cast board](https://www.figma.com/design/m2wi20fAoCgFOKGXkJJGAm?node-id=17-103) as concept work.

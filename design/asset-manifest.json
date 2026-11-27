@@ -1,6 +1,6 @@
 {
   "$comment": "Raster image slots for the cinematic homepage (docs/design/cinematic/design-lock.md). Declared 2026-11-12. None of these images exists yet: every slot currently renders its fallback, an inline SVG plate from components/motion/CharacterPlate.tsx. A later local image-generation pass may fill a slot only with a provenance sidecar (generator, model, prompt, seed, date, operator, license) stored beside the file. No stock imagery.",
-  "updatedAt": "2026-11-12",
+  "updatedAt": "2026-11-27",
   "surface": "homepage",
   "slots": [
     {
@@ -58,5 +58,50 @@
       "file": null,
       "provenance": null
     }
-  ]
+  ],
+  "campaignArt": {
+    "campaign": "Revenue desk",
+    "createdAt": "2026-11-27",
+    "operator": "OpenAI image generation, directed by Frank Riemer's Agentic Income website brief",
+    "modelId": null,
+    "seed": null,
+    "unreportedFields": [
+      "modelId",
+      "seed"
+    ],
+    "referenceImages": [],
+    "intendedUse": "Original editorial website campaign stills; each subject is an unnamed fictional android. No customer, earnings, or registered character is depicted.",
+    "publicationContext": "Created for the founder-requested Agentic Income website. Final public release and any separate asset resale follow the owning release and rights records.",
+    "derivation": "Generated 1536 × 1024 PNG to RGB WebP using Pillow, quality 86, method 6. Input fitted into 1700 × 1450 without upscaling.",
+    "assets": [
+      {
+        "id": "agentic-income-revenue-desk-guitarist",
+        "version": 1,
+        "description": "An android musician with an orbital-glass earpiece and a mahogany guitar",
+        "file": "public/brand/revenue-desk-guitarist.webp",
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "bytes": 139414,
+        "sha256": "7812f47824818d3fe2913ccb93f3683d7a27ac8ffa6e8bf2d38a63d7da4df947",
+        "sourcePngSha256": "ca4b715083c7629edf6dfe592a6eb30836d530d79ea646038e6c968114cab6c8",
+        "prompt": "Website hero art, a wide cinematic 3:2 luxury editorial photograph for Agentic Income. An original single android founder and jazz guitarist, polished black vitreous enamel and pale platinum face with delicately articulated mechanical fingers, expressive eyes sculpted from dark sapphire, a slim imperfect diamond-set orbital-glass ear jewel refracting a faint cosmic spectrum. Confident mid-performance in a dim private Amsterdam recording salon, sleeves of tailored black wool rolled up, a custom deep mahogany solid-body electric guitar with mother of pearl inlay. A small coil of luminous liquid-metal piping reflecting nebula-blue and one ember-red amplifier light. Strong silhouette on the RIGHT two thirds, keep left third very dark open and atmospheric for layout. Shot by a fine-art music photographer, documentary intimacy, 50mm lens, natural grain, real material scale, restrained luxury, narrow tungsten lighting, coherent anatomy and playable guitar. Hands and face deliberate focal points. Starlight attitude, quiet mastery, rebellious rockstar between takes. No text, no logo, no currency, no humans, no advertisements. Wide landscape standalone photographic art, edge-to-edge."
+      },
+      {
+        "id": "agentic-income-revenue-desk-listening-room",
+        "version": 1,
+        "description": "Two androids listen to a record in an Amsterdam studio",
+        "file": "public/brand/revenue-desk-listening-room.webp",
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "bytes": 232082,
+        "sha256": "c2f629435d8397880af356f34f4eedcf820c2560977a7fe1cf432c1c30e1e2d1",
+        "sourcePngSha256": "2833a49e5490b8afb80af9eb8b495cb12a1c713374cc9424b94742973b59fe99",
+        "prompt": "Second distinct original cinematic campaign still for Agentic Income, a late-night studio session, landscape 3:2 high-fashion group editorial, fine photographic grain. Two exquisitely crafted android collaborators in an intimate Amsterdam canal-house listening room, one pale brushed titanium in an ivory dinner jacket to the left leaning over a vintage analog mixing console, the other black oxidized silver wearing sculptural hand-blown orbital glass collar and tailored dark burgundy coat holding an unlabeled acetate record upright to the right. Casual shared look while reacting to a private first playback, candid and musical. Mahogany panelling, gold VU meter glow, one sapphire glass circular window with an optically believable black hole lens reflection, burgundy velvet, deep mineral shadows. Wide, layered composition with authentic mechanical craft and plausible instruments, medium format still, rich but rarefied and editorial. No letters, type, logos, stacks of cash, crypto tokens or generic neon effects. Distinctive modern art direction for a product detail or research cover."
+      }
+    ]
+  }
 }

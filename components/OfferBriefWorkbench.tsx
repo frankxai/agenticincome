@@ -2,23 +2,13 @@
 
 import Link from 'next/link'
 import { TrackedLink } from '@/components/TrackedLink'
-import { useRef, useState, type ChangeEvent, type FormEvent } from 'react'
+import { useRef, useState, useSyncExternalStore, type ChangeEvent, type FormEvent } from 'react'
 import {
   buildOfferBrief, offerBriefInputFromArtifact, offerBriefMarkdown, OFFER_CURRENCIES, OFFER_TEXT_LIMITS, OFFER_UNIT_LIMIT,
   type OfferBrief, type OfferBriefInput,
 } from '@/lib/offer-brief'
+import { scenarioFromFragment, studioExample as example } from '@/lib/revenue-scenario'
 import { trackOfferBrief } from '@/lib/offer-brief-events'
-
-const example: OfferBriefInput = {
-  sourceTitle: 'Studio handover interview (fictional example)',
-  sourceDate: '2026-10-09',
-  excerpt: 'We hand over the website on Friday. On Monday the client is still asking us for the redirect list, analytics access and the final content files.',
-  buyer: 'Independent web studios handing finished websites to client marketing teams',
-  offer: 'Website handover review',
-  currency: 'EUR', unitPrice: 180, unitCost: 60,
-  experiment: 'Show one sample handover report to three studio owners after their next launch. Ask each to book a paid review for an upcoming project.',
-  successCriterion: 'Within seven days, at least one of the three owners books a paid review at the proposed price.',
-}
 
 const stages = ['Source', 'Offer', 'Test'] as const
 type FormValues = Omit<OfferBriefInput, 'unitPrice' | 'unitCost'> & { unitPrice: string; unitCost: string }
@@ -53,9 +43,20 @@ function MoneyView({ brief }: {brief: OfferBrief}) {
   )
 }
 
+function subscribeToFragment(refresh: () => void) {
+  window.addEventListener('hashchange', refresh)
+  return () => window.removeEventListener('hashchange', refresh)
+}
+
 export function OfferBriefWorkbench() {
-  const [form, setForm] = useState<FormValues>(() => formValues(example))
-  const [brief, setBrief] = useState<OfferBrief | null>(() => buildOfferBrief(example))
+  const fragment = useSyncExternalStore(subscribeToFragment, () => window.location.hash, () => '')
+  const scenario = scenarioFromFragment(fragment)
+  return <OfferBriefEditor key={scenario ? fragment : 'default'} initial={scenario ?? example} />
+}
+
+function OfferBriefEditor({ initial }: { initial: OfferBriefInput }) {
+  const [form, setForm] = useState<FormValues>(() => formValues(initial))
+  const [brief, setBrief] = useState<OfferBrief | null>(() => buildOfferBrief(initial))
   const [step, setStep] = useState(0)
   const [sample, setSample] = useState(true)
   const [dirty, setDirty] = useState(false)

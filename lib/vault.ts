@@ -25,7 +25,18 @@ export type EconomyRow = Sourced & {
   period?: string
   takeRate?: string | null
   takeRateFraction?: number | null
+  /** Transaction-specific receipt, independent of the verification of the market metric. */
+  marginTerms?: { rate: number; fixedUsd: number; scope: string; reviewedAt: string; sourceUrl: string }
   retrievedAt: string
+}
+
+export function reviewedMarginTerms(row: EconomyRow | undefined) {
+  const terms = row?.marginTerms
+  if (!terms || terms.sourceUrl !== row?.sourceUrl || terms.rate !== row.takeRateFraction ||
+      !Number.isFinite(terms.rate) || terms.rate < 0 || terms.rate > 1 ||
+      !Number.isFinite(terms.fixedUsd) || terms.fixedUsd < 0 || !terms.scope ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(terms.reviewedAt)) return null
+  return terms
 }
 
 export type SupplyRow = Sourced & {
@@ -109,7 +120,9 @@ export function unitMargin(v: VaultData, input: MarginInput): MarginResult {
     else if (!confirmed(row.id)) refused.push(`${c.supplyId}: source not confirmed`)
     else lines.push({ label: `${row.vendor}: ${row.item} x ${c.quantity}`, usd: c.quantity * row.price, sourceUrl: row.sourceUrl })
   }
-  for (const id of input.feeSupplyIds ?? []) {
+  const feeIds = input.feeSupplyIds ?? []
+  if (new Set(feeIds).size !== feeIds.length) refused.push('Each selling fee may be applied only once per sale.')
+  for (const id of feeIds) {
     const row = supply.get(id)
     const hasTerms = row && (typeof row.rate === 'number' || typeof row.fixedUsd === 'number')
     if (!row || row.priceKind !== 'rate' || typeof row.commissionRate === 'number') refused.push(`${id}: not a selling fee row`)
@@ -119,13 +132,30 @@ export function unitMargin(v: VaultData, input: MarginInput): MarginResult {
   }
   if (input.takeRateFrom) {
     const row = econ.get(input.takeRateFrom)
+    const terms = reviewedMarginTerms(row)
     if (!row || typeof row.takeRateFraction !== 'number') refused.push(`${input.takeRateFrom}: no base take rate`)
     else if (!confirmed(row.id)) refused.push(`${input.takeRateFrom}: source not confirmed`)
-    else lines.push({ label: `${row.platform ?? row.name} take rate`, usd: input.priceUsd * row.takeRateFraction, sourceUrl: row.sourceUrl })
+    else if (!terms) {
+      refused.push(`${row.id}: transaction fee terms have not been reviewed for calculation`)
+    } else {
+      if (feeIds.some((id) => supply.get(id)?.sourceUrl === terms.sourceUrl)) {
+        refused.push(`${row.id}: a selling fee from this pricing source is already included`)
+      } else {
+        lines.push({
+          label: `${row.platform ?? row.name}: ${terms.scope} Reviewed ${terms.reviewedAt}.`,
+          usd: input.priceUsd * terms.rate + terms.fixedUsd,
+          sourceUrl: terms.sourceUrl,
+        })
+      }
+    }
   }
   if (refused.length) return { ok: false, refused }
 
   const costUsd = lines.reduce((a, l) => a + l.usd, 0)
   const keepUsd = input.priceUsd - costUsd
-  return { ok: true, priceUsd: input.priceUsd, costUsd, keepUsd, grossMarginPct: (keepUsd / input.priceUsd) * 100, lines }
+  const grossMarginPct = (keepUsd / input.priceUsd) * 100
+  if (![costUsd, keepUsd, grossMarginPct].every(Number.isFinite)) {
+    return { ok: false, refused: ['Inputs exceed the supported calculation range.'] }
+  }
+  return { ok: true, priceUsd: input.priceUsd, costUsd, keepUsd, grossMarginPct, lines }
 }

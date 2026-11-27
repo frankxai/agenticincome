@@ -373,7 +373,11 @@ function drawCalc() {
     const lines = [];
     for (const l of s.costLines ?? []) { const src = supplyById.get(l.supplyId); lines.push([`${src.vendor}: ${src.item} × ${l.quantity}`, l.quantity * src.price]) }
     for (const f of s.feeLines ?? []) { const src = supplyById.get(f.supplyId); lines.push([`${src.vendor} fee`, p * (src.rate ?? 0) + (src.fixedUsd ?? 0)]) }
-    if (s.takeRateFrom) { const e = econById.get(s.takeRateFrom); lines.push([`${e.platform ?? e.name} take rate`, p * e.takeRateFraction]) }
+    if (s.takeRateFrom) {
+      const market = econById.get(s.takeRateFrom);
+      const terms = market.marginTerms;
+      lines.push([`${market.platform ?? market.name}: ${terms.scope}`, p * terms.rate + terms.fixedUsd]);
+    }
     const cost = lines.reduce((a, [, v]) => a + v, 0), keep = p - cost, m = (keep / p) * 100;
     $('mBig').textContent = m.toFixed(1) + '%';
     $('mBig').style.color = m < 0 ? 'var(--warn)' : m < 50 ? 'var(--money)' : 'var(--impl)';

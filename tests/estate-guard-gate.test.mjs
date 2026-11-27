@@ -124,6 +124,44 @@ test('expanded TMPDIR targets still get the scratch exception', () => {
   assert.equal(decide(`${RM}\${TMPDIR}/estate-guard-test`, { TMPDIR: '/tmp' }), 'allow');
 });
 
+// Thread 3: an unquoted $TMPDIR expansion is word-split and globbed by bash.
+// If the hook's TMPDIR holds whitespace or glob characters, `$TMPDIR/cache`
+// can become several words, one of them a relative non-scratch path
+// (TMPDIR='/tmp/a b' gives `/tmp/a` and `b/cache`). Fail closed: ask.
+const UNSAFE_TMPDIRS = [
+  '/tmp/estate guard',
+  '/tmp/estate\tguard',
+  '/tmp/estate\nguard',
+  '/tmp/estate*guard',
+  '/tmp/estate?guard',
+  '/tmp/estate[g]uard',
+];
+
+for (const tmpdir of UNSAFE_TMPDIRS) {
+  const label = JSON.stringify(tmpdir);
+  test(`unquoted TMPDIR expansion asks when TMPDIR is ${label}`, () => {
+    assert.ok(['ask', 'deny'].includes(decide(`${RM}$TMPDIR/cache`, { TMPDIR: tmpdir })), 'expected ask or deny');
+    assert.ok(['ask', 'deny'].includes(decide(`${RM}\${TMPDIR}/cache`, { TMPDIR: tmpdir })), 'expected ask or deny');
+    assert.ok(
+      ['ask', 'deny'].includes(decide(`${RM}/tmp/estate-guard-test $TMPDIR/cache`, { TMPDIR: tmpdir })),
+      'expected ask or deny',
+    );
+  });
+
+}
+
+// Double quotes stop word splitting, so a whitespace TMPDIR stays one scratch path.
+for (const tmpdir of UNSAFE_TMPDIRS.filter((t) => /\s/.test(t))) {
+  test(`double-quoted TMPDIR expansion is still scratch when TMPDIR is ${JSON.stringify(tmpdir)}`, () => {
+    assert.equal(decide(`${RM}"$TMPDIR/cache"`, { TMPDIR: tmpdir }), 'allow');
+  });
+}
+
+test('unquoted TMPDIR expansion is still scratch when TMPDIR has no whitespace or glob characters', () => {
+  assert.equal(decide(`${RM}$TMPDIR/cache`, { TMPDIR: '/tmp/estate-guard' }), 'allow');
+  assert.equal(decide(`${RM}\${TMPDIR}/cache`, { TMPDIR: '/tmp/estate-guard' }), 'allow');
+});
+
 test('non-scratch recursive delete still asks', () => {
   assert.equal(decide(`${RM}./build`), 'ask');
   assert.equal(decide(`${RM}/tmp/estate-guard-test ./build`), 'ask');

@@ -25,7 +25,9 @@ TMPDIR is set and resolves to a scratch root (the expanded path is then checked
 like a literal one) AND the command does not itself assign TMPDIR anywhere
 (inline prefix, export, declare, env, set, unset, ...) AND the target is typed
 exactly as $TMPDIR/... or "$TMPDIR/..." (single quotes, a backslash, $'...',
-$"..." or quotes inside the name pass a literal path, so they ask). A command that
+$"..." or quotes inside the name pass a literal path, so they ask; the unquoted
+form also asks when the hook's TMPDIR contains whitespace or glob characters,
+since bash would split or glob the expansion). A command that
 names the delete tool any other way than the bare unquoted word `rm` (/bin/rm,
 ./rm, "rm", \\rm, X=rm, a quoted bash -c script) or uses find -delete/-exec/-ok
 gets no exception. A command that
@@ -164,6 +166,9 @@ LINKERS = re.compile(r"(?:^|[^\w-])(?:ln|mount|bindfs)\s", re.I)
 # as a reassignment: inline prefix (TMPDIR=x rm), export/declare/typeset/local/
 # readonly/env/set TMPDIR=x, TMPDIR+=x, unset TMPDIR, read TMPDIR, for TMPDIR in.
 TMPDIR_WRITE = re.compile(r"(?<![$\w{])TMPDIR(?!\w)")
+# Characters in the hook's TMPDIR that make an UNQUOTED $TMPDIR expansion split
+# into several words (default IFS) or glob-expand into other paths.
+UNSAFE_UNQUOTED_TMPDIR = re.compile(r"[\s*?\[]")
 # Where a shell word ends (unquoted). Used to split the whole command and each
 # rm argument list into words while keeping each word's raw (quoted) text.
 WORD_BREAK = set(" \t\n;&|()<>`")
@@ -241,6 +246,12 @@ def is_scratch_target(target: str, tmpdir_reassigned: bool = False, raw: str | N
     # assigns TMPDIR, the value the shell expands is unknown here, so ask.
     # Otherwise expand with the hook's own TMPDIR, which must be a scratch root.
     if tmpdir_reassigned:
+        return False
+    # Unquoted, bash word-splits and globs the expanded value: with
+    # TMPDIR='/tmp/a b', $TMPDIR/cache becomes `/tmp/a` and the relative
+    # `b/cache`. Grant the exception for an unquoted expansion only when the
+    # hook's TMPDIR has no whitespace or glob characters (fail closed).
+    if raw == target and UNSAFE_UNQUOTED_TMPDIR.search(os.environ.get("TMPDIR", "")):
         return False
     env_root = _env_scratch_root()
     if env_root is None:

@@ -14,7 +14,7 @@ const files = {
   privacy: read('app/privacy/page.tsx'),
   notFound: read('app/not-found.tsx'),
   footer: read('components/Footer.tsx'),
-  headers: read('vercel.json'),
+  headers: `${read('vercel.json')}\n${read('next.config.mjs')}`,
   css: read('app/globals.css'),
   path: read('components/PathSection.tsx'),
   'service-kit': read('products/blueprint/service-kit.md'),

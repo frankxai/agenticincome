@@ -30,9 +30,18 @@ form also asks when the hook's TMPDIR contains whitespace or glob characters,
 since bash would split or glob the expansion). A command that
 names the delete tool any other way than the bare unquoted word `rm` (/bin/rm,
 ./rm, "rm", \\rm, X=rm, a quoted bash -c script) or uses find -delete/-exec/-ok
-gets no exception. A command that
-also runs `ln`/`mount`, or contains a redirect with & or | (&>, &>>, >&, <&, >|),
-gets no exception; an rm's arguments end only at an unquoted separator. Relative paths (`cd /tmp && rm -rf x`),
+gets no exception. Each simple command is split on unquoted `;`, `&&`, `||`,
+`|`, newlines and subshell parentheses, then tokenized with redirections
+separated from words (the same operator boundaries `shlex` punctuation_chars
+would expose; quotes stay intact so a quoted path is still a literal). A
+redirection glued to rm (`rm</dev/null`, `rm>file`, `rm>>file`, `rm<<<word`)
+or an fd redirection (`rm 2>file`) is still that rm, and the redirect target
+is not a delete operand. The scratch exception applies only when EVERY rm
+invocation's operands are scratch paths. A here-document (`rm<<EOF`), an
+`&`/`|` redirect (`&>`, `>&`, `<&`, `>|`), a process substitution, or any
+other redirection that does not separate cleanly fails closed (ask). An rm's
+arguments end only at an unquoted separator. A command that also runs
+`ln`/`mount` gets no exception. Relative paths (`cd /tmp && rm -rf x`),
 ~, $HOME, anything else, or a single non-scratch target in any rm still ASK.
 The root/home DENY runs first and is unchanged; every other ASK rule still fires
 even when the command also contains a scratch rm. Leading VAR=value prefixes
@@ -148,7 +157,11 @@ RECURSIVE_DELETE = "recursive delete"
 # Every standalone `rm` word counts as an invocation, wherever it sits (new
 # lines, after xargs/env/\\, inside quotes). Over-matching only removes the
 # exception; under-matching would let a second, non-scratch rm through.
+# Redirections are stripped first, so this still matches an rm that was glued
+# to `<` or `>` (`rm</dev/null`, `rm>file`) once the operator is separated.
 RM_AT = re.compile(r"(?<![\w./-])rm(?=\s|$)", re.I)
+# A bare rm next to a redirection the splitter could not remove. Fail closed.
+_BARE_RM = re.compile(r"(?<![\w./-])rm(?=\s|$|[<>&])", re.I)
 # Where one rm invocation's arguments end: an UNQUOTED, unescaped separator,
 # exactly where bash ends the simple command (see _rm_args). A ')' or ';'
 # inside quotes or after a backslash is part of an argument, not an end.
@@ -364,18 +377,218 @@ def _unvetted_delete(words: list[tuple[str, str]]) -> bool:
     return False
 
 
+# Longest match first so `<<<` is a here-string and `&>>` is not read as `&>`.
+_REDIR_OPS = ("&>>", "<<<", ">>", "<<", "<>", ">&", "<&", ">|", "&>", ">", "<")
+# These stay fail-closed: here-documents swallow the following lines, and the
+# `&`/`|` forms are redirects in bash rather than the separators they look like.
+_OPAQUE_REDIRS = {"<<", ">&", "<&", ">|", "&>", "&>>"}
+
+
+def _split_segments(cmd: str) -> list[str] | None:
+    """Split into simple commands on unquoted ; && || | newlines and subshell parens.
+
+    Separators are dropped. None means an unterminated quote (fail closed).
+    """
+    segments: list[str] = []
+    buf: list[str] = []
+    quote = None
+    i, n = 0, len(cmd)
+
+    def flush() -> None:
+        segments.append("".join(buf))
+        buf.clear()
+
+    while i < n:
+        c = cmd[i]
+        if quote == "'":
+            buf.append(c)
+            if c == "'":
+                quote = None
+            i += 1
+            continue
+        if quote == '"':
+            buf.append(c)
+            if c == '"':
+                quote = None
+            elif c == "\\" and i + 1 < n:
+                buf.append(cmd[i + 1])
+                i += 2
+                continue
+            i += 1
+            continue
+        if c == "\\":
+            buf.append(c)
+            if i + 1 < n:
+                buf.append(cmd[i + 1])
+                i += 2
+            else:
+                i += 1
+            continue
+        if c in "'\"":
+            quote = c
+            buf.append(c)
+            i += 1
+            continue
+        if cmd.startswith("&&", i) or cmd.startswith("||", i):
+            flush()
+            i += 2
+            continue
+        if c in ";\n|()":
+            flush()
+            i += 1
+            continue
+        buf.append(c)
+        i += 1
+    if quote:
+        return None
+    flush()
+    return segments
+
+
+def _redir_op(text: str, i: int) -> str | None:
+    for op in _REDIR_OPS:
+        if text.startswith(op, i):
+            return op
+    return None
+
+
+def _drop_fd(buf: list[str]) -> None:
+    """Drop a trailing fd number that is its own word (`2>`), not part of an operand (`file2>`)."""
+    j = len(buf)
+    while j > 0 and buf[j - 1].isdigit():
+        j -= 1
+    if j < len(buf) and (j == 0 or buf[j - 1] in " \t\n;&|("):
+        del buf[j:]
+
+
+def _skip_redirect_word(text: str, i: int) -> int | None:
+    """Index just after the redirect target. None if the target is missing or ambiguous."""
+    n = len(text)
+    while i < n and text[i] in " \t":
+        i += 1
+    if i >= n or text[i] in ";\n|&)<>":
+        return None
+    if text[i] == "(":
+        return None  # process substitution, or a redirect with no filename
+    start, quote = i, None
+    while i < n:
+        c = text[i]
+        if quote == "'":
+            if c == "'":
+                quote = None
+            i += 1
+            continue
+        if quote == '"':
+            if c == '"':
+                quote = None
+            elif c == "\\" and i + 1 < n:
+                i += 2
+                continue
+            i += 1
+            continue
+        if c == "\\":
+            i += 2 if i + 1 < n else 1
+            continue
+        if c in "'\"":
+            quote = c
+            i += 1
+            continue
+        if c in " \t;\n|&)<>":
+            break
+        i += 1
+    if quote or i == start:
+        return None
+    return i
+
+
+def _without_redirections(segment: str) -> str | None:
+    """Remove plain redirections so operands remain and `rm</dev/null` stays an rm.
+
+    Returns None when a here-document, an `&`/`|` redirect, a process
+    substitution, or a missing redirect target makes the segment ambiguous.
+    """
+    out: list[str] = []
+    i, n = 0, len(segment)
+    quote = None
+    while i < n:
+        c = segment[i]
+        if quote == "'":
+            out.append(c)
+            if c == "'":
+                quote = None
+            i += 1
+            continue
+        if quote == '"':
+            out.append(c)
+            if c == '"':
+                quote = None
+            elif c == "\\" and i + 1 < n:
+                out.append(segment[i + 1])
+                i += 2
+                continue
+            i += 1
+            continue
+        if c == "\\":
+            out.append(c)
+            if i + 1 < n:
+                out.append(segment[i + 1])
+                i += 2
+            else:
+                i += 1
+            continue
+        if c in "'\"":
+            quote = c
+            out.append(c)
+            i += 1
+            continue
+        op = _redir_op(segment, i) if c in "<>&" else None
+        if not op:
+            out.append(c)
+            i += 1
+            continue
+        if op in _OPAQUE_REDIRS:
+            return None
+        _drop_fd(out)
+        i += len(op)
+        nxt = _skip_redirect_word(segment, i)
+        if nxt is None:
+            return None
+        i = nxt
+        out.append(" ")
+    if quote:
+        return None
+    return "".join(out)
+
+
+def _normalized_command(cmd: str) -> str | None:
+    """Every simple command with redirections separated out. None if any segment is ambiguous."""
+    segments = _split_segments(cmd)
+    if segments is None:
+        return None
+    cleaned: list[str] = []
+    for segment in segments:
+        piece = _without_redirections(segment)
+        if piece is None:
+            return None
+        cleaned.append(piece)
+    return ";".join(cleaned)
+
+
 def rm_only_scratch(cmd: str) -> bool:
     """True only if every rm invocation in cmd deletes nothing but scratch targets."""
     if "`" in cmd or "$(" in cmd or LINKERS.search(cmd) or AMP_PIPE_REDIRECT.search(cmd):
+        return False
+    normalized = _normalized_command(cmd)
+    if normalized is None:
         return False
     all_words = _words(cmd)
     if all_words is None or _unvetted_delete(all_words):
         return False
     tmpdir_reassigned = bool(TMPDIR_WRITE.search(cmd))
     found = False
-    for m in RM_AT.finditer(cmd):
+    for m in RM_AT.finditer(normalized):
         found = True
-        raw = _rm_args(cmd[m.end():])
+        raw = _rm_args(normalized[m.end():])
         if raw is None:
             return False
         tokens = _words(raw)
@@ -397,7 +610,13 @@ def rm_only_scratch(cmd: str) -> bool:
 def decision(cmd: str):
     allow_force = bool(os.environ.get("ESTATE_GUARD_ALLOW_FORCE"))
     stripped = _strip_wrappers(cmd)
-    views = (cmd,) if stripped == cmd else (cmd, stripped)
+    views = [cmd] if stripped == cmd else [cmd, stripped]
+    normalized = _normalized_command(cmd)
+    if normalized and normalized != cmd:
+        views.append(normalized)
+        nstripped = _strip_wrappers(normalized)
+        if nstripped != normalized:
+            views.append(nstripped)
 
     def hit(pat):
         return any(re.search(pat, v, re.I) for v in views)
@@ -412,6 +631,10 @@ def decision(cmd: str):
             if why == RECURSIVE_DELETE and rm_only_scratch(cmd):
                 continue
             return "ask", why
+    # A redirection the splitter could not remove hides whatever follows it.
+    # If a bare rm is in that command, do not treat the parse failure as allow.
+    if normalized is None and _BARE_RM.search(cmd):
+        return "ask", RECURSIVE_DELETE
     return None, None
 
 

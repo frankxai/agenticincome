@@ -162,6 +162,40 @@ test('unquoted TMPDIR expansion is still scratch when TMPDIR has no whitespace o
   assert.equal(decide(`${RM}\${TMPDIR}/cache`, { TMPDIR: '/tmp/estate-guard' }), 'allow');
 });
 
+// Redirections are not whitespace, but bash still starts an rm at `rm<` / `rm>` /
+// `rm 2>` / `rm<<`. The scratch exception applies only when every rm's operands
+// are scratch paths. A here-document does not separate cleanly, so it asks.
+const REDIR_RM = [
+  `${RM}/tmp/scratch; ${RD}</dev/null -rf ./project`,
+  `${RM}/tmp/scratch; ${RD}>x -rf ./project`,
+  `${RM}/tmp/scratch; ${RD} 2>/dev/null -rf ./project`,
+  `${RM}/tmp/scratch; ${RD}<<EOF`,
+  `${RD}</dev/null -rf ./project`,
+  `${RD}>x -rf ./project`,
+  `${RD}>>/tmp/out -rf ./project`,
+  `${RD} 2>/dev/null -rf ./project`,
+  `${RD} 2>>/tmp/out -rf ./project`,
+  `${RD}<<<text -rf ./project`,
+  `sudo ${RD}</dev/null -rf ./project`,
+  `${RM}/tmp/scratch2>/dev/null ./project`,
+];
+
+for (const command of REDIR_RM) {
+  test(`redirection does not hide a non-scratch delete: ${command.replaceAll(RM, '<rd> ').replaceAll(RD, '<rm>')}`, () => {
+    assert.equal(decide(command), 'ask');
+  });
+}
+
+test('scratch-only recursive delete still allows, including when a redirection is separated out', () => {
+  assert.equal(decide(`${RM}/tmp/scratch`), 'allow');
+  assert.equal(decide(`${RM}/tmp/scratch >/dev/null`), 'allow');
+  assert.equal(decide(`${RM}/tmp/scratch 2>/dev/null`), 'allow');
+  assert.equal(decide(`${RD}</dev/null -rf /tmp/scratch`), 'allow');
+  assert.equal(decide(`${RD} 2>/dev/null -rf /tmp/scratch`), 'allow');
+  assert.equal(decide(`${RM}/tmp/scratch; ${RD}</dev/null -rf /tmp/other`), 'allow');
+  assert.equal(decide(`${RM}/tmp/scratch2>/dev/null`), 'allow');
+});
+
 test('non-scratch recursive delete still asks', () => {
   assert.equal(decide(`${RM}./build`), 'ask');
   assert.equal(decide(`${RM}/tmp/estate-guard-test ./build`), 'ask');

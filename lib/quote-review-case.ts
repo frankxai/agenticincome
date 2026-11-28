@@ -1,5 +1,5 @@
-import { buildOfferBrief, offerBriefMarkdown } from './offer-brief'
-import { site } from './site'
+import { buildOfferBrief, offerBriefMarkdown, type OfferBriefInput } from './offer-brief.ts'
+import { site } from './site.ts'
 
 export const pilot = {
   title: 'Can a €1,500 quote-review pilot pay for itself?',
@@ -25,8 +25,8 @@ export const contribution = pilot.price - deliveryCost
 export const downside = contribution - pilot.reworkHours * pilot.hourlyCost
 export const monthlyBuyerValue = pilot.monthlyHoursRecovered * pilot.buyerHourlyValue - pilot.buyerMonthlyCost
 
-export function quoteReviewBrief() {
-  return buildOfferBrief({
+export function quoteReviewInput(): OfferBriefInput {
+  return {
     sourceTitle: 'Illustrative quote-review pilot assumptions',
     sourceUrl: site.url + '/blog/' + pilot.slug, sourceDate: pilot.date,
     excerpt: 'Modeled scenario. A sales operations lead wants an assistant to flag discrepancies between a draft quote and an approved rate card. Demand, effort and acceptance have not been observed.',
@@ -35,7 +35,11 @@ export function quoteReviewBrief() {
     currency: 'EUR', unitPrice: pilot.price, unitCost: deliveryCost,
     experiment: 'Ask one design partner to supply ten representative quotes, mark the expected discrepancies, time a manual review and name the budget owner before agreeing a pilot.',
     successCriterion: 'Surface every buyer-designated critical discrepancy in the agreed sample with a rate-card reference. Record false positives and reviewer time. Agree the spending decision separately.',
-  }, pilot.date)
+  }
+}
+
+export function quoteReviewBrief() {
+  return buildOfferBrief(quoteReviewInput(), pilot.date)
 }
 
 export function quoteReviewMarkdown() {

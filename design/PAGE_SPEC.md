@@ -207,3 +207,9 @@ Surface: `app/challenge/page.tsx`, not a protected surface. Copy and one removed
 A sales lead and finance owner arrive from the research index to decide whether a scoped quote-review pilot merits a real buyer test. The article names the sample and its modeled status before showing costs. The cost breakdown, four-hour rework scenario and buyer-capacity calculation give the reader one decision to inspect. Acceptance belongs to the finance owner.
 
 The page offers an editable JSON brief and a Markdown case. The existing offer workbench opens the JSON and recalculates its derived economics. One record supplies all three editions. The canonical page is `/blog/quote-review-pilot`.
+
+## Quote-review workbench · 2026-11-28
+
+At `/workbench/quote-review`, a sales lead can price a review of ten quotes and a finance owner can inspect what happens when human review overruns. The worked case and the main workbench both open the instrument. The two editable assumptions are fee and review hours.
+
+The first result shows euros retained per pilot before fixed costs. The stress case adds four review hours. Keep monthly break-even in whole pilots and buyer payback in months. State the value of redeployed time separately from cash savings. The user can carry the chosen assumptions into the existing brief editor, download the editable JSON, or print a decision memo. The source case and fixed assumptions are available from the same screen.

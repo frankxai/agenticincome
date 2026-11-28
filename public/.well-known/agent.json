@@ -1,0 +1,36 @@
+{
+  "schema": "starlight.agent.v1",
+  "name": "Agentic Income",
+  "domain": "agenticincome.ai",
+  "canonical": "https://www.agenticincome.ai",
+  "description": "The operating system for people who build income with AI agent teams: playbooks, partner economics, working code — and a live MCP server your agents can query. Claims are dated and sourced. We never promise income.",
+  "author": "Frank Riemer",
+  "discovery": {
+    "agentsMd": "https://www.agenticincome.ai/agents.md",
+    "llmsTxt": "https://www.agenticincome.ai/llms.txt",
+    "llmsFullTxt": "https://www.agenticincome.ai/llms-full.txt",
+    "mcpManifest": "https://www.agenticincome.ai/.well-known/mcp.json",
+    "economicsOpenApi": "https://www.agenticincome.ai/economics.openapi.json"
+  },
+  "mcp": {
+    "name": "agentic-income",
+    "endpoint": "https://www.agenticincome.ai/api/mcp",
+    "transport": "streamable-http",
+    "docs": "https://www.agenticincome.ai/mcp",
+    "manifest": "https://www.agenticincome.ai/.well-known/mcp.json"
+  },
+  "surfaces": {
+    "home": "https://www.agenticincome.ai",
+    "build": "https://www.agenticincome.ai/build",
+    "operate": "https://www.agenticincome.ai/operate",
+    "proof": "https://www.agenticincome.ai/proof",
+    "offers": "https://www.agenticincome.ai/offers",
+    "trust": "https://www.agenticincome.ai/trust",
+    "disclosure": "https://www.agenticincome.ai/disclosure",
+    "economicsApi": "https://www.agenticincome.ai/api/v1/economics"
+  },
+  "disclosures": [
+    "No income promises — tooling and documentation support evaluation and engineering only.",
+    "Links marked ourLink in partner-program responses are affiliate links that may earn a commission."
+  ]
+}

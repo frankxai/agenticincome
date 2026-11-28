@@ -49,6 +49,10 @@ We never guarantee or promise income. Every economic claim carries a primary sou
 
 - Home: https://www.agenticincome.ai/
 - MCP guide: https://www.agenticincome.ai/mcp
+- Quote-review calculator: https://www.agenticincome.ai/workbench/quote-review
+- Worked assumptions for ten historical quotes: https://www.agenticincome.ai/blog/quote-review-pilot
+- Illustrative scenario API (fee in EUR, review time in hours): https://www.agenticincome.ai/api/research/quote-review/scenario?fee=1500&hours=14
+- Editable baseline brief: https://www.agenticincome.ai/api/research/quote-review/brief.json
 - Build: https://www.agenticincome.ai/build
 - Operate: https://www.agenticincome.ai/operate
 - Proof: https://www.agenticincome.ai/proof

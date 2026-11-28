@@ -1,0 +1,9 @@
+@media (max-width: 700px) {
+  .quote-review-workspace > nav { padding-top: .25rem; }
+  .quote-review-workspace .pd-desk { padding-top: 1.4rem; }
+  .quote-review-workspace .pd-intro { margin-bottom: 1.15rem; }
+  .quote-review-workspace .pd-intro h1 { font-size: clamp(2.2rem, 8.8vw, 3.15rem); }
+  .quote-review-workspace .pd-inputs { padding-block: 1rem; }
+  .quote-review-workspace .pd-dial + .pd-dial { margin-top: .9rem; }
+  .quote-review-workspace .pd-input-note { margin-top: .9rem; }
+}

@@ -223,3 +223,11 @@ A sales operations lead and a finance partner must decide whether to test an AI-
 Use the same source, currency, dates and cost assumptions for the homepage, the published research case and the transferred brief. Changing fee or hours must update both the seller contribution and the buyer payback. A loss, a fragile margin under rework, and positive downside contribution each need a distinct textual decision. The buyer's capacity must remain identifiable as modeled time, and the seller's contribution is measured before fixed costs.
 
 An operator can change the scenario by keyboard, read its assumptions, print a decision memo, download editable JSON, or take the same numbers and evidence into the existing brief editor. A reader with JavaScript disabled can inspect and download the base case. Keep the founder's other material one click away through the case article, implementation, self-service toolkit, and agent-access routes.
+
+## Quote-review workbench · 2026-11-28
+
+At `/workbench/quote-review`, a sales lead can price a review of ten quotes and a finance owner can inspect what happens when human review overruns. The worked case and the main workbench both open the instrument. The two editable assumptions are fee and review hours.
+
+The first result shows euros retained per pilot before fixed costs. The stress case adds four review hours. Keep monthly break-even in whole pilots and buyer payback in months. State the value of redeployed time separately from cash savings. The user can carry the chosen assumptions into the existing brief editor, download the editable JSON, or print a decision memo. The source case and fixed assumptions are available from the same screen.
+
+The price negotiation disclosure compares a 20% contribution margin after rework with a four-month buyer payback target. When the price window is empty, show the seller’s cost reduction or the buyer’s extra monthly value needed to close the gap. The scenario API, print memo and editable brief carry the same bounds.

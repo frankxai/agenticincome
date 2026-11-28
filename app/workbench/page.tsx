@@ -59,7 +59,10 @@ export default function WorkbenchPage() {
             full model — problem, customer, offer, workflow, authority, costs, kill criterion — is
             what you graduate into, not the toll gate.
           </p>
-          <Link href="/workbench/offer-brief" className="cta mt-5">Build an offer brief <span aria-hidden="true">→</span></Link>
+          <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">
+            <Link href="/workbench/offer-brief" className="cta">Build an offer brief <span aria-hidden="true">→</span></Link>
+            <Link href="/workbench/quote-review" className="inline-flex min-h-11 items-center font-semibold text-accent underline underline-offset-4">Price a quote-review pilot</Link>
+          </div>
           <p className="mt-5 max-w-3xl leading-8 text-muted">
             It will not tell you what you will earn. It reports what your own document asserts, what
             it cannot support, and what you still owe before a manifest is valid. Activation means a

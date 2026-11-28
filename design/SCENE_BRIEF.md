@@ -195,3 +195,11 @@ Open on warm paper with an editorial headline, the worked downside and a single 
 Set paper controls beside a dark result panel. One scale sets the selling price and the other sets human review time. A contribution plot shows where the same slope lands four hours later. Use signed numbers and text beside each signal. Keep secondary research as a contact with the founder's studio and use native disclosure for the reference catalog.
 
 Keep the opening and the financial case readable in a still frame. Respect reduced motion, show visible keyboard focus and leave room for full labels and actions at 320 CSS pixels. The new campaign still is an original manufactured object and anonymous articulated hand, recorded as `agentic-income-pilot-decision-instrument` in the asset manifest.
+
+## Quote-review workbench · 2026-11-28
+
+A warm-paper worksheet sits inside the existing dark site. A navy ledger places the euro result beside the inputs on wide screens. Phone layouts stack the inputs over the result. The line describes contribution as review hours increase. Exact values sit in text below the line so the chart remains optional for interpretation.
+
+Preserve full-size native range targets and a visible keyboard focus ring. The fee, hours and results update together. Motion carries no information. Print draws a separate decision memo with the selected terms, downside, delivery costs, buyer payback, fixed-cost coverage, approval and source.
+
+Price negotiation opens on request below break-even and payback. Keep the two fee bounds and the size of any gap in text. Native disclosure preserves keyboard and reduced-motion behavior.

@@ -193,3 +193,7 @@ Price negotiation opens on request below break-even and payback. Keep the two fe
 The opening poses a concrete decision at a €1,500 buyer ceiling. Each of the four comparison sections separates its billing unit, observed terms and direct source. The cost ledger pairs left-aligned formula text with right-aligned currency, preserving reading order on narrow screens. Two final paragraphs translate the fee gap into 80 minutes of delivery work or €31.25 of monthly value. A link lets the reader test another fee and review time. Another link downloads the dated JSON.
 
 The reading surface inherits the journal’s static typography and has no bespoke motion, character or commissioned asset. Screenshots from the local production build cover the new ledger at phone, tablet and desktop widths. On the phone the article and dataset work with JavaScript disabled.
+
+## MCP tool reference, 28 November 2026
+
+Same obsidian panel, border, and type. No new motion, image, or brand. Below 768px each tool reads as a stacked name, Arguments, and Returns list so the honesty sentence wraps inside the viewport. From 768px the existing three-column table is the frame. The list and the table are static, so reduced motion changes nothing. The heading anchor sits below the sticky nav.

@@ -18,6 +18,15 @@ then call draft_offer_experiment to calculate contribution and export the source
 A human supplies the price and variable cost assumptions and approves all external actions.
 Open the tool's JSON at /workbench/offer-brief to edit it or export Markdown.
 
+## Worked quote-review pilot
+
+Human calculator: https://www.agenticincome.ai/workbench/quote-review
+Case and assumptions: https://www.agenticincome.ai/blog/quote-review-pilot
+Selected scenario and editable brief: https://www.agenticincome.ai/api/research/quote-review/scenario?fee=1500&hours=14
+Machine-readable baseline: https://www.agenticincome.ai/api/research/quote-review/brief.json
+Markdown case: https://www.agenticincome.ai/api/research/quote-review/case.md
+The baseline models ten historical quotes. All prices, costs and benefits are illustrative.
+
 ## What this site is
 
 - Three operator income models — services, products, systems — with honest

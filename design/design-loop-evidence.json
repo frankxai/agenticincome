@@ -529,5 +529,46 @@
       "Upstream handler claims the position before saving the signal; a failed save can leave the count one high (not fixable in the unchanged copy).",
       "Verified in headless Chromium without a GPU."
     ]
+  },
+  "quote_review_workbench": {
+    "date": "2026-11-28",
+    "scope": [
+      "/workbench/quote-review",
+      "/workbench",
+      "/workbench/offer-brief",
+      "/blog/quote-review-pilot",
+      "/api/research/quote-review/scenario",
+      "/sitemap.xml",
+      "/llms.txt",
+      "/llms-full.txt"
+    ],
+    "constitution_revision": "e25fab4c5a0dac2ea8c7b91e9397972f5af4b454",
+    "sources": [
+      "lib/quote-review-case.ts",
+      "lib/offer-brief.ts",
+      "design/PAGE_SPEC.md",
+      "design/SCENE_BRIEF.md",
+      "DESIGN.md"
+    ],
+    "provenance": "The fee, costs and potential value come from the dated, explicitly illustrative public quote-review case. The diagram is rendered from those assumptions. No third-party art, identity or customer data enters the instrument.",
+    "baseline": "Production returned 404 for the standalone calculator. The article published a fixed model. The general workbench opened a generic offer brief.",
+    "screenshots_directory": "design/evidence/2026-11-28-quote-review",
+    "frames": {
+      "before-quote-review-pilot-1440.webp": "Published research article at 1440 × 900 before integration.",
+      "before-workbench-390.webp": "Published general workbench at 390 × 844 before integration.",
+      "desk-desktop.webp": "1440 × 900. Default inputs and seller contribution.",
+      "desk-tablet.webp": "768 × 1024, prefers-reduced-motion. Paired inputs, result, break-even, buyer payback and handoff.",
+      "desk-mobile.webp": "390 × 844. Both native sliders and the euro contribution fit in the first viewport.",
+      "desk-rework.webp": "14 review hours on desktop. €200 contribution and a €100 loss under four further hours of rework."
+    },
+    "browser_checks": [
+      "Chromium at all three viewport sizes. No horizontal overflow or page exceptions.",
+      "From the case and workbench links, focus the native review slider and move it eight half-hour steps to 14 hours. Verify €200 contribution, 8 pilots to cover overhead and −€100 after a further four-hour overrun.",
+      "Export JSON, open the editor through its scenario fragment, and compare €1,500 fee and €1,300 delivery cost. Open the print memo and check ordinary print cleanup.",
+      "With JavaScript disabled, verify both base JSON and Markdown download links render."
+    ],
+    "verification": "The production build, lint, type checks, public surface checks, static links, 306 tests and 41 governance tests passed locally. The selected-scenario API response matched the browser export at 14 review hours. An invalid fee returned HTTP 400.",
+    "independent_check": "A separate browser review of the shared scenario-to-editor path confirmed €200 contribution, 13.3% margin, €1,300 variable cost and a Markdown export on desktop and mobile.",
+    "limits": "Headless Chromium. Buyer acceptance and the value of reclaimed time remain unobserved."
   }
 }

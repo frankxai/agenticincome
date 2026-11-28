@@ -179,3 +179,9 @@ in the reader's email app.
 ## Quote-review pilot editorial layout
 
 Start with the decision and its sensitivity to four extra review hours. Present the buyer deliverable and itemized costs in reading order. Follow them with buyer payback, acceptance evidence and the downloadable brief. On narrow screens the cost lines keep their labels together with their amounts. The field note uses the existing editorial typography and introduces no animation. Native download links and the existing workbench support the same handoff with reduced motion.
+
+## Quote-review workbench · 2026-11-28
+
+A warm-paper worksheet sits inside the existing dark site. A navy ledger places the euro result beside the inputs on wide screens. Phone layouts stack the inputs over the result. The line describes contribution as review hours increase. Exact values sit in text below the line so the chart remains optional for interpretation.
+
+Preserve full-size native range targets and a visible keyboard focus ring. The fee, hours and results update together. Motion carries no information. Print draws a separate decision memo with the selected terms, downside, delivery costs, buyer payback, fixed-cost coverage, approval and source.

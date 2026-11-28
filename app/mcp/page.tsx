@@ -16,6 +16,11 @@ const ENDPOINT = 'https://www.agenticincome.ai/api/mcp'
 
 const TOOLS = [
   {
+    name: 'minimum_offer_price',
+    args: '{ currency: "EUR" | "USD" | "GBP", unitCost, targetMarginPercent }',
+    returns: 'Minimum price to the cent that preserves the requested contribution margin at the stated cost. Excludes fixed costs and tax.',
+  },
+  {
     name: 'draft_offer_experiment',
     args: '{ sourceTitle, sourceUrl?, sourceDate, excerpt, buyer, offer, currency, unitPrice, unitCost, experiment, successCriterion }',
     returns: 'An untested offer with source S1, contribution per sale, planned experiment, approval boundary, Markdown export and SHA-256.',
@@ -123,6 +128,7 @@ export default function McpPage() {
           the verified partner-program registry, the product catalog with real availability, a
           deterministic fit check, and the playbooks. No account, no key, no scraping.
         </p>
+        <Link href="/?ask=mcp#income-chat" className="mt-3 inline-flex min-h-11 items-center text-accent underline underline-offset-4">Try the tools in the studio</Link>
       </div>
 
       <section className="mt-12 grid gap-8 lg:grid-cols-2">

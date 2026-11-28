@@ -896,5 +896,41 @@
       "Real-device and screen-reader speech checks are not performed.",
       "Homepage remains a draft release."
     ]
+  },
+  "income_chat_frontdoor": {
+    "verified": "2026-11-28",
+    "route": "/",
+    "tested_source_revision": "22df60b",
+    "constitution": "e25fab4c5a0dac2ea8c7b91e9397972f5af4b454",
+    "experience_standard_and_brand_pack": "5fb0bdde1c4b4af871b1e1d35172b4030b1e7aa2",
+    "evidence_directory": "design/evidence/2026-11-28-income-chat",
+    "checks": [
+      {
+        "name": "First-screen product and art",
+        "result": "Chromium: 1440×900 desktop, 390×844 phone, 768×1024 tablet, 320×740 narrow. Single h1, no horizontal overflow or page exceptions, keyboard reaches a visible composer; send bottoms are 535, 473, 415, 483 CSS pixels respectively. Independent visual inspection finds the portrait face and orbital light visible in all four. Reduced-motion tablet and narrow phone had zero running scene animations."
+      },
+      {
+        "name": "Economic reasoning and real MCP provenance",
+        "result": "Desktop and phone sent the €1,500/€900 starter to the actual route. Public draft_offer_experiment returned €600 per sale at 40% before fixed costs and tax. A Shift+Enter newline and Enter submission changed cost to 1100; the same €1,500 price gave €400 at 26.7%. Native disclosure showed the tool name. Both the result and conversation downloaded as nonempty Markdown with the checked figures. A third turn requested a 40% contribution margin; minimum_offer_price returned a minimum fee of €1,833.34 on €1,100 cost and exported target-margin.md."
+      },
+      {
+        "name": "Research and app handoff",
+        "result": "The musician starter returned an offer experiment and an explicit paid validation test. The creator-partner starter returned dated terms, original-source links, a catalog link and Markdown. A distinct product-availability question routed to list_products. Comparing payment processing fees invoked list_supply_costs, while asking which creator marketplaces report seller payouts invoked search_digital_economies. These are catalog observations, not a check of an active merchant account. A 10-second Runway cost estimate returned $1.20; an unsupported transcription quote correctly returned no rate. Local source links returned HTTP 200. Five URL prefill cases produced zero unsolicited chat POSTs. A simulated HTTP 503 restored the whole draft; removing the simulated failure allowed a real retry. With JavaScript disabled, the starter kit, research and own-assistant connection remained accessible."
+      },
+      {
+        "name": "Mode and validation",
+        "result": "The local production build had no provider credentials; each sampled turn identified the MCP fallback explicitly. Empty turns, whitespace and a system role were rejected with HTTP 400; an unrelated Origin was rejected with HTTP 403."
+      }
+    ],
+    "screens": [
+      "home-desktop.webp",
+      "home-phone.webp",
+      "home-tablet.webp",
+      "home-small.webp",
+      "conversation-desktop.webp",
+      "conversation-phone.webp",
+      "target-margin-desktop.webp"
+    ],
+    "limitations": "Chromium only; release receipts are local. No inference, merchant charge, buyer demand, partner acceptance, live deployment, measured conversion or cross-browser certification inferred. Technical pass is independent of founder design approval; that human gate remains open."
   }
 }

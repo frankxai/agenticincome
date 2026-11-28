@@ -4,10 +4,11 @@ import { site } from '@/lib/site'
 import { LogoMark } from '@/components/LogoMark'
 
 const sections = [
+  { label: 'Ask the studio', href: '/#income-chat' },
   { label: 'Research', href: '/blog' },
   { label: 'Toolkits', href: '/offers' },
   { label: 'Implementation', href: '/offers/implementation-sprint' },
-  { label: 'MCP', href: '/mcp' },
+  { label: 'Workbench', href: '/workbench' },
 ]
 
 export function Nav() {
@@ -25,8 +26,8 @@ export function Nav() {
             </Link>
           ))}
         </div>
-        <Link href="/workbench/offer-brief" className="revenue-nav-workbench ml-auto inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-ink md:ml-5">
-          Workbench <ArrowUpRight />
+        <Link href="/mcp" className="revenue-nav-workbench ml-auto inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-ink md:ml-5">
+          <span className="hidden min-[370px]:inline">Connect MCP</span><span className="min-[370px]:hidden">MCP</span> <ArrowUpRight />
         </Link>
         <details className="revenue-nav-mobile relative text-sm md:hidden">
           <summary className="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center font-semibold">Menu</summary>

@@ -253,3 +253,13 @@ Retained jobs
 - Next steps are the editor, local download, free kit, MCP connection and scoped implementation.
 
 The original illustration assets are reused from the registered campaign masters. Owned logo authority remains the existing LogoMark. Constitution revision e25fab4c5a0dac2ea8c7b91e9397972f5af4b454 remains the recorded authority. The prior candidate is in draft because the founder rejected its direction.
+
+## Current homepage — 28 November 2026: conversational income studio
+
+**Entry decision.** A musician with an idea, an operator with a cost question and a research buyer with a program in mind should all be able to start work from the same screen. The page asks “What do you want to build?” and opens with a working composer. There is one public front door, with the same source tools available to a visitor's own assistant at `/mcp`. The homepage does not ask for an email, a budget or business details before a first answer.
+
+**One interaction, three useful outputs.** Start with a free-text question or explicitly send a starter. Investigate a concrete offer experiment, calculate contribution from a price and variable cost supplied by the visitor, or inspect partner terms and the supporting source. Each turn can expose the tools it actually used, links, and a Markdown result when available. A conversation export includes the follow-up. The model is optional: the interface names the MCP fallback and does not present deterministic text as model output. A handoff may prefill a question but must never submit it on arrival.
+
+**Economic standard.** Margin means contribution divided by sales price; it is not net profit. Label the cost basis and state what has not been deducted. An offer is a hypothesis until a buyer tests it. A published partner term is not evidence of approval, traffic or earnings. Keep open research, the kit, the quote-review case and the MCP instructions available directly, including when the browser cannot run chat.
+
+**Quality gate.** The dated browser/HTTP record is in `design/evidence/2026-11-28-income-chat/`. It separates local behavior from credentials, production availability, buyer demand and the founder's editorial approval. Constitution revision: `e25fab4c5a0dac2ea8c7b91e9397972f5af4b454`. This specification supersedes the preceding form-led homepage direction.

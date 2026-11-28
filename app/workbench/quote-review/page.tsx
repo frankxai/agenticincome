@@ -24,6 +24,7 @@ export default function QuoteReviewWorkbenchPage() {
         <span aria-current="page">Quote review</span>
       </nav>
       <PilotDecisionDesk headingLevel="h1" />
+      <Link href="/?ask=pricing#income-chat" className="my-6 inline-flex min-h-11 items-center font-semibold text-accent underline underline-offset-4">Talk through your own offer in the studio</Link>
     </div>
   )
 }

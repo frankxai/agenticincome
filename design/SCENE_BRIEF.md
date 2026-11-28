@@ -224,3 +224,11 @@ Scene sequence
 A short image settle and panel arrival supply depth without obscuring initial content. Reduced-motion disables both. Mobile uses normal document flow and compresses the introduction to expose the editor. No-JavaScript users can enter the existing workbench or download the starter kit. The illustrations do not depict deployed autonomous capabilities.
 
 Independent source and screen review rejected hidden example economics, template switches losing edits and ambiguous editor navigation. The corrected implementation displays assumed prices and costs, keeps a draft for each starting point and labels the handoff “Edit the full plan.”
+
+## Current homepage — 28 November 2026: a studio conversation
+
+The invitation and the instrument occupy the same opening scene. The original orbital-studio illustration places a reflective Starlight android at right, lit by the black hole behind the glass. At left the dark listening room gives a two-line invitation and the composer room to breathe. Warm metal, mahogany and dark glass connect the portrait to the offer rather than stand in for business proof.
+
+The visible control is a real text composer with explicit starter actions. On the first turn it becomes a conversation with an inspectable source trail and portable output. The three photographic links below it lead to research, a free kit and a worked case; the MCP connection follows for visitors using their own runtime. The hero is a still, not a video or animated canvas. The scene must preserve the face and orbital light on a narrow crop, visible interaction before the fold, focus outlines and native source disclosures.
+
+Master: `public/brand/income-orbital-studio.webp`. Review the final Chromium frames and measurements in `design/evidence/2026-11-28-income-chat/`. Automated and independent visual verification provide technical evidence; the founder retains the separate final taste decision.

@@ -58,7 +58,8 @@ export default function WorkbenchPage() {
             evidence to gather and export the plan for your team.
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">
-            <Link href="/workbench/offer-brief" className="cta">Build an offer brief <span aria-hidden="true">→</span></Link>
+            <Link href="/?ask=idea#income-chat" className="cta">Talk through an idea <span aria-hidden="true">→</span></Link>
+            <Link href="/workbench/offer-brief" className="inline-flex min-h-11 items-center font-semibold text-accent underline underline-offset-4">Build an offer brief</Link>
             <Link href="/workbench/quote-review" className="inline-flex min-h-11 items-center font-semibold text-accent underline underline-offset-4">Price a quote-review pilot</Link>
           </div>
           <p className="mt-5 max-w-3xl leading-8 text-muted">

@@ -24,9 +24,10 @@ export default function Tools() {
   return (
     <div className="py-16">
       <div className="max-w-3xl">
-        <div className="kicker">Engine</div>
+        <div className="kicker">Partner research</div>
         <h1 className="mt-3 text-5xl font-semibold text-ink">AI tools catalog</h1>
-        <p className="mt-4 text-lg leading-8 text-muted">Only tools with real affiliate programs. The Recurring column shows whether each payout recurs, pays once, mixes both, or is not yet confirmed (n/c). The catalog is the shared source of truth for every monetized route in the network.</p>
+        <p className="mt-4 text-lg leading-8 text-muted">Compare how AI partner programs pay, when commissions recur and which terms we could verify.</p>
+        <Link href="/?ask=partners#income-chat" className="mt-3 inline-flex min-h-11 items-center text-accent underline underline-offset-4">Research a partner in the studio</Link>
       </div>
 
       <section className="mt-12">

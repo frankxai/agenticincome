@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
+import { OfferAgentConnection } from '@/components/OfferAgentConnection'
 import { McpPlayground } from '@/components/McpPlayground'
 
 export const metadata: Metadata = {
@@ -14,6 +15,11 @@ export const metadata: Metadata = {
 const ENDPOINT = 'https://www.agenticincome.ai/api/mcp'
 
 const TOOLS = [
+  {
+    name: 'draft_offer_experiment',
+    args: '{ sourceTitle, sourceUrl?, sourceDate, excerpt, buyer, offer, currency, unitPrice, unitCost, experiment, successCriterion }',
+    returns: 'An untested offer with source S1, contribution per sale, planned experiment, approval boundary, Markdown export and SHA-256.',
+  },
   {
     name: 'list_income_models',
     args: '—',
@@ -63,7 +69,7 @@ const TOOLS = [
   {
     name: 'get_reference_income_graph',
     args: '—',
-    returns: 'The worked request-to-quote graph. A live thesis with costs and no revenue yet — the shape to copy, not a success story.',
+    returns: 'A fictional request-to-quote plan with assumed effort and a proposed review window. Customer demand is untested.',
   },
   {
     name: 'review_income_graph',
@@ -181,6 +187,8 @@ export default function McpPage() {
           </p>
         </div>
       </section>
+
+      <OfferAgentConnection />
 
       <section className="mt-12">
         <McpPlayground />

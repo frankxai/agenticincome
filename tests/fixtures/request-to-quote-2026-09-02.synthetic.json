@@ -3,22 +3,22 @@
   "kind": "IncomeGraph",
   "metadata": {
     "id": "request-to-quote-desk",
-    "name": "Request-to-quote desk for renovation contractors",
+    "name": "Historical synthetic request-to-quote test fixture",
     "version": "0.3.0",
     "updatedAt": "2026-09-02",
-    "principal": "Frank Riemer",
-    "thesis": "Small renovation firms lose qualified inbound work because nobody turns a messy request into a reviewable scope brief within a day, and they will pay per brief for someone who does."
+    "principal": "Example owner",
+    "thesis": "Synthetic test scenario for exercising graph rules. All records, prices, and findings below are test inputs."
   },
   "nodes": [
     {
       "id": "problem-slow-scoping",
       "type": "Problem",
       "label": "Inbound requests wait days for a scope brief",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "knowledge/03-agent-fulfillment.md",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-08-14",
-        "method": "desk research"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -31,11 +31,11 @@
       "id": "customer-owner-operator",
       "type": "Customer",
       "label": "Owner-operator of a 3-12 person renovation firm",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "knowledge/02-income-models.md",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-08-14",
-        "method": "desk research"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -47,18 +47,18 @@
     {
       "id": "evidence-scoping-delay",
       "type": "Evidence",
-      "label": "Interview notes on scoping turnaround",
-      "owner": "Frank Riemer",
+      "label": "Simulated turnaround observation",
+      "owner": "Example owner",
       "provenance": {
-        "source": "knowledge/07-field-dossier.md",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-08-14",
-        "method": "field dossier entry, sourced and dated"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "buyer",
       "evaluation": "Re-verify the dossier entry each quarter; drop the claim if the source is withdrawn or cannot be reproduced.",
       "data": {
-        "finding": "The dossier records that scoping work is done outside business hours by the owner, and that written scopes lag the request by more than a day.",
+        "finding": "This synthetic example assigns a sample delay to exercise evidence and planning rules.",
         "kind": "document",
         "n": 1
       }
@@ -66,18 +66,18 @@
     {
       "id": "evidence-willingness",
       "type": "Evidence",
-      "label": "Stated willingness to pay per brief",
-      "owner": "Frank Riemer",
+      "label": "Simulated price preference",
+      "owner": "Example owner",
       "provenance": {
-        "source": "knowledge/07-field-dossier.md#pricing",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-08-14",
-        "method": "field dossier entry, sourced and dated"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "buyer",
       "evaluation": "Replace with a paid order. A stated price is not a paid price; this node is downgraded the moment a real invoice exists.",
       "data": {
-        "finding": "Firms describe per-brief pricing as easier to approve than a retainer. No money has changed hands, so this remains a stated preference.",
+        "finding": "This synthetic example assigns a sample preference to exercise demand evidence validation.",
         "kind": "document",
         "n": 1
       }
@@ -86,11 +86,11 @@
       "id": "offer-scope-brief",
       "type": "Offer",
       "label": "One reviewed scope brief per inbound request",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "app/build/request-to-quote/page.tsx",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-09-02",
-        "method": "shipped reference surface"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -108,11 +108,11 @@
       "id": "channel-trade-associations",
       "type": "Channel",
       "label": "Regional trade association member lists and direct outreach",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "knowledge/05-honest-marketing.md",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-08-14",
-        "method": "desk research"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -123,11 +123,11 @@
       "id": "workflow-request-to-brief",
       "type": "Workflow",
       "label": "Request to reviewed scope brief",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "https://github.com/frankxai/agentic-income-skills/tree/main/examples/request-to-quote-desk",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-09-02",
-        "method": "open-core reference system"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -177,11 +177,11 @@
       "id": "role-scope-drafter",
       "type": "AgentRole",
       "label": "Scope drafter",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "https://github.com/frankxai/agentic-income-skills/tree/main/examples/request-to-quote-desk",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-09-02",
-        "method": "open-core reference authority policy"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -205,12 +205,12 @@
     {
       "id": "human-frank",
       "type": "Human",
-      "label": "Frank Riemer",
-      "owner": "Frank Riemer",
+      "label": "Example owner",
+      "owner": "Example owner",
       "provenance": {
-        "source": "https://agenticincome.ai/about",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-09-02",
-        "method": "named principal of this graph"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -223,11 +223,11 @@
       "id": "gate-customer-facing",
       "type": "HumanGate",
       "label": "Release before anything reaches the customer",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "https://github.com/frankxai/agentic-income-skills/tree/main/examples/request-to-quote-desk",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-09-02",
-        "method": "open-core reference authority policy"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -237,18 +237,18 @@
           "deliver",
           "agreement"
         ],
-        "approver": "Frank Riemer"
+        "approver": "Example owner"
       }
     },
     {
       "id": "asset-brief-template",
       "type": "Asset",
       "label": "Scope brief template and acceptance-check library",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "components/RequestToQuoteDesk.tsx",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-09-02",
-        "method": "shipped reference surface"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "buyer",
@@ -259,11 +259,11 @@
       "id": "cost-model-usage",
       "type": "Cost",
       "label": "Model usage and hosting",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "knowledge/04-tool-stack.md",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-08-14",
-        "method": "published tool-stack costs"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "private",
@@ -281,11 +281,11 @@
       "id": "cost-founder-time",
       "type": "Cost",
       "label": "Founder review and release time",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "operating log",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-09-02",
-        "method": "estimate from the reference desk build"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "private",
@@ -299,11 +299,11 @@
       "id": "experiment-first-ten",
       "type": "Experiment",
       "label": "Ten outreach conversations against one channel",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "operating log",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-09-02",
-        "method": "planned market test"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "private",
@@ -317,11 +317,11 @@
       "id": "risk-liability",
       "type": "Risk",
       "label": "A brief is read as a binding estimate",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "app/trust/page.tsx",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-09-02",
-        "method": "shipped trust surface"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -332,11 +332,11 @@
       "id": "maintenance-template-review",
       "type": "Maintenance",
       "label": "Review the template against delivered briefs",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "operating log",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-09-02",
-        "method": "operating cadence"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "private",
@@ -349,11 +349,11 @@
       "id": "kill-no-paid-brief",
       "type": "KillCriterion",
       "label": "No paid brief after the first ten conversations",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "operating log",
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
         "date": "2026-09-02",
-        "method": "pre-committed exit"
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "private",
@@ -370,10 +370,11 @@
       "type": "suffers",
       "from": "customer-owner-operator",
       "to": "problem-slow-scoping",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "knowledge/07-field-dossier.md",
-        "date": "2026-08-14"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-08-14",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -384,10 +385,11 @@
       "type": "serves",
       "from": "offer-scope-brief",
       "to": "customer-owner-operator",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "app/build/request-to-quote/page.tsx",
-        "date": "2026-09-02"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-09-02",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -398,10 +400,11 @@
       "type": "evidences",
       "from": "evidence-scoping-delay",
       "to": "problem-slow-scoping",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "knowledge/07-field-dossier.md",
-        "date": "2026-08-14"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-08-14",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "buyer",
@@ -412,10 +415,11 @@
       "type": "evidences",
       "from": "evidence-willingness",
       "to": "customer-owner-operator",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "knowledge/07-field-dossier.md#pricing",
-        "date": "2026-08-14"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-08-14",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "buyer",
@@ -426,10 +430,11 @@
       "type": "evidences",
       "from": "evidence-willingness",
       "to": "offer-scope-brief",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "knowledge/07-field-dossier.md#pricing",
-        "date": "2026-08-14"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-08-14",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "buyer",
@@ -440,10 +445,11 @@
       "type": "reaches",
       "from": "channel-trade-associations",
       "to": "customer-owner-operator",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "knowledge/05-honest-marketing.md",
-        "date": "2026-08-14"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-08-14",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -454,10 +460,11 @@
       "type": "fulfills",
       "from": "workflow-request-to-brief",
       "to": "offer-scope-brief",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "https://github.com/frankxai/agentic-income-skills",
-        "date": "2026-09-02"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-09-02",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -468,10 +475,11 @@
       "type": "performs",
       "from": "role-scope-drafter",
       "to": "workflow-request-to-brief",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "https://github.com/frankxai/agentic-income-skills",
-        "date": "2026-09-02"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-09-02",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -482,10 +490,11 @@
       "type": "gates",
       "from": "gate-customer-facing",
       "to": "workflow-request-to-brief",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "https://github.com/frankxai/agentic-income-skills",
-        "date": "2026-09-02"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-09-02",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -496,10 +505,11 @@
       "type": "produces",
       "from": "workflow-request-to-brief",
       "to": "asset-brief-template",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "components/RequestToQuoteDesk.tsx",
-        "date": "2026-09-02"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-09-02",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "buyer",
@@ -510,10 +520,11 @@
       "type": "incurs",
       "from": "workflow-request-to-brief",
       "to": "cost-model-usage",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "knowledge/04-tool-stack.md",
-        "date": "2026-08-14"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-08-14",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "private",
@@ -524,10 +535,11 @@
       "type": "incurs",
       "from": "workflow-request-to-brief",
       "to": "cost-founder-time",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "operating log",
-        "date": "2026-09-02"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-09-02",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "private",
@@ -538,10 +550,11 @@
       "type": "maintains",
       "from": "maintenance-template-review",
       "to": "asset-brief-template",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "operating log",
-        "date": "2026-09-02"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-09-02",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "private",
@@ -552,10 +565,11 @@
       "type": "threatens",
       "from": "risk-liability",
       "to": "offer-scope-brief",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "app/trust/page.tsx",
-        "date": "2026-09-02"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-09-02",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "public",
@@ -566,10 +580,11 @@
       "type": "tests",
       "from": "experiment-first-ten",
       "to": "offer-scope-brief",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "operating log",
-        "date": "2026-09-02"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-09-02",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "private",
@@ -580,10 +595,11 @@
       "type": "retires",
       "from": "kill-no-paid-brief",
       "to": "offer-scope-brief",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "operating log",
-        "date": "2026-09-02"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-09-02",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "private",
@@ -594,10 +610,11 @@
       "type": "incurs",
       "from": "human-frank",
       "to": "cost-founder-time",
-      "owner": "Frank Riemer",
+      "owner": "Example owner",
       "provenance": {
-        "source": "operating log",
-        "date": "2026-09-02"
+        "source": "tests/fixtures/request-to-quote-2026-09-02.synthetic.json",
+        "date": "2026-09-02",
+        "method": "Synthetic test input. No interviews, payments or customer records."
       },
       "version": "1.0.0",
       "visibility": "private",

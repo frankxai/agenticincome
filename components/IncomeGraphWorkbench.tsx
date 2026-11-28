@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import referenceGraph from '@/data/income-graph-request-to-quote.json'
+import { createReferenceIncomeGraph } from '@/lib/income-graph/reference'
 import { callStaysOff, quoteAgentCall } from '@/lib/income-graph/agent-call'
 import {
   draftIncomeGraph,
@@ -76,7 +76,8 @@ export function IncomeGraphWorkbench() {
   }, [source])
 
   function loadReference() {
-    const text = JSON.stringify(referenceGraph, null, 2)
+    const today = new Date().toISOString().slice(0, 10)
+    const text = JSON.stringify(createReferenceIncomeGraph(today), null, 2)
     setDraft(null)
     setSource(text)
     review(text)
@@ -124,7 +125,7 @@ export function IncomeGraphWorkbench() {
             value={thesis}
             onChange={(event) => setThesis(event.target.value)}
             rows={3}
-            placeholder="Small renovation firms lose qualified inbound work because nobody turns a messy request into a scope brief within a day, and they will pay €180 per brief for someone who does."
+            placeholder="For example, a renovation firm might pay for a written scope brief."
             className="mt-2 w-full rounded-xl border border-border bg-bg/60 p-4 leading-7 text-ink"
           />
           <button
@@ -143,13 +144,13 @@ export function IncomeGraphWorkbench() {
           <div className="kicker">Step two · review a graph</div>
           <p className="mt-2 max-w-3xl leading-7 text-muted">
             Paste a graph, or keep typing. When the JSON closes, the same functions review it here.
-            Nothing leaves the browser.
+            The fictional example includes a proposed review window and assumed effort. Its buyer demand is untested.
           </p>
         </div>
 
         <div className="mt-6 flex flex-wrap gap-3">
           <button type="button" className="cta-secondary" onClick={loadReference}>
-            Load the reference graph
+            Load a fictional example
           </button>
           <button
             type="button"

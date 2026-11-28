@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "title": "Pricing AI work",
+  "checkedOn": "2026-11-28",
+  "articleUrl": "https://www.agenticincome.ai/blog/pricing-ai-work",
+  "scope": "Public US-dollar offer observations. Features and prices can change. The separate euro scenario is illustrative.",
+  "offers": [
+    {
+      "name": "Intercom Fin",
+      "unit": "One billable outcome per Intercom chat or email conversation",
+      "observation": "These rates apply to Fin in Intercom chat and email. Voice has separate pricing. A resolution and a qualified prospect carry different prices. A failed procedure earns no outcome fee. Multiple steps still count as at most one billable outcome per conversation.",
+      "prices": [
+        {"item": "Resolution", "amount": 0.99, "currency": "USD", "per": "outcome"},
+        {"item": "Qualification", "amount": 9.99, "currency": "USD", "per": "outcome"}
+      ],
+      "sources": [
+        {"title": "Fin outcome definitions and billing rules", "url": "https://www.intercom.com/help/en/articles/8205718-fin-ai-agent-outcomes"}
+      ]
+    },
+    {
+      "name": "Section Coach",
+      "unit": "An individual coaching membership",
+      "observation": "Section’s November 2026 individual membership guide gives Basic members five saved use cases. Premium adds unlimited cases, live workshops and monthly office hours.",
+      "prices": [
+        {"item": "Basic", "amount": 0, "currency": "USD", "per": "member"},
+        {"item": "Individual Premium", "amount": 750, "currency": "USD", "per": "member-year"}
+      ],
+      "sources": [
+        {"title": "Individual membership guide, 2 November", "url": "https://help.sectionai.com/hc/en-us/articles/51195851188635-Overview"},
+        {"title": "Section Coach product guide, 9 November", "url": "https://help.sectionai.com/hc/en-us/articles/51233146396699-What-is-Section-Coach"}
+      ]
+    },
+    {
+      "name": "Reforge",
+      "unit": "One seat or an annual team membership",
+      "observation": "Individual access includes live courses and a library of working documents. The ten-seat Starter plan adds administration and engagement reporting for the team buyer.",
+      "prices": [
+        {"item": "Individual", "amount": 1995, "currency": "USD", "per": "year plus tax"},
+        {"item": "Starter, ten seats", "amount": 9995, "currency": "USD", "per": "year plus tax"}
+      ],
+      "sources": [
+        {"title": "Reforge membership pricing", "url": "https://www.reforge.com/pricing"}
+      ]
+    },
+    {
+      "name": "The Information Pro",
+      "unit": "A research subscription",
+      "observation": "Pro readers can interrogate newsroom databases. Its generative AI research draws on company financing and investor information alongside the publication’s reporting.",
+      "prices": [],
+      "priceNote": "The comparison concerns data access. Promotional subscription prices are omitted.",
+      "sources": [
+        {"title": "The Information Pro", "url": "https://www.theinformation.com/pro"},
+        {"title": "Generative AI Database", "url": "https://www.theinformation.com/projects/generative-ai"}
+      ]
+    }
+  ],
+  "scenario": {
+    "evidence": "Illustrative assumptions, excluding tax. Capacity has value only when the buyer can redeploy it.",
+    "currency": "EUR",
+    "reviewHours": 14,
+    "costPerReviewHour": 75,
+    "otherVariableCosts": {"compute": 40, "collection": 45, "acquisition": 90, "supportReserve": 75},
+    "targetContributionMargin": 0.20,
+    "buyerMonthlyHoursRecovered": 6,
+    "buyerValuePerHour": 75,
+    "buyerMonthlyRunningCost": 75,
+    "maximumPaybackMonths": 4
+  }
+}

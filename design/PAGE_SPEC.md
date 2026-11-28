@@ -180,3 +180,44 @@ Surface: `app/page.tsx`, protected surface `homepage`, kind evolve. One block, `
 - Boundaries: no figure, count, countdown or founding benefit is shown; the public count appears only at or above the registry threshold. No outcome claim. Joining charges nothing and is not checkout. `/api/subscribe` and `EmailCapture` are untouched.
 - Keeps: positioning, proof, income truth and the next-step actions are unchanged; this block adds one more next step.
 - No change to the nav: `liquid-gl` was not added (167,480 B minified over the 150 KB budget; a `blob:` worker the CSP blocks). The existing CSS glass stays.
+
+## Offer evidence brief, November 2026
+
+The customer is a founder or consultant deciding whether a buyer signal merits a paid offer test. The entry route is `/workbench/offer-brief`, linked from the homepage, workbench and challenge. The existing graph remains available for deeper review. The new page first exposes a clearly identified fictional brief, its literal source, unit assumptions and decision threshold.
+
+A three-section editor accepts one dated source, an untested offer and a bounded experiment. Editing marks the last generated version stale and disables both exports until recalculation. Markdown preserves the decision for discussion. JSON opens in the same editor and recomputes derived values. The optional connected-assistant handoff names exactly which pasted fields leave the browser and stays under the owner's control. Pricing, outreach and spending remain human decisions.
+
+## Access requests when intake is closed
+
+Across offer, start and delivery pages, the access panel checks its existing
+intake route before requesting an address. A closed destination links directly to
+the free Starter Kit. A configured mailbox offers a user-sent email draft. Only a
+configured webhook accepts an address inline.
+
+## Challenge sign-up truth repair, Claude, 18 November 2026
+
+Surface: `app/challenge/page.tsx`, not a protected surface. Copy and one removed control; no layout, token or motion change.
+
+- Finding: the page asked for an address under "One honest, concrete build step a day, by email" and confirmed with "Day 1 ... is on its way". No challenge email exists in this repository, and `/api/subscribe` keeps no address unless `SUBSCRIBE_WEBHOOK_URL` is set. Production reported `captureMode: "unwired"` on 18 November 2026.
+- Change: the `EmailCapture` block is removed from `/challenge`. The section below it now says the challenge is the page, with no sign-up and no email. The seven day cards and their links are unchanged.
+- Boundary: do not add an email field or a follow-up promise here until a sender and a store both exist. `tests/stale-claims.test.mjs` holds the check. `EmailCapture` and `/api/subscribe` on `/start`, `/offers/*` and `/delivery/*` are untouched.
+
+## Quote-review pilot field note
+
+A sales lead and finance owner arrive from the research index to decide whether a scoped quote-review pilot merits a real buyer test. The article names the sample and its modeled status before showing costs. The cost breakdown, four-hour rework scenario and buyer-capacity calculation give the reader one decision to inspect. Acceptance belongs to the finance owner.
+
+The page offers an editable JSON brief and a Markdown case. The existing offer workbench opens the JSON and recalculates its derived economics. One record supplies all three editions. The canonical page is `/blog/quote-review-pilot`.
+
+## Quote-review workbench · 2026-11-28
+
+At `/workbench/quote-review`, a sales lead can price a review of ten quotes and a finance owner can inspect what happens when human review overruns. The worked case and the main workbench both open the instrument. The two editable assumptions are fee and review hours.
+
+The first result shows euros retained per pilot before fixed costs. The stress case adds four review hours. Keep monthly break-even in whole pilots and buyer payback in months. State the value of redeployed time separately from cash savings. The user can carry the chosen assumptions into the existing brief editor, download the editable JSON, or print a decision memo. The source case and fixed assumptions are available from the same screen.
+
+The price negotiation disclosure compares a 20% contribution margin after rework with a four-month buyer payback target. When the price window is empty, show the seller’s cost reduction or the buyer’s extra monthly value needed to close the gap. The scenario API, print memo and editable brief carry the same bounds.
+
+## Pricing AI work field note, 28 November 2026
+
+A sales lead and a finance owner use `/blog/pricing-ai-work` to identify the billed unit, compare a downside seller fee with a buyer’s payback ceiling, and choose which assumption to test. A reader can open the quote-review calculator or inspect the source observations and scenario inputs in a public JSON download.
+
+The route reuses the existing research article layout and type styles. Four offer descriptions cite five provider guides plus one database description, with USD amounts scoped to the named products. A separate EUR ledger shows the formula and result on each row. Datelines, source URLs and machine-readable units travel with the observations. The blog registry, sitemap and LLM index point to the edition. Both reading and export work without signing in.

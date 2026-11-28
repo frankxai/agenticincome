@@ -1,4 +1,49 @@
 {
+  "quote_review_field_note": {
+    "verified": "2026-11-27",
+    "route": "/blog/quote-review-pilot",
+    "constitution": "e25fab4c5a0dac2ea8c7b91e9397972f5af4b454",
+    "source": "lib/quote-review-case.ts",
+    "checks": [
+      {
+        "name": "desktop and mobile article handoff",
+        "result": "Local production build in Chromium at 1440x900 and 390x844. Mobile used prefers-reduced-motion. Both rendered one main heading without horizontal overflow, downloaded the actual brief and imported it into the workbench. The workbench confirmed recalculation from EUR 1500 revenue and EUR 1000 cost."
+      },
+      {
+        "name": "preview outputs",
+        "result": "The Git-backed preview returned HTTP 200 for HTML, JSON and Markdown. The JSON reported EUR 500 contribution at a 33.3% margin. Markdown reported EUR 375 per month of modeled capacity. All values are illustrative."
+      },
+      {
+        "name": "repository gate",
+        "result": "Lint, 286 tests, type checking, static link validation, public-surface verification and the production build passed on the editorial code."
+      }
+    ]
+  },
+  "intake_availability": {
+    "surface": "Shared access request panel",
+    "reference": "Existing delivery cards, HomeWaitlist closed state and DESIGN.md",
+    "acceptance": "Check availability before collecting an address. On closure offer the existing /delivery/starter-kit route.",
+    "test": "tests/intake-availability.test.mjs"
+  },
+
+  "offer_evidence_brief": {
+    "date": "2026-11-19",
+    "route": "/workbench/offer-brief",
+    "decision": "Expose the source excerpt, unit contribution and test threshold in the first example. Use one local worksheet and optional connected-assistant handoff.",
+    "references": [
+      "DESIGN.md",
+      "TASTE.md",
+      "https://github.com/frankxai/agenticincome/issues/70",
+      "https://github.com/frankxai/agenticincome/pull/52"
+    ],
+    "coverage": [
+      "Dated user-supplied source and explicit hypothetical economics",
+      "Inactive exports while edits await recalculation",
+      "Markdown, editable JSON and owner-initiated MCP handoff",
+      "Stacked mobile, keyboard operation, native inputs and reduced-motion styling"
+    ],
+    "verification": "TypeScript, scoped lint, static internal links and public surface contract passed locally. Browser results and release checks are recorded against the pull request."
+  },
   "blueprint_preview_boundary": {
     "author": "Codex (OpenAI)",
     "created_at": "2026-11-04",
@@ -484,5 +529,83 @@
       "Upstream handler claims the position before saving the signal; a failed save can leave the count one high (not fixable in the unchanged copy).",
       "Verified in headless Chromium without a GPU."
     ]
+  },
+  "quote_review_workbench": {
+    "date": "2026-11-28",
+    "scope": [
+      "/workbench/quote-review",
+      "/workbench",
+      "/workbench/offer-brief",
+      "/blog/quote-review-pilot",
+      "/api/research/quote-review/scenario",
+      "/sitemap.xml",
+      "/llms.txt",
+      "/llms-full.txt"
+    ],
+    "constitution_revision": "e25fab4c5a0dac2ea8c7b91e9397972f5af4b454",
+    "sources": [
+      "lib/quote-review-case.ts",
+      "lib/offer-brief.ts",
+      "design/PAGE_SPEC.md",
+      "design/SCENE_BRIEF.md",
+      "DESIGN.md"
+    ],
+    "provenance": "The fee, costs and potential value come from the dated, explicitly illustrative public quote-review case. The diagram is rendered from those assumptions. No third-party art, identity or customer data enters the instrument.",
+    "baseline": "Production returned 404 for the standalone calculator. The article published a fixed model. The general workbench opened a generic offer brief.",
+    "screenshots_directory": "design/evidence/2026-11-28-quote-review",
+    "frames": {
+      "before-quote-review-pilot-1440.webp": "Published research article at 1440 × 900 before integration.",
+      "before-workbench-390.webp": "Published general workbench at 390 × 844 before integration.",
+      "desk-desktop.webp": "1440 × 900. Default inputs and seller contribution.",
+      "desk-tablet.webp": "768 × 1024, prefers-reduced-motion. Paired inputs, result, break-even, buyer payback and handoff.",
+      "desk-mobile.webp": "390 × 844. Both native sliders and the euro contribution fit in the first viewport.",
+      "pricing-window-tablet.webp": "Expanded negotiating targets on a 768 × 1024 reduced-motion viewport. The €1,625 seller floor and €1,500 buyer ceiling leave a €125 gap.",
+      "desk-rework.webp": "14 review hours on desktop. €200 contribution and a €100 loss under four further hours of rework."
+    },
+    "browser_checks": [
+      "Chromium at all three viewport sizes. No horizontal overflow or page exceptions.",
+      "From the case and workbench links, focus the native review slider and move it eight half-hour steps to 14 hours. Verify €200 contribution, 8 pilots to cover overhead and −€100 after a further four-hour overrun.",
+      "Export JSON, open the editor through its scenario fragment, and compare €1,500 fee and €1,300 delivery cost. Open the print memo and check ordinary print cleanup.",
+      "With JavaScript disabled, verify both base JSON and Markdown download links render."
+    ],
+    "verification": "The production build, lint, type checks, public surface checks, static links, 306 tests and 41 governance tests passed locally. The selected-scenario API response matched the browser export at 14 review hours. An invalid fee returned HTTP 400.",
+    "pricing_check": "Desktop, tablet and phone displayed the same default fee floor, buyer ceiling, €100 cost reduction, 80 review minutes and €31.25 monthly buyer-value gap. At 14 hours the API, brief and print memo used a €2,000 fee floor. The production build passed with the full merge gate.",
+    "independent_check": "A separate browser review of the shared scenario-to-editor path confirmed €200 contribution, 13.3% margin, €1,300 variable cost and a Markdown export on desktop and mobile.",
+    "limits": "Headless Chromium. Buyer acceptance and the value of reclaimed time remain unobserved."
+  },
+  "pricing_ai_work_field_note": {
+    "date": "2026-11-28",
+    "scope": [
+      "/blog/pricing-ai-work",
+      "/research/pricing-ai-work.json",
+      "/blog",
+      "/sitemap.xml",
+      "/llms.txt"
+    ],
+    "constitution_revision": "e25fab4c5a0dac2ea8c7b91e9397972f5af4b454",
+    "sources": [
+      "design/PAGE_SPEC.md",
+      "design/SCENE_BRIEF.md",
+      "DESIGN.md",
+      "public/research/pricing-ai-work.json"
+    ],
+    "baseline": "The public article URL returned HTTP 404 before release. The published quote-review case and calculator supplied the underlying illustrative scenario.",
+    "intent": "A sales lead and finance owner identify the billable unit and evaluate a fee that must satisfy seller margin and buyer payback.",
+    "provenance": "The JSON records the four named offers, six official source URLs and the observation date. The separate EUR inputs are illustrative. No paid enrollment, customer savings or market-wide pricing is inferred.",
+    "frames": {
+      "design/evidence/2026-11-28-pricing-ai-work/390.webp": "390 × 844, JavaScript disabled.",
+      "design/evidence/2026-11-28-pricing-ai-work/768.webp": "768 × 1024, reduced motion.",
+      "design/evidence/2026-11-28-pricing-ai-work/1440.webp": "1440 × 900, normal motion."
+    },
+    "browser_checks": [
+      "All three Chromium viewports rendered the cost ledger without horizontal overflow.",
+      "The article had one primary heading and six source links. The browser found a direct link to the released calculator.",
+      "GET requests checked the published route shape, four-row JSON, HTML research index, sitemap and LLM index in the local production build."
+    ],
+    "independent_review": "Three-width visual review confirmed the ledger groups labels, formulas and results on a 390px screen. The reviewer recomputed both thresholds and identified the Intercom channel qualifier. Scope that observation to Intercom chat and email and describe the research subscription without assuming a cadence.",
+    "arithmetic": "An independent calculation reproduced €1,300 cost, €1,625 minimum fee, €1,500 ceiling, 80 delivery minutes and €31.25 in monthly capacity.",
+    "verification": "The integrated local merge gate passed lint, 307 tests, type checking, static links, public-surface verification and the production Next build. The web guidelines check reported no mechanical violations.",
+    "limits": "Browser evidence is from Chromium. Buyer demand and actual capacity savings remain unmeasured.",
+    "rollback": "Revert the research article, registry entry, JSON and LLM index additions together."
   }
 }

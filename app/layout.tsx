@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono, Bricolage_Grotesque } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { DatadogRum } from '@/components/DatadogRum'
 import './globals.css'
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
@@ -110,6 +111,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-6xl px-4 sm:px-6">{children}</main>
         <Footer />
         <Analytics />
+        <DatadogRum />
         <SpeedInsights />
       </body>
     </html>

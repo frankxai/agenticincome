@@ -84,7 +84,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
                 offer={offer.slug}
                 source="offer-detail"
               >
-                {offer.cta}
+                {isFree || anyLiveCheckout ? offer.cta : 'Check access options'}
               </CheckoutLink>
             )}
             {manifest ? (
@@ -130,7 +130,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
                   ? 'Checkout is live. Polar.sh is the merchant of record and handles VAT and sales tax.'
                 : liveCheckout
                   ? 'Live checkout URL is configured.'
-                  : 'Request access: checkout opens when the provider link is connected.'}
+                  : 'Purchases are currently closed.'}
             </p>
             <div className="mt-5 rounded-xl border border-border bg-bg/60 p-4 text-xs leading-6 text-muted">
               {isFree
@@ -139,7 +139,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
                   ? 'No payment is taken here. The intake route records interest only when the configured service is available.'
                 : anyLiveCheckout
                   ? 'Secure payment provider checkout is connected.'
-                  : 'Checkout is currently gated. Inspect the preview below and request access to be notified when it opens.'}
+                  : 'Explore the preview below. Current access options are at the end of this page.'}
             </div>
             <Link href="/trust" className="mt-4 inline-flex text-xs font-semibold text-accent">
               Trust, support, and refunds

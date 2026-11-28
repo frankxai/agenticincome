@@ -162,3 +162,34 @@ Same layout. Without JavaScript the block shows its copy, a note that the form n
 ### Assets
 
 None. No image, no WebGL, no dependency.
+
+## Source to offer worksheet
+
+The left column is the working copy. The right column is the resulting document, led by the deliverable and buyer. The source ID precedes its exact excerpt. A proportional bar accompanies the price, cost and contribution figures. Zero-price margins are undefined. A loss is visible as a signed amount. The numbers and labels carry the same meaning without color.
+
+The worksheet uses the existing dark palette and Geist families. Emerald marks the active editing stage and main action. Source IDs use a subdued technical accent. Amber labels assumed economics. Motion is limited to short control feedback under the existing reduced-motion preference. At narrow widths, editing precedes the result and generation moves focus to the reviewed document. Screen reader status text describes import, export and validation outcomes.
+
+## Access request availability
+
+Reuse the existing compact card, readable status and single action. The paused
+state gives the reader immediate access to the free Starter Kit. Keep the action
+visible at phone widths and under reduced motion. The manual state opens a draft
+in the reader's email app.
+
+## Quote-review pilot editorial layout
+
+Start with the decision and its sensitivity to four extra review hours. Present the buyer deliverable and itemized costs in reading order. Follow them with buyer payback, acceptance evidence and the downloadable brief. On narrow screens the cost lines keep their labels together with their amounts. The field note uses the existing editorial typography and introduces no animation. Native download links and the existing workbench support the same handoff with reduced motion.
+
+## Quote-review workbench · 2026-11-28
+
+A warm-paper worksheet sits inside the existing dark site. A navy ledger places the euro result beside the inputs on wide screens. Phone layouts stack the inputs over the result. The line describes contribution as review hours increase. Exact values sit in text below the line so the chart remains optional for interpretation.
+
+Preserve full-size native range targets and a visible keyboard focus ring. The fee, hours and results update together. Motion carries no information. Print draws a separate decision memo with the selected terms, downside, delivery costs, buyer payback, fixed-cost coverage, approval and source.
+
+Price negotiation opens on request below break-even and payback. Keep the two fee bounds and the size of any gap in text. Native disclosure preserves keyboard and reduced-motion behavior.
+
+## Pricing AI work field note, 28 November 2026
+
+The opening poses a concrete decision at a €1,500 buyer ceiling. Each of the four comparison sections separates its billing unit, observed terms and direct source. The cost ledger pairs left-aligned formula text with right-aligned currency, preserving reading order on narrow screens. Two final paragraphs translate the fee gap into 80 minutes of delivery work or €31.25 of monthly value. A link lets the reader test another fee and review time. Another link downloads the dated JSON.
+
+The reading surface inherits the journal’s static typography and has no bespoke motion, character or commissioned asset. Screenshots from the local production build cover the new ledger at phone, tablet and desktop widths. On the phone the article and dataset work with JavaScript disabled.

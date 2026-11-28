@@ -87,3 +87,21 @@ test('homepage carries no outcome or autopilot language', () => {
     assert.ok(!source.toLowerCase().includes(phrase.toLowerCase()), `app/page.tsx still contains "${phrase}"`)
   }
 })
+
+// /challenge once asked for an email under "one build step a day, by email" and confirmed
+// with "Day 1 ... is on its way". Nothing in this repository sends a challenge email, and
+// /api/subscribe keeps no address unless an intake webhook is configured. The challenge is
+// the page itself. If a sequence is ever built, change this test in the same change that
+// adds the sender and the store.
+test('the challenge page asks for no email and promises none', () => {
+  const page = read('app/challenge/page.tsx')
+  const copy = `${page}\n${read('lib/challenge.ts')}`
+
+  for (const control of ['EmailCapture', '/api/subscribe', 'type="email"']) {
+    assert.ok(!page.includes(control), `app/challenge/page.tsx still collects an address (${control}) with nothing to send`)
+  }
+  const promises = [/on its way/i, /by email/i, /\binbox\b/i, /Challenge Brief/i, /\b(?:we|we[’']ll|we will) (?:send|email)\b/i]
+  for (const promise of promises) {
+    assert.ok(!promise.test(copy), `the challenge copy still promises an email (${promise})`)
+  }
+})

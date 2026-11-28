@@ -1,9 +1,10 @@
 /**
- * The 7-Day Agentic Income Challenge — a free, evergreen lead-magnet path.
+ * The 7-Day Agentic Income Challenge — a free, evergreen on-page path.
  *
  * Self-contained data (no filesystem, no email-sequence infrastructure): each day
  * is one concrete action that maps to the public Agentic Income skill or an on-site
- * route. The framing is capability, never income.
+ * route. Nothing is emailed, so /challenge collects no address and promises no
+ * follow-up. The framing is capability, never income.
  */
 export type ChallengeDay = {
   day: number

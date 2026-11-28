@@ -19,6 +19,7 @@ name: Web excellence
 # scope.
 on:
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - '**/*.tsx'
       - '**/*.jsx'
@@ -41,8 +42,9 @@ concurrency:
 jobs:
   guidelines:
     name: Web Interface Guidelines (mechanical)
-    runs-on: ${{ vars.CI_RUNNER == 'railway' && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-latest' }}
-    timeout-minutes: 20
+    if: github.event.pull_request.draft == false
+    runs-on: ${{ vars.CI_RUNNER == 'railway' && fromJSON('["self-hosted","linux","x64","railway"]') || 'ubuntu-slim' }}
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with:

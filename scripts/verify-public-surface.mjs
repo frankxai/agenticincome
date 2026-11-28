@@ -14,7 +14,7 @@ const files = {
   privacy: read('app/privacy/page.tsx'),
   notFound: read('app/not-found.tsx'),
   footer: read('components/Footer.tsx'),
-  headers: read('vercel.json'),
+  headers: `${read('vercel.json')}\n${read('next.config.mjs')}`,
   css: read('app/globals.css'),
   path: read('components/PathSection.tsx'),
   'service-kit': read('products/blueprint/service-kit.md'),
@@ -44,8 +44,8 @@ for (const event of [
   'subscribe_manual',
 ]) requireText('analytics', `'${event}'`, `analytics allowlist includes ${event}`)
 
-requireText('subscribe', "mode === 'unwired' ? 'subscribe_unwired' : 'subscribe_manual'", 'intake without a store is never recorded as success')
-requireText('email-capture', "result?.mode === 'manual_email'", 'manual intake tells the visitor nothing was saved')
+requireText('subscribe', "error: 'intake_closed'", 'closed intake refuses the request')
+requireText('email-capture', "receipt.mode === 'manual_email'", 'manual intake tells the visitor nothing was saved')
 requireText('subscribe', 'isSameOriginRequest(req)', 'intake is same-origin only')
 requireText('subscribe', 'readBoundedJson(req)', 'intake body is bounded before parsing')
 

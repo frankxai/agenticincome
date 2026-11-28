@@ -47,14 +47,17 @@ test('margin arithmetic reads prices, fees and take rate from sourced rows', () 
     ['gpu', { price: 5 }],
     ['card', { rate: 0.05, fixedUsd: 0.5 }],
   ]);
-  const economies = new Map([['store', { takeRateFraction: 0.3 }]]);
+  const sourceUrl = 'https://example.com/pricing';
+  const economies = new Map([['store', { takeRateFraction: 0.3, sourceUrl,
+    marginTerms: { rate: 0.3, fixedUsd: 0.5, scope: 'Standard sale.', reviewedAt: '2026-10-25', sourceUrl },
+  }]]);
   const { marginPct } = computeMargin({
     priceUsd: 100,
     costLines: [{ supplyId: 'gpu', quantity: 2 }],
     feeLines: [{ supplyId: 'card' }],
     takeRateFrom: 'store',
   }, supply, economies);
-  assert.equal(Number(marginPct.toFixed(2)), 54.5);
+  assert.equal(Number(marginPct.toFixed(2)), 54);
 });
 
 test('a partner rate that the registry does not state is rejected', () => {

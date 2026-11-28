@@ -221,3 +221,9 @@ The price negotiation disclosure compares a 20% contribution margin after rework
 A sales lead and a finance owner use `/blog/pricing-ai-work` to identify the billed unit, compare a downside seller fee with a buyer’s payback ceiling, and choose which assumption to test. A reader can open the quote-review calculator or inspect the source observations and scenario inputs in a public JSON download.
 
 The route reuses the existing research article layout and type styles. Four offer descriptions cite five provider guides plus one database description, with USD amounts scoped to the named products. A separate EUR ledger shows the formula and result on each row. Datelines, source URLs and machine-readable units travel with the observations. The blog registry, sitemap and LLM index point to the edition. Both reading and export work without signing in.
+
+## MCP tool reference, 28 November 2026
+
+Surface: the tool reference on `/mcp` (`app/mcp/page.tsx`). Not a protected surface. Copy, hrefs, checkout, and prices stay as they are.
+
+A reader checking a tool on a phone has to read the Returns sentence, including the availability line that checkout is not live, without scrolling sideways. Below the `md` breakpoint (768px) each tool is one stacked row in the existing bordered panel: the tool name, Arguments, then Returns. From 768px up the three-column table stays. The stack starts at `md` rather than `sm` because at 640px the table fits the page but the Returns column shrinks to about 175px. Tool names and argument strings are identifiers. The `#tool-reference` heading clears the sticky nav.

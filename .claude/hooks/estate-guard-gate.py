@@ -19,8 +19,10 @@ $TMPDIR/ or ${TMPDIR}/ with at least one real segment after that prefix, made
 only of plain path characters (no '..', no '$(' or backtick, no other $
 expansion, no braces, quotes-inside-path, ~ or spaces), whose first segment is
 not a bare glob (so /tmp, /tmp/ and /tmp/* still ask), with no glob before the
-final segment, and whose literal path does not resolve through a symlink to
-outside the scratch roots. A $TMPDIR target counts only when the hook's own
+final segment and no trailing slash after a glob (that slash makes a recursive
+delete follow a directory symlink the glob matches, and the realpath check
+stops before the glob so it never sees the target), and whose literal path
+does not resolve through a symlink to outside the scratch roots. A $TMPDIR target counts only when the hook's own
 TMPDIR is set and resolves to a scratch root (the expanded path is then checked
 like a literal one) AND the command does not itself assign TMPDIR anywhere
 (inline prefix, export, declare, env, set, unset, ...) AND the target is typed
@@ -245,6 +247,12 @@ def is_scratch_target(target: str, tmpdir_reassigned: bool = False, raw: str | N
         return False
     # A glob is allowed only in the final segment: /tmp/a/*/x can expand into
     # anything the glob matches, including symlinks, before the last segment.
+    # A trailing slash after a glob is the same hole one step later. Bash keeps
+    # the slash, and a recursive delete follows it through a symlink to a
+    # directory. realpath stops at the glob, so the link target is never
+    # checked. Fail closed instead of treating that as scratch.
+    if rest.endswith("/") and any(c in seg for seg in segments for c in "*?"):
+        return False
     if any(c in seg for seg in segments[:-1] for c in "*?"):
         return False
     if literal:

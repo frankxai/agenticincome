@@ -196,6 +196,20 @@ test('scratch-only recursive delete still allows, including when a redirection i
   assert.equal(decide(`${RM}/tmp/scratch2>/dev/null`), 'allow');
 });
 
+test('final-segment glob with a trailing slash is not a scratch target', () => {
+  // A trailing slash after a final-segment glob follows a directory symlink
+  // into whatever it points at. The realpath check stops before the glob, so
+  // this must ask. The same glob without the slash still removes only the
+  // scratch directory entry.
+  assert.equal(decide(`${RM}/tmp/estate-guard-test/*/`), 'ask');
+  assert.equal(decide(`${RM}/tmp/estate-guard-test/out*/`), 'ask');
+  assert.equal(decide(`${RM}/tmp/estate-guard-test/out*//`), 'ask');
+  assert.equal(decide(`${RM}$TMPDIR/cache*/`, { TMPDIR: '/tmp' }), 'ask');
+  assert.equal(decide(`${RM}/tmp/estate-guard-test/*.log`), 'allow');
+  assert.equal(decide(`${RM}/tmp/estate-guard-test/out*`), 'allow');
+  assert.equal(decide(`${RM}/tmp/estate-guard-test/`), 'allow');
+});
+
 test('non-scratch recursive delete still asks', () => {
   assert.equal(decide(`${RM}./build`), 'ask');
   assert.equal(decide(`${RM}/tmp/estate-guard-test ./build`), 'ask');

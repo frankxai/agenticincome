@@ -50,14 +50,12 @@ export default function WorkbenchPage() {
         <div className="max-w-4xl">
           <div className="kicker">Workbench · IncomeGraph.v1</div>
           <h1 className="mt-3 text-5xl font-semibold leading-[1.02] text-ink">
-            One income system, modelled so it can be argued with.
+            Build your income plan.
           </h1>
           <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">
-            Start with the sentence you already believe. The workbench drafts the smallest graph
-            that can carry it, then names the claim in your own thesis that nothing supports, the
-            evidence that would settle it, and what getting that evidence costs you in hours. The
-            full model — problem, customer, offer, workflow, authority, costs, kill criterion — is
-            what you graduate into, not the toll gate.
+            Describe the customer, the problem and what you want to offer. Build a plan that connects
+            the work, the costs and the people responsible. Review what you know, identify the
+            evidence to gather and export the plan for your team.
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link href="/workbench/offer-brief" className="cta">Build an offer brief <span aria-hidden="true">→</span></Link>
@@ -95,7 +93,7 @@ export default function WorkbenchPage() {
 
       <section className="section-band">
         <div className="max-w-4xl">
-          <div className="kicker">The four attacks</div>
+          <div className="kicker">Review your plan</div>
           <h2 className="mt-2 text-3xl font-semibold text-ink">
             What the review is looking for.
           </h2>

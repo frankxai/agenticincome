@@ -237,3 +237,19 @@ The price negotiation disclosure compares a 20% contribution margin after rework
 A sales lead and a finance owner use `/blog/pricing-ai-work` to identify the billed unit, compare a downside seller fee with a buyer’s payback ceiling, and choose which assumption to test. A reader can open the quote-review calculator or inspect the source observations and scenario inputs in a public JSON download.
 
 The route reuses the existing research article layout and type styles. Four offer descriptions cite five provider guides plus one database description, with USD amounts scoped to the named products. A separate EUR ledger shows the formula and result on each row. Datelines, source URLs and machine-readable units travel with the observations. The blog registry, sitemap and LLM index point to the edition. Both reading and export work without signing in.
+
+## Product opening correction — 28 November 2026
+
+The founder rejected the finance-journal positioning and the quote-review case as the homepage identity. The surface now introduces the actual product with “Build your next business with AI” and a working offer-plan editor. The primary audience is independent founders, creators and small teams. The primary action is to build a personal plan, then edit the complete portable brief. Secondary actions open the free toolkit, research and scoped implementation.
+
+Three directions were assessed. The finance journal misrepresented the broader product. A pure cosmic film would still conceal the product. The selected direction places the real planning controls within an original dark Starlight studio scene.
+
+The homepage has three independent example drafts. Switching between them preserves edits. Price and delivery cost remain explicitly marked example assumptions until edited in the full workbench. The same validated OfferBrief contract powers Markdown download and the bounded URL-fragment handoff. Text entered in the two fields is preserved across the handoff. Editing a buyer changes the suggested customer experiment. This local experience proposes work for the customer's tools. It does not simulate completed agent execution.
+
+Retained jobs
+- Positioning is AI-assisted business creation across services, products and research.
+- Proof is the working local artifact, existing source-linked audit workflow and existing research.
+- Income truth is explicit example economics, source provenance and untested hypotheses.
+- Next steps are the editor, local download, free kit, MCP connection and scoped implementation.
+
+The original illustration assets are reused from the registered campaign masters. Owned logo authority remains the existing LogoMark. Constitution revision e25fab4c5a0dac2ea8c7b91e9397972f5af4b454 remains the recorded authority. The prior candidate is in draft because the founder rejected its direction.

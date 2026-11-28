@@ -98,7 +98,7 @@ export function IncomeGraphWorkbench() {
         <div className="border-b border-border pb-6">
           <div className="kicker">Workbench · runs in your browser</div>
           <h2 id="workbench-title" className="mt-2 text-3xl font-semibold text-ink">
-            Review a graph before a buyer does.
+            Develop your business idea.
           </h2>
           <p className="mt-3 max-w-3xl leading-7 text-muted">
             Paste an IncomeGraph document. Nothing is uploaded, stored, or sent anywhere — the same
@@ -110,15 +110,14 @@ export function IncomeGraphWorkbench() {
         <div className="mt-8">
           <div className="kicker">Step one · start from a sentence</div>
           <h3 className="mt-2 text-xl font-semibold text-ink">
-            Write the thesis you already believe.
+            What do you want to build?
           </h3>
           <p className="mt-2 max-w-3xl leading-7 text-muted">
-            Who has the problem, what you would sell them, and why they would pay. The workbench
-            builds the smallest graph that can carry it and then tells you which claim in your own
-            sentence nothing supports — before you have filled in a single field.
+            Describe who you want to help and what you would deliver. The workbench turns your
+            starting point into a structured plan and suggests the customer evidence to collect next.
           </p>
           <label className="mt-5 block text-sm font-semibold text-ink" htmlFor="thesis-source">
-            Your thesis
+            Your business idea
           </label>
           <textarea
             id="thesis-source"
@@ -134,7 +133,7 @@ export function IncomeGraphWorkbench() {
             onClick={draftFromThesis}
             disabled={thesis.trim().length < 12}
           >
-            Draft the graph and attack it
+            Build and review my plan
           </button>
         </div>
 

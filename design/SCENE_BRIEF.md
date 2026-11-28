@@ -209,3 +209,18 @@ Price negotiation opens on request below break-even and payback. Keep the two fe
 The opening poses a concrete decision at a €1,500 buyer ceiling. Each of the four comparison sections separates its billing unit, observed terms and direct source. The cost ledger pairs left-aligned formula text with right-aligned currency, preserving reading order on narrow screens. Two final paragraphs translate the fee gap into 80 minutes of delivery work or €31.25 of monthly value. A link lets the reader test another fee and review time. Another link downloads the dated JSON.
 
 The reading surface inherits the journal’s static typography and has no bespoke motion, character or commissioned asset. Screenshots from the local production build cover the new ledger at phone, tablet and desktop widths. On the phone the article and dataset work with JavaScript disabled.
+
+## Product opening correction — 28 November 2026
+
+The opening shows a working offer plan against the existing commissioned listening-room scene. The porcelain and obsidian characters, orbital-glass collar, mahogany and black-hole window establish the requested world. The plan is the foreground object and is immediately editable. Large plain language introduces the product. Champagne actions and a restrained dark glass panel carry the hierarchy.
+
+Scene sequence
+- Build a plan in the opening, select the type of business and edit buyer and deliverable.
+- Choose the existing workbench, toolkit, research or implementation route.
+- Use the original guitarist scene to explain creative ownership and portable AI tools.
+- Explore dated research and the quote-review calculator as supporting material.
+- Return to the editable plan.
+
+A short image settle and panel arrival supply depth without obscuring initial content. Reduced-motion disables both. Mobile uses normal document flow and compresses the introduction to expose the editor. No-JavaScript users can enter the existing workbench or download the starter kit. The illustrations do not depict deployed autonomous capabilities.
+
+Independent source and screen review rejected hidden example economics, template switches losing edits and ambiguous editor navigation. The corrected implementation displays assumed prices and costs, keeps a draft for each starting point and labels the handoff “Edit the full plan.”

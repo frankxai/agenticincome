@@ -176,7 +176,7 @@
       "Internal operating language",
       "Decorative 3D or generated hero filler"
     ],
-    "signature": "A coded four-stage implementation model—Audit, Architect, Implement, Verify—backed by links to real public systems.",
+    "signature": "A coded four-stage implementation model\u2014Audit, Architect, Implement, Verify\u2014backed by links to real public systems.",
     "system": [
       "Tier C coded product proof as the primary hero asset",
       "Obsidian, emerald, cyan, and amber FrankX tokens",
@@ -728,7 +728,7 @@
         "navMcpFullyVisible": true,
         "narrowestPrimaryTargetHeight": 51.0,
         "staticEconomics": [
-          "€120",
+          "\u20ac120",
           "66.7%",
           "3"
         ]
@@ -801,7 +801,7 @@
       "revision": "The first tablet pass used a portrait-like crop with the mechanism clipped at both edges. The revised 768-pixel spread places the decision and action above a landscape study. The complete glass ring, base and dial now read together. The 390-pixel sequence places the decision and action before the photograph.",
       "workflow": "In each interactive viewport, change fee and hours by keyboard, stress review to 14 hours, inspect a loss and return to EUR 1,500 at 14 hours. Export the actual JSON, open the editor, create Markdown, start blank, then import that JSON and recalculate. The source and 14-hour scope survive. Output is EUR 200 contribution, 13.3% margin and EUR 1,300 unit cost.",
       "accessibility": "The main action measured 16.59:1 text contrast. Both sliders have 44 CSS-pixel targets and visible two-pixel keyboard focus. Reduced motion suppresses the cover settle. With scripts disabled the default figures render and native JSON and Markdown downloads work.",
-      "media": "Original anonymous still from the founder’s material brief. The served derivative is 97,042 bytes. Exact prompt, source PNG hash, derivative hash and pixel dimensions are recorded in the manifest.",
+      "media": "Original anonymous still from the founder\u2019s material brief. The served derivative is 97,042 bytes. Exact prompt, source PNG hash, derivative hash and pixel dimensions are recorded in the manifest.",
       "narrowViewport": "The wordmark wraps to two lines at 320 pixels. The primary action, menu and workbench remain fully visible and usable, with no page overflow."
     },
     "report": "design/evidence/2026-11-28-pilot-desk/browser-checks.json"
@@ -830,23 +830,23 @@
     "baseline": "Production returned 404 for the standalone calculator. The article published a fixed model. The general workbench opened a generic offer brief.",
     "screenshots_directory": "design/evidence/2026-11-28-quote-review",
     "frames": {
-      "before-quote-review-pilot-1440.webp": "Published research article at 1440 × 900 before integration.",
-      "before-workbench-390.webp": "Published general workbench at 390 × 844 before integration.",
-      "desk-desktop.webp": "1440 × 900. Default inputs and seller contribution.",
-      "desk-tablet.webp": "768 × 1024, prefers-reduced-motion. Paired inputs, result, break-even, buyer payback and handoff.",
-      "desk-mobile.webp": "390 × 844. Both native sliders and the euro contribution fit in the first viewport.",
-      "pricing-window-tablet.webp": "Expanded negotiating targets on a 768 × 1024 reduced-motion viewport. The €1,625 seller floor and €1,500 buyer ceiling leave a €125 gap.",
-      "desk-rework.webp": "14 review hours on desktop. €200 contribution and a €100 loss under four further hours of rework."
+      "before-quote-review-pilot-1440.webp": "Published research article at 1440 \u00d7 900 before integration.",
+      "before-workbench-390.webp": "Published general workbench at 390 \u00d7 844 before integration.",
+      "desk-desktop.webp": "1440 \u00d7 900. Default inputs and seller contribution.",
+      "desk-tablet.webp": "768 \u00d7 1024, prefers-reduced-motion. Paired inputs, result, break-even, buyer payback and handoff.",
+      "desk-mobile.webp": "390 \u00d7 844. Both native sliders and the euro contribution fit in the first viewport.",
+      "pricing-window-tablet.webp": "Expanded negotiating targets on a 768 \u00d7 1024 reduced-motion viewport. The \u20ac1,625 seller floor and \u20ac1,500 buyer ceiling leave a \u20ac125 gap.",
+      "desk-rework.webp": "14 review hours on desktop. \u20ac200 contribution and a \u20ac100 loss under four further hours of rework."
     },
     "browser_checks": [
       "Chromium at all three viewport sizes. No horizontal overflow or page exceptions.",
-      "From the case and workbench links, focus the native review slider and move it eight half-hour steps to 14 hours. Verify €200 contribution, 8 pilots to cover overhead and −€100 after a further four-hour overrun.",
-      "Export JSON, open the editor through its scenario fragment, and compare €1,500 fee and €1,300 delivery cost. Open the print memo and check ordinary print cleanup.",
+      "From the case and workbench links, focus the native review slider and move it eight half-hour steps to 14 hours. Verify \u20ac200 contribution, 8 pilots to cover overhead and \u2212\u20ac100 after a further four-hour overrun.",
+      "Export JSON, open the editor through its scenario fragment, and compare \u20ac1,500 fee and \u20ac1,300 delivery cost. Open the print memo and check ordinary print cleanup.",
       "With JavaScript disabled, verify both base JSON and Markdown download links render."
     ],
     "verification": "The production build, lint, type checks, public surface checks, static links, 306 tests and 41 governance tests passed locally. The selected-scenario API response matched the browser export at 14 review hours. An invalid fee returned HTTP 400.",
-    "pricing_check": "Desktop, tablet and phone displayed the same default fee floor, buyer ceiling, €100 cost reduction, 80 review minutes and €31.25 monthly buyer-value gap. At 14 hours the API, brief and print memo used a €2,000 fee floor. The production build passed with the full merge gate.",
-    "independent_check": "A separate browser review of the shared scenario-to-editor path confirmed €200 contribution, 13.3% margin, €1,300 variable cost and a Markdown export on desktop and mobile.",
+    "pricing_check": "Desktop, tablet and phone displayed the same default fee floor, buyer ceiling, \u20ac100 cost reduction, 80 review minutes and \u20ac31.25 monthly buyer-value gap. At 14 hours the API, brief and print memo used a \u20ac2,000 fee floor. The production build passed with the full merge gate.",
+    "independent_check": "A separate browser review of the shared scenario-to-editor path confirmed \u20ac200 contribution, 13.3% margin, \u20ac1,300 variable cost and a Markdown export on desktop and mobile.",
     "limits": "Headless Chromium. Buyer acceptance and the value of reclaimed time remain unobserved."
   },
   "pricing_ai_work_field_note": {
@@ -869,18 +869,32 @@
     "intent": "A sales lead and finance owner identify the billable unit and evaluate a fee that must satisfy seller margin and buyer payback.",
     "provenance": "The JSON records the four named offers, six official source URLs and the observation date. The separate EUR inputs are illustrative. No paid enrollment, customer savings or market-wide pricing is inferred.",
     "frames": {
-      "design/evidence/2026-11-28-pricing-ai-work/390.webp": "390 × 844, JavaScript disabled.",
-      "design/evidence/2026-11-28-pricing-ai-work/768.webp": "768 × 1024, reduced motion.",
-      "design/evidence/2026-11-28-pricing-ai-work/1440.webp": "1440 × 900, normal motion."
+      "design/evidence/2026-11-28-pricing-ai-work/390.webp": "390 \u00d7 844, JavaScript disabled.",
+      "design/evidence/2026-11-28-pricing-ai-work/768.webp": "768 \u00d7 1024, reduced motion.",
+      "design/evidence/2026-11-28-pricing-ai-work/1440.webp": "1440 \u00d7 900, normal motion."
     },
     "browser_checks": [
       "All three Chromium viewports rendered the cost ledger without horizontal overflow.",
       "The article had one primary heading and six source links. The browser found a direct link to the released calculator.",
       "GET requests checked the published route shape, four-row JSON, HTML research index, sitemap and LLM index in the local production build."
     ],
-    "arithmetic": "An independent calculation reproduced €1,300 cost, €1,625 minimum fee, €1,500 ceiling, 80 delivery minutes and €31.25 in monthly capacity.",
+    "independent_review": "Three-width visual review confirmed the ledger groups labels, formulas and results on a 390px screen. The reviewer recomputed both thresholds and identified the Intercom channel qualifier. Scope that observation to Intercom chat and email and describe the research subscription without assuming a cadence.",
+    "arithmetic": "An independent calculation reproduced \u20ac1,300 cost, \u20ac1,625 minimum fee, \u20ac1,500 ceiling, 80 delivery minutes and \u20ac31.25 in monthly capacity.",
     "verification": "The integrated local merge gate passed lint, 307 tests, type checking, static links, public-surface verification and the production Next build. The web guidelines check reported no mechanical violations.",
     "limits": "Browser evidence is from Chromium. Buyer demand and actual capacity savings remain unmeasured.",
     "rollback": "Revert the research article, registry entry, JSON and LLM index additions together."
+  },
+  "product_opening_correction": {
+    "surface": "homepage and workbench entry",
+    "reason": "Founder rejected finance-journal identity and asked for actual product, scenes and brand atmosphere.",
+    "primary_action": "Edit a business starting point and continue with a portable offer plan.",
+    "reference": "Original registered Starlight campaign imagery, TASTE cinematic direction and existing OfferBrief.v1.",
+    "independent_review": "Product direction and rendered desktop/phone reviewed separately; requested visible economics, preserved draft state and clearer navigation were implemented.",
+    "evidence_directory": "design/evidence/2026-11-28-product-first",
+    "limits": [
+      "No live agent execution is implied.",
+      "Real-device and screen-reader speech checks are not performed.",
+      "Homepage remains a draft release."
+    ]
   }
 }

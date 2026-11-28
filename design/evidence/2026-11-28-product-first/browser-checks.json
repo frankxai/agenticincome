@@ -1,0 +1,50 @@
+[
+  {
+    "viewport": [
+      1440,
+      1000
+    ],
+    "h1": true,
+    "overflow": false,
+    "download": true,
+    "handoff": true,
+    "errors": []
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "h1": true,
+    "overflow": false,
+    "download": true,
+    "handoff": true,
+    "errors": []
+  },
+  {
+    "viewport": [
+      768,
+      1024
+    ],
+    "h1": true,
+    "overflow": false,
+    "download": true,
+    "handoff": true,
+    "errors": []
+  },
+  {
+    "viewport": [
+      320,
+      740
+    ],
+    "h1": true,
+    "overflow": false,
+    "download": true,
+    "handoff": true,
+    "errors": []
+  },
+  {
+    "javascript": false,
+    "working_static_entrypoints": true
+  }
+]

@@ -194,10 +194,31 @@ export default function McpPage() {
         <McpPlayground />
       </section>
 
-      <section className="mt-14">
-        <h2 className="display-h2">Tool reference</h2>
+      <section className="mt-14" aria-labelledby="tool-reference">
+        <h2 id="tool-reference" className="display-h2 scroll-mt-24 text-balance">Tool reference</h2>
         <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-surface/80">
-          <div className="overflow-x-auto">
+          <ul className="divide-y divide-border/70 md:hidden">
+            {TOOLS.map((tool) => (
+              <li key={tool.name} className="min-w-0 px-4 py-4">
+                <h3 className="break-words text-balance font-mono text-xs font-semibold text-accent" translate="no">
+                  {tool.name}
+                </h3>
+                <dl className="mt-3 grid min-w-0 gap-3">
+                  <div className="min-w-0">
+                    <dt className="text-xs font-medium text-muted">Arguments</dt>
+                    <dd className="mt-1 break-words font-mono text-xs leading-5 text-muted" translate="no">
+                      {tool.args}
+                    </dd>
+                  </div>
+                  <div className="min-w-0">
+                    <dt className="text-xs font-medium text-muted">Returns</dt>
+                    <dd className="mt-1 break-words text-sm leading-6 text-pretty text-muted">{tool.returns}</dd>
+                  </div>
+                </dl>
+              </li>
+            ))}
+          </ul>
+          <div className="hidden overflow-x-auto md:block">
             <table className="w-full min-w-[760px] text-sm">
               <thead>
                 <tr className="border-b border-border text-left text-muted">
@@ -209,9 +230,9 @@ export default function McpPage() {
               <tbody>
                 {TOOLS.map((tool) => (
                   <tr key={tool.name} className="border-t border-border/70">
-                    <td className="px-5 py-4 font-mono text-xs font-semibold text-accent">{tool.name}</td>
-                    <td className="px-5 py-4 font-mono text-xs text-muted">{tool.args}</td>
-                    <td className="px-5 py-4 leading-6 text-muted">{tool.returns}</td>
+                    <td className="px-5 py-4 font-mono text-xs font-semibold text-accent" translate="no">{tool.name}</td>
+                    <td className="break-words px-5 py-4 font-mono text-xs text-muted" translate="no">{tool.args}</td>
+                    <td className="break-words px-5 py-4 leading-6 text-muted">{tool.returns}</td>
                   </tr>
                 ))}
               </tbody>

@@ -607,5 +607,22 @@
     "verification": "The integrated local merge gate passed lint, 307 tests, type checking, static links, public-surface verification and the production Next build. The web guidelines check reported no mechanical violations.",
     "limits": "Browser evidence is from Chromium. Buyer demand and actual capacity savings remain unmeasured.",
     "rollback": "Revert the research article, registry entry, JSON and LLM index additions together."
+  },
+  "mcp_tool_reference": {
+    "date": "2026-11-28",
+    "route": "/mcp",
+    "scope": ["app/mcp/page.tsx"],
+    "constitution_revision": "e25fab4c5a0dac2ea8c7b91e9397972f5af4b454",
+    "sources": ["design/PAGE_SPEC.md", "design/SCENE_BRIEF.md", "DESIGN.md", "TASTE.md"],
+    "decision": "Below 768px each tool is a stacked row (name, Arguments, Returns) in the existing panel. From 768px the three-column table stays. The break is md, not sm, because at 640px the table fits but the Returns column is about 175px wide.",
+    "baseline": "At 375px the table laid out at 559px inside a 341px scroller. The Returns sentence for list_products started at x=421, off-screen. Document scrollWidth equalled clientWidth because the outer panel clips the overflow.",
+    "browser_checks": [
+      "Headless Chrome via .claude/skills/visual-proof/capture.mjs, full page, 375, 768 and 1440, light and dark color schemes.",
+      "375 before and after differ. After, the list_products returns sentence sits at left 33 and right 342. The longest card, draft_offer_experiment, ends at x=358.",
+      "768 and 1440 before and after captures are byte-identical. Light and dark captures are byte-identical because the site sets color-scheme dark and the body stays rgb(5, 6, 10).",
+      "The capture runner reported no horizontal scroll at 375, 768 or 1440."
+    ],
+    "verification": "pnpm run merge:gate passed on the layout commit: eslint, 307 tests, type-check, static links, public-surface verification and the production build. /mcp stayed a static route. No new client JavaScript, images, fonts or motion.",
+    "limits": "Chromium only. The dev overlay badge is not part of the production page."
   }
 }

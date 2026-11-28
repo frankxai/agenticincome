@@ -26,7 +26,7 @@ export default function QuoteReviewCase() {
       <p><Link href="/blog">Research</Link> · Modeled case · <time dateTime={pilot.date}>27 November 2026</time></p>
       <h1>{pilot.title}</h1>
       <p>A sales lead wants ten historical quotes checked against an approved rate card. At {money(pilot.price)} per pilot, the supplier could keep <strong>{money(contribution)} before fixed costs</strong>. Four extra hours of review cut that to {money(downside)}. That difference decides whether this is a repeatable service.</p>
-      <p>These figures are illustrative, in euros excluding tax. Replace them with a buyer’s baseline and your costs before quoting.</p>
+      <p>These figures are illustrative, in euros excluding tax. Replace them with a buyer’s baseline and your costs before quoting. <Link href="/workbench/quote-review">Try the pilot calculator</Link> to see what your review time does to the margin.</p>
       <h2>What the buyer takes home</h2>
       <p>One exception report with a source reference for each discrepancy, the reviewer’s decisions and a handover file the sales team can use on its next quote. The finance owner keeps control of rates and discounts. The assistant can flag a price difference. Sending a revised quote stays with sales.</p>
       <h2>Where the first €1,500 goes</h2>

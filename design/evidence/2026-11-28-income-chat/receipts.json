@@ -1,0 +1,450 @@
+{
+  "surface": "Local optimized Next build, public unauthenticated MCP tools, no model credentials. Local hosted origin http://localhost:4471.",
+  "tested_source_revision": "2949bf6",
+  "viewports_and_behavior": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "page_width": 1440,
+      "composer_bottom": 535,
+      "send_bottom": 535,
+      "h1": "What do you want\nto build?",
+      "motion": "no-preference",
+      "composer_reachable_by_tab": true,
+      "calculator_notices": [
+        null,
+        null,
+        null
+      ],
+      "target_margin_followup": {
+        "messages_received": 5,
+        "mode": "tools",
+        "tools": [
+          "minimum_offer_price"
+        ],
+        "price_floor": "1833.34",
+        "verified_markdown": "target-margin.md"
+      },
+      "modes": [
+        "tools",
+        "tools"
+      ],
+      "tools": [
+        "draft_offer_experiment"
+      ],
+      "history_messages_on_followup": 3,
+      "download_bytes": 988,
+      "result_bytes": 908,
+      "keyboard_followup": true,
+      "links": [
+        "/workbench/offer-brief"
+      ],
+      "contribution_after_cost_change": 400,
+      "errors": []
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "page_width": 390,
+      "composer_bottom": 473,
+      "send_bottom": 473,
+      "h1": "What do you want\nto build?",
+      "motion": "no-preference",
+      "composer_reachable_by_tab": true,
+      "calculator_notices": [
+        null,
+        null,
+        null
+      ],
+      "target_margin_followup": {
+        "messages_received": 5,
+        "mode": "tools",
+        "tools": [
+          "minimum_offer_price"
+        ],
+        "price_floor": "1833.34",
+        "verified_markdown": "target-margin.md"
+      },
+      "modes": [
+        "tools",
+        "tools"
+      ],
+      "tools": [
+        "draft_offer_experiment"
+      ],
+      "history_messages_on_followup": 3,
+      "download_bytes": 988,
+      "result_bytes": 908,
+      "keyboard_followup": true,
+      "links": [
+        "/workbench/offer-brief"
+      ],
+      "contribution_after_cost_change": 400,
+      "errors": []
+    },
+    {
+      "viewport": [
+        768,
+        1024
+      ],
+      "page_width": 768,
+      "composer_bottom": 415,
+      "send_bottom": 415,
+      "h1": "What do you want\nto build?",
+      "running_scene_animations": 0,
+      "motion": "reduce",
+      "composer_reachable_by_tab": true,
+      "errors": []
+    },
+    {
+      "viewport": [
+        320,
+        740
+      ],
+      "page_width": 320,
+      "composer_bottom": 483,
+      "send_bottom": 483,
+      "h1": "What do you want\nto build?",
+      "running_scene_animations": 0,
+      "motion": "reduce",
+      "composer_reachable_by_tab": true,
+      "errors": []
+    },
+    {
+      "simulated_transient_503": true,
+      "restored_prompt": true,
+      "successful_real_retry_mode": "tools"
+    },
+    {
+      "prefill_cases": 5,
+      "automatic_chat_posts": 0
+    },
+    {
+      "javascript": false,
+      "visible_navigation": [
+        "Skip to content",
+        "Agentic Income",
+        "Connect MCP",
+        "Chat privacy",
+        "Connect your own AI assistant",
+        "explore the research",
+        "download the starter kit",
+        "connect your assistant",
+        "Research\nHow to price AI work\n\nFour business models and what their customers actually buy.",
+        "Free toolkit\nBuild your first offer\n\nTake the starter files into your own studio.",
+        "Interactive case\nTest the margin\n\nSee what four more delivery hours do to a €1,500 pilot.",
+        "Connect via MCP"
+      ]
+    }
+  ],
+  "http": {
+    "invalid_requests": [
+      {
+        "case": "empty",
+        "status": 400
+      },
+      {
+        "case": "empty-last",
+        "status": 400
+      },
+      {
+        "case": "untrusted-role",
+        "status": 400
+      },
+      {
+        "case": "cross-origin",
+        "status": 403
+      }
+    ],
+    "samples": [
+      {
+        "question": "I make music. Help me shape a digital product.",
+        "response": {
+          "answer": "My first bet: a small pack of original, edit-ready loops for independent video editors. Sell the time they save clearing and cutting music. Include stems, tempo, a usage license and a short demo cut.\n\nSend a private demo to three editors who regularly license music. Ask them to use one loop in an actual cut, then offer the full pack at a stated price. A paid order is a stronger signal than a compliment.\n\nWhich editors can you reach, and which style of music do you already own the rights to?",
+          "links": [
+            {
+              "label": "Open the offer workbench",
+              "href": "/workbench/offer-brief"
+            },
+            {
+              "label": "Connect your agent",
+              "href": "/mcp"
+            }
+          ],
+          "artifact": {
+            "filename": "offer-experiment.md",
+            "markdown": "# First offer experiment\n\nMy first bet: a small pack of original, edit-ready loops for independent video editors. Sell the time they save clearing and cutting music. Include stems, tempo, a usage license and a short demo cut.\n\nSend a private demo to three editors who regularly license music. Ask them to use one loop in an actual cut, then offer the full pack at a stated price. A paid order is a stronger signal than a compliment.\n\n## Evidence gap\n\nOne assumption needs evidence. Start with this one: “Offer hypothesis: sell a small pack of original, clearly licensed music loops for independent video editors.” A dated artifact a stranger could open: a URL, a file in the repository, or an interview record naming the person and the date. Estimated time to check the assumptions: 1 founder hour.\n\n# Operating tasks — Offer hypothesis: sell a small pack of original, clearly licensed music loops f…\n\nThesis: Offer hypothesis: sell a small pack of original, clearly licensed music loops for independent video editors. Test whether editors will use the loops in a real cut.\nPrincipal: The founder\n\nGated tasks may not complete until the named approver releases them. An agent that\ncompletes a gated task without a release has exceeded its authority.\n\n- [ ] **Structure the incoming request** · agent · per request\n- [ ] **Produce the work against the stated acceptance checks** · agent · per request\n- [ ] **Read the draft against the acceptance checks** · human · per request\n- [ ] **Send the finished work to the customer** · agent · per request · gate: Release before anything reaches the customer — approver: The founder\n- [ ] **Kill review: No paid order after the first ten conversations — Zero paid orders after ten completed conversations** · human · once, by 2027-02-26"
+          },
+          "mode": "tools",
+          "tools": [
+            {
+              "name": "draft_income_graph",
+              "label": "Identify what the offer still needs to prove"
+            },
+            {
+              "name": "export_income_system_tasks",
+              "label": "Export the experiment checklist"
+            }
+          ],
+          "notice": "Model generation is unavailable for this turn. This result comes directly from the tools shown below."
+        }
+      },
+      {
+        "question": "Which partner programs should I research for a creator business?",
+        "response": {
+          "answer": "Start with these research leads:\n\nSysteme.io — 60% lifetime recurring. Last checked 2026-08-16.\n\nCapCut — up to 35% recurring (tiered by referral volume). Last checked 2026-09-28.\n\nChoose the tool your audience already asks about. Net referral income depends on paid conversions, the eligible commission and refunds; a headline rate alone cannot tell you what you will earn. The catalog discloses affiliate links.",
+          "links": [
+            {
+              "label": "Compare the partner catalog",
+              "href": "/tools"
+            },
+            {
+              "label": "Systeme.io · original terms",
+              "href": "https://systeme.io/affiliate-program"
+            },
+            {
+              "label": "CapCut · original terms",
+              "href": "https://www.capcut.com/partners/affiliate-program"
+            }
+          ],
+          "artifact": {
+            "filename": "partner-research.md",
+            "markdown": "# Partner research\n\nCatalog snapshot: 2026-11-27\n\nStart with these research leads:\n\nSysteme.io — 60% lifetime recurring. Last checked 2026-08-16.\n\nCapCut — up to 35% recurring (tiered by referral volume). Last checked 2026-09-28.\n\nChoose the tool your audience already asks about. Net referral income depends on paid conversions, the eligible commission and refunds; a headline rate alone cannot tell you what you will earn. The catalog discloses affiliate links.\n\nCompare the partner catalog: https://www.agenticincome.ai/tools\nSysteme.io · original terms: https://systeme.io/affiliate-program\nCapCut · original terms: https://www.capcut.com/partners/affiliate-program"
+          },
+          "mode": "tools",
+          "tools": [
+            {
+              "name": "search_partner_programs",
+              "label": "Search the partner research catalog"
+            },
+            {
+              "name": "get_partner_program",
+              "label": "Read the dated partner terms"
+            }
+          ],
+          "notice": "Model generation is unavailable for this turn. This result comes directly from the tools shown below."
+        }
+      },
+      {
+        "question": "Which Agentic Income digital products can I use right now?",
+        "response": {
+          "answer": "Connect the public MCP at https://www.agenticincome.ai/api/mcp to use the same offer, research and economics tools in your own assistant.\n\nStart with Income Flywheel Starter Kit (Free). Use one skill to scope the deliverable and a second to check its acceptance criteria.\n\nThe catalog currently marks no paid product as purchasable. That does not establish whether a merchant account exists.",
+          "links": [
+            {
+              "label": "Connect your agent",
+              "href": "/mcp"
+            },
+            {
+              "label": "Income Flywheel Starter Kit",
+              "href": "/delivery/starter-kit"
+            }
+          ],
+          "mode": "tools",
+          "tools": [
+            {
+              "name": "list_products",
+              "label": "Read the product catalog"
+            }
+          ],
+          "notice": "Model generation is unavailable for this turn. This result comes directly from the tools shown below."
+        }
+      },
+      {
+        "question": "What do I keep on a €1,500 service that costs €900 to deliver?",
+        "response": {
+          "answer": "You keep €600 per sale before fixed costs and tax. That’s a 40% contribution margin.\n\n€1,500 price − €900 variable cost = €600 contribution.\n\nThis uses your stated assumptions. Check whether delivery cost includes review time, payment fees and refunds before committing to the price.",
+          "links": [
+            {
+              "label": "Open the offer workbench",
+              "href": "/workbench/offer-brief"
+            }
+          ],
+          "artifact": {
+            "filename": "offer-economics.md",
+            "markdown": "# Offer evidence brief\n\nOfferBrief.v1\n\n## Source S1\n\n    Your stated pricing assumptions\n\nRecorded 2026-11-28. Supplied by the author.\n\n    What do I keep on a €1,500 service that costs €900 to deliver?\n\n## Buyer hypothesis\n\n    Buyer segment not yet confirmed.\n\n## Offer hypothesis\n\n    A single sale at the price and variable cost supplied in this conversation.\n\nS1 informed this hypothesis. Demand still needs a market test.\n\n## Economics per sale\n\n- Assumed price: EUR 1500.00\n- Assumed variable cost: EUR 900.00\n- Contribution before fixed costs: EUR 600.00\n- Contribution margin: 40%\n\n## Planned experiment\n\n    Compare these assumptions with one delivered order and an itemized cost record.\n\n## Acceptance criterion\n\n    Delivery cost is reconciled with recorded labor, fees and other per-order costs.\n\n## Owner approval\n\nA person approves outreach, publication, pricing commitments and spending.\n"
+          },
+          "mode": "tools",
+          "tools": [
+            {
+              "name": "draft_offer_experiment",
+              "label": "Calculate contribution from your assumptions"
+            }
+          ]
+        },
+        "local_http_elapsed_ms": 16
+      },
+      {
+        "question": "What if delivery costs 1100? (follow-up)",
+        "response": {
+          "answer": "You keep €400 per sale before fixed costs and tax. That’s a 26.7% contribution margin.\n\n€1,500 price − €1,100 variable cost = €400 contribution.\n\nThis uses your stated assumptions. Check whether delivery cost includes review time, payment fees and refunds before committing to the price.",
+          "links": [
+            {
+              "label": "Open the offer workbench",
+              "href": "/workbench/offer-brief"
+            }
+          ],
+          "artifact": {
+            "filename": "offer-economics.md",
+            "markdown": "# Offer evidence brief\n\nOfferBrief.v1\n\n## Source S1\n\n    Your stated pricing assumptions\n\nRecorded 2026-11-28. Supplied by the author.\n\n    What do I keep on a €1,500 service that costs €900 to deliver?\n    What if delivery costs 1100?\n\n## Buyer hypothesis\n\n    Buyer segment not yet confirmed.\n\n## Offer hypothesis\n\n    A single sale at the price and variable cost supplied in this conversation.\n\nS1 informed this hypothesis. Demand still needs a market test.\n\n## Economics per sale\n\n- Assumed price: EUR 1500.00\n- Assumed variable cost: EUR 1100.00\n- Contribution before fixed costs: EUR 400.00\n- Contribution margin: 26.7%\n\n## Planned experiment\n\n    Compare these assumptions with one delivered order and an itemized cost record.\n\n## Acceptance criterion\n\n    Delivery cost is reconciled with recorded labor, fees and other per-order costs.\n\n## Owner approval\n\nA person approves outreach, publication, pricing commitments and spending.\n"
+          },
+          "mode": "tools",
+          "tools": [
+            {
+              "name": "draft_offer_experiment",
+              "label": "Calculate contribution from your assumptions"
+            }
+          ]
+        },
+        "local_http_elapsed_ms": 9
+      },
+      {
+        "question": "What should I charge to keep a 40% margin? (third turn)",
+        "response": {
+          "answer": "Charge at least €1,833.34 per sale to keep a 40% contribution margin at €1,100 in variable cost. That leaves €733.34 before fixed costs and tax.\n\nPrice floor = €1,100 ÷ (1 − 40%), rounded up to the next cent when needed.\n\nThat is your financial floor. Test whether a buyer will pay it. Recalculate any price-dependent processing fees at the new price.",
+          "links": [
+            {
+              "label": "Read the pricing research",
+              "href": "/blog/pricing-ai-work"
+            }
+          ],
+          "artifact": {
+            "filename": "target-margin.md",
+            "markdown": "# Minimum offer price\n\nCharge at least €1,833.34 per sale to keep a 40% contribution margin at €1,100 in variable cost. That leaves €733.34 before fixed costs and tax.\n\nPrice floor = €1,100 ÷ (1 − 40%), rounded up to the next cent when needed.\n\nThat is your financial floor. Test whether a buyer will pay it. Recalculate any price-dependent processing fees at the new price.\n\nBasis: Unit contribution before fixed costs and tax. Cost is assumed constant over the prices considered. This is not evidence of buyer demand.\n"
+          },
+          "mode": "tools",
+          "tools": [
+            {
+              "name": "minimum_offer_price",
+              "label": "Calculate the price floor for your target margin"
+            }
+          ]
+        },
+        "local_http_elapsed_ms": 7
+      },
+      {
+        "question": "Compare Stripe, Polar and Whop payment processing fees.",
+        "response": {
+          "answer": "**Stripe · US standard online domestic card transaction** — 2.9% + 30¢ (percent + USD 0.30 per successful transaction). Source captured 2026-10-25.\n\n**Whop · Card processing, domestic** — 2.7% + $0.30 (percent + USD 0.30 per successful transaction). Source captured 2026-10-25.\n\n**Polar · Merchant-of-record transaction fee, Starter tier** — 5% + 50¢ (percent + USD 0.50 per transaction). Source captured 2026-10-25.\n\nThese are recorded vendor prices. Confirm the plan, region and billing unit before quoting a client; review labor and retries are additional.",
+          "links": [
+            {
+              "label": "Stripe pricing",
+              "href": "https://stripe.com/us/pricing"
+            },
+            {
+              "label": "Whop pricing",
+              "href": "https://docs.whop.com/fees"
+            },
+            {
+              "label": "Polar pricing",
+              "href": "https://polar.sh/resources/pricing"
+            },
+            {
+              "label": "Explore the Economy Vault",
+              "href": "/atlas"
+            }
+          ],
+          "artifact": {
+            "filename": "economy-vault-research.md",
+            "markdown": "# Supply cost research\n\n**Stripe · US standard online domestic card transaction** — 2.9% + 30¢ (percent + USD 0.30 per successful transaction). Source captured 2026-10-25.\n\n**Whop · Card processing, domestic** — 2.7% + $0.30 (percent + USD 0.30 per successful transaction). Source captured 2026-10-25.\n\n**Polar · Merchant-of-record transaction fee, Starter tier** — 5% + 50¢ (percent + USD 0.50 per transaction). Source captured 2026-10-25.\n\nThese are recorded vendor prices. Confirm the plan, region and billing unit before quoting a client; review labor and retries are additional.\n\n- Stripe pricing: https://stripe.com/us/pricing\n- Whop pricing: https://docs.whop.com/fees\n- Polar pricing: https://polar.sh/resources/pricing\n- Explore the Economy Vault: https://www.agenticincome.ai/atlas\n"
+          },
+          "mode": "tools",
+          "tools": [
+            {
+              "name": "list_supply_costs",
+              "label": "Inspect sourced infrastructure costs"
+            }
+          ],
+          "notice": "Model generation is unavailable for this turn. This result comes directly from the tools shown below."
+        }
+      },
+      {
+        "question": "Which creator marketplaces report seller payouts?",
+        "response": {
+          "answer": "**Patreon · cumulative payments from fans to creators** — $10 billion since 2013 (2013 to Aug 2025). Source captured 2026-10-25.\n\n**YouTube · payouts to creators, artists and media companies** — over $100 billion in the past four years (four years to Jan 2026). Source captured 2026-10-25.\n\nKeep each figure attached to its metric and period. Platform volume is not the income an individual seller can expect.",
+          "links": [
+            {
+              "label": "Patreon · source",
+              "href": "https://www.patreon.com/about"
+            },
+            {
+              "label": "YouTube · source",
+              "href": "https://blog.youtube/inside-youtube/the-future-of-youtube-2026/"
+            },
+            {
+              "label": "Explore the Economy Vault",
+              "href": "/atlas"
+            }
+          ],
+          "artifact": {
+            "filename": "economy-vault-research.md",
+            "markdown": "# Marketplace research\n\n**Patreon · cumulative payments from fans to creators** — $10 billion since 2013 (2013 to Aug 2025). Source captured 2026-10-25.\n\n**YouTube · payouts to creators, artists and media companies** — over $100 billion in the past four years (four years to Jan 2026). Source captured 2026-10-25.\n\nKeep each figure attached to its metric and period. Platform volume is not the income an individual seller can expect.\n\n- Patreon · source: https://www.patreon.com/about\n- YouTube · source: https://blog.youtube/inside-youtube/the-future-of-youtube-2026/\n- Explore the Economy Vault: https://www.agenticincome.ai/atlas\n"
+          },
+          "mode": "tools",
+          "tools": [
+            {
+              "name": "search_digital_economies",
+              "label": "Look up sourced market economics"
+            }
+          ],
+          "notice": "Model generation is unavailable for this turn. This result comes directly from the tools shown below."
+        }
+      },
+      {
+        "question": "What does it cost to generate 10 seconds of video with Runway?",
+        "response": {
+          "answer": "**Runway · Runway API gen4.5 video** — 12 credits per second; credits $0.01 each (USD per second of video). At list price: 10 seconds of generated video × $0.12 = $1.20 in vendor usage. Source captured 2026-10-25.\n\nThese are recorded vendor prices. Confirm the plan, region and billing unit before quoting a client; review labor and retries are additional.",
+          "links": [
+            {
+              "label": "Runway pricing",
+              "href": "https://docs.dev.runwayml.com/guides/pricing/"
+            },
+            {
+              "label": "Explore the Economy Vault",
+              "href": "/atlas"
+            }
+          ],
+          "artifact": {
+            "filename": "economy-vault-research.md",
+            "markdown": "# Supply cost research\n\n**Runway · Runway API gen4.5 video** — 12 credits per second; credits $0.01 each (USD per second of video). At list price: 10 seconds of generated video × $0.12 = $1.20 in vendor usage. Source captured 2026-10-25.\n\nThese are recorded vendor prices. Confirm the plan, region and billing unit before quoting a client; review labor and retries are additional.\n\n- Runway pricing: https://docs.dev.runwayml.com/guides/pricing/\n- Explore the Economy Vault: https://www.agenticincome.ai/atlas\n"
+          },
+          "mode": "tools",
+          "tools": [
+            {
+              "name": "list_supply_costs",
+              "label": "Inspect sourced infrastructure costs"
+            }
+          ],
+          "notice": "Model generation is unavailable for this turn. This result comes directly from the tools shown below."
+        }
+      },
+      {
+        "question": "What does it cost to transcribe an hour of audio?",
+        "response": {
+          "answer": "The Vault has no confirmed speech transcription rate for this request. A text-to-speech rate prices the opposite job and cannot support a transcription estimate.",
+          "links": [
+            {
+              "label": "Explore the Economy Vault",
+              "href": "/atlas"
+            }
+          ],
+          "artifact": {
+            "filename": "economy-vault-research.md",
+            "markdown": "# Supply cost research\n\nThe Vault has no confirmed speech transcription rate for this request. A text-to-speech rate prices the opposite job and cannot support a transcription estimate.\n\n- Explore the Economy Vault: https://www.agenticincome.ai/atlas\n"
+          },
+          "mode": "tools",
+          "tools": [
+            {
+              "name": "list_supply_costs",
+              "label": "Inspect sourced infrastructure costs"
+            }
+          ],
+          "notice": "Model generation is unavailable for this turn. This result comes directly from the tools shown below."
+        }
+      }
+    ]
+  }
+}

@@ -69,7 +69,9 @@ export default async function OfferDetail({ params }: OfferPageProps) {
           <h1 className="mt-3 max-w-4xl text-5xl font-semibold leading-[1.02] text-ink">{offer.title}</h1>
           <p className="mt-5 max-w-3xl text-xl leading-8 text-muted">{offer.promise}</p>
           <div className="mt-7 flex flex-wrap gap-3">
-            {polarCheckoutLive ? (
+            {isScoped ? (
+              <a href="https://www.frankx.ai/contact" className="cta">Discuss your scope with Frank</a>
+            ) : polarCheckoutLive ? (
               <PolarCheckoutButton
                 productId={offer.slug}
                 source="offer-detail"
@@ -136,7 +138,7 @@ export default async function OfferDetail({ params }: OfferPageProps) {
               {isFree
                 ? 'Internal free delivery route is live.'
                 : isScoped
-                  ? 'No payment is taken here. The intake route records interest only when the configured service is available.'
+                  ? 'Bring one workflow, an example input and the decision owner to the scoping conversation.'
                 : anyLiveCheckout
                   ? 'Secure payment provider checkout is connected.'
                   : 'Explore the preview below. Current access options are at the end of this page.'}
@@ -255,17 +257,26 @@ export default async function OfferDetail({ params }: OfferPageProps) {
 
       {!isFree && !liveCheckout ? (
         <section id="request-access" className="section-band scroll-mt-24">
-          <EmailCapture
-            headline={polarCheckoutLive ? `Backup access request for ${offer.shortTitle}` : `Request ${offer.shortTitle} access`}
-            sub={isScoped
-              ? 'Share your email to request the current scoping path. If online intake is not connected, the page will say so before claiming receipt.'
-              : polarCheckoutLive
+          {isScoped ? (
+            <>
+              <h2 className="text-3xl font-semibold">Bring a brief to Frank.</h2>
+              <p className="mt-3 max-w-2xl text-muted">Open the founder’s contact page and select Implementation sprint. Describe the workflow and what an accepted delivery would look like. You choose what to share.</p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <a href="https://www.frankx.ai/contact" className="cta">Discuss your scope</a>
+                <Link href="/workbench/offer-brief" className="cta-secondary">Prepare an offer brief</Link>
+              </div>
+            </>
+          ) : (
+            <EmailCapture
+              headline={polarCheckoutLive ? `Backup access request for ${offer.shortTitle}` : `Request ${offer.shortTitle} access`}
+              sub={polarCheckoutLive
                 ? 'Use the checkout button above for instant Polar delivery. If checkout fails or is unavailable in your browser, leave your email here as a fallback.'
                 : 'Get notified when checkout opens and receive updates on the first-loop checklist.'}
-            source={`offer-${offer.slug}`}
-            buttonLabel="Request access"
-            successMessage="Request received. You are on the access list."
-          />
+              source={`offer-${offer.slug}`}
+              buttonLabel="Request access"
+              successMessage="Request received. You are on the access list."
+            />
+          )}
         </section>
       ) : null}
     </div>

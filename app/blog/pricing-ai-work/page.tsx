@@ -70,7 +70,7 @@ export default function PricingAIWork() {
       <p><strong>On the delivery side, recover {minutesToRecover} minutes.</strong> At the buyer’s {eur.format(priceCeiling)} ceiling, variable cost can reach {eur.format(priceCeiling - priceCeiling * m.targetContributionMargin)} and still leave the seller’s target margin. Removing {eur.format(costGap)} of work closes the cost gap. Time a second batch of comparable quotes and preserve the same acceptance criteria.</p>
       <p><strong>On the buyer side, establish another {eur.format(extraBuyerValue)} of monthly value.</strong> A fee of {eur.format(priceFloor)} needs {eur.format(priceFloor / m.maximumPaybackMonths)} per month to pay back in four months. At the assumed hourly value, that is {extraBuyerValue / m.buyerValuePerHour * 60} additional redeployable minutes per month. Ask the buyer what work those minutes would actually replace.</p>
       <p>Either change would reconcile the quote on paper. Keep the engagement in discovery until a timed trial or a named buyer provides the missing evidence.</p>
-      <p><Link href="/workbench/quote-review">Test a different fee and review time</Link> · <Link href="/blog/quote-review-pilot">Read the quote-review case</Link> · <a href={dataset} download>Download the sources and model inputs (JSON)</a></p>
+      <p><Link href="/?ask=pricing#income-chat">Ask about your own price and costs</Link> · <Link href="/workbench/quote-review">Test a different fee and review time</Link> · <Link href="/blog/quote-review-pilot">Read the quote-review case</Link> · <a href={dataset} download>Download the sources and model inputs (JSON)</a></p>
     </article>
   )
 }

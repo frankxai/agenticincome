@@ -29,6 +29,7 @@ import {
 import { incomeGraphSchema } from '@/lib/income-graph/zod'
 import { buildOfferBrief, offerBriefMarkdown, OFFER_CURRENCIES, OFFER_TEXT_LIMITS, OFFER_UNIT_LIMIT } from '@/lib/offer-brief'
 import { unitMargin } from '@/lib/vault'
+import { minimumOfferPrice } from '@/lib/minimum-offer-price'
 import { costEvidence, marketEvidence, publicVault } from '@/lib/public-economics'
 
 export const maxDuration = 60
@@ -445,6 +446,29 @@ const handler = createMcpHandler(
       async ({ category, confirmedOnly }) => {
         const effectiveConfirmedOnly = confirmedOnly ?? true
         return json(costEvidence(category, effectiveConfirmedOnly))
+      },
+    )
+
+    server.registerTool(
+      'minimum_offer_price',
+      {
+        title: 'Price an offer for a target contribution margin',
+        description: 'Return the lowest positive price in whole cents that meets a target contribution margin at a supplied constant per-sale cost. No demand or revenue forecast.',
+        annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
+        inputSchema: z.strictObject({
+          currency: z.enum(OFFER_CURRENCIES),
+          unitCost: z.number().min(0).max(OFFER_UNIT_LIMIT),
+          targetMarginPercent: z.number().min(0).lt(100),
+        }),
+      },
+      async (args) => {
+        try {
+          const result = minimumOfferPrice(args)
+          return { ...json(result), structuredContent: result }
+        } catch (error) {
+          if (!(error instanceof RangeError)) throw error
+          return { isError: true, content: [{ type: 'text' as const, text: error.message }] }
+        }
       },
     )
 

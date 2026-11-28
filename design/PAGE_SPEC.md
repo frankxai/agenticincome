@@ -202,11 +202,27 @@ Surface: `app/challenge/page.tsx`, not a protected surface. Copy and one removed
 - Change: the `EmailCapture` block is removed from `/challenge`. The section below it now says the challenge is the page, with no sign-up and no email. The seven day cards and their links are unchanged.
 - Boundary: do not add an email field or a follow-up promise here until a sender and a store both exist. `tests/stale-claims.test.mjs` holds the check. `EmailCapture` and `/api/subscribe` on `/start`, `/offers/*` and `/delivery/*` are untouched.
 
+## Revenue desk and unit economics · November 27, 2026
+
+A founder or revenue lead brings one possible paid service. The home page leads into a calculation they can challenge before they collect data, subscribe or pay. The starter example is a hypothetical website handover review. An operator can vary the assumed selling price, delivery cost and monthly fixed cost, inspect the effect on contribution and break-even units, and carry the two unit assumptions into the existing offer brief. The brief retains the source, buyer, offer and bounded validation experiment. Its portable file gives a human or compatible agent the same inputs to review.
+
+An offer with losses on every sale needs a different price or delivery method. The calculator should express this clearly without producing a negative or infinite break-even count. A zero fixed cost has a different meaning from a missing input. No financial input should enter analytics or a request URL. The opening illustration depicts a fictional performer. Real offer terms, fees and availability stay with their owning source.
+
+The founder's commissioning brief sets the visual direction. The owning [Agentic Income brand pack](https://github.com/Starlight-Intelligence/starlight-design-intelligence/blob/5fb0bdde1c4b4af871b1e1d35172b4030b1e7aa2/brand-packs/agentic-income/BRAND.md) defines the commercial voice, and the [Frontier constitution](https://github.com/Starlight-Intelligence/starlight-design-intelligence/blob/e25fab4c5a0dac2ea8c7b91e9397972f5af4b454/portfolio/frontier-experience-constitution.md) defines the review evidence. The old and new screens are recorded in `design/evidence/2026-11-27-revenue-desk/`.
+
 ## Quote-review pilot field note
 
 A sales lead and finance owner arrive from the research index to decide whether a scoped quote-review pilot merits a real buyer test. The article names the sample and its modeled status before showing costs. The cost breakdown, four-hour rework scenario and buyer-capacity calculation give the reader one decision to inspect. Acceptance belongs to the finance owner.
 
 The page offers an editable JSON brief and a Markdown case. The existing offer workbench opens the JSON and recalculates its derived economics. One record supplies all three editions. The canonical page is `/blog/quote-review-pilot`.
+
+## The price of a second look · November 28, 2026
+
+A sales operations lead and a finance partner must decide whether to test an AI-assisted quote review. Show the modeled €1,500 fee and the cost of four additional hours on the cover. Lead to one working model. Ten redacted historical quotes and one approved rate card define the scope. The buyer still has to supply the examples and agree the acceptance threshold.
+
+Use the same source, currency, dates and cost assumptions for the homepage, the published research case and the transferred brief. Changing fee or hours must update both the seller contribution and the buyer payback. A loss, a fragile margin under rework, and positive downside contribution each need a distinct textual decision. The buyer's capacity must remain identifiable as modeled time, and the seller's contribution is measured before fixed costs.
+
+An operator can change the scenario by keyboard, read its assumptions, print a decision memo, download editable JSON, or take the same numbers and evidence into the existing brief editor. A reader with JavaScript disabled can inspect and download the base case. Keep the founder's other material one click away through the case article, implementation, self-service toolkit, and agent-access routes.
 
 ## Quote-review workbench · 2026-11-28
 
@@ -221,3 +237,29 @@ The price negotiation disclosure compares a 20% contribution margin after rework
 A sales lead and a finance owner use `/blog/pricing-ai-work` to identify the billed unit, compare a downside seller fee with a buyer’s payback ceiling, and choose which assumption to test. A reader can open the quote-review calculator or inspect the source observations and scenario inputs in a public JSON download.
 
 The route reuses the existing research article layout and type styles. Four offer descriptions cite five provider guides plus one database description, with USD amounts scoped to the named products. A separate EUR ledger shows the formula and result on each row. Datelines, source URLs and machine-readable units travel with the observations. The blog registry, sitemap and LLM index point to the edition. Both reading and export work without signing in.
+
+## Product opening correction — 28 November 2026
+
+The founder rejected the finance-journal positioning and the quote-review case as the homepage identity. The surface now introduces the actual product with “Build your next business with AI” and a working offer-plan editor. The primary audience is independent founders, creators and small teams. The primary action is to build a personal plan, then edit the complete portable brief. Secondary actions open the free toolkit, research and scoped implementation.
+
+Three directions were assessed. The finance journal misrepresented the broader product. A pure cosmic film would still conceal the product. The selected direction places the real planning controls within an original dark Starlight studio scene.
+
+The homepage has three independent example drafts. Switching between them preserves edits. Price and delivery cost remain explicitly marked example assumptions until edited in the full workbench. The same validated OfferBrief contract powers Markdown download and the bounded URL-fragment handoff. Text entered in the two fields is preserved across the handoff. Editing a buyer changes the suggested customer experiment. This local experience proposes work for the customer's tools. It does not simulate completed agent execution.
+
+Retained jobs
+- Positioning is AI-assisted business creation across services, products and research.
+- Proof is the working local artifact, existing source-linked audit workflow and existing research.
+- Income truth is explicit example economics, source provenance and untested hypotheses.
+- Next steps are the editor, local download, free kit, MCP connection and scoped implementation.
+
+The original illustration assets are reused from the registered campaign masters. Owned logo authority remains the existing LogoMark. Constitution revision e25fab4c5a0dac2ea8c7b91e9397972f5af4b454 remains the recorded authority. The prior candidate is in draft because the founder rejected its direction.
+
+## Current homepage — 28 November 2026: conversational income studio
+
+**Entry decision.** A musician with an idea, an operator with a cost question and a research buyer with a program in mind should all be able to start work from the same screen. The page asks “What do you want to build?” and opens with a working composer. There is one public front door, with the same source tools available to a visitor's own assistant at `/mcp`. The homepage does not ask for an email, a budget or business details before a first answer.
+
+**One interaction, three useful outputs.** Start with a free-text question or explicitly send a starter. Investigate a concrete offer experiment, calculate contribution from a price and variable cost supplied by the visitor, or inspect partner terms and the supporting source. Each turn can expose the tools it actually used, links, and a Markdown result when available. A conversation export includes the follow-up. The model is optional: the interface names the MCP fallback and does not present deterministic text as model output. A handoff may prefill a question but must never submit it on arrival.
+
+**Economic standard.** Margin means contribution divided by sales price; it is not net profit. Label the cost basis and state what has not been deducted. An offer is a hypothesis until a buyer tests it. A published partner term is not evidence of approval, traffic or earnings. Keep open research, the kit, the quote-review case and the MCP instructions available directly, including when the browser cannot run chat.
+
+**Quality gate.** The dated browser/HTTP record is in `design/evidence/2026-11-28-income-chat/`. It separates local behavior from credentials, production availability, buyer demand and the founder's editorial approval. Constitution revision: `e25fab4c5a0dac2ea8c7b91e9397972f5af4b454`. This specification supersedes the preceding form-led homepage direction.

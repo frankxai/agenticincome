@@ -176,9 +176,25 @@ state gives the reader immediate access to the free Starter Kit. Keep the action
 visible at phone widths and under reduced motion. The manual state opens a draft
 in the reader's email app.
 
+## The studio · November 27, 2026
+
+A musician has their instrument in hand. The viewer has a proposed offer to test. The first frame pairs the two, giving the model a point of entry before the rest of the catalog. Platinum, black enamel, wool, mahogany and a small orbital-glass jewel catch a practical studio light. The second frame places collaborators across a mixing desk, listening before they decide. The black-hole detail belongs in the circular studio window. Screens, buttons, numbers and any financial claims use live HTML.
+
+Keep the face and guitar readable where the opening art crops. Give the number fields, evidence and action links a quiet opaque surface. Mobile reading order should follow the proposition, action, model and handoff, with usable controls and room for longer labels. Model changes should be legible under reduced motion. Existing Agentic Income character plates retain their specialist meanings. The campaign stills introduce anonymous editorial subjects without assigning them to the Starlight cast.
+
+Exact prompts, derivative sizes and checksums belong to `design/asset-manifest.json`. Both commissions use the founder’s written direction. Neither used a reference image or founder likeness. VIS owns the cross-brand cast registry. Figma marks its [Starlight cast board](https://www.figma.com/design/m2wi20fAoCgFOKGXkJJGAm?node-id=17-103) as concept work.
+
 ## Quote-review pilot editorial layout
 
 Start with the decision and its sensitivity to four extra review hours. Present the buyer deliverable and itemized costs in reading order. Follow them with buyer payback, acceptance evidence and the downloadable brief. On narrow screens the cost lines keep their labels together with their amounts. The field note uses the existing editorial typography and introduces no animation. Native download links and the existing workbench support the same handoff with reduced motion.
+
+## The instrument and its reading · November 28, 2026
+
+Open on warm paper with an editorial headline, the worked downside and a single primary action. Across the spread, a mechanical hand turns a brass control on an optical-glass instrument. The contact point between fingers and dial, the cut of blue light in the glass and the weight of the mahogany base should survive the phone crop. Subject and meaning come from the photograph. All prices, decisions and comparisons are live text.
+
+Set paper controls beside a dark result panel. One scale sets the selling price and the other sets human review time. A contribution plot shows where the same slope lands four hours later. Use signed numbers and text beside each signal. Keep secondary research as a contact with the founder's studio and use native disclosure for the reference catalog.
+
+Keep the opening and the financial case readable in a still frame. Respect reduced motion, show visible keyboard focus and leave room for full labels and actions at 320 CSS pixels. The new campaign still is an original manufactured object and anonymous articulated hand, recorded as `agentic-income-pilot-decision-instrument` in the asset manifest.
 
 ## Quote-review workbench · 2026-11-28
 
@@ -193,3 +209,26 @@ Price negotiation opens on request below break-even and payback. Keep the two fe
 The opening poses a concrete decision at a €1,500 buyer ceiling. Each of the four comparison sections separates its billing unit, observed terms and direct source. The cost ledger pairs left-aligned formula text with right-aligned currency, preserving reading order on narrow screens. Two final paragraphs translate the fee gap into 80 minutes of delivery work or €31.25 of monthly value. A link lets the reader test another fee and review time. Another link downloads the dated JSON.
 
 The reading surface inherits the journal’s static typography and has no bespoke motion, character or commissioned asset. Screenshots from the local production build cover the new ledger at phone, tablet and desktop widths. On the phone the article and dataset work with JavaScript disabled.
+
+## Product opening correction — 28 November 2026
+
+The opening shows a working offer plan against the existing commissioned listening-room scene. The porcelain and obsidian characters, orbital-glass collar, mahogany and black-hole window establish the requested world. The plan is the foreground object and is immediately editable. Large plain language introduces the product. Champagne actions and a restrained dark glass panel carry the hierarchy.
+
+Scene sequence
+- Build a plan in the opening, select the type of business and edit buyer and deliverable.
+- Choose the existing workbench, toolkit, research or implementation route.
+- Use the original guitarist scene to explain creative ownership and portable AI tools.
+- Explore dated research and the quote-review calculator as supporting material.
+- Return to the editable plan.
+
+A short image settle and panel arrival supply depth without obscuring initial content. Reduced-motion disables both. Mobile uses normal document flow and compresses the introduction to expose the editor. No-JavaScript users can enter the existing workbench or download the starter kit. The illustrations do not depict deployed autonomous capabilities.
+
+Independent source and screen review rejected hidden example economics, template switches losing edits and ambiguous editor navigation. The corrected implementation displays assumed prices and costs, keeps a draft for each starting point and labels the handoff “Edit the full plan.”
+
+## Current homepage — 28 November 2026: a studio conversation
+
+The invitation and the instrument occupy the same opening scene. The original orbital-studio illustration places a reflective Starlight android at right, lit by the black hole behind the glass. At left the dark listening room gives a two-line invitation and the composer room to breathe. Warm metal, mahogany and dark glass connect the portrait to the offer rather than stand in for business proof.
+
+The visible control is a real text composer with explicit starter actions. On the first turn it becomes a conversation with an inspectable source trail and portable output. The three photographic links below it lead to research, a free kit and a worked case; the MCP connection follows for visitors using their own runtime. The hero is a still, not a video or animated canvas. The scene must preserve the face and orbital light on a narrow crop, visible interaction before the fold, focus outlines and native source disclosures.
+
+Master: `public/brand/income-orbital-studio.webp`. Review the final Chromium frames and measurements in `design/evidence/2026-11-28-income-chat/`. Automated and independent visual verification provide technical evidence; the founder retains the separate final taste decision.

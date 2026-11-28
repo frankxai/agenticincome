@@ -1,0 +1,466 @@
+{
+  "revision": "3dde7bf370b0fdcf1f249cfb22d6dece0125570b",
+  "engine": "Headless Chromium 158.0.8127.0, Linux, DPR 1, local Next.js production build. Each pass used a fresh browser context.",
+  "cases": {
+    "desktop": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "motion": "no-preference",
+      "javascript": true,
+      "title": "The price of\na second look.",
+      "width": 1440,
+      "assetWidth": 1817,
+      "duplicates": [],
+      "primaryRect": {
+        "x": 74.2,
+        "y": 512.2,
+        "width": 185.3,
+        "height": 49.6
+      },
+      "primaryColors": {
+        "fg": "rgb(255, 249, 237)",
+        "bg": "rgb(25, 26, 29)"
+      },
+      "primaryContrast": 16.59,
+      "heroMotion": {
+        "animation": "edition-lens-settle",
+        "transition": "0s"
+      },
+      "initialResources": {
+        "count": 38,
+        "bytes": 596820
+      },
+      "localLCPms": 228,
+      "base": [
+        "€500",
+        "10 h\n€500\n14 h\n€200",
+        [
+          "3 pilots",
+          "4 months"
+        ]
+      ],
+      "keyboardFocus": {
+        "matches": true,
+        "outline": "solid",
+        "width": "2px"
+      },
+      "sliderHeight": [
+        44,
+        44
+      ],
+      "downside": "14 h\n€200\n18 h\n-€100",
+      "download": {
+        "file": "quote-review-1500eur-14h.offer-brief.json",
+        "economics": {
+          "currency": "EUR",
+          "unitPrice": 1500,
+          "unitCost": 1300,
+          "contribution": 200,
+          "marginPercent": 13.3
+        }
+      },
+      "workbenchMarkdownBytes": 1655,
+      "rehydrated": [
+        "€1,500",
+        "€1,300",
+        "13.3%"
+      ],
+      "pageErrors": []
+    },
+    "mobile": {
+      "viewport": [
+        390,
+        844
+      ],
+      "motion": "no-preference",
+      "javascript": true,
+      "title": "The price of\na second look.",
+      "width": 390,
+      "assetWidth": 1817,
+      "duplicates": [],
+      "primaryRect": {
+        "x": 20.1,
+        "y": 334.9,
+        "width": 185.3,
+        "height": 49.6
+      },
+      "primaryColors": {
+        "fg": "rgb(255, 249, 237)",
+        "bg": "rgb(25, 26, 29)"
+      },
+      "primaryContrast": 16.59,
+      "heroMotion": {
+        "animation": "edition-lens-settle",
+        "transition": "0s"
+      },
+      "initialResources": {
+        "count": 27,
+        "bytes": 549702
+      },
+      "localLCPms": 144,
+      "mcpTargetHeight": 44,
+      "base": [
+        "€500",
+        "10 h\n€500\n14 h\n€200",
+        [
+          "3 pilots",
+          "4 months"
+        ]
+      ],
+      "keyboardFocus": {
+        "matches": true,
+        "outline": "solid",
+        "width": "2px"
+      },
+      "sliderHeight": [
+        44,
+        44
+      ],
+      "downside": "14 h\n€200\n18 h\n-€100",
+      "download": {
+        "file": "quote-review-1500eur-14h.offer-brief.json",
+        "economics": {
+          "currency": "EUR",
+          "unitPrice": 1500,
+          "unitCost": 1300,
+          "contribution": 200,
+          "marginPercent": 13.3
+        }
+      },
+      "workbenchMarkdownBytes": 1655,
+      "rehydrated": [
+        "€1,500",
+        "€1,300",
+        "13.3%"
+      ],
+      "pageErrors": []
+    },
+    "tablet": {
+      "viewport": [
+        768,
+        1024
+      ],
+      "motion": "no-preference",
+      "javascript": true,
+      "title": "The price of\na second look.",
+      "width": 768,
+      "assetWidth": 1817,
+      "duplicates": [],
+      "primaryRect": {
+        "x": 416.8,
+        "y": 221.6,
+        "width": 185.3,
+        "height": 49.6
+      },
+      "primaryColors": {
+        "fg": "rgb(255, 249, 237)",
+        "bg": "rgb(25, 26, 29)"
+      },
+      "primaryContrast": 16.59,
+      "heroMotion": {
+        "animation": "edition-lens-settle",
+        "transition": "0s"
+      },
+      "initialResources": {
+        "count": 38,
+        "bytes": 596820
+      },
+      "localLCPms": 200,
+      "base": [
+        "€500",
+        "10 h\n€500\n14 h\n€200",
+        [
+          "3 pilots",
+          "4 months"
+        ]
+      ],
+      "keyboardFocus": {
+        "matches": true,
+        "outline": "solid",
+        "width": "2px"
+      },
+      "sliderHeight": [
+        44,
+        44
+      ],
+      "downside": "14 h\n€200\n18 h\n-€100",
+      "download": {
+        "file": "quote-review-1500eur-14h.offer-brief.json",
+        "economics": {
+          "currency": "EUR",
+          "unitPrice": 1500,
+          "unitCost": 1300,
+          "contribution": 200,
+          "marginPercent": 13.3
+        }
+      },
+      "workbenchMarkdownBytes": 1655,
+      "rehydrated": [
+        "€1,500",
+        "€1,300",
+        "13.3%"
+      ],
+      "pageErrors": []
+    },
+    "narrow": {
+      "viewport": [
+        320,
+        720
+      ],
+      "motion": "no-preference",
+      "javascript": true,
+      "title": "The price of\na second look.",
+      "width": 320,
+      "assetWidth": 1817,
+      "duplicates": [],
+      "primaryRect": {
+        "x": 20,
+        "y": 345.0,
+        "width": 185.3,
+        "height": 49.6
+      },
+      "primaryColors": {
+        "fg": "rgb(255, 249, 237)",
+        "bg": "rgb(25, 26, 29)"
+      },
+      "primaryContrast": 16.59,
+      "heroMotion": {
+        "animation": "edition-lens-settle",
+        "transition": "0s"
+      },
+      "initialResources": {
+        "count": 27,
+        "bytes": 549720
+      },
+      "localLCPms": 84,
+      "mcpTargetHeight": 44,
+      "base": [
+        "€500",
+        "10 h\n€500\n14 h\n€200",
+        [
+          "3 pilots",
+          "4 months"
+        ]
+      ],
+      "keyboardFocus": {
+        "matches": true,
+        "outline": "solid",
+        "width": "2px"
+      },
+      "sliderHeight": [
+        44,
+        44
+      ],
+      "downside": "14 h\n€200\n18 h\n-€100",
+      "download": {
+        "file": "quote-review-1500eur-14h.offer-brief.json",
+        "economics": {
+          "currency": "EUR",
+          "unitPrice": 1500,
+          "unitCost": 1300,
+          "contribution": 200,
+          "marginPercent": 13.3
+        }
+      },
+      "workbenchMarkdownBytes": 1655,
+      "rehydrated": [
+        "€1,500",
+        "€1,300",
+        "13.3%"
+      ],
+      "pageErrors": []
+    },
+    "reduced": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "motion": "reduce",
+      "javascript": true,
+      "title": "The price of\na second look.",
+      "width": 1440,
+      "assetWidth": 1817,
+      "duplicates": [],
+      "primaryRect": {
+        "x": 74.2,
+        "y": 512.2,
+        "width": 185.3,
+        "height": 49.6
+      },
+      "primaryColors": {
+        "fg": "rgb(255, 249, 237)",
+        "bg": "rgb(25, 26, 29)"
+      },
+      "primaryContrast": 16.59,
+      "heroMotion": {
+        "animation": "none",
+        "transition": "1e-06s"
+      },
+      "initialResources": {
+        "count": 38,
+        "bytes": 596820
+      },
+      "localLCPms": 164,
+      "base": [
+        "€500",
+        "10 h\n€500\n14 h\n€200",
+        [
+          "3 pilots",
+          "4 months"
+        ]
+      ],
+      "keyboardFocus": {
+        "matches": true,
+        "outline": "solid",
+        "width": "2px"
+      },
+      "sliderHeight": [
+        44,
+        44
+      ],
+      "downside": "14 h\n€200\n18 h\n-€100",
+      "download": {
+        "file": "quote-review-1500eur-14h.offer-brief.json",
+        "economics": {
+          "currency": "EUR",
+          "unitPrice": 1500,
+          "unitCost": 1300,
+          "contribution": 200,
+          "marginPercent": 13.3
+        }
+      },
+      "workbenchMarkdownBytes": 1655,
+      "rehydrated": [
+        "€1,500",
+        "€1,300",
+        "13.3%"
+      ],
+      "pageErrors": []
+    },
+    "no-js": {
+      "viewport": [
+        390,
+        844
+      ],
+      "motion": "reduce",
+      "javascript": false,
+      "title": "The price of\na second look.",
+      "width": 390,
+      "assetWidth": 1817,
+      "duplicates": [],
+      "primaryRect": {
+        "x": 20.1,
+        "y": 334.9,
+        "width": 185.3,
+        "height": 49.6
+      },
+      "primaryColors": {
+        "fg": "rgb(255, 249, 237)",
+        "bg": "rgb(25, 26, 29)"
+      },
+      "primaryContrast": 16.59,
+      "heroMotion": {
+        "animation": "none",
+        "transition": "1e-06s"
+      },
+      "initialResources": {
+        "count": 7,
+        "bytes": 357525
+      },
+      "localLCPms": null,
+      "mcpTargetHeight": 44,
+      "base": [
+        "€500",
+        "10 h\n€500\n14 h\n€200",
+        [
+          "3 pilots",
+          "4 months"
+        ]
+      ],
+      "visibleSliders": 0,
+      "availableActions": [
+        "Download the base brief (JSON)",
+        "Read the case (Markdown)"
+      ],
+      "nativeJSONContribution": 500,
+      "nativeMarkdownBytes": 2282,
+      "pageErrors": []
+    }
+  },
+  "keyboardAndRoutes": {
+    "320": {
+      "skipFocus": "Skip to content",
+      "afterSkip": "Test the pilot ↓",
+      "afterPilotAnchor": "<input id=\"_R_it5fbb_\" type=\"range\" min=\"500\" max=\"3500\" step=\"50\" aria-valuetext=\"€1,500\" style=\"--pd-fill:33.33333333333333%\" value=\"1500\"",
+      "openedDisclosureWidths": [
+        320,
+        320,
+        320,
+        320
+      ],
+      "routeChecks": {
+        "/blog/quote-review-pilot": 200,
+        "/offers/implementation-sprint": 200,
+        "/delivery/starter-kit": 200,
+        "/mcp": 200
+      }
+    },
+    "390": {
+      "skipFocus": "Skip to content",
+      "afterSkip": "Test the pilot ↓",
+      "afterPilotAnchor": "<input id=\"_R_it5fbb_\" type=\"range\" min=\"500\" max=\"3500\" step=\"50\" aria-valuetext=\"€1,500\" style=\"--pd-fill:33.33333333333333%\" value=\"1500\"",
+      "openedDisclosureWidths": [
+        390,
+        390,
+        390,
+        390
+      ],
+      "routeChecks": {
+        "/blog/quote-review-pilot": 200,
+        "/offers/implementation-sprint": 200,
+        "/delivery/starter-kit": 200,
+        "/mcp": 200
+      }
+    },
+    "768": {
+      "skipFocus": "Skip to content",
+      "afterSkip": "Test the pilot ↓",
+      "afterPilotAnchor": "<input id=\"_R_it5fbb_\" type=\"range\" min=\"500\" max=\"3500\" step=\"50\" aria-valuetext=\"€1,500\" style=\"--pd-fill:33.33333333333333%\" value=\"1500\"",
+      "openedDisclosureWidths": [
+        768,
+        768,
+        768,
+        768
+      ],
+      "routeChecks": {
+        "/blog/quote-review-pilot": 200,
+        "/offers/implementation-sprint": 200,
+        "/delivery/starter-kit": 200,
+        "/mcp": 200
+      }
+    },
+    "1440": {
+      "skipFocus": "Skip to content",
+      "afterSkip": "Test the pilot ↓",
+      "afterPilotAnchor": "<input id=\"_R_it5fbb_\" type=\"range\" min=\"500\" max=\"3500\" step=\"50\" aria-valuetext=\"€1,500\" style=\"--pd-fill:33.33333333333333%\" value=\"1500\"",
+      "openedDisclosureWidths": [
+        1440,
+        1440,
+        1440,
+        1440
+      ],
+      "routeChecks": {
+        "/blog/quote-review-pilot": 200,
+        "/offers/implementation-sprint": 200,
+        "/delivery/starter-kit": 200,
+        "/mcp": 200
+      }
+    }
+  },
+  "limitations": [
+    "Viewport emulation on desktop Chromium. Physical devices, screen-reader speech and field performance were not measured.",
+    "Local resource transfer and largest-contentful-paint timings are diagnostic only. They include framework prefetching and do not estimate public network performance."
+  ]
+}

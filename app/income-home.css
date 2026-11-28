@@ -1,0 +1,60 @@
+.income-home { --ink:#f5f2e9; --muted:#bcc4c1; --gold:#e1c99c; --edge:#d5d9ca27; color:var(--ink); background:#080e10; font-family:var(--font-geist-sans),system-ui,sans-serif; }
+main:has(> .income-home) { max-width:none; padding:0; }
+body:has(.income-home) > header { background:#0a1113; border-bottom:1px solid #d5d9ca20; box-shadow:none; backdrop-filter:none; }
+body:has(.income-home) > header nav { max-width:1600px; padding-inline:clamp(20px,5vw,88px); }
+body:has(.income-home) .revenue-nav-brand { white-space:nowrap; }
+body:has(.income-home) .revenue-nav-workbench { color:#ead6b0; }
+body:has(.income-home) > footer { margin-top:0; }
+.income-home :is(a,summary,button,textarea):focus-visible { outline:2px solid #f3d79e; outline-offset:4px; }
+.income-atrium { isolation:isolate; position:relative; background:#091214; }
+.income-scene { position:absolute; z-index:-1; inset:0 0 auto; height:100%; max-height:870px; overflow:hidden; pointer-events:none; }
+.income-scene img { object-fit:cover; object-position:70% 34%; }
+.income-scene::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,#091214 0%,#09121447 20%,transparent 47%),linear-gradient(90deg,#071012c4,#07101252 45%,transparent 69%); }
+.income-entrance { margin:0 auto; max-width:1600px; min-height:clamp(630px,48vw,760px); padding:clamp(74px,7vw,122px) clamp(24px,7vw,120px) clamp(54px,5vw,86px); }
+.income-intro h1 { margin:0; font:500 clamp(3rem,6.3vw,6.9rem)/.99 var(--font-geist-sans),system-ui,sans-serif; letter-spacing:-.069em; color:var(--ink); }
+.income-intro em { font:italic 400 1.09em/.93 Georgia,serif; letter-spacing:-.068em; color:#ebd5ac; }
+.income-intro p { font-size:clamp(.94rem,1.08vw,1.1rem); line-height:1.55; color:#dbe0dd; max-width:40ch; margin:20px 0 0; text-wrap:pretty; }
+.income-conversation { position:relative; max-width:min(710px,65%); margin-top:32px; }
+.income-nojs { font-size:.9rem; color:var(--muted); }
+.income-nojs a,.income-library p a,.income-library details > a { text-decoration:underline; text-underline-offset:.22em; }
+.income-resources,.income-connect,.income-library { width:min(100% - clamp(48px,14vw,240px),1360px); margin-inline:auto; }
+.income-resources { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(18px,2.5vw,44px); padding:52px 0; }
+.income-resource-image { overflow:hidden; position:relative; aspect-ratio:2.05; margin-bottom:17px; background:#152123; }
+.income-resource-image img { object-fit:cover; }
+.income-resources small { font-size:.72rem; color:var(--gold); }
+.income-resources h2 { display:flex; align-items:center; justify-content:space-between; gap:16px; line-height:1.2; margin-top:7px; font-size:clamp(1.06rem,1.7vw,1.75rem); font-weight:500; letter-spacing:-.035em; }
+.income-home :is(.income-resources,.income-connect,.income-library) svg { width:15px; height:15px; flex:none; }
+.income-resources a:hover h2,.income-connect a:hover { color:var(--gold); }
+.income-resources p,.income-connect p,.income-library p { color:var(--muted); font-size:.9rem; line-height:1.6; margin-top:10px; }
+.income-connect { border-block:1px solid var(--edge); display:flex; justify-content:space-between; align-items:center; gap:22px; padding-block:42px; }
+.income-connect h2 { font-size:clamp(1.6rem,3vw,2.9rem); line-height:1.14; letter-spacing:-.04em; font-weight:500; }
+.income-connect a { border:1px solid var(--edge); padding:11px 16px; min-height:44px; display:inline-flex; gap:16px; align-items:center; white-space:nowrap; }
+.income-library { padding-block:24px 56px; }
+.income-library details { border-bottom:1px solid var(--edge); padding-block:5px; font-size:.85rem; }
+.income-library summary { cursor:pointer; line-height:44px; }
+.income-library ul { padding-block:8px 18px; display:grid; gap:8px; }
+.income-library li { display:flex; gap:12px; flex-wrap:wrap; }
+.income-library li span { color:var(--muted); }
+.income-library p a { display:inline-flex; align-items:center; gap:6px; color:var(--ink); }
+@media (prefers-reduced-motion:no-preference) {
+ .income-scene img { animation:orbital-arrival 1.8s cubic-bezier(.18,.66,.24,1) both; }
+ @keyframes orbital-arrival { from { transform:scale(1.028); } to {transform:scale(1);} }
+ .income-resource-image img { transition:transform .35s ease; }
+ .income-resources a:hover img { transform:scale(1.025); }
+}
+@media (max-width:760px){
+ .income-entrance { padding:clamp(85px,25vw,155px) 20px 38px; min-height:0; }
+ .income-scene { height:510px; }
+ .income-scene img { object-position:73% 30%; }
+ .income-scene::after { background:linear-gradient(0deg,#091214 0%,#09121492 35%,transparent 82%),linear-gradient(90deg,#071012a0 0%,transparent 76%); }
+ .income-intro h1 { font-size:clamp(3.1rem,10.4vw,5.6rem); }
+ .income-intro p { max-width:34ch; margin-top:14px; font-size:.94rem; }
+ .income-conversation { max-width:none; margin-top:23px; }
+ .income-resources,.income-connect,.income-library { width:calc(100% - 40px); }
+ .income-resources { gap:20px; grid-template-columns:1fr; padding-block:26px; }
+ .income-resources a { display:grid; grid-template-columns:94px 1fr; grid-template-rows:auto auto auto; gap:2px 15px; align-content:center; align-items:center; }
+ .income-resource-image { grid-row:1/4; aspect-ratio:1.2; margin:0; }
+ .income-resources h2 { margin:1px 0; font-size:1.08rem; }
+ .income-resources p { margin:0; font-size:.78rem; }
+ .income-connect { flex-wrap:wrap; padding-block:28px; }
+}

@@ -1,6 +1,6 @@
 {
   "_comment": "Polar-ready product catalog for agenticincome.ai. Source of truth for product metadata; ops/POLAR-SETUP.md is the runbook that turns these entries into live Polar products. Prices in cents. interval: null = one-time purchase.",
-  "_note": "Paid payloads must move to private delivery (Polar file delivery or a private repo granted via license key) before this repo goes public. Until then, products/blueprint/*.md and products/private-intel/*.md are the paid content sitting in a private repo — do NOT open-source this repo with them in it.",
+  "_note": "This repository is public. The Blueprint source files can be read without purchasing. Polar is the planned delivery channel for the versioned bundle. Verify buyer benefits and fulfilment before enabling checkout.",
   "_checkoutGate": "`status` is the machine-readable sale gate read by lib/polar.ts. A product may be sold ONLY when its status starts with 'for sale' (case-insensitive); every other value refuses checkout, so an unrecognized or misspelled status fails closed instead of opening a sale. Setting the POLAR_* env vars alone does not open checkout — the status here must be flipped too. Activation checklist: ops/POLAR-SETUP.md.",
   "updatedAt": "2026-11-03",
   "merchant_of_record": "polar.sh",
@@ -26,7 +26,7 @@
       "price_cents": 6700,
       "interval": null,
       "status": "for sale — private delivery via Polar",
-      "description": "The complete 7-file Agentic Income Operating Desk: repository workspace and daily/weekly cadence, primary-sourced coding-tool comparison matrix and page template, 12-row verified recurring-payer CSV catalog, 4-stage offer and waitlist ladder with TypeScript/JSON schema, self-serve Polar.sh fail-closed fulfillment checklist, and SHA-256 MANIFEST.json. Every financial table is a labeled scenario with named assumptions, never an income promise.",
+      "description": "The source files are publicly readable. The planned paid edition packages a versioned copy with a checksum manifest. The complete 7-file Agentic Income Operating Desk: repository workspace and daily/weekly cadence, primary-sourced coding-tool comparison matrix and page template, 12-row verified recurring-payer CSV catalog, 4-stage offer and waitlist ladder with TypeScript/JSON schema, self-serve Polar.sh fail-closed fulfillment checklist, and SHA-256 MANIFEST.json. Every financial table is a labeled scenario with named assumptions, never an income promise.",
       "delivery": {
         "type": "polar-files",
         "path": "/delivery/blueprint",

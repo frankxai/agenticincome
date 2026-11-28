@@ -344,14 +344,10 @@ export function draftIncomeGraph(
     }
   }
 
-  const headline =
-    unsupported.length === 0
-      ? 'Nothing in this thesis asserts demand yet, which means it also does not yet claim anyone will pay. Say what you believe someone will buy.'
-      : `${unsupported.length} claim${unsupported.length === 1 ? '' : 's'} in your own sentence ${
-          unsupported.length === 1 ? 'has' : 'have'
-        } nothing behind ${unsupported.length === 1 ? 'it' : 'them'}. The first one is the thesis: "${unsupported[0].claim}". ${
-          unsupported[0].evidenceThatWouldSettleIt
-        } That is about ${unsupported.reduce((sum, u) => sum + u.costInFounderHours, 0)} founder hours of work, and it is the cheapest thing you can do this week.`
+  const researchHours = unsupported.reduce((sum, item) => sum + item.costInFounderHours, 0)
+  const headline = unsupported.length === 0
+    ? 'The plan does not yet say what a buyer would pay for. Name the buyer and the deliverable.'
+    : `${unsupported.length === 1 ? 'One assumption needs' : `${unsupported.length} assumptions need`} evidence. Start with this one: “${unsupported[0].claim}” ${unsupported[0].evidenceThatWouldSettleIt} Estimated time to check the assumptions: ${researchHours} founder hour${researchHours === 1 ? '' : 's'}.`
 
   return { graph, unsupported, assumptions, headline }
 }

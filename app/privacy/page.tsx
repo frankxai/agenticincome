@@ -32,6 +32,12 @@ export default function PrivacyPage() {
 
       <section className="section-band max-w-3xl space-y-8 text-sm leading-7 text-muted">
         <div>
+          <h2 id="studio-chat" className="text-2xl font-semibold text-ink">Studio conversations</h2>
+          <p className="mt-3">
+            When you send a question, the studio receives it with recent turns so it can understand follow-ups. It may pass that context to a model provider through Vercel AI Gateway and use Agentic Income tools to answer. Use public or redacted details. The conversation stays in this tab while the page is open; download it to keep a copy.
+          </p>
+        </div>
+        <div>
           <h2 className="text-2xl font-semibold text-ink">Access requests</h2>
           <p className="mt-3">
             When an intake webhook is configured, the email address and source are sent to that configured service. When a concierge address is configured, the site can prepare a mail message for you to send. When neither exists, the site does not retain the address and says so in the interface.

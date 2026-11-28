@@ -29,6 +29,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 
 const SEVERITY = { critical: 4, high: 3, medium: 2, low: 1 };
@@ -97,7 +98,7 @@ function listFiles(root) {
       for (const e of fs.readdirSync(d, { withFileTypes: true })) {
         const p = path.join(d, e.name);
         if (e.isDirectory()) { if (e.name !== 'node_modules' && e.name !== '.git') walk(p); }
-        else if (e.isFile()) acc.push(path.relative(root, p));
+        else if (e.isFile()) acc.push(path.relative(root, p).split(path.sep).join('/'));
       }
     };
     walk(root);
@@ -133,6 +134,59 @@ function loadConfig(root, explicit) {
 
 // ------------------------------------------------------------------- rules
 // Every rule: { id, severity, title, fix }. Findings reference the id.
+
+// Split a hook command into shell words with quotes removed. Unquoted
+// whitespace and ; & | < > separate words; parens and backticks stay inside the
+// word, so `$(pwd)/.claude/hooks/x` remains one word that starts with `$(`.
+function shellWords(cmd) {
+  const words = [];
+  let cur = '', inWord = false, quote = null;
+  for (let i = 0; i < cmd.length; i++) {
+    const c = cmd[i];
+    if (quote === "'") { if (c === "'") quote = null; else cur += c; continue; }
+    if (quote === '"') {
+      if (c === '"') quote = null;
+      else if (c === '\\' && i + 1 < cmd.length && '"\\$`'.includes(cmd[i + 1])) cur += cmd[++i];
+      else cur += c;
+      continue;
+    }
+    if (c === "'" || c === '"') { quote = c; inWord = true; continue; }
+    if (c === '\\' && i + 1 < cmd.length) { cur += cmd[++i]; inWord = true; continue; }
+    if (/[\s;&|<>]/.test(c)) { if (inWord) words.push(cur); cur = ''; inWord = false; continue; }
+    cur += c; inWord = true;
+  }
+  if (inWord) words.push(cur);
+  return words;
+}
+
+// A path start that does not depend on the working directory.
+const ANCHORED = /^(?:\$CLAUDE_PROJECT_DIR(?![\w])|\$\{CLAUDE_PROJECT_DIR\}|\$HOME(?![\w])|\$\{HOME\}|~\/|\/|[A-Za-z]:[\\/])/;
+// `.claude/hooks/` as its own path segments, after `//` and `/./` are collapsed.
+const HOOK_SEGMENT = /(?:^|[/=])\.claude\/hooks\//;
+
+/**
+ * True when the hook command references a `.claude/hooks/` path whose shell
+ * word (quotes removed) is not anchored at $CLAUDE_PROJECT_DIR,
+ * ${CLAUDE_PROJECT_DIR}, $HOME, ${HOME}, ~/, an absolute path or a drive
+ * letter. `./`, `../`, `$PWD`, `$(pwd)`, backtick-pwd and
+ * `${CLAUDE_PROJECT_DIR:-.}` are all relative to the working directory.
+ */
+export function isRelativeHookCommand(cmd) {
+  if (typeof cmd !== 'string' || !cmd) return false;
+  for (const word of shellWords(cmd)) {
+    let w = word;
+    for (let prev; prev !== w;) { prev = w; w = w.replace(/\/{2,}/g, '/').replace(/\/\.\//g, '/'); }
+    const m = HOOK_SEGMENT.exec(w);
+    if (!m) continue;
+    // The path starts after the last `=` before the match (--flag=path, VAR=path).
+    const head = w.slice(0, m.index + (m[0][0] === '=' ? 1 : 0));
+    const eq = head.lastIndexOf('=');
+    const pathStart = w.slice(eq + 1);
+    if (!ANCHORED.test(pathStart)) return true;
+  }
+  return false;
+}
+
 export const RULES = {
   WF001: { severity: 'high', title: 'pull_request_target checks out the PR head', fix: 'Check out base.sha for trusted code; if the PR tree is needed, check it out to a separate path with persist-credentials:false and never run its scripts or expose secrets after it.' },
   WF002: { severity: 'high', title: 'Untrusted event text interpolated directly into a run: step', fix: 'Pass it through env: (e.g. `env: BODY: ${{ github.event.comment.body }}` then use "$BODY") so it is data, not shell.' },
@@ -145,9 +199,10 @@ export const RULES = {
   HK001: { severity: 'medium', title: 'settings.local.json is tracked in git', fix: 'It is per-machine by design. `git rm --cached` it and add it to .gitignore.' },
   HK002: { severity: 'high', title: 'Blanket Bash permission in Claude settings', fix: 'Replace `Bash(*)` with explicit command prefixes. A blanket allow makes every hook and skill a code-execution path.' },
   HK003: { severity: 'medium', title: 'Hook executes an unpinned remote package on every event', fix: 'Pin the version (`pkg@1.2.3`) or vendor the script. `@latest` on a hook means a compromised release runs with your privileges on the next edit.' },
-  HK004: { severity: 'low', title: 'Hook references a machine-specific absolute path', fix: 'Use a repo-relative path. On any other machine this hook silently fails and the gate it implements does not exist.' },
+  HK004: { severity: 'low', title: 'Hook references a machine-specific absolute path', fix: 'Use `"$CLAUDE_PROJECT_DIR"/.claude/hooks/<name>` (a bare relative path trips HK008). On any other machine this hook silently fails and the gate it implements does not exist.' },
   HK005: { severity: 'high', title: 'Hook script contains a destructive or remote-exec primitive', fix: 'Hooks run unattended on every event. Remove curl|sh, eval of tool input, recursive deletes outside a temp dir, and force-pushes.' },
   HK006: { severity: 'medium', title: 'enableAllProjectMcpServers is true in a tracked settings file', fix: 'Approve MCP servers explicitly. Auto-approving every project .mcp.json means a PR can add a server that runs on checkout.' },
+  HK008: { severity: 'high', title: 'Hook command uses a relative .claude/hooks/ path', fix: 'After any `cd` in Bash a relative hook path breaks every later tool call. Use `python3 "$CLAUDE_PROJECT_DIR"/.claude/hooks/<name>.py` (or `${CLAUDE_PROJECT_DIR}`); re-running `install.sh` writes the correct form.' },
   HK007: { severity: 'high', title: 'Permission bypass mode committed to the repo', fix: 'Remove bypassPermissions / skip-prompt settings from tracked config. Bypass is a per-session decision, never a repo default.' },
 
   MCP001: { severity: 'high', title: 'Inline secret-looking value in MCP server env', fix: 'Reference environment variables (`${VAR}`) and keep values in the machine keychain or .env (untracked).' },
@@ -348,6 +403,14 @@ export function scanRepo(root, opts = {}) {
           if (CURL_PIPE_SH.test(cmd)) add('HK005', rel, 1, cmd);
         }
       }
+      // HK008 applies to settings.json and settings.local.json, tracked or not:
+      // a relative hook path breaks after any `cd` either way.
+      if (d) for (const ev of Object.values(d.hooks || {})) for (const e of ev) for (const h of e.hooks || []) {
+        const cmd = h.command || '';
+        // "$HOME"/.claude/hooks, ~/.claude/hooks and /abs/.claude/hooks do not depend
+        // on the working directory; every other start of the shell word does.
+        if (isRelativeHookCommand(cmd)) add('HK008', rel, 1, cmd);
+      }
     }
     if (/(^|\/)\.claude\/hooks\/[^/]+\.(sh|py|js|mjs|cjs|ts|ps1)$/.test(rel) || /^hooks\/[^/]+\.(sh|py|js|mjs|cjs)$/.test(rel)) {
       stats.hooks++;
@@ -483,7 +546,7 @@ export function toMarkdown(reports) {
 }
 
 // -------------------------------------------------------------------- main
-const isMain = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname);
+const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
   const a = parseArgs(process.argv.slice(2));
   const reports = [];

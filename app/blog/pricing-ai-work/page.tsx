@@ -35,7 +35,7 @@ export default function PricingAIWork() {
       <ArticleJsonLd title={post.title} description={post.dek} slug={slug} date={post.date} />
       <p className="text-sm"><Link href="/blog">Revenue research</Link> · <time dateTime={data.checkedOn}>28 November 2026</time></p>
       <h1>{post.title}</h1>
-      <p>Suppose a buyer needs a four-month payback on a quote-review pilot. That puts the modeled fee ceiling at {eur.format(priceCeiling)}. Finance estimates that delivering it at the agreed margin requires {eur.format(priceFloor)}. A discount would close the deal and leave the underlying problem intact. Which assumption can the team change?</p>
+      <p>Suppose a buyer needs a four-month payback on a quote-review pilot. That puts the modeled fee ceiling at {eur.format(priceCeiling)}. Finance estimates that delivering it at the agreed margin requires {eur.format(priceFloor)}. A discount could meet the buyer’s payback target and leave the seller short of its margin. Which assumption can the team change?</p>
 
       <h2>What four companies actually sell</h2>
       <p>The unit on the invoice tells you what the customer expects to keep. These public offers illustrate four different units. Prices below are in US dollars, checked on 28 November 2026.</p>

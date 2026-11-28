@@ -203,3 +203,9 @@ A warm-paper worksheet sits inside the existing dark site. A navy ledger places 
 Preserve full-size native range targets and a visible keyboard focus ring. The fee, hours and results update together. Motion carries no information. Print draws a separate decision memo with the selected terms, downside, delivery costs, buyer payback, fixed-cost coverage, approval and source.
 
 Price negotiation opens on request below break-even and payback. Keep the two fee bounds and the size of any gap in text. Native disclosure preserves keyboard and reduced-motion behavior.
+
+## Pricing AI work field note, 28 November 2026
+
+The opening poses a concrete decision at a €1,500 buyer ceiling. Each of the four comparison sections separates its billing unit, observed terms and direct source. The cost ledger pairs left-aligned formula text with right-aligned currency, preserving reading order on narrow screens. Two final paragraphs translate the fee gap into 80 minutes of delivery work or €31.25 of monthly value. A link lets the reader test another fee and review time. Another link downloads the dated JSON.
+
+The reading surface inherits the journal’s static typography and has no bespoke motion, character or commissioned asset. Screenshots from the local production build cover the new ledger at phone, tablet and desktop widths. On the phone the article and dataset work with JavaScript disabled.

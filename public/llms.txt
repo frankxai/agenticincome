@@ -60,3 +60,8 @@ Read dated market observations at /api/v1/economics?dataset=markets and supply c
 /api/v1/economics?dataset=costs. Each row links to its source. The OpenAPI contract is
 https://www.agenticincome.ai/economics.openapi.json. The same evidence is available
 through search_digital_economies and list_supply_costs on the MCP server.
+
+## Pricing research
+
+Article: https://www.agenticincome.ai/blog/pricing-ai-work
+Source observations and illustrative EUR assumptions: https://www.agenticincome.ai/research/pricing-ai-work.json

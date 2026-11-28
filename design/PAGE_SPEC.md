@@ -231,3 +231,9 @@ At `/workbench/quote-review`, a sales lead can price a review of ten quotes and 
 The first result shows euros retained per pilot before fixed costs. The stress case adds four review hours. Keep monthly break-even in whole pilots and buyer payback in months. State the value of redeployed time separately from cash savings. The user can carry the chosen assumptions into the existing brief editor, download the editable JSON, or print a decision memo. The source case and fixed assumptions are available from the same screen.
 
 The price negotiation disclosure compares a 20% contribution margin after rework with a four-month buyer payback target. When the price window is empty, show the seller’s cost reduction or the buyer’s extra monthly value needed to close the gap. The scenario API, print memo and editable brief carry the same bounds.
+
+## Pricing AI work field note, 28 November 2026
+
+A sales lead and a finance owner use `/blog/pricing-ai-work` to identify the billed unit, compare a downside seller fee with a buyer’s payback ceiling, and choose which assumption to test. A reader can open the quote-review calculator or inspect the source observations and scenario inputs in a public JSON download.
+
+The route reuses the existing research article layout and type styles. Four offer descriptions cite five provider guides plus one database description, with USD amounts scoped to the named products. A separate EUR ledger shows the formula and result on each row. Datelines, source URLs and machine-readable units travel with the observations. The blog registry, sitemap and LLM index point to the edition. Both reading and export work without signing in.

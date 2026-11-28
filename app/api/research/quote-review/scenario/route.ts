@@ -49,6 +49,7 @@ export function GET(request: Request) {
       monthlyRunningCost: pilot.buyerMonthlyCost, netMonthlyCapacityValue: monthlyBuyerValue,
       simplePaybackMonths: model.buyerPaybackMonths,
     },
+    pricingWindow: model.pricingWindow,
     brief,
   }, { headers: { 'Cache-Control': 'public, max-age=300, s-maxage=3600', 'Access-Control-Allow-Origin': '*' } })
 }

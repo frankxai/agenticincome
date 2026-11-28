@@ -60,6 +60,7 @@ export function PilotDecisionMemo({ price, hours }: { price: number; hours: numb
           </section>
         </div>
         <section className="pm-decision"><span>Decision at these terms</span><h2>{model.verdict}</h2>
+          <p>At a {model.pricingWindow.targetDownsideMarginPercent}% margin after rework, the seller’s minimum is {euro.format(model.pricingWindow.sellerFeeFloor)}. The buyer’s {model.pricingWindow.buyerPaybackLimitMonths}-month ceiling is {euro.format(model.pricingWindow.buyerFeeCeiling)}. {model.pricingWindow.feeGap > 0 ? 'Closing the gap takes ' + euro.format(model.pricingWindow.requiredCostReduction) + ' in cost reductions or ' + euro.format(model.pricingWindow.requiredExtraMonthlyBuyerValue) + ' more monthly buyer value.' : 'An agreed price inside this range meets both targets.'}</p>
           <p>Before authorizing spend, name a budget owner, time the manual review and agree which discrepancies are critical. On the ten-quote sample, record misses, false positives and actual review hours.</p>
         </section>
         <footer><span>Illustrative assumptions · EUR excluding tax · Case dated {pilot.date}</span><span>{site.url.replace(/^https?:\/\//, '')}/blog/{pilot.slug}</span></footer>

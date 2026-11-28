@@ -193,3 +193,13 @@ Price negotiation opens on request below break-even and payback. Keep the two fe
 The opening poses a concrete decision at a €1,500 buyer ceiling. Each of the four comparison sections separates its billing unit, observed terms and direct source. The cost ledger pairs left-aligned formula text with right-aligned currency, preserving reading order on narrow screens. Two final paragraphs translate the fee gap into 80 minutes of delivery work or €31.25 of monthly value. A link lets the reader test another fee and review time. Another link downloads the dated JSON.
 
 The reading surface inherits the journal’s static typography and has no bespoke motion, character or commissioned asset. Screenshots from the local production build cover the new ledger at phone, tablet and desktop widths. On the phone the article and dataset work with JavaScript disabled.
+
+## Product-first homepage · 2026-11-28
+
+Replace the opening film with one composition: an ivory editorial headline
+against a quiet mineral-green field and the real pricing instrument. Use the
+instrument’s values as the visual focus. Result changes follow input directly.
+A static starting case and downstream study remain available without scripting.
+Research and scoped implementation follow as two short editorial rows. No
+identity imagery is introduced. Constitution:
+e25fab4c5a0dac2ea8c7b91e9397972f5af4b454.

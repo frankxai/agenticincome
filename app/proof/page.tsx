@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { baseOpenGraph } from '@/lib/open-graph'
 import Link from 'next/link'
+import { AgentWorkflowProof } from '@/components/AgentWorkflowProof'
 
 export const metadata: Metadata = {
   title: 'Agentic Income Proof Standard',
@@ -89,6 +90,8 @@ export default function ProofPage() {
           </div>
         </div>
       </section>
+
+      <AgentWorkflowProof />
 
       <section className="section-band" aria-labelledby="evidence-layers-title">
         <div className="section-heading">

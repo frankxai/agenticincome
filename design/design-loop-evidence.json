@@ -25,7 +25,6 @@
     "acceptance": "Check availability before collecting an address. On closure offer the existing /delivery/starter-kit route.",
     "test": "tests/intake-availability.test.mjs"
   },
-
   "offer_evidence_brief": {
     "date": "2026-11-19",
     "route": "/workbench/offer-brief",
@@ -607,5 +606,21 @@
     "verification": "The integrated local merge gate passed lint, 307 tests, type checking, static links, public-surface verification and the production Next build. The web guidelines check reported no mechanical violations.",
     "limits": "Browser evidence is from Chromium. Buyer demand and actual capacity savings remain unmeasured.",
     "rollback": "Revert the research article, registry entry, JSON and LLM index additions together."
+  },
+  "product_first_homepage": {
+    "route": "/",
+    "baseline_revision": "490410b0d004d884c2d9df7ab285921179af2fee",
+    "constitution": "e25fab4c5a0dac2ea8c7b91e9397972f5af4b454",
+    "baseline": "Live browser inspection showed a priced-offer headline paired with an unrelated fit_check terminal, followed by repository implementation scenes and closed intake.",
+    "candidate": "Live pricing controls backed by lib/pilot-decision.ts, with a scenario-preserving handoff to OfferBrief.v1. Research and implementation follow. The reference workflow moves to /proof.",
+    "provenance": "Existing typography and interface primitives, new styles and factual text. No character or identity assets added.",
+    "browser_checks": [
+      "Chromium 1440px, 768px, 390px and 320px: keyboard controls and reflow",
+      "390px and 320px: reduced motion",
+      "1440px and 390px: editable brief and real JSON download",
+      "No JavaScript: stable base case and full model link"
+    ],
+    "limits": "Separate design review and authorized preview validation are outstanding. No customer demand, realized economic outcome or performance benchmark was measured.",
+    "rollback": "Revert the candidate commit."
   }
 }

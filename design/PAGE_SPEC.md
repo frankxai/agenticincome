@@ -221,3 +221,17 @@ The price negotiation disclosure compares a 20% contribution margin after rework
 A sales lead and a finance owner use `/blog/pricing-ai-work` to identify the billed unit, compare a downside seller fee with a buyer’s payback ceiling, and choose which assumption to test. A reader can open the quote-review calculator or inspect the source observations and scenario inputs in a public JSON download.
 
 The route reuses the existing research article layout and type styles. Four offer descriptions cite five provider guides plus one database description, with USD amounts scoped to the named products. A separate EUR ledger shows the formula and result on each row. Datelines, source URLs and machine-readable units travel with the observations. The blog registry, sitemap and LLM index point to the edition. Both reading and export work without signing in.
+
+## Product-first homepage · 2026-11-28
+
+The opening audience is a founder or operating lead deciding whether one AI
+workflow can support a paid pilot. The primary action is changing a modeled
+quote-review fee or review time. The homepage and quote-review workbench use
+the same economics, assumptions and editable brief route. No credentials or
+email are required. The full model explains the numbers, and the pricing study
+provides source context. Implementation is a secondary action.
+
+The homepage omits repo filenames, fake terminal activity, chapter marks and
+closed intake. The executable affiliate audit now has a home on /proof. The
+commercial and developer routes remain available. Review the visible example,
+negative contribution, keyboard controls, reflow and the edited brief handoff.

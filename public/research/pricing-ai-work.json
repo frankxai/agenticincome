@@ -7,8 +7,8 @@
   "offers": [
     {
       "name": "Intercom Fin",
-      "unit": "One billable outcome per conversation",
-      "observation": "A resolution and a qualified prospect carry different prices. A failed procedure earns no outcome fee. Multiple steps still count as at most one billable outcome per conversation.",
+      "unit": "One billable outcome per Intercom chat or email conversation",
+      "observation": "These rates apply to Fin in Intercom chat and email. Voice has separate pricing. A resolution and a qualified prospect carry different prices. A failed procedure earns no outcome fee. Multiple steps still count as at most one billable outcome per conversation.",
       "prices": [
         {"item": "Resolution", "amount": 0.99, "currency": "USD", "per": "outcome"},
         {"item": "Qualification", "amount": 9.99, "currency": "USD", "per": "outcome"}
@@ -44,8 +44,8 @@
     },
     {
       "name": "The Information Pro",
-      "unit": "An annual research subscription",
-      "observation": "Pro readers can interrogate newsroom databases. Its generative AI database tracks company financing and vendor relationships alongside the publication’s reporting.",
+      "unit": "A research subscription",
+      "observation": "Pro readers can interrogate newsroom databases. Its generative AI research draws on company financing and investor information alongside the publication’s reporting.",
       "prices": [],
       "priceNote": "The comparison concerns data access. Promotional subscription prices are omitted.",
       "sources": [

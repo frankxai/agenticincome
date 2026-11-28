@@ -1,6 +1,6 @@
 {
   "surface": "Local optimized Next build, public unauthenticated MCP tools, no model credentials. Local hosted origin http://localhost:4471.",
-  "tested_source_revision": "22df60b",
+  "tested_source_revision": "2949bf6",
   "viewports_and_behavior": [
     {
       "viewport": [
@@ -13,6 +13,11 @@
       "h1": "What do you want\nto build?",
       "motion": "no-preference",
       "composer_reachable_by_tab": true,
+      "calculator_notices": [
+        null,
+        null,
+        null
+      ],
       "target_margin_followup": {
         "messages_received": 5,
         "mode": "tools",
@@ -30,7 +35,7 @@
         "draft_offer_experiment"
       ],
       "history_messages_on_followup": 3,
-      "download_bytes": 1194,
+      "download_bytes": 988,
       "result_bytes": 908,
       "keyboard_followup": true,
       "links": [
@@ -50,6 +55,11 @@
       "h1": "What do you want\nto build?",
       "motion": "no-preference",
       "composer_reachable_by_tab": true,
+      "calculator_notices": [
+        null,
+        null,
+        null
+      ],
       "target_margin_followup": {
         "messages_received": 5,
         "mode": "tools",
@@ -67,7 +77,7 @@
         "draft_offer_experiment"
       ],
       "history_messages_on_followup": 3,
-      "download_bytes": 1194,
+      "download_bytes": 988,
       "result_bytes": 908,
       "keyboard_followup": true,
       "links": [
@@ -263,9 +273,9 @@
               "name": "draft_offer_experiment",
               "label": "Calculate contribution from your assumptions"
             }
-          ],
-          "notice": "Model generation is unavailable for this turn. This result comes directly from the tools shown below."
-        }
+          ]
+        },
+        "local_http_elapsed_ms": 16
       },
       {
         "question": "What if delivery costs 1100? (follow-up)",
@@ -287,9 +297,9 @@
               "name": "draft_offer_experiment",
               "label": "Calculate contribution from your assumptions"
             }
-          ],
-          "notice": "Model generation is unavailable for this turn. This result comes directly from the tools shown below."
-        }
+          ]
+        },
+        "local_http_elapsed_ms": 9
       },
       {
         "question": "What should I charge to keep a 40% margin? (third turn)",
@@ -311,9 +321,9 @@
               "name": "minimum_offer_price",
               "label": "Calculate the price floor for your target margin"
             }
-          ],
-          "notice": "Model generation is unavailable for this turn. This result comes directly from the tools shown below."
-        }
+          ]
+        },
+        "local_http_elapsed_ms": 7
       },
       {
         "question": "Compare Stripe, Polar and Whop payment processing fees.",

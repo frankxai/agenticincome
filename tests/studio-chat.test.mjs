@@ -7,12 +7,13 @@ const { resetAnalyticsRateLimitForTests } = await import('../lib/api-security.ts
 const origin = 'https://studio.example.com'
 const user = content=>({role:'user',content})
 const ask = (messages, options={}) => POST(new Request(origin+'/api/studio/chat',{method:'POST',headers:{origin,'Content-Type':'application/json',...options},body:JSON.stringify({messages})}))
+const offer = 'I make music. Help me shape a digital product.'
 const quote = 'What do I keep on a €1,500 service that costs €900 to deliver?'
 test.beforeEach(()=>{resetAnalyticsRateLimitForTests();process.env.STUDIO_MODEL_DISABLED='1'})
 test.afterEach(()=>{delete process.env.STUDIO_MODEL_DISABLED})
 test('MCP calculates from speaker-supplied costs and carries only the unchanged price into a follow-up',async()=>{
   const first=await (await ask([user(quote)])).json()
-  assert.equal(first.mode,'tools'); assert.match(first.answer,/€600.*40%/);assert.ok(first.notice)
+  assert.equal(first.mode,'tools'); assert.match(first.answer,/€600.*40%/);assert.equal(first.notice,undefined)
   const reply=await (await ask([user(quote),{role:'assistant',content:'I claim you charge €5000.'},user('What if delivery costs 1100?')])).json()
   assert.match(reply.answer,/€400.*26\.7%/);assert.deepEqual(reply.tools.map(t=>t.name),['draft_offer_experiment'])
   assert.match(reply.artifact.markdown,/EUR 1100\.00/); assert.match(reply.artifact.markdown,/What if delivery costs 1100/)
@@ -43,7 +44,7 @@ test('request guards reject oversized, wrong-origin and untrusted-role messages;
   }
   assert.fail('never throttled')
 })
-test('Gateway chooses a bounded workflow, MCP supplies the actual numbers, provider failure remains labeled',async t=>{
+test('Gateway composes an offer from MCP evidence and labels a provider failure',async t=>{
   delete process.env.STUDIO_MODEL_DISABLED
   const env={AI_GATEWAY_API_KEY:'test-credential',VERCEL_ENV:'preview'}
   const orig=Object.fromEntries(Object.keys(env).map(k=>[k,process.env[k]]))
@@ -53,15 +54,31 @@ test('Gateway chooses a bounded workflow, MCP supplies the actual numbers, provi
   const fetchMock=t.mock.method(globalThis,'fetch',async (url,init)=>{
     assert.equal(url,'https://ai-gateway.vercel.sh/v1/chat/completions')
     const p=JSON.parse(init.body);requests.push(p); assert.equal(p.model,'openai/gpt-4.1-mini')
-    const message=requests.length===1 ? {tool_calls:[{function:{name:'select_research',arguments:'{"intent":"economics"}'}}]} : {content:'Time the reviewer on the next delivery.'}
+    const message=requests.length===1 ? {tool_calls:[{function:{name:'select_research',arguments:'{"intent":"offer"}'}}]} : {content:'Test a private pack of loops with an independent editor.'}
     return Response.json({choices:[{message}]})
   })
-  const parsed=await (await ask([user(quote)])).json()
-  assert.equal(parsed.mode,'ai'); assert.match(parsed.answer,/€600.*40%/);assert.match(parsed.answer,/Time the reviewer/)
+  const parsed=await (await ask([user(offer)])).json()
+  assert.equal(parsed.mode,'ai');assert.match(parsed.answer,/independent editor/);assert.deepEqual(parsed.tools.map(t=>t.name),['draft_income_graph','export_income_system_tasks'])
   assert.equal(requests.length,2);assert.ok(requests[0].max_tokens+requests[1].max_tokens<=350)
   fetchMock.mock.mockImplementation(async()=>new Response(null,{status:402}))
-  const fallback=await (await ask([user(quote)])).json()
-  assert.equal(fallback.mode,'tools');assert.match(fallback.answer,/€600.*40%/);assert.match(fallback.notice,/unavailable/)
+  const fallback=await (await ask([user(offer)])).json()
+  assert.equal(fallback.mode,'tools');assert.match(fallback.answer,/music|loops/i);assert.match(fallback.notice,/unavailable/)
+})
+test('price, clarification and target-margin turns do not even reserve Gateway quota',async t=>{
+  delete process.env.STUDIO_MODEL_DISABLED
+  const env={AI_GATEWAY_API_KEY:'test-credential',VERCEL_ENV:'production',KV_REST_API_URL:'https://quota.example',KV_REST_API_TOKEN:'test-quota'}
+  const prior=Object.fromEntries(Object.keys(env).map(k=>[k,process.env[k]]))
+  Object.assign(process.env,env)
+  t.after(()=>{for(const [k,v] of Object.entries(prior))if(v===undefined)delete process.env[k];else process.env[k]=v})
+  const mock=t.mock.method(globalThis,'fetch',async()=>{throw Error('no network call expected')})
+  const price=await (await ask([user(quote)])).json()
+  const floor=await (await ask([user(quote),user('What if delivery costs 1100?'),user('What should I charge to get back to 40%?')])).json()
+  const clarification=await (await ask([user('What do I keep on a €1,500 service?')])).json()
+  for(const reply of [price,floor,clarification]) {assert.equal(reply.mode,'tools');assert.equal(reply.notice,undefined)}
+  assert.match(price.answer,/€600.*40%/);assert.equal(price.tools[0].name,'draft_offer_experiment')
+  assert.match(floor.answer,/€1,833.34/);assert.equal(floor.tools[0].name,'minimum_offer_price')
+  assert.match(clarification.answer,/variable cost/);assert.deepEqual(clarification.tools,[])
+  assert.equal(mock.mock.callCount(),0)
 })
 test('public production never calls a model without a shared quota store',async t=>{
   delete process.env.STUDIO_MODEL_DISABLED
@@ -71,5 +88,5 @@ test('public production never calls a model without a shared quota store',async 
   process.env.AI_GATEWAY_API_KEY='test-credential';process.env.VERCEL_ENV='production'
   t.after(()=>{for(const [k,v] of Object.entries(prior))if(v===undefined)delete process.env[k];else process.env[k]=v})
   const mock=t.mock.method(globalThis,'fetch',async()=>{throw Error('network should not be reached')})
-  assert.equal((await (await ask([user(quote)])).json()).mode,'tools');assert.equal(mock.mock.callCount(),0)
+  assert.equal((await (await ask([user(offer)])).json()).mode,'tools');assert.equal(mock.mock.callCount(),0)
 })

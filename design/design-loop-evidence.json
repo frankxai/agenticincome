@@ -900,7 +900,7 @@
   "income_chat_frontdoor": {
     "verified": "2026-11-28",
     "route": "/",
-    "tested_source_revision": "22df60b",
+    "tested_source_revision": "2949bf6",
     "constitution": "e25fab4c5a0dac2ea8c7b91e9397972f5af4b454",
     "experience_standard_and_brand_pack": "5fb0bdde1c4b4af871b1e1d35172b4030b1e7aa2",
     "evidence_directory": "design/evidence/2026-11-28-income-chat",
@@ -919,7 +919,7 @@
       },
       {
         "name": "Mode and validation",
-        "result": "The local production build had no provider credentials; each sampled turn identified the MCP fallback explicitly. Empty turns, whitespace and a system role were rejected with HTTP 400; an unrelated Origin was rejected with HTTP 403."
+        "result": "The local production build had no provider credentials. The three arithmetic turns exposed the public MCP calculator without describing a model outage. The sampled non-arithmetic requests identified the model-free fallback when model generation was unavailable. Empty turns, whitespace and a system role were rejected with HTTP 400; an unrelated Origin was rejected with HTTP 403."
       }
     ],
     "screens": [

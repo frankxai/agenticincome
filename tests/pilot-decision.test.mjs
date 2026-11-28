@@ -56,3 +56,21 @@ test('the fragment accepts the bounded quote-review controls only', () => {
     assert.equal(pilotInputFromFragment(fragment), null)
   }
 })
+
+test('seller and buyer conditions can conflict even when the pilot is profitable', () => {
+  const window = pilotDecision(1500, 10).pricingWindow
+  assert.equal(window.sellerFeeFloor, 1625)
+  assert.equal(window.buyerFeeCeiling, 1500)
+  assert.equal(window.requiredCostReduction, 100)
+  assert.equal(window.requiredReviewMinutesSaved, 80)
+  assert.equal(window.requiredExtraMonthlyBuyerValue, 31.25)
+  assert.equal(window.feeGap, 125)
+  const aligned = pilotDecision(1500, 8).pricingWindow
+  assert.equal(aligned.sellerFeeFloor, 1437.5)
+  assert.equal(aligned.requiredCostReduction, 0)
+  for (let hours = 0; hours <= 30; hours += .5) {
+    const { stressCost, sellerFeeFloor } = pilotDecision(1500, hours).pricingWindow
+    assert.ok(sellerFeeFloor * .8 + 1e-7 >= stressCost)
+    assert.ok((sellerFeeFloor - .01) * .8 < stressCost)
+  }
+})

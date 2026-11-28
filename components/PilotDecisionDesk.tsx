@@ -77,6 +77,7 @@ export function PilotDecisionDesk({ headingLevel: Heading = 'h2' }: { headingLev
   const headingId = useId()
   const Subheading = Heading === 'h1' ? 'h2' : 'h3'
   const model = pilotDecision(price, hours)
+  const terms = model.pricingWindow
   return (
     <section className="pd-desk" id="unit-economics" aria-labelledby={headingId}>
       <div className="pd-frame">
@@ -119,6 +120,15 @@ export function PilotDecisionDesk({ headingLevel: Heading = 'h2' }: { headingLev
             <p>at {money.format(monthlyBuyerValue)}/month in redeployable time. Verify hours with the buyer.</p></div>
           <span className="pd-sr-only">{model.verdict}. Seller contribution {money.format(model.contribution)} per pilot, or {money.format(model.stressContribution)} with four extra review hours.</span>
         </div>
+        <details className="pd-negotiation">
+          <summary>Can both sides agree a price?</summary>
+          <div>
+            <p>A {terms.targetDownsideMarginPercent}% seller margin after rework sets the fee floor at <b>{money.format(terms.sellerFeeFloor)}</b>. A {terms.buyerPaybackLimitMonths}-month payback on the buyer’s modeled time savings caps the fee at <b>{money.format(terms.buyerFeeCeiling)}</b>.</p>
+            {terms.feeGap > 0 ? <p>The gap is {money.format(terms.feeGap)}. To close it, remove {money.format(terms.requiredCostReduction)} in delivery cost ({terms.requiredReviewMinutesSaved} minutes of review), or demonstrate another {money.format(terms.requiredExtraMonthlyBuyerValue)} in monthly buyer value.</p>
+              : <p>The two targets overlap. An agreed fee from {money.format(terms.sellerFeeFloor)} to {money.format(terms.buyerFeeCeiling)} meets both under these assumptions.</p>}
+            <p>These are negotiating targets. The buyer still needs to confirm that the recovered hours have value.</p>
+          </div>
+        </details>
         <div className="pd-foot">
           <div className="pd-actions">
             <Link className="pd-primary" href={pilotBriefHref(price, hours)}>Edit this brief <span aria-hidden="true">↗</span></Link>

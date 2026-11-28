@@ -99,6 +99,12 @@
 .pd-observations p { font-size: .86rem; line-height: 1.5; color: var(--pd-muted); max-width: 34rem; }
 .pd-static { margin-bottom: 1rem; font-size: .9rem; line-height: 1.6; }
 .pd-static a { display: inline-block; margin-right: 1rem; color: var(--pd-cobalt); text-decoration: underline; }
+.pd-negotiation { border-bottom: 1px solid var(--pd-rule); }
+.pd-negotiation summary { cursor: pointer; min-height: 44px; display: list-item; list-style: disclosure-closed; padding: .85rem 0; color: var(--pd-cobalt); font-size: .94rem; font-weight: 600; }
+.pd-negotiation[open] summary { list-style: disclosure-open; }
+.pd-negotiation > div { max-width: 64ch; padding: 0 0 1rem; color: var(--pd-muted); font-size: .92rem; line-height: 1.6; }
+.pd-negotiation p + p { margin-top: .45rem; }
+.pd-negotiation b { color: var(--pd-ink); }
 .pd-foot { margin-top: 1.2rem; }
 .pd-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .4rem 1.5rem; }
 .pd-actions :is(button,a) { font: 600 .84rem/1.4 var(--font-geist-sans, system-ui), sans-serif; }

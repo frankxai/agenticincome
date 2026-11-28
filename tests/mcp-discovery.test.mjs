@@ -39,10 +39,10 @@ test('MCP product availability honors the checkout release gate', () => {
   )
 })
 
-test('homepage featured tools are real MCP tools, not invented names', () => {
-  const homepageSource = read('app/page.tsx')
-  const featured = [...homepageSource.matchAll(/\{ name: '([a-z_]+)', desc:/g)].map((m) => m[1])
-  assert.ok(featured.length >= 7, 'expected the homepage to feature at least seven tools')
+test('tools documented on the MCP page are discoverable', () => {
+  const docsSource = read('app/mcp/page.tsx')
+  const featured = [...docsSource.matchAll(/\bname: '([a-z_]+)'/g)].map((m) => m[1])
+  assert.ok(featured.length > 0, 'expected named tools in the MCP documentation')
   for (const name of featured) {
     assert.ok(wellKnown.tools.includes(name), `${name} is featured on the homepage but missing from .well-known/mcp.json`)
   }

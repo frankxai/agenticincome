@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs'
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
 const files = {
   home: read('app/page.tsx'),
+  proof: read('app/proof/page.tsx'),
   hero: read('components/IncomeDeskHero.tsx'),
   workflow: read('components/AgentWorkflowProof.tsx'),
   analytics: read('lib/analytics.ts'),
@@ -28,7 +29,8 @@ const forbidText = (file, value, label) => {
   if (files[file].toLowerCase().includes(value.toLowerCase())) failures.push(`${label}: forbidden ${JSON.stringify(value)} in ${file}`)
 }
 
-requireText('home', '<AgentWorkflowProof />', 'workflow is present on the homepage')
+requireText('home', '<HomePilotCalculator />', 'homepage exposes the real calculator')
+requireText('proof', '<AgentWorkflowProof />', 'the executable workflow is present on the proof page')
 requireText('workflow', 'node scripts/affiliate-audit.mjs', 'workflow shows the executable command')
 requireText('workflow', 'Human gate', 'workflow exposes human approval')
 requireText('workflow', 'It does not join a program', 'workflow exposes autonomy boundary')

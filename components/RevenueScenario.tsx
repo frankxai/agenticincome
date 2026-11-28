@@ -13,7 +13,7 @@ const fields = [
   { key: 'fixed', label: 'Monthly fixed costs', initial: '360' },
 ] as const
 
-export function RevenueScenario() {
+export function RevenueScenario({ id = 'unit-economics' }: { id?: string }) {
   const [values, setValues] = useState({ price: fields[0].initial, cost: fields[1].initial, fixed: fields[2].initial })
   const price = scenarioAmount(values.price)
   const cost = scenarioAmount(values.cost)
@@ -22,7 +22,7 @@ export function RevenueScenario() {
   const valid = result !== null && fixed !== null
   const units = valid ? breakEvenUnits(fixed, result.contribution) : null
   return (
-    <section className="desk-model" id="unit-economics" aria-labelledby="desk-model-title">
+    <section className="desk-model" id={id} aria-labelledby="desk-model-title">
       <div className="desk-model-intro">
         <p className="desk-eyebrow"><span aria-hidden="true" /> Unit economics</p>
         <h2 id="desk-model-title">Test the margin.</h2>

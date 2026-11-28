@@ -215,3 +215,11 @@ The founder's commissioning brief sets the visual direction. The owning [Agentic
 A sales lead and finance owner arrive from the research index to decide whether a scoped quote-review pilot merits a real buyer test. The article names the sample and its modeled status before showing costs. The cost breakdown, four-hour rework scenario and buyer-capacity calculation give the reader one decision to inspect. Acceptance belongs to the finance owner.
 
 The page offers an editable JSON brief and a Markdown case. The existing offer workbench opens the JSON and recalculates its derived economics. One record supplies all three editions. The canonical page is `/blog/quote-review-pilot`.
+
+## The price of a second look · November 28, 2026
+
+A sales operations lead and a finance partner must decide whether to test an AI-assisted quote review. Show the modeled €1,500 fee and the cost of four additional hours on the cover. Lead to one working model. Ten redacted historical quotes and one approved rate card define the scope. The buyer still has to supply the examples and agree the acceptance threshold.
+
+Use the same source, currency, dates and cost assumptions for the homepage, the published research case and the transferred brief. Changing fee or hours must update both the seller contribution and the buyer payback. A loss, a fragile margin under rework, and positive downside contribution each need a distinct textual decision. The buyer's capacity must remain identifiable as modeled time, and the seller's contribution is measured before fixed costs.
+
+An operator can change the scenario by keyboard, read its assumptions, print a decision memo, download editable JSON, or take the same numbers and evidence into the existing brief editor. A reader with JavaScript disabled can inspect and download the base case. Keep the founder's other material one click away through the case article, implementation, self-service toolkit, and agent-access routes.

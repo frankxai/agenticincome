@@ -37,16 +37,16 @@ export function AgentWorkflowProof() {
   return (
     <section id="workflow-proof" className="section-band" aria-labelledby="workflow-proof-title">
       <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
-        <div className="section-heading motion-reveal">
+        <div className="section-heading">
           <div className="kicker">Inspectable agent workflow</div>
           <h2 id="workflow-proof-title">One real run. Every boundary visible.</h2>
         </div>
-        <p className="max-w-2xl text-lg leading-8 text-muted motion-reveal">
+        <p className="max-w-2xl text-lg leading-8 text-muted">
           The open-source affiliate audit is a concrete reference workflow: known inputs, executable source, a reviewable output, and a human decision before anything becomes public.
         </p>
       </div>
 
-      <div className="workflow-proof motion-reveal">
+      <div className="workflow-proof">
         <div className="workflow-command" aria-label="Affiliate audit command">
           <div className="workflow-command-topline">
             <span>affiliate-audit / local run</span>

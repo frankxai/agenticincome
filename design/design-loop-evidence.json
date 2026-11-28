@@ -744,5 +744,66 @@
       ]
     },
     "decision": "Candidate evidence only. Exact-PR release and independent approvals are tracked by the owning repository."
+  },
+  "pilot_decision_desk_2026_11_28": {
+    "date": "2026-11-28",
+    "surface": "/ to /workbench/offer-brief",
+    "testedImplementation": "3dde7bf370b0fdcf1f249cfb22d6dece0125570b",
+    "reviewScope": "Independent local browser evidence on the recorded implementation. The repository tracks authenticated release approvals separately.",
+    "constitution": "e25fab4c5a0dac2ea8c7b91e9397972f5af4b454",
+    "baseline": {
+      "previousProduction": "design/evidence/2026-11-27-revenue-desk/before-desktop.webp",
+      "previousCandidateDesktop": "design/evidence/2026-11-27-revenue-desk/candidate-desktop.webp",
+      "previousCandidatePhone": "design/evidence/2026-11-27-revenue-desk/candidate-mobile.webp",
+      "previousCandidateTablet": "design/evidence/2026-11-27-revenue-desk/candidate-tablet.webp"
+    },
+    "artwork": "design/asset-manifest.json#agentic-income-pilot-decision-instrument",
+    "images": {
+      "cover-desktop": {
+        "file": "design/evidence/2026-11-28-pilot-desk/cover-desktop.webp",
+        "sha256": "97a12d74c7bc1f4a31e1992a3df75a3b78e7a588551aba0b368194c185049618"
+      },
+      "cover-tablet": {
+        "file": "design/evidence/2026-11-28-pilot-desk/cover-tablet.webp",
+        "sha256": "2d9a77fc74fe79a741c57a0b4b52b9713556de30c33e9860a51f4505cc7fb9bd"
+      },
+      "cover-mobile": {
+        "file": "design/evidence/2026-11-28-pilot-desk/cover-mobile.webp",
+        "sha256": "e13597bc807eff27bfb13f7cdc15d2309f01691d3a1d992882810027c1134dda"
+      },
+      "cover-narrow": {
+        "file": "design/evidence/2026-11-28-pilot-desk/cover-narrow.webp",
+        "sha256": "91fb9e0d0f93fe720c76fd258e6fc5d7839f47605e60fa43a2d657a4dd942317"
+      },
+      "cover-reduced": {
+        "file": "design/evidence/2026-11-28-pilot-desk/cover-reduced.webp",
+        "sha256": "8a56a9d70752ebb84004200ddc6aabe2798d85c8a1706d172c3423f363f8ca30"
+      },
+      "instrument-desktop": {
+        "file": "design/evidence/2026-11-28-pilot-desk/instrument-desktop.webp",
+        "sha256": "8b7ead123d21df4b93b5e2e563f212c3c96d8968cd874654c1b1d06ca1c82896"
+      },
+      "instrument-mobile": {
+        "file": "design/evidence/2026-11-28-pilot-desk/instrument-mobile.webp",
+        "sha256": "e6ac7791028866985d65f09a77b5634623411505d87a615bc0db3cf0edd8bed7"
+      },
+      "instrument-no-js": {
+        "file": "design/evidence/2026-11-28-pilot-desk/instrument-no-js.webp",
+        "sha256": "c44800dbe67d93e1850fa823d18724921d2c264f7653736b90c55d6da2568d78"
+      },
+      "studio-desktop": {
+        "file": "design/evidence/2026-11-28-pilot-desk/studio-desktop.webp",
+        "sha256": "31c9da4cc8ab5de9ed8cb14e43e59ead20cc68f112477a84a37ec91ccf134ec6"
+      }
+    },
+    "observations": {
+      "composition": "The prior candidate opened on a musician and an unpriced proposition, used a studio handover calculator, and then introduced a different quote-review case. The revised first frame supplies the EUR 1,500 case, its EUR 500 and EUR 200 outputs, and one primary action. The musician moves to the signed editorial section.",
+      "revision": "The first tablet pass used a portrait-like crop with the mechanism clipped at both edges. The revised 768-pixel spread places the decision and action above a landscape study. The complete glass ring, base and dial now read together. The 390-pixel sequence places the decision and action before the photograph.",
+      "workflow": "In each interactive viewport, change fee and hours by keyboard, stress review to 14 hours, inspect a loss and return to EUR 1,500 at 14 hours. Export the actual JSON, open the editor, create Markdown, start blank, then import that JSON and recalculate. The source and 14-hour scope survive. Output is EUR 200 contribution, 13.3% margin and EUR 1,300 unit cost.",
+      "accessibility": "The main action measured 16.59:1 text contrast. Both sliders have 44 CSS-pixel targets and visible two-pixel keyboard focus. Reduced motion suppresses the cover settle. With scripts disabled the default figures render and native JSON and Markdown downloads work.",
+      "media": "Original anonymous still from the founder’s material brief. The served derivative is 97,042 bytes. Exact prompt, source PNG hash, derivative hash and pixel dimensions are recorded in the manifest.",
+      "narrowViewport": "The wordmark wraps to two lines at 320 pixels. The primary action, menu and workbench remain fully visible and usable, with no page overflow."
+    },
+    "report": "design/evidence/2026-11-28-pilot-desk/browser-checks.json"
   }
 }

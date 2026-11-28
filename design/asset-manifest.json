@@ -1,6 +1,6 @@
 {
-  "$comment": "Raster image slots for the cinematic homepage (docs/design/cinematic/design-lock.md). Declared 2026-11-12. None of these images exists yet: every slot currently renders its fallback, an inline SVG plate from components/motion/CharacterPlate.tsx. A later local image-generation pass may fill a slot only with a provenance sidecar (generator, model, prompt, seed, date, operator, license) stored beside the file. No stock imagery.",
-  "updatedAt": "2026-11-27",
+  "$comment": "Historic schematic character slots and commissioned editorial campaign photography for the homepage. Provenance and pixel dimensions accompany each delivered campaign derivative.",
+  "updatedAt": "2026-11-28",
   "surface": "homepage",
   "slots": [
     {
@@ -101,6 +101,24 @@
         "sha256": "c2f629435d8397880af356f34f4eedcf820c2560977a7fe1cf432c1c30e1e2d1",
         "sourcePngSha256": "2833a49e5490b8afb80af9eb8b495cb12a1c713374cc9424b94742973b59fe99",
         "prompt": "Second distinct original cinematic campaign still for Agentic Income, a late-night studio session, landscape 3:2 high-fashion group editorial, fine photographic grain. Two exquisitely crafted android collaborators in an intimate Amsterdam canal-house listening room, one pale brushed titanium in an ivory dinner jacket to the left leaning over a vintage analog mixing console, the other black oxidized silver wearing sculptural hand-blown orbital glass collar and tailored dark burgundy coat holding an unlabeled acetate record upright to the right. Casual shared look while reacting to a private first playback, candid and musical. Mahogany panelling, gold VU meter glow, one sapphire glass circular window with an optically believable black hole lens reflection, burgundy velvet, deep mineral shadows. Wide, layered composition with authentic mechanical craft and plausible instruments, medium format still, rich but rarefied and editorial. No letters, type, logos, stacks of cash, crypto tokens or generic neon effects. Distinctive modern art direction for a product detail or research cover."
+      },
+      {
+        "id": "agentic-income-pilot-decision-instrument",
+        "version": 1,
+        "createdAt": "2026-11-28",
+        "description": "A dark nickel mechanical hand adjusts a brass dial on a sapphire-glass gimbal above a mahogany pedestal.",
+        "file": "public/brand/decision-instrument.webp",
+        "dimensions": [
+          1817,
+          866
+        ],
+        "bytes": 97042,
+        "sha256": "cd64020a22450a57d00504d28e6c083ed6c0352642981361e3da20782ec623b0",
+        "sourcePngSha256": "876f6ef162b830629bcb9c4212230ca16c12232c4b711785fe238f1d25a6d2a4",
+        "derivation": "Generated wide PNG to RGB WebP using Pillow, quality 85, method 6.",
+        "intendedUse": "Original, unbranded campaign still for the pilot decision desk. Anonymous mechanical hand and manufactured instrument.",
+        "referenceImages": [],
+        "prompt": "Create one original fine-art industrial editorial campaign photograph for Agentic Income, an Amsterdam revenue research studio. Very wide landscape composition intended for a 2.1-to-1 cinematic crop (render widescreen). The object: a rare estate-made income-desk control instrument, like an extravagant musician's precision mixing control rather than a clock. One massive smoked sapphire optical-glass torus, oval from perspective and suspended in a beautifully milled platinum gimbal over a brutalist dark mahogany/burl pedestal, with an off-centre faceted black opal core and fine softly warm brass graduation cuts. The focus is the actual physical point of contact: at upper right a slender, fully mechanical dark-nickel android hand in a sharply tailored black sleeve, thumb and forefinger pinching a single unlettered knurled brass adjustment knob, coherent believable geometry. Dynamic asymmetric closeup. The clear sapphire torus refracts a tight caustic on the wood and a muted electric-cobalt light seam. Multiple depth planes. Deep espresso and black shadows, slightly matte burgundy-wood grain, a narrow cold edge, a single warm practical light, minor signs of real machining and finger wear, very subtle photographic grain. Medium format industrial catalog photography with the tactile human drama of high-end record cover art. The entire instrument on right of centre, distinct optical axis and recognisable silhouette even at phone size; left third is dark negative space. No text, numerals, logos, branding, gemstones scattered around, stars in the background, graphs, captions or watermarks. The image should feel like an actual commissioned artwork photographed on a table, not a sci-fi poster. Use precision, restraint, a strong cut of light rather than busyness."
       }
     ]
   }

@@ -1,0 +1,44 @@
+.pilot-memo-page { display: none; }
+@page pilot-decision { size: auto; margin: 16mm 17mm; background: white; }
+@media print {
+  html:has(.pilot-memo-page), body:has(> .pilot-memo-page) {
+    height: auto !important; min-height: 0 !important; display: block !important; color-scheme: light !important;
+    padding: 0 !important; margin: 0 !important; background: white !important; color: #171916 !important;
+  }
+  body:has(> .pilot-memo-page)::before, body:has(> .pilot-memo-page)::after { content: none !important; }
+  body:has(> .pilot-memo-page) > :not(.pilot-memo-page) { display: none !important; }
+  .pilot-memo-page {
+    page: pilot-decision; display: block; color: #171916; background: white;
+    font: 10.5pt/1.45 Arial, sans-serif; max-width: 185mm; margin: 0 auto;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .pilot-memo-page * { box-sizing: border-box; }
+  .pilot-memo-page .pm-mast, .pilot-memo-page footer {
+    display: flex; justify-content: space-between; gap: 3mm; border-color: #555d52;
+  }
+  .pilot-memo-page .pm-mast { align-items: baseline; border-bottom: 1.25pt solid; padding-bottom: 3mm; }
+  .pilot-memo-page .pm-mast b { font: 700 16pt/1 Georgia, serif; letter-spacing: -.6pt; }
+  .pilot-memo-page .pm-mast span, .pilot-memo-page footer { font-size: 8pt; }
+  .pilot-memo-page .pm-intro { padding: 9mm 0 5mm; }
+  .pilot-memo-page .pm-intro > span, .pilot-memo-page .pm-decision > span {
+    display: block; font: 700 8pt/1.2 Arial, sans-serif; letter-spacing: 1pt; text-transform: uppercase; color: #4b554d;
+  }
+  .pilot-memo-page h1, .pilot-memo-page h2, .pilot-memo-page p, .pilot-memo-page dl, .pilot-memo-page dd { margin: 0; }
+  .pilot-memo-page h1 { font: 400 36pt/1.08 Georgia, serif; letter-spacing: -1.8pt; margin: 2mm 0; }
+  .pilot-memo-page h2 { font: 600 13pt/1.2 Georgia, serif; letter-spacing: -.25pt; margin-bottom: 2.5mm; }
+  .pilot-memo-page p { max-width: 145mm; }
+  .pilot-memo-page .pm-figures, .pilot-memo-page .pm-columns { display: grid; grid-template-columns: 1fr 1fr; }
+  .pilot-memo-page .pm-figures { border-block: 1pt solid #222a22; padding-block: 4mm; }
+  .pilot-memo-page .pm-figures > div + div { border-left: .5pt solid #a2a99d; padding-left: 6mm; }
+  .pilot-memo-page .pm-figures span, .pilot-memo-page .pm-figures small { display: block; font-size: 9pt; }
+  .pilot-memo-page .pm-figures strong { display: block; font: 400 28pt/1.1 Georgia, serif; letter-spacing: -1pt; margin: 1mm 0; }
+  .pilot-memo-page .pm-columns { gap: 8mm; margin: 6mm 0; }
+  .pilot-memo-page dl > div { display: flex; justify-content: space-between; gap: 2mm; padding: 1.4mm 0; border-bottom: .5pt solid #d5d9d2; }
+  .pilot-memo-page dl > div:last-child { font-weight: bold; border-bottom-color: #555d52; }
+  .pilot-memo-page dd { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .pilot-memo-page p + p { margin-top: 2mm; }
+  .pilot-memo-page p + h2 { margin-top: 4mm; }
+  .pilot-memo-page .pm-decision { padding: 4mm 5mm; border-left: 2pt solid #515d47; background-color: #f1f2ed; break-inside: avoid; }
+  .pilot-memo-page .pm-decision h2 { margin-block: 1.5mm; font-size: 17pt; }
+  .pilot-memo-page footer { border-top: .5pt solid; margin-top: 6mm; padding-top: 2mm; flex-wrap: wrap; }
+}

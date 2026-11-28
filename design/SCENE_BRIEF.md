@@ -187,3 +187,11 @@ Exact prompts, derivative sizes and checksums belong to `design/asset-manifest.j
 ## Quote-review pilot editorial layout
 
 Start with the decision and its sensitivity to four extra review hours. Present the buyer deliverable and itemized costs in reading order. Follow them with buyer payback, acceptance evidence and the downloadable brief. On narrow screens the cost lines keep their labels together with their amounts. The field note uses the existing editorial typography and introduces no animation. Native download links and the existing workbench support the same handoff with reduced motion.
+
+## The instrument and its reading · November 28, 2026
+
+Open on warm paper with an editorial headline, the worked downside and a single primary action. Across the spread, a mechanical hand turns a brass control on an optical-glass instrument. The contact point between fingers and dial, the cut of blue light in the glass and the weight of the mahogany base should survive the phone crop. Subject and meaning come from the photograph. All prices, decisions and comparisons are live text.
+
+Set paper controls beside a dark result panel. One scale sets the selling price and the other sets human review time. A contribution plot shows where the same slope lands four hours later. Use signed numbers and text beside each signal. Keep secondary research as a contact with the founder's studio and use native disclosure for the reference catalog.
+
+Keep the opening and the financial case readable in a still frame. Respect reduced motion, show visible keyboard focus and leave room for full labels and actions at 320 CSS pixels. The new campaign still is an original manufactured object and anonymous articulated hand, recorded as `agentic-income-pilot-decision-instrument` in the asset manifest.

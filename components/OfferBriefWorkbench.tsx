@@ -8,6 +8,7 @@ import {
   type OfferBrief, type OfferBriefInput,
 } from '@/lib/offer-brief'
 import { scenarioFromFragment, studioExample as example } from '@/lib/revenue-scenario'
+import { pilotInputFromFragment } from '@/lib/pilot-decision'
 import { trackOfferBrief } from '@/lib/offer-brief-events'
 
 const stages = ['Source', 'Offer', 'Test'] as const
@@ -50,7 +51,7 @@ function subscribeToFragment(refresh: () => void) {
 
 export function OfferBriefWorkbench() {
   const fragment = useSyncExternalStore(subscribeToFragment, () => window.location.hash, () => '')
-  const scenario = scenarioFromFragment(fragment)
+  const scenario = pilotInputFromFragment(fragment) ?? scenarioFromFragment(fragment)
   return <OfferBriefEditor key={scenario ? fragment : 'default'} initial={scenario ?? example} />
 }
 
